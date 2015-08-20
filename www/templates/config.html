@@ -1,0 +1,60 @@
+<meta charset="UTF-8">
+<ion-view view-title="Configuración" ng-init="initialize()">
+  <ion-content has-bouncing="false">
+
+	<div class="list">
+
+	  <label class="item item-input item-select">
+	    <div class="input-label">
+	      Color por defecto de nueva lista
+	    </div>
+	    <select ng-model="claseLista"
+	    		ng-options="cc.claseLista as cc.nombre for cc in configData.configColors"
+	    		ng-change="changeColor(claseLista)">
+	    </select>
+	  </label>
+
+    <label class="item item-input item-select">
+	    <div class="input-label">
+	      Color por defecto de nuevo elemento
+	    </div>
+	    <select ng-model="claseElemento"
+	    		ng-options="cc.claseElemento as cc.nombre for cc in configData.configColorsElements"
+	    		ng-change="changeColorElement(claseElemento)">
+	    </select>
+	  </label>
+
+    <label class="item item-toggle">
+       Preguntar para añadir a la lista de la compra
+       <label class="toggle toggle-balanced">
+         <input type="checkbox" ng-model="configData.askAddListaCompra" ng-checked="configData.askAddListaCompra">
+         <div class="track">
+           <div class="handle"></div>
+         </div>
+       </label>
+    </label>
+<!--
+	  <label class="item item-input item-select">
+	    <div class="input-label">
+	      Lista por defecto
+	    </div>
+	    <select ng-model="nombreLista"
+	    		ng-options="lista.nombreLista as lista.nombreLista for lista in listas"
+	    		ng-change="changeListaDefecto(nombreLista)">
+	    </select>
+	  </label>
+-->
+<!--
+	  <label class="item item-input item-select">
+	    <div class="input-label">
+	      Idioma
+	    </div>
+	    <select ng-model="idiomaSeleccionado"
+	    		ng-options="idioma.id as idioma.idiomaSeleccionado for idioma in configData.idiomas"
+	    		ng-change="changeIdioma(idiomaSeleccionado)">
+	    </select>
+	  </label>
+-->
+	</div>
+  </ion-content>
+</ion-view>

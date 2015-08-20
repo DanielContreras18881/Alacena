@@ -1,0 +1,40 @@
+<meta charset="UTF-8">
+<ion-view  cache-view="false" view-title="{{nombreLista}}" ng-init="initialize()">
+  <ion-content has-bouncing="false">
+    <ion-list show-reorder="showReorder">
+      <ion-item ng-if="!elementoLista.marked"
+                ng-repeat="elementoLista in elementosLista | filter:nombreLista"
+                class="{{elementoLista.colorElemento}}">
+          <i class="icon ion-android-checkbox-outline-blank" ng-hide="{{listaEditable}}" ng-click="markAcquired(elementoLista)"></i>
+        	{{elementoLista.nombreElemento}} : {{elementoLista.cantidadElemento}} | {{elementoLista.fechaCaducidad |filterDate}}
+          <ion-option-button class="ion-close-circled {{elementoLista.colorBotones}}"
+                             ng-click="onItemDelete(elementoLista)">
+          </ion-option-button>
+          <ion-option-button class="ion-minus-circled {{elementoLista.colorBotones}}"
+                             ng-click="minusElement(elementoLista)">
+          </ion-option-button>
+          <ion-option-button class="ion-plus-circled {{elementoLista.colorBotones}}"
+                             ng-click="plusElement(elementoLista)">
+          </ion-option-button>
+          <ion-option-button class="ion-edit {{elementoLista.colorBotones}}"
+                             ng-click="edit(elementoLista)">
+          </ion-option-button>
+          <ion-option-button ng-if="listaEditable" class="ion-shuffle {{elementoLista.colorBotones}}"
+                             ng-click="moveTo(elementoLista)">
+          </ion-option-button>
+          <ion-reorder-button class="ion-navicon" on-reorder="moveItem(elementoLista, $fromIndex, $toIndex)"></ion-reorder-button>
+      </ion-item>
+      <ion-item ng-if="elementoLista.marked"
+                ng-repeat="elementoLista in elementosLista | filter:nombreLista"
+                class="{{elementoLista.colorElemento}}">
+          <i class="icon ion-android-checkbox-outline" ng-hide="{{listaEditable}}" ng-click="markAcquired(elementoLista)"></i>
+        	{{elementoLista.nombreElemento}} : {{elementoLista.cantidadElemento}} | {{elementoLista.fechaCaducidad |filterDate}}
+          <ion-option-button class="ion-shuffle {{elementoLista.colorBotones}}"
+                             ng-click="moveTo(elementoLista)">
+          </ion-option-button>
+          <ion-reorder-button class="ion-navicon" on-reorder="moveItem(elementoLista, $fromIndex, $toIndex)"></ion-reorder-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <button class="button button-float" ng-click="addItem()"><i class="icon ion-plus"></i></button>
+</ion-view>

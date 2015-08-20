@@ -1,0 +1,19 @@
+[{
+    "nombreElemento": "Panecillos",
+    "nombreLista": "Lista de la Compra",
+    "cantidadElemento": 2,
+    "colorElemento": "item item-calm item-complex item-right-editable",
+    "colorBotones":"button-calm",
+    "fechaCaducidad": "2015-09-29",
+    "cantidadMinima":1,
+    "marked":false
+}, {
+    "nombreElemento": "Cervezas",
+    "nombreLista": "Lista de la Compra",
+    "cantidadElemento": 3,
+    "colorElemento": "item item-balanced item-complex item-right-editable",
+    "colorBotones":"button-balanced",
+    "fechaCaducidad": "2016-05-18",
+    "cantidadMinima":2,
+    "marked":false
+}]

@@ -1,0 +1,25 @@
+<meta charset="UTF-8">
+<ion-view view-title="Gestión de listas" ng-init="initialize()">
+  <ion-content has-bouncing="false">
+    <ion-list show-reorder="showReorder">
+      <ion-item class="{{lista.colorLista}}" ng-repeat="lista in listas"
+            ng-class="item-remove-animate"
+      			href="#/app/listas/{{lista.nombreLista}}/{{lista.colorLista}}/{{lista.listaEditable}}">
+            {{lista.nombreLista}}
+          <ion-option-button ng-if="lista.listaEditable" class="ion-minus-circled {{lista.colorBotones}}"
+                             ng-click="onItemDelete(lista)">
+          </ion-option-button>
+          <ion-option-button ng-if="lista.listaEditable" class="ion-edit {{lista.colorBotones}}"
+                             ng-click="edit(lista)">
+          </ion-option-button>
+          <!--
+          <ion-option-button ng-if="lista.listaEditable" class="ion-shuffle {{lista.colorBotones}}"
+                             ng-click="share(lista)">
+          </ion-option-button>
+          -->
+          <ion-reorder-button class="ion-navicon" on-reorder="moveItem(lista, $fromIndex, $toIndex)"></ion-reorder-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <button class="button button-float" ng-click="addItem()"><i class="icon ion-plus"></i></button>
+</ion-view>

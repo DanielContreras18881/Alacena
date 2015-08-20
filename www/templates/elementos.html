@@ -1,0 +1,13 @@
+<meta charset="UTF-8">	
+<ion-view cache-view="false" view-title="Gestión de elementos" ng-init="initialize()">
+  <ion-content has-bouncing="false">
+    <ion-list>
+      <ion-item class="item-dark" ng-repeat="elemento in elementos" class="item-remove-animate">
+        {{elemento.nombreElemento}}
+          <ion-option-button class="ion-close-circled button-dark"
+                             ng-click="onItemDelete(elemento)">
+          </ion-option-button>        
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

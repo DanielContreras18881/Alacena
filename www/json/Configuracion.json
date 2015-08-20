@@ -1,0 +1,81 @@
+{
+	"ListaDefecto":"Lista de la Compra",
+	"idiomaDefault":"es",
+	"idiomas":[
+		{
+			"id":"es",
+			"idiomaSeleccionado":"Español"
+		},
+		{
+			"id":"en",
+			"idiomaSeleccionado":"English"
+		}
+	],
+	"askAddListaCompra":true,
+	"colorDefault":"item-dark item item-complex",
+	"configColors":[
+		{
+			"nombre":"Blanco",
+			"claseLista":"item-stable item item-complex",
+			"botonesEditables":"button-stable"
+		},
+		{
+			"nombre":"Negro",
+			"claseLista":"item-dark item item-complex",
+			"botonesEditables":"button-dark"
+		},
+		{
+			"nombre":"Morado",
+			"claseLista":"item-royal item item-complex",
+			"botonesEditables":"button-royal"
+		},
+		{
+			"nombre":"Verde",
+			"claseLista":"item-balanced item item-complex",
+			"botonesEditables":"button-balanced"
+		},
+		{
+			"nombre":"Azul Claro",
+			"claseLista":"item-calm item item-complex",
+			"botonesEditables":"button-calm"
+		},
+		{
+			"nombre":"Azul Oscuro",
+			"claseLista":"item-positive item item-complex",
+			"botonesEditables":"button-positive"
+		}
+	],
+	"colorDefaultElement":"item item-stable item-complex item-right-editable",
+	"configColorsElements":[
+		{
+			"nombre":"Blanco",
+			"claseElemento":"item item-stable item-complex item-right-editable",
+			"botonesEditables":"button-stable"
+		},
+		{
+			"nombre":"Negro",
+			"claseElemento":"item item-dark item-complex item-right-editable",
+			"botonesEditables":"button-dark"
+		},
+		{
+			"nombre":"Morado",
+			"claseElemento":"item item-royal item-complex item-right-editable",
+			"botonesEditables":"button-royal"
+		},
+		{
+			"nombre":"Verde",
+			"claseElemento":"item item-balanced item-complex item-right-editable",
+			"botonesEditables":"button-balanced"
+		},
+		{
+			"nombre":"Azul Claro",
+			"claseElemento":"item item-calm item-complex item-right-editable",
+			"botonesEditables":"button-calm"
+		},
+		{
+			"nombre":"Azul Oscuro",
+			"claseElemento":"item item-positive item-complex item-right-editable",
+			"botonesEditables":"button-positive"
+		}
+	]
+}

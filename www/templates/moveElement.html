@@ -1,0 +1,19 @@
+<meta charset="UTF-8">
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-dark">
+    <h1 class="title">Mover {{elementoLista.nombreElemento}}</h1>
+    <button class="button button-clear button-primary ion-close-round" ng-click="modalMoveElement.hide()"></button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">Lista:</span>
+        <select ng-model="nuevoNombreLista"
+            ng-options="lista.nombreLista as lista.nombreLista for lista in listas | filtrarQuitarLista:nombreLista"
+            ng-change="changeLista(nuevoNombreLista)">
+        </select>
+      </label>
+      <button class="button button-full button-dark ion-archive" ng-click="changeLista(nuevoNombreLista)"></button>
+    </div>
+  </ion-content>
+</ion-modal-view>

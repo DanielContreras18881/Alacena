@@ -1,0 +1,14 @@
+[
+	{
+		"nombreLista":"Lista de la Compra",
+		"colorLista":"item-dark item item-complex",
+		"colorBotones":"button-dark",
+		"listaEditable":false
+	},
+	{
+		"nombreLista":"Nevera",
+		"colorLista":"item-calm item item-complex",
+		"colorBotones":"button-calm",
+		"listaEditable":true
+	}	
+]
