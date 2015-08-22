@@ -104,27 +104,27 @@ angular.module('alacena.controllers', ['ngCordova'])
     $rootScope.showReorderbutton = false;
 
     jsonFactory.getConfigData(function(data){
-      $scope.configData = data;
+      $rootScope.configData = data;
     });
 /*
     jsonFactory.getListData(function(data){
       $scope.listas = data;
     });
 */
-    $scope.claseLista = $scope.configData.colorDefault;
-    $scope.claseElemento = $scope.configData.colorDefaultElement;
+    $scope.claseLista = $rootScope.configData.colorDefault;
+    $scope.claseElemento = $rootScope.configData.colorDefaultElement;
     //$scope.nombreLista = $scope.configData.ListaDefecto;
     //$scope.idiomaSeleccionado = $scope.configData.idiomaDefault;
   }
 
     $scope.changeColor = function(claseLista){
-      $scope.configData.colorDefault = claseLista;
-      LocalStorage.set('configData',$scope.configData);
+      $rootScope.configData.colorDefault = claseLista;
+      LocalStorage.set('configData',$rootScope.configData);
     };
 
     $scope.changeColorElement = function(claseElemento){
-      $scope.configData.colorDefaultElement = claseElemento;
-      LocalStorage.set('configData',$scope.configData);
+      $rootScope.configData.colorDefaultElement = claseElemento;
+      LocalStorage.set('configData',$rootScope.configData);
     };
 /*
     $scope.changeListaDefecto = function(nombreLista){
@@ -140,7 +140,7 @@ angular.module('alacena.controllers', ['ngCordova'])
 
 })
 
-.controller('ElementosCtrl', function($rootScope,$scope,jsonFactory,LocalStorage,$filter,$ionicPopup) {
+.controller('ElementosCtrl', function($rootScope,$scope,jsonFactory,LocalStorage,$filter,$ionicPopup,$ionicModal,$ionicListDelegate) {
 
   $scope.initialize = function(){
     $rootScope.showReorderbutton = false;
@@ -150,9 +150,89 @@ angular.module('alacena.controllers', ['ngCordova'])
     });
 
     jsonFactory.getElementListData(function(data){
-      $scope.elementosLista = data;
+      $rootScope.elementosLista = data;
+    });
+
+    jsonFactory.getListData(function(data){
+      $rootScope.listas = data;
+    });
+
+    jsonFactory.getConfigData(function(data){
+      $scope.colorDefaultElement = data.colorDefaultElement;
+      $scope.colorbotonesEditablesDefaultElement = $filter('filter')(data.configColorsElements, {"claseElemento":data.colorDefaultElement}, true)[0].botonesEditables;
     });
   }
+
+  $ionicModal.fromTemplateUrl('templates/createElement.html', {
+    scope: $scope
+  }).then(function(modalCreateElement) {
+    $scope.modalCreateElement = modalCreateElement;
+  });
+
+  $scope.cambioCaducidad = function(){
+    $scope.fechaDisabled=!$scope.fechaDisabled;
+    $scope.elementoLista.fechaCaducidad = null;
+  }
+
+  $scope.changeLista = function(){
+    if($scope.elementoLista.caduca){
+      //Comprobar la cantidad de elementos y la cantidad minima por si hay que mandarlo a la lista de la compra
+      var entrada =new moment($scope.elementoLista.fechaCaducidad);
+      var formato = "YYYY-MM-DD";
+      $scope.elementoLista.fechaCaducidad = entrada.format(formato);
+    }
+    $rootScope.elementosLista.push($scope.elementoLista);
+    LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
+    $scope.modalCreateElement.hide();
+  };
+
+  $scope.mostrarListas = function(nombre) {
+    var elementosListaFiltrados = $filter('filter')($rootScope.elementosLista,
+                                                    function(value, index) {
+                                                      return value.nombreElemento === nombre;
+                                                    });
+    if(elementosListaFiltrados.length>0){
+      var listasElemento = '';
+        angular.forEach(elementosListaFiltrados, function(item) {
+            if (item.nombreLista.indexOf('Lista de la Compra') > -1) {
+                listasElemento+=item.nombreLista+' - '+item.cantidadElemento;
+                if(item.cantidadElemento>1){
+                  listasElemento+=' unidades';
+                }else{
+                  listasElemento+=' unidad';
+                }
+                listasElemento+='<br/>';
+            }
+        });
+         var alertPopup = $ionicPopup.alert({
+           title: 'Tienes '+nombre,
+           template: listasElemento
+         });
+         alertPopup.then(function(res) {});
+    }else{
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'No existe el elemento',
+        template: '¿Deseas añadir '+nombre+' a la Lista de la Compra?'
+      });
+      confirmPopup.then(function(res) {
+        if(res) {
+          $scope.fechaDisabled = false;
+          $scope.elementoLista = {
+            "nombreElemento":nombre,
+            "colorElemento":$scope.colorDefaultElement,
+            "colorBotones":$scope.colorbotonesEditablesDefaultElement,
+            "nombreLista":'Lista de la Compra',
+            "cantidadElemento":1,
+            "caduca":!$scope.fechaDisabled,
+            "fechaCaducidad":moment().toDate(),
+            "cantidadMinima":0,
+            "marked":false
+          };
+          $scope.modalCreateElement.show();
+        }
+      });
+    }
+  };
 
   $scope.onItemDelete = function(item) {
     $rootScope.elementos.splice($rootScope.elementos.indexOf(item), 1);
@@ -162,13 +242,14 @@ angular.module('alacena.controllers', ['ngCordova'])
 
   $scope.showConfirm = function(nombre) {
    var confirmPopup = $ionicPopup.confirm({
-     title: 'Borrado de elementos',
-     template: '¿Desea borrar '+nombre+' de todas sus listas?'
+     title: 'Borrar '+nombre,
+     template: '¿Deseas borrar '+nombre+' de todas sus listas?'
    });
    confirmPopup.then(function(res) {
      if(res) {
-        $scope.elementosLista = $filter('filter')($scope.elementosLista, function(value, index) {return value.nombreElemento !== nombre;});
-        LocalStorage.set('cantidadElementosLista',$scope.elementosLista);
+        $rootScope.elementosLista = $filter('filter')($rootScope.elementosLista, function(value, index) {return value.nombreElemento !== nombre;});
+        LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
+        $ionicListDelegate.closeOptionButtons();
      }
    });
   };
@@ -180,8 +261,8 @@ angular.module('alacena.controllers', ['ngCordova'])
   $scope.initialize = function(){
 
     jsonFactory.getListData(function(data){
-      $scope.listas = data;
-      $rootScope.showReorderbutton = $scope.listas.length > 2;
+      $rootScope.listas = data;
+      $rootScope.showReorderbutton = $rootScope.listas.length > 2;
     });
 
     jsonFactory.getConfigData(function(data){
@@ -191,8 +272,9 @@ angular.module('alacena.controllers', ['ngCordova'])
     });
 
     jsonFactory.getElementListData(function(data){
-      $scope.elementosLista = data;
+      $rootScope.elementosLista = data;
     });
+
   }
 
   $scope.share = function(item) {
@@ -207,10 +289,10 @@ angular.module('alacena.controllers', ['ngCordova'])
   };
 
   $scope.save = function(element){
-    if($scope.listas.indexOf(element) === -1) {
-      $scope.listas.push(element);
+    if($rootScope.listas.indexOf(element) === -1) {
+      $rootScope.listas.push(element);
     }
-    LocalStorage.set('listas',$scope.listas);
+    LocalStorage.set('listas',$rootScope.listas);
     $scope.modalLista.hide();
   };
 
@@ -237,17 +319,17 @@ angular.module('alacena.controllers', ['ngCordova'])
 
   $scope.moveItem = function(item, fromIndex, toIndex) {
     if(item.listaEditable && toIndex!==0){
-      $scope.listas.splice(fromIndex, 1);
-      $scope.listas.splice(toIndex, 0, item);
-      LocalStorage.set('listas',$scope.listas);
+      $rootScope.listas.splice(fromIndex, 1);
+      $rootScope.listas.splice(toIndex, 0, item);
+      LocalStorage.set('listas',$rootScope.listas);
     }
   };
 
   $scope.onItemDelete = function(item) {
-    $scope.listas.splice($scope.listas.indexOf(item), 1);
-    LocalStorage.set('listas',$scope.listas);
-    $scope.elementosLista = $filter('filter')($scope.elementosLista, function(value, index) {return value.nombreLista !== item.nombreLista;});
-    LocalStorage.set('cantidadElementosLista',$scope.elementosLista);
+    $rootScope.listas.splice($rootScope.listas.indexOf(item), 1);
+    LocalStorage.set('listas',$rootScope.listas);
+    $rootScope.elementosLista = $filter('filter')($rootScope.elementosLista, function(value, index) {return value.nombreLista !== item.nombreLista;});
+    LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
   };
 
 })
@@ -261,13 +343,14 @@ angular.module('alacena.controllers', ['ngCordova'])
       $scope.colorLista = $stateParams.colorLista;
 
       jsonFactory.getListData(function(data){
-        $scope.listas = data;
+        $rootScope.listas = data;
       });
 
       jsonFactory.getElementListData(function(data){
-        $scope.elementosLista = data;
-        var elementosFiltrados = $filter('filtrarLista')($scope.elementosLista,$scope.nombreLista);
-        $rootScope.showReorderbutton = elementosFiltrados.length > 1;
+        $rootScope.elementosLista = data;
+        var elementosFiltrados = $filter('filtrarLista')($rootScope.elementosLista,$scope.nombreLista);
+        //$rootScope.showReorderbutton = elementosFiltrados.length > 1;
+        $rootScope.showReorderbutton = false;
       });
 
       jsonFactory.getElementData(function(data){
@@ -296,34 +379,53 @@ angular.module('alacena.controllers', ['ngCordova'])
   };
 
   $scope.save = function(element){
-    //Comprobar la cantidad de elementos y la cantidad minima por si hay que mandarlo a la lista de la compra
-    var entrada =new moment(element.fechaCaducidad);
-    var formato = "YYYY-MM-DD";
-    element.fechaCaducidad = entrada.format(formato);
-    if($filter('filter')($scope.elementosLista,element).length==0) {
-      $scope.elementosLista.push(element);
-      if($filter('filter')($scope.elementos,{"nombreElemento":element.nombreElemento}).length==0) {
+    if(element.caduca){
+      //Comprobar la cantidad de elementos y la cantidad minima por si hay que mandarlo a la lista de la compra
+      var entrada =new moment(element.fechaCaducidad);
+      var formato = "YYYY-MM-DD";
+      element.fechaCaducidad = entrada.format(formato);
+    }
+    if($filter('filter')($rootScope.elementosLista,element).length==0) {
+      $rootScope.elementosLista.push(element);
+      if($filter('filter')($rootScope.elementos,{"nombreElemento":element.nombreElemento}).length==0) {
         $rootScope.elementos.push({"nombreElemento":element.nombreElemento});
       }
     }
-    LocalStorage.set('cantidadElementosLista',$scope.elementosLista);
+    LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
     LocalStorage.set('elementos',$rootScope.elementos);
     $scope.modalElemento.hide();
+    $ionicListDelegate.closeOptionButtons();
   };
 
   $scope.changeLista = function(lista){
-    $scope.elementoLista.nombreLista = lista;
-    if($scope.elementosLista.indexOf($scope.elementoLista) === -1) {
-      $scope.elementosLista.push($scope.elementoLista);
+    if($scope.elementoLista.nombreLista==='Lista de la Compra'){
+      var newElementLista = $scope.elementoLista;
+      newElementLista.nombreLista = lista;
+      if($rootScope.elementosLista.indexOf(newElementLista) === -1) {
+        $rootScope.elementosLista.push(newElementLista);
+      }else{
+        var cantidadActual = $rootScope.elementosLista[$rootScope.elementosLista.indexOf(newElementLista)].cantidadElemento;
+        $rootScope.elementosLista[$rootScope.elementosLista.indexOf(newElementLista)].cantidadElemento=cantidadActual+newElementLista.cantidadElemento;
+        $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(newElementLista), 1);
+      }
+    }else{
+      $scope.elementoLista.nombreLista = lista;
+      if($rootScope.elementosLista.indexOf($scope.elementoLista) === -1) {
+        $rootScope.elementosLista.push($scope.elementoLista);
+      }else{
+        var cantidadActual = $rootScope.elementosLista[$rootScope.elementosLista.indexOf($scope.elementoLista)].cantidadElemento;
+        $rootScope.elementosLista[$rootScope.elementosLista.indexOf($scope.elementoLista)].cantidadElemento=cantidadActual+$scope.elementoLista.cantidadElemento;
+        $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf($scope.elementoLista), 1);
+      }
     }
-    LocalStorage.set('cantidadElementosLista',$scope.elementosLista);
+    LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
     $scope.modalMoveElement.hide();
   };
 
   $scope.preguntaTraslado = function(nombre,callback){
     var confirmPopup = $ionicPopup.confirm({
       title: 'Mover '+nombre,
-      template: '¿Desea mover '+nombre+' a la lista de la compra?'
+      template: '¿Deseas mover '+nombre+' a la Lista de la Compra?'
     });
     confirmPopup.then(function(res) {
       if(res) {
@@ -337,12 +439,12 @@ angular.module('alacena.controllers', ['ngCordova'])
       item.cantidadElemento = --item.cantidadElemento;
       if(item.cantidadElemento<item.cantidadMinima){
         $scope.preguntaTraslado(item.nombreElemento,function(){
-          var elementosFiltrados = $filter('filter')($scope.elementosLista,
+          var elementosFiltrados = $filter('filter')($rootScope.elementosLista,
                 {"nombreElemento":item.nombreElemento,"nombreLista":"Lista de la Compra"});
           if(elementosFiltrados.length > 0) {
-            var cantidadActual = $scope.elementosLista[$scope.elementosLista.indexOf(elementosFiltrados[0])].cantidadElemento;
-            $scope.elementosLista[$scope.elementosLista.indexOf(elementosFiltrados[0])].cantidadElemento=cantidadActual+elementosFiltrados[0].cantidadMinima;
-            $scope.elementosLista.splice($scope.elementosLista.indexOf(item), 1);
+            var cantidadActual = $rootScope.elementosLista[$rootScope.elementosLista.indexOf(elementosFiltrados[0])].cantidadElemento;
+            $rootScope.elementosLista[$rootScope.elementosLista.indexOf(elementosFiltrados[0])].cantidadElemento=cantidadActual+elementosFiltrados[0].cantidadMinima;
+            $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(item), 1);
           }else{
             item.nombreLista="Lista de la Compra";
             item.cantidadElemento = item.cantidadMinima;
@@ -351,7 +453,7 @@ angular.module('alacena.controllers', ['ngCordova'])
       }
     }else{
       if(item.cantidadMinima==0){
-        $scope.elementosLista.splice($scope.elementosLista.indexOf(item), 1);
+        $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(item), 1);
       }else{
         $scope.preguntaTraslado(item.nombreElemento,function(){
           item.nombreLista="Lista de la Compra";
@@ -359,7 +461,7 @@ angular.module('alacena.controllers', ['ngCordova'])
         });
       }
     }
-    LocalStorage.set('cantidadElementosLista',$scope.elementosLista);
+    LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
     $ionicListDelegate.closeOptionButtons();
     /*
     $cordovaLocalNotification.schedule({
@@ -377,13 +479,15 @@ angular.module('alacena.controllers', ['ngCordova'])
 
   $scope.plusElement = function(item) {
     item.cantidadElemento = ++item.cantidadElemento;
+    LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
     $ionicListDelegate.closeOptionButtons();
   };
 
   $scope.moveTo = function(item) {
     $scope.elementoLista = item;
-    var listasFiltradas = $filter('filtrarQuitarLista')($scope.listas,$scope.nombreLista);
+    var listasFiltradas = $filter('filtrarQuitarLista')($rootScope.listas,$scope.nombreLista);
     $scope.nuevoNombreLista = listasFiltradas[0].nombreLista;
+    $scope.fechaDisabled = !item.caduca;
     $scope.modalMoveElement.show();
     $ionicListDelegate.closeOptionButtons();
   };
@@ -394,6 +498,7 @@ angular.module('alacena.controllers', ['ngCordova'])
     }else{
       item.marked = true;
     }
+    LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
   };
 
   $ionicModal.fromTemplateUrl('templates/moveElement.html', {
@@ -402,15 +507,23 @@ angular.module('alacena.controllers', ['ngCordova'])
     $scope.modalMoveElement = modalMoveElement;
   });
 
+  $scope.cambioCaducidad = function(){
+    $scope.fechaDisabled=!$scope.fechaDisabled;
+    $scope.newElement.fechaCaducidad = null;
+  }
+
   $scope.addItem = function() {
+    $scope.fechaDisabled = false;
     $scope.newElement = {
       "nombreElemento":"elemento",
       "colorElemento":$scope.colorDefaultElement,
       "colorBotones":$scope.colorbotonesEditablesDefaultElement,
       "nombreLista":$scope.nombreLista,
       "cantidadElemento":1,
+      "caduca":!$scope.fechaDisabled,
       "fechaCaducidad":moment().toDate(),
-      "cantidadMinima":0
+      "cantidadMinima":0,
+      "marked":false
     };
     $scope.modalElemento.show();
   };
@@ -421,27 +534,30 @@ angular.module('alacena.controllers', ['ngCordova'])
     $scope.modalElemento = modalElemento;
   });
 
+  /*
   $scope.moveItem = function(item, fromIndex, toIndex) {
-    $scope.elementosLista.splice(fromIndex, 1);
-    $scope.elementosLista.splice(toIndex, 0, item);
-    LocalStorage.set('cantidadElementosLista',$scope.elementosLista);
+    $rootScope.elementosLista.splice(fromIndex, 1);
+    $rootScope.elementosLista.splice(toIndex, 0, item);
+    LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
   };
+  */
 
   $scope.onItemDelete = function(item) {
-    $scope.elementosLista.splice($scope.elementosLista.indexOf(item), 1);
-    LocalStorage.set('cantidadElementosLista',$scope.elementosLista);
-    //$scope.showConfirm(item.nombreElemento);
+    $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(item), 1);
+    LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
+    $scope.showConfirm(item.nombreElemento);
   };
 
   $scope.showConfirm = function(nombre) {
    var confirmPopup = $ionicPopup.confirm({
-     title: 'Borrado de elementos',
-     template: '¿Desea borrar '+nombre+' de la lista general?'
+     title: 'Borrar '+nombre,
+     template: '¿Deseas borrar '+nombre+' del histórico?'
    });
    confirmPopup.then(function(res) {
      if(res) {
       $rootScope.elementos = $filter('filter')($rootScope.elementos, function(value, index) {return value.nombreElemento !== nombre;});
       LocalStorage.set('elementos',$rootScope.elementos);
+      $ionicListDelegate.closeOptionButtons();
      }
    });
   };

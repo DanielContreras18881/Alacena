@@ -9,21 +9,26 @@ angular.module('alacena.services', [])
 
 	/**
 	* Recupera los datos de configuración de la App, si existen en el dispositivo, sino recupera del json de ejemplo
-	*/	
+	*/
 	jsonFactory.getConfigData = function (callback){
-		if(LocalStorage.get('configData')==null){
-			$http.get('./json/Configuracion.json').success(function(response) {
-				LocalStorage.set('configData',response);
-        		callback(response);
-    		});
-		}else{
-			callback(LocalStorage.get('configData'));
-		}
+		$http.get('./json/Configuracion.json').success(function(response) {
+			var datosConfig = response;
+			if(LocalStorage.get('configData')==null){
+					LocalStorage.set('configData',datosConfig);
+					callback(datosConfig);
+			}else{
+				var configLocalData = LocalStorage.get('configData');
+				configLocalData.configColorsElements = datosConfig.configColorsElements;
+				configLocalData.configColors = datosConfig.configColors;
+				configLocalData.idiomas = datosConfig.idiomas;
+				callback(configLocalData);
+			}
+		});
 	};
 
 	/**
 	* Recupera los datos de los elementos, si existen en el dispositivo, sino recupera del json de ejemplo
-	*/	
+	*/
 	jsonFactory.getElementData = function (callback){
 		if(LocalStorage.get('elementos')==null){
 			$http.get('./json/Elementos.json').success(function(response) {
@@ -32,12 +37,12 @@ angular.module('alacena.services', [])
     		});
 		}else{
 			callback(LocalStorage.get('elementos'));
-		}		
+		}
 	};
 
 	/**
 	* Recupera los datos de las listas, si existen en el dispositivo, sino recupera del json de ejemplo
-	*/	
+	*/
 	jsonFactory.getListData = function (callback){
 		if(LocalStorage.get('listas')==null){
 			$http.get('./json/Listas.json').success(function(response) {
@@ -46,12 +51,12 @@ angular.module('alacena.services', [])
     		});
 		}else{
 			callback(LocalStorage.get('listas'));
-		}			
-	};		
+		}
+	};
 
 	/**
 	* Recupera los datos de los elementos de una lista, si existen en el dispositivo, sino recupera del json de ejemplo
-	*/	
+	*/
 	jsonFactory.getElementListData = function (callback){
 		if(LocalStorage.get('cantidadElementosLista')==null){
 			$http.get('./json/CantidadElementoLista.json').success(function(response) {
@@ -60,8 +65,8 @@ angular.module('alacena.services', [])
     		});
 		}else{
 			callback(LocalStorage.get('cantidadElementosLista'));
-		}		
-	};	
+		}
+	};
 
 	return jsonFactory;
 })

@@ -7,19 +7,17 @@
   <ion-content class="padding">
     <div class="list">
       <label class="item item-input">
-        <span class="input-label">Lista:</span>
-        <select ng-model="nuevoNombreLista"
-            ng-options="lista.nombreLista as lista.nombreLista for lista in listas | filtrarQuitarLista:nombreLista">
-        </select>
-      </label>
-      <label class="item item-input">
         <span class="input-label">Cantidad:</span>
         <input ng-model="elementoLista.cantidadElemento" min="{{elementoLista.cantidadElemento}}" type="number">
       </label>
+      <label class="item item-input">
+  		  <span class="input-label">Cantidad mínima:</span>
+  		  <input type="number" min="0" ng-model="elementoLista.cantidadMinima"></input>
+  	  </label>
       <label class="item item-toggle">
          Caduca:
          <label class="toggle toggle-assertive">
-           <input type="checkbox" ng-model="elementoLista.caduca" ng-checked="elementoLista.caduca" ng-change="cambioCaducidad()">
+           <input type="checkbox" ng-model="elementoLista.caduca" ng-checked="elementoLista.caduca" ng-change="fechaDisabled=!fechaDisabled">
            <div class="track">
              <div class="handle"></div>
            </div>
@@ -29,14 +27,7 @@
         <span class="input-label">Fecha de caducidad:</span>
         <input ng-disabled="fechaDisabled" ng-model="elementoLista.fechaCaducidad" type="date">
       </label>
-      <label class="item item-input">
-        <span class="input-label">Color:</span>
-        <select ng-model="elementoLista.colorElemento"
-            ng-options="cc.claseElemento as cc.nombre for cc in coloresElementos"
-            ng-change="setColor(elementoLista.colorElemento)">
-        </select>
-      </label>
-      <button class="button button-full button-dark ion-archive" ng-click="changeLista(nuevoNombreLista)"></button>
+      <button class="button button-full button-dark ion-archive" ng-click="changeLista()"></button>
     </div>
   </ion-content>
 </ion-modal-view>

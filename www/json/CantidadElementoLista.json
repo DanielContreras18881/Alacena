@@ -4,6 +4,7 @@
     "cantidadElemento": 2,
     "colorElemento": "item item-calm item-complex item-right-editable",
     "colorBotones":"button-calm",
+    "caduca":true,
     "fechaCaducidad": "2015-09-29",
     "cantidadMinima":1,
     "marked":false
@@ -13,7 +14,18 @@
     "cantidadElemento": 3,
     "colorElemento": "item item-balanced item-complex item-right-editable",
     "colorBotones":"button-balanced",
+    "caduca":true,
     "fechaCaducidad": "2016-05-18",
     "cantidadMinima":2,
+    "marked":false
+}, {
+    "nombreElemento": "Papel de cocina",
+    "nombreLista": "Lista de la Compra",
+    "cantidadElemento": 5,
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones":"button-stable",
+    "caduca":false,
+    "fechaCaducidad": null,
+    "cantidadMinima":3,
     "marked":false
 }]

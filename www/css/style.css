@@ -3,7 +3,7 @@ body {
 	position: absolute;
 }
 input{
-  text-align:right; 
+  text-align:right;
 }
 button.ion-arrow-swap.light.sinBordes{
   background: none;
@@ -25,4 +25,9 @@ button.ion-arrow-swap.light.sinBordes{
   -webkit-transition-property: -webkit-transform, all !important;
   transition-property: transform, all !important;
 
+}
+
+.badge.badge-royal{
+	display: inline-block;
+	position: inherit;
 }

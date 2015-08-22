@@ -12,15 +12,24 @@
       </label>
       <label class="item item-input">
         <span class="input-label">Cantidad:</span>
-        <input ng-model="newElement.cantidadElemento" min="0" type="number">
+        <input ng-model="newElement.cantidadElemento" min="{{newElement.cantidadMinima}}" type="number">
       </label>
       <label class="item item-input">
   		  <span class="input-label">Cantidad mínima:</span>
   		  <input type="number" min="0" ng-model="newElement.cantidadMinima"></input>
   	  </label>
+      <label class="item item-toggle">
+         Caduca:
+         <label class="toggle toggle-assertive">
+           <input type="checkbox" ng-model="newElement.caduca" ng-checked="newElement.caduca" ng-change="cambioCaducidad()">
+           <div class="track">
+             <div class="handle"></div>
+           </div>
+         </label>
+      </label>
       <label class="item item-input">
         <span class="input-label">Fecha de caducidad:</span>
-        <input ng-model="newElement.fechaCaducidad" type="date">
+        <input ng-disabled="fechaDisabled" ng-model="newElement.fechaCaducidad" type="date">
       </label>
       <label class="item item-input">
         <span class="input-label">Color:</span>

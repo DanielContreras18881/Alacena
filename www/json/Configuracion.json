@@ -15,11 +15,6 @@
 	"colorDefault":"item-dark item item-complex",
 	"configColors":[
 		{
-			"nombre":"Blanco",
-			"claseLista":"item-stable item item-complex",
-			"botonesEditables":"button-stable"
-		},
-		{
 			"nombre":"Negro",
 			"claseLista":"item-dark item item-complex",
 			"botonesEditables":"button-dark"
@@ -35,12 +30,7 @@
 			"botonesEditables":"button-balanced"
 		},
 		{
-			"nombre":"Azul Claro",
-			"claseLista":"item-calm item item-complex",
-			"botonesEditables":"button-calm"
-		},
-		{
-			"nombre":"Azul Oscuro",
+			"nombre":"Azul",
 			"claseLista":"item-positive item item-complex",
 			"botonesEditables":"button-positive"
 		}
@@ -53,29 +43,14 @@
 			"botonesEditables":"button-stable"
 		},
 		{
-			"nombre":"Negro",
-			"claseElemento":"item item-dark item-complex item-right-editable",
-			"botonesEditables":"button-dark"
-		},
-		{
-			"nombre":"Morado",
-			"claseElemento":"item item-royal item-complex item-right-editable",
-			"botonesEditables":"button-royal"
-		},
-		{
 			"nombre":"Verde",
 			"claseElemento":"item item-balanced item-complex item-right-editable",
 			"botonesEditables":"button-balanced"
 		},
 		{
-			"nombre":"Azul Claro",
+			"nombre":"Azul",
 			"claseElemento":"item item-calm item-complex item-right-editable",
 			"botonesEditables":"button-calm"
-		},
-		{
-			"nombre":"Azul Oscuro",
-			"claseElemento":"item item-positive item-complex item-right-editable",
-			"botonesEditables":"button-positive"
 		}
 	]
 }

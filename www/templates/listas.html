@@ -2,18 +2,18 @@
 <ion-view view-title="Gestión de listas" ng-init="initialize()">
   <ion-content has-bouncing="false">
     <ion-list show-reorder="showReorder">
-      <ion-item class="{{lista.colorLista}}" ng-repeat="lista in listas"
+      <ion-item class="{{lista.colorLista}}" ng-repeat="lista in listas track by $index"
             ng-class="item-remove-animate"
       			href="#/app/listas/{{lista.nombreLista}}/{{lista.colorLista}}/{{lista.listaEditable}}">
             {{lista.nombreLista}}
-          <ion-option-button ng-if="lista.listaEditable" class="ion-minus-circled {{lista.colorBotones}}"
+          <ion-option-button ng-if="lista.listaEditable" class="ion-close-circled {{lista.colorBotones}}"
                              ng-click="onItemDelete(lista)">
           </ion-option-button>
           <ion-option-button ng-if="lista.listaEditable" class="ion-edit {{lista.colorBotones}}"
                              ng-click="edit(lista)">
           </ion-option-button>
           <!--
-          <ion-option-button ng-if="lista.listaEditable" class="ion-shuffle {{lista.colorBotones}}"
+          <ion-option-button class="ion-person-add {{lista.colorBotones}}"
                              ng-click="share(lista)">
           </ion-option-button>
           -->
