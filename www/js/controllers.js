@@ -1,8 +1,8 @@
 angular.module('alacena.controllers', ['ngCordova'])
 
-.filter('filterDate', function()
+.filter('filterDate', function($rootScope)
     {
-        return function(input)
+        return function(input,elemento)
         {
           var _date = "";
             if(input !== null){
@@ -11,23 +11,36 @@ angular.module('alacena.controllers', ['ngCordova'])
               var entrada = moment(input,formato).hours(0).minutes(0).seconds(0).milliseconds(0);
               var hoy =  moment().hours(0).minutes(0).seconds(0).milliseconds(0);
               var maniana = moment().add(1,'days').hours(0).minutes(0).seconds(0).milliseconds(0);
+              var pasado = moment().add(2,'days').hours(0).minutes(0).seconds(0).milliseconds(0);
               var sigSemana = moment().add(7,'days').hours(0).minutes(0).seconds(0).milliseconds(0);
               var quinceDias = moment().add(15,'days').hours(0).minutes(0).seconds(0).milliseconds(0);
 
               var info = "caduca ";
 
-              if(entrada<hoy){
+              if(hoy>entrada){
                 _date = "CADUCADO!";
-              }else if(hoy>=entrada){
+                elemento.colorElemento = "item item-assertive item-complex item-right-editable";
+                elemento.colorBotones = "button-assertive";
+              }else if(hoy<=entrada && entrada<maniana){
                 _date = info+"hoy";
-              }else if (maniana>=entrada){
+                elemento.colorElemento = "item item-assertive item-complex item-right-editable";
+                elemento.colorBotones = "button-assertive";
+              }else if (maniana<=entrada && entrada<pasado){
                 _date = info+"mañana";
-              }else if (sigSemana>=entrada){
+                elemento.colorElemento = "item item-energized item-complex item-right-editable";
+                elemento.colorBotones = "button-energized";
+              }else if (pasado<=entrada && entrada<sigSemana){
+                _date = info+"esta semana";
+                elemento.colorElemento = "item item-energized item-complex item-right-editable";
+                elemento.colorBotones = "button-energized";
+              }else if (sigSemana<=entrada && entrada<quinceDias){
                 _date = info+"la semana que viene";
-              /*}else if (quinceDias>=entrada){
-                _date = info+"en dos semanas";*/
+                elemento.colorElemento = elemento.colorElementoNoCaducado;
+                elemento.colorBotones = elemento.colorBotonesNoCaducado;
               }else{
                 _date = info+"el "+entrada.format("D MM YY");
+                elemento.colorElemento = elemento.colorElementoNoCaducado;
+                elemento.colorBotones = elemento.colorBotonesNoCaducado;
               }
             }
             return _date;
@@ -49,6 +62,7 @@ angular.module('alacena.controllers', ['ngCordova'])
         angular.forEach(arr, function(item) {
 
             if (item.nombreLista.toLowerCase().indexOf(searchString) > -1) {
+                //if(item.)
                 result.push(item);
             }
 
@@ -105,14 +119,14 @@ angular.module('alacena.controllers', ['ngCordova'])
 
     jsonFactory.getConfigData(function(data){
       $rootScope.configData = data;
+      $scope.claseLista = $rootScope.configData.colorDefault;
+      $scope.claseElemento = $rootScope.configData.colorDefaultElement;
     });
 /*
     jsonFactory.getListData(function(data){
       $scope.listas = data;
     });
 */
-    $scope.claseLista = $rootScope.configData.colorDefault;
-    $scope.claseElemento = $rootScope.configData.colorDefaultElement;
     //$scope.nombreLista = $scope.configData.ListaDefecto;
     //$scope.idiomaSeleccionado = $scope.configData.idiomaDefault;
   }
@@ -140,7 +154,21 @@ angular.module('alacena.controllers', ['ngCordova'])
 
 })
 
-.controller('ElementosCtrl', function($rootScope,$scope,jsonFactory,LocalStorage,$filter,$ionicPopup,$ionicModal,$ionicListDelegate) {
+.controller('ElementosCtrl', function($rootScope,$scope,jsonFactory,LocalStorage,$filter,$ionicPopup,$ionicModal,$ionicListDelegate,$ionicFilterBar) {
+
+  var filterBarInstance;
+
+  $scope.showFilterBar = function () {
+    filterBarInstance = $ionicFilterBar.show({
+      cancelText: 'Cancelar',
+      debounce: true,
+      delay: 25,
+      items: $rootScope.elementos,
+      update: function (filteredItems, filterText) {
+        $rootScope.elementos = filteredItems;
+      }
+    });
+  };
 
   $scope.initialize = function(){
     $rootScope.showReorderbutton = false;
@@ -212,7 +240,9 @@ angular.module('alacena.controllers', ['ngCordova'])
     }else{
       var confirmPopup = $ionicPopup.confirm({
         title: 'No existe el elemento',
-        template: '¿Deseas añadir '+nombre+' a la Lista de la Compra?'
+        template: '¿Deseas añadir '+nombre+' a la Lista de la Compra?',
+        cancelText: 'No',
+        okText: 'Si'
       });
       confirmPopup.then(function(res) {
         if(res) {
@@ -221,6 +251,8 @@ angular.module('alacena.controllers', ['ngCordova'])
             "nombreElemento":nombre,
             "colorElemento":$scope.colorDefaultElement,
             "colorBotones":$scope.colorbotonesEditablesDefaultElement,
+            "colorElementoNoCaducado":$scope.colorDefaultElement,
+            "colorBotonesNoCaducado":$scope.colorbotonesEditablesDefaultElement,
             "nombreLista":'Lista de la Compra',
             "cantidadElemento":1,
             "caduca":!$scope.fechaDisabled,
@@ -243,7 +275,9 @@ angular.module('alacena.controllers', ['ngCordova'])
   $scope.showConfirm = function(nombre) {
    var confirmPopup = $ionicPopup.confirm({
      title: 'Borrar '+nombre,
-     template: '¿Deseas borrar '+nombre+' de todas sus listas?'
+     template: '¿Deseas borrar '+nombre+' de todas sus listas?',
+     cancelText: 'No',
+     okText: 'Si'
    });
    confirmPopup.then(function(res) {
      if(res) {
@@ -334,7 +368,21 @@ angular.module('alacena.controllers', ['ngCordova'])
 
 })
 
-.controller('ListaCtrl', function($rootScope,$scope,$stateParams,$ionicModal,$ionicListDelegate,jsonFactory,LocalStorage,$filter,$cordovaLocalNotification,$ionicPopup) {
+.controller('ListaCtrl', function($rootScope,$scope,$stateParams,$ionicModal,$ionicListDelegate,jsonFactory,LocalStorage,$filter,$cordovaLocalNotification,$ionicPopup,$ionicFilterBar) {
+
+  var filterBarInstance;
+
+  $scope.showFilterBar = function () {
+    filterBarInstance = $ionicFilterBar.show({
+      cancelText: 'Cancelar',
+      debounce: true,
+      delay: 25,
+      items: $rootScope.elementosLista,
+      update: function (filteredItems, filterText) {
+        $rootScope.elementosLista = filteredItems;
+      }
+    });
+  };
 
     $scope.initialize = function(){
 
@@ -399,8 +447,19 @@ angular.module('alacena.controllers', ['ngCordova'])
 
   $scope.changeLista = function(lista){
     if($scope.elementoLista.nombreLista==='Lista de la Compra'){
-      var newElementLista = $scope.elementoLista;
-      newElementLista.nombreLista = lista;
+      var newElementLista = {
+        "nombreElemento":$scope.elementoLista.nombreElemento,
+        "colorElemento":$scope.elementoLista.colorElemento,
+        "colorBotones":$scope.elementoLista.colorBotones,
+        "colorElementoNoCaducado":$scope.elementoLista.colorElementoNoCaducado,
+        "colorBotonesNoCaducado":$scope.elementoLista.colorBotonesNoCaducado,
+        "nombreLista":lista,
+        "cantidadElemento":$scope.elementoLista.cantidadElemento,
+        "caduca":$scope.elementoLista.caduca,
+        "fechaCaducidad":$scope.elementoLista.fechaCaducidad,
+        "cantidadMinima":$scope.elementoLista.cantidadMinima,
+        "marked":false
+      };
       if($rootScope.elementosLista.indexOf(newElementLista) === -1) {
         $rootScope.elementosLista.push(newElementLista);
       }else{
@@ -425,7 +484,9 @@ angular.module('alacena.controllers', ['ngCordova'])
   $scope.preguntaTraslado = function(nombre,callback){
     var confirmPopup = $ionicPopup.confirm({
       title: 'Mover '+nombre,
-      template: '¿Deseas mover '+nombre+' a la Lista de la Compra?'
+      template: '¿Deseas mover '+nombre+' a la Lista de la Compra?',
+      cancelText: 'No',
+      okText: 'Si'
     });
     confirmPopup.then(function(res) {
       if(res) {
@@ -518,6 +579,8 @@ angular.module('alacena.controllers', ['ngCordova'])
       "nombreElemento":"elemento",
       "colorElemento":$scope.colorDefaultElement,
       "colorBotones":$scope.colorbotonesEditablesDefaultElement,
+      "colorElementoNoCaducado":$scope.colorDefaultElement,
+      "colorBotonesNoCaducado":$scope.colorbotonesEditablesDefaultElement,      
       "nombreLista":$scope.nombreLista,
       "cantidadElemento":1,
       "caduca":!$scope.fechaDisabled,
@@ -551,7 +614,9 @@ angular.module('alacena.controllers', ['ngCordova'])
   $scope.showConfirm = function(nombre) {
    var confirmPopup = $ionicPopup.confirm({
      title: 'Borrar '+nombre,
-     template: '¿Deseas borrar '+nombre+' del histórico?'
+     template: '¿Deseas borrar '+nombre+' del histórico?',
+     cancelText: 'No',
+     okText: 'Si'
    });
    confirmPopup.then(function(res) {
      if(res) {

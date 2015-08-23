@@ -6,10 +6,10 @@
             ng-class="item-remove-animate"
       			href="#/app/listas/{{lista.nombreLista}}/{{lista.colorLista}}/{{lista.listaEditable}}">
             {{lista.nombreLista}}
-          <ion-option-button ng-if="lista.listaEditable" class="ion-close-circled {{lista.colorBotones}}"
+          <ion-option-button ng-if="lista.listaEditable" class="ion-close-circled icono-option-size {{lista.colorBotones}}"
                              ng-click="onItemDelete(lista)">
           </ion-option-button>
-          <ion-option-button ng-if="lista.listaEditable" class="ion-edit {{lista.colorBotones}}"
+          <ion-option-button ng-if="lista.listaEditable" class="ion-edit icono-option-size {{lista.colorBotones}}"
                              ng-click="edit(lista)">
           </ion-option-button>
           <!--

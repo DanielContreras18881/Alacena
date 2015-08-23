@@ -1,5 +1,9 @@
 <meta charset="UTF-8">
 <ion-view  cache-view="false" view-title="{{nombreLista}}" ng-init="initialize()">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon icon ion-ios-search-strong" ng-click="showFilterBar()">
+    </button>
+  </ion-nav-buttons>
   <ion-content has-bouncing="false">
     <ion-list show-reorder="showReorder">
       <ion-item ng-if="!elementoLista.marked"
@@ -8,18 +12,18 @@
           <i class="icon ion-android-checkbox-outline-blank" ng-hide="{{listaEditable}}" ng-click="markAcquired(elementoLista)"></i>
   				<span>{{elementoLista.nombreElemento}}</span>
   				<p class="fade-in">
-            <i class="ion-minus-circled {{elementoLista.colorBotones}}"ng-click="minusElement(elementoLista)"></i>
+            <i class="ion-minus-circled icono-size {{elementoLista.colorBotones}}"ng-click="minusElement(elementoLista)"></i>
             <span class="badge badge-royal">{{elementoLista.cantidadElemento}}</span>
-            <i class="ion-plus-circled {{elementoLista.colorBotones}}" ng-click="plusElement(elementoLista)"></i>
+            <i class="ion-plus-circled icono-size {{elementoLista.colorBotones}}" ng-click="plusElement(elementoLista)"></i>
           </p>
-  				<span ng-show="{{elementoLista.caduca}}" class="item-note"><p>{{elementoLista.fechaCaducidad |filterDate}}</p></span>
-          <ion-option-button class="ion-close-circled {{elementoLista.colorBotones}}"
+  				<span ng-show="{{elementoLista.caduca}}" class="item-note"><p>{{elementoLista.fechaCaducidad |filterDate:elementoLista}}</p></span>
+          <ion-option-button class="ion-close-circled icono-option-size {{elementoLista.colorBotones}}"
                              ng-click="onItemDelete(elementoLista)">
           </ion-option-button>
-          <ion-option-button class="ion-edit {{elementoLista.colorBotones}}"
+          <ion-option-button class="ion-edit icono-option-size {{elementoLista.colorBotones}}"
                              ng-click="edit(elementoLista)">
           </ion-option-button>
-          <ion-option-button  ng-show="{{listaEditable}}"class="ion-shuffle {{elementoLista.colorBotones}}"
+          <ion-option-button  ng-show="{{listaEditable}}"class="ion-shuffle icono-option-size {{elementoLista.colorBotones}}"
                              ng-click="moveTo(elementoLista)">
           </ion-option-button>
           <ion-reorder-button class="ion-navicon" on-reorder="moveItem(elementoLista, $fromIndex, $toIndex)"></ion-reorder-button>
@@ -32,8 +36,8 @@
           <p class="fade-in">
             <span class="badge badge-royal">{{elementoLista.cantidadElemento}}</span>
           </p>
-  				<span ng-show="{{elementoLista.caduca}}" class="item-note"><p>{{elementoLista.fechaCaducidad |filterDate}}</p></span>
-          <ion-option-button class="ion-shuffle {{elementoLista.colorBotones}}"
+  				<span ng-show="{{elementoLista.caduca}}" class="item-note"><p>{{elementoLista.fechaCaducidad |filterDate:elementoLista}}</p></span>
+          <ion-option-button class="ion-shuffle icono-option-size {{elementoLista.colorBotones}}"
                              ng-click="moveTo(elementoLista)">
           </ion-option-button>
           <ion-reorder-button class="ion-navicon" on-reorder="moveItem(elementoLista, $fromIndex, $toIndex)"></ion-reorder-button>

@@ -1,4 +1,8 @@
 /* Empty. Add your own CSS if you like */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	 display: none !important;
+}
+
 body {
 	position: absolute;
 }
@@ -30,4 +34,32 @@ button.ion-arrow-swap.light.sinBordes{
 .badge.badge-royal{
 	display: inline-block;
 	position: inherit;
+ 	font-size: 16px;
+	padding: 4px 8px;
+	border-radius: 20px;
+}
+
+.icono-option-size{
+	font-size: 22px;
+}
+
+.icono-size{
+	display: inline-block;
+  position: inherit;
+	vertical-align: sub;
+	font-size: 24px;
+}
+
+input.reset-field {
+	padding-right: 36px;
+	z-index:1000 !important;
+}
+.reset-field-icon {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    margin: 0px;
+    color: #bbb;
+		z-index:1000 !important;
+		font-size:28px;
 }

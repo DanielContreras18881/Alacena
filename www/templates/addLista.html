@@ -5,19 +5,21 @@
     <button class="button button-clear button-primary ion-close-round" ng-click="modalLista.hide()"></button>
   </ion-header-bar>
   <ion-content class="padding">
-    <div class="list">
-      <label class="item item-input">
-        <span class="input-label">Nombre:</span>
-        <input ng-model="newList.nombreLista" type="text">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">Color:</span>
-        <select ng-model="newList.colorLista"
-            ng-options="cc.claseLista as cc.nombre for cc in coloresListas"
-            ng-change="setColor(newList.colorLista)">
-        </select>
-      </label>
-      <button class="button button-full button-dark ion-archive" ng-click="save(newList)"></button>
-    </div>
+    <form name="myForm">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Nombre:</span>
+          <input ng-model="newList.nombreLista" type="text" reset-field/>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Color:</span>
+          <select ng-model="newList.colorLista"
+              ng-options="cc.claseLista as cc.nombre for cc in coloresListas"
+              ng-change="setColor(newList.colorLista)">
+          </select>
+        </label>
+        <button class="button button-full button-dark ion-archive" ng-click="save(newList)"></button>
+      </div>
+    </form>
   </ion-content>
 </ion-modal-view>
