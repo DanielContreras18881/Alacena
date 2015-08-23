@@ -4,58 +4,17 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('alacena', ['ionic', 'alacena.controllers','alacena.services', 'jett.ionic.filter.bar'])
-
-.directive('resetField', ['$compile', '$timeout', function($compile, $timeout) {
-    return {
-    require: 'ngModel',
-    scope: {},
-    link: function(rootScope, el, attrs, ctrl) {
-
-        // limit to input element of specific types
-        var inputTypes = /text|search|tel|url|email|password/i;
-        if (el[0].nodeName === "INPUT") {
-            if (!inputTypes.test(attrs.type)) {
-                throw new Error("Invalid input type for resetField: " + attrs.type);
-            }
-        } else if (el[0].nodeName !== "TEXTAREA") {
-            throw new Error("resetField is limited to input and textarea elements");
-        }
-
-        // compiled reset icon template
-        var template = $compile('<i ng-show="enabled" ng-mousedown="resetData()" class="icon ion-close-circled reset-field-icon"></i>')(rootScope);
-        el.addClass("reset-field");
-        el.after(template);
-
-        rootScope.resetData = function() {
-            ctrl.$setViewValue(null);
-            ctrl.$render();
-            $timeout(function() {
-                el[0].focus();
-            }, 0, false);
-            rootScope.enabled = false;
-        };
-
-        el.bind('input', function() {
-            rootScope.enabled = !ctrl.$isEmpty(el.val());
-        })
-        .bind('focus', function() {
-            $timeout(function() { //Timeout just in case someone else is listening to focus and alters model
-                rootScope.enabled = !ctrl.$isEmpty(el.val());
-                rootScope.$apply();
-            }, 0, false);
-        })
-       .bind('blur', function() {
-            $timeout(function() {
-                rootScope.enabled = false;
-                rootScope.$apply();
-            }, 0, false);
-        })
-      ;
-    }
-    };
-}])
-
+angular.module('alacena', ['ionic', 'alacena.controllers',
+                                    'alacena.cantidadElementosController',
+                                    'alacena.configController',
+                                    'alacena.elementosController',                                                                                                            'alacena.listasController',
+                                    'alacena.services',
+                                    'alacena.directives',
+                                    'alacena.filters',
+                                    'jett.ionic.filter.bar'])
+/**
+* Ejecución de la aplicación
+*/
 .run(function($ionicPlatform,$state,$ionicHistory,$ionicPopup) {
 
   $ionicPlatform.ready(function() {
@@ -98,7 +57,9 @@ angular.module('alacena', ['ionic', 'alacena.controllers','alacena.services', 'j
 
   });
 })
-
+/**
+* Configuración de la aplicación
+*/
 .config(function($stateProvider, $urlRouterProvider,$ionicFilterBarConfigProvider) {
 
   $ionicFilterBarConfigProvider.transition('vertical');
