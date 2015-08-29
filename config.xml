@@ -20,6 +20,7 @@
   <preference name="orientation" value="portrait"/>
   <preference name="android-minSdkVersion" value="10"/>
   <preference name="android-targetSdkVersion" value="22"/>
+  <preference name="BackgroundColor" value="#FFFFFF"/>
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>

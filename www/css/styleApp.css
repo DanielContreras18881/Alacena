@@ -5,6 +5,7 @@
 
 body {
 	position: absolute;
+	background: #ffffff !important;
 }
 input{
   text-align:right;

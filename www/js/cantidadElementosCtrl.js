@@ -84,7 +84,6 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   $scope.save = function(element){
     $log.debug('ListaCtrl:save:'+element);
     if(element.caduca){
-      //Comprobar la cantidad de elementos y la cantidad minima por si hay que mandarlo a la lista de la compra
       var entrada =new moment(element.fechaCaducidad);
       var formato = "YYYY-MM-DD";
       element.fechaCaducidad = entrada.format(formato);
@@ -93,6 +92,24 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
       $rootScope.elementosLista.push(element);
       if($filter('filter')($rootScope.elementos,{"nombreElemento":element.nombreElemento}).length==0) {
         $rootScope.elementos.push({"nombreElemento":element.nombreElemento});
+      }
+    }else{
+      if(element.cantidadElemento<element.cantidadMinima){
+        $scope.preguntaTraslado(element.nombreElemento,function(){
+          $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(element), 1);
+          var elementosFiltrados = $filter('filter')($rootScope.elementosLista,
+                {"nombreElemento":element.nombreElemento,"nombreLista":"Lista de la Compra"});
+          if(elementosFiltrados.length > 0) {
+            var cantidadActual = elementosFiltrados[0].cantidadElemento;
+            elementosFiltrados[0].cantidadElemento=cantidadActual+elementosFiltrados[0].cantidadMinima;
+          }else{
+            $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(element), 1);
+            element.nombreLista="Lista de la Compra";
+            element.cantidadElemento = element.cantidadMinima;
+            $rootScope.elementosLista.push(element);
+          }
+          LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
+        });
       }
     }
     LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
@@ -149,17 +166,22 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   */
   $scope.preguntaTraslado = function(nombre,callback){
     $log.debug('ListaCtrl:preguntaTraslado:'+nombre);
-    var confirmPopup = $ionicPopup.confirm({
-      title: 'Mover '+nombre,
-      template: '¿Deseas mover '+nombre+' a la Lista de la Compra?',
-      cancelText: 'No',
-      okText: 'Si'
-    });
-    confirmPopup.then(function(res) {
-      if(res) {
-         callback();
-      }
-    });
+    if($scope.askAddListaCompra){
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Mover '+nombre,
+        template: '¿Deseas mover '+nombre+' a la Lista de la Compra?',
+        cancelText: 'No',
+        okText: 'Si'
+      });
+      confirmPopup.then(function(res) {
+        if(res) {
+           callback();
+        }
+      });
+    }else{
+      callback();
+    }
+
   }
   /**
   * Se quita una unidad a un elemento
@@ -170,16 +192,19 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
       item.cantidadElemento = --item.cantidadElemento;
       if(item.cantidadElemento<item.cantidadMinima){
         $scope.preguntaTraslado(item.nombreElemento,function(){
+          $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(item), 1);
           var elementosFiltrados = $filter('filter')($rootScope.elementosLista,
                 {"nombreElemento":item.nombreElemento,"nombreLista":"Lista de la Compra"});
           if(elementosFiltrados.length > 0) {
-            var cantidadActual = $rootScope.elementosLista[$rootScope.elementosLista.indexOf(elementosFiltrados[0])].cantidadElemento;
-            $rootScope.elementosLista[$rootScope.elementosLista.indexOf(elementosFiltrados[0])].cantidadElemento=cantidadActual+elementosFiltrados[0].cantidadMinima;
-            $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(item), 1);
+            var cantidadActual = elementosFiltrados[0].cantidadElemento;
+            elementosFiltrados[0].cantidadElemento=cantidadActual+elementosFiltrados[0].cantidadMinima;
           }else{
+            $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(item), 1);
             item.nombreLista="Lista de la Compra";
             item.cantidadElemento = item.cantidadMinima;
+            $rootScope.elementosLista.push(item);
           }
+          LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
         });
       }
     }else{
@@ -187,8 +212,18 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
         $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(item), 1);
       }else{
         $scope.preguntaTraslado(item.nombreElemento,function(){
-          item.nombreLista="Lista de la Compra";
-          item.cantidadElemento = item.cantidadMinima;
+          $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(item), 1);
+          var elementosFiltrados = $filter('filter')($rootScope.elementosLista,
+                {"nombreElemento":item.nombreElemento,"nombreLista":"Lista de la Compra"});
+          if(elementosFiltrados.length > 0) {
+            var cantidadActual = elementosFiltrados[0].cantidadElemento;
+            elementosFiltrados[0].cantidadElemento=cantidadActual+elementosFiltrados[0].cantidadMinima;
+          }else{
+            item.nombreLista="Lista de la Compra";
+            item.cantidadElemento = item.cantidadMinima;
+            $rootScope.elementosLista.push(item);
+          }
+          LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
         });
       }
     }
