@@ -33,9 +33,9 @@
       </label>
       <label class="item item-input">
         <span class="input-label">Color:</span>
-        <select ng-model="newElement.colorElemento"
+        <select ng-model="colorElemento"
             ng-options="cc.claseElemento as cc.nombre for cc in coloresElementos"
-            ng-change="setColor(newElement.colorElemento)">
+            ng-change="setColor(colorElemento)">
         </select>
       </label>
       <button class="button button-full button-dark ion-archive" ng-click="save(newElement)"></button>

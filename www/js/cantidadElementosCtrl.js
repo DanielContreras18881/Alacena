@@ -62,6 +62,9 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     var formato = "YYYY-MM-DD";
     item.fechaCaducidad = moment(item.fechaCaducidad,formato).hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
     $scope.newElement = item;
+    $scope.newElement.colorElemento = item.colorElementoNoCaducado;
+    $scope.newElement.colorBotones = item.colorBotonesNoCaducado;
+    $scope.colorElemento = item.colorElementoNoCaducado;
     $ionicListDelegate.closeOptionButtons();
     $scope.modalElemento.show();
   };
@@ -70,10 +73,10 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   */
   $scope.setColor = function(claseElemento){
     $log.debug('ListaCtrl:setColor:'+claseElemento);
-    $scope.newElement.colorElemento = claseElemento;
-    $scope.newElement.colorBotones = $filter('filter')($scope.coloresElementos, {"claseElemento":claseElemento})[0].botonesEditables;
-    $scope.newElement.colorElementoNoCaducado = $scope.newElement.colorElemento;
-    $scope.newElement.colorBotonesNoCaducado = $scope.newElement.colorBotones;
+    $scope.elementoLista.colorElemento = claseElemento;
+    $scope.elementoLista.colorBotones = $filter('filter')($scope.coloresElementos, {"claseElemento":claseElemento})[0].botonesEditables;
+    $scope.elementoLista.colorElementoNoCaducado = $scope.elementoLista.colorElemento;
+    $scope.elementoLista.colorBotonesNoCaducado = $scope.elementoLista.colorBotones;
   };
   /**
   * Guarda un elemento creado o editado
@@ -116,21 +119,26 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
         "cantidadMinima":$scope.elementoLista.cantidadMinima,
         "marked":false
       };
-      if($rootScope.elementosLista.indexOf(newElementLista) === -1) {
-        $rootScope.elementosLista.push(newElementLista);
+      var busqueda = $filter('filter')($rootScope.elementosLista, {"nombreElemento":newElementLista.nombreElemento,"nombreLista":newElementLista.nombreLista}, true);
+      if(busqueda.length>0){
+        var cantidadActual = busqueda[0].cantidadElemento;
+        busqueda[0].cantidadElemento=cantidadActual+newElementLista.cantidadElemento;
       }else{
-        var cantidadActual = $rootScope.elementosLista[$rootScope.elementosLista.indexOf(newElementLista)].cantidadElemento;
-        $rootScope.elementosLista[$rootScope.elementosLista.indexOf(newElementLista)].cantidadElemento=cantidadActual+newElementLista.cantidadElemento;
-        $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(newElementLista), 1);
+        $rootScope.elementosLista.push(newElementLista);
       }
     }else{
+      var busqueda = $filter('filter')($rootScope.elementosLista, {"nombreElemento":$scope.elementoLista.nombreElemento,"nombreLista":lista}, true);
       $scope.elementoLista.nombreLista = lista;
-      if($rootScope.elementosLista.indexOf($scope.elementoLista) === -1) {
-        $rootScope.elementosLista.push($scope.elementoLista);
+      if(busqueda.length>0){
+        var cantidadActual = busqueda[0].cantidadElemento;
+        busqueda[0].cantidadElemento=cantidadActual+$scope.elementoLista.cantidadElemento;
       }else{
-        var cantidadActual = $rootScope.elementosLista[$rootScope.elementosLista.indexOf($scope.elementoLista)].cantidadElemento;
-        $rootScope.elementosLista[$rootScope.elementosLista.indexOf($scope.elementoLista)].cantidadElemento=cantidadActual+$scope.elementoLista.cantidadElemento;
-        $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf($scope.elementoLista), 1);
+        if(lista==='Lista de la Compra'){
+          $scope.elementoLista.colorElemento = $scope.elementoLista.colorElementoNoCaducado;
+          $scope.elementoLista.colorBotones = $scope.elementoLista.colorBotonesNoCaducado;
+          $scope.elementoLista.fechaCaducidad = null;
+          $scope.elementoLista.caduca = false;
+        }
       }
     }
     LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
@@ -217,6 +225,9 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     var listasFiltradas = $filter('filtrarQuitarLista')($rootScope.listas,$scope.nombreLista);
     $scope.nuevoNombreLista = listasFiltradas[0].nombreLista;
     $scope.fechaDisabled = !item.caduca;
+    $scope.elementoLista.colorElemento = item.colorElementoNoCaducado;
+    $scope.elementoLista.colorBotones = item.colorBotonesNoCaducado;
+    $scope.colorElemento = item.colorElementoNoCaducado;
     $scope.modalMoveElement.show();
     $ionicListDelegate.closeOptionButtons();
   };

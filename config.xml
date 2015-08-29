@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="develop.apps.chony.alacena" version="0.0.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="develop.apps.chony.alacena" version="0.0.9" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Alacena</name>
   <description>
         Organiza tu alacena facilmente
   </description>
-  <author email="daniel.chony@gmail.com" href="mailto:daniel.chony@gmail.com">
+  <author email="develop.apps.chony@gmail.com" href="mailto:develop.apps.chony@gmail.com">
       Chony Apps Develop
     </author>
   <content src="index.html"/>
@@ -38,7 +38,7 @@
     <splash src="resources/android/splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi"/>
   </platform>
   <platform name="ios">
-    <preference name="KeyboardDisplayRequiresUserAction" value="false"/>    
+    <preference name="KeyboardDisplayRequiresUserAction" value="false"/>
     <icon src="resources/ios/icon/icon.png" width="57" height="57"/>
     <icon src="resources/ios/icon/icon@2x.png" width="114" height="114"/>
     <icon src="resources/ios/icon/icon-40.png" width="40" height="40"/>
