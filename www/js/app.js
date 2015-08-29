@@ -60,8 +60,9 @@ angular.module('alacena', ['ionic', 'alacena.controllers',
 /**
 * Configuración de la aplicación
 */
-.config(function($stateProvider, $urlRouterProvider,$ionicFilterBarConfigProvider) {
+.config(function($stateProvider, $urlRouterProvider,$ionicFilterBarConfigProvider,$compileProvider) {
 
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(file|https?|ftp|mailto|app):/);
   $ionicFilterBarConfigProvider.transition('vertical');
   $ionicFilterBarConfigProvider.placeholder('Buscar');
 

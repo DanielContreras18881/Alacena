@@ -87,18 +87,15 @@ angular.module('alacena.elementosController', ['ionic'])
     if(elementosListaFiltrados.length>0){
       var listasElemento = '';
         angular.forEach(elementosListaFiltrados, function(item) {
-            if (item.nombreLista.indexOf('Lista de la Compra') > -1) {
-                listasElemento+=item.nombreLista+' - '+item.cantidadElemento;
-                if(item.cantidadElemento>1){
-                  listasElemento+=' unidades';
-                }else{
-                  listasElemento+=' unidad';
-                }
-                listasElemento+='<br/>';
+            if (item.nombreLista !== 'Lista de la Compra'){
+              listasElemento+='Tienes '+item.cantidadElemento+' en '+item.nombreLista;
+            }else{
+              listasElemento+='Hay que comprar '+item.cantidadElemento;
             }
+            listasElemento+='<br/>';
         });
          var alertPopup = $ionicPopup.alert({
-           title: 'Tienes '+nombre,
+           title: nombre,
            template: listasElemento
          });
          alertPopup.then(function(res) {});
