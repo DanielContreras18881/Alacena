@@ -88,7 +88,7 @@ angular.module('alacena.elementosController', ['ionic'])
       var listasElemento = '';
         angular.forEach(elementosListaFiltrados, function(item) {
             if (item.nombreLista !== 'Lista de la Compra'){
-              listasElemento+='Tienes '+item.cantidadElemento+' en '+item.nombreLista;
+              listasElemento+='Hay '+item.cantidadElemento+' en '+item.nombreLista;
             }else{
               listasElemento+='Hay que comprar '+item.cantidadElemento;
             }
