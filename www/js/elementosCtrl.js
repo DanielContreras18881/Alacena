@@ -2,7 +2,7 @@ angular.module('alacena.elementosController', ['ionic'])
 /**
 * Controlador de la pantalla de elementos
 */
-.controller('ElementosCtrl', function($rootScope,$scope,jsonFactory,LocalStorage,$filter,$ionicPopup,$ionicModal,$ionicListDelegate,$ionicFilterBar,$log) {
+.controller('ElementosCtrl', function($rootScope,$scope,jsonFactory,LocalStorage,$filter,$ionicPopup,$ionicModal,$ionicListDelegate,$ionicFilterBar,logdata) {
 
   var filterBarInstance;
   /**
@@ -16,7 +16,7 @@ angular.module('alacena.elementosController', ['ionic'])
       items: $rootScope.elementos,
       update: function (filteredItems, filterText) {
         $rootScope.elementos = filteredItems;
-        $log.debug('ElementosCtrl:showFilterBar:Filtrado por:'+filterText);
+        logdata.debug('ElementosCtrl:showFilterBar:Filtrado por:'+filterText);
       }
     });
   };
@@ -24,7 +24,7 @@ angular.module('alacena.elementosController', ['ionic'])
   * Inicializa la pantalla de lista de elementos
   */
   $scope.initialize = function(){
-    $log.debug('ElementosCtrl:initialize:Inicio');
+    logdata.debug('ElementosCtrl:initialize:Inicio');
     $rootScope.showReorderbutton = false;
 
     jsonFactory.getElementData(function(data){
@@ -43,7 +43,7 @@ angular.module('alacena.elementosController', ['ionic'])
       $scope.colorDefaultElement = data.colorDefaultElement;
       $scope.colorbotonesEditablesDefaultElement = $filter('filter')(data.configColorsElements, {"claseElemento":data.colorDefaultElement}, true)[0].botonesEditables;
     });
-    $log.debug('ElementosCtrl:initialize:Fin');
+    logdata.debug('ElementosCtrl:initialize:Fin');
   }
   /**
   * Ventana modal que copia un elemento en la lista de la compra
@@ -57,7 +57,7 @@ angular.module('alacena.elementosController', ['ionic'])
   * Cambia que el elemento tenga fecha de caducidad o no
   */
   $scope.cambioCaducidad = function(){
-    $log.debug('ElementosCtrl:cambioCaducidad');
+    logdata.debug('ElementosCtrl:cambioCaducidad');
     $scope.fechaDisabled=!$scope.fechaDisabled;
     $scope.elementoLista.fechaCaducidad = null;
   }
@@ -65,7 +65,7 @@ angular.module('alacena.elementosController', ['ionic'])
   * Copia el elemento en la lista de la compra del elemento
   */
   $scope.changeLista = function(){
-    $log.debug('ElementosCtrl:changeLista');
+    logdata.debug('ElementosCtrl:changeLista');
     if($scope.elementoLista.caduca){
       var entrada =new moment($scope.elementoLista.fechaCaducidad);
       var formato = "YYYY-MM-DD";
@@ -79,7 +79,7 @@ angular.module('alacena.elementosController', ['ionic'])
   * Se muestran las listas en las que se encuentra el elemento
   */
   $scope.mostrarListas = function(nombre) {
-    $log.debug('ElementosCtrl:mostrarListas:'+nombre);
+    logdata.debug('ElementosCtrl:mostrarListas:'+nombre);
     var elementosListaFiltrados = $filter('filter')($rootScope.elementosLista,
                                                     function(value, index) {
                                                       return value.nombreElemento === nombre;
@@ -131,7 +131,7 @@ angular.module('alacena.elementosController', ['ionic'])
   * Se borra un elemento
   */
   $scope.onItemDelete = function(item) {
-    $log.debug('ElementosCtrl:onItemDelete:'+JSON.stringify(item));
+    logdata.debug('ElementosCtrl:onItemDelete:'+JSON.stringify(item));
     $rootScope.elementos.splice($rootScope.elementos.indexOf(item), 1);
     LocalStorage.set('elementos',$rootScope.elementos);
     $scope.showConfirm(item.nombreElemento);
@@ -140,7 +140,7 @@ angular.module('alacena.elementosController', ['ionic'])
   * Se muestra una ventana modal de confirmación
   */
   $scope.showConfirm = function(nombre) {
-   $log.debug('ElementosCtrl:showConfirm:'+nombre);
+   logdata.debug('ElementosCtrl:showConfirm:'+nombre);
    var confirmPopup = $ionicPopup.confirm({
      title: 'Borrar '+nombre,
      template: '¿Deseas borrar '+nombre+' de todas sus listas?',
@@ -149,7 +149,7 @@ angular.module('alacena.elementosController', ['ionic'])
    });
    confirmPopup.then(function(res) {
      if(res) {
-        $log.debug('ElementosCtrl:showConfirm:confirmado:'+res);
+        logdata.debug('ElementosCtrl:showConfirm:confirmado:'+res);
         $rootScope.elementosLista = $filter('filter')($rootScope.elementosLista, function(value, index) {return value.nombreElemento !== nombre;});
         LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
         $ionicListDelegate.closeOptionButtons();

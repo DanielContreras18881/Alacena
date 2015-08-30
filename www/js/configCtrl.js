@@ -2,12 +2,12 @@ angular.module('alacena.configController', ['ionic'])
 /**
 * Controlador de la pantalla de configuración
 */
-.controller('ConfigCtrl', function($rootScope,$scope,jsonFactory,LocalStorage,$log) {
+.controller('ConfigCtrl', function($rootScope,$scope,jsonFactory,LocalStorage,logdata) {
   /**
   * Inicializa la pantalla de configuración
   */
   $scope.initialize = function(){
-    $log.debug('ConfigCtrl:initialize:Inicio');
+    logdata.debug('ConfigCtrl:initialize:Inicio');
     $rootScope.showReorderbutton = false;
 
     jsonFactory.getConfigData(function(data){
@@ -22,13 +22,13 @@ angular.module('alacena.configController', ['ionic'])
 */
     //$scope.nombreLista = $scope.configData.ListaDefecto;
     //$scope.idiomaSeleccionado = $scope.configData.idiomaDefault;
-    $log.debug('ConfigCtrl:initialize:Fin');
+    logdata.debug('ConfigCtrl:initialize:Fin');
   }
     /**
     * Cambiar el color por defecto para las listas
     */
     $scope.changeColor = function(claseLista){
-      $log.debug('ConfigCtrl:changeColor:'+claseLista);
+      logdata.debug('ConfigCtrl:changeColor:'+claseLista);
       $rootScope.configData.colorDefault = claseLista;
       LocalStorage.set('configData',$rootScope.configData);
     };
@@ -36,7 +36,7 @@ angular.module('alacena.configController', ['ionic'])
     * Cambiar el color por defecto de los elementos de las listas
     */
     $scope.changeColorElement = function(claseElemento){
-      $log.debug('ConfigCtrl:changeColorElement:'+claseElemento);
+      logdata.debug('ConfigCtrl:changeColorElement:'+claseElemento);
       $rootScope.configData.colorDefaultElement = claseElemento;
       LocalStorage.set('configData',$rootScope.configData);
     };

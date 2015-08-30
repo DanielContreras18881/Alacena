@@ -1,10 +1,11 @@
 // Ionic Starter App
-
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('alacena', ['ionic', 'alacena.controllers',
+angular.module('alacena', ['ionic', 'ngCordova',
+                                    'alacena.devdataController',
+                                    'alacena.controllers',
                                     'alacena.cantidadElementosController',
                                     'alacena.configController',
                                     'alacena.elementosController',                                                                                                            'alacena.listasController',
@@ -12,12 +13,30 @@ angular.module('alacena', ['ionic', 'alacena.controllers',
                                     'alacena.directives',
                                     'alacena.filters',
                                     'jett.ionic.filter.bar'])
+
+
 /**
 * Ejecución de la aplicación
 */
-.run(function($ionicPlatform,$state,$ionicHistory,$ionicPopup) {
+.run(function($ionicPlatform,$state,$ionicHistory,$ionicPopup,logdata,$rootScope) {
 
   $ionicPlatform.ready(function() {
+    if (window.cordova) {
+      if (ionic.Platform.isAndroid()) {
+        console.log('cordova.file.externalDataDirectory: ' + cordova.file.externalDataDirectory);
+        $rootScope.dataDirectory = cordova.file.externalDataDirectory;
+      }else if (ionic.Platform.isIOS()) {
+        console.log('cordova.file.documentsDirectory: ' + cordova.file.documentsDirectory);
+        $rootScope.dataDirectory = cordova.file.documentsDirectory;
+      }else{
+        console.log('cordova.file.dataDirectory: ' + cordova.file.dataDirectory);
+        $rootScope.dataDirectory = cordova.file.dataDirectory;
+      }
+    } else {
+      $rootScope.dataDirectory = "";
+    }
+
+    logdata.createLogFile();
 
     if(navigator!==undefined){
       if(navigator.splashscreen!==undefined){
@@ -46,7 +65,7 @@ angular.module('alacena', ['ionic', 'alacena.controllers',
                if( res ){
                  navigator.app.exitApp();
                } else {
-                 console.log('no salimos');
+                 logdata.debug('no salimos');
                }
              });
          }else{
@@ -73,6 +92,17 @@ angular.module('alacena', ['ionic', 'alacena.controllers',
     abstract: true,
     templateUrl: "templates/menu.html",
     controller: 'MenuCtrl'
+  })
+
+  .state('app.devData', {
+    url: "/devData",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/devdata.html",
+        controller:'DevDataCtrl'
+      }
+    },
+    principal:'SI'
   })
 
   .state('app.config', {

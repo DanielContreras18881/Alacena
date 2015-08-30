@@ -1,0 +1,20 @@
+<meta charset="UTF-8">
+<ion-view view-title="Acerca de..." ng-init="initialize()">
+    <ion-content has-bouncing="false">
+      <div class="card">
+        <div class="item item-text-wrap">
+          Esta es una aplicación pensada para los que quieren tener orden en su nevera, armarios, despensa...<br/>
+          Además permite gestionar la lista de la compra, incluso compartiéndola con tus amigos o familiares.<br/>
+          <br/>
+          <br/>
+          <br/>
+          Desarrollada por <b>Chony Apps Develop</b><br/>
+          Alacena - Versión : <b>{{appVersion}}</b>
+        </div>
+      </div>
+      <button class="button button-full" ng-click="reportarError()">Reportar error</button>
+      <button class="button button-full" ng-click="compartir()">compartir</button>
+      <button class="button button-full" ng-click="local()">localnotification</button>
+      <button class="button button-full" ng-click="barcode()">barcode</button>
+    </ion-content>
+</ion-view>

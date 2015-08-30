@@ -2,16 +2,14 @@ angular.module('alacena.controllers', ['ngCordova'])
 /**
 * Controlador general
 */
-.controller('AppCtrl', function($log) {
-  $log.debug('AppCtrl:Inicio');
-  $log.debug('AppCtrl:Fin');
+.controller('AppCtrl', function() {
 
 })
 /**
 * Controlador del menú
 */
-.controller('MenuCtrl', function($rootScope,$log) {
-  $log.debug('MenuCtrl:Inicio');
+.controller('MenuCtrl', function($rootScope,logdata) {
+  logdata.debug('MenuCtrl:Inicio');
 
   /**
   * Habilitar la reordenación
@@ -19,5 +17,5 @@ angular.module('alacena.controllers', ['ngCordova'])
   $rootScope.reorder = function(){
       $rootScope.showReorder = !$rootScope.showReorder;
   }
-  $log.debug('MenuCtrl:Fin');
+  logdata.debug('MenuCtrl:Fin');
 });

@@ -2,7 +2,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
 /**
 * Controlador de la pantalla de lista de elementos
 */
-.controller('ListaCtrl', function($rootScope,$scope,$stateParams,$ionicModal,$ionicListDelegate,jsonFactory,LocalStorage,$filter,$cordovaLocalNotification,$ionicPopup,$ionicFilterBar,$log) {
+.controller('ListaCtrl', function($rootScope,$scope,$stateParams,$ionicModal,$ionicListDelegate,jsonFactory,LocalStorage,$filter,$cordovaLocalNotification,$ionicPopup,$ionicFilterBar,logdata) {
 
   var filterBarInstance;
   /**
@@ -16,7 +16,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
       items: $rootScope.elementosLista,
       update: function (filteredItems, filterText) {
         $rootScope.elementosLista = filteredItems;
-        $log.debug('ListaCtrl:showFilterBar:Filtrado por:'+filterText);
+        logdata.debug('ListaCtrl:showFilterBar:Filtrado por:'+filterText);
       }
     });
   };
@@ -25,7 +25,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   */
   $scope.initialize = function(){
 
-    $log.debug('ListaCtrl:initialize:Inicio');
+    logdata.debug('ListaCtrl:initialize:Inicio');
 
     $scope.nombreLista = $stateParams.nombreLista;
     $scope.listaEditable = $stateParams.listaEditable;
@@ -52,13 +52,13 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
       $scope.colorbotonesEditablesDefaultElement = $filter('filter')(data.configColorsElements, {"claseElemento":data.colorDefaultElement}, true)[0].botonesEditables;
       $scope.askAddListaCompra = data.askAddListaCompra;
     });
-    $log.debug('ListaCtrl:initialize:Fin');
+    logdata.debug('ListaCtrl:initialize:Fin');
   }
   /**
   * Muestra una ventana modal para editar un elemento
   */
   $scope.edit = function(item) {
-    $log.debug('ListaCtrl:edit:'+JSON.stringify(item));
+    logdata.debug('ListaCtrl:edit:'+JSON.stringify(item));
     var formato = "YYYY-MM-DD";
     item.fechaCaducidad = moment(item.fechaCaducidad,formato).hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
     $scope.newElement = item;
@@ -72,7 +72,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   * Establece un color en un elemento concreto
   */
   $scope.setColor = function(claseElemento){
-    $log.debug('ListaCtrl:setColor:'+claseElemento);
+    logdata.debug('ListaCtrl:setColor:'+claseElemento);
     $scope.elementoLista.colorElemento = claseElemento;
     $scope.elementoLista.colorBotones = $filter('filter')($scope.coloresElementos, {"claseElemento":claseElemento})[0].botonesEditables;
     $scope.elementoLista.colorElementoNoCaducado = $scope.elementoLista.colorElemento;
@@ -82,7 +82,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   * Guarda un elemento creado o editado
   */
   $scope.save = function(element){
-    $log.debug('ListaCtrl:save:'+element);
+    logdata.debug('ListaCtrl:save:'+element);
     if(element.caduca){
       var entrada =new moment(element.fechaCaducidad);
       var formato = "YYYY-MM-DD";
@@ -121,7 +121,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   * Mueve un elemento de una lista a otra
   */
   $scope.changeLista = function(lista){
-    $log.debug('ListaCtrl:changeLista:'+lista);
+    logdata.debug('ListaCtrl:changeLista:'+lista);
     if($scope.elementoLista.nombreLista==='Lista de la Compra'){
       var newElementLista = {
         "nombreElemento":$scope.elementoLista.nombreElemento,
@@ -165,7 +165,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   * Pregunta si se tiene que mover un elemento a la lista de la compra
   */
   $scope.preguntaTraslado = function(nombre,callback){
-    $log.debug('ListaCtrl:preguntaTraslado:'+nombre);
+    logdata.debug('ListaCtrl:preguntaTraslado:'+nombre);
     if($scope.askAddListaCompra){
       var confirmPopup = $ionicPopup.confirm({
         title: 'Mover '+nombre,
@@ -187,7 +187,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   * Se quita una unidad a un elemento
   */
   $scope.minusElement = function(item) {
-    $log.debug('ListaCtrl:minusElement:'+JSON.stringify(item));
+    logdata.debug('ListaCtrl:minusElement:'+JSON.stringify(item));
     if(item.cantidadElemento>0){
       item.cantidadElemento = --item.cantidadElemento;
       if(item.cantidadElemento<item.cantidadMinima){
@@ -246,7 +246,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   * Se añade una unidad a un elemento
   */
   $scope.plusElement = function(item) {
-    $log.debug('ListaCtrl:plusElement:'+JSON.stringify(item));
+    logdata.debug('ListaCtrl:plusElement:'+JSON.stringify(item));
     item.cantidadElemento = ++item.cantidadElemento;
     LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
     $ionicListDelegate.closeOptionButtons();
@@ -255,7 +255,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   * Muestra una ventana modal para mover un elemento de una lista a otra
   */
   $scope.moveTo = function(item) {
-    $log.debug('ListaCtrl:moveTo:'+JSON.stringify(item));
+    logdata.debug('ListaCtrl:moveTo:'+JSON.stringify(item));
     $scope.elementoLista = item;
     var listasFiltradas = $filter('filtrarQuitarLista')($rootScope.listas,$scope.nombreLista);
     $scope.nuevoNombreLista = listasFiltradas[0].nombreLista;
@@ -270,7 +270,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   * Se marca o desmarca un elemento de la lista de la compra
   */
   $scope.markAcquired = function(item) {
-    $log.debug('ListaCtrl:markAcquired:'+JSON.stringify(item));
+    logdata.debug('ListaCtrl:markAcquired:'+JSON.stringify(item));
     if(item.marked){
       item.marked = false;
     }else{
@@ -290,7 +290,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   * Cambia que el elemento tenga fecha de caducidad o no
   */
   $scope.cambioCaducidad = function(){
-    $log.debug('ListaCtrl:cambioCaducidad');
+    logdata.debug('ListaCtrl:cambioCaducidad');
     $scope.fechaDisabled=!$scope.fechaDisabled;
     $scope.newElement.fechaCaducidad = null;
   }
@@ -298,7 +298,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   * Muestra una ventana modal para añadir un elemento
   */
   $scope.addItem = function() {
-    $log.debug('ListaCtrl:addItem');
+    logdata.debug('ListaCtrl:addItem');
     $scope.fechaDisabled = false;
     $scope.newElement = {
       "nombreElemento":"elemento",
@@ -335,7 +335,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   * Se mueve un elemento dentro de la lista de elementos
   */
   $scope.onItemDelete = function(item) {
-    $log.debug('ListaCtrl:onItemDelete');
+    logdata.debug('ListaCtrl:onItemDelete');
     $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(item), 1);
     LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
     $scope.showConfirm(item.nombreElemento);
@@ -344,7 +344,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   * Muestra la ventana de confirmación para borrar un elemento
   */
   $scope.showConfirm = function(nombre) {
-   $log.debug('ListaCtrl:showConfirm:'+nombre);
+   logdata.debug('ListaCtrl:showConfirm:'+nombre);
    var confirmPopup = $ionicPopup.confirm({
      title: 'Borrar '+nombre,
      template: '¿Deseas borrar '+nombre+' del histórico?',
@@ -353,7 +353,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
    });
    confirmPopup.then(function(res) {
      if(res) {
-      $log.debug('ListaCtrl:showConfirm:confirmado:'+res);
+      logdata.debug('ListaCtrl:showConfirm:confirmado:'+res);
       $rootScope.elementos = $filter('filter')($rootScope.elementos, function(value, index) {return value.nombreElemento !== nombre;});
       LocalStorage.set('elementos',$rootScope.elementos);
       $ionicListDelegate.closeOptionButtons();

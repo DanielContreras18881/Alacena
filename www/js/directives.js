@@ -2,7 +2,7 @@ angular.module('alacena.directives',[])
 /**
 * Directiva para resetear un input
 */
-.directive('resetField', ['$compile', '$timeout', function($compile, $timeout) {
+.directive('resetField', ['$compile', '$timeout', function($compile, $timeout,logdata) {
     return {
     require: 'ngModel',
     scope: {},
