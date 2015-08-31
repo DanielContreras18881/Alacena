@@ -65,12 +65,14 @@ angular.module('alacena.listasController', ['ionic'])
   */
   $scope.addItem = function() {
     logdata.debug('ListaCtrl:addItem');
-    $scope.newList =   {
-      "nombreLista":"lista nueva",
-      "colorLista":$scope.colorDefault,
-      "colorBotones":$scope.colorBotonesDefault,
-      "listaEditable":true
-    };
+    $translate(['LISTA_NUEVA']).then(function (translations) {
+      $scope.newList =   {
+        "nombreLista":translations.LISTA_NUEVA,
+        "colorLista":$scope.colorDefault,
+        "colorBotones":$scope.colorBotonesDefault,
+        "listaEditable":true
+      };
+    });
     $scope.modalLista.show();
   };
   /**

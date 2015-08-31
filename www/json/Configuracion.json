@@ -3,34 +3,50 @@
 	"idiomaDefault":"es",
 	"idiomas":[
 		{
-			"id":"es",
+			"id_iso":"es",
 			"idiomaSeleccionado":"Español"
 		},
 		{
-			"id":"en",
+			"id_iso":"en",
 			"idiomaSeleccionado":"English"
+		},
+		{
+			"id_iso":"de",
+			"idiomaSeleccionado":"Deutsch"
+		},
+		{
+			"id_iso":"it",
+			"idiomaSeleccionado":"Italiano"
+		},
+		{
+			"id_iso":"fr",
+			"idiomaSeleccionado":"Français"
+		},
+		{
+			"id_iso":"ja",
+			"idiomaSeleccionado":"Nihonjin"
 		}
 	],
 	"askAddListaCompra":true,
 	"colorDefault":"item-dark item item-complex",
 	"configColors":[
 		{
-			"nombre":"Negro",
+			"nombre":"NEGRO",
 			"claseLista":"item-dark item item-complex",
 			"botonesEditables":"button-dark"
 		},
 		{
-			"nombre":"Morado",
+			"nombre":"MORADO",
 			"claseLista":"item-royal item item-complex",
 			"botonesEditables":"button-royal"
 		},
 		{
-			"nombre":"Verde",
+			"nombre":"VERDE",
 			"claseLista":"item-balanced item item-complex",
 			"botonesEditables":"button-balanced"
 		},
 		{
-			"nombre":"Azul",
+			"nombre":"AZUL",
 			"claseLista":"item-positive item item-complex",
 			"botonesEditables":"button-positive"
 		}
@@ -38,17 +54,17 @@
 	"colorDefaultElement":"item item-stable item-complex item-right-editable",
 	"configColorsElements":[
 		{
-			"nombre":"Blanco",
+			"nombre":"BLANCO",
 			"claseElemento":"item item-stable item-complex item-right-editable",
 			"botonesEditables":"button-stable"
 		},
 		{
-			"nombre":"Verde",
+			"nombre":"VERDE",
 			"claseElemento":"item item-balanced item-complex item-right-editable",
 			"botonesEditables":"button-balanced"
 		},
 		{
-			"nombre":"Azul",
+			"nombre":"AZUL",
 			"claseElemento":"item item-calm item-complex item-right-editable",
 			"botonesEditables":"button-calm"
 		}

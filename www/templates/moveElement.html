@@ -1,23 +1,23 @@
 <meta charset="UTF-8">
 <ion-modal-view>
   <ion-header-bar class="bar bar-header bar-dark">
-    <h1 class="title">Mover {{elementoLista.nombreElemento}}</h1>
+    <h1 class="title">{{ 'MOVER' | translate }} {{elementoLista.nombreElemento}}</h1>
     <button class="button button-clear button-primary ion-close-round" ng-click="modalMoveElement.hide()"></button>
   </ion-header-bar>
   <ion-content class="padding">
     <div class="list">
       <label class="item item-input">
-        <span class="input-label">Lista:</span>
+        <span class="input-label">{{ 'LISTA' | translate }}</span>
         <select ng-model="nuevoNombreLista"
-            ng-options="lista.nombreLista as lista.nombreLista for lista in listas | filtrarQuitarLista:nombreLista">
+            ng-options="lista.nombreLista as (lista.nombreLista | translate) for lista in listas | filtrarQuitarLista:nombreLista">
         </select>
       </label>
       <label class="item item-input">
-        <span class="input-label">Cantidad:</span>
+        <span class="input-label">{{ 'CANTIDAD' | translate }}</span>
         <input ng-model="elementoLista.cantidadElemento" min="{{elementoLista.cantidadElemento}}" type="number">
       </label>
       <label class="item item-toggle">
-         Caduca:
+         {{ 'CADUCA' | translate }}
          <label class="toggle toggle-assertive">
            <input type="checkbox" ng-model="elementoLista.caduca" ng-checked="elementoLista.caduca" ng-change="cambioCaducidad()">
            <div class="track">
@@ -26,13 +26,13 @@
          </label>
       </label>
       <label class="item item-input">
-        <span class="input-label">Fecha de caducidad:</span>
+        <span class="input-label">{{ 'FECHA_CADUCIDAD' | translate }}</span>
         <input ng-disabled="fechaDisabled" ng-model="elementoLista.fechaCaducidad" type="date">
       </label>
       <label class="item item-input">
-        <span class="input-label">Color:</span>
+        <span class="input-label">{{ 'COLOR' | translate }}</span>
         <select ng-model="colorElemento"
-            ng-options="cc.claseElemento as cc.nombre for cc in coloresElementos"
+            ng-options="cc.claseElemento as (cc.nombre| translate) for cc in coloresElementos"
             ng-change="setColor(colorElemento)">
         </select>
       </label>

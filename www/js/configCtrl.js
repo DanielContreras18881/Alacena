@@ -2,7 +2,7 @@ angular.module('alacena.configController', ['ionic'])
 /**
 * Controlador de la pantalla de configuración
 */
-.controller('ConfigCtrl', function($rootScope,$scope,jsonFactory,LocalStorage,logdata) {
+.controller('ConfigCtrl', function($rootScope,$scope,$translate,jsonFactory,LocalStorage,logdata) {
   /**
   * Inicializa la pantalla de configuración
   */
@@ -14,6 +14,7 @@ angular.module('alacena.configController', ['ionic'])
       $rootScope.configData = data;
       $scope.claseLista = $rootScope.configData.colorDefault;
       $scope.claseElemento = $rootScope.configData.colorDefaultElement;
+      $scope.idiomaSeleccionado = $scope.configData.idiomaDefault;
     });
 /*
     jsonFactory.getListData(function(data){
@@ -21,7 +22,6 @@ angular.module('alacena.configController', ['ionic'])
     });
 */
     //$scope.nombreLista = $scope.configData.ListaDefecto;
-    //$scope.idiomaSeleccionado = $scope.configData.idiomaDefault;
     logdata.debug('ConfigCtrl:initialize:Fin');
   }
     /**
@@ -46,10 +46,12 @@ angular.module('alacena.configController', ['ionic'])
       LocalStorage.set('configData',$scope.configData);
     };
 */
-/*
+
     $scope.changeIdioma = function(idiomaSeleccionado){
-      alert(JSON.stringify(idiomaSeleccionado));
+      $translate.use(idiomaSeleccionado);
+      $rootScope.configData.idiomaDefault= idiomaSeleccionado;
+      LocalStorage.set('configData',$rootScope.configData);
     };
-*/
+
 
 });

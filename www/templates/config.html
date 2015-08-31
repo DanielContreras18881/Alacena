@@ -1,31 +1,31 @@
 <meta charset="UTF-8">
-<ion-view view-title="Configuración" ng-init="initialize()">
+<ion-view view-title="{{ 'CONFIGURACION' | translate }}" ng-init="initialize()">
   <ion-content has-bouncing="false">
 
 	<div class="list">
 
 	  <label class="item item-input item-select">
 	    <div class="input-label">
-	      Color por defecto de nueva lista
+	      {{ 'COLOR_DEFECTO_LISTA' | translate }}
 	    </div>
 	    <select ng-model="claseLista"
-	    		ng-options="cc.claseLista as cc.nombre for cc in configData.configColors"
+	    		ng-options="cc.claseLista as (cc.nombre | translate) for cc in configData.configColors"
 	    		ng-change="changeColor(claseLista)">
 	    </select>
 	  </label>
 
     <label class="item item-input item-select">
 	    <div class="input-label">
-	      Color por defecto de nuevo elemento
+	      {{ 'COLOR_DEFECTO_ELEMENTO' | translate }}
 	    </div>
 	    <select ng-model="claseElemento"
-	    		ng-options="cc.claseElemento as cc.nombre for cc in configData.configColorsElements"
+	    		ng-options="cc.claseElemento as (cc.nombre | translate) for cc in configData.configColorsElements"
 	    		ng-change="changeColorElement(claseElemento)">
 	    </select>
 	  </label>
 
     <label class="item item-toggle">
-       Preguntar para añadir a la lista de la compra
+       {{ 'PREGUNTA_INCLUIR_LISTA_COMPRA' | translate }}
        <label class="toggle toggle-balanced">
          <input type="checkbox" ng-model="configData.askAddListaCompra" ng-checked="configData.askAddListaCompra">
          <div class="track">
@@ -44,17 +44,17 @@
 	    </select>
 	  </label>
 -->
-<!--
+
 	  <label class="item item-input item-select">
 	    <div class="input-label">
-	      Idioma
+	      {{ 'IDIOMA' | translate }}
 	    </div>
 	    <select ng-model="idiomaSeleccionado"
-	    		ng-options="idioma.id as idioma.idiomaSeleccionado for idioma in configData.idiomas"
+	    		ng-options="idioma.id_iso as idioma.idiomaSeleccionado for idioma in configData.idiomas"
 	    		ng-change="changeIdioma(idiomaSeleccionado)">
 	    </select>
 	  </label>
--->
+
 	</div>
   </ion-content>
 </ion-view>

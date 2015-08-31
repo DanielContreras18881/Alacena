@@ -1,20 +1,20 @@
 <meta charset="UTF-8">
 <ion-modal-view>
   <ion-header-bar class="bar bar-header bar-dark">
-    <h1 class="title">Lista</h1>
+    <h1 class="title">{{ 'LISTA' | translate }}</h1>
     <button class="button button-clear button-primary ion-close-round" ng-click="modalLista.hide()"></button>
   </ion-header-bar>
   <ion-content class="padding">
     <form name="myForm">
       <div class="list">
         <label class="item item-input">
-          <span class="input-label">Nombre:</span>
+          <span class="input-label">{{ 'NOMBRE' | translate }}</span>
           <input ng-model="newList.nombreLista" type="text" reset-field/>
         </label>
         <label class="item item-input">
-          <span class="input-label">Color:</span>
+          <span class="input-label">{{ 'COLOR' | translate }}</span>
           <select ng-model="newList.colorLista"
-              ng-options="cc.claseLista as cc.nombre for cc in coloresListas"
+              ng-options="cc.claseLista as (cc.nombre | translate) for cc in coloresListas"
               ng-change="setColor(newList.colorLista)">
           </select>
         </label>

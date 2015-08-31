@@ -1,6 +1,6 @@
 [
 	{
-		"nombreLista":"Lista de la Compra",
+		"nombreLista":"LISTA_COMPRA",
 		"colorLista":"item-dark item item-complex",
 		"colorBotones":"button-dark",
 		"listaEditable":false
@@ -10,5 +10,5 @@
 		"colorLista":"item-calm item item-complex",
 		"colorBotones":"button-calm",
 		"listaEditable":true
-	}	
+	}
 ]

@@ -3,7 +3,7 @@ angular.module('alacena.filters',[])
 * Filtro de las fechas que controla cómo se muestran las fechas de caducidad
 * También se controla el color del elemento si la fecha de caducidad se acerca
 */
-.filter('filterDate', function($rootScope)
+.filter('filterDate', function($filter)
     {
         return function(input,elemento)
         {
@@ -18,30 +18,30 @@ angular.module('alacena.filters',[])
               var sigSemana = moment().add(7,'days').hours(0).minutes(0).seconds(0).milliseconds(0);
               var quinceDias = moment().add(15,'days').hours(0).minutes(0).seconds(0).milliseconds(0);
 
-              var info = "caduca ";
+              var info = $filter('translate')('FECHA_CADUCA');
 
               if(hoy>entrada){
-                _date = "CADUCADO!";
+                _date = $filter('translate')('CADUCADO');
                 elemento.colorElemento = "item item-assertive item-complex item-right-editable";
                 elemento.colorBotones = "button-assertive";
               }else if(hoy<=entrada && entrada<maniana){
-                _date = info+"hoy";
+                _date = info+' '+$filter('translate')('HOY');
                 elemento.colorElemento = "item item-assertive item-complex item-right-editable";
                 elemento.colorBotones = "button-assertive";
               }else if (maniana<=entrada && entrada<pasado){
-                _date = info+"mañana";
+                _date = info+' '+$filter('translate')('MANIANA');
                 elemento.colorElemento = "item item-energized item-complex item-right-editable";
                 elemento.colorBotones = "button-energized";
               }else if (pasado<=entrada && entrada<sigSemana){
-                _date = info+"esta semana";
+                _date = info+' '+$filter('translate')('ESTA_SEMANA');
                 elemento.colorElemento = "item item-energized item-complex item-right-editable";
                 elemento.colorBotones = "button-energized";
               }else if (sigSemana<=entrada && entrada<quinceDias){
-                _date = info+"la semana que viene";
+                _date = info+' '+$filter('translate')('SEMANA_SIGUIENTE');
                 elemento.colorElemento = elemento.colorElementoNoCaducado;
                 elemento.colorBotones = elemento.colorBotonesNoCaducado;
               }else{
-                _date = info+"el "+entrada.format("D MM YY");
+                _date = info+' '+$filter('translate')('EL')+' '+entrada.format("D MM YY");
                 elemento.colorElemento = elemento.colorElementoNoCaducado;
                 elemento.colorBotones = elemento.colorBotonesNoCaducado;
               }

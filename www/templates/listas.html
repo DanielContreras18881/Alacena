@@ -1,11 +1,11 @@
 <meta charset="UTF-8">
-<ion-view view-title="Gestión de listas" ng-init="initialize()">
+<ion-view view-title="{{ 'GESTION_LISTAS' | translate }}" ng-init="initialize()">
   <ion-content has-bouncing="false">
     <ion-list show-reorder="showReorder">
       <ion-item class="{{lista.colorLista}}" ng-repeat="lista in listas track by $index"
             ng-class="item-remove-animate"
       			href="#/app/listas/{{lista.nombreLista}}/{{lista.colorLista}}/{{lista.listaEditable}}">
-            {{lista.nombreLista}}
+            {{lista.nombreLista | translate}}
           <ion-option-button ng-if="lista.listaEditable" class="ion-close-circled icono-option-size {{lista.colorBotones}}"
                              ng-click="onItemDelete(lista)">
           </ion-option-button>

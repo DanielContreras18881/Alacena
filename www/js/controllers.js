@@ -1,4 +1,4 @@
-angular.module('alacena.controllers', ['ngCordova'])
+angular.module('alacena.controllers', [])
 /**
 * Controlador general
 */

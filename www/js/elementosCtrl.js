@@ -2,7 +2,7 @@ angular.module('alacena.elementosController', ['ionic'])
 /**
 * Controlador de la pantalla de elementos
 */
-.controller('ElementosCtrl', function($rootScope,$scope,jsonFactory,LocalStorage,$filter,$ionicPopup,$ionicModal,$ionicListDelegate,$ionicFilterBar,logdata) {
+.controller('ElementosCtrl', function($rootScope,$scope,$translate,jsonFactory,LocalStorage,$filter,$ionicPopup,$ionicModal,$ionicListDelegate,$ionicFilterBar,logdata) {
 
   var filterBarInstance;
   /**
@@ -67,7 +67,7 @@ angular.module('alacena.elementosController', ['ionic'])
   $scope.changeLista = function(){
     logdata.debug('ElementosCtrl:changeLista');
     if($scope.elementoLista.caduca){
-      var entrada =new moment($scope.elementoLista.fechaCaducidad);
+      var entrada = moment($scope.elementoLista.fechaCaducidad);
       var formato = "YYYY-MM-DD";
       $scope.elementoLista.fechaCaducidad = entrada.format(formato);
     }
@@ -85,45 +85,50 @@ angular.module('alacena.elementosController', ['ionic'])
                                                       return value.nombreElemento === nombre;
                                                     });
     if(elementosListaFiltrados.length>0){
-      var listasElemento = '';
-        angular.forEach(elementosListaFiltrados, function(item) {
-            if (item.nombreLista !== 'Lista de la Compra'){
-              listasElemento+='Hay '+item.cantidadElemento+' en '+item.nombreLista;
-            }else{
-              listasElemento+='Hay que comprar '+item.cantidadElemento;
-            }
-            listasElemento+='<br/>';
+      $translate(['HAY_QUE_COMPRAR','TIENES','EN','VALE']).then(function (translations) {
+        var listasElemento = '';
+          angular.forEach(elementosListaFiltrados, function(item) {
+              if (item.nombreLista !== $rootScope.listaDeLaCompra){
+                listasElemento+=translations.TIENES+item.cantidadElemento+translations.EN+item.nombreLista;
+              }else{
+                listasElemento+=translations.HAY_QUE_COMPRAR+item.cantidadElemento;
+              }
+              listasElemento+='<br/>';
+          });
+           var alertPopup = $ionicPopup.alert({
+             title: nombre,
+             template: listasElemento,
+             okText: translations.VALE
+           });
+           alertPopup.then(function(res) {});
         });
-         var alertPopup = $ionicPopup.alert({
-           title: nombre,
-           template: listasElemento
-         });
-         alertPopup.then(function(res) {});
     }else{
-      var confirmPopup = $ionicPopup.confirm({
-        title: 'No existe el elemento',
-        template: '¿Deseas añadir '+nombre+' a la Lista de la Compra?',
-        cancelText: 'No',
-        okText: 'Si'
-      });
-      confirmPopup.then(function(res) {
-        if(res) {
-          $scope.fechaDisabled = false;
-          $scope.elementoLista = {
-            "nombreElemento":nombre,
-            "colorElemento":$scope.colorDefaultElement,
-            "colorBotones":$scope.colorbotonesEditablesDefaultElement,
-            "colorElementoNoCaducado":$scope.colorDefaultElement,
-            "colorBotonesNoCaducado":$scope.colorbotonesEditablesDefaultElement,
-            "nombreLista":'Lista de la Compra',
-            "cantidadElemento":1,
-            "caduca":!$scope.fechaDisabled,
-            "fechaCaducidad":moment().toDate(),
-            "cantidadMinima":0,
-            "marked":false
-          };
-          $scope.modalCreateElement.show();
-        }
+      $translate(['NO_EXISTE_ELEMENTO','NO','SI']).then(function (translations) {
+        var confirmPopup = $ionicPopup.confirm({
+          title: translations.NO_EXISTE_ELEMENTO,
+          template: $translate('INCLUIR_PREGUNTA', { nombre:nombre }),
+          cancelText: translations.NO,
+          okText: translations.SI
+        });
+        confirmPopup.then(function(res) {
+          if(res) {
+            $scope.fechaDisabled = false;
+            $scope.elementoLista = {
+              "nombreElemento":nombre,
+              "colorElemento":$scope.colorDefaultElement,
+              "colorBotones":$scope.colorbotonesEditablesDefaultElement,
+              "colorElementoNoCaducado":$scope.colorDefaultElement,
+              "colorBotonesNoCaducado":$scope.colorbotonesEditablesDefaultElement,
+              "nombreLista":$rootScope.listaDeLaCompra,
+              "cantidadElemento":1,
+              "caduca":!$scope.fechaDisabled,
+              "fechaCaducidad":moment().toDate(),
+              "cantidadMinima":0,
+              "marked":false
+            };
+            $scope.modalCreateElement.show();
+          }
+        });
       });
     }
   };
@@ -141,11 +146,12 @@ angular.module('alacena.elementosController', ['ionic'])
   */
   $scope.showConfirm = function(nombre) {
    logdata.debug('ElementosCtrl:showConfirm:'+nombre);
+   $translate(['BORRAR','NO','SI']).then(function (translations) {});
    var confirmPopup = $ionicPopup.confirm({
-     title: 'Borrar '+nombre,
-     template: '¿Deseas borrar '+nombre+' de todas sus listas?',
-     cancelText: 'No',
-     okText: 'Si'
+     title: translations.BORRAR+nombre,
+     template: $translate('BORRAR_PREGUNTA_LISTAS', { nombre:nombre }),
+     cancelText: translations.NO,
+     okText: translations.SI
    });
    confirmPopup.then(function(res) {
      if(res) {
