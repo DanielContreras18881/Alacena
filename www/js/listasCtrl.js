@@ -7,7 +7,7 @@ angular.module('alacena.listasController', ['ionic'])
   * Inicializa la pantalla de listas
   */
   $scope.initialize = function(){
-    logdata.debug('ListasCtrl:initialize:Inicio');
+    logdata.messageLog('ListasCtrl:initialize:Inicio');
     jsonFactory.getListData(function(data){
       $rootScope.listas = data;
       $rootScope.showReorderbutton = $rootScope.listas.length > 2;
@@ -22,13 +22,13 @@ angular.module('alacena.listasController', ['ionic'])
     jsonFactory.getElementListData(function(data){
       $rootScope.elementosLista = data;
     });
-    logdata.debug('ListasCtrl:initialize:Fin');
+    logdata.messageLog('ListasCtrl:initialize:Fin');
   }
   /**
   * Compartir la lista con alguien
   */
   $scope.share = function(item) {
-    logdata.debug('ListaCtrl:share:'+JSON.stringify(item));
+    logdata.messageLog('ListaCtrl:share:'+JSON.stringify(item));
     alert('Share Item: ' + item.nombreLista);
     $ionicListDelegate.closeOptionButtons();
   };
@@ -36,7 +36,7 @@ angular.module('alacena.listasController', ['ionic'])
   * Muestra ventana modal para editar una lista
   */
   $scope.edit = function(item) {
-    logdata.debug('ListaCtrl:edit:'+JSON.stringify(item));
+    logdata.messageLog('ListaCtrl:edit:'+JSON.stringify(item));
     $scope.newList = item;
     $ionicListDelegate.closeOptionButtons();
     $scope.modalLista.show();
@@ -45,7 +45,7 @@ angular.module('alacena.listasController', ['ionic'])
   * Salva los datos de una lista editada o creada
   */
   $scope.save = function(element){
-    logdata.debug('ListaCtrl:save:'+JSON.stringify(element));
+    logdata.messageLog('ListaCtrl:save:'+JSON.stringify(element));
     if($rootScope.listas.indexOf(element) === -1) {
       $rootScope.listas.push(element);
     }
@@ -56,7 +56,7 @@ angular.module('alacena.listasController', ['ionic'])
   * Establece el color de la lista
   */
   $scope.setColor = function(claseLista){
-    logdata.debug('ListaCtrl:setColor:'+claseLista);
+    logdata.messageLog('ListaCtrl:setColor:'+claseLista);
     $scope.newList.colorLista = claseLista;
     $scope.newList.colorBotones = $filter('filter')($scope.coloresListas, {"claseLista":claseLista}, true)[0].botonesEditables;
   };
@@ -64,7 +64,7 @@ angular.module('alacena.listasController', ['ionic'])
   * Muestra la ventana modal para crear una lista
   */
   $scope.addItem = function() {
-    logdata.debug('ListaCtrl:addItem');
+    logdata.messageLog('ListaCtrl:addItem');
     $translate(['LISTA_NUEVA']).then(function (translations) {
       $scope.newList =   {
         "nombreLista":translations.LISTA_NUEVA,
@@ -72,6 +72,7 @@ angular.module('alacena.listasController', ['ionic'])
         "colorBotones":$scope.colorBotonesDefault,
         "listaEditable":true
       };
+      logdata.messageLog('ListaCtrl:addItem:$scope.newList'+JSON.stringify($scope.newList));
     });
     $scope.modalLista.show();
   };
@@ -87,7 +88,7 @@ angular.module('alacena.listasController', ['ionic'])
   * Mueve una lista dentro de la lista de listas
   */
   $scope.moveItem = function(item, fromIndex, toIndex) {
-    logdata.debug('ListaCtrl:moveItem:'+JSON.stringify(item)+' de '+fromIndex+' a '+toIndex);
+    logdata.messageLog('ListaCtrl:moveItem:'+JSON.stringify(item)+' de '+fromIndex+' a '+toIndex);
     if(item.listaEditable && toIndex!==0){
       $rootScope.listas.splice(fromIndex, 1);
       $rootScope.listas.splice(toIndex, 0, item);
@@ -98,7 +99,7 @@ angular.module('alacena.listasController', ['ionic'])
   * Elimina una lista de la lista de listas
   */
   $scope.onItemDelete = function(item) {
-    logdata.debug('ListaCtrl:onItemDelete:'+JSON.stringify(item));
+    logdata.messageLog('ListaCtrl:onItemDelete:'+JSON.stringify(item));
     $rootScope.listas.splice($rootScope.listas.indexOf(item), 1);
     LocalStorage.set('listas',$rootScope.listas);
     $rootScope.elementosLista = $filter('filter')($rootScope.elementosLista, function(value, index) {return value.nombreLista !== item.nombreLista;});

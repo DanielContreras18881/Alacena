@@ -37,6 +37,9 @@
         <ion-item class="item-dark" menu-close href="#/app/devData">
           {{ 'ACERCA_DE' | translate }}
         </ion-item>
+        <ion-item class="item-dark" ng-if="hayFechaUltimoBackup">
+          <p class="fade-in backupColor">{{ fechaUltimoBackup | filterDateBckp }}</p>
+        </ion-item>
       </ion-list>
     <!--
     <ion-list>

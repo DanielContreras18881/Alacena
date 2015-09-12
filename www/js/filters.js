@@ -1,5 +1,40 @@
 angular.module('alacena.filters',[])
 /**
+* Filtro de las fechas que controla cómo se muestran las fechas de backup
+*/
+.filter('filterDateBckp', function($filter)
+  {
+    return function(input)
+      {
+        var _date = "";
+          if(input !== null){
+            var formato = "YYYY-MM-DD";
+
+            var entrada = moment(input,formato).hours(0).minutes(0).seconds(0).milliseconds(0);
+            var hoy =  moment().hours(0).minutes(0).seconds(0).milliseconds(0);
+            var ayer = moment().add(-1,'days').hours(0).minutes(0).seconds(0).milliseconds(0);
+            var anteayer = moment().add(-2,'days').hours(0).minutes(0).seconds(0).milliseconds(0);
+            var semanaPasada = moment().add(-7,'days').hours(0).minutes(0).seconds(0).milliseconds(0);
+            var quinceDias = moment().add(-15,'days').hours(0).minutes(0).seconds(0).milliseconds(0);
+
+            var info = $filter('translate')('ULTIMO_BACKUP');
+
+            if(hoy<=entrada && entrada>ayer){
+              _date = info+' '+$filter('translate')('HOY');
+            }else if (ayer<=entrada && entrada>anteayer){
+              _date = info+' '+$filter('translate')('AYER');
+            }else if (anteayer<=entrada && entrada<semanaPasada){
+              _date = info+' '+$filter('translate')('ANTEAYER');
+            }else if (semanaPasada<=entrada && entrada<quinceDias){
+              _date = info+' '+$filter('translate')('SEMANA_PASADA');
+            }else{
+              _date = info+' '+$filter('translate')('EL')+' '+entrada.format("D MM YY");
+            }
+          }
+          return _date;
+      };
+  })
+/**
 * Filtro de las fechas que controla cómo se muestran las fechas de caducidad
 * También se controla el color del elemento si la fecha de caducidad se acerca
 */

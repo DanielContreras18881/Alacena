@@ -56,5 +56,9 @@
   "GESTION_LISTAS":"Gestione lista",
   "LISTAS":"Lista",
   "ELEMENTOS":"Elementi",
-  "ACERCA_DE":"A proposito di ... "
+  "ACERCA_DE":"A proposito di ... ",
+  "ULTIMO_BACKUP":"Ultimo backup:",
+  "AYER":"ayer",
+  "ANTEAYER":"antes de ayer",
+  "SEMANA_PASADA":"la semana pasada"
 }

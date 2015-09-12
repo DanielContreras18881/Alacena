@@ -12,9 +12,11 @@ angular.module('alacena.directives',[])
         var inputTypes = /text|search|tel|url|email|password/i;
         if (el[0].nodeName === "INPUT") {
             if (!inputTypes.test(attrs.type)) {
+                logdata.messageError('directives:resetField:error=Invalid input type for resetField:'+ attrs.type);
                 throw new Error("Invalid input type for resetField: " + attrs.type);
             }
         } else if (el[0].nodeName !== "TEXTAREA") {
+            logdata.messageError('directives:resetField:error=resetField is limited to input and textarea elements');
             throw new Error("resetField is limited to input and textarea elements");
         }
 
@@ -30,6 +32,7 @@ angular.module('alacena.directives',[])
                 el[0].focus();
             }, 0, false);
             rootScope.enabled = false;
+            logdata.messageLog('directives:resetField:resetData');
         };
 
         el.bind('input', function() {

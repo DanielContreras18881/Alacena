@@ -22,22 +22,43 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate',
 .run(function($ionicPlatform,$state,$ionicHistory,$ionicPopup,logdata,$rootScope,$cordovaGlobalization,$translate) {
 
   $ionicPlatform.ready(function() {
+
+    if(window.AdMob) {
+
+        // Detect platform
+        var adMobId = "";
+        if (ionic.Platform.isAndroid()) { // for android
+            adMobId = "ca-app-pub-7863580056712493/6709912168";
+        } else if(ionic.Platform.isIOS()) { // for ios
+            adMobId = "ca-app-pub-7863580056712493/9663378563";
+        }
+        console.log('app:run:AdMob Banner inicializado');
+        // Create banner
+        window.AdMob.createBanner({
+        adId: adMobId,
+        position: AdMob.AD_POSITION.BOTTOM_CENTER,
+        autoShow: true });
+    }
+
     if (window.cordova) {
+      console.log('ionic.Platform.isAndroid():'+ionic.Platform.isAndroid());
+      console.log(JSON.stringify(cordova.file));
       if (ionic.Platform.isAndroid()) {
-        console.log('cordova.file.externalDataDirectory: ' + cordova.file.externalDataDirectory);
         $rootScope.dataDirectory = cordova.file.externalDataDirectory;
       }else if (ionic.Platform.isIOS()) {
-        console.log('cordova.file.documentsDirectory: ' + cordova.file.documentsDirectory);
         $rootScope.dataDirectory = cordova.file.documentsDirectory;
       }else{
-        console.log('cordova.file.dataDirectory: ' + cordova.file.dataDirectory);
+        $rootScope.dataTemp = JSON.stringify(cordova.file);
         $rootScope.dataDirectory = cordova.file.dataDirectory;
       }
+      console.log('app:run:$rootScope.dataDirectory='+$rootScope.dataDirectory);
     } else {
       $rootScope.dataDirectory = "";
     }
 
+    console.log('app:run:createLogFile');
     logdata.createLogFile();
+    console.log('app:run:createLogFile:Creado');
 
     $translate(['LISTA_COMPRA']).then(function (translations) {
       $rootScope.listaDeLaCompra = translations.LISTA_COMPRA;
@@ -45,23 +66,29 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate',
 
     if(navigator!==undefined){
       if(navigator.splashscreen!==undefined){
+        console.log('app:run:Se oculta la SplashScreen');
         navigator.splashscreen.hide();
       }
     }
 
     if(typeof navigator.globalization !== "undefined") {
         navigator.globalization.getPreferredLanguage(function(language) {
+            console.log('app:run:getPreferredLanguage='+language);
             $translate.use((language.value).split("-")[0]).then(function(data) {}, function(error) {});
-        }, null);
+        }, function(error){
+          logdata.messageError('app:run:getPreferredLanguage:error='+JSON.stringify(error));
+        });
     }
 
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins.Keyboard) {
+      console.log('app:run:Tratamos el teclado');
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
+      console.log('app:run:Tratamos la barra de estado');
       StatusBar.styleDefault();
     }
 
@@ -74,14 +101,16 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate',
                   template: translations.SALIR_PREGUNTA
               }).then(function(res){
                 if( res ){
+                  logdata.messageLog('app:run:registerBackButtonAction:Se sale de la App');
                   navigator.app.exitApp();
                 } else {
-                  logdata.debug('No se sale de la aplicación or decisión del usuario');
+                  logdata.messageLog('app:run:registerBackButtonAction:No se sale de la App');
                 }
               });
            });
          }else{
              //En cualquier otra página volvemos hacia atrás
+             logdata.messageLog('app:run:registerBackButtonAction:Vamos hacia atrás en la navegación');
              $ionicHistory.goBack();
          }
       }, 100);
@@ -113,7 +142,6 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate',
   $translateProvider.useSanitizeValueStrategy('escape');
   $translateProvider.fallbackLanguage("es");
 
-  $translateProvider.preferredLanguage('en');
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(file|https?|ftp|mailto|app):/);
   $ionicFilterBarConfigProvider.transition('vertical');
   $ionicFilterBarConfigProvider.placeholder('');

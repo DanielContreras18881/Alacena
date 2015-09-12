@@ -2,20 +2,22 @@ angular.module('alacena.controllers', [])
 /**
 * Controlador general
 */
-.controller('AppCtrl', function() {
+.controller('AppCtrl', function(LocalStorage) {
+  $rootScope.hayFechaUltimoBackup = false;
+  var hayFecha = LocalStorage.get('hayFechaUltimoBackup');
+  if(hayFecha!==null && hayFecha!=='null' && hayFecha!==undefined){
+    $rootScope.hayFechaUltimoBackup = hayFecha;
+  }
 
 })
 /**
 * Controlador del menú
 */
 .controller('MenuCtrl', function($rootScope,logdata) {
-  logdata.debug('MenuCtrl:Inicio');
-
   /**
   * Habilitar la reordenación
   */
   $rootScope.reorder = function(){
       $rootScope.showReorder = !$rootScope.showReorder;
   }
-  logdata.debug('MenuCtrl:Fin');
 });

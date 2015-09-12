@@ -2,49 +2,57 @@ angular.module('alacena.devdataController', ['ionic'])
 /**
 * Controlador de la pantalla de datos del desarrollador
 */
-.controller('DevDataCtrl', function($scope,$rootScope,$cordovaAppVersion,
-                                    $cordovaGlobalization,$cordovaSocialSharing,$cordovaLocalNotification,$cordovaBarcodeScanner,
+.controller('DevDataCtrl', function($scope,$rootScope,$cordovaAppVersion,$translate,$cordovaSocialSharing,
+                                    $cordovaGlobalization,$cordovaLocalNotification,$cordovaBarcodeScanner,
                                     $cordovaFile,$ionicPopup,logdata) {
 
   $scope.initialize = function(){
-
+    logdata.messageLog('DevDataCtrl:initialize:Inicio');
     $cordovaAppVersion.getVersionNumber().then(function (version) {
       $scope.appVersion = version;
     });
-
+    logdata.messageLog('DevDataCtrl:initialize:Fin');
   }
 
   $scope.idioma = function(){
+    logdata.messageLog('DevDataCtrl:idioma:inicio');
     var datos = '';
     $cordovaGlobalization.getPreferredLanguage().then(
       function(result) {
+        logdata.messageLog('DevDataCtrl:idioma:getPreferredLanguage'+JSON.stringify(result));
         datos+= 'PreferredLanguage:'+JSON.stringify(result)+'\n';
         $cordovaGlobalization.getLocaleName().then(
           function(result) {
+            logdata.messageLog('DevDataCtrl:idioma:getLocaleName'+JSON.stringify(result));
             datos+= 'LocaleName:'+JSON.stringify(result);
             alert(datos);
           },
           function(error) {
-            // error
+            logdata.messageError('DevDataCtrl:idioma:getLocaleName'+JSON.stringify(error));
         });
       },
       function(error) {
-        // error
+        logdata.messageError('DevDataCtrl:idioma:getPreferredLanguage'+JSON.stringify(error));
     });
-
-
+    logdata.messageLog('DevDataCtrl:idioma:Fin');
   }
 
   $scope.reportarError = function(){
+    logdata.messageLog('DevDataCtrl:reportarError:Fin');
     var formatoDia = 'YYYY_MM_DD';
     var dia = moment().format(formatoDia);
     $translate(['MAIL_TEXTO','MAIL_ASUNTO',]).then(function (translations) {
       $cordovaSocialSharing
         .shareViaEmail(translations.MAIL_TEXTO+$scope.appVersion+'\n\n\n',
-                      translations.MAIL_ASUNTO+$scope.appVersion,
+                      translations.MAIL_ASUNTO,
                       ['develop.apps.chony@gmail.com'],[],[],[$rootScope.dataDirectory+"alacena_"+dia+".log"])
-          .then(function(result) {}, function(err) {});
+          .then(function(result) {
+                logdata.messageLog('DevDataCtrl:reportarError:success='+JSON.stringify(result));
+          }, function(err) {
+                logdata.messageError('DevDataCtrl:reportarError:error='+JSON.stringify(err));
+          });
     });
+    logdata.messageLog('DevDataCtrl:reportarError:Fin');
   }
 
   $scope.compartir = function(){

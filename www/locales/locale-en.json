@@ -1,6 +1,6 @@
 {
   "TITULO": "Cupboard",
-  "SALIR":"Leave",
+  "SALIR":"Exit",
   "SALIR_PREGUNTA":"Do you want to exit the application?",
   "CANCELAR":"Cancel",
   "LISTA_COMPRA":"Shopping List",
@@ -56,5 +56,9 @@
   "GESTION_LISTAS":"List management",
   "LISTAS":"Lists",
   "ELEMENTOS":"Items",
-  "ACERCA_DE":"About..."
+  "ACERCA_DE":"About...",
+  "ULTIMO_BACKUP":"Ultimo backup:",
+  "AYER":"ayer",
+  "ANTEAYER":"antes de ayer",
+  "SEMANA_PASADA":"la semana pasada"
 }

@@ -14,11 +14,11 @@ angular.module('alacena.services', [])
 		$http.get('./json/Configuracion.json').success(function(response) {
 			var datosConfig = response;
 			if(LocalStorage.get('configData')==null){
-					logdata.debug('Primera instalación');
+					logdata.messageLog('Primera instalación');
 					LocalStorage.set('configData',datosConfig);
 					callback(datosConfig);
 			}else{
-				logdata.debug('Actualizando configuración');
+				logdata.messageLog('Actualizando configuración');
 				var configLocalData = LocalStorage.get('configData');
 				configLocalData.configColorsElements = datosConfig.configColorsElements;
 				configLocalData.configColors = datosConfig.configColors;
@@ -33,13 +33,13 @@ angular.module('alacena.services', [])
 	*/
 	jsonFactory.getElementData = function (callback){
 		if(LocalStorage.get('elementos')==null){
-			logdata.debug('Primera instalación');
+			logdata.messageLog('Primera instalación');
 			$http.get('./json/Elementos.json').success(function(response) {
 				LocalStorage.set('elementos',response);
         		callback(response);
     		});
 		}else{
-			logdata.debug('Se recuperan los elementos');
+			logdata.messageLog('Se recuperan los elementos');
 			callback(LocalStorage.get('elementos'));
 		}
 	};
@@ -49,13 +49,13 @@ angular.module('alacena.services', [])
 	*/
 	jsonFactory.getListData = function (callback){
 		if(LocalStorage.get('listas')==null){
-			logdata.debug('Primera instalación');
+			logdata.messageLog('Primera instalación');
 			$http.get('./json/Listas.json').success(function(response) {
 				LocalStorage.set('listas',response);
         		callback(response);
     		});
 		}else{
-			logdata.debug('Se recuperan las listas');
+			logdata.messageLog('Se recuperan las listas');
 			callback(LocalStorage.get('listas'));
 		}
 	};
@@ -65,13 +65,13 @@ angular.module('alacena.services', [])
 	*/
 	jsonFactory.getElementListData = function (callback){
 		if(LocalStorage.get('cantidadElementosLista')==null){
-			logdata.debug('Primera instalación');
+			logdata.messageLog('Primera instalación');
 			$http.get('./json/CantidadElementoLista.json').success(function(response) {
 				LocalStorage.set('cantidadElementosLista',response);
         		callback(response);
     		});
 		}else{
-			logdata.debug('Se recuperan los elementos de una lista');
+			logdata.messageLog('Se recuperan los elementos de una lista');
 			callback(LocalStorage.get('cantidadElementosLista'));
 		}
 	};
@@ -89,20 +89,20 @@ angular.module('alacena.services', [])
              * Guarda en la base de datos del dispositivo el valor asociándolo a la clave
              */
             set: function(key, value) {
-								logdata.debug('Guarda:'+JSON.stringify(value));
+								logdata.messageLog('Guarda:'+JSON.stringify(value));
                 localStorage.setItem(key, JSON.stringify(value));
             },
             /**
              * Recupera de la base de datos del dispositivo el valor asociado a la clave solicitada
              */
             get: function(key) {
-								logdata.debug('Recupera:'+key);
+								logdata.messageLog('Recupera:'+key);
                 var resultado = localStorage.getItem(key);
                 if (resultado !== null && resultado !== 'undefined' && resultado !== undefined) {
-										logdata.debug('Recuperado:'+JSON.stringify(resultado));
+										logdata.messageLog('Recuperado:'+JSON.stringify(resultado));
                     return JSON.parse(resultado);
                 } else {
-										logdata.debug('No encontrado:'+key);
+										logdata.messageError('No encontrado:'+key);
                     return null;
                 }
             },
@@ -110,16 +110,16 @@ angular.module('alacena.services', [])
              * Elimina de la base de datos del dispositivo el valor asociado a la clave indicada
              */
             put: function(key) {
-								logdata.debug('Borrado:'+key);
+								logdata.messageLog('Borrado:'+key);
                 localStorage.removeItem(key);
             }
         };
     })
 
-		/**
-		* Factoría que guarda en un fichero el log
-		*/
-		.factory('logdata', function($cordovaFile,$rootScope) {
+/**
+* Factoría que guarda en un fichero el log
+*/
+.factory('logdata', function($cordovaFile,$rootScope) {
 
 			var formatoDia = 'YYYY_MM_DD';
 			var formato = "YYYY-MM-DD HH:mm:ss";
@@ -127,19 +127,38 @@ angular.module('alacena.services', [])
 
 			return{
 					createLogFile: function(){
-						if($rootScope.dataDirectory!==''){
-							$cordovaFile.createFile($rootScope.dataDirectory,"alacena_"+dia+".log", true)
+						//console.log('createLogFile:'+$rootScope.dataDirectory+"alacena_"+dia+".log");
+						if($rootScope.dataDirectory!=='' && $rootScope.dataDirectory!==undefined){
+							//console.log($rootScope.dataDirectory+'logs/'+"alacena_"+dia+".log");
+							$cordovaFile.checkDir($rootScope.dataDirectory, "logs")
 					      .then(function (success) {
-					        console.log('FICHERO CREADO');
+										$cordovaFile.createFile($rootScope.dataDirectory+'logs/',"alacena_"+dia+".log", true)
+											.then(function (success) {
+												console.log('FICHERO CREADO:'+$rootScope.dataDirectory+'logs/'+"alacena_"+dia+".log");
+											}, function (error) {
+												console.log('FICHERO NO CREADO:'+JSON.stringify(error));
+										});
 					      }, function (error) {
-					        console.log('FICHERO NO CREADO:'+JSON.stringify(error));
-					    });
+									$cordovaFile.createDir($rootScope.dataDirectory, "logs", false)
+							      .then(function (success) {
+											$cordovaFile.createFile($rootScope.dataDirectory+'logs/',"alacena_"+dia+".log", true)
+												.then(function (success) {
+													console.log('FICHERO CREADO:'+$rootScope.dataDirectory+'logs/'+"alacena_"+dia+".log");
+												}, function (error) {
+													console.log('FICHERO NO CREADO:'+JSON.stringify(error));
+											});
+							      }, function (error) {
+							        console.log('FICHERO NO CREADO:NO SE HA PODIDO CREAR EL DIRECTORIO:'+JSON.stringify(error));
+							      });
+					      });
 						}
 					},
-					info: function(message){
-						var txtLog = '{'+moment().format(formato)+'}-[INFO]:::'+message+'\n';
-						if($rootScope.dataDirectory!==''){
-							$cordovaFile.writeExistingFile($rootScope.dataDirectory, "alacena_"+dia+".log", txtLog)
+					messageLog: function(message){
+						var txtLog = '{'+moment().format(formato)+'}===[LOG]...........'+message+'\n';
+						//console.log(txtLog);
+						//console.log($rootScope.dataDirectory+'logs/'+"alacena_"+dia+".log");
+						if($rootScope.dataDirectory!=='' && $rootScope.dataDirectory!==undefined){
+							$cordovaFile.writeExistingFile($rootScope.dataDirectory+'logs/', "alacena_"+dia+".log", txtLog)
 								.then(function (success) {
 										console.log(txtLog);
 								}, function (error) {
@@ -150,10 +169,12 @@ angular.module('alacena.services', [])
 							console.log(txtLog);
 						}
 					},
-					error: function(message){
-						var txtLog = '{'+moment().format(formato)+'}-[ERROR]:::'+message+'\n';
-						if($rootScope.dataDirectory!==''){
-							$cordovaFile.writeExistingFile($rootScope.dataDirectory, "alacena_"+dia+".log", txtLog)
+					messageError: function(message){
+						var txtLog = '{'+moment().format(formato)+'}###[ERROR]**********'+message+'\n';
+						//console.log(txtLog);
+						//console.log($rootScope.dataDirectory+'logs/'+"alacena_"+dia+".log");
+						if($rootScope.dataDirectory!=='' && $rootScope.dataDirectory!==undefined){
+							$cordovaFile.writeExistingFile($rootScope.dataDirectory+'logs/', "alacena_"+dia+".log", txtLog)
 								.then(function (success) {
 									console.log(txtLog);
 								}, function (error) {
@@ -163,34 +184,98 @@ angular.module('alacena.services', [])
 						}else{
 							console.log(txtLog);
 						}
-					},
-					debug: function(message){
-						var txtLog = '{'+moment().format(formato)+'}-[DEBUG]:::'+message+'\n';
-						if($rootScope.dataDirectory!==''){
-							$cordovaFile.writeExistingFile($rootScope.dataDirectory, "alacena_"+dia+".log", txtLog)
-								.then(function (success) {
-									console.log(txtLog);
-								}, function (error) {
-										console.log(error);
-									}
-							);
-						}else{
-							console.log(txtLog);
-						}
-					},
-					warn: function(message){
-						var txtLog = '{'+moment().format(formato)+'}-[WARN]:::'+message+'\n';
-						if($rootScope.dataDirectory!==''){
-							$cordovaFile.writeExistingFile($rootScope.dataDirectory, "alacena_"+dia+".log", txtLog)
-								.then(function (success) {
-									console.log(txtLog);
-								}, function (error) {
-										console.log(error);
-									}
-							);
-						}else{
-							console.log(txtLog);
-						}
-					},
+					}
 			};
-		});
+})
+
+/**
+* Factoría que guarda en ficheros las listas, y que permite recuperar el backup
+*/
+.factory('backup', function($cordovaFile,$rootScope,$filter,LocalStorage,logdata,$translate) {
+
+			var formato = "YYYY-MM-DD HH:mm:ss";
+			var dia = moment().format(formato);
+			var formatoCarpeta = "YYYY-MM-DD";
+			var diaCarpeta = moment().format(formatoCarpeta);
+
+			function backup(){
+				$translate(['LISTA_COMPRA']).then(function (translations) {
+					//Backup de cada lista de elementos
+					angular.forEach($rootScope.listas, function(item) {
+						//console.log('Backup:'+JSON.stringify(item));
+						var elementos_lista = $filter('filtrarLista')($rootScope.elementosLista,item.nombreLista);
+						var strNombreLista = item.nombreLista;
+						if(item.nombreLista==='LISTA_COMPRA'){
+							strNombreLista = translations.LISTA_COMPRA;
+						}
+						angular.forEach(elementos_lista, function(item) {
+							//console.log('Backup::'+JSON.stringify(item));
+							$cordovaFile.createFile($rootScope.dataDirectory+'BACKUP_'+diaCarpeta+'/',strNombreLista+".json", true)
+								.then(function (success) {
+									logdata.messageLog('backup:makeBckp:FICHERO CREADO:'+$rootScope.dataDirectory+'BACKUP_'+diaCarpeta+'/'+strNombreLista+".json");
+									$cordovaFile.writeFile($rootScope.dataDirectory+'BACKUP_'+diaCarpeta+'/', strNombreLista+".json", elementos_lista, true)
+										.then(function (success) {
+											logdata.messageLog('backup:makeBckp:Escritura en fichero realizada'+JSON.stringify(success));
+										}, function (error) {
+											logdata.messageError('backup:makeBckp:Error al escribir en fichero:'+strNombreLista+".json : "+JSON.stringify(error));
+										}
+									);
+								}, function (error) {
+									logdata.messageError('backup:makeBckp:FICHERO NO CREADO:'+JSON.stringify(error));
+							});
+						});
+					});
+					//Backup de la lista general de elementos
+					$cordovaFile.createFile($rootScope.dataDirectory+'BACKUP_'+diaCarpeta+'/',"elementos.json", true)
+						.then(function (success) {
+							logdata.messageLog('backup:makeBckp:FICHERO CREADO:'+$rootScope.dataDirectory+'BACKUP_'+diaCarpeta+'/'+"elementos.json");
+							$cordovaFile.writeFile($rootScope.dataDirectory+'BACKUP_'+diaCarpeta+'/', "elementos.json", $rootScope.elementos, true)
+								.then(function (success) {
+									logdata.messageLog('backup:makeBckp:Escritura en fichero realizada'+JSON.stringify(success));
+								}, function (error) {
+									logdata.messageError('backup:makeBckp:Error al escribir en fichero:elementos.json : '+JSON.stringify(error));
+								}
+							);
+						}, function (error) {
+							logdata.messageError('backup:makeBckp:FICHERO NO CREADO:'+JSON.stringify(error));
+					});
+					//TODO: hacer backup de la configuración
+					LocalStorage.set('fechaUltimoBackup',dia);
+					$rootScope.fechaUltimoBackup = dia;
+					$rootScope.hayFechaUltimoBackup = true;
+					LocalStorage.set('hayFechaUltimoBackup',$rootScope.hayFechaUltimoBackup);
+					logdata.messageLog('backup:makeBckp:Backup realizado:'+dia);
+					alert('Backup realizado');
+				});
+			};
+
+			return{
+				/**
+				* Realiza un backup en ficheros json de cada lista de elementos y de la lista general de elementos, sobreescribiendo
+				*/
+				makeBckp: function(){
+					if($rootScope.dataDirectory!=='' && $rootScope.dataDirectory!==undefined){
+						$cordovaFile.checkDir(cordova.file.dataDirectory, "BACKUP_"+diaCarpeta)
+						.then(function (success) {
+							backup();
+						}, function (error) {
+							$cordovaFile.createDir($rootScope.dataDirectory, "BACKUP_"+diaCarpeta, false)
+								.then(function (success) {
+									backup();
+								}, function (error) {
+										logdata.messageLog('backup:makeBckp:Backup no realizado:No se ha podido el directorio:'+JSON.stringify(error));
+										alert('Backup no realizado');
+								});
+
+						});
+					}
+				},
+				/**
+				* Recupera un backup de ficheros json de cada lista de elementos y de la lista general de elementos, sobreescribiendo
+				*/
+				retrieveBckp: function(){
+					//TODO:recuperar de los ficheros, crear los json de elementos, cantidadElementosLista y listas(ver si es necesario hacer backup) y configuración
+				}
+			}
+})
+;
