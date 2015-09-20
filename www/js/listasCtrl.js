@@ -2,7 +2,7 @@ angular.module('alacena.listasController', ['ionic'])
 /**
 * Controlador de la pantalla de listas
 */
-.controller('ListasCtrl', function($rootScope,$scope,$ionicModal,$ionicListDelegate,jsonFactory,LocalStorage,$filter,logdata) {
+.controller('ListasCtrl', function($rootScope,$scope,$ionicModal,$ionicListDelegate,jsonFactory,LocalStorage,$filter,logdata,$translate) {
   /**
   * Inicializa la pantalla de listas
   */

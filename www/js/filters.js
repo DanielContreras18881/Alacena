@@ -28,7 +28,7 @@ angular.module('alacena.filters',[])
             }else if (semanaPasada<=entrada && entrada<quinceDias){
               _date = info+' '+$filter('translate')('SEMANA_PASADA');
             }else{
-              _date = info+' '+$filter('translate')('EL')+' '+entrada.format("D MM YY");
+              _date = info+' '+$filter('translate')('EL')+' '+entrada.format("D/MM/YY");
             }
           }
           return _date;
@@ -76,7 +76,7 @@ angular.module('alacena.filters',[])
                 elemento.colorElemento = elemento.colorElementoNoCaducado;
                 elemento.colorBotones = elemento.colorBotonesNoCaducado;
               }else{
-                _date = info+' '+$filter('translate')('EL')+' '+entrada.format("D MM YY");
+                _date = info+' '+$filter('translate')('EL')+' '+entrada.format("D/MM/YY");
                 elemento.colorElemento = elemento.colorElementoNoCaducado;
                 elemento.colorBotones = elemento.colorBotonesNoCaducado;
               }

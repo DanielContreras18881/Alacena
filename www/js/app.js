@@ -138,9 +138,9 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate',
       suffix: '.json'
   });
 
-  $translateProvider.preferredLanguage("es");
+  $translateProvider.preferredLanguage("en");
   $translateProvider.useSanitizeValueStrategy('escape');
-  $translateProvider.fallbackLanguage("es");
+  $translateProvider.fallbackLanguage("en");
 
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(file|https?|ftp|mailto|app):/);
   $ionicFilterBarConfigProvider.transition('vertical');

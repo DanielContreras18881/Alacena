@@ -53,4 +53,43 @@ angular.module('alacena.directives',[])
       ;
     }
     };
-}]);
+}])
+
+.directive('detectGestures', function($ionicGesture,$ionicSideMenuDelegate,$rootScope) {
+  return {
+    restrict :  'A',
+
+    link : function(scope, elem, attrs) {
+      var gestureType = attrs.gestureType;
+
+		var onSwipeLeft = function(){
+			  //$ionicSideMenuDelegate.toggleLeft();
+        $rootScope.optionsOpen = !$rootScope.optionsOpen;
+        if($ionicSideMenuDelegate.isOpen()){
+			     $ionicSideMenuDelegate.toggleLeft();
+        }
+        $rootScope.$evalAsync();
+		};
+		var onSwipeRight = function(){
+        if(!$rootScope.optionsOpen){
+          $ionicSideMenuDelegate.toggleLeft();
+        }else{
+          $rootScope.optionsOpen = !$rootScope.optionsOpen;
+        }
+        $rootScope.$evalAsync();
+		};
+
+      switch(gestureType) {
+        case 'swiperight':
+          $ionicGesture.on('swiperight', onSwipeRight, elem);
+          break;
+        case 'swipeleft':
+          $ionicGesture.on('swipeleft', onSwipeLeft, elem);
+          break;
+      }
+
+    }
+  }
+})
+
+;

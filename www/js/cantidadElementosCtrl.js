@@ -54,6 +54,16 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
       $scope.colorbotonesEditablesDefaultElement = $filter('filter')(data.configColorsElements, {"claseElemento":data.colorDefaultElement}, true)[0].botonesEditables;
       $scope.askAddListaCompra = data.askAddListaCompra;
     });
+
+    /**
+    * Ventana modal para añadir un elemento
+    */
+    $ionicModal.fromTemplateUrl('templates/addElemento.html', {
+      scope: $scope
+    }).then(function(modalElemento) {
+      $scope.modalElemento = modalElemento;
+    });
+
     logdata.messageLog('ListaCtrl:initialize:Fin');
   }
   /**
@@ -61,8 +71,13 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   */
   $scope.edit = function(item) {
     logdata.messageLog('ListaCtrl:edit:'+JSON.stringify(item));
-    var formato = "YYYY-MM-DD";
-    item.fechaCaducidad = moment(item.fechaCaducidad,formato).hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
+    if(item.caduca){
+      $scope.fechaDisabled = false;
+      var formato = "YYYY-MM-DD";
+      item.fechaCaducidad = moment(item.fechaCaducidad,formato).hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
+    }else{
+      $scope.fechaDisabled = true;
+    }
     $scope.newElement = item;
     $scope.newElement.colorElemento = item.colorElementoNoCaducado;
     $scope.newElement.colorBotones = item.colorBotonesNoCaducado;
@@ -340,14 +355,6 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     logdata.messageLog('ListaCtrl:addItem:$scope.newElement='+$scope.newElement);
     $scope.modalElemento.show();
   };
-  /**
-  * Ventana modal para añadir un elemento
-  */
-  $ionicModal.fromTemplateUrl('templates/addElemento.html', {
-    scope: $scope
-  }).then(function(modalElemento) {
-    $scope.modalElemento = modalElemento;
-  });
 
   /*
   $scope.moveItem = function(item, fromIndex, toIndex) {

@@ -191,7 +191,7 @@ angular.module('alacena.services', [])
 /**
 * Factoría que guarda en ficheros las listas, y que permite recuperar el backup
 */
-.factory('backup', function($cordovaFile,$rootScope,$filter,LocalStorage,logdata,$translate) {
+.factory('backup', function($cordovaFile,$rootScope,$filter,LocalStorage,logdata,$translate,$ionicPopup) {
 
 			var formato = "YYYY-MM-DD HH:mm:ss";
 			var dia = moment().format(formato);
@@ -210,10 +210,10 @@ angular.module('alacena.services', [])
 						}
 						angular.forEach(elementos_lista, function(item) {
 							//console.log('Backup::'+JSON.stringify(item));
-							$cordovaFile.createFile($rootScope.dataDirectory+'BACKUP_'+diaCarpeta+'/',strNombreLista+".json", true)
+							$cordovaFile.createFile($rootScope.dataDirectory+'backup_'+diaCarpeta+'/',strNombreLista+".json", true)
 								.then(function (success) {
-									logdata.messageLog('backup:makeBckp:FICHERO CREADO:'+$rootScope.dataDirectory+'BACKUP_'+diaCarpeta+'/'+strNombreLista+".json");
-									$cordovaFile.writeFile($rootScope.dataDirectory+'BACKUP_'+diaCarpeta+'/', strNombreLista+".json", elementos_lista, true)
+									logdata.messageLog('backup:makeBckp:FICHERO CREADO:'+$rootScope.dataDirectory+'backup_'+diaCarpeta+'/'+strNombreLista+".json");
+									$cordovaFile.writeFile($rootScope.dataDirectory+'backup_'+diaCarpeta+'/', strNombreLista+".json", elementos_lista, true)
 										.then(function (success) {
 											logdata.messageLog('backup:makeBckp:Escritura en fichero realizada'+JSON.stringify(success));
 										}, function (error) {
@@ -226,10 +226,10 @@ angular.module('alacena.services', [])
 						});
 					});
 					//Backup de la lista general de elementos
-					$cordovaFile.createFile($rootScope.dataDirectory+'BACKUP_'+diaCarpeta+'/',"elementos.json", true)
+					$cordovaFile.createFile($rootScope.dataDirectory+'backup_'+diaCarpeta+'/',"elementos.json", true)
 						.then(function (success) {
-							logdata.messageLog('backup:makeBckp:FICHERO CREADO:'+$rootScope.dataDirectory+'BACKUP_'+diaCarpeta+'/'+"elementos.json");
-							$cordovaFile.writeFile($rootScope.dataDirectory+'BACKUP_'+diaCarpeta+'/', "elementos.json", $rootScope.elementos, true)
+							logdata.messageLog('backup:makeBckp:FICHERO CREADO:'+$rootScope.dataDirectory+'backup_'+diaCarpeta+'/'+"elementos.json");
+							$cordovaFile.writeFile($rootScope.dataDirectory+'backup_'+diaCarpeta+'/', "elementos.json", $rootScope.elementos, true)
 								.then(function (success) {
 									logdata.messageLog('backup:makeBckp:Escritura en fichero realizada'+JSON.stringify(success));
 								}, function (error) {
@@ -245,7 +245,10 @@ angular.module('alacena.services', [])
 					$rootScope.hayFechaUltimoBackup = true;
 					LocalStorage.set('hayFechaUltimoBackup',$rootScope.hayFechaUltimoBackup);
 					logdata.messageLog('backup:makeBckp:Backup realizado:'+dia);
-					alert('Backup realizado');
+					$ionicPopup.alert({
+						title: 'EXITO',
+						template: 'Backup realizado correctamente'
+					});
 				});
 			};
 
@@ -255,16 +258,19 @@ angular.module('alacena.services', [])
 				*/
 				makeBckp: function(){
 					if($rootScope.dataDirectory!=='' && $rootScope.dataDirectory!==undefined){
-						$cordovaFile.checkDir(cordova.file.dataDirectory, "BACKUP_"+diaCarpeta)
+						$cordovaFile.checkDir(cordova.file.dataDirectory, "backup_"+diaCarpeta)
 						.then(function (success) {
 							backup();
 						}, function (error) {
-							$cordovaFile.createDir($rootScope.dataDirectory, "BACKUP_"+diaCarpeta, false)
+							$cordovaFile.createDir($rootScope.dataDirectory, "backup_"+diaCarpeta, false)
 								.then(function (success) {
 									backup();
 								}, function (error) {
 										logdata.messageLog('backup:makeBckp:Backup no realizado:No se ha podido el directorio:'+JSON.stringify(error));
-										alert('Backup no realizado');
+										$ionicPopup.alert({
+											title: 'ERROR',
+											template: 'Backup no realizado correctamente'
+										});
 								});
 
 						});

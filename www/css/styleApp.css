@@ -22,7 +22,6 @@ button.ion-arrow-swap.light.sinBordes{
   bottom: 10px !important;
   right: 10px !important;
   border-radius: 50% !important;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26) !important;
   -webkit-transform: translate3d(0, 0, 0) !important;
   transform: translate3d(0, 0, 0) !important;
   -webkit-transition: 0.2s linear !important;
@@ -35,9 +34,10 @@ button.ion-arrow-swap.light.sinBordes{
 .badge.badge-royal{
 	display: inline-block;
 	position: inherit;
- 	font-size: 16px;
-	padding: 4px 8px;
-	border-radius: 20px;
+	font-size: 22px;
+	padding: 10px 12px;
+	border-radius: 36px;
+	vertical-align: middle;
 }
 
 .icono-option-size{
@@ -47,8 +47,8 @@ button.ion-arrow-swap.light.sinBordes{
 .icono-size{
 	display: inline-block;
   position: inherit;
-	vertical-align: sub;
-	font-size: 24px;
+	vertical-align: middle;
+	font-size: 36px;
 }
 
 input.reset-field {

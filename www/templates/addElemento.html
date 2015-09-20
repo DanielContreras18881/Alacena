@@ -27,9 +27,9 @@
            </div>
          </label>
       </label>
-      <label class="item item-input">
+      <label ng-hide="fechaDisabled" class="item item-input">
         <span class="input-label">{{ 'FECHA_CADUCIDAD' | translate}}</span>
-        <input ng-disabled="fechaDisabled" ng-model="newElement.fechaCaducidad" type="date">
+        <input ng-model="newElement.fechaCaducidad" type="date">
       </label>
       <label class="item item-input">
         <span class="input-label">{{ 'COLOR' | translate}}</span>
