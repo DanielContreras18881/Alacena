@@ -41,13 +41,13 @@ angular.module('alacena.directives',[])
         .bind('focus', function() {
             $timeout(function() { //Timeout just in case someone else is listening to focus and alters model
                 rootScope.enabled = !ctrl.$isEmpty(el.val());
-                rootScope.$apply();
+                rootScope.$evalAsync();
             }, 0, false);
         })
        .bind('blur', function() {
             $timeout(function() {
                 rootScope.enabled = false;
-                rootScope.$apply();
+                rootScope.$evalAsync();
             }, 0, false);
         })
       ;

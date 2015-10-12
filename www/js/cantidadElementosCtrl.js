@@ -3,7 +3,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
 * Controlador de la pantalla de lista de elementos
 */
 .controller('ListaCtrl', function($rootScope,$scope,$stateParams,$ionicModal,$ionicListDelegate,jsonFactory,LocalStorage,$filter,$ionicPopup,$ionicFilterBar,logdata,$translate) {
-  
+
   /**
   * Cuando termina de cargar los datos en pantalla
   */
@@ -80,10 +80,10 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     logdata.messageLog('ListaCtrl:edit:'+JSON.stringify(item));
     if(item.caduca){
       $scope.fechaDisabled = false;
-      var formato = "YYYY-MM-DD";
-      item.fechaCaducidad = moment(item.fechaCaducidad,formato).hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
+      item.fechaCaducidad = moment(item.fechaCaducidad).hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
     }else{
       $scope.fechaDisabled = true;
+      item.fechaCaducidad = moment('3015-12-31T22:00:00.000Z').hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
     }
     $scope.newElement = item;
     $scope.newElement.colorElemento = item.colorElementoNoCaducado;
@@ -110,9 +110,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     logdata.messageLog('ListaCtrl:save:'+element);
     if(element.caduca){
       logdata.messageLog('ListaCtrl:save:Se transforma la fecha de caducidad');
-      var entrada = moment(element.fechaCaducidad);
-      var formato = "YYYY-MM-DD";
-      element.fechaCaducidad = entrada.format(formato);
+      element.fechaCaducidad = moment(element.fechaCaducidad).hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
     }
     if($filter('filter')($rootScope.elementosLista,element).length==0) {
       logdata.messageLog('ElementosCtrl:save:Se comprueba que es nuevo');
@@ -150,6 +148,8 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     LocalStorage.set('elementos',$rootScope.elementos);
     $scope.modalElemento.hide();
     $ionicListDelegate.closeOptionButtons();
+    $scope.initialize();
+    $scope.$evalAsync();
   };
   /**
   * Mueve un elemento de una lista a otra
@@ -336,7 +336,11 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   $scope.cambioCaducidad = function(){
     logdata.messageLog('ListaCtrl:cambioCaducidad');
     $scope.fechaDisabled=!$scope.fechaDisabled;
-    $scope.newElement.fechaCaducidad = null;
+    if($scope.fechaDisabled){
+      $scope.newElement.fechaCaducidad = moment('3015-12-31T22:00:00.000Z').hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
+    }else{
+      $scope.newElement.fechaCaducidad = moment().hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
+    }
   }
   /**
   * Muestra una ventana modal para añadir un elemento
@@ -354,7 +358,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
         "nombreLista":$scope.nombreLista,
         "cantidadElemento":1,
         "caduca":!$scope.fechaDisabled,
-        "fechaCaducidad":moment().toDate(),
+        "fechaCaducidad":moment().hours(0).minutes(0).seconds(0).milliseconds(0).toDate(),
         "cantidadMinima":0,
         "marked":false
       };
@@ -402,5 +406,4 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
    });
   };
 // IDEA I3
-// FIXME F2
 });

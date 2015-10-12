@@ -43,10 +43,9 @@ angular.module('alacena.filters',[])
         return function(input,elemento)
         {
           var _date = "";
-            if(input !== null){
-              var formato = "YYYY-MM-DD";
+            if(elemento.caduca){
 
-              var entrada = moment(input,formato).hours(0).minutes(0).seconds(0).milliseconds(0);
+              var entrada = moment(input).hours(0).minutes(0).seconds(0).milliseconds(0);
               var hoy =  moment().hours(0).minutes(0).seconds(0).milliseconds(0);
               var maniana = moment().add(1,'days').hours(0).minutes(0).seconds(0).milliseconds(0);
               var pasado = moment().add(2,'days').hours(0).minutes(0).seconds(0).milliseconds(0);
@@ -80,8 +79,12 @@ angular.module('alacena.filters',[])
                 elemento.colorElemento = elemento.colorElementoNoCaducado;
                 elemento.colorBotones = elemento.colorBotonesNoCaducado;
               }
+              //console.log(input+':'+entrada+'='+_date);
+              return _date;
+            }else{
+              elemento.colorElemento = elemento.colorElementoNoCaducado;
+              elemento.colorBotones = elemento.colorBotonesNoCaducado;              
             }
-            return _date;
         };
     })
 /**

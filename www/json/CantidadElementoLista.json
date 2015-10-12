@@ -8,7 +8,7 @@
     "nombreLista": "Armario baño",
     "cantidadElemento": 4,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:58"
@@ -22,7 +22,7 @@
     "nombreLista": "Armario baño",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:63"
@@ -36,7 +36,7 @@
     "nombreLista": "Armario baño",
     "cantidadElemento": 3,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:68"
@@ -50,7 +50,7 @@
     "nombreLista": "Armario baño",
     "cantidadElemento": 7,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:73"
@@ -64,7 +64,7 @@
     "nombreLista": "Armario baño",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false
   },
@@ -77,7 +77,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 4,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:128"
@@ -91,7 +91,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 5,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:129"
@@ -105,7 +105,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 3,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:139"
@@ -119,7 +119,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 6,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:144"
@@ -133,7 +133,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 4,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:149"
@@ -147,7 +147,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 4,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:154"
@@ -161,7 +161,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 3,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:159"
@@ -175,7 +175,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:166"
@@ -189,7 +189,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 6,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:171"
@@ -203,7 +203,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:176"
@@ -217,7 +217,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:181"
@@ -231,7 +231,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:186"
@@ -245,7 +245,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 0,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:191"
@@ -259,7 +259,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:196"
@@ -273,7 +273,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:201"
@@ -287,7 +287,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:206"
@@ -301,7 +301,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 32,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:211"
@@ -315,7 +315,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 3,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:216"
@@ -329,7 +329,7 @@
     "nombreLista": "Armarios terraza",
     "cantidadElemento": 30,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:69"
@@ -343,7 +343,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:686"
@@ -357,7 +357,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:691"
@@ -371,7 +371,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 4,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:696"
@@ -385,7 +385,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 4,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:701"
@@ -399,7 +399,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:706"
@@ -413,7 +413,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:802"
@@ -427,7 +427,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:822"
@@ -441,7 +441,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:827"
@@ -455,7 +455,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:832"
@@ -469,7 +469,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:837"
@@ -483,7 +483,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:842"
@@ -497,7 +497,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:847"
@@ -511,7 +511,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:852"
@@ -525,7 +525,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:857"
@@ -539,7 +539,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:862"
@@ -553,7 +553,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:872"
@@ -567,7 +567,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:877"
@@ -581,7 +581,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:882"
@@ -595,7 +595,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 4,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:887"
@@ -609,7 +609,7 @@
     "nombreLista": "Congelador",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:71"
@@ -623,7 +623,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:58"
@@ -637,7 +637,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:63"
@@ -651,7 +651,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:68"
@@ -665,7 +665,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 0,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:73"
@@ -679,7 +679,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:78"
@@ -693,7 +693,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:83"
@@ -707,7 +707,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:88"
@@ -721,7 +721,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:93"
@@ -735,7 +735,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:98"
@@ -749,7 +749,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:103"
@@ -763,7 +763,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:108"
@@ -777,7 +777,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 0,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:113"
@@ -791,7 +791,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 3,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:118"
@@ -805,7 +805,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:123"
@@ -819,7 +819,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:128"
@@ -833,7 +833,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:138"
@@ -847,7 +847,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 3,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:143"
@@ -861,7 +861,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 5,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:148"
@@ -875,7 +875,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:153"
@@ -889,7 +889,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:158"
@@ -903,7 +903,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:163"
@@ -917,7 +917,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:168"
@@ -931,7 +931,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 1,
     "marked": false,
     "$$hashKey": "object:173"
@@ -945,7 +945,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:178"
@@ -959,7 +959,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:183"
@@ -973,7 +973,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:188"
@@ -987,7 +987,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:193"
@@ -1001,7 +1001,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:198"
@@ -1015,7 +1015,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:203"
@@ -1029,7 +1029,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:208"
@@ -1043,7 +1043,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:213"
@@ -1057,7 +1057,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:218"
@@ -1071,7 +1071,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:223"
@@ -1085,7 +1085,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 4,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:228"
@@ -1099,7 +1099,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 4,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 1,
     "marked": false,
     "$$hashKey": "object:233"
@@ -1113,7 +1113,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 3,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:238"
@@ -1127,7 +1127,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:243"
@@ -1141,7 +1141,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:89"
@@ -1155,7 +1155,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:91"
@@ -1169,7 +1169,7 @@
     "nombreLista": "Despensa",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:92"
@@ -1183,7 +1183,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 6,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:221"
@@ -1197,7 +1197,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 3,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:226"
@@ -1211,7 +1211,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:204"
@@ -1225,7 +1225,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:48"
@@ -1239,7 +1239,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:53"
@@ -1253,7 +1253,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:58"
@@ -1267,7 +1267,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:35"
@@ -1281,7 +1281,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:64"
@@ -1295,7 +1295,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:69"
@@ -1309,7 +1309,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 3,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:76"
@@ -1323,7 +1323,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 4,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:81"
@@ -1337,7 +1337,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:86"
@@ -1351,7 +1351,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:101"
@@ -1365,7 +1365,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 4,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:271"
@@ -1379,7 +1379,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 4,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:1085"
@@ -1393,7 +1393,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:118"
@@ -1407,7 +1407,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 6,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:443"
@@ -1421,7 +1421,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:194"
@@ -1435,7 +1435,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:70"
@@ -1449,7 +1449,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true,
     "$$hashKey": "object:71"
@@ -1463,7 +1463,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true
   },
@@ -1476,7 +1476,7 @@
     "nombreLista": "LISTA_COMPRA",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": true
   },
@@ -1489,7 +1489,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:98"
@@ -1503,7 +1503,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:108"
@@ -1517,7 +1517,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:113"
@@ -1531,7 +1531,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 7,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:118"
@@ -1545,7 +1545,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:133"
@@ -1559,7 +1559,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:138"
@@ -1573,21 +1573,21 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:143"
   },
   {
     "nombreElemento": "Salsa kebab picante",
-    "colorElemento": "item item-stable item-complex item-right-editable",
-    "colorBotones": "button-stable",
+    "colorElemento": "item item-assertive item-complex item-right-editable",
+    "colorBotones": "button-assertive",
     "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
     "colorBotonesNoCaducado": "button-stable",
     "nombreLista": "Nevera",
     "cantidadElemento": 1,
-    "caduca": false,
-    "fechaCaducidad": null,
+    "caduca": true,
+    "fechaCaducidad": "2015-10-11T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:148"
@@ -1601,21 +1601,21 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:153"
   },
   {
     "nombreElemento": "Paté de salmón",
-    "colorElemento": "item item-stable item-complex item-right-editable",
-    "colorBotones": "button-stable",
+    "colorElemento": "item item-energized item-complex item-right-editable",
+    "colorBotones": "button-energized",
     "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
     "colorBotonesNoCaducado": "button-stable",
     "nombreLista": "Nevera",
     "cantidadElemento": 1,
-    "caduca": false,
-    "fechaCaducidad": null,
+    "caduca": true,
+    "fechaCaducidad": "2015-10-13T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:158"
@@ -1628,8 +1628,8 @@
     "colorBotonesNoCaducado": "button-stable",
     "nombreLista": "Nevera",
     "cantidadElemento": 4,
-    "caduca": false,
-    "fechaCaducidad": null,
+    "caduca": true,
+    "fechaCaducidad": "2015-10-28T23:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:163"
@@ -1642,22 +1642,22 @@
     "colorBotonesNoCaducado": "button-stable",
     "nombreLista": "Nevera",
     "cantidadElemento": 2,
-    "caduca": false,
-    "fechaCaducidad": null,
+    "caduca": true,
+    "fechaCaducidad": "2015-10-19T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:168"
   },
   {
     "nombreElemento": "Pavo de sandwich",
-    "colorElemento": "item item-stable item-complex item-right-editable",
-    "colorBotones": "button-stable",
+    "colorElemento": "item item-energized item-complex item-right-editable",
+    "colorBotones": "button-energized",
     "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
     "colorBotonesNoCaducado": "button-stable",
     "nombreLista": "Nevera",
     "cantidadElemento": 1,
-    "caduca": false,
-    "fechaCaducidad": null,
+    "caduca": true,
+    "fechaCaducidad": "2015-10-13T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:349"
@@ -1671,7 +1671,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 0,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:354"
@@ -1685,7 +1685,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 0,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:359"
@@ -1699,7 +1699,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:369"
@@ -1713,7 +1713,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:374"
@@ -1727,7 +1727,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:379"
@@ -1741,7 +1741,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:384"
@@ -1755,21 +1755,21 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:389"
   },
   {
     "nombreElemento": "Yogur",
-    "colorElemento": "item item-stable item-complex item-right-editable",
-    "colorBotones": "button-stable",
+    "colorElemento": "item item-energized item-complex item-right-editable",
+    "colorBotones": "button-energized",
     "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
     "colorBotonesNoCaducado": "button-stable",
     "nombreLista": "Nevera",
     "cantidadElemento": 2,
-    "caduca": false,
-    "fechaCaducidad": null,
+    "caduca": true,
+    "fechaCaducidad": "2015-10-12T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:399"
@@ -1783,7 +1783,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 4,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:409"
@@ -1797,7 +1797,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 0,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:414"
@@ -1811,7 +1811,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 4,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:419"
@@ -1825,21 +1825,21 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:424"
   },
   {
     "nombreElemento": "Huevos",
-    "colorElemento": "item item-stable item-complex item-right-editable",
-    "colorBotones": "button-stable",
+    "colorElemento": "item item-assertive item-complex item-right-editable",
+    "colorBotones": "button-assertive",
     "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
     "colorBotonesNoCaducado": "button-stable",
     "nombreLista": "Nevera",
     "cantidadElemento": 2,
-    "caduca": false,
-    "fechaCaducidad": null,
+    "caduca": true,
+    "fechaCaducidad": "2015-10-11T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:429"
@@ -1853,7 +1853,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 0,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:434"
@@ -1867,7 +1867,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 6,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:444"
@@ -1881,7 +1881,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:66"
@@ -1894,36 +1894,36 @@
     "colorBotonesNoCaducado": "button-stable",
     "nombreLista": "Nevera",
     "cantidadElemento": 6,
-    "caduca": false,
-    "fechaCaducidad": null,
+    "caduca": true,
+    "fechaCaducidad": "2015-10-18T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:81"
   },
   {
     "nombreElemento": "Aceitunas grandes",
-    "colorElemento": "item item-stable item-complex item-right-editable",
-    "colorBotones": "button-stable",
+    "colorElemento": "item item-assertive item-complex item-right-editable",
+    "colorBotones": "button-assertive",
     "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
     "colorBotonesNoCaducado": "button-stable",
     "nombreLista": "Nevera",
     "cantidadElemento": 0,
-    "caduca": false,
-    "fechaCaducidad": null,
+    "caduca": true,
+    "fechaCaducidad": "2015-10-11T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:82"
   },
   {
     "nombreElemento": "Mostaza",
-    "colorElemento": "item item-stable item-complex item-right-editable",
-    "colorBotones": "button-stable",
+    "colorElemento": "item item-assertive item-complex item-right-editable",
+    "colorBotones": "button-assertive",
     "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
     "colorBotonesNoCaducado": "button-stable",
     "nombreLista": "Nevera",
     "cantidadElemento": 1,
-    "caduca": false,
-    "fechaCaducidad": null,
+    "caduca": true,
+    "fechaCaducidad": "2015-10-11T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:83"
@@ -1937,7 +1937,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:84"
@@ -1950,8 +1950,8 @@
     "colorBotonesNoCaducado": "button-stable",
     "nombreLista": "Nevera",
     "cantidadElemento": 1,
-    "caduca": false,
-    "fechaCaducidad": null,
+    "caduca": true,
+    "fechaCaducidad": "2015-10-29T23:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:85"
@@ -1965,7 +1965,7 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:86"
@@ -1979,21 +1979,21 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:87"
   },
   {
     "nombreElemento": "Cocacola",
-    "colorElemento": "item item-stable item-complex item-right-editable",
-    "colorBotones": "button-stable",
+    "colorElemento": "item item-assertive item-complex item-right-editable",
+    "colorBotones": "button-assertive",
     "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
     "colorBotonesNoCaducado": "button-stable",
     "nombreLista": "Nevera",
     "cantidadElemento": 3,
-    "caduca": false,
-    "fechaCaducidad": null,
+    "caduca": true,
+    "fechaCaducidad": "2015-10-11T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:134"
@@ -2007,21 +2007,21 @@
     "nombreLista": "Nevera",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
-    "$$hashKey": "object:133"
+    "$$hashKey": "object:1334"
   },
   {
     "nombreElemento": "Bacon en tacos",
-    "colorElemento": "item item-stable item-complex item-right-editable",
-    "colorBotones": "button-stable",
+    "colorElemento": "item item-energized item-complex item-right-editable",
+    "colorBotones": "button-energized",
     "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
     "colorBotonesNoCaducado": "button-stable",
     "nombreLista": "Nevera",
     "cantidadElemento": 0,
-    "caduca": false,
-    "fechaCaducidad": null,
+    "caduca": true,
+    "fechaCaducidad": "2015-10-13T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:295"
@@ -2035,7 +2035,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:338"
@@ -2049,7 +2049,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 5,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:343"
@@ -2063,7 +2063,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:348"
@@ -2077,7 +2077,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:353"
@@ -2091,7 +2091,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:358"
@@ -2105,7 +2105,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 84,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:363"
@@ -2119,7 +2119,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 12,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:368"
@@ -2133,7 +2133,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 3,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:373"
@@ -2147,7 +2147,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 3,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:378"
@@ -2161,7 +2161,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:383"
@@ -2175,7 +2175,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:388"
@@ -2189,7 +2189,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:393"
@@ -2203,7 +2203,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 6,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:398"
@@ -2217,7 +2217,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:403"
@@ -2231,7 +2231,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 6,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:408"
@@ -2245,7 +2245,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:413"
@@ -2259,7 +2259,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:418"
@@ -2273,7 +2273,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:423"
@@ -2287,7 +2287,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:428"
@@ -2301,7 +2301,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:433"
@@ -2315,7 +2315,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:438"
@@ -2329,7 +2329,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:443"
@@ -2343,7 +2343,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:448"
@@ -2357,7 +2357,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:453"
@@ -2371,7 +2371,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:458"
@@ -2385,7 +2385,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 3,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:463"
@@ -2399,7 +2399,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 4,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:468"
@@ -2413,7 +2413,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:473"
@@ -2427,7 +2427,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 0,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:478"
@@ -2441,7 +2441,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:483"
@@ -2455,7 +2455,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:488"
@@ -2469,7 +2469,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:493"
@@ -2483,7 +2483,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 9,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:498"
@@ -2497,7 +2497,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:503"
@@ -2511,7 +2511,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:508"
@@ -2525,7 +2525,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 3,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:513"
@@ -2539,7 +2539,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 1,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:518"
@@ -2553,7 +2553,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 6,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:523"
@@ -2567,7 +2567,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 8,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:528"
@@ -2581,7 +2581,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 16,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:533"
@@ -2595,7 +2595,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 6,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:538"
@@ -2609,7 +2609,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 3,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:543"
@@ -2623,7 +2623,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 3,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:548"
@@ -2637,7 +2637,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 6,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:553"
@@ -2651,7 +2651,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 4,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:558"
@@ -2665,7 +2665,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 2,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:563"
@@ -2679,7 +2679,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 3,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:568"
@@ -2693,7 +2693,7 @@
     "nombreLista": "Trastero",
     "cantidadElemento": 8,
     "caduca": false,
-    "fechaCaducidad": null,
+    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "cantidadMinima": 0,
     "marked": false,
     "$$hashKey": "object:98"

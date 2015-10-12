@@ -5,9 +5,9 @@
     </button>
   </ion-nav-buttons>
   <ion-content has-bouncing="false" detect-gestures gesture-type="swiperight">
-    <ion-list show-reorder="showReorder" detect-gestures gesture-type="swipeleft">
+    <ion-list detect-gestures gesture-type="swipeleft">
       <ion-item ng-if="!elementoLista.marked"
-                ng-repeat="elementoLista in elementosLista | filter:nombreLista | orderBy:'[fechaCaducidad,nombreElemento]' track by $index"
+                ng-repeat="elementoLista in elementosLista | filter:nombreLista | orderBy:['fechaCaducidad','nombreElemento'] track by $index"
                 class="item item-icon-left item-icon-right {{elementoLista.colorElemento}}">
           <i class="icon ion-android-checkbox-outline-blank" ng-hide="{{listaEditable}}" ng-click="markAcquired(elementoLista)"></i>
   				<span>{{elementoLista.nombreElemento}}</span>
@@ -29,7 +29,7 @@
           <ion-reorder-button class="ion-navicon" on-reorder="moveItem(elementoLista, $fromIndex, $toIndex)"></ion-reorder-button>
       </ion-item>
       <ion-item ng-if="elementoLista.marked"
-                ng-repeat="elementoLista in elementosLista | filter:nombreLista"
+                ng-repeat="elementoLista in elementosLista | filter:nombreLista | orderBy:['fechaCaducidad','nombreElemento'] track by $index"
                 class="item item-icon-left item-icon-right {{elementoLista.colorElemento}}">
           <i class="icon ion-android-checkbox-outline" ng-hide="{{listaEditable}}" ng-click="markAcquired(elementoLista)"></i>
           <span>{{elementoLista.nombreElemento}}</span>
