@@ -18,16 +18,15 @@
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="2500"/>
   <preference name="orientation" value="portrait"/>
-  <preference name="android-minSdkVersion" value="10"/>
-  <preference name="android-targetSdkVersion" value="22"/>
+  <preference name="android-minSdkVersion" value="14"/>
+  <preference name="android-targetSdkVersion" value="23"/>
   <preference name="BackgroundColor" value="#FFFFFF"/>
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
   <platform name="android">
-    <plugin name="File" value="org.apache.cordova.FileUtils" />
-    <plugin name="FileTransfer" value="org.apache.cordova.FileTransfer" />
-
+    <plugin name="File" value="org.apache.cordova.FileUtils"/>
+    <plugin name="FileTransfer" value="org.apache.cordova.FileTransfer"/>
     <icon src="resources/android/icon/drawable-ldpi-icon.png" density="ldpi"/>
     <icon src="resources/android/icon/drawable-mdpi-icon.png" density="mdpi"/>
     <icon src="resources/android/icon/drawable-hdpi-icon.png" density="hdpi"/>
@@ -43,9 +42,8 @@
   </platform>
   <platform name="ios">
     <preference name="KeyboardDisplayRequiresUserAction" value="false"/>
-    <plugin name="File" value="CDVFile" />
-    <plugin name="FileTransfer" value="CDVFileTransfer" />
-
+    <plugin name="File" value="CDVFile"/>
+    <plugin name="FileTransfer" value="CDVFileTransfer"/>
     <icon src="resources/ios/icon/icon.png" width="57" height="57"/>
     <icon src="resources/ios/icon/icon@2x.png" width="114" height="114"/>
     <icon src="resources/ios/icon/icon-40.png" width="40" height="40"/>

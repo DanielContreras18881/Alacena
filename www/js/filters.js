@@ -7,9 +7,7 @@ angular.module('alacena.filters',[])
     return function(input)
       {
         var _date = "";
-          if($rootScope.hayFechaUltimoBackup!=null && $rootScope.hayFechaUltimoBackup!='null' && $rootScope.hayFechaUltimoBackup!=undefined){
-            return $filter('translate')('NO_HAY_BACKUP');
-          }else if(input !== null){
+          if(input !== null){
             var formato = "YYYY-MM-DD";
 
             var entrada = moment(input,formato).hours(0).minutes(0).seconds(0).milliseconds(0);

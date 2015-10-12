@@ -68,3 +68,37 @@ input.reset-field {
 .backupColor{
 	color:#33cd5f !important;
 }
+
+.popup-container {
+
+}
+.popup {
+    border: none;
+}
+.popup-head {
+    background-color: #444;
+}
+.popup-title {
+    color: #fff;
+}
+.popup-body {
+    background-color: #ECECEC;
+    color: #111111;
+}
+.popup-buttons{
+    background-color: #ECECEC;
+}
+.popup-buttons .button {
+    background-color: #444;
+		border: none;
+    font-size: 20px;
+}
+.popup-buttons .button.button-default{
+    color: #fff;
+}
+.popup-buttons .button.button-positive{
+    color: #fff;
+}
+.popup-buttons .button.activated {
+    background-color: #111111;
+}
