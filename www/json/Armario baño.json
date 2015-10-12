@@ -1,1 +1,71 @@
-[{"nombreElemento":"Desodorante viaje","colorElemento":"item item-stable item-complex item-right-editable","colorBotones":"button-stable","colorElementoNoCaducado":"item item-stable item-complex item-right-editable","colorBotonesNoCaducado":"button-stable","nombreLista":"Armario baño","cantidadElemento":4,"caduca":false,"fechaCaducidad":null,"cantidadMinima":0,"marked":false,"$$hashKey":"object:58"},{"nombreElemento":"Pasta de dientes","colorElemento":"item item-stable item-complex item-right-editable","colorBotones":"button-stable","colorElementoNoCaducado":"item item-stable item-complex item-right-editable","colorBotonesNoCaducado":"button-stable","nombreLista":"Armario baño","cantidadElemento":1,"caduca":false,"fechaCaducidad":null,"cantidadMinima":0,"marked":false,"$$hashKey":"object:63"},{"nombreElemento":"Pasta de dientes de viaje","colorElemento":"item item-stable item-complex item-right-editable","colorBotones":"button-stable","colorElementoNoCaducado":"item item-stable item-complex item-right-editable","colorBotonesNoCaducado":"button-stable","nombreLista":"Armario baño","cantidadElemento":3,"caduca":false,"fechaCaducidad":null,"cantidadMinima":0,"marked":false,"$$hashKey":"object:68"},{"nombreElemento":"Papel higiénico","colorElemento":"item item-stable item-complex item-right-editable","colorBotones":"button-stable","colorElementoNoCaducado":"item item-stable item-complex item-right-editable","colorBotonesNoCaducado":"button-stable","nombreLista":"Armario baño","cantidadElemento":7,"caduca":false,"fechaCaducidad":null,"cantidadMinima":0,"marked":false,"$$hashKey":"object:73"},{"nombreElemento":"Crema hidratante","colorElemento":"item item-stable item-complex item-right-editable","colorBotones":"button-stable","colorElementoNoCaducado":"item item-stable item-complex item-right-editable","colorBotonesNoCaducado":"button-stable","nombreLista":"Armario baño","cantidadElemento":1,"caduca":false,"fechaCaducidad":null,"cantidadMinima":0,"marked":false}]
+[
+  {
+    "nombreElemento": "Desodorante viaje",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "Armario baño",
+    "cantidadElemento": 4,
+    "caduca": false,
+    "fechaCaducidad": null,
+    "cantidadMinima": 0,
+    "marked": false,
+    "$$hashKey": "object:58"
+  },
+  {
+    "nombreElemento": "Pasta de dientes",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "Armario baño",
+    "cantidadElemento": 1,
+    "caduca": false,
+    "fechaCaducidad": null,
+    "cantidadMinima": 0,
+    "marked": false,
+    "$$hashKey": "object:63"
+  },
+  {
+    "nombreElemento": "Pasta de dientes de viaje",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "Armario baño",
+    "cantidadElemento": 3,
+    "caduca": false,
+    "fechaCaducidad": null,
+    "cantidadMinima": 0,
+    "marked": false,
+    "$$hashKey": "object:68"
+  },
+  {
+    "nombreElemento": "Papel higiénico",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "Armario baño",
+    "cantidadElemento": 7,
+    "caduca": false,
+    "fechaCaducidad": null,
+    "cantidadMinima": 0,
+    "marked": false,
+    "$$hashKey": "object:73"
+  },
+  {
+    "nombreElemento": "Crema hidratante",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "Armario baño",
+    "cantidadElemento": 1,
+    "caduca": false,
+    "fechaCaducidad": null,
+    "cantidadMinima": 0,
+    "marked": false
+  }
+]
