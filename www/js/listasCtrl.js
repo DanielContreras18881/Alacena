@@ -3,6 +3,14 @@ angular.module('alacena.listasController', ['ionic'])
 * Controlador de la pantalla de listas
 */
 .controller('ListasCtrl', function($rootScope,$scope,$ionicModal,$ionicListDelegate,jsonFactory,LocalStorage,$filter,logdata,$translate) {
+
+  /**
+  * Cuando termina de cargar los datos en pantalla
+  */
+  $scope.$watch('$viewContentLoaded', function(){
+      $rootScope.$broadcast('loading:hide');
+  });
+  
   /**
   * Inicializa la pantalla de listas
   */

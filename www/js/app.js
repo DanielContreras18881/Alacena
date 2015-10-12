@@ -4,7 +4,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 var buscar = '';
-angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate',
+angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.ionic.filter.bar',
                                     'alacena.devdataController',
                                     'alacena.controllers',
                                     'alacena.cantidadElementosController',
@@ -12,14 +12,29 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate',
                                     'alacena.elementosController',                                                                                                            'alacena.listasController',
                                     'alacena.services',
                                     'alacena.directives',
-                                    'alacena.filters',
-                                    'jett.ionic.filter.bar'])
+                                    'alacena.filters'])
 
 
 /**
 * Ejecución de la aplicación
 */
-.run(function($ionicPlatform,$state,$ionicHistory,$ionicPopup,logdata,$rootScope,$cordovaGlobalization,$translate) {
+.run(function($ionicPlatform,$state,$ionicHistory,$ionicPopup,logdata,$rootScope,$cordovaGlobalization,$translate,$ionicLoading) {
+
+  $rootScope.$on('loading:show', function() {
+    $ionicLoading.show({
+          template: '<ion-spinner icon="bubbles" class="spinner-light"></ion-spinner>',
+          duration: 2500,
+          noBackdrop: false
+        });
+  })
+
+  $rootScope.$on('loading:hide', function() {
+    $ionicLoading.hide();
+  })
+
+  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
+    $rootScope.$broadcast('loading:show');
+  });
 
   $ionicPlatform.ready(function() {
 
@@ -78,6 +93,9 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate',
         }, function(error){
           logdata.messageError('app:run:getPreferredLanguage:error='+JSON.stringify(error));
         });
+    }else{
+      console.log('app:run:getPreferredLanguage:navegador=es');
+      $translate.use(('es').split("-")[0]).then(function(data) {}, function(error) {});
     }
 
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -117,6 +135,7 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate',
 
   });
 })
+
 /**
 * Configuración de la aplicación
 */
@@ -138,9 +157,9 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate',
       suffix: '.json'
   });
 
-  $translateProvider.preferredLanguage("en");
+  $translateProvider.preferredLanguage("es");
   $translateProvider.useSanitizeValueStrategy('escape');
-  $translateProvider.fallbackLanguage("en");
+  $translateProvider.fallbackLanguage("es");
 
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(file|https?|ftp|mailto|app):/);
   $ionicFilterBarConfigProvider.transition('vertical');

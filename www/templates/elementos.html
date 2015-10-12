@@ -1,12 +1,14 @@
 <meta charset="UTF-8">
 <ion-view cache-view="false" view-title="{{ 'GESTION_ELEMENTOS' | translate }}" ng-init="initialize()">
   <ion-nav-buttons side="right">
+    <button class="button button-icon icon ion-bag" ng-click="makeShopingList()">
+    </button>
     <button class="button button-icon icon ion-ios-search-strong" ng-click="showFilterBar()">
     </button>
   </ion-nav-buttons>
   <ion-content has-bouncing="false" detect-gestures gesture-type="swiperight">
     <ion-list>
-      <ion-item class="item-dark" ng-repeat="elemento in elementos" class="item-remove-animate"
+      <ion-item class="item-dark" ng-repeat="elemento in elementos | orderBy:'nombreElemento' track by $index" class="item-remove-animate"
       ng-click="mostrarListas(elemento.nombreElemento)">
         {{elemento.nombreElemento}}
           <ion-option-button class="ion-close-circled button-dark icono-option-size"

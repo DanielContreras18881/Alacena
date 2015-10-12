@@ -4,6 +4,13 @@ angular.module('alacena.elementosController', ['ionic'])
 */
 .controller('ElementosCtrl', function($rootScope,$scope,$translate,jsonFactory,LocalStorage,$filter,$ionicPopup,$ionicModal,$ionicListDelegate,$ionicFilterBar,logdata) {
 
+  /**
+  * Cuando termina de cargar los datos en pantalla
+  */
+  $scope.$watch('$viewContentLoaded', function(){
+      $rootScope.$broadcast('loading:hide');
+  });
+
   var filterBarInstance;
   /**
   * Se muestra el filtro de la lista de elementos
@@ -171,5 +178,10 @@ angular.module('alacena.elementosController', ['ionic'])
      }
    });
   };
-
+  /**
+  * Crea un listado y muestra una ventana modal con los elementos que no existen en ninguna lista o tienen 0 en su cantidad
+  */
+  $scope.makeShopingList = function(){
+    // IDEA I4
+  };
 });

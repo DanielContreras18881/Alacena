@@ -2,12 +2,14 @@ angular.module('alacena.filters',[])
 /**
 * Filtro de las fechas que controla cómo se muestran las fechas de backup
 */
-.filter('filterDateBckp', function($filter)
+.filter('filterDateBckp', function($filter,$rootScope)
   {
     return function(input)
       {
         var _date = "";
-          if(input !== null){
+          if($rootScope.hayFechaUltimoBackup!=null && $rootScope.hayFechaUltimoBackup!='null' && $rootScope.hayFechaUltimoBackup!=undefined){
+            return $filter('translate')('NO_HAY_BACKUP');
+          }else if(input !== null){
             var formato = "YYYY-MM-DD";
 
             var entrada = moment(input,formato).hours(0).minutes(0).seconds(0).milliseconds(0);

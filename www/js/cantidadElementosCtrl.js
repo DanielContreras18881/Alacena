@@ -3,6 +3,13 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
 * Controlador de la pantalla de lista de elementos
 */
 .controller('ListaCtrl', function($rootScope,$scope,$stateParams,$ionicModal,$ionicListDelegate,jsonFactory,LocalStorage,$filter,$ionicPopup,$ionicFilterBar,logdata,$translate) {
+  
+  /**
+  * Cuando termina de cargar los datos en pantalla
+  */
+  $scope.$watch('$viewContentLoaded', function(){
+      $rootScope.$broadcast('loading:hide');
+  });
 
   var filterBarInstance;
   /**
@@ -394,5 +401,6 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
      });
    });
   };
-
+// IDEA I3
+// FIXME F2
 });

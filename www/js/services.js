@@ -195,7 +195,7 @@ angular.module('alacena.services', [])
 
 			var formato = "YYYY-MM-DD HH:mm:ss";
 			var dia = moment().format(formato);
-			var formatoCarpeta = "YYYY-MM-DD";
+			var formatoCarpeta = "YYYY-MM-DD_HH-mm-ss";
 			var diaCarpeta = moment().format(formatoCarpeta);
 
 			function backup(){
@@ -217,10 +217,12 @@ angular.module('alacena.services', [])
 										.then(function (success) {
 											logdata.messageLog('backup:makeBckp:Escritura en fichero realizada'+JSON.stringify(success));
 										}, function (error) {
+											$rootScope.$broadcast('loading:hide');
 											logdata.messageError('backup:makeBckp:Error al escribir en fichero:'+strNombreLista+".json : "+JSON.stringify(error));
 										}
 									);
 								}, function (error) {
+									$rootScope.$broadcast('loading:hide');
 									logdata.messageError('backup:makeBckp:FICHERO NO CREADO:'+JSON.stringify(error));
 							});
 						});
@@ -233,10 +235,12 @@ angular.module('alacena.services', [])
 								.then(function (success) {
 									logdata.messageLog('backup:makeBckp:Escritura en fichero realizada'+JSON.stringify(success));
 								}, function (error) {
+									$rootScope.$broadcast('loading:hide');
 									logdata.messageError('backup:makeBckp:Error al escribir en fichero:elementos.json : '+JSON.stringify(error));
 								}
 							);
 						}, function (error) {
+							$rootScope.$broadcast('loading:hide');
 							logdata.messageError('backup:makeBckp:FICHERO NO CREADO:'+JSON.stringify(error));
 					});
 					//TODO: hacer backup de la configuración
@@ -245,6 +249,7 @@ angular.module('alacena.services', [])
 					$rootScope.hayFechaUltimoBackup = true;
 					LocalStorage.set('hayFechaUltimoBackup',$rootScope.hayFechaUltimoBackup);
 					logdata.messageLog('backup:makeBckp:Backup realizado:'+dia);
+					$rootScope.$broadcast('loading:hide');
 					$ionicPopup.alert({
 						title: 'EXITO',
 						template: 'Backup realizado correctamente'
@@ -267,6 +272,7 @@ angular.module('alacena.services', [])
 									backup();
 								}, function (error) {
 										logdata.messageLog('backup:makeBckp:Backup no realizado:No se ha podido el directorio:'+JSON.stringify(error));
+										$rootScope.$broadcast('loading:hide');
 										$ionicPopup.alert({
 											title: 'ERROR',
 											template: 'Backup no realizado correctamente'
@@ -280,7 +286,8 @@ angular.module('alacena.services', [])
 				* Recupera un backup de ficheros json de cada lista de elementos y de la lista general de elementos, sobreescribiendo
 				*/
 				retrieveBckp: function(){
-					//TODO:recuperar de los ficheros, crear los json de elementos, cantidadElementosLista y listas(ver si es necesario hacer backup) y configuración
+					//IDEA I2
+					//recuperar de los ficheros, crear los json de elementos, cantidadElementosLista y listas(ver si es necesario hacer backup) y configuración
 				}
 			}
 })

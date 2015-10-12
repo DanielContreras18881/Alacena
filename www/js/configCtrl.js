@@ -3,6 +3,14 @@ angular.module('alacena.configController', ['ionic'])
 * Controlador de la pantalla de configuración
 */
 .controller('ConfigCtrl', function($rootScope,$scope,$translate,jsonFactory,LocalStorage,logdata,backup) {
+
+  /**
+  * Cuando termina de cargar los datos en pantalla
+  */
+  $scope.$watch('$viewContentLoaded', function(){
+      $rootScope.$broadcast('loading:hide');
+  });
+
   /**
   * Inicializa la pantalla de configuración
   */
@@ -60,6 +68,7 @@ angular.module('alacena.configController', ['ionic'])
     */
     $scope.hacerBackup = function(){
       logdata.messageLog('ConfigCtrl:hacerBackup:Se lanza el backup de la aplicación');
+      $rootScope.$broadcast('loading:show');
       backup.makeBckp();
       var formato = "YYYY-MM-DD HH:mm:ss";
       var dia = moment().format(formato);
