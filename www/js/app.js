@@ -135,7 +135,6 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
 
   });
 })
-
 /**
 * Configuración de la aplicación
 */
@@ -234,6 +233,5 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
     principal:'NO'
   });
   // if none of the above states are matched, use this as the fallback
-  //$urlRouterProvider.otherwise('/app/listas/Lista de la Compra');
   $urlRouterProvider.otherwise('/app/listas');
 });
