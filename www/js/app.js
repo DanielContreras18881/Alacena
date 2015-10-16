@@ -113,10 +113,12 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
     //Se registra el botón back para controlar su funcionamiento en Android
     $ionicPlatform.registerBackButtonAction(function () {
        if($state.current.principal==='SI'){//Si es la página inicial mostramos una advertencia
-           $translate(['SALIR','SALIR_PREGUNTA']).then(function (translations) {
+           $translate(['SALIR','SALIR_PREGUNTA','NO','SI']).then(function (translations) {
              $ionicPopup.confirm({
                   title: translations.SALIR,
-                  template: translations.SALIR_PREGUNTA
+                  template: translations.SALIR_PREGUNTA,
+                  cancelText: translations.NO,
+                  okText: translations.SI
               }).then(function(res){
                 if( res ){
                   logdata.messageLog('app:run:registerBackButtonAction:Se sale de la App');
