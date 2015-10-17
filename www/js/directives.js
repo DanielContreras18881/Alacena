@@ -72,7 +72,9 @@ angular.module('alacena.directives',[])
 		};
 		var onSwipeRight = function(){
         if(!$rootScope.optionsOpen){
-          $ionicSideMenuDelegate.toggleLeft();
+          if($ionicSideMenuDelegate.isOpen()){
+             $ionicSideMenuDelegate.toggleLeft();
+          }
         }else{
           $rootScope.optionsOpen = !$rootScope.optionsOpen;
         }

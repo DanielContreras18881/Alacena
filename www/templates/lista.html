@@ -8,11 +8,11 @@
     <ion-list detect-gestures gesture-type="swipeleft">
       <ion-item ng-if="!elementoLista.marked"
                 ng-repeat="elementoLista in elementosLista | filter:nombreLista | orderBy:['fechaCaducidad','nombreElemento'] track by $index"
-                class="item item-icon-left item-icon-right {{elementoLista.colorElemento}}">
+                class="item item-icon-left item-icon-right  item-size {{elementoLista.colorElemento}}">
           <i class="icon ion-android-checkbox-outline-blank" ng-hide="{{listaEditable}}" ng-click="markAcquired(elementoLista)"></i>
   				<span>{{elementoLista.nombreElemento}}</span>
   				<p class="fade-in">
-            <i class="ion-minus-circled icono-size {{elementoLista.colorBotones}}"ng-click="minusElement(elementoLista)"></i>
+            <i class="ion-minus-circled icono-size {{elementoLista.colorBotones}}" ng-click="minusElement(elementoLista)"></i>
             <span class="badge badge-royal">{{elementoLista.cantidadElemento}}</span>
             <i class="ion-plus-circled icono-size {{elementoLista.colorBotones}}" ng-click="plusElement(elementoLista)"></i>
           </p>

@@ -28,8 +28,13 @@
 		}
 	],
 	"askAddListaCompra":true,
-	"colorDefault":"item-dark item item-complex",
+	"colorDefault":"item-stable item item-complex",
 	"configColors":[
+		{
+			"nombre":"BLANCO",
+			"claseLista":"item-stable item item-complex",
+			"botonesEditables":"button-stable"
+		},
 		{
 			"nombre":"NEGRO",
 			"claseLista":"item-dark item item-complex",
@@ -49,6 +54,11 @@
 			"nombre":"AZUL",
 			"claseLista":"item-positive item item-complex",
 			"botonesEditables":"button-positive"
+		},
+		{
+			"nombre":"AMARILLO",
+			"claseLista":"item-energized item item-complex",
+			"botonesEditables":"button-energized"
 		}
 	],
 	"colorDefaultElement":"item item-stable item-complex item-right-editable",

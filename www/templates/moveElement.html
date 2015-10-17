@@ -14,8 +14,12 @@
       </label>
       <label class="item item-input">
         <span class="input-label">{{ 'CANTIDAD' | translate }}</span>
-        <input ng-model="elementoLista.cantidadElemento" min="{{elementoLista.cantidadElemento}}" type="number">
+        <input ng-model="elementoLista.cantidadElemento" min="1" max="{{elementoLista.cantidadElemento}}" type="number">
       </label>
+      <label class="item item-input">
+  		  <span class="input-label">{{ 'CANTIDAD_MINIMA' | translate}}</span>
+  		  <input type="number" min="0" ng-model="elementoLista.cantidadMinima"></input>
+  	  </label>
       <label class="item item-toggle">
          {{ 'CADUCA' | translate }}
          <label class="toggle toggle-assertive">
@@ -29,6 +33,7 @@
         <span class="input-label">{{ 'FECHA_CADUCIDAD' | translate }}</span>
         <input ng-disabled="fechaDisabled" ng-model="elementoLista.fechaCaducidad" type="date">
       </label>
+      <!--
       <label class="item item-input">
         <span class="input-label">{{ 'COLOR' | translate }}</span>
         <select ng-model="colorElemento"
@@ -36,6 +41,7 @@
             ng-change="setColor(colorElemento)">
         </select>
       </label>
+    -->
       <button class="button button-full button-dark ion-archive" ng-click="changeLista(nuevoNombreLista)"></button>
     </div>
   </ion-content>

@@ -19,7 +19,7 @@ button.ion-arrow-swap.light.sinBordes{
   color:white !important;
   z-index: 12 !important;
   position: absolute !important;
-  bottom: 10px !important;
+  bottom: 50px !important;
   right: 10px !important;
   border-radius: 50% !important;
   -webkit-transform: translate3d(0, 0, 0) !important;
@@ -34,10 +34,14 @@ button.ion-arrow-swap.light.sinBordes{
 .badge.badge-royal{
 	display: inline-block;
 	position: inherit;
-	font-size: 22px;
+	font-size: 20px;
 	padding: 10px 12px;
 	border-radius: 36px;
 	vertical-align: middle;
+}
+
+.item-size{
+	font-size: 16px;
 }
 
 .icono-option-size{
@@ -48,11 +52,11 @@ button.ion-arrow-swap.light.sinBordes{
 	display: inline-block;
   position: inherit;
 	vertical-align: middle;
-	font-size: 36px;
+	font-size: 32px;
 }
 
 input.reset-field {
-	padding-right: 36px;
+	padding-right: 40px;
 	z-index:1000 !important;
 }
 .reset-field-icon {
@@ -80,6 +84,7 @@ input.reset-field {
 }
 .popup-title {
     color: #fff;
+		font-size: 18px;
 }
 .popup-body {
     background-color: #ECECEC;
@@ -91,7 +96,7 @@ input.reset-field {
 .popup-buttons .button {
     background-color: #444;
 		border: none;
-    font-size: 20px;
+    font-size: 14px;
 }
 .popup-buttons .button.button-default{
     color: #fff;

@@ -115,7 +115,8 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     if($filter('filter')($rootScope.elementosLista,element).length==0) {
       logdata.messageLog('ElementosCtrl:save:Se comprueba que es nuevo');
       $rootScope.elementosLista.push(element);
-      if($filter('filter')($rootScope.elementos,{"nombreElemento":element.nombreElemento}).length==0) {
+      var listadoElementos = $filter('filter')($rootScope.elementos,{"nombreElemento":element.nombreElemento})
+      if(listadoElementos!==undefined && listadoElementos.length==0) {
         logdata.messageLog('ElementosCtrl:save:Se comprueba que es nuevo en el histórico');
         $rootScope.elementos.push({"nombreElemento":element.nombreElemento});
       }
@@ -347,7 +348,14 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   */
   $scope.addItem = function() {
     logdata.messageLog('ListaCtrl:addItem');
-    $scope.fechaDisabled = false;
+    var fechaCaducidadInicial = moment().hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
+    $scope.fechaDisabled = true;
+    if($scope.nombreLista==='LISTA_COMPRA'){
+      $scope.elementoListaCompra = true;
+      fechaCaducidadInicial = moment('3015-12-31T22:00:00.000Z').hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
+    }else{
+      $scope.elementoListaCompra = false;
+    }
     $translate(['ELEMENTO_NUEVO']).then(function (translations) {
       $scope.newElement = {
         "nombreElemento":translations.ELEMENTO_NUEVO,
@@ -358,7 +366,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
         "nombreLista":$scope.nombreLista,
         "cantidadElemento":1,
         "caduca":!$scope.fechaDisabled,
-        "fechaCaducidad":moment().hours(0).minutes(0).seconds(0).milliseconds(0).toDate(),
+        "fechaCaducidad":fechaCaducidadInicial,
         "cantidadMinima":0,
         "marked":false
       };
@@ -396,6 +404,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
        okText: translations.SI
      });
      confirmPopup.then(function(res) {
+       $ionicListDelegate.closeOptionButtons();
        if(res) {
         logdata.messageLog('ListaCtrl:showConfirm:confirmado:'+res);
         $rootScope.elementos = $filter('filter')($rootScope.elementos, function(value, index) {return value.nombreElemento !== nombre;});

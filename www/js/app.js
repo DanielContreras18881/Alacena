@@ -22,7 +22,7 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
 
   $rootScope.$on('loading:show', function() {
     $ionicLoading.show({
-          template: '<ion-spinner icon="bubbles" class="spinner-light"></ion-spinner>',
+          template: '<ion-spinner icon="ion-load-a" class="spinner-light"></ion-spinner>',
           duration: 2500,
           noBackdrop: false
         });
@@ -50,9 +50,12 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
         console.log('app:run:AdMob Banner inicializado');
         // Create banner
         window.AdMob.createBanner({
-        adId: adMobId,
-        position: AdMob.AD_POSITION.BOTTOM_CENTER,
-        autoShow: true });
+          adId: adMobId,
+          position: AdMob.AD_POSITION.BOTTOM_CENTER,
+          adSize: AdMob.AD_SIZE.SMART_BANNER,
+          autoShow: true,
+          overlap: true
+        });
     }
 
     if (window.cordova) {
@@ -112,6 +115,8 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
 
     //Se registra el botón back para controlar su funcionamiento en Android
     $ionicPlatform.registerBackButtonAction(function () {
+      logdata.messageLog('app:run:registerBackButtonAction:principal:'+$state.current.principal);
+      logdata.messageLog('app:run:registerBackButtonAction:url:'+$state.current.url);
        if($state.current.principal==='SI'){//Si es la página inicial mostramos una advertencia
            $translate(['SALIR','SALIR_PREGUNTA','NO','SI']).then(function (translations) {
              $ionicPopup.confirm({
@@ -134,7 +139,6 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
              $ionicHistory.goBack();
          }
       }, 100);
-
   });
 })
 /**

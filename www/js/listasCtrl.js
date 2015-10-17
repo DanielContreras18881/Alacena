@@ -10,7 +10,7 @@ angular.module('alacena.listasController', ['ionic'])
   $scope.$watch('$viewContentLoaded', function(){
       $rootScope.$broadcast('loading:hide');
   });
-  
+
   /**
   * Inicializa la pantalla de listas
   */
@@ -19,6 +19,7 @@ angular.module('alacena.listasController', ['ionic'])
     jsonFactory.getListData(function(data){
       $rootScope.listas = data;
       $rootScope.showReorderbutton = $rootScope.listas.length > 2;
+      $rootScope.showReorder = false;
     });
 
     jsonFactory.getConfigData(function(data){
@@ -59,6 +60,7 @@ angular.module('alacena.listasController', ['ionic'])
     }
     LocalStorage.set('listas',$rootScope.listas);
     $scope.modalLista.hide();
+    $scope.initialize();
   };
   /**
   * Establece el color de la lista
