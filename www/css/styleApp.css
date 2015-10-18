@@ -7,6 +7,22 @@ body {
 	position: absolute;
 	background: #ffffff !important;
 }
+.menu .bar-header{
+	margin:0px;
+	color: #9F7ACC;
+}
+.item-icon-left .icon{
+	left: 11px;
+	width: 50px;
+	height: auto;
+	top: 11px;
+}
+.desplazado {
+  top:70px !important;
+}
+.scroll-content{
+	bottom: 50px;
+}
 input{
   text-align:right;
 }

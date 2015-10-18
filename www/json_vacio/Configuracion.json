@@ -49,6 +49,11 @@
 			"nombre":"AZUL",
 			"claseLista":"item-positive item item-complex",
 			"botonesEditables":"button-positive"
+		},
+		{
+			"nombre":"AMARILLO",
+			"claseLista":"item-energized item item-complex",
+			"botonesEditables":"button-energized"
 		}
 	],
 	"colorDefaultElement":"item item-stable item-complex item-right-editable",

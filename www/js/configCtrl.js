@@ -76,4 +76,10 @@ angular.module('alacena.configController', ['ionic'])
       $rootScope.hayFechaUltimoBackup = true;
     };
 
+    $scope.recuperarBackup = function(){
+      logdata.messageLog('ConfigCtrl:recuperarBackup:Se lanza la recuperación del backup de la aplicación');
+      $rootScope.$broadcast('loading:show');
+      backup.retrieveBckp();
+    };
+
 });

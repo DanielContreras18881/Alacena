@@ -1,0 +1,24 @@
+<meta charset="UTF-8">
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-dark">
+    <h1 class="title">{{ 'SELECCIONE_ELEMENTOS' | translate}}</h1>
+    <button class="button button-clear button-primary ion-close-round" ng-click="modalAddToList.hide()"></button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <ion-list>
+      <ion-item ng-if="!elementoLista.marked"
+                class="item-dark"
+                ng-repeat="elemento in elementosSinLista | orderBy:'nombreElemento' track by $index">
+        <i class="icon ion-android-checkbox-outline-blank" ng-model="elemento.marked" ng-click="markToAdd(elemento)"></i>
+        <span>{{elemento.nombreElemento}}</span>
+      </ion-item>
+      <ion-item ng-if="elementoLista.marked"
+                class="item-dark"
+                ng-repeat="elemento in elementosSinLista | orderBy:'nombreElemento' track by $index">
+        <i class="icon ion-android-checkbox-outline" ng-model="elemento.marked" ng-click="markToAdd(elemento)"></i>
+        <span>{{elemento.nombreElemento}}</span>
+      </ion-item>
+    </ion-list>
+    <button class="button button-full button-dark ion-archive" ng-click="addToList()">&nbsp;&nbsp;{{ 'ANIADIR_A_LISTA_COMPRA' | translate}}</button>
+  </ion-content>
+</ion-modal-view>

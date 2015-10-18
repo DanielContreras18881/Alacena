@@ -28,13 +28,8 @@
 		}
 	],
 	"askAddListaCompra":true,
-	"colorDefault":"item-stable item item-complex",
+	"colorDefault":"item-dark item item-complex",
 	"configColors":[
-		{
-			"nombre":"BLANCO",
-			"claseLista":"item-stable item item-complex",
-			"botonesEditables":"button-stable"
-		},
 		{
 			"nombre":"NEGRO",
 			"claseLista":"item-dark item item-complex",

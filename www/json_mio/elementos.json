@@ -1,1 +1,479 @@
-[]
+[
+  {
+    "nombreElemento": "Desodorante viaje"
+  },
+  {
+    "nombreElemento": "Pasta de dientes"
+  },
+  {
+    "nombreElemento": "Pasta de dientes de viaje"
+  },
+  {
+    "nombreElemento": "Crema hidratante"
+  },
+  {
+    "nombreElemento": "Cocacola"
+  },
+  {
+    "nombreElemento": "Mahou 5 estrellas"
+  },
+  {
+    "nombreElemento": "Tonica"
+  },
+  {
+    "nombreElemento": "Nestea"
+  },
+  {
+    "nombreElemento": "Estropajo ancho"
+  },
+  {
+    "nombreElemento": "Estropajo estrecho"
+  },
+  {
+    "nombreElemento": "Bayeta"
+  },
+  {
+    "nombreElemento": "Trapo"
+  },
+  {
+    "nombreElemento": "Estropajo con mango"
+  },
+  {
+    "nombreElemento": "Antihormigas"
+  },
+  {
+    "nombreElemento": "Antihormigas granulado"
+  },
+  {
+    "nombreElemento": "Recambios plumero"
+  },
+  {
+    "nombreElemento": "Fregona"
+  },
+  {
+    "nombreElemento": "Bolsa congelar"
+  },
+  {
+    "nombreElemento": "Papel cocina"
+  },
+  {
+    "nombreElemento": "Servilletas"
+  },
+  {
+    "nombreElemento": "Kleenex"
+  },
+  {
+    "nombreElemento": "Ambientador lavavajillas"
+  },
+  {
+    "nombreElemento": "Pastillas antimosquitos"
+  },
+  {
+    "nombreElemento": "Cocacola zero sin cafeína"
+  },
+  {
+    "nombreElemento": "Botellines mahou"
+  },
+  {
+    "nombreElemento": "Filetes de ternera"
+  },
+  {
+    "nombreElemento": "Carne Debra"
+  },
+  {
+    "nombreElemento": "Preparado para paella"
+  },
+  {
+    "nombreElemento": "Judías verdes"
+  },
+  {
+    "nombreElemento": "Brócoli"
+  },
+  {
+    "nombreElemento": "Espinacas"
+  },
+  {
+    "nombreElemento": "Ajo picado"
+  },
+  {
+    "nombreElemento": "Cebolla picada"
+  },
+  {
+    "nombreElemento": "Pimiento picado"
+  },
+  {
+    "nombreElemento": "Pimiento en tiras"
+  },
+  {
+    "nombreElemento": "Boquerones fritos"
+  },
+  {
+    "nombreElemento": "Tupper de ternera con arroz"
+  },
+  {
+    "nombreElemento": "Tupper de pollo con arroz"
+  },
+  {
+    "nombreElemento": "Tupper de pollo con arroz y setas"
+  },
+  {
+    "nombreElemento": "Tupper de macarrones con carne"
+  },
+  {
+    "nombreElemento": "Tupper de muslos de pollo"
+  },
+  {
+    "nombreElemento": "Tupper de arroz negro"
+  },
+  {
+    "nombreElemento": "Hueso jamón Debra"
+  },
+  {
+    "nombreElemento": "Carne de kebab"
+  },
+  {
+    "nombreElemento": "Pollo en tiras para horno"
+  },
+  {
+    "nombreElemento": "Cordón bleu para horno"
+  },
+  {
+    "nombreElemento": "Pan de tomate"
+  },
+  {
+    "nombreElemento": "Pan de pipas"
+  },
+  {
+    "nombreElemento": "Patatas fritas"
+  },
+  {
+    "nombreElemento": "Patatas light"
+  },
+  {
+    "nombreElemento": "Nueces"
+  },
+  {
+    "nombreElemento": "Capuchino caramelo"
+  },
+  {
+    "nombreElemento": "Pan tostado"
+  },
+  {
+    "nombreElemento": "Salsa original old el paso"
+  },
+  {
+    "nombreElemento": "Chili con carne"
+  },
+  {
+    "nombreElemento": "Salsa teriyaki"
+  },
+  {
+    "nombreElemento": "Zumo de tomate"
+  },
+  {
+    "nombreElemento": "Atún"
+  },
+  {
+    "nombreElemento": "Salsa de soja heinz"
+  },
+  {
+    "nombreElemento": "Salsa de kebab suave"
+  },
+  {
+    "nombreElemento": "Zumo"
+  },
+  {
+    "nombreElemento": "Leche"
+  },
+  {
+    "nombreElemento": "Caldo de pollo"
+  },
+  {
+    "nombreElemento": "Puré de patatas"
+  },
+  {
+    "nombreElemento": "Fideos de fideuá"
+  },
+  {
+    "nombreElemento": "Estrellitas"
+  },
+  {
+    "nombreElemento": "Aceite"
+  },
+  {
+    "nombreElemento": "Directo al horno"
+  },
+  {
+    "nombreElemento": "Salteado de champiñones"
+  },
+  {
+    "nombreElemento": "Garbanzos"
+  },
+  {
+    "nombreElemento": "Caldo para paella"
+  },
+  {
+    "nombreElemento": "Frijoles"
+  },
+  {
+    "nombreElemento": "Judías para frijoles"
+  },
+  {
+    "nombreElemento": "Arroz salvaje la cigala"
+  },
+  {
+    "nombreElemento": "Azúcar moreno"
+  },
+  {
+    "nombreElemento": "Vino tinto"
+  },
+  {
+    "nombreElemento": "Crema de verduras"
+  },
+  {
+    "nombreElemento": "Grimemberg"
+  },
+  {
+    "nombreElemento": "Maiz"
+  },
+  {
+    "nombreElemento": "Guisantes"
+  },
+  {
+    "nombreElemento": "Cereales"
+  },
+  {
+    "nombreElemento": "Pan de sandwich"
+  },
+  {
+    "nombreElemento": "Pan de bocata"
+  },
+  {
+    "nombreElemento": "Miel"
+  },
+  {
+    "nombreElemento": "Yatekomo"
+  },
+  {
+    "nombreElemento": "Aceitunas grandes"
+  },
+  {
+    "nombreElemento": "Sopa de sobre"
+  },
+  {
+    "nombreElemento": "Aceitunas pequeñas"
+  },
+  {
+    "nombreElemento": "Ketchup"
+  },
+  {
+    "nombreElemento": "Mostaza"
+  },
+  {
+    "nombreElemento": "Salsa de mostaza y miel"
+  },
+  {
+    "nombreElemento": "Tinto de verano"
+  },
+  {
+    "nombreElemento": "Salchichas Debra"
+  },
+  {
+    "nombreElemento": "Salsa cocktail"
+  },
+  {
+    "nombreElemento": "Fuet"
+  },
+  {
+    "nombreElemento": "Bacon en tacos"
+  },
+  {
+    "nombreElemento": "Sanuscol"
+  },
+  {
+    "nombreElemento": "Pan de kebab"
+  },
+  {
+    "nombreElemento": "Pavo de sandwich"
+  },
+  {
+    "nombreElemento": "Pavo en taco"
+  },
+  {
+    "nombreElemento": "Cerveza"
+  },
+  {
+    "nombreElemento": "Huevos"
+  },
+  {
+    "nombreElemento": "Salchichas gordas"
+  },
+  {
+    "nombreElemento": "Yogur"
+  },
+  {
+    "nombreElemento": "Salsa ikea"
+  },
+  {
+    "nombreElemento": "Salsa kebab suave"
+  },
+  {
+    "nombreElemento": "Salsa kebab picante"
+  },
+  {
+    "nombreElemento": "Salsa barbacoa"
+  },
+  {
+    "nombreElemento": "Paté de salmón"
+  },
+  {
+    "nombreElemento": "Queso de sandwich"
+  },
+  {
+    "nombreElemento": "Salsa griega"
+  },
+  {
+    "nombreElemento": "Salsa de cabrales"
+  },
+  {
+    "nombreElemento": "Salsa ranchera"
+  },
+  {
+    "nombreElemento": "Salsa estilo argentino"
+  },
+  {
+    "nombreElemento": "Salsa old el paso para fajitas"
+  },
+  {
+    "nombreElemento": "Mandarina"
+  },
+  {
+    "nombreElemento": "Lechuga"
+  },
+  {
+    "nombreElemento": "Tomatitos"
+  },
+  {
+    "nombreElemento": "Paté de ibérico"
+  },
+  {
+    "nombreElemento": "Salsa de queso"
+  },
+  {
+    "nombreElemento": "Cocacola de 2l"
+  },
+  {
+    "nombreElemento": "Tranchetes"
+  },
+  {
+    "nombreElemento": "Alubias blancas"
+  },
+  {
+    "nombreElemento": "Desodorante"
+  },
+  {
+    "nombreElemento": "Desodorante de viaje"
+  },
+  {
+    "nombreElemento": "Plumero"
+  },
+  {
+    "nombreElemento": "Colacao"
+  },
+  {
+    "nombreElemento": "Papel higiénico"
+  },
+  {
+    "nombreElemento": "Papel de cocina"
+  },
+  {
+    "nombreElemento": "Azúcar glass"
+  },
+  {
+    "nombreElemento": "Arroz"
+  },
+  {
+    "nombreElemento": "Espárragos blancos"
+  },
+  {
+    "nombreElemento": "Marcilla"
+  },
+  {
+    "nombreElemento": "Espaguetis"
+  },
+  {
+    "nombreElemento": "Tomate frito"
+  },
+  {
+    "nombreElemento": "Suavizante flor"
+  },
+  {
+    "nombreElemento": "Detergente lavavajillas"
+  },
+  {
+    "nombreElemento": "Ambientador wc"
+  },
+  {
+    "nombreElemento": "Preparado tarta chocolate"
+  },
+  {
+    "nombreElemento": "Detergente fregar"
+  },
+  {
+    "nombreElemento": "Fairy"
+  },
+  {
+    "nombreElemento": "Detergente lavadora"
+  },
+  {
+    "nombreElemento": "Sofrito tomate"
+  },
+  {
+    "nombreElemento": "Vinagre balsámico"
+  },
+  {
+    "nombreElemento": "Bolsas congelar"
+  },
+  {
+    "nombreElemento": "Esponja"
+  },
+  {
+    "nombreElemento": "Espuma garnier"
+  },
+  {
+    "nombreElemento": "Champú acondicionador garnier"
+  },
+  {
+    "nombreElemento": "Evax"
+  },
+  {
+    "nombreElemento": "Sensodyne"
+  },
+  {
+    "nombreElemento": "Gel don algodón"
+  },
+  {
+    "nombreElemento": "Gel mio"
+  },
+  {
+    "nombreElemento": "Jabón de manos"
+  },
+  {
+    "nombreElemento": "Limpiacristales"
+  },
+  {
+    "nombreElemento": "Caldo"
+  },
+  {
+    "nombreElemento": "Lentejas"
+  },
+  {
+    "nombreElemento": "Atun"
+  },
+  {
+    "nombreElemento": "Champú hs"
+  },
+  {
+    "nombreElemento": "Balleta"
+  }
+]

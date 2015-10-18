@@ -4,7 +4,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 var buscar = '';
-angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.ionic.filter.bar',
+angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.ionic.filter.bar','gapi',
                                     'alacena.devdataController',
                                     'alacena.controllers',
                                     'alacena.cantidadElementosController',
@@ -14,7 +14,17 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
                                     'alacena.directives',
                                     'alacena.filters'])
 
-
+/*
+.value('GoogleApp', {
+  apiKey: 'AIzaSyDJjcsyOgQdmlCEI8cJCm0nxtq-e4yqklU',
+  clientId: '1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com',
+  scopes: [
+    'https://www.googleapis.com/auth/drive',
+    'https://www.googleapis.com/auth/contacts.readonly',
+    'https://www.googleapis.com/auth/userinfo.profile'
+  ]
+})
+*/
 /**
 * Ejecución de la aplicación
 */
@@ -22,7 +32,7 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
 
   $rootScope.$on('loading:show', function() {
     $ionicLoading.show({
-          template: '<ion-spinner icon="ion-load-a" class="spinner-light"></ion-spinner>',
+          template: '<ion-spinner icon="ion-load-a"></ion-spinner>',
           duration: 2500,
           noBackdrop: false
         });

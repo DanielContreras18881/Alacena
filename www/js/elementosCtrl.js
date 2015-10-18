@@ -182,6 +182,39 @@ angular.module('alacena.elementosController', ['ionic'])
   * Crea un listado y muestra una ventana modal con los elementos que no existen en ninguna lista o tienen 0 en su cantidad
   */
   $scope.makeShopingList = function(){
-    // IDEA I4
+    var elementosConCantidad = $filter('filter')($rootScope.elementosLista,
+      function(value, index) {return (value.nombreLista !== 'LISTA_COMPRA' && value.cantidadElemento > 0);}
+    );
+    $rootScope.elementosSinLista = $filter('filter')($rootScope.elementos,
+      function(value1, index1) {
+        var elementos = $filter('filter')(elementosConCantidad,function(value2, index2) {return (value1.nombreElemento == value2.nombreElemento);});
+        if(elementos.length==0){
+          return value1;
+        }
+      }
+    );
+    logdata.messageLog('ElementosCtrl:makeShopingList:elementosSinLista:'+JSON.stringify($rootScope.elementosSinLista));
+    $scope.modalAddToList.show();
+  };
+  /**
+  * Ventana modal para mostrar elementos a añadir
+  */
+  $ionicModal.fromTemplateUrl('templates/addToList.html', {
+    scope: $scope
+  }).then(function(modalAddToList) {
+    $scope.modalAddToList = modalAddToList;
+  });
+  /**
+  * Se marca o desmarca un elemento de la lista candidata a la lista de la compra
+  */
+  $scope.markToAdd = function(item) {
+    logdata.messageLog('ElementosCtrl:markToAdd:'+JSON.stringify(item));
+    var busqueda = $filter('filter')($rootScope.elementosSinLista, {"nombreElemento":item.nombreElemento}, true);
+    if(busqueda[0].marked){
+      busqueda[0].marked = false;
+    }else{
+      busqueda[0].marked = true;
+    }
+    logdata.messageLog('ElementosCtrl:markToAdd:'+JSON.stringify(busqueda[0]));
   };
 });

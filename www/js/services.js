@@ -243,7 +243,22 @@ angular.module('alacena.services', [])
 							$rootScope.$broadcast('loading:hide');
 							logdata.messageError('backup:makeBckp:FICHERO NO CREADO:'+JSON.stringify(error));
 					});
-					//TODO: hacer backup de la configuración
+					//Backup de la configuración
+					$cordovaFile.createFile($rootScope.dataDirectory+'backup_'+diaCarpeta+'/',"Configuracion.json", true)
+						.then(function (success) {
+							logdata.messageLog('backup:makeBckp:FICHERO CREADO:'+$rootScope.dataDirectory+'backup_'+diaCarpeta+'/'+"Configuracion.json");
+							$cordovaFile.writeFile($rootScope.dataDirectory+'backup_'+diaCarpeta+'/', "Configuracion.json", $rootScope.configData, true)
+								.then(function (success) {
+									logdata.messageLog('backup:makeBckp:Escritura en fichero realizada'+JSON.stringify(success));
+								}, function (error) {
+									$rootScope.$broadcast('loading:hide');
+									logdata.messageError('backup:makeBckp:Error al escribir en fichero:elementos.json : '+JSON.stringify(error));
+								}
+							);
+						}, function (error) {
+							$rootScope.$broadcast('loading:hide');
+							logdata.messageError('backup:makeBckp:FICHERO NO CREADO:'+JSON.stringify(error));
+					});
 					LocalStorage.set('fechaUltimoBackup',dia);
 					$rootScope.fechaUltimoBackup = dia;
 					$rootScope.hayFechaUltimoBackup = true;

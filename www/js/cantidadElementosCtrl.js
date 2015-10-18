@@ -414,5 +414,37 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
      });
    });
   };
-// IDEA I3
+  /**
+  * Se limpia la lista de la compra
+  */
+  $scope.limpiarListaCompra = function(){
+    logdata.messageLog('ListaCtrl:limpiarListaCompra');
+    $translate(['BORRAR','NO','SI']).then(function (translations) {
+      var confirmPopup = $ionicPopup.confirm({
+        title: translations.BORRAR,
+        template: $translate('BORRAR_COMPRA'),
+        cancelText: translations.NO,
+        okText: translations.SI
+      });
+      confirmPopup.then(function(res) {
+        if(res) {
+         logdata.messageLog('ListaCtrl:showConfirm:confirmado:'+res);
+         $rootScope.elementosLista = $filter('filter')($rootScope.elementosLista, function(value, index) {return value.nombreLista !== 'LISTA_COMPRA';});
+         LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
+        }
+      });
+    });
+  }
+  /**
+  * Se guarda la lista de la compra actual en un fichero
+  */
+  $scope.guardarListaFavorita = function(){
+
+  }
+  /**
+  * Se recupera una lista de la compra de entre las guardadas
+  */
+  $scope.recuperarListaFavorita = function(){
+    //Preguntar si sobreescribir o añadir a lo que hay en la lista de la compra, si existen elementos en la lista de la compra
+  }
 });

@@ -20,10 +20,13 @@
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
-    <ion-header-bar class="bar-dark">
-      <h1 class="title">{{ 'TITULO' | translate }}</h1>
+    <ion-header-bar class="bar-dark item-user-account item-avatar item item-icon-left">
+          <i ng-hide="authorized" class="icon ion-person"></i>
+          <img ng-show="authorized" class="icon" ng-src="img/ionic.png"/>
+          {{ 'TITULO' | translate }}
+          <p ng-show="authorized" class="fade-in">Nombre usuario</p>
     </ion-header-bar>
-    <ion-content>
+    <ion-content class="desplazado">
       <ion-list>
         <ion-item class="item-dark" menu-close href="#/app/listas">
           {{ 'LISTAS' | translate }}
@@ -39,6 +42,9 @@
         </ion-item>
         <ion-item class="item-dark" ng-if="hayFechaUltimoBackup">
           <p class="fade-in backupColor">{{ fechaUltimoBackup | filterDateBckp }}</p>
+        </ion-item>
+        <ion-item class="item-dark" ng-hide="authorized" ng-click="authorize()">
+          <i class="icon"><img ng-src="img/google.png"></i>
         </ion-item>
       </ion-list>
     <!--
