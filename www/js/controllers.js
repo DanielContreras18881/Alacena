@@ -25,7 +25,7 @@ angular.module('alacena.controllers', [])
     $rootScope.showReorder = !$rootScope.showReorder;
   }
   /**
-  *
+  * Función que realiza la autorización con Google
   */
   $scope.authorize = function () {
     logdata.messageLog('GAPI:Inicio');
@@ -46,16 +46,4 @@ angular.module('alacena.controllers', [])
     );
     logdata.messageLog('GAPI:Fin');
   }
-
-  /*
-  $scope.googleLogin = function() {
-        $cordovaOauth.google("1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com", ['https://www.googleapis.com/auth/drive',
-        'https://www.googleapis.com/auth/contacts.readonly',
-        'https://www.googleapis.com/auth/userinfo.profile']).then(function(result) {
-            console.log(JSON.stringify(result));
-        }, function(error) {
-            console.log(error);
-        });
-    }
-    */
 });

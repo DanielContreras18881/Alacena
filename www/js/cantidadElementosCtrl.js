@@ -2,7 +2,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
 /**
 * Controlador de la pantalla de lista de elementos
 */
-.controller('ListaCtrl', function($rootScope,$scope,$stateParams,$ionicModal,$ionicListDelegate,jsonFactory,LocalStorage,$filter,$ionicPopup,$ionicFilterBar,logdata,$translate) {
+.controller('ListaCtrl', function($rootScope,$scope,$stateParams,$ionicModal,$ionicListDelegate,jsonFactory,LocalStorage,$filter,$ionicPopup,$ionicFilterBar,logdata,$translate,favoritas) {
 
   /**
   * Cuando termina de cargar los datos en pantalla
@@ -36,6 +36,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
 
     logdata.messageLog('ListaCtrl:initialize:Inicio');
 
+    $scope.nombreListaFavorita = "";
     $scope.nombreLista = $stateParams.nombreLista;
     $scope.listaEditable = $stateParams.listaEditable;
     $scope.colorLista = $stateParams.colorLista;
@@ -436,15 +437,78 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     });
   }
   /**
+  * Ventana modal para dar nombre a la lista que guardar
+  */
+  $ionicModal.fromTemplateUrl('templates/saveList.html', {
+    scope: $scope
+  }).then(function(modalSaveList) {
+    $scope.modalSaveList = modalSaveList;
+  });
+  /**
   * Se guarda la lista de la compra actual en un fichero
   */
-  $scope.guardarListaFavorita = function(){
+  $scope.guardarListaFavorita = function(nombreListaFavorita){
+    $rootScope.$broadcast('loading:show');
+    logdata.messageLog('ListaCtrl:guardarListaFavorita:'+$scope.nombreListaFavorita);
+    var listaFavorita = $filter('filter')($rootScope.elementosLista, function(value, index) {return value.nombreLista === 'LISTA_COMPRA';});
+    favoritas.guardarLista(listaFavorita,nombreListaFavorita);
+    $scope.modalSaveList.hide();
+  }
+  /**
+  * Ventana modal para dar nombre de la lista a recuperar
+  */
+  $ionicModal.fromTemplateUrl('templates/retrieveList.html', {
+    scope: $scope
+  }).then(function(modalRetrieveList) {
+    $scope.modalRetrieveList = modalRetrieveList;
+  });
+  /**
+  * Se recupera una lista de listas de la compra guardadas
+  */
+  $scope.recuperarListasGuardadas = function(){
+    favoritas.retriveListOfLists(function(data){
+      logdata.messageLog('ListaCtrl:recuperarListasGuardadas:data:'+JSON.stringify(data));
+      if(data!==null && data!== undefined && data.length >0){
+/*
+10-24 19:25:56.303: I/chromium(29445): [INFO:CONSOLE(173)] "{2015-10-24 19:25:56}===[LOG]...........ListaCtrl:recuperarListasGuardadas:data:[{"isFile":true,"isDirectory":false,"name":"undefined.json","fullPath":"/listasFavoritas/undefined.json","filesystem":"<FileSystem: files-external>","nativeURL":"file:///storage/emulated/0/Android/data/develop.apps.chony.alacena/files/listasFavoritas/undefined.json"},{"isFile":true,"isDirectory":false,"name":"Hfjggj.json","fullPath":"/listasFavoritas/Hfjggj.json","filesystem":"<FileSystem: files-external>","nativeURL":"file:///storage/emulated/0/Android/data/develop.apps.chony.alacena/files/listasFavoritas/Hfjggj.json"}]
 
+*/
+        $scope.listasGuardadas = data;
+        $scope.modalRetrieveList.show();
+      }else{
+        $ionicPopup.alert({
+          title: 'AVISO',
+          template: 'No existen listas de la compra guardadas'
+        });
+      }
+    });
   }
   /**
   * Se recupera una lista de la compra de entre las guardadas
   */
-  $scope.recuperarListaFavorita = function(){
-    //Preguntar si sobreescribir o añadir a lo que hay en la lista de la compra, si existen elementos en la lista de la compra
+  $scope.recuperarListaFavorita = function(listaRecuperar){
+    logdata.messageLog('ListaCtrl:limpiarListaCompra');
+    var elementosListaRecuperada = favoritas.retrieveList(listaRecuperar);
+    $translate(['SOBREESCRIBIR','INCLUIR','RECUPERAR_LISTA']).then(function (translations) {
+      var confirmPopup = $ionicPopup.confirm({
+        title: translations.RECUPERAR_LISTA,
+        template: $translate('RECUPERAR_LISTA_COMPRA')+' : '+listaRecuperar,
+        cancelText: translations.INCLUIR,
+        okText: translations.SOBREESCRIBIR
+      });
+      confirmPopup.then(function(res) {
+        if(res) {
+         logdata.messageLog('ListaCtrl:showConfirm:SOBREESCRIBIR:'+res);
+         $rootScope.elementosLista = $filter('filter')($rootScope.elementosLista, function(value, index) {return value.nombreLista !== 'LISTA_COMPRA';});
+        }else{
+         logdata.messageLog('ListaCtrl:showConfirm:INCLUIR:'+res);
+        }
+        angular.forEach(elementosListaRecuperada, function(item) {
+          $rootScope.elementosLista.push(item);
+        });
+        LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
+        $scope.modalRetrieveList.hide();
+      });
+    });
   }
 });

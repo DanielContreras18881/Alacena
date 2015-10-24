@@ -1,5 +1,15 @@
 angular.module('alacena.filters',[])
 /**
+* Filtro de los nombres de los ficheros json
+*/
+.filter('filterNameJson', function($filter)
+  {
+    return function(input)
+      {
+        return input.replace('.json','');
+      };
+  })
+/**
 * Filtro de las fechas que controla cómo se muestran las fechas de backup
 */
 .filter('filterDateBckp', function($filter,$rootScope)
@@ -83,7 +93,7 @@ angular.module('alacena.filters',[])
               return _date;
             }else{
               elemento.colorElemento = elemento.colorElementoNoCaducado;
-              elemento.colorBotones = elemento.colorBotonesNoCaducado;              
+              elemento.colorBotones = elemento.colorBotonesNoCaducado;
             }
         };
     })

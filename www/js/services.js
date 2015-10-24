@@ -189,6 +189,111 @@ angular.module('alacena.services', [])
 })
 
 /**
+*
+*/
+.factory('favoritas',function($rootScope,$cordovaFile,logdata,$translate,$ionicPopup) {
+	function saveFile(listaGuardar,nombreLista){
+		logdata.messageLog('favoritas:saveFile:'+nombreLista+'-contenido:'+JSON.stringify(listaGuardar));
+		$cordovaFile.createFile($rootScope.dataDirectory+'listasFavoritas/',nombreLista+".json", true)
+			.then(function (success) {
+				logdata.messageLog('favoritas:saveFile:FICHERO CREADO:'+$rootScope.dataDirectory+'listasFavoritas/'+nombreLista+".json");
+				$cordovaFile.writeFile($rootScope.dataDirectory+'listasFavoritas/',nombreLista+".json", listaGuardar, true)
+					.then(function (success) {
+						logdata.messageLog('favoritas:saveFile:Escritura en fichero realizada'+JSON.stringify(success));
+					}, function (error) {
+						$rootScope.$broadcast('loading:hide');
+						logdata.messageError('favoritas:saveFile:Error al escribir en fichero:'+strNombreLista+".json : "+JSON.stringify(error));
+					}
+				);
+			}, function (error) {
+				$rootScope.$broadcast('loading:hide');
+				logdata.messageError('favoritas:saveFile:FICHERO NO CREADO:'+JSON.stringify(error));
+		});
+	};
+	function loadFile(listaRecuperar){
+		logdata.messageLog('favoritas:loadFile:'+listaRecuperar);
+		$cordovaFile.checkFile($rootScope.dataDirectory+'listasFavoritas/',listaRecuperar+".json")
+			.then(function (success) {
+				$cordovaFile.readAsText(path, file)
+					.then(function(success){
+
+					}),function(error){
+						logdata.messageError('favoritas:loadFile:Lista no recuperada:Ha ocurrido un error:'+JSON.stringify(error));
+						$rootScope.$broadcast('loading:hide');
+						$ionicPopup.alert({
+							title: 'ERROR',
+							template: 'Lista no recuperada correctamente'
+						});
+					}
+			}, function (error) {
+				logdata.messageError('favoritas:loadFile:Lista no recuperada:No se ha encontrado el fichero:'+JSON.stringify(error));
+				$rootScope.$broadcast('loading:hide');
+				$ionicPopup.alert({
+					title: 'ERROR',
+					template: 'Lista no recuperada correctamente'
+				});
+		});
+	};
+
+	return{
+		guardarLista: function(listaGuardar,nombreLista){
+			logdata.messageLog('favoritas:guardarLista:'+nombreLista+'-contenido:'+JSON.stringify(listaGuardar));
+			if($rootScope.dataDirectory!=='' && $rootScope.dataDirectory!==undefined){
+				logdata.messageLog('favoritas:guardarLista:$rootScope.dataDirectory'+$rootScope.dataDirectory);
+				$cordovaFile.checkDir($rootScope.dataDirectory, "listasFavoritas")
+				.then(function (success) {
+					saveFile(listaGuardar,nombreLista);
+				}, function (error) {
+					logdata.messageError('favoritas:guardarLista:ERROR:'+JSON.stringify(error));
+					$cordovaFile.createDir($rootScope.dataDirectory, "listasFavoritas", false)
+						.then(function (success) {
+							saveFile(listaGuardar,nombreLista);
+						}, function (error) {
+								logdata.messageError('favoritas:guardarLista:Lista no guardada:No se ha podido crear el directorio:'+JSON.stringify(error));
+								$rootScope.$broadcast('loading:hide');
+								$ionicPopup.alert({
+									title: 'ERROR',
+									template: 'Lista no guardada correctamente'
+								});
+						});
+				});
+			}
+		},
+		retrieveList: function(listaRecuperar){
+			logdata.messageLog('favoritas:recuperarLista:'+listaRecuperar);
+			if($rootScope.dataDirectory!=='' && $rootScope.dataDirectory!==undefined){
+				$cordovaFile.checkDir($rootScope.dataDirectory, "listasFavoritas")
+				.then(function (success) {
+					return loadFile(listaRecuperar);
+				}, function (error) {
+					logdata.messageError('favoritas:recuperarLista:No existen listas favoritas:No se ha encontrado el directorio:'+JSON.stringify(error));
+					$rootScope.$broadcast('loading:hide');
+					$ionicPopup.alert({
+						title: 'ERROR',
+						template: 'No existen listas favoritas'
+					});
+					return null;
+				});
+			}
+		},
+		retriveListOfLists: function(callback){
+			if($rootScope.dataDirectory!=='' && $rootScope.dataDirectory!==undefined){
+				$cordovaFile.listDir($rootScope.dataDirectory, "listasFavoritas")
+				.then(function (success) {
+					logdata.messageError('favoritas:retriveListOfLists:Listado ficheros:'+JSON.stringify(success));
+					callback(success);
+				}, function (error) {
+					logdata.messageError('favoritas:retriveListOfLists:No existen listas favoritas:No se ha encontrado el directorio:'+JSON.stringify(error));
+					callback(null);
+				});
+			}else{
+				callback(null);
+			}
+		}
+	};
+})
+
+/**
 * Factoría que guarda en ficheros las listas, y que permite recuperar el backup
 */
 .factory('backup', function($cordovaFile,$rootScope,$filter,LocalStorage,logdata,$translate,$ionicPopup) {
@@ -278,7 +383,7 @@ angular.module('alacena.services', [])
 				*/
 				makeBckp: function(){
 					if($rootScope.dataDirectory!=='' && $rootScope.dataDirectory!==undefined){
-						$cordovaFile.checkDir(cordova.file.dataDirectory, "backup_"+diaCarpeta)
+						$cordovaFile.checkDir($rootScope.dataDirectory, "backup_"+diaCarpeta)
 						.then(function (success) {
 							backup();
 						}, function (error) {
@@ -286,7 +391,7 @@ angular.module('alacena.services', [])
 								.then(function (success) {
 									backup();
 								}, function (error) {
-										logdata.messageLog('backup:makeBckp:Backup no realizado:No se ha podido el directorio:'+JSON.stringify(error));
+										logdata.messageLog('backup:makeBckp:Backup no realizado:No se ha podido crear el directorio:'+JSON.stringify(error));
 										$rootScope.$broadcast('loading:hide');
 										$ionicPopup.alert({
 											title: 'ERROR',

@@ -209,12 +209,36 @@ angular.module('alacena.elementosController', ['ionic'])
   */
   $scope.markToAdd = function(item) {
     logdata.messageLog('ElementosCtrl:markToAdd:'+JSON.stringify(item));
-    var busqueda = $filter('filter')($rootScope.elementosSinLista, {"nombreElemento":item.nombreElemento}, true);
-    if(busqueda[0].marked){
-      busqueda[0].marked = false;
+    if(item.marked){
+      $rootScope.elementosSinLista[$rootScope.elementosSinLista.indexOf(item)].marked = false;
     }else{
-      busqueda[0].marked = true;
+      $rootScope.elementosSinLista[$rootScope.elementosSinLista.indexOf(item)].marked = true;
     }
-    logdata.messageLog('ElementosCtrl:markToAdd:'+JSON.stringify(busqueda[0]));
+  };
+  /**
+  * Se añaden los elementos seleccionados a la lista de la compra
+  */
+  $scope.addToList = function(){
+    var elementosAIncluir = $filter('filter')($rootScope.elementosSinLista,function(value, index) {return value.marked});
+    logdata.messageLog('ElementosCtrl:addToList:elementosAIncluir:'+JSON.stringify(elementosAIncluir));
+    angular.forEach(elementosAIncluir, function(item) {
+        var nuevoElemento = {
+          "nombreElemento":item.nombreElemento,
+          "colorElemento":$scope.colorDefaultElement,
+          "colorBotones":$scope.colorbotonesEditablesDefaultElement,
+          "colorElementoNoCaducado":$scope.colorDefaultElement,
+          "colorBotonesNoCaducado":$scope.colorbotonesEditablesDefaultElement,
+          "nombreLista":'LISTA_COMPRA',
+          "cantidadElemento":1,
+          "caduca":false,
+          "fechaCaducidad":moment('3015-12-31T22:00:00.000Z').hours(0).minutes(0).seconds(0).milliseconds(0).toDate(),
+          "cantidadMinima":0,
+          "marked":false
+        };
+        $rootScope.elementosLista.push(nuevoElemento);
+      }
+    );
+    LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
+    $scope.modalAddToList.hide();
   };
 });

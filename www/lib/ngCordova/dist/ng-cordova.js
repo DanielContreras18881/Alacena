@@ -905,7 +905,7 @@ angular.module('ngCordova.plugins.brightness', [])
 angular.module('ngCordova.plugins.calendar', [])
 
   .factory('$cordovaCalendar', ['$q', '$window', function ($q, $window) {
-    
+
     return {
       createCalendar: function (options) {
         var d = $q.defer(),
@@ -1519,7 +1519,7 @@ angular.module('ngCordova.plugins.contacts', [])
 angular.module('ngCordova.plugins.datePicker', [])
 
   .factory('$cordovaDatePicker', ['$window', '$q', function ($window, $q) {
-    
+
     return {
       show: function (options) {
         var q = $q.defer();
@@ -1681,7 +1681,7 @@ angular.module('ngCordova.plugins.deviceOrientation', [])
     var defaultOptions = {
       frequency: 3000 // every 3s
     };
-    
+
     return {
       getCurrentHeading: function () {
         var q = $q.defer();
@@ -2678,41 +2678,47 @@ angular.module('ngCordova.plugins.file', [])
             q.reject(e);
           }
           return q.promise;
-        }
+        },
 
         /*
          listFiles: function (path, dir) {
 
          },
+        */
 
          listDir: function (path, dirName) {
          var q = $q.defer();
-
+         console.log('-----------------------------------path:'+path);
+         console.log('-----------------------------------dirName:'+dirName);
          try {
          $window.resolveLocalFileSystemURL(path, function (fileSystem) {
-         fileSystem.getDirectory(dirName, options, function (parent) {
-         var reader = parent.createReader();
-         reader.readEntries(function (entries) {
-         q.resolve(entries);
-         }, function () {
-         q.reject('DIR_READ_ERROR : ' + path + dirName);
-         });
-         }, function (error) {
-         error.message = $cordovaFileError[error.code];
-         q.reject(error);
-         });
+           fileSystem.getDirectory(dirName, null, function (parent) {
+             var reader = parent.createReader();
+             reader.readEntries(function (entries) {
+               q.resolve(entries);
+             }, function () {
+               console.log('-----------------------------------0');
+               q.reject('DIR_READ_ERROR : ' + path + dirName);
+             });
+           }, function (error) {
+             console.log('-----------------------------------1');
+             error.message = $cordovaFileError[error.code];
+             q.reject(error);
+           });
          }, function (err) {
-         err.message = $cordovaFileError[err.code];
-         q.reject(err);
+           console.log('-----------------------------------2');
+           err.message = $cordovaFileError[err.code];
+           q.reject(err);
          });
          } catch (e) {
-         e.message = $cordovaFileError[e.code];
-         q.reject(e);
+           console.log('-----------------------------------3');
+           e.message = $cordovaFileError[e.code];
+           q.reject(e);
          }
 
          return q.promise;
-         },
-
+         }
+         /*
          readFileMetadata: function (filePath) {
          //return getFile(filePath, {create: false});
          }
@@ -3748,7 +3754,7 @@ angular.module('ngCordova.plugins.googlePlus', [])
             q.reject(available);
           }
         });
-        
+
         return q.promise;
       }
     };

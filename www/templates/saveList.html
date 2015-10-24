@@ -1,0 +1,16 @@
+<meta charset="UTF-8">
+<ion-modal-view cache-view="false">
+  <ion-header-bar class="bar bar-header bar-dark">
+    <h1 class="title">{{ 'GUARDAR_LISTA' | translate}}</h1>
+    <button class="button button-clear button-primary ion-close-round" ng-click="modalSaveList.hide()"></button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">{{ 'NOMBRE_LISTA' | translate}}</span>
+        <input ng-model="nombreListaFavorita" type="text" reset-field>
+      </label>
+    </div>
+    <button class="button button-full button-dark ion-archive" ng-click="guardarListaFavorita(nombreListaFavorita)">&nbsp;&nbsp;{{ 'GUARDAR' | translate}}</button>
+  </ion-content>
+</ion-modal-view>

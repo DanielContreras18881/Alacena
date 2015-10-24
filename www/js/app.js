@@ -69,7 +69,6 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
     }
 
     if (window.cordova) {
-      console.log('ionic.Platform.isAndroid():'+ionic.Platform.isAndroid());
       console.log(JSON.stringify(cordova.file));
       if (ionic.Platform.isAndroid()) {
         $rootScope.dataDirectory = cordova.file.externalDataDirectory;
