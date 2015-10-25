@@ -69,20 +69,6 @@
     "nombreLista": "Armario baño"
   },
   {
-    "$$hashKey": "object:128",
-    "caduca": false,
-    "cantidadElemento": 0,
-    "cantidadMinima": 0,
-    "colorBotones": "button-stable",
-    "colorBotonesNoCaducado": "button-stable",
-    "colorElemento": "item item-stable item-complex item-right-editable",
-    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
-    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
-    "marked": false,
-    "nombreElemento": "Cocacola",
-    "nombreLista": "Armarios terraza"
-  },
-  {
     "$$hashKey": "object:129",
     "caduca": false,
     "cantidadElemento": 5,
@@ -234,20 +220,6 @@
     "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "marked": false,
     "nombreElemento": "Recambios plumero",
-    "nombreLista": "Armarios terraza"
-  },
-  {
-    "$$hashKey": "object:191",
-    "caduca": false,
-    "cantidadElemento": 0,
-    "cantidadMinima": 0,
-    "colorBotones": "button-stable",
-    "colorBotonesNoCaducado": "button-stable",
-    "colorElemento": "item item-stable item-complex item-right-editable",
-    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
-    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
-    "marked": false,
-    "nombreElemento": "Fregona",
     "nombreLista": "Armarios terraza"
   },
   {
@@ -689,20 +661,6 @@
     "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "marked": false,
     "nombreElemento": "Patatas fritas",
-    "nombreLista": "Despensa"
-  },
-  {
-    "$$hashKey": "object:73",
-    "caduca": false,
-    "cantidadElemento": 0,
-    "cantidadMinima": 0,
-    "colorBotones": "button-stable",
-    "colorBotonesNoCaducado": "button-stable",
-    "colorElemento": "item item-stable item-complex item-right-editable",
-    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
-    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
-    "marked": false,
-    "nombreElemento": "Patatas light",
     "nombreLista": "Despensa"
   },
   {
@@ -2491,20 +2449,6 @@
     "fechaCaducidad": "3015-12-31T22:00:00.000Z",
     "marked": false,
     "nombreElemento": "Espuma garnier",
-    "nombreLista": "Trastero"
-  },
-  {
-    "$$hashKey": "object:478",
-    "caduca": false,
-    "cantidadElemento": 0,
-    "cantidadMinima": 0,
-    "colorBotones": "button-stable",
-    "colorBotonesNoCaducado": "button-stable",
-    "colorElemento": "item item-stable item-complex item-right-editable",
-    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
-    "fechaCaducidad": "3015-12-31T22:00:00.000Z",
-    "marked": false,
-    "nombreElemento": "Champú acondicionador garnier",
     "nombreLista": "Trastero"
   },
   {

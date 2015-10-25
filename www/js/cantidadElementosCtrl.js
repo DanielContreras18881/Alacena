@@ -469,10 +469,6 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     favoritas.retriveListOfLists(function(data){
       logdata.messageLog('ListaCtrl:recuperarListasGuardadas:data:'+JSON.stringify(data));
       if(data!==null && data!== undefined && data.length >0){
-/*
-10-24 19:25:56.303: I/chromium(29445): [INFO:CONSOLE(173)] "{2015-10-24 19:25:56}===[LOG]...........ListaCtrl:recuperarListasGuardadas:data:[{"isFile":true,"isDirectory":false,"name":"undefined.json","fullPath":"/listasFavoritas/undefined.json","filesystem":"<FileSystem: files-external>","nativeURL":"file:///storage/emulated/0/Android/data/develop.apps.chony.alacena/files/listasFavoritas/undefined.json"},{"isFile":true,"isDirectory":false,"name":"Hfjggj.json","fullPath":"/listasFavoritas/Hfjggj.json","filesystem":"<FileSystem: files-external>","nativeURL":"file:///storage/emulated/0/Android/data/develop.apps.chony.alacena/files/listasFavoritas/Hfjggj.json"}]
-
-*/
         $scope.listasGuardadas = data;
         $scope.modalRetrieveList.show();
       }else{
@@ -487,27 +483,40 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   * Se recupera una lista de la compra de entre las guardadas
   */
   $scope.recuperarListaFavorita = function(listaRecuperar){
-    logdata.messageLog('ListaCtrl:limpiarListaCompra');
-    var elementosListaRecuperada = favoritas.retrieveList(listaRecuperar);
-    $translate(['SOBREESCRIBIR','INCLUIR','RECUPERAR_LISTA']).then(function (translations) {
-      var confirmPopup = $ionicPopup.confirm({
-        title: translations.RECUPERAR_LISTA,
-        template: $translate('RECUPERAR_LISTA_COMPRA')+' : '+listaRecuperar,
-        cancelText: translations.INCLUIR,
-        okText: translations.SOBREESCRIBIR
-      });
-      confirmPopup.then(function(res) {
-        if(res) {
-         logdata.messageLog('ListaCtrl:showConfirm:SOBREESCRIBIR:'+res);
-         $rootScope.elementosLista = $filter('filter')($rootScope.elementosLista, function(value, index) {return value.nombreLista !== 'LISTA_COMPRA';});
-        }else{
-         logdata.messageLog('ListaCtrl:showConfirm:INCLUIR:'+res);
-        }
-        angular.forEach(elementosListaRecuperada, function(item) {
-          $rootScope.elementosLista.push(item);
+    logdata.messageLog('ListaCtrl:recuperarListaFavorita:'+listaRecuperar);
+    favoritas.retrieveList(listaRecuperar,function(data){
+      var elementosListaRecuperada = JSON.parse(data);
+      $translate(['SOBREESCRIBIR','INCLUIR','RECUPERAR_LISTA']).then(function (translations) {
+        var confirmPopup = $ionicPopup.confirm({
+          title: translations.RECUPERAR_LISTA,
+          template: $translate('RECUPERAR_LISTA_COMPRA')+' : '+$filter('filterNameJson')(listaRecuperar),
+          cancelText: translations.INCLUIR,
+          okText: translations.SOBREESCRIBIR
         });
-        LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
-        $scope.modalRetrieveList.hide();
+        confirmPopup.then(function(res) {
+          if(res) {
+           logdata.messageLog('ListaCtrl:showConfirm:SOBREESCRIBIR:'+res);
+           $rootScope.elementosLista = $filter('filter')($rootScope.elementosLista, function(value, index) {return value.nombreLista !== 'LISTA_COMPRA';});
+           angular.forEach(elementosListaRecuperada, function(item) {
+               $rootScope.elementosLista.push(item);
+           });
+          }else{
+           logdata.messageLog('ListaCtrl:showConfirm:INCLUIR:'+res);
+           angular.forEach(elementosListaRecuperada, function(item) {
+             var busqueda = $filter('filter')($rootScope.elementosLista, {"nombreElemento":item.nombreElemento,"nombreLista":'LISTA_COMPRA'}, true);
+             if(busqueda.length>0){
+               logdata.messageLog('ListaCtrl:recuperarListaFavorita:Ya existe, incrementamos la cantidad');
+               var cantidadActual = busqueda[0].cantidadElemento;
+               busqueda[0].cantidadElemento=cantidadActual+item.cantidadElemento;
+             }else{
+               logdata.messageLog('ListaCtrl:changeLista:No existe, se crea');
+               $rootScope.elementosLista.push(item);
+             }
+           });
+          }
+          LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
+          $scope.modalRetrieveList.hide();
+        });
       });
     });
   }

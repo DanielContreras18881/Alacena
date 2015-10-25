@@ -1,0 +1,16 @@
+<meta charset="UTF-8">
+<ion-modal-view cache-view="false">
+  <ion-header-bar class="bar bar-header bar-dark">
+    <h1 class="title">{{ 'RECUPERAR_BACKUP' | translate}}</h1>
+    <button class="button button-clear button-primary ion-close-round" ng-click="modalBackupRetrieveList.hide()"></button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <ion-list>
+      <ion-item class="item-dark"
+                ng-repeat="lista in listaBackups | orderBy:'name' track by $index"
+                ng-click="recuperarBackup(lista.name)">
+        <span>{{lista.name}}</span>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-modal-view>

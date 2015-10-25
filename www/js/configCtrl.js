@@ -2,7 +2,7 @@ angular.module('alacena.configController', ['ionic'])
 /**
 * Controlador de la pantalla de configuración
 */
-.controller('ConfigCtrl', function($rootScope,$scope,$translate,jsonFactory,LocalStorage,logdata,backup) {
+.controller('ConfigCtrl', function($rootScope,$scope,$ionicModal,$translate,jsonFactory,LocalStorage,logdata,backup) {
 
   /**
   * Cuando termina de cargar los datos en pantalla
@@ -64,7 +64,7 @@ angular.module('alacena.configController', ['ionic'])
       LocalStorage.set('configData',$rootScope.configData);
     };
     /**
-    *
+    * Se crea el backup de los datos actuales
     */
     $scope.hacerBackup = function(){
       logdata.messageLog('ConfigCtrl:hacerBackup:Se lanza el backup de la aplicación');
@@ -75,11 +75,34 @@ angular.module('alacena.configController', ['ionic'])
       $rootScope.fechaUltimoBackup = dia;
       $rootScope.hayFechaUltimoBackup = true;
     };
-
-    $scope.recuperarBackup = function(){
-      logdata.messageLog('ConfigCtrl:recuperarBackup:Se lanza la recuperación del backup de la aplicación');
+    /**
+    * Ventana modal para dar nombre de la lista a recuperar
+    */
+    $ionicModal.fromTemplateUrl('templates/retrieveBackupList.html', {
+      scope: $scope
+    }).then(function(modalBackupRetrieveList) {
+      $scope.modalBackupRetrieveList = modalBackupRetrieveList;
+    });
+    /**
+    * Se recupera el listado de los backups realizados
+    */
+    $scope.recuperarListaBackups = function(){
+      logdata.messageLog('ConfigCtrl:recuperarListaBackups:Se lanza la recuperación de la lista de backups de la aplicación');
       $rootScope.$broadcast('loading:show');
-      backup.retrieveBckp();
+      backup.retrieveBckpList(function(data){
+        logdata.messageLog('ConfigCtrl:recuperarListaBackups:data:'+JSON.stringify(data));
+        $scope.listaBackups = data;
+        $rootScope.$broadcast('loading:hide');
+        $scope.modalBackupRetrieveList.show();
+      });
+    };
+    /**
+    * Se recupera el backup seleccionado
+    */
+    $scope.recuperarBackup = function(backup){
+      logdata.messageLog('ConfigCtrl:recuperarBackup:Se lanza la recuperación del backup de la aplicación');
+      logdata.messageLog('ConfigCtrl:recuperarBackup:backup:'+backup);
+      $scope.modalBackupRetrieveList.hide();
     };
 
 });

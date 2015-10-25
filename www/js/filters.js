@@ -113,11 +113,11 @@ angular.module('alacena.filters',[])
         searchString = searchString.toLowerCase();
 
         angular.forEach(arr, function(item) {
-
+          if(item!=null && item!=undefined && item.nombreLista!=null && item.nombreLista!=undefined && item.nombreLista!==''){
             if (item.nombreLista.toLowerCase().indexOf(searchString) > -1) {
                 result.push(item);
             }
-
+          }
         });
 
         return result;
