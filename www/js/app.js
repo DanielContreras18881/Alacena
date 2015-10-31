@@ -26,24 +26,31 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
 })
 */
 /**
+* Factoría que muestra el spinner de carga
+*/
+.factory('Spinner', function ($ionicLoading) {
+  return{
+    show:function(){
+      $ionicLoading.show({
+            template: '<ion-spinner icon="ripple" class="spinner-royal"></ion-spinner>',
+            animation: 'fade-in',
+            hideOnStateChange : false,
+            duration: 2500,
+            showBackdrop: false
+          });
+    },
+    hide:function(){
+      $ionicLoading.hide();
+    }
+  }
+})
+/**
 * Ejecución de la aplicación
 */
-.run(function($ionicPlatform,$state,$ionicHistory,$ionicPopup,logdata,$rootScope,$cordovaGlobalization,$translate,$ionicLoading) {
-
-  $rootScope.$on('loading:show', function() {
-    $ionicLoading.show({
-          template: '<ion-spinner icon="ion-load-a"></ion-spinner>',
-          duration: 2500,
-          noBackdrop: false
-        });
-  })
-
-  $rootScope.$on('loading:hide', function() {
-    $ionicLoading.hide();
-  })
+.run(function($ionicPlatform,$state,$ionicHistory,$ionicPopup,logdata,$rootScope,$cordovaGlobalization,$translate,Spinner) {
 
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
-    $rootScope.$broadcast('loading:show');
+    Spinner.show();
   });
 
   $ionicPlatform.ready(function() {

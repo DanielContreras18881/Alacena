@@ -11,7 +11,7 @@ angular.module('alacena.devdataController', ['ionic'])
   * Cuando termina de cargar los datos en pantalla
   */
   $scope.$watch('$viewContentLoaded', function(){
-      $rootScope.$broadcast('loading:hide');
+      Spinner.hide();
   });
   
   $scope.initialize = function(){

@@ -2,13 +2,13 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
 /**
 * Controlador de la pantalla de lista de elementos
 */
-.controller('ListaCtrl', function($rootScope,$scope,$stateParams,$ionicModal,$ionicListDelegate,jsonFactory,LocalStorage,$filter,$ionicPopup,$ionicFilterBar,logdata,$translate,favoritas) {
+.controller('ListaCtrl', function($rootScope,$scope,$stateParams,$ionicModal,$ionicListDelegate,jsonFactory,LocalStorage,$filter,$ionicPopup,$ionicFilterBar,logdata,$translate,favoritas,Spinner) {
 
   /**
   * Cuando termina de cargar los datos en pantalla
   */
   $scope.$watch('$viewContentLoaded', function(){
-      $rootScope.$broadcast('loading:hide');
+      Spinner.hide();
   });
 
   var filterBarInstance;
@@ -448,7 +448,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   * Se guarda la lista de la compra actual en un fichero
   */
   $scope.guardarListaFavorita = function(nombreListaFavorita){
-    $rootScope.$broadcast('loading:show');
+    Spinner.show();
     logdata.messageLog('ListaCtrl:guardarListaFavorita:'+$scope.nombreListaFavorita);
     var listaFavorita = $filter('filter')($rootScope.elementosLista, function(value, index) {return value.nombreLista === 'LISTA_COMPRA';});
     favoritas.guardarLista(listaFavorita,nombreListaFavorita);
@@ -484,40 +484,55 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   */
   $scope.recuperarListaFavorita = function(listaRecuperar){
     logdata.messageLog('ListaCtrl:recuperarListaFavorita:'+listaRecuperar);
+    Spinner.show();
     favoritas.retrieveList(listaRecuperar,function(data){
-      var elementosListaRecuperada = JSON.parse(data);
-      $translate(['SOBREESCRIBIR','INCLUIR','RECUPERAR_LISTA']).then(function (translations) {
-        var confirmPopup = $ionicPopup.confirm({
-          title: translations.RECUPERAR_LISTA,
-          template: $translate('RECUPERAR_LISTA_COMPRA')+' : '+$filter('filterNameJson')(listaRecuperar),
-          cancelText: translations.INCLUIR,
-          okText: translations.SOBREESCRIBIR
+      if(data!=null){
+        var elementosListaRecuperada = JSON.parse(data);
+        $translate(['SOBREESCRIBIR','INCLUIR','RECUPERAR_LISTA']).then(function (translations) {
+          var confirmPopup = $ionicPopup.confirm({
+            title: translations.RECUPERAR_LISTA,
+            template: $translate('RECUPERAR_LISTA_COMPRA')+' : '+$filter('filterNameJson')(listaRecuperar),
+            cancelText: translations.INCLUIR,
+            okText: translations.SOBREESCRIBIR
+          });
+          confirmPopup.then(function(res) {
+            if(res) {
+             logdata.messageLog('ListaCtrl:showConfirm:SOBREESCRIBIR:'+res);
+             $rootScope.elementosLista = $filter('filter')($rootScope.elementosLista, function(value, index) {return value.nombreLista !== 'LISTA_COMPRA';});
+             angular.forEach(elementosListaRecuperada, function(item) {
+                 $rootScope.elementosLista.push(item);
+             });
+            }else{
+             logdata.messageLog('ListaCtrl:showConfirm:INCLUIR:'+res);
+             angular.forEach(elementosListaRecuperada, function(item) {
+               var busqueda = $filter('filter')($rootScope.elementosLista, {"nombreElemento":item.nombreElemento,"nombreLista":'LISTA_COMPRA'}, true);
+               if(busqueda.length>0){
+                 logdata.messageLog('ListaCtrl:recuperarListaFavorita:Ya existe, incrementamos la cantidad');
+                 var cantidadActual = busqueda[0].cantidadElemento;
+                 busqueda[0].cantidadElemento=cantidadActual+item.cantidadElemento;
+               }else{
+                 logdata.messageLog('ListaCtrl:changeLista:No existe, se crea');
+                 $rootScope.elementosLista.push(item);
+               }
+             });
+            }
+            LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
+            $scope.modalRetrieveList.hide();
+            Spinner.hide();
+            $ionicPopup.alert({
+              title: 'AVISO',
+              template: 'Lista de la compra recuperada'
+            });
+          });
         });
-        confirmPopup.then(function(res) {
-          if(res) {
-           logdata.messageLog('ListaCtrl:showConfirm:SOBREESCRIBIR:'+res);
-           $rootScope.elementosLista = $filter('filter')($rootScope.elementosLista, function(value, index) {return value.nombreLista !== 'LISTA_COMPRA';});
-           angular.forEach(elementosListaRecuperada, function(item) {
-               $rootScope.elementosLista.push(item);
-           });
-          }else{
-           logdata.messageLog('ListaCtrl:showConfirm:INCLUIR:'+res);
-           angular.forEach(elementosListaRecuperada, function(item) {
-             var busqueda = $filter('filter')($rootScope.elementosLista, {"nombreElemento":item.nombreElemento,"nombreLista":'LISTA_COMPRA'}, true);
-             if(busqueda.length>0){
-               logdata.messageLog('ListaCtrl:recuperarListaFavorita:Ya existe, incrementamos la cantidad');
-               var cantidadActual = busqueda[0].cantidadElemento;
-               busqueda[0].cantidadElemento=cantidadActual+item.cantidadElemento;
-             }else{
-               logdata.messageLog('ListaCtrl:changeLista:No existe, se crea');
-               $rootScope.elementosLista.push(item);
-             }
-           });
-          }
-          LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
-          $scope.modalRetrieveList.hide();
+      }else{
+        $scope.modalRetrieveList.hide();
+        Spinner.hide();
+        $ionicPopup.alert({
+          title: 'ERROR',
+          template: 'Lista de la compra no recuperada'
         });
-      });
+      }
     });
   }
 });
