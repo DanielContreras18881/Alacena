@@ -8,13 +8,24 @@ angular.module('alacena.controllers', [])
 /**
 * Controlador del menú
 */
-.controller('MenuCtrl', function(LocalStorage,$rootScope,$scope,logdata,$cordovaOauth) {
+.controller('MenuCtrl', function(LocalStorage,$rootScope,$scope,logdata,googleServices,$ionicPopup,jsonFactory) {
   $rootScope.authorized = false;
-
+  jsonFactory.getConfigData(function(data){
+    $rootScope.configData = data;
+    if($rootScope.configData.access_token!==null && $rootScope.configData.access_token!==undefined){
+      $rootScope.authorized = true;
+      googleServices.userInfo(function(data){
+        if(data!==null){
+          $rootScope.nombreUsuario = data.name;
+          $rootScope.imagenUsuario = data.picture;
+        }
+      });
+    }
+  });
   $rootScope.optionsOpen = false;
   $rootScope.hayFechaUltimoBackup = false;
   var hayFecha = LocalStorage.get('hayFechaUltimoBackup');
-  if(hayFecha!=null && hayFecha!='null' && hayFecha!=undefined){
+  if(hayFecha!==null && hayFecha!=='null' && hayFecha!==undefined){
     $rootScope.hayFechaUltimoBackup = hayFecha;
     $rootScope.fechaUltimoBackup  = LocalStorage.get('fechaUltimoBackup');
   }
@@ -23,27 +34,24 @@ angular.module('alacena.controllers', [])
   */
   $rootScope.reorder = function(){
     $rootScope.showReorder = !$rootScope.showReorder;
-  }
+  };
   /**
   * Función que realiza la autorización con Google
   */
   $scope.authorize = function () {
     logdata.messageLog('GAPI:Inicio');
-    $cordovaOauth.google(
-        "1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com",
-        [
-          'https://www.googleapis.com/auth/drive',
-          'https://www.googleapis.com/auth/contacts.readonly',
-          'https://www.googleapis.com/auth/userinfo.profile'
-        ],
-        {redirect_uri: 'http://localhost/callback/'}
-      ).then(function(result) {
-        logdata.messageLog('GAPI:OK:'+JSON.stringify(result));
-        $rootScope.authorized = true;
-      }, function(error) {
-        logdata.messageLog('GAPI:error:'+error);
+    googleServices.init(function(data){
+      LocalStorage.set('configData',$rootScope.configData);
+      if(data!==null){
+        $rootScope.nombreUsuario = data.name;
+        $rootScope.imagenUsuario = data.picture;
+      }else{
+        $ionicPopup.alert({
+          title: 'ERROR',
+          template: 'No se ha podido hacer login contra Google.<br/>Inténtelo de nuevo más tarde'
+        });
       }
-    );
+    });
     logdata.messageLog('GAPI:Fin');
-  }
+  };
 });

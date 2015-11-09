@@ -1,6 +1,7 @@
 {
   "name": "Alacena",
-  "app_id": "0394949a",
+  "app_id": "0394949a"
+  ],
   "gulpStartupTasks": [
     "sass",
     "watch"

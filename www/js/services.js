@@ -1,9 +1,9 @@
 angular.module('alacena.services', [])
 
 /**
-* Factoría que permite
+* Factoría que permite recuperar los datos de la aplicación
 */
-.factory('jsonFactory',function($http,LocalStorage,logdata){
+.factory('jsonFactory',function($http,LocalStorage,logdata,googleServices){
 
 	var jsonFactory = {};
 
@@ -13,7 +13,7 @@ angular.module('alacena.services', [])
 	jsonFactory.getConfigData = function (callback){
 		$http.get('./json/Configuracion.json').success(function(response) {
 			var datosConfig = response;
-			if(LocalStorage.get('configData')==null){
+			if(LocalStorage.get('configData')===null){
 					logdata.messageLog('Primera instalación');
 					LocalStorage.set('configData',datosConfig);
 					callback(datosConfig);
@@ -32,7 +32,7 @@ angular.module('alacena.services', [])
 	* Recupera los datos de los elementos, si existen en el dispositivo, sino recupera del json de ejemplo
 	*/
 	jsonFactory.getElementData = function (callback){
-		if(LocalStorage.get('elementos')==null){
+		if(LocalStorage.get('elementos')===null){
 			logdata.messageLog('Primera instalación');
 			$http.get('./json/Elementos.json').success(function(response) {
 					LocalStorage.set('elementos',response);
@@ -48,15 +48,18 @@ angular.module('alacena.services', [])
 	* Recupera los datos de las listas, si existen en el dispositivo, sino recupera del json de ejemplo
 	*/
 	jsonFactory.getListData = function (callback){
-		if(LocalStorage.get('listas')==null){
+		if(LocalStorage.get('listas')===null){
 			logdata.messageLog('Primera instalación');
 			$http.get('./json/Listas.json').success(function(response) {
 						LocalStorage.set('listas',response);
+						//googleServices.writeFile('Listas.json',response);
         		callback(response);
     		});
 		}else{
 			logdata.messageLog('Se recuperan las listas');
-			callback(LocalStorage.get('listas'));
+			var data = LocalStorage.get('listas');
+			//googleServices.writeFile('Listas.json',data);
+			callback(data);
 		}
 	};
 
@@ -64,7 +67,7 @@ angular.module('alacena.services', [])
 	* Recupera los datos de los elementos de una lista, si existen en el dispositivo, sino recupera del json de ejemplo
 	*/
 	jsonFactory.getElementListData = function (callback){
-		if(LocalStorage.get('cantidadElementosLista')==null){
+		if(LocalStorage.get('cantidadElementosLista')===null){
 			logdata.messageLog('Primera instalación');
 			$http.get('./json/CantidadElementoLista.json').success(function(response) {
 						LocalStorage.set('cantidadElementosLista',response);
@@ -207,7 +210,7 @@ angular.module('alacena.services', [])
 			}, function (error) {
 				logdata.messageError('favoritas:saveFile:FICHERO NO CREADO:'+JSON.stringify(error));
 		});
-	};
+	}
 	function loadFile(listaRecuperar,callback){
 		logdata.messageLog('favoritas:loadFile:'+$rootScope.dataDirectory+'listasFavoritas/'+listaRecuperar);
 		$cordovaFile.checkFile($rootScope.dataDirectory+'listasFavoritas/',listaRecuperar)
@@ -216,15 +219,15 @@ angular.module('alacena.services', [])
 					.then(function(success){
 						logdata.messageLog('favoritas:loadFile:success');
 						callback(success);
-					}),function(error){
+					},function(error){
 						logdata.messageError('favoritas:loadFile:Lista no recuperada:Ha ocurrido un error:'+JSON.stringify(error));
 						callback(null);
-					}
+					});
 			}, function (error) {
 				logdata.messageError('favoritas:loadFile:Lista no recuperada:No se ha encontrado el fichero:'+JSON.stringify(error));
 				callback(null);
 		});
-	};
+	}
 
 	return{
 		guardarLista: function(listaGuardar,nombreLista){
@@ -360,7 +363,7 @@ angular.module('alacena.services', [])
 					logdata.messageLog('backup:makeBckp:Backup realizado:'+dia);
 					callback(true);
 				});
-			};
+			}
 
 			return{
 				/**
@@ -423,21 +426,25 @@ angular.module('alacena.services', [])
 											.then(function(response){
 												logdata.messageLog('backup:retrieveBckp:name:'+item.name+':success');
 												if(item.name=='Elementos.json'){
+													LocalStorage.put('elementos');
 													LocalStorage.set('elementos',JSON.parse(response));
 												}else if (item.name=='Configuracion.json'){
+													LocalStorage.put('configData');
 													LocalStorage.set('configData',JSON.parse(response));
 												}else if (item.name=='Listas.json'){
+													LocalStorage.put('listas');
 													LocalStorage.set('listas',JSON.parse(response));
 												}else{
 													var cantidadElementosLista = LocalStorage.get('cantidadElementosLista');
 													angular.forEach(JSON.parse(response), function(item) {
 														cantidadElementosLista.push(item);
 													});
+													LocalStorage.put('cantidadElementosLista');
 													LocalStorage.set('cantidadElementosLista',cantidadElementosLista);
 												}
-											}),function(error){
+											},function(error){
 												logdata.messageError('backup:retrieveBckp:name:'+item.name+':Ha ocurrido un error:'+JSON.stringify(error));
-											}
+											});
 									}, function (error) {
 										logdata.messageError('backup:retrieveBckp:Backuo no recuperado:No se ha encontrado el fichero:'+JSON.stringify(error));
 								});
@@ -468,6 +475,6 @@ angular.module('alacena.services', [])
 						callback(null);
 					}
 				}
-			}
+			};
 })
 ;

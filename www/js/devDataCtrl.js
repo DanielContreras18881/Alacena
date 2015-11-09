@@ -4,7 +4,7 @@ angular.module('alacena.devdataController', ['ionic'])
 */
 .controller('DevDataCtrl', function($scope,$rootScope,$cordovaAppVersion,$translate,$cordovaSocialSharing,
                                     $cordovaGlobalization,$cordovaLocalNotification,$cordovaBarcodeScanner,
-                                    $cordovaFile,$ionicPopup,logdata) {
+                                    $cordovaFile,$ionicPopup,logdata,Spinner) {
 
 
   /**
@@ -13,14 +13,14 @@ angular.module('alacena.devdataController', ['ionic'])
   $scope.$watch('$viewContentLoaded', function(){
       Spinner.hide();
   });
-  
+
   $scope.initialize = function(){
     logdata.messageLog('DevDataCtrl:initialize:Inicio');
     $cordovaAppVersion.getVersionNumber().then(function (version) {
       $scope.appVersion = version;
     });
     logdata.messageLog('DevDataCtrl:initialize:Fin');
-  }
+  };
 
   $scope.idioma = function(){
     logdata.messageLog('DevDataCtrl:idioma:inicio');
@@ -43,7 +43,7 @@ angular.module('alacena.devdataController', ['ionic'])
         logdata.messageError('DevDataCtrl:idioma:getPreferredLanguage'+JSON.stringify(error));
     });
     logdata.messageLog('DevDataCtrl:idioma:Fin');
-  }
+  };
 
   $scope.reportarError = function(){
     logdata.messageLog('DevDataCtrl:reportarError:Inicio');
@@ -62,7 +62,7 @@ angular.module('alacena.devdataController', ['ionic'])
           });
     });
     logdata.messageLog('DevDataCtrl:reportarError:Fin');
-  }
+  };
 
   $scope.compartir = function(){
     $cordovaSocialSharing
@@ -72,7 +72,7 @@ angular.module('alacena.devdataController', ['ionic'])
     }, function(err) {
       // An error occured. Show a message to the user
     });
-  }
+  };
 
   $scope.local = function(){
     $cordovaLocalNotification.schedule({
@@ -85,7 +85,7 @@ angular.module('alacena.devdataController', ['ionic'])
     }).then(function (result) {
       // ...
     });
-  }
+  };
 
   $scope.barcode = function(){
     $cordovaBarcodeScanner
@@ -95,6 +95,6 @@ angular.module('alacena.devdataController', ['ionic'])
       }, function(error) {
         // An error occurred
       });
-  }
+  };
 
 });

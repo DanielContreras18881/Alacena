@@ -2,7 +2,7 @@ angular.module('alacena.listasController', ['ionic'])
 /**
 * Controlador de la pantalla de listas
 */
-.controller('ListasCtrl', function($rootScope,$scope,$ionicModal,$ionicListDelegate,jsonFactory,LocalStorage,$filter,logdata,$translate) {
+.controller('ListasCtrl', function($rootScope,$scope,$ionicModal,$ionicListDelegate,jsonFactory,LocalStorage,$filter,logdata,$translate,Spinner) {
 
   /**
   * Cuando termina de cargar los datos en pantalla
@@ -16,23 +16,24 @@ angular.module('alacena.listasController', ['ionic'])
   */
   $scope.initialize = function(){
     logdata.messageLog('ListasCtrl:initialize:Inicio');
-    jsonFactory.getListData(function(data){
-      $rootScope.listas = data;
-      $rootScope.showReorderbutton = $rootScope.listas.length > 2;
-      $rootScope.showReorder = false;
-    });
-
     jsonFactory.getConfigData(function(data){
       $scope.coloresListas = data.configColors;
       $scope.colorDefault = data.colorDefault;
       $scope.colorBotonesDefault = $filter('filter')(data.configColors, {"claseLista":data.colorDefault}, true)[0].botonesEditables;
-    });
 
-    jsonFactory.getElementListData(function(data){
-      $rootScope.elementosLista = data;
+      jsonFactory.getListData(function(data){
+        $rootScope.listas = data;
+        $rootScope.showReorderbutton = $rootScope.listas.length > 2;
+        $rootScope.showReorder = false;
+      });
+
+      jsonFactory.getElementListData(function(data){
+        $rootScope.elementosLista = data;
+      });
+
     });
     logdata.messageLog('ListasCtrl:initialize:Fin');
-  }
+  };
   /**
   * Compartir la lista con alguien
   */

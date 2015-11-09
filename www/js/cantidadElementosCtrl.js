@@ -73,7 +73,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     });
 
     logdata.messageLog('ListaCtrl:initialize:Fin');
-  }
+  };
   /**
   * Muestra una ventana modal para editar un elemento
   */
@@ -113,11 +113,11 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
       logdata.messageLog('ListaCtrl:save:Se transforma la fecha de caducidad');
       element.fechaCaducidad = moment(element.fechaCaducidad).hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
     }
-    if($filter('filter')($rootScope.elementosLista,element).length==0) {
+    if($filter('filter')($rootScope.elementosLista,element).length===0) {
       logdata.messageLog('ElementosCtrl:save:Se comprueba que es nuevo');
       $rootScope.elementosLista.push(element);
-      var listadoElementos = $filter('filter')($rootScope.elementos,{"nombreElemento":element.nombreElemento})
-      if(listadoElementos!==undefined && listadoElementos.length==0) {
+      var listadoElementos = $filter('filter')($rootScope.elementos,{"nombreElemento":element.nombreElemento});
+      if(listadoElementos!==undefined && listadoElementos.length===0) {
         logdata.messageLog('ElementosCtrl:save:Se comprueba que es nuevo en el histórico');
         $rootScope.elementos.push({"nombreElemento":element.nombreElemento});
       }
@@ -174,11 +174,11 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
         "marked":false
       };
       logdata.messageLog('ListaCtrl:changeLista:newElementLista='+newElementLista);
-      var busqueda = $filter('filter')($rootScope.elementosLista, {"nombreElemento":newElementLista.nombreElemento,"nombreLista":newElementLista.nombreLista}, true);
-      if(busqueda.length>0){
+      var busquedaNuevo = $filter('filter')($rootScope.elementosLista, {"nombreElemento":newElementLista.nombreElemento,"nombreLista":newElementLista.nombreLista}, true);
+      if(busquedaNuevo.length>0){
         logdata.messageLog('ListaCtrl:changeLista:Ya existe, incrementamos la cantidad');
-        var cantidadActual = busqueda[0].cantidadElemento;
-        busqueda[0].cantidadElemento=cantidadActual+newElementLista.cantidadElemento;
+        var cantidadActualNuevo = busquedaNuevo[0].cantidadElemento;
+        busquedaNuevo[0].cantidadElemento=cantidadActualNuevo+newElementLista.cantidadElemento;
       }else{
         logdata.messageLog('ElementosCtrl:changeLista:No existe, se crea');
         $rootScope.elementosLista.push(newElementLista);
@@ -232,7 +232,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
       callback();
     }
 
-  }
+  };
   /**
   * Se quita una unidad a un elemento
   */
@@ -262,7 +262,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
         });
       }
     }else{
-      if(item.cantidadMinima==0){
+      if(item.cantidadMinima===0){
         logdata.messageLog('ElementosCtrl:minusElement:No se traslada a la Lista de la Compra');
         $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(item), 1);
       }else{
@@ -343,7 +343,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     }else{
       $scope.newElement.fechaCaducidad = moment().hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
     }
-  }
+  };
   /**
   * Muestra una ventana modal para añadir un elemento
   */
@@ -435,7 +435,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
         }
       });
     });
-  }
+  };
   /**
   * Ventana modal para dar nombre a la lista que guardar
   */
@@ -453,7 +453,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     var listaFavorita = $filter('filter')($rootScope.elementosLista, function(value, index) {return value.nombreLista === 'LISTA_COMPRA';});
     favoritas.guardarLista(listaFavorita,nombreListaFavorita);
     $scope.modalSaveList.hide();
-  }
+  };
   /**
   * Ventana modal para dar nombre de la lista a recuperar
   */
@@ -478,7 +478,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
         });
       }
     });
-  }
+  };
   /**
   * Se recupera una lista de la compra de entre las guardadas
   */
@@ -486,7 +486,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     logdata.messageLog('ListaCtrl:recuperarListaFavorita:'+listaRecuperar);
     Spinner.show();
     favoritas.retrieveList(listaRecuperar,function(data){
-      if(data!=null){
+      if(data!==null){
         var elementosListaRecuperada = JSON.parse(data);
         $translate(['SOBREESCRIBIR','INCLUIR','RECUPERAR_LISTA']).then(function (translations) {
           var confirmPopup = $ionicPopup.confirm({
@@ -534,5 +534,5 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
         });
       }
     });
-  }
+  };
 });

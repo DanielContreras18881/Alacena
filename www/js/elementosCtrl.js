@@ -2,7 +2,7 @@ angular.module('alacena.elementosController', ['ionic'])
 /**
 * Controlador de la pantalla de elementos
 */
-.controller('ElementosCtrl', function($rootScope,$scope,$translate,jsonFactory,LocalStorage,$filter,$ionicPopup,$ionicModal,$ionicListDelegate,$ionicFilterBar,logdata) {
+.controller('ElementosCtrl', function($rootScope,$scope,$translate,jsonFactory,LocalStorage,$filter,$ionicPopup,$ionicModal,$ionicListDelegate,$ionicFilterBar,logdata,Spinner) {
 
   /**
   * Cuando termina de cargar los datos en pantalla
@@ -51,7 +51,7 @@ angular.module('alacena.elementosController', ['ionic'])
       $scope.colorbotonesEditablesDefaultElement = $filter('filter')(data.configColorsElements, {"claseElemento":data.colorDefaultElement}, true)[0].botonesEditables;
     });
     logdata.messageLog('ElementosCtrl:initialize:Fin');
-  }
+  };
   /**
   * Ventana modal que copia un elemento en la lista de la compra
   */
@@ -67,7 +67,7 @@ angular.module('alacena.elementosController', ['ionic'])
     logdata.messageLog('ElementosCtrl:cambioCaducidad');
     $scope.fechaDisabled=!$scope.fechaDisabled;
     $scope.elementoLista.fechaCaducidad = null;
-  }
+  };
   /**
   * Copia el elemento en la lista de la compra del elemento
   */
@@ -188,7 +188,7 @@ angular.module('alacena.elementosController', ['ionic'])
     $rootScope.elementosSinLista = $filter('filter')($rootScope.elementos,
       function(value1, index1) {
         var elementos = $filter('filter')(elementosConCantidad,function(value2, index2) {return (value1.nombreElemento == value2.nombreElemento);});
-        if(elementos.length==0){
+        if(elementos.length===0){
           return value1;
         }
       }
@@ -219,7 +219,7 @@ angular.module('alacena.elementosController', ['ionic'])
   * Se añaden los elementos seleccionados a la lista de la compra
   */
   $scope.addToList = function(){
-    var elementosAIncluir = $filter('filter')($rootScope.elementosSinLista,function(value, index) {return value.marked});
+    var elementosAIncluir = $filter('filter')($rootScope.elementosSinLista,function(value, index) {return value.marked;});
     logdata.messageLog('ElementosCtrl:addToList:elementosAIncluir:'+JSON.stringify(elementosAIncluir));
     angular.forEach(elementosAIncluir, function(item) {
         var nuevoElemento = {

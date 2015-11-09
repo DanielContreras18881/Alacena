@@ -11,15 +11,17 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
                                     'alacena.configController',
                                     'alacena.elementosController',                                                                                                            'alacena.listasController',
                                     'alacena.services',
+                                    'alacena.googleServices',
                                     'alacena.directives',
                                     'alacena.filters'])
 
 /*
 .value('GoogleApp', {
-  apiKey: 'AIzaSyDJjcsyOgQdmlCEI8cJCm0nxtq-e4yqklU',
-  clientId: '1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com',
+  //apiKey: 'AIzaSyDJjcsyOgQdmlCEI8cJCm0nxtq-e4yqklU',
+  apiKey:'2XQfVHpwQv3IinnUufiBsQc2',
+  clientId: 'AlacenaJS',
   scopes: [
-    'https://www.googleapis.com/auth/drive',
+    'https://www.googleapis.com/auth/drive.files',
     'https://www.googleapis.com/auth/contacts.readonly',
     'https://www.googleapis.com/auth/userinfo.profile'
   ]
@@ -42,13 +44,14 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
     hide:function(){
       $ionicLoading.hide();
     }
-  }
+  };
 })
 /**
 * Ejecución de la aplicación
 */
 .run(function($ionicPlatform,$state,$ionicHistory,$ionicPopup,logdata,$rootScope,$cordovaGlobalization,$translate,Spinner) {
-
+  $rootScope.nombreUsuario = '';
+  $rootScope.imagenUsuario = 'img/ionic.png';
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
     Spinner.show();
   });

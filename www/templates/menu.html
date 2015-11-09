@@ -22,9 +22,9 @@
   <ion-side-menu side="left">
     <ion-header-bar class="bar-dark item-user-account item-avatar item item-icon-left">
           <i ng-hide="authorized" class="icon ion-person"></i>
-          <img ng-show="authorized" class="icon" ng-src="img/ionic.png"/>
+          <img ng-show="authorized" class="icon" ng-src="{{imagenUsuario}}"/>
           {{ 'TITULO' | translate }}
-          <p ng-show="authorized" class="fade-in">Nombre usuario</p>
+          <p ng-show="authorized" class="fade-in">{{nombreUsuario}}</p>
     </ion-header-bar>
     <ion-content class="desplazado">
       <ion-list>
