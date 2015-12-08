@@ -9,7 +9,7 @@ angular.module('alacena.googleServices', [])
     $http({
       method: 'GET',
       //url: 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='+$rootScope.configData.access_token
-      url: 'https://www.googleapis.com/drive/v2/about?key=AIzaSyBnmOW1LWo948ho0RtJFolV08Qm87_IBag'
+      url: 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&key=1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com'
     }).then(function successCallback(response) {
         logdata.messageLog('googleServices:init:getUserInfo:OK:'+JSON.stringify(response));
         callback(response.data);

@@ -8,7 +8,7 @@ angular.module('alacena.controllers', [])
 /**
 * Controlador del menú
 */
-.controller('MenuCtrl', function(LocalStorage,$rootScope,$scope,logdata,googleServices,$ionicPopup,jsonFactory,DriveService) {
+.controller('MenuCtrl', function($q,LocalStorage,$rootScope,$scope,logdata,googleServices,$ionicPopup,jsonFactory,DriveService,Drive,GAPI) {
   $rootScope.authorized = false;
   jsonFactory.getConfigData(function(data){
     $rootScope.configData = data;
@@ -29,6 +29,7 @@ angular.module('alacena.controllers', [])
     $rootScope.hayFechaUltimoBackup = hayFecha;
     $rootScope.fechaUltimoBackup  = LocalStorage.get('fechaUltimoBackup');
   }
+  GAPI.init();
   /**
   * Muestra las opciones de reordenación
   */
@@ -40,11 +41,46 @@ angular.module('alacena.controllers', [])
   */
   $scope.authorize = function () {
     logdata.messageLog('GAPI:Inicio');
-    var dataAbaout = DriveService.about.get();
-    logdata.messageLog('GAPI:dataAbaout:'+JSON.stringify(dataAbaout));
+    logdata.messageLog('GAPI:about='+JSON.stringify(
+      Drive.about()
+    ));
+    logdata.messageLog('GAPI:listFiles='+JSON.stringify(
+      Drive.listFiles()
+    ));
+    Drive.insertFiles({title: 'ficheroPrueba.txt', mimeType:'text/plain'}, {});
+    /*
+    var defer = $q.defer();
+    var client_id = "1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com";//web-app
+    var scopes = ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/drive.file', 'https://www.googleapis.com/auth/userinfo.email'];
+
+    Drive.authenticate(client_id, scopes, {redirect_uri: 'http://localhost/callback/'})
+        .then(function (response) {
+          if (response) {
+            console.log("UserInfo: " + JSON.stringify(response));
+            token = response.access_token;
+            gapi.auth.setToken(response);
+            //email= response.authResponse.email;
+            authenticated = true;
+            defer.resolve('authenticated');
+          }
+        },
+        function (error) {
+          console.log("" + error);
+          defer.reject('de-authenticated');
+        });
+    return defer.promise;
+    */
+    /*
+    DriveService.files.insert({title: 'ficheroPrueba.txt', mimeType:'text/plain'});
+    logdata.messageLog('GAPI:'+JSON.stringify(
+      DriveService.files.list({q:"mimeType = 'text/plain' and trashed = false"}, true).data
+    ));
+    */
+    /*
     googleServices.userInfo(function(dataUserInfo){
-      logdata.messageLog('GAPI:dataUserInfo:'+JSON.stringify(dataUserInfo));
+        logdata.messageLog('GAPI:dataUserInfo:'+JSON.stringify(dataUserInfo));
     });
+    */
     /*
     googleServices.init(function(data){
       LocalStorage.set('configData',$rootScope.configData);
