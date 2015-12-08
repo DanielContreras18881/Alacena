@@ -4,7 +4,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 var buscar = '';
-angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.ionic.filter.bar','gapi',
+angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.ionic.filter.bar',
+                                    //'gapi',
+                                    'ngm.ngDrive',
                                     'alacena.devdataController',
                                     'alacena.controllers',
                                     'alacena.cantidadElementosController',
@@ -15,18 +17,16 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
                                     'alacena.directives',
                                     'alacena.filters'])
 
-/*
-.value('GoogleApp', {
-  //apiKey: 'AIzaSyDJjcsyOgQdmlCEI8cJCm0nxtq-e4yqklU',
-  apiKey:'2XQfVHpwQv3IinnUufiBsQc2',
-  clientId: 'AlacenaJS',
-  scopes: [
-    'https://www.googleapis.com/auth/drive.files',
-    'https://www.googleapis.com/auth/contacts.readonly',
-    'https://www.googleapis.com/auth/userinfo.profile'
-  ]
-})
-*/
+.provider('OauthService', ngDrive.Config)
+    .config(function (OauthServiceProvider) {
+        OauthServiceProvider.setScopes('https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/contacts.readonly https://www.googleapis.com/auth/userinfo.profile');
+        OauthServiceProvider.setClientID('1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com');
+        OauthServiceProvider.setTokenRefreshPolicy(ngDrive.TokenRefreshPolicy.PRIOR_TO_EXPIRY);
+        //OauthServiceProvider.setNoAccessTokenPolicy(999);
+        OauthServiceProvider.setImmediateMode(false);
+        //OauthServiceProvider.setTestingRefreshToken(MY_REFRESHTOKEN).
+        //OauthServiceProvider.setTestingClientSecret(MY_CLIENTSECRET)
+    })
 /**
 * Factoría que muestra el spinner de carga
 */
@@ -89,6 +89,8 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
       }
       console.log('app:run:$rootScope.dataDirectory='+$rootScope.dataDirectory);
     } else {
+      console.log('app:run:Navegador');
+      $rootScope.isWebBrowser = true;
       $rootScope.dataDirectory = "";
     }
 

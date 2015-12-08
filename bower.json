@@ -8,6 +8,7 @@
     "ngCordova": "master"
   },
   "dependencies": {
-    "ngGAPI": "https://github.com/christiansmith/ngGAPI.git"
+    "ngGAPI": "https://github.com/christiansmith/ngGAPI.git",
+    "ngDrive": "~0.1.9"
   }
 }

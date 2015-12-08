@@ -8,7 +8,7 @@ angular.module('alacena.controllers', [])
 /**
 * Controlador del menú
 */
-.controller('MenuCtrl', function(LocalStorage,$rootScope,$scope,logdata,googleServices,$ionicPopup,jsonFactory) {
+.controller('MenuCtrl', function(LocalStorage,$rootScope,$scope,logdata,googleServices,$ionicPopup,jsonFactory,DriveService) {
   $rootScope.authorized = false;
   jsonFactory.getConfigData(function(data){
     $rootScope.configData = data;
@@ -29,6 +29,12 @@ angular.module('alacena.controllers', [])
     $rootScope.hayFechaUltimoBackup = hayFecha;
     $rootScope.fechaUltimoBackup  = LocalStorage.get('fechaUltimoBackup');
   }
+  var ficheros = DriveService.files.list({
+                q: 'trashed = false',
+                maxResults: 10,
+                fields: 'items/title'
+            }, true).data;
+  logdata.messageLog('PRUEBADRIVE:'+JSON.stringify(ficheros));
   /**
   * Muestra las opciones de reordenación
   */
