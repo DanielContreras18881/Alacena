@@ -29,8 +29,6 @@ angular.module('alacena.controllers', [])
     $rootScope.hayFechaUltimoBackup = hayFecha;
     $rootScope.fechaUltimoBackup  = LocalStorage.get('fechaUltimoBackup');
   }
-  var ficheros = DriveService.about.get({}, true).data;
-  logdata.messageLog('PRUEBADRIVE:'+JSON.stringify(ficheros));
   /**
   * Muestra las opciones de reordenación
   */
@@ -42,6 +40,9 @@ angular.module('alacena.controllers', [])
   */
   $scope.authorize = function () {
     logdata.messageLog('GAPI:Inicio');
+    var datos = DriveService.about.get().data;
+    logdata.messageLog(JSON.stringify(datos));
+    /*
     googleServices.init(function(data){
       LocalStorage.set('configData',$rootScope.configData);
       if(data!==null){
@@ -54,6 +55,7 @@ angular.module('alacena.controllers', [])
         });
       }
     });
+    */
     logdata.messageLog('GAPI:Fin');
   };
 });
