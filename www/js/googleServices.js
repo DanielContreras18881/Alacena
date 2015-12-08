@@ -8,7 +8,8 @@ angular.module('alacena.googleServices', [])
   function getUserInfo(callback){
     $http({
       method: 'GET',
-      url: 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='+$rootScope.configData.access_token
+      //url: 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='+$rootScope.configData.access_token
+      url: 'https://www.googleapis.com/drive/v2/about?key=AIzaSyBnmOW1LWo948ho0RtJFolV08Qm87_IBag'
     }).then(function successCallback(response) {
         logdata.messageLog('googleServices:init:getUserInfo:OK:'+JSON.stringify(response));
         callback(response.data);

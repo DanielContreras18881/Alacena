@@ -40,8 +40,11 @@ angular.module('alacena.controllers', [])
   */
   $scope.authorize = function () {
     logdata.messageLog('GAPI:Inicio');
-    var datos = DriveService.about.get().data;
-    logdata.messageLog(JSON.stringify(datos));
+    var dataAbaout = DriveService.about.get();
+    logdata.messageLog('GAPI:dataAbaout:'+JSON.stringify(dataAbaout));
+    googleServices.userInfo(function(dataUserInfo){
+      logdata.messageLog('GAPI:dataUserInfo:'+JSON.stringify(dataUserInfo));
+    });
     /*
     googleServices.init(function(data){
       LocalStorage.set('configData',$rootScope.configData);

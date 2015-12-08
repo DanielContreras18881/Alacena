@@ -19,13 +19,10 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
 
 .provider('OauthService', ngDrive.Config)
     .config(function (OauthServiceProvider) {
-        OauthServiceProvider.setScopes('https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/drive.appdata https://www.googleapis.com/auth/drive.metadata https://www.googleapis.com/auth/drive.photos.readonly');
+        OauthServiceProvider.setScopes('https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/drive.appdata https://www.googleapis.com/auth/drive.metadata https://www.googleapis.com/auth/drive.photos.readonly https://www.googleapis.com/auth/userinfo.profile');
         OauthServiceProvider.setClientID('1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com');
         OauthServiceProvider.setTokenRefreshPolicy(ngDrive.TokenRefreshPolicy.PRIOR_TO_EXPIRY);
-        //OauthServiceProvider.setNoAccessTokenPolicy(999);
-        OauthServiceProvider.setImmediateMode(false);
-        //OauthServiceProvider.setTestingRefreshToken(MY_REFRESHTOKEN)
-        //OauthServiceProvider.setTestingClientSecret(MY_CLIENTSECRET)
+        OauthServiceProvider.setImmediateMode(true);
     })
 /**
 * Factoría que muestra el spinner de carga
