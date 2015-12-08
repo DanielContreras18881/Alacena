@@ -24,7 +24,7 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
         OauthServiceProvider.setTokenRefreshPolicy(ngDrive.TokenRefreshPolicy.PRIOR_TO_EXPIRY);
         //OauthServiceProvider.setNoAccessTokenPolicy(999);
         OauthServiceProvider.setImmediateMode(false);
-        //OauthServiceProvider.setTestingRefreshToken(MY_REFRESHTOKEN).
+        //OauthServiceProvider.setTestingRefreshToken(MY_REFRESHTOKEN)
         //OauthServiceProvider.setTestingClientSecret(MY_CLIENTSECRET)
     })
 /**

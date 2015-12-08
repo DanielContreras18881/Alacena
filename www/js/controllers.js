@@ -29,11 +29,7 @@ angular.module('alacena.controllers', [])
     $rootScope.hayFechaUltimoBackup = hayFecha;
     $rootScope.fechaUltimoBackup  = LocalStorage.get('fechaUltimoBackup');
   }
-  var ficheros = DriveService.files.list({
-                q: 'trashed = false',
-                maxResults: 10,
-                fields: 'items/title'
-            }, true).data;
+  var ficheros = DriveService.about.get({}, true).data;
   logdata.messageLog('PRUEBADRIVE:'+JSON.stringify(ficheros));
   /**
   * Muestra las opciones de reordenación
