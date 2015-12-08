@@ -79,13 +79,12 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
     }
 
     if (window.cordova) {
-      console.log(JSON.stringify(cordova.file));
+      console.log(JSON.stringify(cordova));
       if (ionic.Platform.isAndroid()) {
         $rootScope.dataDirectory = cordova.file.externalDataDirectory;
       }else if (ionic.Platform.isIOS()) {
         $rootScope.dataDirectory = cordova.file.documentsDirectory;
       }else{
-        $rootScope.dataTemp = JSON.stringify(cordova.file);
         $rootScope.dataDirectory = cordova.file.dataDirectory;
       }
       console.log('app:run:$rootScope.dataDirectory='+$rootScope.dataDirectory);
