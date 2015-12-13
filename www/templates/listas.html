@@ -21,5 +21,5 @@
       </ion-item>
     </ion-list>
   </ion-content>
-  <button ng-if="!optionsOpen" class="button button-float" ng-click="addItem()"><i class="icon ion-plus"></i></button>
+  <button ng-if="!optionsOpen" class="button button-float" ng-class="{'button-web': isWebBrowser}" ng-click="addItem()"><i class="icon ion-plus"></i></button>
 </ion-view>

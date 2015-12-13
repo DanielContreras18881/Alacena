@@ -2,7 +2,10 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
 /**
 * Controlador de la pantalla de lista de elementos
 */
-.controller('ListaCtrl', function($rootScope,$scope,$stateParams,$ionicModal,$ionicListDelegate,jsonFactory,LocalStorage,$filter,$ionicPopup,$ionicFilterBar,logdata,$translate,favoritas,Spinner) {
+.controller('ListaCtrl', function($rootScope,$scope,$stateParams,$filter,$translate,
+                                  $ionicModal,$ionicListDelegate,$ionicPopup,$ionicFilterBar,
+                                  jsonFactory,LocalStorage,logdata,
+                                  favoritas,Spinner) {
 
   /**
   * Cuando termina de cargar los datos en pantalla
@@ -74,6 +77,12 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
 
     logdata.messageLog('ListaCtrl:initialize:Fin');
   };
+  /**
+  * Se cierran los botones de operación
+  */
+  $scope.closeBotons = function(){
+    $ionicListDelegate.closeOptionButtons();
+  }
   /**
   * Muestra una ventana modal para editar un elemento
   */
@@ -158,6 +167,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   */
   $scope.changeLista = function(lista){
     logdata.messageLog('ListaCtrl:changeLista:'+lista);
+    var listaAnterior = $scope.elementoLista.nombreLista;
     if($scope.elementoLista.nombreLista==='LISTA_COMPRA'){
       logdata.messageLog('ListaCtrl:changeLista:Si se viene de Lista de la Compra se crea nuevo elemento');
       var newElementLista = {
@@ -199,6 +209,13 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
           $scope.elementoLista.fechaCaducidad = null;
           $scope.elementoLista.caduca = false;
         }
+        $rootScope.elementosLista.push($scope.elementoLista);
+      }
+      var busquedaAnterior = $filter('filter')($rootScope.elementosLista, {"nombreElemento":$scope.elementoLista.nombreElemento,"nombreLista":listaAnterior}, true);
+      if(busquedaAnterior[0].cantidadElemento === $scope.elementoLista.cantidadElemento){
+        $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(busquedaAnterior[0]), 1);
+      }else{
+        busquedaAnterior[0].cantidadElemento=busquedaAnterior[0].cantidadElemento-$scope.elementoLista.cantidadElemento;
       }
     }
     LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
@@ -302,7 +319,19 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   */
   $scope.moveTo = function(item) {
     logdata.messageLog('ListaCtrl:moveTo:'+JSON.stringify(item));
-    $scope.elementoLista = item;
+    $scope.elementoLista = {
+      "nombreElemento":item.nombreElemento,
+      "colorElemento":item.colorElemento,
+      "colorBotones":item.colorBotones,
+      "colorElementoNoCaducado":item.colorElementoNoCaducado,
+      "colorBotonesNoCaducado":item.colorBotonesNoCaducado,
+      "nombreLista":item.nombreLista,
+      "cantidadElemento":item.cantidadElemento,
+      "caduca":item.caduca,
+      "fechaCaducidad":item.fechaCaducidad,
+      "cantidadMinima":item.cantidadMinima,
+      "marked":item.marked
+    };
     var listasFiltradas = $filter('filtrarQuitarLista')($rootScope.listas,$scope.nombreLista);
     $scope.nuevoNombreLista = listasFiltradas[0].nombreLista;
     $scope.fechaDisabled = !item.caduca;
@@ -511,7 +540,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
                  var cantidadActual = busqueda[0].cantidadElemento;
                  busqueda[0].cantidadElemento=cantidadActual+item.cantidadElemento;
                }else{
-                 logdata.messageLog('ListaCtrl:changeLista:No existe, se crea');
+                 logdata.messageLog('ListaCtrl:recuperarListaFavorita:No existe, se crea');
                  $rootScope.elementosLista.push(item);
                }
              });

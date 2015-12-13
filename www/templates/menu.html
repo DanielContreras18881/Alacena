@@ -43,17 +43,18 @@
         <ion-item class="item-dark" ng-if="hayFechaUltimoBackup">
           <p class="fade-in backupColor">{{ fechaUltimoBackup | filterDateBckp }}</p>
         </ion-item>
+        <ion-item class="item-dark" ng-click="hacerBackup()" ng-controller="ConfigCtrl">
+          <i class="icon ion-archive"></i>&nbsp;&nbsp;Hacer Backup
+        </ion-item>
+        <ion-item class="item-dark" ng-click="recuperarListaBackups()" ng-controller="ConfigCtrl">
+          <i class="icon ion-filing"></i>&nbsp;&nbsp;Recuperar Backup
+        </ion-item>
+        <!--
         <ion-item class="item-dark" ng-hide="configData.googleLogin" ng-click="authorize()">
           <i class="icon"><img ng-src="img/google.png"></i>
         </ion-item>
+        -->
       </ion-list>
-    <!--
-    <ion-list>
-      <ion-item class="{{lista.colorLista}}" ng-repeat="lista in listas" href="#/app/listas/{{lista.nombreLista}}">
-        {{lista.nombreLista}}
-      </ion-item>
-    </ion-list>
-    -->
     </ion-content>
   </ion-side-menu>
 </ion-side-menus>

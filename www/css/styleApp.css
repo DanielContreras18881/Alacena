@@ -44,7 +44,10 @@ button.ion-arrow-swap.light.sinBordes{
   transition: 0.2s linear !important;
   -webkit-transition-property: -webkit-transform, all !important;
   transition-property: transform, all !important;
+}
 
+.button.button-float.button-web{
+	bottom: 5px !important;
 }
 
 .badge.badge-royal{

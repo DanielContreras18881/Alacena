@@ -23,7 +23,7 @@
             <i class="ion-plus-circled icono-size {{elementoLista.colorBotones}}" ng-click="plusElement(elementoLista)"></i>
           </p>
   				<span ng-show="{{elementoLista.caduca}}" class="item-note"><p>{{elementoLista.fechaCaducidad |filterDate:elementoLista}}</p></span>
-          <ion-option-button class="ion-close-circled icono-option-size {{elementoLista.colorBotones}}"
+          <ion-option-button class="ion-trash-a icono-option-size {{elementoLista.colorBotones}}"
                              ng-click="onItemDelete(elementoLista)">
           </ion-option-button>
           <ion-option-button class="ion-edit icono-option-size {{elementoLista.colorBotones}}"
@@ -31,6 +31,9 @@
           </ion-option-button>
           <ion-option-button  ng-show="{{listaEditable}}"class="ion-shuffle icono-option-size {{elementoLista.colorBotones}}"
                              ng-click="moveTo(elementoLista)">
+          </ion-option-button>
+          <ion-option-button class="ion-close-circled icono-option-size {{elementoLista.colorBotones}}"
+                             ng-click="closeBotons()">
           </ion-option-button>
           <ion-reorder-button class="ion-navicon" on-reorder="moveItem(elementoLista, $fromIndex, $toIndex)"></ion-reorder-button>
       </ion-item>
@@ -50,5 +53,5 @@
       </ion-item>
     </ion-list>
   </ion-content>
-  <button ng-if="!optionsOpen" class="button button-float" ng-click="addItem()"><i class="icon ion-plus"></i></button>
+  <button ng-if="!optionsOpen" class="button button-float" ng-class="{'button-web': isWebBrowser}" ng-click="addItem()"><i class="icon ion-plus"></i></button>
 </ion-view>

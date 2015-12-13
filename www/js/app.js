@@ -81,7 +81,7 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
       $rootScope.isWebBrowser = true;
       $rootScope.dataDirectory = "";
     }
-
+    
     if(window.AdMob && !rootScope.isWebBrowser) {
         // Detect platform
         var adMobId = "";

@@ -11,7 +11,7 @@
       <ion-item class="item-dark" ng-repeat="elemento in elementos | orderBy:'nombreElemento' track by $index" class="item-remove-animate"
       ng-click="mostrarListas(elemento.nombreElemento)">
         {{elemento.nombreElemento}}
-          <ion-option-button class="ion-close-circled button-dark icono-option-size"
+          <ion-option-button class="ion-trash-a button-dark icono-option-size"
                              ng-click="onItemDelete(elemento)">
           </ion-option-button>
       </ion-item>
