@@ -3,7 +3,7 @@ angular.module('alacena.googleServices', [])
 /**
 * Factoría que permite
 */
-.factory('googleServices',function($http,logdata,$cordovaOauth,$rootScope){
+.factory('googleServices',function($http,logdata,Drive,GAPI,$rootScope){
 
   function getUserInfo(callback){
     $http({
@@ -22,6 +22,10 @@ angular.module('alacena.googleServices', [])
   var googleServices = {};
 
   googleServices.init = function(callback){
+    GAPI.init();
+    var dataUserDrive = Drive.about();
+    callback(dataUserDrive);
+    /*
     $cordovaOauth.google(
         "1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com",
         [
@@ -42,6 +46,7 @@ angular.module('alacena.googleServices', [])
           callback(null);
         }
     );
+    */
   };
 
   googleServices.userInfo = function(callback){

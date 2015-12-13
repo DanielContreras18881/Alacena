@@ -8,18 +8,12 @@ angular.module('alacena.controllers', [])
 /**
 * Controlador del menú
 */
-.controller('MenuCtrl', function($q,LocalStorage,$rootScope,$scope,logdata,googleServices,$ionicPopup,jsonFactory,DriveService,Drive,GAPI) {
+.controller('MenuCtrl', function($q,LocalStorage,$rootScope,$scope,logdata,googleServices,$ionicPopup,jsonFactory,googleServices) {
   $rootScope.authorized = false;
   jsonFactory.getConfigData(function(data){
     $rootScope.configData = data;
-    if($rootScope.configData.access_token!==null && $rootScope.configData.access_token!==undefined){
-      $rootScope.authorized = true;
-      googleServices.userInfo(function(data){
-        if(data!==null){
-          $rootScope.nombreUsuario = data.name;
-          $rootScope.imagenUsuario = data.picture;
-        }
-      });
+    if($rootScope.configData.googleLogin!==null && $rootScope.configData.googleLogin!==undefined && $rootScope.configData.googleLogin===true){
+      $scope.authorize();
     }
   });
   $rootScope.optionsOpen = false;
@@ -29,7 +23,6 @@ angular.module('alacena.controllers', [])
     $rootScope.hayFechaUltimoBackup = hayFecha;
     $rootScope.fechaUltimoBackup  = LocalStorage.get('fechaUltimoBackup');
   }
-  GAPI.init();
   /**
   * Muestra las opciones de reordenación
   */
@@ -41,6 +34,7 @@ angular.module('alacena.controllers', [])
   */
   $scope.authorize = function () {
     logdata.messageLog('GAPI:Inicio');
+    /*
     logdata.messageLog('GAPI:about='+JSON.stringify(
       Drive.about()
     ));
@@ -48,6 +42,7 @@ angular.module('alacena.controllers', [])
       Drive.listFiles()
     ));
     Drive.insertFiles({title: 'ficheroPrueba.txt', mimeType:'text/plain'}, {});
+    */
     /*
     var defer = $q.defer();
     var client_id = "1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com";//web-app
@@ -81,9 +76,8 @@ angular.module('alacena.controllers', [])
         logdata.messageLog('GAPI:dataUserInfo:'+JSON.stringify(dataUserInfo));
     });
     */
-    /*
     googleServices.init(function(data){
-      LocalStorage.set('configData',$rootScope.configData);
+      logdata.messageLog('GAPI:dataUserInfo:'+JSON.stringify(data));
       if(data!==null){
         $rootScope.nombreUsuario = data.name;
         $rootScope.imagenUsuario = data.picture;
@@ -94,7 +88,7 @@ angular.module('alacena.controllers', [])
         });
       }
     });
-    */
+
     logdata.messageLog('GAPI:Fin');
   };
 });

@@ -6,7 +6,7 @@
 var buscar = '';
 angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.ionic.filter.bar',
                                     'gapi',
-                                    'ngm.ngDrive',
+                                    //'ngm.ngDrive',
                                     'alacena.devdataController',
                                     'alacena.controllers',
                                     'alacena.cantidadElementosController',
@@ -25,24 +25,15 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
       'https://www.googleapis.com/auth/userinfo.profile'
       // ...
     ]})
-
+/*
 .provider('OauthService', ngDrive.Config)
     .config(function (OauthServiceProvider) {
         OauthServiceProvider.setScopes('https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/drive.appdata https://www.googleapis.com/auth/drive.metadata https://www.googleapis.com/auth/drive.photos.readonly https://www.googleapis.com/auth/userinfo.profile');
         OauthServiceProvider.setClientID('1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com');
         OauthServiceProvider.setTokenRefreshPolicy(ngDrive.TokenRefreshPolicy.PRIOR_TO_EXPIRY);
         OauthServiceProvider.setImmediateMode(false);
-        /*
-        OauthServiceProvider.setGetAccessTokenFunction(function getToken(access_token) {
-          $injector = angular.injector(['ng']);
-          q = $injector.get('$q');
-          deferred = q.defer();
-          console.log(access_token);
-          deferred.resolve(access_token);
-          return deferred.promise;
-        });
-        */
     })
+    */
 /**
 * Factoría que muestra el spinner de carga
 */
