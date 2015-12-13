@@ -7,13 +7,13 @@
   <ion-content class="padding">
     <ion-list>
       <ion-item ng-if="!elemento.marked"
-                class="item-dark item-size"
+                class="item item-dark item-size-2" ng-click="markToAdd(elemento)"
                 ng-repeat="elemento in elementosSinLista | orderBy:'nombreElemento' track by $index">
         <i class="icon ion-android-checkbox-outline-blank" ng-model="elemento.marked" ng-click="markToAdd(elemento)"></i>
         <span>{{elemento.nombreElemento}}</span>
       </ion-item>
       <ion-item ng-if="elemento.marked"
-                class="item-dark item-size"
+                class="item item-dark item-size-2" ng-click="markToAdd(elemento)"
                 ng-repeat="elemento in elementosSinLista | orderBy:'nombreElemento' track by $index">
         <i class="icon ion-android-checkbox-outline" ng-model="elemento.marked" ng-click="markToAdd(elemento)"></i>
         <span>{{elemento.nombreElemento}}</span>
