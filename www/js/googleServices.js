@@ -26,10 +26,10 @@ angular.module('alacena.googleServices', [])
       .then(
         function(){
           var dataUserDrive = Drive.about();
-          callback(dataUserDrive);
+          callback(dataUserDrive.user);
         },
         function(){
-          console.log('Something went wrong yes?'); 
+          console.log('Something went wrong yes?');
         }
     );
     /*

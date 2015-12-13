@@ -8,8 +8,7 @@ angular.module('alacena.controllers', [])
 /**
 * Controlador del menú
 */
-.controller('MenuCtrl', function($q,LocalStorage,$rootScope,$scope,logdata,googleServices,$ionicPopup,jsonFactory,googleServices) {
-  $rootScope.authorized = false;
+.controller('MenuCtrl', function($q,LocalStorage,$rootScope,$scope,logdata,googleServices,$ionicPopup,jsonFactory) {
   jsonFactory.getConfigData(function(data){
     $rootScope.configData = data;
     if($rootScope.configData.googleLogin!==null && $rootScope.configData.googleLogin!==undefined && $rootScope.configData.googleLogin===true){
@@ -79,8 +78,10 @@ angular.module('alacena.controllers', [])
     googleServices.init(function(data){
       logdata.messageLog('GAPI:dataUserInfo:'+JSON.stringify(data));
       if(data!==null){
-        $rootScope.nombreUsuario = data.name;
-        $rootScope.imagenUsuario = data.picture;
+        $rootScope.nombreUsuario = data.displayName;
+        $rootScope.imagenUsuario = data.picture.url;
+        $rootScope.configData.googleLogin = true;
+        LocalStorage.set('configData',$rootScope.configData);
       }else{
         $ionicPopup.alert({
           title: 'ERROR',
