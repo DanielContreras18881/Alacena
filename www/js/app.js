@@ -6,7 +6,7 @@
 var buscar = '';
 angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.ionic.filter.bar',
                                     'gapi',
-                                    //'ngm.ngDrive',
+                                    'ngm.ngDrive',
                                     'alacena.devdataController',
                                     'alacena.controllers',
                                     'alacena.cantidadElementosController',
@@ -25,7 +25,7 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
       'https://www.googleapis.com/auth/userinfo.profile'
       // ...
     ]})
-/*
+
 .provider('OauthService', ngDrive.Config)
     .config(function (OauthServiceProvider) {
         OauthServiceProvider.setScopes('https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/drive.appdata https://www.googleapis.com/auth/drive.metadata https://www.googleapis.com/auth/drive.photos.readonly https://www.googleapis.com/auth/userinfo.profile');
@@ -33,7 +33,7 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
         OauthServiceProvider.setTokenRefreshPolicy(ngDrive.TokenRefreshPolicy.PRIOR_TO_EXPIRY);
         OauthServiceProvider.setImmediateMode(false);
     })
-    */
+    
 /**
 * Factoría que muestra el spinner de carga
 */

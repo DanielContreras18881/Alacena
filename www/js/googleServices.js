@@ -8,7 +8,6 @@ angular.module('alacena.googleServices', [])
   function getUserInfo(callback){
     $http({
       method: 'GET',
-      //url: 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='+$rootScope.configData.access_token
       url: 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&key=1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com'
     }).then(function successCallback(response) {
         logdata.messageLog('googleServices:init:getUserInfo:OK:'+JSON.stringify(response));
@@ -22,38 +21,37 @@ angular.module('alacena.googleServices', [])
   var googleServices = {};
 
   googleServices.init = function(callback){
-    GAPI.init()
-      .then(
-        function(){
-          var dataUserDrive = Drive.about();
-          callback(dataUserDrive.user);
-        },
-        function(){
-          console.log('Something went wrong yes?');
-        }
-    );
-    /*
-    $cordovaOauth.google(
-        "1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com",
-        [
-          'https://www.googleapis.com/auth/drive.file',
-          'https://www.googleapis.com/auth/contacts.readonly',
-          'https://www.googleapis.com/auth/userinfo.profile'
-        ],
-        {redirect_uri: 'http://localhost/callback/'}
-      ).then(
-        function(result) {
-          logdata.messageLog('googleServices:init:ok:'+JSON.stringify(result));
-          $rootScope.authorized = true;
-          $rootScope.configData.access_token = result.access_token;
-          getUserInfo(callback);
-        },
-        function(error) {
-          logdata.messageLog('googleServices:init:error:'+JSON.stringify(error));
-          callback(null);
-        }
-    );
-    */
+    if($rootScope.isWebBrowser){
+      GAPI.init()
+        .then(
+          function(){
+            var dataUserDrive = Drive.about();
+            callback(dataUserDrive.user);
+          },
+          function(){
+            console.log('Something went wrong yes?');
+          }
+      );
+    }else{
+      $cordovaOauth.google(
+          "1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com",
+          [
+            'https://www.googleapis.com/auth/drive.file',
+            'https://www.googleapis.com/auth/contacts.readonly',
+            'https://www.googleapis.com/auth/userinfo.profile'
+          ],
+          {redirect_uri: 'http://localhost/callback/'}
+        ).then(
+          function(result) {
+            logdata.messageLog('googleServices:init:ok:'+JSON.stringify(result));
+            getUserInfo(callback);
+          },
+          function(error) {
+            logdata.messageLog('googleServices:init:error:'+JSON.stringify(error));
+            callback(null);
+          }
+      );
+    }
   };
 
   googleServices.userInfo = function(callback){
