@@ -3,7 +3,7 @@ angular.module('alacena.googleServices', [])
 /**
 * Factoría que permite
 */
-.factory('googleServices',function($http,logdata,Drive,GAPI,$rootScope){
+.factory('googleServices',function($http,logdata,Drive,GAPI,$rootScope,$cordovaOauth){
 
   function getUserInfo(callback){
     $http({
@@ -21,6 +21,7 @@ angular.module('alacena.googleServices', [])
   var googleServices = {};
 
   googleServices.init = function(callback){
+
     if($rootScope.isWebBrowser){
       GAPI.init()
         .then(
@@ -52,6 +53,7 @@ angular.module('alacena.googleServices', [])
           }
       );
     }
+
   };
 
   googleServices.userInfo = function(callback){

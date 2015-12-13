@@ -9,6 +9,9 @@
   },
   "dependencies": {
     "ngGAPI": "https://github.com/christiansmith/ngGAPI.git",
-    "ngDrive": "~0.1.9"
+    "ngDrive": "~0.1.9",
+    "auth0-angular": "4.*",
+    "a0-angular-storage": ">= 0.0.12",
+    "angular-jwt": ">= 0.0.9"
   }
 }

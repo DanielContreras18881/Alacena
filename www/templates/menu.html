@@ -43,7 +43,7 @@
         <ion-item class="item-dark" ng-if="hayFechaUltimoBackup">
           <p class="fade-in backupColor">{{ fechaUltimoBackup | filterDateBckp }}</p>
         </ion-item>
-        <ion-item class="item-dark" ng-hide="authorized" ng-click="authorize()">
+        <ion-item class="item-dark" ng-hide="configData.googleLogin" ng-click="authorize()">
           <i class="icon"><img ng-src="img/google.png"></i>
         </ion-item>
       </ion-list>

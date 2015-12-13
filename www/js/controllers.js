@@ -8,7 +8,7 @@ angular.module('alacena.controllers', [])
 /**
 * Controlador del menú
 */
-.controller('MenuCtrl', function($q,LocalStorage,$rootScope,$scope,logdata,googleServices,$ionicPopup,jsonFactory) {
+.controller('MenuCtrl', function(LocalStorage,$rootScope,$scope,logdata,$ionicPopup,jsonFactory,googleServices) {//auth,$state
   jsonFactory.getConfigData(function(data){
     $rootScope.configData = data;
     if($rootScope.configData.googleLogin!==null && $rootScope.configData.googleLogin!==undefined && $rootScope.configData.googleLogin===true){
@@ -33,6 +33,27 @@ angular.module('alacena.controllers', [])
   */
   $scope.authorize = function () {
     logdata.messageLog('GAPI:Inicio');
+/*
+    auth.signin({
+      closable: false,
+      // This asks for the refresh token
+      // So that the user never has to log in again
+      authParams: {
+        scope: 'openid offline_access drive'
+      }
+    }, function(profile, idToken, accessToken, state, refreshToken) {
+      console.log('profile:'+profile);
+      console.log('idToken:'+idToken);
+      console.log('accessToken:'+accessToken);
+      console.log('state:'+state);
+      console.log('refreshToken:'+refreshToken);
+      /*store.set('profile', profile);
+      store.set('token', idToken);
+      store.set('refreshToken', refreshToken);
+      $state.go('/app/listas');
+    }, function(error) {
+      console.log("There was an error logging in", error);
+    });
     /*
     logdata.messageLog('GAPI:about='+JSON.stringify(
       Drive.about()
@@ -75,9 +96,10 @@ angular.module('alacena.controllers', [])
         logdata.messageLog('GAPI:dataUserInfo:'+JSON.stringify(dataUserInfo));
     });
     */
+
     googleServices.init(function(data){
       logdata.messageLog('GAPI:dataUserInfo:'+JSON.stringify(data));
-      if(data!==null){
+      if(data!==null && data!==undefined){
         $rootScope.nombreUsuario = data.displayName;
         $rootScope.imagenUsuario = data.picture.url;
         $rootScope.configData.googleLogin = true;
