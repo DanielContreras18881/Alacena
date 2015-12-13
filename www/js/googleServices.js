@@ -22,9 +22,16 @@ angular.module('alacena.googleServices', [])
   var googleServices = {};
 
   googleServices.init = function(callback){
-    GAPI.init();
-    var dataUserDrive = Drive.about();
-    callback(dataUserDrive);
+    GAPI.init()
+      .then(
+        function(){
+          var dataUserDrive = Drive.about();
+          callback(dataUserDrive);
+        },
+        function(){
+          console.log('Something went wrong yes?'); 
+        }
+    );
     /*
     $cordovaOauth.google(
         "1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com",
