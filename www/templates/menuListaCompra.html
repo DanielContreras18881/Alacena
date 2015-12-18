@@ -1,0 +1,35 @@
+<meta charset="UTF-8">
+<ion-popover-view class="fit">
+    <ion-content>
+      <div class="list">
+        <a class="item item-dark" ng-click="limpiarListaCompra()">
+          <i class="icon ion-trash-a icon-menu"></i>&nbsp;{{ 'Limpiar' | translate }}
+        </a>
+        <a class="item item-dark" ng-click="modalSaveList.show()">
+          <i class="icon ion-star icon-menu"></i>&nbsp;{{ 'Salvar' | translate }}
+        </a>
+        <a class="item item-dark" ng-click="recuperarListasGuardadas()">
+          <i class="icon ion-ios-cart-outline icon-menu"></i>&nbsp;{{ 'Recuperar' | translate }}
+        </a>
+        <a class="item item-dark" ng-click="showFilterBar()">
+          <i class="icon ion-ios-search-strong icon-menu"></i>&nbsp;{{ 'Filtrar' | translate }}
+        </a>
+      </div>
+      <!--
+      <ion-list>
+        <ion-item class="item-dark" ng-click="limpiarListaCompra()">
+          <i class="icon ion-trash-a"></i>&nbsp;{{ 'Limpiar' | translate }}
+        </ion-item>
+        <ion-item class="item-dark" ng-click="modalSaveList.show()">
+          <i class="icon ion-star"></i>&nbsp;{{ 'Salvar' | translate }}
+        </ion-item>
+        <ion-item class="item-dark" ng-click="recuperarListasGuardadas()">
+          <i class="icon ion-ios-cart-outl"></i>&nbsp;{{ 'Recuperar' | translate }}
+        </ion-item>
+        <ion-item class="item-dark" ng-click="showFilterBar()">
+          <i class="icon ion-ios-search-strong"></i>&nbsp;{{ 'Filtrar' | translate }}
+        </ion-item>
+      </ion-list>
+    -->
+    </ion-content>
+</ion-popover-view>

@@ -2,7 +2,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
 /**
 * Controlador de la pantalla de lista de elementos
 */
-.controller('ListaCtrl', function($rootScope,$scope,$stateParams,$filter,$translate,
+.controller('ListaCtrl', function($rootScope,$scope,$stateParams,$filter,$translate,$ionicPopover,
                                   $ionicModal,$ionicListDelegate,$ionicPopup,$ionicFilterBar,
                                   jsonFactory,LocalStorage,logdata,
                                   favoritas,Spinner) {
@@ -13,6 +13,15 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   $scope.$watch('$viewContentLoaded', function(){
       Spinner.hide();
   });
+
+  /**
+  * Para mostrar el menú en la lista de la compra
+  */
+  $ionicPopover.fromTemplateUrl('templates/menuListaCompra.html', {
+      scope: $scope,
+    }).then(function(popover) {
+      $scope.popover = popover;
+    });
 
   var filterBarInstance;
   /**

@@ -2,7 +2,7 @@ angular.module('alacena.listasController', ['ionic'])
 /**
 * Controlador de la pantalla de listas
 */
-.controller('ListasCtrl', function($rootScope,$scope,$ionicModal,$ionicListDelegate,jsonFactory,LocalStorage,$filter,logdata,$translate,Spinner) {
+.controller('ListasCtrl', function($rootScope,$scope,$ionicModal,$ionicPopover,$ionicListDelegate,jsonFactory,LocalStorage,$filter,logdata,$translate,Spinner) {
 
   /**
   * Cuando termina de cargar los datos en pantalla
@@ -10,7 +10,7 @@ angular.module('alacena.listasController', ['ionic'])
   $scope.$watch('$viewContentLoaded', function(){
       Spinner.hide();
   });
-
+  
   /**
   * Inicializa la pantalla de listas
   */

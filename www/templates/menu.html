@@ -6,7 +6,7 @@
       </ion-nav-back-button>
 
       <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        <button ng-hide="isWebBrowser" class="button button-icon button-clear ion-drag" menu-toggle="left">
         </button>
       </ion-nav-buttons>
 
@@ -23,31 +23,34 @@
     <ion-header-bar class="bar-dark item-user-account item-avatar item item-icon-left">
           <i ng-hide="configData.googleLogin" class="icon ion-person"></i>
           <img ng-show="configData.googleLogin" class="icon" ng-src="{{imagenUsuario}}"/>
-          {{ 'TITULO' | translate }}
+          <p class='appTitle'>{{ 'TITULO' | translate }}</p>
           <p ng-show="configData.googleLogin" class="fade-in">{{nombreUsuario}}</p>
     </ion-header-bar>
     <ion-content class="desplazado">
       <ion-list>
         <ion-item class="item-dark" menu-close href="#/app/listas">
-          {{ 'LISTAS' | translate }}
+          <i class="icon ion-document-text"></i>&nbsp;&nbsp;{{ 'LISTAS' | translate }}
         </ion-item>
         <ion-item class="item-dark" menu-close href="#/app/elementos">
-          {{ 'ELEMENTOS' | translate }}
+          <i class="icon ion-pricetags"></i>&nbsp;&nbsp;{{ 'ELEMENTOS' | translate }}
         </ion-item>
         <ion-item class="item-dark" menu-close href="#/app/config">
-          {{ 'CONFIGURACION' | translate }}
-        </ion-item>
-        <ion-item class="item-dark" menu-close href="#/app/devData">
-          {{ 'ACERCA_DE' | translate }}
-        </ion-item>
-        <ion-item class="item-dark" ng-if="hayFechaUltimoBackup">
-          <p class="fade-in backupColor">{{ fechaUltimoBackup | filterDateBckp }}</p>
+          <i class="icon ion-wrench"></i>&nbsp;&nbsp;{{ 'CONFIGURACION' | translate }}
         </ion-item>
         <ion-item class="item-dark" ng-click="hacerBackup()" ng-controller="ConfigCtrl">
           <i class="icon ion-archive"></i>&nbsp;&nbsp;Hacer Backup
         </ion-item>
         <ion-item class="item-dark" ng-click="recuperarListaBackups()" ng-controller="ConfigCtrl">
           <i class="icon ion-filing"></i>&nbsp;&nbsp;Recuperar Backup
+        </ion-item>
+        <ion-item class="item-dark" ng-if="hayFechaUltimoBackup">
+          <i class="icon ion-ion-help-circled"></i>&nbsp;&nbsp;<p class="fade-in backupColor">{{ fechaUltimoBackup | filterDateBckp }}</p>
+        </ion-item>
+        <ion-item class="item-dark" menu-close ng-click="reportarError()" ng-controller="DevDataCtrl">
+          <i class="icon ion-bug"></i>&nbsp;&nbsp;{{ 'REPORTAR_ERROR' | translate }}
+        </ion-item>
+        <ion-item class="item-dark" menu-close href="#/app/devData">
+          <i class="icon ion-information-circled"></i>&nbsp;&nbsp;{{ 'ACERCA_DE' | translate }}
         </ion-item>
         <!--
         <ion-item class="item-dark" ng-hide="configData.googleLogin" ng-click="authorize()">
