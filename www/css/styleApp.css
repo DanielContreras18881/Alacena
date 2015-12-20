@@ -7,6 +7,9 @@ body {
 	position: absolute;
 	background: #ffffff !important;
 }
+.item p.fade-in-config{
+	white-space: normal;
+}
 .menu .bar-header{
 	margin:0px;
 	color: #9F7ACC;
@@ -14,13 +17,14 @@ body {
 .item p.appTitle{
 	margin:0px;
 	color: #9F7ACC;
-	padding: 1em;
+	padding: .5em;
+	top: .25em;
 }
 .item-icon-left .icon{
 	left: .5em;
 	width: 1.5em;
 	height: 1.5em;
-	top: .5em;
+	top: .25em;
 }
 .desplazado {
   top:70px !important;
@@ -140,7 +144,7 @@ ion-popover-view.fit {
   height: auto !important;
 	width: auto !important;
 	top: 2.75em !important;;
-	left: 25em !important;;
+	left: inherit !important;;
 	margin-left: 0px !important;;
 	right: -.5em !important;;
 	margin-top: .4em !important;;

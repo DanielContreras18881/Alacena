@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <meta charset="UTF-8">
 <ion-view view-title="{{ 'CONFIGURACION' | translate }}" ng-init="initialize()">
   <ion-content has-bouncing="false" detect-gestures gesture-type="swiperight">
@@ -24,46 +25,40 @@
 	    </select>
 	  </label>
 -->
-    <label class="item item-toggle">
-       {{ 'PREGUNTA_INCLUIR_LISTA_COMPRA' | translate }}
-       <label class="toggle toggle-balanced">
-         <input type="checkbox" ng-model="configData.askAddListaCompra" ng-checked="configData.askAddListaCompra">
-         <div class="track">
-           <div class="handle"></div>
-         </div>
-       </label>
-    </label>
-    <label class="item item-toggle">
+  <label class="item item-input">
+    <p class="fade-in-config">
+     {{ 'CANTIDAD_MINIMA_DEFECTO' | translate }}
+   </p>
+   <input ng-model="configData.cantidadMinimaDefecto" min="1" type="number"/>
+  </label>
+  <label class="item item-toggle">
+     <p class="fade-in-config">
        {{ 'BORRAR_AL_LLEGAR_0' | translate }}
+     </p>
+     <label class="toggle toggle-balanced">
+       <input type="checkbox" ng-model="configData.deleteAt0" ng-checked="configData.deleteAt0"/>
+       <div class="track">
+         <div class="handle"></div>
+       </div>
+     </label>
+  </label>
+    <label class="item item-toggle">
+       <p class="fade-in-config">
+         {{ 'PREGUNTA_INCLUIR_LISTA_COMPRA' | translate }}
+       </p>
        <label class="toggle toggle-balanced">
-         <input type="checkbox" ng-model="configData.askAddListaCompra" ng-checked="configData.askAddListaCompra">
+         <input type="checkbox" ng-model="configData.askAddListaCompra" ng-checked="configData.askAddListaCompra"/>
          <div class="track">
            <div class="handle"></div>
          </div>
        </label>
     </label>
     <label class="item item-toggle">
-       {{ 'CANTIDAD_MINIMA_DEFECTO' | translate }}
-       <label class="toggle toggle-balanced">
-         <input type="checkbox" ng-model="configData.askAddListaCompra" ng-checked="configData.askAddListaCompra">
-         <div class="track">
-           <div class="handle"></div>
-         </div>
-       </label>
-    </label>
-    <label class="item item-toggle">
-       {{ 'BORRAR_AL_LLEGAR_0' | translate }}
-       <label class="toggle toggle-balanced">
-         <input type="checkbox" ng-model="configData.askAddListaCompra" ng-checked="configData.askAddListaCompra">
-         <div class="track">
-           <div class="handle"></div>
-         </div>
-       </label>
-    </label>
-    <label class="item item-toggle">
+      <p class="fade-in-config">
        {{ 'AVISOS_FECHA_CADUCIDAD' | translate }}
+     </p>
        <label class="toggle toggle-balanced">
-         <input type="checkbox" ng-model="configData.askAddListaCompra" ng-checked="configData.askAddListaCompra">
+         <input type="checkbox" ng-model="configData.expireReminders" ng-checked="configData.expireReminders"/>
          <div class="track">
            <div class="handle"></div>
          </div>
@@ -83,7 +78,9 @@
 
 	  <label class="item item-input item-select">
 	    <div class="input-label">
-	      {{ 'IDIOMA' | translate }}
+        <p class="fade-in-config">
+          {{ 'IDIOMA' | translate }}
+        </p>
 	    </div>
 	    <select ng-model="idiomaSeleccionado"
 	    		ng-options="idioma.id_iso as idioma.idiomaSeleccionado for idioma in configData.idiomas"

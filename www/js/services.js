@@ -191,10 +191,26 @@ angular.module('alacena.services', [])
 			};
 })
 
+
 /**
-*
-*/
+ * factory - description
+ *
+ * @param  {type} 'favoritas'         description
+ * @param  {type} function($rootScope description
+ * @param  {type} $cordovaFile        description
+ * @param  {type} logdata             description
+ * @param  {type} $translate          description
+ * @return {type}                     description
+ */
 .factory('favoritas',function($rootScope,$cordovaFile,logdata,$translate) {
+
+	/**
+	 * saveFile - description
+	 *
+	 * @param  {type} listaGuardar description
+	 * @param  {type} nombreLista  description
+	 * @return {type}              description
+	 */
 	function saveFile(listaGuardar,nombreLista){
 		logdata.messageLog('favoritas:saveFile:'+nombreLista+'-contenido:'+JSON.stringify(listaGuardar));
 		$cordovaFile.createFile($rootScope.dataDirectory+'listasFavoritas/',nombreLista+".json", true)

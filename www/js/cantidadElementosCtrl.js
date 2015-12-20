@@ -130,6 +130,8 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     if(element.caduca){
       logdata.messageLog('ListaCtrl:save:Se transforma la fecha de caducidad');
       element.fechaCaducidad = moment(element.fechaCaducidad).hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
+    }else{
+      element.fechaCaducidad = moment('3015-12-31T22:00:00.000Z').hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
     }
     if($filter('filter')($rootScope.elementosLista,element).length===0) {
       logdata.messageLog('ElementosCtrl:save:Se comprueba que es nuevo');
@@ -313,6 +315,8 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     }
     LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
     $ionicListDelegate.closeOptionButtons();
+    $scope.initialize();
+    $scope.$evalAsync();
   };
   /**
   * Se añade una unidad a un elemento
@@ -322,6 +326,8 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     item.cantidadElemento = ++item.cantidadElemento;
     LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
     $ionicListDelegate.closeOptionButtons();
+    $scope.initialize();
+    $scope.$evalAsync();
   };
   /**
   * Muestra una ventana modal para mover un elemento de una lista a otra
@@ -429,6 +435,8 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(item), 1);
     LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
     $scope.showConfirm(item.nombreElemento);
+    $scope.initialize();
+    $scope.$evalAsync();
   };
   /**
   * Muestra la ventana de confirmación para borrar un elemento
@@ -573,4 +581,17 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
       }
     });
   };
+  /**
+   * Función que crea un recordatorio para la lista
+   */
+  $scope.createReminder = function(){
+
+  };
+/**
+ * Revisar la lógica de comportamiento de los siguientes valores de configuración
+ * expireReminders
+ * cantidadMinimaDefecto
+ * deleteAt0
+ * askAddListaCompra
+ */
 });

@@ -8,9 +8,20 @@ angular.module('alacena.controllers', [])
 /**
 * Controlador del menú
 */
-.controller('MenuCtrl', function(LocalStorage,$rootScope,$scope,logdata,$ionicPopup,jsonFactory,googleServices) {//auth,$state
+.controller('MenuCtrl', function(LocalStorage,$rootScope,$scope,logdata,$ionicPopup,jsonFactory,googleServices,$translate) {//auth,$state
   jsonFactory.getConfigData(function(data){
     $rootScope.configData = data;
+    if(typeof navigator.globalization !== "undefined") {
+        navigator.globalization.getPreferredLanguage(function(language) {
+            console.log('app:run:getPreferredLanguage='+language);
+            $translate.use((language.value).split("-")[0]).then(function(data) {}, function(error) {});
+        }, function(error){
+          logdata.messageError('app:run:getPreferredLanguage:error='+JSON.stringify(error));
+        });
+    }else{
+      console.log('app:run:getPreferredLanguage:navegador=es');
+      $translate.use(($rootScope.configData.idiomaDefault).split("-")[0]).then(function(data) {}, function(error) {});
+    }
     if($rootScope.configData.googleLogin!==null && $rootScope.configData.googleLogin!==undefined && $rootScope.configData.googleLogin===true){
       $scope.authorize();
     }

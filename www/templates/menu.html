@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
 <ion-side-menus enable-menu-with-back-views="false" expose-aside-when="large">
   <ion-side-menu-content edge-drag-threshold="500" drag-content="true">
     <ion-nav-bar class="bar-dark">
@@ -23,7 +25,7 @@
     <ion-header-bar class="bar-dark item-user-account item-avatar item item-icon-left">
           <i ng-hide="configData.googleLogin" class="icon ion-person"></i>
           <img ng-show="configData.googleLogin" class="icon" ng-src="{{imagenUsuario}}"/>
-          <p class='appTitle'>{{ 'TITULO' | translate }}</p>
+          <p class="appTitle">{{ 'TITULO' | translate }}</p>
           <p ng-show="configData.googleLogin" class="fade-in">{{nombreUsuario}}</p>
     </ion-header-bar>
     <ion-content class="desplazado">

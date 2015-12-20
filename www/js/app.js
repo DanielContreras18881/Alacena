@@ -37,6 +37,7 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
 /**
 * Factoría que muestra el spinner de carga
 */
+
 .factory('Spinner', function ($ionicLoading) {
   return{
     show:function(){
@@ -67,7 +68,7 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
   $ionicPlatform.ready(function() {
 
     if (window.cordova) {
-      console.log(JSON.stringify(cordova));
+      //console.log(JSON.stringify(cordova));
       if (ionic.Platform.isAndroid()) {
         $rootScope.dataDirectory = cordova.file.externalDataDirectory;
       }else if (ionic.Platform.isIOS()) {
@@ -196,15 +197,16 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
       loginState: 'login' // This is the name of the state where you'll show the login, which is defined above...
     });
 */
-  $translateProvider.registerAvailableLanguageKeys(['en', 'de', 'fr', 'it','es','ja'], {
+  //$translateProvider.registerAvailableLanguageKeys(['en', 'de', 'fr', 'it','es','ja'], {
+  $translateProvider.registerAvailableLanguageKeys(['en', 'fr', 'it','es'], {
       'en-US': 'en',
       'en-UK': 'en',
-      'de-DE': 'de',
-      'de-CH': 'de',
+      //'de-DE': 'de',
+      //'de-CH': 'de',
       'fr-FR': 'fr',
       'it-IT': 'it',
       'es-ES': 'es',
-      'ja-JP': 'ja',
+      //'ja-JP': 'ja',
   });
 
   $translateProvider.useStaticFilesLoader({
@@ -212,7 +214,7 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
       suffix: '.json'
   });
 
-  $translateProvider.preferredLanguage("es");
+  //$translateProvider.preferredLanguage("es");
   $translateProvider.useSanitizeValueStrategy('escape');
   $translateProvider.fallbackLanguage("es");
 

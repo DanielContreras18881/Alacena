@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <meta charset="UTF-8">
 <ion-modal-view>
   <ion-header-bar class="bar bar-header bar-dark">
@@ -16,7 +17,7 @@
       </label>
       <label ng-hide="elementoListaCompra" class="item item-input">
   		  <span class="input-label">{{ 'CANTIDAD_MINIMA' | translate}}</span>
-  		  <input type="number" min="0" ng-model="newElement.cantidadMinima"></input>
+  		  <input type="number" min="0" ng-model="newElement.cantidadMinima">
   	  </label>
       <label ng-hide="elementoListaCompra" class="item item-toggle">
          {{ 'CADUCA' | translate}}
