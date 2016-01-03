@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-dark">
+    <h1 class="title">{{ 'RECORDATORIO' | translate }}</h1>
+    <button class="button button-clear button-primary ion-close-round" ng-click="modalReminder.hide()"></button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input">
+  		  <span class="input-label">{{ 'MENSAJE' | translate }}</span>
+  		  <input type="text" ng-model="mensajeReminder"/>
+  	  </label>
+      <label class="item item-input">
+        <span class="input-label">{{ 'CUANDO' | translate }}</span>
+        <input ng-model="dateTimeReminder" type="datetime" ng-click="fechaYhora()">
+      </label>
+      <button class="button button-full button-dark ion-archive" ng-click="saveReminder(mensajeReminder)"></button>
+    </div>
+  </ion-content>
+</ion-modal-view>

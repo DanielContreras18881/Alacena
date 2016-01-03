@@ -4,7 +4,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
 */
 .controller('ListaCtrl', function($rootScope,$scope,$stateParams,$filter,$translate,$ionicPopover,
                                   $ionicModal,$ionicListDelegate,$ionicPopup,$ionicFilterBar,
-                                  jsonFactory,LocalStorage,logdata,
+                                  jsonFactory,LocalStorage,logdata,$cordovaLocalNotification,
                                   favoritas,Spinner) {
 
   /**
@@ -634,10 +634,49 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     });
   };
   /**
+  * Ventana modal para crear un recordatorio para una lista
+  */
+  $ionicModal.fromTemplateUrl('templates/reminder.html', {
+    scope: $scope
+  }).then(function(modalReminder) {
+    $scope.modalReminder = modalReminder;
+  });
+  /**
    * Función que crea un recordatorio para la lista
    */
   $scope.createReminder = function(){
       $scope.popover.hide();
+      $scope.dateTimeReminder = moment().toDate();
+      $scope.modalReminder.show();
+  }
+  /**
+   * Función que establece el recordatorio según los datos
+   */
+  $scope.saveReminder = function(mensajeReminder){
       //expireReminders
+      //<input type="datetime">
+      $cordovaLocalNotification.schedule({
+        id: $scope.nombreLista+moment().valueOf(),
+        title: 'Recuerda!',
+        text: mensajeReminder,
+        at: $scope.dateTimeReminder,
+        icon:      'file://img/icon.png',
+        smallIcon: 'file://img/icon.png',
+        //sound: ionic.Platform.isAndroid() ? 'file://sounds/sound.mp3' : 'file://sounds/sound.caf'
+        sound: 'file://sounds/sound.mp3'
+      }).then(function (result) {
+        $scope.modalReminder.hide();
+      });
   };
+  $scope.fechaYhora = function(){
+    datePicker.show({
+        date: moment().toDate(),
+        mode: 'datetime',
+        is24Hour: true
+    }, function(date){
+      $scope.dateTimeReminder = date;
+    }, function(error){
+
+    });
+  }
 });

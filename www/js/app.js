@@ -77,6 +77,12 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
         $rootScope.dataDirectory = cordova.file.dataDirectory;
       }
       console.log('app:run:$rootScope.dataDirectory='+$rootScope.dataDirectory);
+
+      $rootScope.$on('$cordovaLocalNotification:trigger',
+      function (event, notification, state) {
+        //alert(JSON.stringify(notification));
+      });
+
     } else {
       console.log('app:run:Navegador');
       $rootScope.isWebBrowser = true;
