@@ -3,10 +3,13 @@
 <ion-popover-view class="fit">
     <ion-content>
       <div class="list">
+        <a ng-if="nombreLista=='LISTA_COMPRA'" class="item item-dark" ng-click="limpiarMarcados()">
+          <i class="icon ion-android-checkbox-outline icon-menu"></i>&nbsp;{{ 'Limpiar marcados' | translate }}
+        </a>
         <a ng-if="nombreLista=='LISTA_COMPRA'" class="item item-dark" ng-click="limpiarListaCompra()">
           <i class="icon ion-trash-a icon-menu"></i>&nbsp;{{ 'Limpiar' | translate }}
         </a>
-        <a ng-if="nombreLista=='LISTA_COMPRA'" class="item item-dark" ng-click="modalSaveList.show()">
+        <a ng-if="nombreLista=='LISTA_COMPRA'" class="item item-dark" ng-click="modalSaveList.show();popover.hide()">
           <i class="icon ion-star icon-menu"></i>&nbsp;{{ 'Salvar' | translate }}
         </a>
         <a ng-if="nombreLista=='LISTA_COMPRA'" class="item item-dark" ng-click="recuperarListasGuardadas()">

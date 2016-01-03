@@ -28,6 +28,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   * Muestra el filtro de la lista de elementos
   */
   $scope.showFilterBar = function () {
+    $scope.popover.hide();
     $translate(['CANCELAR']).then(function (translations) {
       filterBarInstance = $ionicFilterBar.show({
         cancelText: translations.CANCELAR,
@@ -72,7 +73,11 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
       $scope.coloresElementos = data.configColorsElements;
       $scope.colorDefaultElement = data.colorDefaultElement;
       $scope.colorbotonesEditablesDefaultElement = $filter('filter')(data.configColorsElements, {"claseElemento":data.colorDefaultElement}, true)[0].botonesEditables;
+      logdata.messageLog('ListaCtrl:initialize:ConfigData:'+JSON.stringify(data));
       $scope.askAddListaCompra = data.askAddListaCompra;
+      $scope.deleteAt0 = data.deleteAt0;
+      $scope.cantidadMinimaDefecto = data.cantidadMinimaDefecto;
+      $scope.expireReminders = data.expireReminders;
     });
 
     /**
@@ -89,7 +94,8 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   /**
   * Se cierran los botones de operación
   */
-  $scope.closeBotons = function(){
+  $scope.closeButons = function(){
+    $rootScope.optionsOpen = !$rootScope.optionsOpen;
     $ionicListDelegate.closeOptionButtons();
   }
   /**
@@ -97,6 +103,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   */
   $scope.edit = function(item) {
     logdata.messageLog('ListaCtrl:edit:'+JSON.stringify(item));
+    $rootScope.optionsOpen = !$rootScope.optionsOpen;
     if(item.caduca){
       $scope.fechaDisabled = false;
       item.fechaCaducidad = moment(item.fechaCaducidad).hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
@@ -334,6 +341,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   */
   $scope.moveTo = function(item) {
     logdata.messageLog('ListaCtrl:moveTo:'+JSON.stringify(item));
+    $rootScope.optionsOpen = !$rootScope.optionsOpen;
     $scope.elementoLista = {
       "nombreElemento":item.nombreElemento,
       "colorElemento":item.colorElemento,
@@ -409,10 +417,10 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
         "colorElementoNoCaducado":$scope.colorDefaultElement,
         "colorBotonesNoCaducado":$scope.colorbotonesEditablesDefaultElement,
         "nombreLista":$scope.nombreLista,
-        "cantidadElemento":1,
+        "cantidadElemento":$scope.cantidadMinimaDefecto,
         "caduca":!$scope.fechaDisabled,
         "fechaCaducidad":fechaCaducidadInicial,
-        "cantidadMinima":0,
+        "cantidadMinima":$scope.cantidadMinimaDefecto,
         "marked":false
       };
     });
@@ -435,6 +443,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(item), 1);
     LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
     $scope.showConfirm(item.nombreElemento);
+    $rootScope.optionsOpen = !$rootScope.optionsOpen;
     $scope.initialize();
     $scope.$evalAsync();
   };
@@ -462,10 +471,34 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
    });
   };
   /**
+  * Se limpian los elementos marcados de la lista de la compra
+  */
+  $scope.limpiarMarcados = function(){
+    logdata.messageLog('ListaCtrl:limpiarMarcados');
+    $scope.popover.hide();
+    $translate(['BORRAR','NO','SI']).then(function (translations) {
+      var confirmPopup = $ionicPopup.confirm({
+        title: translations.BORRAR,
+        template: $translate('BORRAR_MARCADOS'),
+        cancelText: translations.NO,
+        okText: translations.SI
+      });
+      confirmPopup.then(function(res) {
+        if(res) {
+         logdata.messageLog('ListaCtrl:showConfirm:confirmado:'+res);
+         $rootScope.elementosLista = $filter('filter')($rootScope.elementosLista, function(value, index) {
+           return (value.nombreLista !== 'LISTA_COMPRA' || value.marked !== true);});
+         LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
+        }
+      });
+    });
+  };
+  /**
   * Se limpia la lista de la compra
   */
   $scope.limpiarListaCompra = function(){
     logdata.messageLog('ListaCtrl:limpiarListaCompra');
+    $scope.popover.hide();
     $translate(['BORRAR','NO','SI']).then(function (translations) {
       var confirmPopup = $ionicPopup.confirm({
         title: translations.BORRAR,
@@ -512,6 +545,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   * Se recupera una lista de listas de la compra guardadas
   */
   $scope.recuperarListasGuardadas = function(){
+    $scope.popover.hide();
     favoritas.retriveListOfLists(function(data){
       logdata.messageLog('ListaCtrl:recuperarListasGuardadas:data:'+JSON.stringify(data));
       if(data!==null && data!== undefined && data.length >0){
@@ -585,12 +619,11 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
    * Función que crea un recordatorio para la lista
    */
   $scope.createReminder = function(){
-
+      $scope.popover.hide();
   };
 /**
  * Revisar la lógica de comportamiento de los siguientes valores de configuración
  * expireReminders
- * cantidadMinimaDefecto
  * deleteAt0
  * askAddListaCompra
  */

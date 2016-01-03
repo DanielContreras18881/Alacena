@@ -49,6 +49,7 @@ angular.module('alacena.elementosController', ['ionic'])
     jsonFactory.getConfigData(function(data){
       $scope.colorDefaultElement = data.colorDefaultElement;
       $scope.colorbotonesEditablesDefaultElement = $filter('filter')(data.configColorsElements, {"claseElemento":data.colorDefaultElement}, true)[0].botonesEditables;
+      $scope.cantidadMinimaDefecto = data.cantidadMinimaDefecto;
     });
     logdata.messageLog('ElementosCtrl:initialize:Fin');
   };
@@ -73,12 +74,6 @@ angular.module('alacena.elementosController', ['ionic'])
   */
   $scope.changeLista = function(){
     logdata.messageLog('ElementosCtrl:changeLista');
-    if($scope.elementoLista.caduca){
-      logdata.messageLog('ElementosCtrl:changeLista:Se transforma la fecha de caducidad');
-      var entrada = moment($scope.elementoLista.fechaCaducidad);
-      var formato = "YYYY-MM-DD";
-      $scope.elementoLista.fechaCaducidad = entrada.format(formato);
-    }
     $rootScope.elementosLista.push($scope.elementoLista);
     LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
     $scope.modalCreateElement.hide();
@@ -134,11 +129,11 @@ angular.module('alacena.elementosController', ['ionic'])
               "colorBotones":$scope.colorbotonesEditablesDefaultElement,
               "colorElementoNoCaducado":$scope.colorDefaultElement,
               "colorBotonesNoCaducado":$scope.colorbotonesEditablesDefaultElement,
-              "nombreLista":$rootScope.listaDeLaCompra,
-              "cantidadElemento":1,
-              "caduca":!$scope.fechaDisabled,
-              "fechaCaducidad":moment().toDate(),
-              "cantidadMinima":0,
+              "nombreLista":'LISTA_COMPRA',
+              "cantidadElemento":$scope.cantidadMinimaDefecto,
+              "caduca":false,
+              "fechaCaducidad":moment('3015-12-31T22:00:00.000Z').hours(0).minutes(0).seconds(0).milliseconds(0).toDate(),
+              "cantidadMinima":$scope.cantidadMinimaDefecto,
               "marked":false
             };
             logdata.messageLog('ElementosCtrl:changeLista:$scope.elementoLista='+JSON.stringify($scope.elementoLista));
@@ -229,10 +224,10 @@ angular.module('alacena.elementosController', ['ionic'])
           "colorElementoNoCaducado":$scope.colorDefaultElement,
           "colorBotonesNoCaducado":$scope.colorbotonesEditablesDefaultElement,
           "nombreLista":'LISTA_COMPRA',
-          "cantidadElemento":1,
+          "cantidadElemento":$scope.cantidadMinimaDefecto,
           "caduca":false,
           "fechaCaducidad":moment('3015-12-31T22:00:00.000Z').hours(0).minutes(0).seconds(0).milliseconds(0).toDate(),
-          "cantidadMinima":0,
+          "cantidadMinima":$scope.cantidadMinimaDefecto,
           "marked":false
         };
         $rootScope.elementosLista.push(nuevoElemento);

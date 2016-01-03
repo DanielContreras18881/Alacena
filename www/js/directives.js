@@ -63,19 +63,19 @@ angular.module('alacena.directives',[])
       var gestureType = attrs.gestureType;
 
 		var onSwipeLeft = function(){
-			  //$ionicSideMenuDelegate.toggleLeft();
-        $rootScope.optionsOpen = !$rootScope.optionsOpen;
         if($ionicSideMenuDelegate.isOpen()){
-			     $ionicSideMenuDelegate.toggleLeft();
+           $ionicSideMenuDelegate.toggleLeft();
+        }
+			  if(!$rootScope.optionsOpen){
+          $rootScope.optionsOpen = !$rootScope.optionsOpen;
         }
         $rootScope.$evalAsync();
 		};
 		var onSwipeRight = function(){
-        if(!$rootScope.optionsOpen){
-          if($ionicSideMenuDelegate.isOpen()){
-             $ionicSideMenuDelegate.toggleLeft();
-          }
-        }else{
+        if($ionicSideMenuDelegate.isOpen()){
+           $ionicSideMenuDelegate.toggleLeft();
+        }
+        if($rootScope.optionsOpen){
           $rootScope.optionsOpen = !$rootScope.optionsOpen;
         }
         $rootScope.$evalAsync();
