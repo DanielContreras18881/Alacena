@@ -1,5 +1,9 @@
 {
 	"ListaDefecto":"Lista de la Compra",
+	"cantidadMinimaDefecto": 1,
+  "askAddListaCompra":true,
+  "expireReminders":true,
+  "deleteAt0":false,	
 	"idiomaDefault":"es",
 	"idiomas":[
 		{

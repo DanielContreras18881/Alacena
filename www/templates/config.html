@@ -29,14 +29,14 @@
     <p class="fade-in-config">
      {{ 'CANTIDAD_MINIMA_DEFECTO' | translate }}
    </p>
-   <input ng-model="configData.cantidadMinimaDefecto" min="1" type="number"/>
+   <input ng-model="configData.cantidadMinimaDefecto" min="1" type="number" ng-change="saveConfig()"/>
   </label>
   <label class="item item-toggle">
      <p class="fade-in-config">
        {{ 'BORRAR_AL_LLEGAR_0' | translate }}
      </p>
      <label class="toggle toggle-balanced">
-       <input type="checkbox" ng-model="configData.deleteAt0" ng-checked="configData.deleteAt0"/>
+       <input type="checkbox" ng-model="configData.deleteAt0" ng-checked="configData.deleteAt0" ng-change="saveConfig()"/>
        <div class="track">
          <div class="handle"></div>
        </div>
@@ -47,7 +47,7 @@
          {{ 'PREGUNTA_INCLUIR_LISTA_COMPRA' | translate }}
        </p>
        <label class="toggle toggle-balanced">
-         <input type="checkbox" ng-model="configData.askAddListaCompra" ng-checked="configData.askAddListaCompra"/>
+         <input type="checkbox" ng-model="configData.askAddListaCompra" ng-checked="configData.askAddListaCompra" ng-change="saveConfig()"/>
          <div class="track">
            <div class="handle"></div>
          </div>
@@ -58,7 +58,7 @@
        {{ 'AVISOS_FECHA_CADUCIDAD' | translate }}
      </p>
        <label class="toggle toggle-balanced">
-         <input type="checkbox" ng-model="configData.expireReminders" ng-checked="configData.expireReminders"/>
+         <input type="checkbox" ng-model="configData.expireReminders" ng-checked="configData.expireReminders" ng-change="saveConfig()"/>
          <div class="track">
            <div class="handle"></div>
          </div>

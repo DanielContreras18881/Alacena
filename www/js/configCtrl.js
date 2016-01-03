@@ -32,6 +32,13 @@ angular.module('alacena.configController', ['ionic'])
     //$scope.nombreLista = $scope.configData.ListaDefecto;
     logdata.messageLog('ConfigCtrl:initialize:Fin');
   };
+  /**
+  * Guarda los cambios realizados en la configuración
+  */
+  $scope.saveConfig = function(){
+    logdata.messageLog('ConfigCtrl:saveConfig');
+    LocalStorage.set('configData',$rootScope.configData);
+  };
     /**
     * Cambiar el color por defecto para las listas
     */

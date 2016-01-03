@@ -273,48 +273,66 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   */
   $scope.minusElement = function(item) {
     logdata.messageLog('ListaCtrl:minusElement:'+JSON.stringify(item));
-    if(item.cantidadElemento>0){
+    var elemento = {
+      "nombreElemento":item.nombreElemento,
+      "colorElemento":item.colorElemento,
+      "colorBotones":item.colorBotones,
+      "colorElementoNoCaducado":item.colorElementoNoCaducado,
+      "colorBotonesNoCaducado":item.colorBotonesNoCaducado,
+      "nombreLista":item.nombreLista,
+      "cantidadElemento":item.cantidadElemento,
+      "caduca":item.caduca,
+      "fechaCaducidad":item.fechaCaducidad,
+      "cantidadMinima":item.cantidadMinima,
+      "marked":item.marked
+    };
+    if(elemento.cantidadElemento>0){
+      elemento.cantidadElemento = --elemento.cantidadElemento;
       item.cantidadElemento = --item.cantidadElemento;
-      if(item.cantidadElemento<item.cantidadMinima){
+      if(elemento.cantidadElemento<elemento.cantidadMinima){
         logdata.messageLog('ListaCtrl:minusElement:Se comprueba que se ha quedado bajo la catidad mínima');
-        $scope.preguntaTraslado(item.nombreElemento,function(){
+        $scope.preguntaTraslado(elemento.nombreElemento,function(){
           logdata.messageLog('ListaCtrl:minusElement:Trasladamos a la Lista de la Compra');
-          $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(item), 1);
+          //$rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(elemento), 1);
           var elementosFiltrados = $filter('filter')($rootScope.elementosLista,
-                {"nombreElemento":item.nombreElemento,"nombreLista":'LISTA_COMPRA'});
+                {"nombreElemento":elemento.nombreElemento,"nombreLista":'LISTA_COMPRA'});
           if(elementosFiltrados.length > 0) {
             logdata.messageLog('ListaCtrl:minusElement:Ya existe, incrementamos la cantidad');
             var cantidadActual = elementosFiltrados[0].cantidadElemento;
             elementosFiltrados[0].cantidadElemento=cantidadActual+elementosFiltrados[0].cantidadMinima;
           }else{
             logdata.messageLog('ElementosCtrl:minusElement:No existe, se crea');
-            $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(item), 1);
-            item.nombreLista='LISTA_COMPRA';
-            item.cantidadElemento = item.cantidadMinima;
-            $rootScope.elementosLista.push(item);
+            //$rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(elemento), 1);
+            elemento.nombreLista='LISTA_COMPRA';
+            elemento.cantidadElemento = elemento.cantidadMinima;
+            $rootScope.elementosLista.push(elemento);
           }
           LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
         });
       }
     }else{
-      if(item.cantidadMinima===0){
+      if(elemento.cantidadMinima===0){
         logdata.messageLog('ElementosCtrl:minusElement:No se traslada a la Lista de la Compra');
-        $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(item), 1);
+        if($scope.deleteAt0){
+          $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(elemento), 1);
+        }
       }else{
-        $scope.preguntaTraslado(item.nombreElemento,function(){
+        $scope.preguntaTraslado(elemento.nombreElemento,function(){
           logdata.messageLog('ListaCtrl:minusElement:Trasladamos a la Lista de la Compra');
-          $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(item), 1);
+          if($scope.deleteAt0){
+            $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(elemento), 1);
+          }
           var elementosFiltrados = $filter('filter')($rootScope.elementosLista,
-                {"nombreElemento":item.nombreElemento,"nombreLista":'LISTA_COMPRA'});
+                {"nombreElemento":elemento.nombreElemento,"nombreLista":'LISTA_COMPRA'});
           if(elementosFiltrados.length > 0) {
             logdata.messageLog('ListaCtrl:minusElement:Ya existe, incrementamos la cantidad');
             var cantidadActual = elementosFiltrados[0].cantidadElemento;
             elementosFiltrados[0].cantidadElemento=cantidadActual+elementosFiltrados[0].cantidadMinima;
           }else{
             logdata.messageLog('ElementosCtrl:minusElement:No existe, se crea');
-            item.nombreLista='LISTA_COMPRA';
-            item.cantidadElemento = item.cantidadMinima;
-            $rootScope.elementosLista.push(item);
+            elemento.nombreLista='LISTA_COMPRA';
+            elemento.cantidadElemento = elemento.cantidadMinima;
+            $rootScope.elementosLista.push(elemento);
           }
           LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
         });
@@ -620,11 +638,6 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
    */
   $scope.createReminder = function(){
       $scope.popover.hide();
+      //expireReminders
   };
-/**
- * Revisar la lógica de comportamiento de los siguientes valores de configuración
- * expireReminders
- * deleteAt0
- * askAddListaCompra
- */
 });
