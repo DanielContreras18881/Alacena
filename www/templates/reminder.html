@@ -12,8 +12,20 @@
   		  <input type="text" ng-model="mensajeReminder"/>
   	  </label>
       <label class="item item-input">
-        <span class="input-label">{{ 'CUANDO' | translate }}</span>
-        <input ng-model="dateTimeReminder" type="datetime" ng-click="fechaYhora()">
+        <span class="input-label">{{ 'FECHA' | translate }}</span>
+        <ionic-datepicker input-obj="datepickerObject">
+          <button class="button button-block datetimeButton button-dark"> {{dateTimeReminder | date:'dd - MMMM - yyyy'}}</button>
+        </ionic-datepicker>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">{{ 'HORA' | translate }}</span>
+        <ionic-timepicker input-obj="timePickerObject">
+          <div id="buttonright">
+            <button class="button button-block datetimeButton button-dark">
+              <standard-time-no-meridian etime="timePickerObject.inputEpochTime"></standard-time-no-meridian>
+            </button>
+          </div>
+        </ionic-timepicker>
       </label>
       <button class="button button-full button-dark ion-archive" ng-click="saveReminder(mensajeReminder)"></button>
     </div>

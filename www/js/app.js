@@ -5,6 +5,7 @@
 // 'starter.controllers' is found in controllers.js
 var buscar = '';
 angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.ionic.filter.bar',
+                                    'ionic-timepicker','ionic-datepicker',
                                     'gapi','ngm.ngDrive',//'auth0','angular-storage','angular-jwt',
                                     'alacena.devdataController',
                                     'alacena.controllers',

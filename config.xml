@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="develop.apps.chony.alacena" version="0.7.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="developapps.chony.alacena" version="0.7.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Alacena</name>
   <description>
         Organiza tu alacena facilmente
@@ -20,13 +20,14 @@
   <preference name="orientation" value="portrait"/>
   <preference name="android-minSdkVersion" value="14"/>
   <preference name="android-targetSdkVersion" value="23"/>
-  <preference name="BackgroundColor" value="#FFFFFF"/>
+  <preference name="BackgroundColor" value="#AAAAAA"/>
+  <preference name="AndroidPersistentFileLocation" value="Compatibility" />
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
   <feature name="InAppBrowser">
-    <param name="ios-package" value="CDVInAppBrowser" />
-    <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    <param name="ios-package" value="CDVInAppBrowser"/>
+    <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser"/>
   </feature>
   <platform name="android">
     <plugin name="File" value="org.apache.cordova.FileUtils"/>

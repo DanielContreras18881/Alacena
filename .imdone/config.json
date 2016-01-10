@@ -39,6 +39,10 @@
     {
       "name": "FIXME",
       "hidden": false
+    },
+    {
+      "name": "XXX",
+      "hidden": false
     }
   ],
   "marked": {

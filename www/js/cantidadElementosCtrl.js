@@ -646,19 +646,72 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
    */
   $scope.createReminder = function(){
       $scope.popover.hide();
-      $scope.dateTimeReminder = moment().toDate();
+      $scope.dateTimeReminder = moment().seconds(0).milliseconds(0).toDate();
       $scope.modalReminder.show();
-  }
+  };
+  /**
+   * Objeto de fecha
+   */
+  $scope.datepickerObject = {
+    titleLabel: 'Selecciona dia',  //Optional
+    todayLabel: 'Today',  //Optional
+    closeLabel: 'Close',  //Optional
+    setLabel: 'Set',  //Optional
+    setButtonType : 'button-dark',  //Optional
+    todayButtonType : 'button-dark',  //Optional
+    closeButtonType : 'button-dark',  //Optional
+    inputDate: $scope.dateTimeReminder,  //Optional
+    mondayFirst: true,  //Optional
+    templateType: 'popup', //Optional
+    showTodayButton: false, //Optional
+    modalHeaderColor: 'bar-dark', //Optional
+    modalFooterColor: 'bar-dark', //Optional
+    callback: function (val) {  //Mandatory
+      if(val!==undefined){
+        var tiempo = moment($scope.dateTimeReminder);
+        $scope.dateTimeReminder = moment(val).hour(tiempo.hour()).minutes(tiempo.minutes()).toDate();
+      }
+    },
+    dateFormat: 'dd-MM-yyyy', //Optional
+    closeOnSelect: true, //Optional
+  };
+  /**
+   * Objeto de tiempo
+   */
+  $scope.timePickerObject = {
+    inputEpochTime: (moment().seconds(0).milliseconds(0).toDate().getHours() * 60 * 60) + (moment().seconds(0).milliseconds(0).toDate().getMinutes() * 60),  //Optional
+    step: 1,  //Optional
+    format: 24,  //Optional
+    titleLabel: 'Selecciona hora',  //Optional
+    setLabel: 'Set',  //Optional
+    closeLabel: 'Close',  //Optional
+    setButtonType: 'button-dark',  //Optional
+    closeButtonType: 'button-dark',  //Optional
+    callback: function (val) {    //Mandatory
+      if(val!==undefined){
+        var tiempo = moment(val * 1000);
+        var horas = tiempo.hour();
+        var minutos = tiempo.minutes();
+        $scope.timePickerObject.inputEpochTime = val;
+        if(horas>0){
+          $scope.dateTimeReminder = moment($scope.dateTimeReminder).hour(horas).toDate();
+        }
+        if(minutos>0){
+          $scope.dateTimeReminder = moment($scope.dateTimeReminder).minutes(minutos).toDate();
+        }
+      }
+    }
+  };
   /**
    * Función que establece el recordatorio según los datos
    */
   $scope.saveReminder = function(mensajeReminder){
+    mensajeReminder = mensajeReminder!==null?mensajeReminder!==undefined?mensajeReminder:"":"";
       //expireReminders
-      //<input type="datetime">
       $cordovaLocalNotification.schedule({
-        id: $scope.nombreLista+moment().valueOf(),
+        id: moment().valueOf(),
         title: 'Recuerda!',
-        text: mensajeReminder,
+        text: $scope.nombreLista+':'+mensajeReminder+'('+$scope.dateTimeReminder+')',
         at: $scope.dateTimeReminder,
         icon:      'file://img/icon.png',
         smallIcon: 'file://img/icon.png',
@@ -668,15 +721,4 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
         $scope.modalReminder.hide();
       });
   };
-  $scope.fechaYhora = function(){
-    datePicker.show({
-        date: moment().toDate(),
-        mode: 'datetime',
-        is24Hour: true
-    }, function(date){
-      $scope.dateTimeReminder = date;
-    }, function(error){
-
-    });
-  }
 });
