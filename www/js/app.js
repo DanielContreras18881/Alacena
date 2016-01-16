@@ -5,7 +5,7 @@
 // 'starter.controllers' is found in controllers.js
 var buscar = '';
 angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.ionic.filter.bar',
-                                    'ionic-timepicker','ionic-datepicker',
+                                    'ionic-timepicker','ionic-datepicker','angular-web-notification',
                                     'gapi','ngm.ngDrive',//'auth0','angular-storage','angular-jwt',
                                     'alacena.devdataController',
                                     'alacena.controllers',
@@ -58,8 +58,20 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
 /**
 * Ejecución de la aplicación
 */
-.run(function($ionicPlatform,$state,$ionicHistory,$ionicPopup,logdata,$rootScope,$cordovaGlobalization,$translate,Spinner) {//,auth
+.run(function($ionicPlatform,$state,$ionicHistory,$ionicPopup,logdata,$rootScope,$cordovaGlobalization,$translate,Spinner,$ionicSideMenuDelegate) {//,auth
   //auth.hookEvents();
+  //
+  document.addEventListener("pause", onPause, false);
+	function onPause() {
+		$rootScope.segundoPlano = true;
+	}
+	document.addEventListener("resume", onResume, false);
+
+	function onResume() {
+		$rootScope.segundoPlano = false;
+	}
+
+  $ionicSideMenuDelegate.canDragContent(true);
   $rootScope.nombreUsuario = '';
   $rootScope.imagenUsuario = 'img/ionic.png';
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
@@ -81,7 +93,29 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
 
       $rootScope.$on('$cordovaLocalNotification:trigger',
       function (event, notification, state) {
-        //alert(JSON.stringify(notification));
+        if(!$rootScope.segundoPlano){
+          $ionicPopup.alert({
+            title: notification.title,
+            template: notification.text
+          });
+        }
+      });
+
+      $rootScope.$on('$cordovaLocalNotification:click',
+      function (event, notification, state) {
+        if(!$rootScope.segundoPlano){
+          $ionicPopup.alert({
+            title: notification.title,
+            template: notification.text
+          });
+        }else{
+          var dataNotification = JSON.parse(notification.data);
+          $state.go('app.lista', {
+            nombreLista: dataNotification.nombreLista,
+            colorLista: dataNotification.colorLista,
+            listaEditable: dataNotification.listaEditable
+          });
+        }
       });
 
     } else {
@@ -223,7 +257,7 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
 
   //$translateProvider.preferredLanguage("es");
   $translateProvider.useSanitizeValueStrategy('escape');
-  $translateProvider.fallbackLanguage("es");
+  //$translateProvider.fallbackLanguage("es");
 
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(file|https?|ftp|mailto|app):/);
   $ionicFilterBarConfigProvider.transition('vertical');

@@ -5,7 +5,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
 .controller('ListaCtrl', function($rootScope,$scope,$stateParams,$filter,$translate,$ionicPopover,
                                   $ionicModal,$ionicListDelegate,$ionicPopup,$ionicFilterBar,
                                   jsonFactory,LocalStorage,logdata,$cordovaLocalNotification,
-                                  favoritas,Spinner) {
+                                  favoritas,Spinner,webNotification,$state) {
 
   /**
   * Cuando termina de cargar los datos en pantalla
@@ -130,6 +130,82 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     $scope.elementoLista.colorBotonesNoCaducado = $scope.elementoLista.colorBotones;
   };
   /**
+   * Establece las notificaciones locales para la decha de caducidad de un elemento
+   */
+  $scope.establishExpireReminders = function(element){
+    if(window.cordova){
+      var objetoCaducidad1 = {
+        id: moment().valueOf(),
+        title: 'Caducidad!',
+        text: element.nombreLista+'\n'+element.nombreElemento+'\n'+'caduca mañana',
+        at: moment(element.fechaCaducidad).add(-1,'days'),
+        sound: 'file://sounds/sound.mp3',
+        data: {
+              nombreLista: $scope.nombreLista,
+              colorLista: $scope.colorLista,
+              listaEditable: $scope.listaEditable
+        }
+      };
+      if(ionic.Platform.isAndroid()){
+        objetoNotificacion.icon = 'file://img/icon.png';
+        objetoNotificacion.smallIcon = '';
+      }
+      var objetoCaducidad3 = objetoCaducidad1;
+      objetoCaducidad3.at = moment(element.fechaCaducidad).add(-3,'days');
+      objetoCaducidad3.text = element.nombreLista+'\n'+element.nombreElemento+'\n'+'caduca en tres días';
+      $cordovaLocalNotification.schedule([objetoCaducidad1,objetoCaducidad3]).then(function (result) {});
+    }else{
+      var milisecondsToCaducidad1 = moment(element.fechaCaducidad).add(-1,'days').subtract(1, 'hour').toDate().getTime() - moment().toDate().getTime();
+      var milisecondsToCaducidad3 = moment(element.fechaCaducidad).add(-3,'days').subtract(1, 'hour').toDate().getTime() - moment().toDate().getTime();
+      setTimeout(function hideNotification() {
+        webNotification.showNotification('Caducidad!', {
+            body: element.nombreLista+'\n'+element.nombreElemento+'\n'+'caduca mañana',
+            icon: '../img/icon.png',
+            onClick: function onNotificationClicked() {
+                $state.go('app.lista', {
+                  nombreLista: $scope.nombreLista,
+                  colorLista: $scope.colorLista,
+                  listaEditable: $scope.listaEditable
+                });
+            },
+            pageVisibility : true,
+            //autoClose: 3000 //auto close the notification after 2 seconds (you manually close it via hide function)
+        }, function onShow(error, hide) {
+            if (error) {
+              alert('Unable to show notification: ' + error.message);
+            } else {
+                setTimeout(function hideNotification() {
+                    hide(); //manually close the notification (or let the autoClose close it)
+                }, 5000);
+            }
+        });
+      }, milisecondsToCaducidad1);
+      setTimeout(function hideNotification() {
+        webNotification.showNotification('Caducidad!', {
+            body: element.nombreLista+'\n'+element.nombreElemento+'\n'+'caduca en tres días',
+            icon: '../img/icon.png',
+            onClick: function onNotificationClicked() {
+                $state.go('app.lista', {
+                  nombreLista: $scope.nombreLista,
+                  colorLista: $scope.colorLista,
+                  listaEditable: $scope.listaEditable
+                });
+            },
+            pageVisibility : true,
+            //autoClose: 3000 //auto close the notification after 2 seconds (you manually close it via hide function)
+        }, function onShow(error, hide) {
+            if (error) {
+              alert('Unable to show notification: ' + error.message);
+            } else {
+                setTimeout(function hideNotification() {
+                    hide(); //manually close the notification (or let the autoClose close it)
+                }, 5000);
+            }
+        });
+      }, milisecondsToCaducidad3);
+    }
+  };
+  /**
   * Guarda un elemento creado o editado
   */
   $scope.save = function(element){
@@ -137,6 +213,9 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     if(element.caduca){
       logdata.messageLog('ListaCtrl:save:Se transforma la fecha de caducidad');
       element.fechaCaducidad = moment(element.fechaCaducidad).hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
+      if($scope.expireReminders){
+        $scope.establishExpireReminders(element);
+      }
     }else{
       element.fechaCaducidad = moment('3015-12-31T22:00:00.000Z').hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
     }
@@ -679,7 +758,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
    * Objeto de tiempo
    */
   $scope.timePickerObject = {
-    inputEpochTime: (moment().seconds(0).milliseconds(0).toDate().getHours() * 60 * 60) + (moment().seconds(0).milliseconds(0).toDate().getMinutes() * 60),  //Optional
+    inputEpochTime: (moment().seconds(0).milliseconds(0).hour() * 60 * 60) + (moment().seconds(0).milliseconds(0).minutes() * 60),  //Optional
     step: 1,  //Optional
     format: 24,  //Optional
     titleLabel: 'Selecciona hora',  //Optional
@@ -691,6 +770,9 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
       if(val!==undefined){
         var tiempo = moment(val * 1000);
         var horas = tiempo.hour();
+        if(ionic.Platform.isAndroid()){
+          horas=horas-1;
+        }
         var minutos = tiempo.minutes();
         $scope.timePickerObject.inputEpochTime = val;
         if(horas>0){
@@ -706,19 +788,54 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
    * Función que establece el recordatorio según los datos
    */
   $scope.saveReminder = function(mensajeReminder){
-    mensajeReminder = mensajeReminder!==null?mensajeReminder!==undefined?mensajeReminder:"":"";
-      //expireReminders
-      $cordovaLocalNotification.schedule({
-        id: moment().valueOf(),
-        title: 'Recuerda!',
-        text: $scope.nombreLista+':'+mensajeReminder+'('+$scope.dateTimeReminder+')',
-        at: $scope.dateTimeReminder,
-        icon:      'file://img/icon.png',
-        smallIcon: 'file://img/icon.png',
-        //sound: ionic.Platform.isAndroid() ? 'file://sounds/sound.mp3' : 'file://sounds/sound.caf'
-        sound: 'file://sounds/sound.mp3'
-      }).then(function (result) {
+    mensajeReminder = mensajeReminder!==null?mensajeReminder!==undefined?':'+mensajeReminder:"":"";
+      if(window.cordova){
+        var objetoNotificacion = {
+          id: moment().valueOf(),
+          title: 'Recuerda!',
+          text: $scope.nombreLista+'\n'+mensajeReminder,
+          at: $scope.dateTimeReminder,
+          sound: 'file://sounds/sound.mp3',
+          data: {
+                nombreLista: $scope.nombreLista,
+                colorLista: $scope.colorLista,
+                listaEditable: $scope.listaEditable
+          }
+        };
+        if(ionic.Platform.isAndroid()){
+          objetoNotificacion.icon = 'file://img/icon.png';
+          objetoNotificacion.smallIcon = '';
+        }
+        $cordovaLocalNotification.schedule(objetoNotificacion).then(function (result) {
+          $scope.modalReminder.hide();
+        });
+      }else{
         $scope.modalReminder.hide();
-      });
+        var milisecondsToNotification = moment($scope.dateTimeReminder).subtract(1, 'hour').toDate().getTime() - moment().toDate().getTime();
+        logdata.messageLog('ListaCtrl:saveReminder:'+milisecondsToNotification);
+        setTimeout(function hideNotification() {
+          webNotification.showNotification('Recuerda!', {
+              body: $scope.nombreLista+'\n'+mensajeReminder,
+              icon: '../img/icon.png',
+              onClick: function onNotificationClicked() {
+                  $state.go('app.lista', {
+                    nombreLista: $scope.nombreLista,
+                    colorLista: $scope.colorLista,
+                    listaEditable: $scope.listaEditable
+                  });
+              },
+              pageVisibility : true,
+              //autoClose: 3000 //auto close the notification after 2 seconds (you manually close it via hide function)
+          }, function onShow(error, hide) {
+              if (error) {
+                alert('Unable to show notification: ' + error.message);
+              } else {
+                  setTimeout(function hideNotification() {
+                      hide(); //manually close the notification (or let the autoClose close it)
+                  }, 5000);
+              }
+          });
+        }, milisecondsToNotification);
+      }
   };
 });
