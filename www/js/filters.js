@@ -153,5 +153,32 @@ angular.module('alacena.filters',[])
     };
 
 })
+/**
+ * Filtra los elementos según el valor facilitado
+ */
+.filter('filtrarElementos', function() {
 
+    return function(arr, searchString) {
+
+        if (!searchString) {
+            return arr;
+        }
+
+        var result = [];
+
+        searchString = searchString.toLowerCase();
+
+        angular.forEach(arr, function(item) {
+          if(item!==null && item!==undefined && item.nombreElemento!==null){
+            if (item.nombreElemento.toLowerCase().indexOf(searchString) > -1) {
+                result.push({id: item.nombreElemento, name: item.nombreElemento, view: item.nombreElemento});
+            }
+          }
+        });
+
+        return result;
+
+    };
+
+})
 ;

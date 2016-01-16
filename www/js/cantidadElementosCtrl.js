@@ -7,6 +7,20 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
                                   jsonFactory,LocalStorage,logdata,$cordovaLocalNotification,
                                   favoritas,Spinner,webNotification,$state) {
 
+  $scope.getElements = function (query) {
+      if (query) {
+          return {
+              items: $filter('filtrarElementos')($rootScope.elementos, query)
+          };
+      }
+      return {items: []};
+  };
+  $scope.itemsClicked = function (callback) {
+      alert('itemsClicked:'+callback);
+  };
+  $scope.itemsRemoved = function (callback) {
+      alert('itemsRemoved:'+callback);
+  };
   /**
   * Cuando termina de cargar los datos en pantalla
   */
@@ -508,7 +522,8 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     }
     $translate(['ELEMENTO_NUEVO']).then(function (translations) {
       $scope.newElement = {
-        "nombreElemento":translations.ELEMENTO_NUEVO,
+        //"nombreElemento":translations.ELEMENTO_NUEVO,
+        "nombreElemento":'',
         "colorElemento":$scope.colorDefaultElement,
         "colorBotones":$scope.colorbotonesEditablesDefaultElement,
         "colorElementoNoCaducado":$scope.colorDefaultElement,

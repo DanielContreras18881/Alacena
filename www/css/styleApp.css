@@ -5,7 +5,7 @@
 
 body {
 	position: absolute;
-	background: #ffffff !important;
+	background: #AAAAAA !important;
 }
 
 .button.button-block.datetimeButton {
@@ -92,6 +92,9 @@ button.ion-arrow-swap.light.sinBordes{
   position: inherit;
 	vertical-align: middle;
 	font-size: 32px;
+}
+input#_value.form-control.form-control-small.inputAutocomplete.ng-valid-maxlength{
+    padding-left: 6em;
 }
 
 input.reset-field {

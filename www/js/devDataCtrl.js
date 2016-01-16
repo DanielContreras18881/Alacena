@@ -52,12 +52,16 @@ angular.module('alacena.devdataController', ['ionic'])
       var formatoDia = 'YYYY_MM_DD';
       var dia = moment().format(formatoDia);
       logdata.messageLog('DevDataCtrl:reportarError:Fichero:'+$rootScope.dataDirectory+"logs/alacena_"+dia+".log");
+      var files = [$rootScope.dataDirectory+"logs/alacena_"+dia+".log"];
+      if(ionic.Platform.isAndroid() && ionic.Platform.version()>=6){
+        files = null;
+      }
       $translate(['MAIL_TEXTO','MAIL_ASUNTO',]).then(function (translations) {
         $cordovaSocialSharing
           .shareViaEmail(translations.MAIL_TEXTO+$scope.appVersion+'\n\n\n',
                         translations.MAIL_ASUNTO,
                         ['develop.apps.chony@gmail.com'],null,null,
-                        [$rootScope.dataDirectory+"logs/alacena_"+dia+".log"])
+                        files)
             .then(function(result) {
                   logdata.messageLog('DevDataCtrl:reportarError:success='+JSON.stringify(result));
             }, function(err) {

@@ -4,8 +4,8 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 var buscar = '';
-angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.ionic.filter.bar',
-                                    'ionic-timepicker','ionic-datepicker','angular-web-notification',
+angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.ionic.filter.bar','angucomplete-alt',
+                                    'ionic-timepicker','ionic-datepicker','angular-web-notification',//'ion-autocomplete',
                                     'gapi','ngm.ngDrive',//'auth0','angular-storage','angular-jwt',
                                     'alacena.devdataController',
                                     'alacena.controllers',
