@@ -29,7 +29,12 @@
     "cordova-plugin-splashscreen",
     "com.ionic.keyboard",
     "org.apache.cordova.inappbrowser",
-    "de.appplant.cordova.plugin.local-notification@0.8.4"
+    "de.appplant.cordova.plugin.local-notification@0.8.4",
+    "cordova-plugin-x-socialsharing",
+    {
+      "locator": "https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git",
+      "id": "nl.x-services.plugins.socialsharing"
+    }
   ],
   "cordovaPlatforms": [
     "ios",

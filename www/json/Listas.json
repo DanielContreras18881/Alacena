@@ -1,1 +1,14 @@
-[{"nombreLista":"LISTA_COMPRA","colorLista":"item-dark item item-complex","colorBotones":"button-dark","listaEditable":false},{"nombreLista":"Nevera","colorLista":"item-positive item item-complex","colorBotones":"button-positive","listaEditable":true},{"nombreLista":"Congelador","colorLista":"item-positive item item-complex","colorBotones":"button-positive","listaEditable":true},{"nombreLista":"Despensa","colorLista":"item-balanced item item-complex","colorBotones":"button-balanced","listaEditable":true},{"nombreLista":"Armarios terraza","colorLista":"item-royal item item-complex","colorBotones":"button-royal","listaEditable":true},{"nombreLista":"Trastero","colorLista":"item-royal item item-complex","colorBotones":"button-royal","listaEditable":true},{"nombreLista":"Armario baño","colorLista":"item-balanced item item-complex","colorBotones":"button-balanced","listaEditable":true}]
+[
+	{
+		"nombreLista":"LISTA_COMPRA",
+		"colorLista":"item-dark item item-complex",
+		"colorBotones":"button-dark",
+		"listaEditable":false
+	},
+	{
+		"nombreLista":"Nevera",
+		"colorLista":"item-calm item item-complex",
+		"colorBotones":"button-calm",
+		"listaEditable":true
+	}
+]

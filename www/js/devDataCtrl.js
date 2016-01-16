@@ -47,19 +47,23 @@ angular.module('alacena.devdataController', ['ionic'])
 
   $scope.reportarError = function(){
     logdata.messageLog('DevDataCtrl:reportarError:Inicio');
-    var formatoDia = 'YYYY_MM_DD';
-    var dia = moment().format(formatoDia);
-    logdata.messageLog('DevDataCtrl:reportarError:Fichero:'+$rootScope.dataDirectory+"logs/alacena_"+dia+".log");
-    $translate(['MAIL_TEXTO','MAIL_ASUNTO',]).then(function (translations) {
-      $cordovaSocialSharing
-        .shareViaEmail(translations.MAIL_TEXTO+$scope.appVersion+'\n\n\n',
-                      translations.MAIL_ASUNTO,
-                      ['develop.apps.chony@gmail.com'],[],[],[$rootScope.dataDirectory+"logs/alacena_"+dia+".log"])
-          .then(function(result) {
-                logdata.messageLog('DevDataCtrl:reportarError:success='+JSON.stringify(result));
-          }, function(err) {
-                logdata.messageError('DevDataCtrl:reportarError:error='+JSON.stringify(err));
-          });
+    $cordovaAppVersion.getVersionNumber().then(function (version) {
+      $scope.appVersion = version;
+      var formatoDia = 'YYYY_MM_DD';
+      var dia = moment().format(formatoDia);
+      logdata.messageLog('DevDataCtrl:reportarError:Fichero:'+$rootScope.dataDirectory+"logs/alacena_"+dia+".log");
+      $translate(['MAIL_TEXTO','MAIL_ASUNTO',]).then(function (translations) {
+        $cordovaSocialSharing
+          .shareViaEmail(translations.MAIL_TEXTO+$scope.appVersion+'\n\n\n',
+                        translations.MAIL_ASUNTO,
+                        ['develop.apps.chony@gmail.com'],null,null,
+                        [$rootScope.dataDirectory+"logs/alacena_"+dia+".log"])
+            .then(function(result) {
+                  logdata.messageLog('DevDataCtrl:reportarError:success='+JSON.stringify(result));
+            }, function(err) {
+                  logdata.messageError('DevDataCtrl:reportarError:error='+JSON.stringify(err));
+            });
+      });
     });
     logdata.messageLog('DevDataCtrl:reportarError:Fin');
   };

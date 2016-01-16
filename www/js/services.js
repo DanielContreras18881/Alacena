@@ -433,6 +433,7 @@ angular.module('alacena.services', [])
 					if($rootScope.dataDirectory!=='' && $rootScope.dataDirectory!==undefined){
 						$cordovaFile.listDir($rootScope.dataDirectory+"backups/",backupRecuperar)
 						.then(function (ficherosBackup) {
+							LocalStorage.put('cantidadElementosLista');
 							angular.forEach(ficherosBackup, function(item) {
 								logdata.messageLog('backup:retrieveBckp:name:'+item.name);
 								logdata.messageLog('backup:retrieveBckp:path:'+$rootScope.dataDirectory+'backups/'+backupRecuperar+'/'+item.name);
@@ -451,11 +452,10 @@ angular.module('alacena.services', [])
 													LocalStorage.put('listas');
 													LocalStorage.set('listas',JSON.parse(response));
 												}else{
-													var cantidadElementosLista = LocalStorage.get('cantidadElementosLista');
+													var cantidadElementosLista = LocalStorage.get('cantidadElementosLista')!==null?LocalStorage.get('cantidadElementosLista'):[];
 													angular.forEach(JSON.parse(response), function(item) {
 														cantidadElementosLista.push(item);
 													});
-													LocalStorage.put('cantidadElementosLista');
 													LocalStorage.set('cantidadElementosLista',cantidadElementosLista);
 												}
 											},function(error){
