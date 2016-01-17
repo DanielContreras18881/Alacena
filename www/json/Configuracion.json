@@ -3,7 +3,7 @@
 	"cantidadMinimaDefecto": 1,
   "askAddListaCompra":true,
   "expireReminders":true,
-  "deleteAt0":false,	
+  "deleteAt0":false,
 	"idiomaDefault":"es",
 	"idiomas":[
 		{
@@ -13,22 +13,6 @@
 		{
 			"id_iso":"en",
 			"idiomaSeleccionado":"English"
-		},
-		{
-			"id_iso":"de",
-			"idiomaSeleccionado":"Deutsch"
-		},
-		{
-			"id_iso":"it",
-			"idiomaSeleccionado":"Italiano"
-		},
-		{
-			"id_iso":"fr",
-			"idiomaSeleccionado":"Français"
-		},
-		{
-			"id_iso":"ja",
-			"idiomaSeleccionado":"Nihonjin"
 		}
 	],
 	"askAddListaCompra":true,

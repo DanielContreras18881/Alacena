@@ -25,14 +25,14 @@ angular.module('alacena.controllers', [])
     if($rootScope.configData.googleLogin!==null && $rootScope.configData.googleLogin!==undefined && $rootScope.configData.googleLogin===true){
       $scope.authorize();
     }
+    $rootScope.optionsOpen = false;
+    $rootScope.hayFechaUltimoBackup = false;
+    var hayFecha = LocalStorage.get('hayFechaUltimoBackup');
+    if(hayFecha!==null && hayFecha!=='null' && hayFecha!==undefined){
+      $rootScope.hayFechaUltimoBackup = hayFecha;
+      $rootScope.fechaUltimoBackup  = LocalStorage.get('fechaUltimoBackup');
+    }
   });
-  $rootScope.optionsOpen = false;
-  $rootScope.hayFechaUltimoBackup = false;
-  var hayFecha = LocalStorage.get('hayFechaUltimoBackup');
-  if(hayFecha!==null && hayFecha!=='null' && hayFecha!==undefined){
-    $rootScope.hayFechaUltimoBackup = hayFecha;
-    $rootScope.fechaUltimoBackup  = LocalStorage.get('fechaUltimoBackup');
-  }
   /**
   * Muestra las opciones de reordenación
   */

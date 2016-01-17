@@ -82,7 +82,7 @@
           {{ 'IDIOMA' | translate }}
         </p>
 	    </div>
-	    <select ng-model="idiomaSeleccionado"
+	    <select ng-model="idiomaSeleccionado" class="inputIdioma"
 	    		ng-options="idioma.id_iso as idioma.idiomaSeleccionado for idioma in configData.idiomas"
 	    		ng-change="changeIdioma(idiomaSeleccionado)">
 	    </select>

@@ -92,17 +92,17 @@ angular.module('alacena.services', [])
              * Guarda en la base de datos del dispositivo el valor asociándolo a la clave
              */
             set: function(key, value) {
-								logdata.messageLog('Guarda:'+JSON.stringify(value));
+								//logdata.messageLog('Guarda:'+JSON.stringify(value));
                 localStorage.setItem(key, JSON.stringify(value));
             },
             /**
              * Recupera de la base de datos del dispositivo el valor asociado a la clave solicitada
              */
             get: function(key) {
-								logdata.messageLog('Recupera:'+key);
+								//logdata.messageLog('Recupera:'+key);
                 var resultado = localStorage.getItem(key);
                 if (resultado !== null && resultado !== 'undefined' && resultado !== undefined) {
-										logdata.messageLog('Recuperado:'+JSON.stringify(resultado));
+										//logdata.messageLog('Recuperado:'+JSON.stringify(resultado));
                     return JSON.parse(resultado);
                 } else {
 										logdata.messageError('No encontrado:'+key);
@@ -113,7 +113,7 @@ angular.module('alacena.services', [])
              * Elimina de la base de datos del dispositivo el valor asociado a la clave indicada
              */
             put: function(key) {
-								logdata.messageLog('Borrado:'+key);
+								//logdata.messageLog('Borrado:'+key);
                 localStorage.removeItem(key);
             }
         };

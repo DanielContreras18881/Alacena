@@ -7,7 +7,10 @@ body {
 	position: absolute;
 	background: #AAAAAA !important;
 }
-
+select.inputIdioma{
+	font-size: .9em;
+	padding: 10px 48px 10px 16px;
+}
 .button.button-block.datetimeButton {
 	margin-top: .1em;
 	margin-bottom: .1em;

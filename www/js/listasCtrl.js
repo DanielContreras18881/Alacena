@@ -10,7 +10,7 @@ angular.module('alacena.listasController', ['ionic'])
   $scope.$watch('$viewContentLoaded', function(){
       Spinner.hide();
   });
-  
+
   /**
   * Inicializa la pantalla de listas
   */
@@ -39,7 +39,6 @@ angular.module('alacena.listasController', ['ionic'])
   */
   $scope.share = function(item) {
     logdata.messageLog('ListaCtrl:share:'+JSON.stringify(item));
-    alert('Share Item: ' + item.nombreLista);
     $ionicListDelegate.closeOptionButtons();
   };
   /**

@@ -17,7 +17,7 @@ angular.module('alacena.elementosController', ['ionic'])
   */
   $scope.showFilterBar = function () {
     filterBarInstance = $ionicFilterBar.show({
-      cancelText: 'Cancelar',
+      cancelText: $translate('CANCELAR'),
       debounce: true,
       delay: 25,
       items: $rootScope.elementos,

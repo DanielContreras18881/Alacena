@@ -40,10 +40,10 @@
           <i class="icon ion-wrench"></i>&nbsp;&nbsp;{{ 'CONFIGURACION' | translate }}
         </ion-item>
         <ion-item class="item-dark" ng-click="hacerBackup()" ng-controller="ConfigCtrl">
-          <i class="icon ion-archive"></i>&nbsp;&nbsp;Hacer Backup
+          <i class="icon ion-archive"></i>&nbsp;&nbsp;{{ 'HACER_BACKUP' | translate }}
         </ion-item>
         <ion-item class="item-dark" ng-click="recuperarListaBackups()" ng-controller="ConfigCtrl">
-          <i class="icon ion-filing"></i>&nbsp;&nbsp;Recuperar Backup
+          <i class="icon ion-filing"></i>&nbsp;&nbsp;{{ 'RECUPERAR_BACKUP' | translate }}
         </ion-item>
         <ion-item class="item-dark" ng-if="hayFechaUltimoBackup">
           <i class="icon ion-ion-help-circled"></i>&nbsp;&nbsp;<p class="fade-in backupColor">{{ fechaUltimoBackup | filterDateBckp }}</p>

@@ -82,17 +82,21 @@ angular.module('alacena.configController', ['ionic'])
           var dia = moment().format(formato);
           $rootScope.fechaUltimoBackup = dia;
           $rootScope.hayFechaUltimoBackup = true;
-          Spinner.hide();
-          $ionicPopup.alert({
-						title: 'EXITO',
-						template: 'Backup realizado correctamente'
-					});
+          $translate(['EXITO','BACKUP_OK',]).then(function (translations) {
+            Spinner.hide();
+            $ionicPopup.alert({
+  						title: translations.EXITO,
+  						template: translations.BACKUP_OK
+  					});
+          });
         }else{
           $rootScope.hayFechaUltimoBackup = false;
-          Spinner.hide();
-          $ionicPopup.alert({
-            title: 'ERROR',
-            template: 'Backup no realizado correctamente'
+          $translate(['ERROR','BACKUP_KO',]).then(function (translations) {
+            Spinner.hide();
+            $ionicPopup.alert({
+              title: translations.ERROR,
+              template: translations.BACKUP_KO
+            });
           });
         }
       });
@@ -124,11 +128,13 @@ angular.module('alacena.configController', ['ionic'])
     $scope.recuperarBackup = function(backupRecuperar){
       logdata.messageLog('ConfigCtrl:recuperarBackup:Se lanza la recuperación del backup de la aplicación');
       logdata.messageLog('ConfigCtrl:recuperarBackup:backup:'+backupRecuperar);
-      var confirmPopup = $ionicPopup.confirm({
-        title: 'Recuperar backup?',
-        template: 'Recuperar el backup '+backupRecuperar+'?',
-        cancelText: 'NO',
-        okText: 'SI'
+      $translate(['PREGUNTA_RECUPERAR_BACKUP','NO','SI']).then(function (translations) {
+        var confirmPopup = $ionicPopup.confirm({
+          title: translations.PREGUNTA_RECUPERAR_BACKUP,
+          template: $translate('PREGUNTA_RECUPERAR_NOMBRE_BACKUP', { nombre:backupRecuperar }),
+          cancelText: translations.NO,
+          okText: translations.SI
+        });
       });
       confirmPopup.then(function(res) {
         if(res) {
@@ -137,14 +143,15 @@ angular.module('alacena.configController', ['ionic'])
             $scope.modalBackupRetrieveList.hide();
             Spinner.hide();
             if(data){
+              $translate('MOVER_PREGUNTA', { nombre:nombre })
               $ionicPopup.alert({
-                title: 'AVISO',
-                template: 'Backup '+backupRecuperar+' recuperado'
+                title: $translate('AVISO'),
+                template: $translate('BACKUP_RECUPERADO', { nombre:backupRecuperar })
               });
             }else{
               $ionicPopup.alert({
-                title: 'ERROR',
-                template: 'Backup '+backupRecuperar+' no recuperado'
+                title: $translate('ERROR'),
+                template: $translate('BACKUP_NO_RECUPERADO', { nombre:backupRecuperar })
               });
             }
           });

@@ -58,7 +58,10 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
 /**
 * Ejecución de la aplicación
 */
-.run(function($ionicPlatform,$state,$ionicHistory,$ionicPopup,logdata,$rootScope,$cordovaGlobalization,$translate,Spinner,$ionicSideMenuDelegate) {//,auth
+.run(function(
+                $ionicPlatform,$state,$ionicHistory,$ionicPopup,
+                logdata,$rootScope,$cordovaGlobalization,$translate,
+                Spinner,$ionicSideMenuDelegate,jsonFactory) {//,auth
   //auth.hookEvents();
   //
   document.addEventListener("pause", onPause, false);
@@ -70,6 +73,21 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
 	function onResume() {
 		$rootScope.segundoPlano = false;
 	}
+
+  jsonFactory.getConfigData(function(data){
+    $rootScope.configData = data;
+    if(typeof navigator.globalization !== "undefined") {
+        navigator.globalization.getPreferredLanguage(function(language) {
+            console.log('app:run:getPreferredLanguage='+language);
+            $translate.use((language.value).split("-")[0]).then(function(data) {}, function(error) {});
+        }, function(error){
+          logdata.messageError('app:run:getPreferredLanguage:error='+JSON.stringify(error));
+        });
+    }else{
+      console.log('app:run:getPreferredLanguage:navegador=es');
+      $translate.use(($rootScope.configData.idiomaDefault).split("-")[0]).then(function(data) {}, function(error) {});
+    }
+  });
 
   $ionicSideMenuDelegate.canDragContent(true);
   $rootScope.nombreUsuario = '';
@@ -239,13 +257,14 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
     });
 */
   //$translateProvider.registerAvailableLanguageKeys(['en', 'de', 'fr', 'it','es','ja'], {
-  $translateProvider.registerAvailableLanguageKeys(['en', 'fr', 'it','es'], {
+  //$translateProvider.registerAvailableLanguageKeys(['en', 'fr', 'it','es'], {
+  $translateProvider.registerAvailableLanguageKeys(['en', 'es'], {
       'en-US': 'en',
       'en-UK': 'en',
       //'de-DE': 'de',
       //'de-CH': 'de',
-      'fr-FR': 'fr',
-      'it-IT': 'it',
+      //'fr-FR': 'fr',
+      //'it-IT': 'it',
       'es-ES': 'es',
       //'ja-JP': 'ja',
   });

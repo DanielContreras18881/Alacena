@@ -4,22 +4,22 @@
     <ion-content>
       <div class="list">
         <a ng-if="nombreLista=='LISTA_COMPRA'" class="item item-dark" ng-click="limpiarMarcados()">
-          <i class="icon ion-android-checkbox-outline icon-menu"></i>&nbsp;{{ 'Limpiar marcados' | translate }}
+          <i class="icon ion-android-checkbox-outline icon-menu"></i>&nbsp;{{ 'LIMPIAR_MARCADOS' | translate }}
         </a>
         <a ng-if="nombreLista=='LISTA_COMPRA'" class="item item-dark" ng-click="limpiarListaCompra()">
-          <i class="icon ion-trash-a icon-menu"></i>&nbsp;{{ 'Limpiar' | translate }}
+          <i class="icon ion-trash-a icon-menu"></i>&nbsp;{{ 'LIMPIAR' | translate }}
         </a>
         <a ng-if="nombreLista=='LISTA_COMPRA'" class="item item-dark" ng-click="modalSaveList.show();popover.hide()">
-          <i class="icon ion-star icon-menu"></i>&nbsp;{{ 'Salvar' | translate }}
+          <i class="icon ion-star icon-menu"></i>&nbsp;{{ 'GUARDAR' | translate }}
         </a>
         <a ng-if="nombreLista=='LISTA_COMPRA'" class="item item-dark" ng-click="recuperarListasGuardadas()">
-          <i class="icon ion-ios-cart-outline icon-menu"></i>&nbsp;{{ 'Recuperar' | translate }}
+          <i class="icon ion-ios-cart-outline icon-menu"></i>&nbsp;{{ 'RECUPERAR' | translate }}
         </a>
         <a class="item item-dark" ng-click="showFilterBar()">
-          <i class="icon ion-ios-search-strong icon-menu"></i>&nbsp;{{ 'Filtrar' | translate }}
+          <i class="icon ion-ios-search-strong icon-menu"></i>&nbsp;{{ 'FILTRAR' | translate }}
         </a>
         <a class="item item-dark" ng-click="createReminder()">
-          <i class="icon ion-ios-alarm icon-menu"></i>&nbsp;{{ 'Recordatorio' | translate }}
+          <i class="icon ion-ios-alarm icon-menu"></i>&nbsp;{{ 'RECORDATORIO' | translate }}
         </a>
       </div>
       <!-- ion-ios-alarm -->
