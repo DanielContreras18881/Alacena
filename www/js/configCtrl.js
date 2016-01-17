@@ -135,27 +135,27 @@ angular.module('alacena.configController', ['ionic'])
           cancelText: translations.NO,
           okText: translations.SI
         });
-      });
-      confirmPopup.then(function(res) {
-        if(res) {
-          Spinner.show();
-          backup.retrieveBckp(backupRecuperar,function(data){
-            $scope.modalBackupRetrieveList.hide();
-            Spinner.hide();
-            if(data){
-              $translate('MOVER_PREGUNTA', { nombre:nombre })
-              $ionicPopup.alert({
-                title: $translate('AVISO'),
-                template: $translate('BACKUP_RECUPERADO', { nombre:backupRecuperar })
-              });
-            }else{
-              $ionicPopup.alert({
-                title: $translate('ERROR'),
-                template: $translate('BACKUP_NO_RECUPERADO', { nombre:backupRecuperar })
-              });
-            }
-          });
-        }
+        confirmPopup.then(function(res) {
+          if(res) {
+            Spinner.show();
+            backup.retrieveBckp(backupRecuperar,function(data){
+              $scope.modalBackupRetrieveList.hide();
+              Spinner.hide();
+              if(data){
+                $translate('MOVER_PREGUNTA', { nombre:nombre })
+                $ionicPopup.alert({
+                  title: $translate('AVISO'),
+                  template: $translate('BACKUP_RECUPERADO', { nombre:backupRecuperar })
+                });
+              }else{
+                $ionicPopup.alert({
+                  title: $translate('ERROR'),
+                  template: $translate('BACKUP_NO_RECUPERADO', { nombre:backupRecuperar })
+                });
+              }
+            });
+          }
+        });
       });
     };
 

@@ -1,14 +1,32 @@
 [
-	{
-		"nombreLista":"LISTA_COMPRA",
-		"colorLista":"item-dark item item-complex",
-		"colorBotones":"button-dark",
-		"listaEditable":false
-	},
-	{
-		"nombreLista":"Nevera",
-		"colorLista":"item-calm item item-complex",
-		"colorBotones":"button-calm",
-		"listaEditable":true
-	}
+  {
+    "nombreLista": "LISTA_COMPRA",
+    "colorLista": "item-dark item item-complex",
+    "colorBotones": "button-dark",
+    "listaEditable": false
+  },
+  {
+    "nombreLista": "Nevera",
+    "colorLista": "item-royal item item-complex",
+    "colorBotones": "button-royal",
+    "listaEditable": true
+  },
+  {
+    "nombreLista": "Congelador",
+    "colorLista": "item-positive item item-complex",
+    "colorBotones": "button-positive",
+    "listaEditable": true
+  },
+  {
+    "nombreLista": "Despensa",
+    "colorLista": "item-balanced item item-complex",
+    "colorBotones": "button-balanced",
+    "listaEditable": true
+  },
+  {
+    "nombreLista": "Comidas",
+    "colorLista": "item-energized item item-complex",
+    "colorBotones": "button-energized",
+    "listaEditable": true
+  }
 ]

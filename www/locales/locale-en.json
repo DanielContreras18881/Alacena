@@ -96,5 +96,6 @@
   "NO_EXISTEN_LISTAS":"There is not shopping lists saved",
   "LISTA_RECUPERADA":"Shopping list retrieved",
   "LISTA_NO_RECUPERADA":"Shopping list not retrieved",
-  "RECUERDA":"Remember"
+  "RECUERDA":"Remember",
+  "PREGUNTA_RECUPERAR_BACKUP":"Retrieve backup"
 }

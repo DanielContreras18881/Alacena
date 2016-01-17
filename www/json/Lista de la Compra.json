@@ -1,0 +1,93 @@
+[
+  {
+    "nombreElemento": "Lechuga",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "LISTA_COMPRA",
+    "cantidadElemento": 1,
+    "caduca": false,
+    "fechaCaducidad": "3015-12-31T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": true
+  },
+  {
+    "nombreElemento": "Pavo ensalada",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "LISTA_COMPRA",
+    "cantidadElemento": 2,
+    "caduca": false,
+    "fechaCaducidad": "3015-12-31T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": true
+  },
+  {
+    "nombreElemento": "Tomates",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "LISTA_COMPRA",
+    "cantidadElemento": 4,
+    "caduca": false,
+    "fechaCaducidad": "3015-12-31T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": true
+  },
+  {
+    "nombreElemento": "Queso ensalada",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "LISTA_COMPRA",
+    "cantidadElemento": 2,
+    "caduca": false,
+    "fechaCaducidad": "3015-12-31T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": true
+  },
+  {
+    "nombreElemento": "Leche",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "LISTA_COMPRA",
+    "cantidadElemento": 1,
+    "caduca": false,
+    "fechaCaducidad": "3015-12-31T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": false
+  },
+  {
+    "nombreElemento": "Vinagre balsamico",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "LISTA_COMPRA",
+    "cantidadElemento": 2,
+    "caduca": false,
+    "fechaCaducidad": "3015-12-31T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": true
+  },
+  {
+    "nombreElemento": "Berocca",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "LISTA_COMPRA",
+    "cantidadElemento": 3,
+    "caduca": false,
+    "fechaCaducidad": "3015-12-31T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": false
+  }
+]

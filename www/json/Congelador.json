@@ -1,0 +1,93 @@
+[
+  {
+    "nombreElemento": "Salchichas",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "Congelador",
+    "cantidadElemento": 12,
+    "caduca": false,
+    "fechaCaducidad": "2015-11-01T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": false
+  },
+  {
+    "nombreElemento": "Pechugas de pollo",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "Congelador",
+    "cantidadElemento": 4,
+    "caduca": false,
+    "fechaCaducidad": "2015-11-01T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": false
+  },
+  {
+    "nombreElemento": "Bimbo",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "Congelador",
+    "cantidadElemento": 1,
+    "caduca": false,
+    "fechaCaducidad": "2015-11-01T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": false
+  },
+  {
+    "nombreElemento": "Pescado",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "Congelador",
+    "cantidadElemento": 2,
+    "caduca": false,
+    "fechaCaducidad": "2015-11-01T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": false
+  },
+  {
+    "nombreElemento": "Aros de cebolla",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "Congelador",
+    "cantidadElemento": 1,
+    "caduca": false,
+    "fechaCaducidad": "2015-11-01T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": false
+  },
+  {
+    "nombreElemento": "Bacon",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "Congelador",
+    "cantidadElemento": 6,
+    "caduca": false,
+    "fechaCaducidad": "2015-11-24T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": false
+  },
+  {
+    "nombreElemento": "Pan hamburguesa",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "Congelador",
+    "cantidadElemento": 2,
+    "caduca": false,
+    "fechaCaducidad": "2015-11-24T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": false
+  }
+]

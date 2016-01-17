@@ -96,5 +96,6 @@
   "NO_EXISTEN_LISTAS":"No existen listas de la compra guardadas",
   "LISTA_RECUPERADA":"Lista de la compra recuperada",
   "LISTA_NO_RECUPERADA":"Lista de la compra no recuperada",
-  "RECUERDA":"Recuerda"
+  "RECUERDA":"Recuerda",
+  "PREGUNTA_RECUPERAR_BACKUP":"Recuperar copia de seguridad"
 }

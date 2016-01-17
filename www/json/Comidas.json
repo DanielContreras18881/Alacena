@@ -1,0 +1,28 @@
+[
+  {
+    "nombreElemento": "Chili con carne",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "Comidas",
+    "cantidadElemento": 3,
+    "caduca": false,
+    "fechaCaducidad": "2015-11-01T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": false
+  },
+  {
+    "nombreElemento": "Pasta con carne",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "Comidas",
+    "cantidadElemento": 2,
+    "caduca": false,
+    "fechaCaducidad": "3015-12-31T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": false
+  }
+]

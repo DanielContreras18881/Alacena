@@ -1,0 +1,54 @@
+[
+  {
+    "nombreElemento": "Lechuga",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "Nevera",
+    "cantidadElemento": 2,
+    "caduca": false,
+    "fechaCaducidad": "3015-12-31T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": false
+  },
+  {
+    "nombreElemento": "Pavo ensalada",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "Nevera",
+    "cantidadElemento": 2,
+    "caduca": false,
+    "fechaCaducidad": "3015-12-31T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": false
+  },
+  {
+    "nombreElemento": "Queso ensalada",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "Nevera",
+    "cantidadElemento": 2,
+    "caduca": false,
+    "fechaCaducidad": "3015-12-31T00:00:00.000Z",
+    "cantidadMinima": null,
+    "marked": false
+  },
+  {
+    "nombreElemento": "Tomates",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "Nevera",
+    "cantidadElemento": 4,
+    "caduca": false,
+    "fechaCaducidad": "3015-12-31T00:00:00.000Z",
+    "cantidadMinima": 0,
+    "marked": false
+  }
+]
