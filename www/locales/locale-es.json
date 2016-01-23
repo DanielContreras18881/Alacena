@@ -97,5 +97,6 @@
   "LISTA_RECUPERADA":"Lista de la compra recuperada",
   "LISTA_NO_RECUPERADA":"Lista de la compra no recuperada",
   "RECUERDA":"Recuerda",
-  "PREGUNTA_RECUPERAR_BACKUP":"Recuperar copia de seguridad"
+  "PREGUNTA_RECUPERAR_BACKUP":"Recuperar copia de seguridad",
+  "TUTORIAL":"Tutorial"
 }

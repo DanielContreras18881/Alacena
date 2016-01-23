@@ -2,8 +2,28 @@ angular.module('alacena.controllers', [])
 /**
 * Controlador general
 */
-.controller('AppCtrl', function() {
+.controller('AppCtrl', function() {})
+/**
+* Controlador de la intro
+*/
+.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate,$rootScope,LocalStorage) {
 
+  // Called to navigate to the main app
+  $scope.startApp = function() {
+    LocalStorage.set('showedIntro',true);
+    $state.go('app.listas');
+  };
+  $scope.next = function() {
+    $ionicSlideBoxDelegate.next();
+  };
+  $scope.previous = function() {
+    $ionicSlideBoxDelegate.previous();
+  };
+
+  // Called each time the slide changes
+  $scope.slideChanged = function(index) {
+    $scope.slideIndex = index;
+  };
 })
 /**
 * Controlador del menú

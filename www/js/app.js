@@ -61,7 +61,7 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
 .run(function(
                 $ionicPlatform,$state,$ionicHistory,$ionicPopup,
                 logdata,$rootScope,$cordovaGlobalization,$translate,
-                Spinner,$ionicSideMenuDelegate,jsonFactory) {//,auth
+                Spinner,$ionicSideMenuDelegate,jsonFactory,LocalStorage) {//,auth
   //auth.hookEvents();
   //
   document.addEventListener("pause", onPause, false);
@@ -92,7 +92,9 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
   $ionicSideMenuDelegate.canDragContent(true);
   $rootScope.nombreUsuario = '';
   $rootScope.imagenUsuario = 'img/ionic.png';
+
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
+    $rootScope.showBackButton = toState.principal === 'NO';
     Spinner.show();
   });
 
@@ -225,6 +227,13 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
              $ionicHistory.goBack();
          }
       }, 100);
+
+      var showedIntro = LocalStorage.get('showedIntro');
+      logdata.messageLog('app:run:showedIntro:'+showedIntro);
+      if(showedIntro===null || showedIntro===undefined || !showedIntro){
+        logdata.messageLog('app:run:showedIntro:Se muestra el tutorial');
+        $state.go('app.intro');
+      }
   });
 })
 /**
@@ -290,6 +299,18 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
     cache: false,
     templateUrl: "templates/menu.html",
     controller: 'MenuCtrl'
+  })
+
+  .state('app.intro', {
+    url: "/intro",
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: "templates/intro.html",
+        controller:'IntroCtrl'
+      }
+    },
+    principal:'SI'
   })
 
   // This is the state where you'll show the login

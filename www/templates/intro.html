@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<ion-view view-title="{{ 'TUTORIAL' | translate }}">
+       <ion-nav-buttons side="left">
+         <button class="button button-light button-clear no-animation"
+                 ng-click="startApp()" ng-show="!slideIndex">
+           <i class="icon ion-close"></i>
+         </button>
+         <button class="button button-light button-clear no-animation"
+                 ng-click="previous()" ng-show="slideIndex > 0">
+           <i class="icon ion-arrow-left-b"></i>
+         </button>
+       </ion-nav-buttons>
+       <ion-nav-buttons side="right">
+         <button class="button button-light button-clear no-animation"
+                 ng-click="next()" ng-show="slideIndex != 2">
+           <i class="icon ion-arrow-right-b"></i>
+         </button>
+         <button class="button button-light button-clear no-animation"
+                 ng-click="startApp()" ng-show="slideIndex == 2">
+           <i class="icon ion-home"></i>
+         </button>
+       </ion-nav-buttons>
+       <ion-slide-box
+            on-slide-changed="slideChanged(index)"
+            slide-interval="5000"
+            show-pager="false"
+            auto-play="true">
+         <ion-slide>
+           <img class="imgTutorial" src="img/a.jpg">
+         </ion-slide>
+         <ion-slide>
+           <img class="imgTutorial" src="img/b.jpg">
+         </ion-slide>
+         <ion-slide>
+           <img class="imgTutorial" src="img/c.jpg">
+         </ion-slide>
+       </ion-slide-box>
+     </ion-view>

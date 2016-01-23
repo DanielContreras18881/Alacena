@@ -4,7 +4,7 @@ angular.module('alacena.devdataController', ['ionic'])
 */
 .controller('DevDataCtrl', function($scope,$rootScope,$cordovaAppVersion,$translate,$cordovaSocialSharing,
                                     $cordovaGlobalization,$cordovaLocalNotification,$cordovaBarcodeScanner,
-                                    $cordovaFile,$ionicPopup,logdata,Spinner) {
+                                    $cordovaFile,$ionicPopup,logdata,Spinner,$state) {
 
 
   /**
@@ -13,7 +13,15 @@ angular.module('alacena.devdataController', ['ionic'])
   $scope.$watch('$viewContentLoaded', function(){
       Spinner.hide();
   });
-
+  /**
+   * Arranca el tutorial de nuevo
+   */
+  $scope.toIntro = function(){
+    $state.go('app.intro');
+  }
+  /**
+   * Inicialización
+   */
   $scope.initialize = function(){
     logdata.messageLog('DevDataCtrl:initialize:Inicio');
     $cordovaAppVersion.getVersionNumber().then(function (version) {

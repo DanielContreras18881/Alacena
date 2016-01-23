@@ -97,5 +97,6 @@
   "LISTA_RECUPERADA":"Shopping list retrieved",
   "LISTA_NO_RECUPERADA":"Shopping list not retrieved",
   "RECUERDA":"Remember",
-  "PREGUNTA_RECUPERAR_BACKUP":"Retrieve backup"
+  "PREGUNTA_RECUPERAR_BACKUP":"Retrieve backup",
+  "TUTORIAL":"Tutorial"
 }
