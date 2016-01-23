@@ -224,7 +224,12 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   * Guarda un elemento creado o editado
   */
   $scope.save = function(element){
-    logdata.messageLog('ListaCtrl:save:'+element);
+    if(element.nombreElemento.originalObject.nombreElemento!==undefined){
+      element.nombreElemento = element.nombreElemento.originalObject.nombreElemento;
+    }else{
+      element.nombreElemento = element.nombreElemento.originalObject;
+    }
+    logdata.messageLog('ListaCtrl:save:'+JSON.stringify(element));
     if(element.caduca){
       logdata.messageLog('ListaCtrl:save:Se transforma la fecha de caducidad');
       element.fechaCaducidad = moment(element.fechaCaducidad).hours(0).minutes(0).seconds(0).milliseconds(0).toDate();

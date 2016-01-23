@@ -16,15 +16,17 @@ angular.module('alacena.elementosController', ['ionic'])
   * Se muestra el filtro de la lista de elementos
   */
   $scope.showFilterBar = function () {
-    filterBarInstance = $ionicFilterBar.show({
-      cancelText: $translate('CANCELAR'),
-      debounce: true,
-      delay: 25,
-      items: $rootScope.elementos,
-      update: function (filteredItems, filterText) {
-        $rootScope.elementos = filteredItems;
-        logdata.messageLog('ElementosCtrl:showFilterBar:Filtrado por:'+filterText);
-      }
+    $translate(['CANCELAR']).then(function (translations) {
+      filterBarInstance = $ionicFilterBar.show({
+        cancelText: translations.CANCELAR,
+        debounce: true,
+        delay: 25,
+        items: $rootScope.elementos,
+        update: function (filteredItems, filterText) {
+          $rootScope.elementos = filteredItems;
+          logdata.messageLog('ElementosCtrl:showFilterBar:Filtrado por:'+filterText);
+        }
+      });
     });
   };
   /**
