@@ -2,7 +2,7 @@ angular.module('alacena.configController', ['ionic'])
 /**
 * Controlador de la pantalla de configuración
 */
-.controller('ConfigCtrl', function($rootScope,$scope,$ionicModal,$translate,$ionicPopup,jsonFactory,LocalStorage,logdata,backup,Spinner) {
+.controller('ConfigCtrl', function($rootScope,$scope,$ionicModal,$translate,$ionicPopup,jsonFactory,LocalStorage,logdata,backup,Spinner,$filter) {
 
   /**
   * Cuando termina de cargar los datos en pantalla
@@ -67,6 +67,8 @@ angular.module('alacena.configController', ['ionic'])
     $scope.changeIdioma = function(idiomaSeleccionado){
       logdata.messageLog('ConfigCtrl:changeIdioma:'+idiomaSeleccionado);
       $translate.use(idiomaSeleccionado);
+      $rootScope.textoFechaUltimoBackup = $filter('filterDateBckp')($rootScope.fechaUltimoBackup );
+      $rootScope.$evalAsync();
       $rootScope.configData.idiomaDefault= idiomaSeleccionado;
       LocalStorage.set('configData',$rootScope.configData);
     };

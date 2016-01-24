@@ -8,6 +8,26 @@ angular.module('alacena.controllers', [])
 */
 .controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate,$rootScope,LocalStorage) {
 
+  $scope.initialize = function(){
+    $scope.slidesTutorial = [
+      {"image":"img/tutorial/tut_01.png","text":"TUT_01"},
+      {"image":"img/tutorial/tut_02.png","text":"TUT_02"},
+      {"image":"img/tutorial/tut_03.png","text":"TUT_03"},
+      {"image":"img/tutorial/tut_07.png","text":"TUT_07"},
+      {"image":"img/tutorial/tut_08.png","text":"TUT_08"},
+      {"image":"img/tutorial/tut_09.png","text":"TUT_09"},
+      {"image":"img/tutorial/tut_11.png","text":"TUT_11"},
+      {"image":"img/tutorial/tut_12.png","text":"TUT_12"},
+      {"image":"img/tutorial/tut_13.png","text":"TUT_13"},
+      {"image":"img/tutorial/tut_15.png","text":"TUT_15"},
+      {"image":"img/tutorial/tut_16.png","text":"TUT_16"},
+      {"image":"img/tutorial/tut_17.png","text":"TUT_17"},
+      {"image":"img/tutorial/tut_18.png","text":"TUT_18"},
+      {"image":"img/tutorial/tut_19.png","text":"TUT_19"},
+      {"image":"img/tutorial/tut_20.png","text":"TUT_20"},
+      {"image":"img/tutorial/tut_21.png","text":"TUT_21"},
+    ];
+  }
   // Called to navigate to the main app
   $scope.startApp = function() {
     LocalStorage.set('showedIntro',true);
@@ -28,29 +48,35 @@ angular.module('alacena.controllers', [])
 /**
 * Controlador del menú
 */
-.controller('MenuCtrl', function(LocalStorage,$rootScope,$scope,logdata,$ionicPopup,jsonFactory,googleServices,$translate) {//auth,$state
+.controller('MenuCtrl', function(LocalStorage,$rootScope,$scope,logdata,$ionicPopup,jsonFactory,googleServices,$translate,$filter) {//auth,$state
   jsonFactory.getConfigData(function(data){
     $rootScope.configData = data;
-    if(typeof navigator.globalization !== "undefined") {
-        navigator.globalization.getPreferredLanguage(function(language) {
-            console.log('app:run:getPreferredLanguage='+language);
-            $translate.use((language.value).split("-")[0]).then(function(data) {}, function(error) {});
-        }, function(error){
-          logdata.messageError('app:run:getPreferredLanguage:error='+JSON.stringify(error));
-        });
-    }else{
-      console.log('app:run:getPreferredLanguage:navegador=es');
-      $translate.use(($rootScope.configData.idiomaDefault).split("-")[0]).then(function(data) {}, function(error) {});
-    }
-    if($rootScope.configData.googleLogin!==null && $rootScope.configData.googleLogin!==undefined && $rootScope.configData.googleLogin===true){
-      $scope.authorize();
-    }
     $rootScope.optionsOpen = false;
     $rootScope.hayFechaUltimoBackup = false;
     var hayFecha = LocalStorage.get('hayFechaUltimoBackup');
     if(hayFecha!==null && hayFecha!=='null' && hayFecha!==undefined){
       $rootScope.hayFechaUltimoBackup = hayFecha;
       $rootScope.fechaUltimoBackup  = LocalStorage.get('fechaUltimoBackup');
+    }
+    if(typeof navigator.globalization !== "undefined") {
+        navigator.globalization.getPreferredLanguage(function(language) {
+            console.log('app:run:getPreferredLanguage='+language);
+            $translate.use((language.value).split("-")[0]).then(function(data) {
+              $rootScope.textoFechaUltimoBackup = $filter('filterDateBckp')($rootScope.fechaUltimoBackup );
+              $rootScope.$evalAsync();
+            }, function(error) {});
+        }, function(error){
+          logdata.messageError('app:run:getPreferredLanguage:error='+JSON.stringify(error));
+        });
+    }else{
+      console.log('app:run:getPreferredLanguage:navegador=es');
+      $translate.use(($rootScope.configData.idiomaDefault).split("-")[0]).then(function(data) {
+        $rootScope.textoFechaUltimoBackup = $filter('filterDateBckp')($rootScope.fechaUltimoBackup );
+        $rootScope.$evalAsync();
+      }, function(error) {});
+    }
+    if($rootScope.configData.googleLogin!==null && $rootScope.configData.googleLogin!==undefined && $rootScope.configData.googleLogin===true){
+      $scope.authorize();
     }
   });
   /**

@@ -98,5 +98,21 @@
   "LISTA_NO_RECUPERADA":"Lista de la compra no recuperada",
   "RECUERDA":"Recuerda",
   "PREGUNTA_RECUPERAR_BACKUP":"Recuperar copia de seguridad",
-  "TUTORIAL":"Tutorial"
+  "TUTORIAL":"Tutorial",
+  "TUT_01":"Bienvenido a Alacena! Aquí podrás gestionar tu lista de la compra y los armarios de tu casa",
+  "TUT_02":"Deslizando con el dedo desde la izquierda verás las opciones del menú",
+  "TUT_03":"Puedes hacer una copia de seguridad, recuperar una copia de seguridad y ver cuando hiciste la última copia de seguridad de tus datos. También puedes enviar un mail al equipo de desarrollo si encuentras un error o tienes sugerencias",
+  "TUT_07":"Podrás ordenar tus listas y añadir nuevas según tus necesidades",
+  "TUT_08":"Añade el color que quieras a tus listas",
+  "TUT_09":"En cada lista podrás filtrar, añadir un recordatorio y los elementos que quieras guardar en ella",
+  "TUT_11":"A cada recordatorio podrás asignarle un mensaje, un día y una hora en la que se te mostrará un aviso",
+  "TUT_12":"Deslizando el dedo desde la derecha en un elemento podrás ver las opciones ... borrar, editar, mover a otra lista y cerrar las opciones. Además, la cantidad de cada elemento se puede modificar con los botones - y +",
+  "TUT_13":"A cada elemento puedes asignarle una cantidad mínima con la que se asignará a la lista de la compra y una fecha de caducidad. El nombre de los elementos será buscado dentro de tu propia lista de elementos para que te sea más fácil añadir elementos a tus listas",
+  "TUT_15":"La lista de la compra es especial, no la podrás mover de su posición original y podrás hacer algunas acciones más ... limpiar los elementos marcados, limpiar la lista completa, guardar la lista de la compra y recuperar una lista guardada",
+  "TUT_16":"Los elementos de la lista de la compra puedes tenerlos pendientes ...",
+  "TUT_17":"... o ya marcados como adquiridos, para que tu paseo por la tienda sea sencillo seguir tu lista de la compra",
+  "TUT_18":"Antes de ir a comprar puedes revisar tu lista de elementos, para revisar que tienes ...",
+  "TUT_19":"... o que te falta. Incluso puedes pulsar en la bolsa ...",
+  "TUT_20":"... que generará un listado de los elementos que te faltan para que decidas si quieres añadirlos a la lista de la compra",
+  "TUT_21":"Por último puedes configurar el comportamiento de la aplicación: indicando la cantidad mínima por defecto de los elementos para añadirlos a la lista de la compra, si quieres que al llegar a 0 un elemento se borre de la lista, si quieres que la aplicación te pregunte antes de añadir un elemento a la lista de la compra, si quieres recibir avisos sobre elementos próximos a caducar, además del idioma de la aplicación. Disfruta organizando tu Alacena!"
 }

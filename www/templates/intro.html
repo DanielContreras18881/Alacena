@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
-<ion-view view-title="{{ 'TUTORIAL' | translate }}">
+<ion-view view-title="{{ 'TUTORIAL' | translate }}" ng-init="initialize()">
        <ion-nav-buttons side="left">
          <button class="button button-light button-clear no-animation"
                  ng-click="startApp()" ng-show="!slideIndex">
@@ -13,11 +13,11 @@
        </ion-nav-buttons>
        <ion-nav-buttons side="right">
          <button class="button button-light button-clear no-animation"
-                 ng-click="next()" ng-show="slideIndex != 2">
+                 ng-click="next()" ng-show="slideIndex != slidesTutorial.length-1">
            <i class="icon ion-arrow-right-b"></i>
          </button>
          <button class="button button-light button-clear no-animation"
-                 ng-click="startApp()" ng-show="slideIndex == 2">
+                 ng-click="startApp()" ng-show="slideIndex == slidesTutorial.length-1">
            <i class="icon ion-home"></i>
          </button>
        </ion-nav-buttons>
@@ -26,14 +26,11 @@
             slide-interval="5000"
             show-pager="false"
             auto-play="true">
-         <ion-slide>
-           <img class="imgTutorial" src="img/a.jpg">
-         </ion-slide>
-         <ion-slide>
-           <img class="imgTutorial" src="img/b.jpg">
-         </ion-slide>
-         <ion-slide>
-           <img class="imgTutorial" src="img/c.jpg">
+         <ion-slide ng-repeat="slide in slidesTutorial track by $index">
+           <div id="capaTexto"> <p>
+             {{slide.text | translate}}
+           </p></div>
+           <div id="capaImagen"> <img class="imgTutorial" ng-src="{{slide.image}}"> </div>
          </ion-slide>
        </ion-slide-box>
      </ion-view>

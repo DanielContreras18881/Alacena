@@ -95,7 +95,9 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
 
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
     $rootScope.showBackButton = toState.principal === 'NO';
-    Spinner.show();
+    if(toState.name!=='app.intro'){
+      Spinner.show();
+    }
   });
 
   $ionicPlatform.ready(function() {
@@ -176,17 +178,28 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
         navigator.splashscreen.hide();
       }
     }
-
+    $rootScope.hayFechaUltimoBackup = false;
+    var hayFecha = LocalStorage.get('hayFechaUltimoBackup');
+    if(hayFecha!==null && hayFecha!=='null' && hayFecha!==undefined){
+      $rootScope.hayFechaUltimoBackup = hayFecha;
+      $rootScope.fechaUltimoBackup  = LocalStorage.get('fechaUltimoBackup');
+    }
     if(typeof navigator.globalization !== "undefined") {
         navigator.globalization.getPreferredLanguage(function(language) {
             console.log('app:run:getPreferredLanguage='+language);
-            $translate.use((language.value).split("-")[0]).then(function(data) {}, function(error) {});
+            $translate.use((language.value).split("-")[0]).then(function(data) {
+              $rootScope.textoFechaUltimoBackup = $filter('filterDateBckp')($rootScope.fechaUltimoBackup );
+              $rootScope.$evalAsync();
+            }, function(error) {});
         }, function(error){
           logdata.messageError('app:run:getPreferredLanguage:error='+JSON.stringify(error));
         });
     }else{
       console.log('app:run:getPreferredLanguage:navegador=es');
-      $translate.use(('es').split("-")[0]).then(function(data) {}, function(error) {});
+      $translate.use(('es').split("-")[0]).then(function(data) {
+        $rootScope.textoFechaUltimoBackup = $filter('filterDateBckp')($rootScope.fechaUltimoBackup );
+        $rootScope.$evalAsync();
+      }, function(error) {});
     }
 
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

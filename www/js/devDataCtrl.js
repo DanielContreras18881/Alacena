@@ -24,6 +24,7 @@ angular.module('alacena.devdataController', ['ionic'])
    */
   $scope.initialize = function(){
     logdata.messageLog('DevDataCtrl:initialize:Inicio');
+    $rootScope.showReorderbutton = false;
     $cordovaAppVersion.getVersionNumber().then(function (version) {
       $scope.appVersion = version;
     });

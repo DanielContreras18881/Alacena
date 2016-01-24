@@ -12,7 +12,7 @@ angular.module('alacena.filters',[])
 /**
 * Filtro de las fechas que controla cómo se muestran las fechas de backup
 */
-.filter('filterDateBckp', function($filter,$rootScope)
+.filter('filterDateBckp', function($filter)
   {
     return function(input)
       {
