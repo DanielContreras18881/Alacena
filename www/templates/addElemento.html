@@ -10,7 +10,7 @@
       <label class="item item-input">
         <span class="input-label">{{ 'ELEMENTO' | translate}}</span>
              <angucomplete-alt
-                           placeholder="{{ 'ELEMENTO_NUEVO' | translate}}"
+                           placeholder="{{newElement.nombreElemento}}"
                            pause="0" minlength="1"
                            override-suggestions="true"
                            auto-match="true"
@@ -21,14 +21,22 @@
                            match-class="highlight"
                            input-class="form-control form-control-small inputAutocomplete"/>
       </label>
-      <label class="item item-input">
-        <span class="input-label">{{ 'CANTIDAD' | translate}}</span>
-        <input ng-model="newElement.cantidadElemento" min="{{newElement.cantidadMinima}}" type="number">
-      </label>
-      <label ng-hide="elementoListaCompra" class="item item-input">
-  		  <span class="input-label">{{ 'CANTIDAD_MINIMA' | translate}}</span>
-  		  <input type="number" min="0" ng-model="newElement.cantidadMinima">
-  	  </label>
+      <ion-item class="item item-icon-right  item-size">
+  				<span>{{ 'CANTIDAD' | translate}}</span>
+  				<span class="minusPlusRight">
+            <i class="ion-minus-circled icono-size" ng-click="minusAmountElement(newElement)"></i>
+            <span class="badge badge-royal">{{newElement.cantidadElemento}}</span>
+            <i class="ion-plus-circled icono-size" ng-click="plusAmountElement(newElement)"></i>
+          </span>
+      </ion-item>
+      <ion-item ng-hide="elementoListaCompra" class="item item-icon-right  item-size">
+  				<span>{{ 'CANTIDAD_MINIMA' | translate}}</span>
+          <span class="minusPlusRight">
+            <i class="ion-minus-circled icono-size" ng-click="minusElementMin(newElement)"></i>
+            <span class="badge badge-royal">{{newElement.cantidadMinima}}</span>
+            <i class="ion-plus-circled icono-size" ng-click="plusElementMin(newElement)"></i>
+          </span>          
+      </ion-item>
       <label ng-hide="elementoListaCompra" class="item item-toggle">
          {{ 'CADUCA' | translate}}
          <label class="toggle toggle-assertive">

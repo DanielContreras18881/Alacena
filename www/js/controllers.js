@@ -6,7 +6,7 @@ angular.module('alacena.controllers', [])
 /**
 * Controlador de la intro
 */
-.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate,$rootScope,LocalStorage) {
+.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate,$rootScope,LocalStorage,$filter) {
 
   $scope.initialize = function(){
     $scope.slidesTutorial = [
@@ -49,6 +49,15 @@ angular.module('alacena.controllers', [])
 * Controlador del menú
 */
 .controller('MenuCtrl', function(LocalStorage,$rootScope,$scope,logdata,$ionicPopup,jsonFactory,googleServices,$translate,$filter) {//auth,$state
+  jsonFactory.getListData(function(data){
+    $rootScope.listas = data;
+  });
+  jsonFactory.getElementData(function(data){
+    $rootScope.elementos = data;
+  });
+  jsonFactory.getElementListData(function(data){
+    $rootScope.elementosLista = data;
+  });
   jsonFactory.getConfigData(function(data){
     $rootScope.configData = data;
     $rootScope.optionsOpen = false;

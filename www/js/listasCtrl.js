@@ -16,6 +16,14 @@ angular.module('alacena.listasController', ['ionic'])
   */
   $scope.initialize = function(){
     logdata.messageLog('ListasCtrl:initialize:Inicio');
+
+    $scope.coloresListas = $rootScope.configData.configColors;
+    $scope.colorDefault = $rootScope.configData.colorDefault;
+    $scope.colorBotonesDefault = $filter('filter')($rootScope.configData.configColors, {"claseLista":$rootScope.configData.colorDefault}, true)[0].botonesEditables;
+
+    $rootScope.showReorderbutton = $rootScope.listas.length > 2;
+    $rootScope.showReorder = false;
+    /*
     jsonFactory.getConfigData(function(data){
       $scope.coloresListas = data.configColors;
       $scope.colorDefault = data.colorDefault;
@@ -32,6 +40,7 @@ angular.module('alacena.listasController', ['ionic'])
       });
 
     });
+    */
     logdata.messageLog('ListasCtrl:initialize:Fin');
   };
   /**

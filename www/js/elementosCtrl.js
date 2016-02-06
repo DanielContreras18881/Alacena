@@ -36,6 +36,10 @@ angular.module('alacena.elementosController', ['ionic'])
     logdata.messageLog('ElementosCtrl:initialize:Inicio');
     $rootScope.showReorderbutton = false;
 
+    $scope.colorDefaultElement = $rootScope.configData.colorDefaultElement;
+    $scope.colorbotonesEditablesDefaultElement = $filter('filter')($rootScope.configData.configColorsElements, {"claseElemento":$rootScope.configData.colorDefaultElement}, true)[0].botonesEditables;
+    $scope.cantidadMinimaDefecto = $rootScope.configData.cantidadMinimaDefecto;
+    /*
     jsonFactory.getElementData(function(data){
       $rootScope.elementos = data;
     });
@@ -53,6 +57,7 @@ angular.module('alacena.elementosController', ['ionic'])
       $scope.colorbotonesEditablesDefaultElement = $filter('filter')(data.configColorsElements, {"claseElemento":data.colorDefaultElement}, true)[0].botonesEditables;
       $scope.cantidadMinimaDefecto = data.cantidadMinimaDefecto;
     });
+    */
     logdata.messageLog('ElementosCtrl:initialize:Fin');
   };
   /**

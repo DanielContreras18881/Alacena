@@ -57,9 +57,9 @@ angular.module('alacena.devdataController', ['ionic'])
   $scope.reportarError = function(){
     logdata.messageLog('DevDataCtrl:reportarError:Inicio');
     $cordovaAppVersion.getVersionNumber().then(function (version) {
-      $scope.appVersion = version;
       var formatoDia = 'YYYY_MM_DD';
       var dia = moment().format(formatoDia);
+      logdata.messageLog('DevDataCtrl:reportarError:version:'+version);
       logdata.messageLog('DevDataCtrl:reportarError:Fichero:'+$rootScope.dataDirectory+"logs/alacena_"+dia+".log");
       var files = [$rootScope.dataDirectory+"logs/alacena_"+dia+".log"];
       if(ionic.Platform.isAndroid() && ionic.Platform.version()>=6){
@@ -67,8 +67,8 @@ angular.module('alacena.devdataController', ['ionic'])
       }
       $translate(['MAIL_TEXTO','MAIL_ASUNTO',]).then(function (translations) {
         $cordovaSocialSharing
-          .shareViaEmail(translations.MAIL_TEXTO+$scope.appVersion+'\n\n\n',
-                        translations.MAIL_ASUNTO,
+          .shareViaEmail(translations.MAIL_TEXTO+'\n\n\n',
+                        translations.MAIL_ASUNTO+" : "+version,
                         ['develop.apps.chony@gmail.com'],null,null,
                         files)
             .then(function(result) {

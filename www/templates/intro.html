@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
-<ion-view view-title="{{ 'TUTORIAL' | translate }}" ng-init="initialize()">
+<ion-view view-title="{{ 'TUTORIAL' | translate }}" ng-init="initialize()" has-bouncing="false">
        <ion-nav-buttons side="left">
          <button class="button button-light button-clear no-animation"
                  ng-click="startApp()" ng-show="!slideIndex">
@@ -23,7 +23,7 @@
        </ion-nav-buttons>
        <ion-slide-box
             on-slide-changed="slideChanged(index)"
-            slide-interval="5000"
+            slide-interval="15000"
             show-pager="false"
             auto-play="true">
          <ion-slide ng-repeat="slide in slidesTutorial track by $index">
@@ -33,4 +33,5 @@
            <div id="capaImagen"> <img class="imgTutorial" ng-src="{{slide.image}}"> </div>
          </ion-slide>
        </ion-slide-box>
-     </ion-view>
+
+</ion-view>

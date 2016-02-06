@@ -68,6 +68,17 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     $scope.listaEditable = $stateParams.listaEditable;
     $scope.colorLista = $stateParams.colorLista;
 
+    $rootScope.showReorderbutton = false;
+
+    $scope.coloresElementos = $rootScope.configData.configColorsElements;
+    $scope.colorDefaultElement = $rootScope.configData.colorDefaultElement;
+    $scope.colorbotonesEditablesDefaultElement = $filter('filter')($rootScope.configData.configColorsElements, {"claseElemento":$rootScope.configData.colorDefaultElement}, true)[0].botonesEditables;
+    $scope.askAddListaCompra = $rootScope.configData.askAddListaCompra;
+    $scope.deleteAt0 = $rootScope.configData.deleteAt0;
+    $scope.cantidadMinimaDefecto = $rootScope.configData.cantidadMinimaDefecto;
+    $scope.expireReminders = $rootScope.configData.expireReminders;
+
+    /*
     jsonFactory.getListData(function(data){
       $rootScope.listas = data;
     });
@@ -92,7 +103,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
       $scope.cantidadMinimaDefecto = data.cantidadMinimaDefecto;
       $scope.expireReminders = data.expireReminders;
     });
-
+    */
     /**
     * Ventana modal para añadir un elemento
     */
@@ -224,12 +235,20 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   * Guarda un elemento creado o editado
   */
   $scope.save = function(element){
-    if(element.nombreElemento.originalObject.nombreElemento!==undefined){
-      element.nombreElemento = element.nombreElemento.originalObject.nombreElemento;
+    logdata.messageLog('ListaCtrl:save:'+JSON.stringify(element.nombreElemento));
+    if(element.nombreElemento.originalObject!==undefined){
+      if(element.nombreElemento.originalObject.nombreElemento!==undefined){
+        element.nombreElemento = element.nombreElemento.originalObject.nombreElemento;
+        logdata.messageLog('ListaCtrl:save:1:'+element.nombreElemento);
+      }else{
+        element.nombreElemento = element.nombreElemento.originalObject;
+        logdata.messageLog('ListaCtrl:save:2:'+element.nombreElemento);
+      }
     }else{
-      element.nombreElemento = element.nombreElemento.originalObject;
+      element.nombreElemento = element.nombreElemento;
+      logdata.messageLog('ListaCtrl:save:3:'+element.nombreElemento);
     }
-    logdata.messageLog('ListaCtrl:save:'+JSON.stringify(element));
+    logdata.messageLog('ListaCtrl:save:'+JSON.stringify(element.nombreElemento));
     if(element.caduca){
       logdata.messageLog('ListaCtrl:save:Se transforma la fecha de caducidad');
       element.fechaCaducidad = moment(element.fechaCaducidad).hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
@@ -400,7 +419,6 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
             elementosFiltrados[0].cantidadElemento=cantidadActual+elementosFiltrados[0].cantidadMinima;
           }else{
             logdata.messageLog('ElementosCtrl:minusElement:No existe, se crea');
-            //$rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(elemento), 1);
             elemento.nombreLista='LISTA_COMPRA';
             elemento.cantidadElemento = elemento.cantidadMinima;
             $rootScope.elementosLista.push(elemento);
@@ -412,13 +430,13 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
       if(elemento.cantidadMinima===0){
         logdata.messageLog('ElementosCtrl:minusElement:No se traslada a la Lista de la Compra');
         if($scope.deleteAt0){
-          $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(elemento), 1);
+          $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(item), 1);
         }
       }else{
         $scope.preguntaTraslado(elemento.nombreElemento,function(){
           logdata.messageLog('ListaCtrl:minusElement:Trasladamos a la Lista de la Compra');
           if($scope.deleteAt0){
-            $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(elemento), 1);
+            $rootScope.elementosLista.splice($rootScope.elementosLista.indexOf(item), 1);
           }
           var elementosFiltrados = $filter('filter')($rootScope.elementosLista,
                 {"nombreElemento":elemento.nombreElemento,"nombreLista":'LISTA_COMPRA'});
@@ -513,6 +531,58 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     }
   };
   /**
+   * Se resta una unidad minima a un elemento
+   */
+  $scope.minusElementMin = function(item){
+    item.cantidadMinima = --item.cantidadMinima;
+    $scope.checkMinimumElement();
+  };
+  /**
+  * Se añade una unidad minima a un elemento
+  */
+  $scope.plusElementMin = function(item) {
+    item.cantidadMinima = ++item.cantidadMinima;
+  };
+  /**
+   * Chequea la cantidad minima de un elemento
+   */
+  $scope.checkMinimumElement = function(){
+    var minimo = $scope.newElement.cantidadMinima;
+    var cantidad = $scope.newElement.cantidadElemento;
+    if(minimo>cantidad){
+      $scope.newElement.cantidadMinima = cantidad;
+    }
+    if (minimo<0){
+      $scope.newElement.cantidadMinima = 0;
+    }
+  };
+  /**
+   * Suma uno a la cantidad del elemento
+   */
+  $scope.plusAmountElement = function(item){
+    item.cantidadElemento = ++item.cantidadElemento;
+  };
+  /**
+   * Resta uno a la cantidad del elemento
+   */
+  $scope.minusAmountElement = function(item){
+    item.cantidadElemento = --item.cantidadElemento;
+    $scope.checkAmountElement();
+  };
+  /**
+   * Chequea la cantidad de un elemento
+   */
+  $scope.checkAmountElement = function(){
+    var minimo = $scope.newElement.cantidadMinima;
+    var cantidad = $scope.newElement.cantidadElemento;
+    if(cantidad<0){
+      $scope.newElement.cantidadElemento = 0;
+    }
+    if(cantidad<minimo){
+      $scope.newElement.cantidadElemento = minimo;
+    }
+  };
+  /**
   * Muestra una ventana modal para añadir un elemento
   */
   $scope.addItem = function() {
@@ -525,21 +595,23 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     }else{
       $scope.elementoListaCompra = false;
     }
-    $scope.newElement = {
-      "nombreElemento":'',
-      "colorElemento":$scope.colorDefaultElement,
-      "colorBotones":$scope.colorbotonesEditablesDefaultElement,
-      "colorElementoNoCaducado":$scope.colorDefaultElement,
-      "colorBotonesNoCaducado":$scope.colorbotonesEditablesDefaultElement,
-      "nombreLista":$scope.nombreLista,
-      "cantidadElemento":$scope.cantidadMinimaDefecto,
-      "caduca":!$scope.fechaDisabled,
-      "fechaCaducidad":fechaCaducidadInicial,
-      "cantidadMinima":$scope.cantidadMinimaDefecto,
-      "marked":false
-    };
-    logdata.messageLog('ListaCtrl:addItem:$scope.newElement='+$scope.newElement);
-    $scope.modalElemento.show();
+    $translate(['ELEMENTO_NUEVO']).then(function (translations) {
+      $scope.newElement = {
+        "nombreElemento":translations.ELEMENTO_NUEVO,
+        "colorElemento":$scope.colorDefaultElement,
+        "colorBotones":$scope.colorbotonesEditablesDefaultElement,
+        "colorElementoNoCaducado":$scope.colorDefaultElement,
+        "colorBotonesNoCaducado":$scope.colorbotonesEditablesDefaultElement,
+        "nombreLista":$scope.nombreLista,
+        "cantidadElemento":$scope.cantidadMinimaDefecto,
+        "caduca":!$scope.fechaDisabled,
+        "fechaCaducidad":fechaCaducidadInicial,
+        "cantidadMinima":$scope.cantidadMinimaDefecto,
+        "marked":false
+      };
+      logdata.messageLog('ListaCtrl:addItem:$scope.newElement='+$scope.newElement);
+      $scope.modalElemento.show();
+    });
   };
 
   /*
@@ -813,7 +885,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
    * Función que establece el recordatorio según los datos
    */
   $scope.saveReminder = function(mensajeReminder){
-    mensajeReminder = mensajeReminder!==null?mensajeReminder!==undefined?':'+mensajeReminder:"":"";
+    mensajeReminder = mensajeReminder!==null?mensajeReminder!==undefined?mensajeReminder:"":"";
       if(window.cordova){
         var objetoNotificacion = {
           id: moment().valueOf(),

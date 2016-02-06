@@ -10,19 +10,20 @@ body {
 
 #capaTexto{
 	position:absolute;
-	z-index:1;
+	z-index:5;
 	background-color:transparent;
-	color:#480048;
-	padding-left: 2.5em;
+	color:#010101;
+	padding-left: 2em;
 	padding-top: 5em;
-	width: 80%;
-	font-size:1.25em;
+	width: 90%;
+	font-size:0.95em;
 	font-weight: bold;
 }
 #capaImagen{
 	position:absolute;
 	z-index:0;
 	opacity: 0.35;
+	padding-top: 1.5em;
 }
 
 .imgTutorial{
@@ -133,6 +134,10 @@ button.ion-arrow-swap.light.sinBordes{
 	padding: 10px 12px;
 	border-radius: 36px;
 	vertical-align: middle;
+}
+
+.minusPlusRight{
+	float: right;
 }
 
 .item-size{

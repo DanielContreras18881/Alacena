@@ -59,7 +59,7 @@ angular.module('alacena', ['ionic', 'ngCordova','pascalprecht.translate','jett.i
 * Ejecución de la aplicación
 */
 .run(function(
-                $ionicPlatform,$state,$ionicHistory,$ionicPopup,
+                $ionicPlatform,$state,$ionicHistory,$ionicPopup,$filter,
                 logdata,$rootScope,$cordovaGlobalization,$translate,
                 Spinner,$ionicSideMenuDelegate,jsonFactory,LocalStorage) {//,auth
   //auth.hookEvents();

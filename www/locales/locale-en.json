@@ -114,5 +114,6 @@
   "TUT_18":"Before yo go to shopping you can check your element list, to check what do you have ...",
   "TUT_19":"... or what do you need. Even click on the bag ...",
   "TUT_20":"... generating a list of elements that do you need for you to decide if you want to add them to the shopping list",
-  "TUT_21":"Last you can configure the behaviour of the app: indicating the default minimum amount of the elements to add to the shopping list, if you want to delete from a list when the amount of an element reaches 0, if you want the app prompts you before adding an element to the shopping list, if you want to receive notifications about the elements near to expire, furthermore the language of the app. Enjoy managing your Cupboard!"
+  "TUT_21":"Last you can configure the behaviour of the app: indicating the default minimum amount of the elements to add to the shopping list, if you want to delete from a list when the amount of an element reaches 0, if you want the app prompts you before adding an element to the shopping list, if you want to receive notifications about the elements near to expire, furthermore the language of the app. Enjoy managing your Cupboard!",
+  "AYUDA":"Show help"
 }

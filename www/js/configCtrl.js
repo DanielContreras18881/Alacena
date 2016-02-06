@@ -18,13 +18,18 @@ angular.module('alacena.configController', ['ionic'])
     logdata.messageLog('ConfigCtrl:initialize:Inicio');
     $rootScope.showReorderbutton = false;
 
+    $scope.claseLista = $rootScope.configData.colorDefault;
+    $scope.claseElemento = $rootScope.configData.colorDefaultElement;
+    $scope.idiomaSeleccionado = $scope.configData.idiomaDefault;
+
+/*    
     jsonFactory.getConfigData(function(data){
       $rootScope.configData = data;
       $scope.claseLista = $rootScope.configData.colorDefault;
       $scope.claseElemento = $rootScope.configData.colorDefaultElement;
       $scope.idiomaSeleccionado = $scope.configData.idiomaDefault;
     });
-/*
+
     jsonFactory.getListData(function(data){
       $scope.listas = data;
     });

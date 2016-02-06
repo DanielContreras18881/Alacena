@@ -14,7 +14,7 @@
   "BORRAR":"Borrar ",
   "BORRAR_COMPRA":"¿Limpiar lista de la compra?",
   "BORRAR_PREGUNTA":"¿Deseas borrar {{nombre}} del histórico?",
-  "MAIL_TEXTO":"Error encontrado en Alacena ",
+  "MAIL_TEXTO":"Error encontrado en Alacena",
   "MAIL_ASUNTO":"NOTIFICACION DE BUG : VERSION ",
   "TIENES":"Tienes ",
   "EN":" en ",
@@ -114,5 +114,6 @@
   "TUT_18":"Antes de ir a comprar puedes revisar tu lista de elementos, para revisar que tienes ...",
   "TUT_19":"... o que te falta. Incluso puedes pulsar en la bolsa ...",
   "TUT_20":"... que generará un listado de los elementos que te faltan para que decidas si quieres añadirlos a la lista de la compra",
-  "TUT_21":"Por último puedes configurar el comportamiento de la aplicación: indicando la cantidad mínima por defecto de los elementos para añadirlos a la lista de la compra, si quieres que al llegar a 0 un elemento se borre de la lista, si quieres que la aplicación te pregunte antes de añadir un elemento a la lista de la compra, si quieres recibir avisos sobre elementos próximos a caducar, además del idioma de la aplicación. Disfruta organizando tu Alacena!"
+  "TUT_21":"Por último puedes configurar el comportamiento de la aplicación: indicando la cantidad mínima por defecto de los elementos para añadirlos a la lista de la compra, si quieres que al llegar a 0 un elemento se borre de la lista, si quieres que la aplicación te pregunte antes de añadir un elemento a la lista de la compra, si quieres recibir avisos sobre elementos próximos a caducar, además del idioma de la aplicación. Disfruta organizando tu Alacena!",
+  "AYUDA":"Mostrar ayuda"
 }
