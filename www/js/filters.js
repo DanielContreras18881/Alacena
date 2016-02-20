@@ -16,14 +16,16 @@ angular.module('alacena.filters',[])
     {
       return function(input)
         {
-          if(input.originalObject!==undefined){
-            if(input.originalObject.nombreElemento!==undefined){
-              return input.originalObject.nombreElemento;
+          if (input!==undefined && input!==null){
+            if(input.originalObject!==undefined){
+              if(input.originalObject.nombreElemento!==undefined){
+                return input.originalObject.nombreElemento;
+              }else{
+                return input.originalObject;
+              }
             }else{
-              return input.originalObject;
-            }
-          }else{
-            return input;
+              return input;
+            }            
           }
         };
     })
