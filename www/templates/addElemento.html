@@ -3,23 +3,25 @@
 <ion-modal-view>
   <ion-header-bar class="bar bar-header bar-dark">
     <h1 class="title">{{ 'ELEMENTO_DE' | translate}} {{nombreLista | translate}}</h1>
-    <button class="button button-clear button-primary ion-close-round" ng-click="modalElemento.hide()"></button>
+    <button class="button button-clear button-primary ion-close-round" ng-click="closeAddElemento()"></button>
   </ion-header-bar>
   <ion-content class="padding">
     <div class="list">
       <label class="item item-input">
         <span class="input-label">{{ 'ELEMENTO' | translate}}</span>
-             <angucomplete-alt
-                           placeholder="{{newElement.nombreElemento}}"
+             <div angucomplete-alt
+                           text-searching="..."
+                           text-no-results="..."
+                           placeholder="{{newElement.nombreElemento | filterNombreElemento}}"
                            pause="0" minlength="1"
-                           override-suggestions="true"
-                           auto-match="true"
                            selected-object="newElement.nombreElemento"
                            local-data="elementos"
                            search-fields="nombreElemento"
                            title-field="nombreElemento"
                            match-class="highlight"
-                           input-class="form-control form-control-small inputAutocomplete"/>
+                           input-class="form-control form-control-small inputAutocomplete"
+                           override-suggestions="true"
+                          clear-selected="true"/>
       </label>
       <ion-item class="item item-icon-right  item-size">
   				<span>{{ 'CANTIDAD' | translate}}</span>
@@ -35,7 +37,7 @@
             <i class="ion-minus-circled icono-size" ng-click="minusElementMin(newElement)"></i>
             <span class="badge badge-royal">{{newElement.cantidadMinima}}</span>
             <i class="ion-plus-circled icono-size" ng-click="plusElementMin(newElement)"></i>
-          </span>          
+          </span>
       </ion-item>
       <label ng-hide="elementoListaCompra" class="item item-toggle">
          {{ 'CADUCA' | translate}}

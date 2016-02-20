@@ -7,6 +7,9 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
                                   jsonFactory,LocalStorage,logdata,$cordovaLocalNotification,
                                   favoritas,Spinner,webNotification,$state) {
 
+  /**
+   * Función para realizar la búsqueda del autocompletar
+   */
   $scope.getElements = function (query) {
       if (query) {
           return {
@@ -14,12 +17,6 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
           };
       }
       return {items: []};
-  };
-  $scope.itemsClicked = function (callback) {
-      logdata.messageLog('itemsClicked:'+callback);
-  };
-  $scope.itemsRemoved = function (callback) {
-      logdata.messageLog('itemsRemoved:'+callback);
   };
   /**
   * Cuando termina de cargar los datos en pantalla
@@ -121,6 +118,15 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
   $scope.closeButons = function(){
     $rootScope.optionsOpen = !$rootScope.optionsOpen;
     $ionicListDelegate.closeOptionButtons();
+  }
+  /**
+   * Se cierra la ventana modal de edición de elemento
+   */
+  $scope.closeAddElemento = function(){
+    if($rootScope.optionsOpen){
+      $rootScope.optionsOpen = !$rootScope.optionsOpen;
+    }
+    $scope.modalElemento.hide();
   }
   /**
   * Muestra una ventana modal para editar un elemento
@@ -238,17 +244,13 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
     logdata.messageLog('ListaCtrl:save:'+JSON.stringify(element.nombreElemento));
     if(element.nombreElemento.originalObject!==undefined){
       if(element.nombreElemento.originalObject.nombreElemento!==undefined){
-        element.nombreElemento = element.nombreElemento.originalObject.nombreElemento;
-        logdata.messageLog('ListaCtrl:save:1:'+element.nombreElemento);
+        $scope.newElement.nombreElemento = element.nombreElemento.originalObject.nombreElemento;
+        logdata.messageLog('ListaCtrl:save:1:'+$scope.newElement.nombreElemento);
       }else{
-        element.nombreElemento = element.nombreElemento.originalObject;
-        logdata.messageLog('ListaCtrl:save:2:'+element.nombreElemento);
+        $scope.newElement.nombreElemento = element.nombreElemento.originalObject;
+        logdata.messageLog('ListaCtrl:save:2:'+$scope.newElement.nombreElemento);
       }
-    }else{
-      element.nombreElemento = element.nombreElemento;
-      logdata.messageLog('ListaCtrl:save:3:'+element.nombreElemento);
     }
-    logdata.messageLog('ListaCtrl:save:'+JSON.stringify(element.nombreElemento));
     if(element.caduca){
       logdata.messageLog('ListaCtrl:save:Se transforma la fecha de caducidad');
       element.fechaCaducidad = moment(element.fechaCaducidad).hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
@@ -886,11 +888,13 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
    */
   $scope.saveReminder = function(mensajeReminder){
     mensajeReminder = mensajeReminder!==null?mensajeReminder!==undefined?mensajeReminder:"":"";
+    $translate(['LISTA_COMPRA']).then(function (translations) {
+      var nombreLista = $scope.nombreLista === 'LISTA_COMPRA'?translations.LISTA_COMPRA:$scope.nombreLista;
       if(window.cordova){
         var objetoNotificacion = {
           id: moment().valueOf(),
           title: $scope.RECUERDA,
-          text: $scope.nombreLista+'\n'+mensajeReminder,
+          text: nombreLista+'\n'+mensajeReminder,
           at: $scope.dateTimeReminder,
           sound: 'file://sounds/sound.mp3',
           data: {
@@ -912,7 +916,7 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
         logdata.messageLog('ListaCtrl:saveReminder:'+milisecondsToNotification);
         setTimeout(function hideNotification() {
           webNotification.showNotification($scope.RECUERDA, {
-              body: $scope.nombreLista+'\n'+mensajeReminder,
+              body: nombreLista+'\n'+mensajeReminder,
               icon: '../img/icon.png',
               onClick: function onNotificationClicked() {
                   $state.go('app.lista', {
@@ -934,5 +938,6 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
           });
         }, milisecondsToNotification);
       }
+    });
   };
 });

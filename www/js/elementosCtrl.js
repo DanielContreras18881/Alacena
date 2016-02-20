@@ -155,6 +155,7 @@ angular.module('alacena.elementosController', ['ionic'])
   */
   $scope.onItemDelete = function(item) {
     logdata.messageLog('ElementosCtrl:onItemDelete:'+JSON.stringify(item));
+    $ionicListDelegate.closeOptionButtons();
     $rootScope.elementos.splice($rootScope.elementos.indexOf(item), 1);
     LocalStorage.set('elementos',$rootScope.elementos);
     $scope.showConfirm(item.nombreElemento);
@@ -164,20 +165,20 @@ angular.module('alacena.elementosController', ['ionic'])
   */
   $scope.showConfirm = function(nombre) {
    logdata.messageLog('ElementosCtrl:showConfirm:'+nombre);
-   $translate(['BORRAR','NO','SI']).then(function (translations) {});
-   var confirmPopup = $ionicPopup.confirm({
-     title: translations.BORRAR+nombre,
-     template: $translate('BORRAR_PREGUNTA_LISTAS', { nombre:nombre }),
-     cancelText: translations.NO,
-     okText: translations.SI
-   });
-   confirmPopup.then(function(res) {
-     if(res) {
-        logdata.messageLog('ElementosCtrl:showConfirm:Se decide borrar '+nombre+'|'+JSON.stringify(res));
-        $rootScope.elementosLista = $filter('filter')($rootScope.elementosLista, function(value, index) {return value.nombreElemento !== nombre;});
-        LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
-        $ionicListDelegate.closeOptionButtons();
-     }
+   $translate(['BORRAR','NO','SI']).then(function (translations) {
+     var confirmPopup = $ionicPopup.confirm({
+       title: translations.BORRAR+nombre,
+       template: $translate('BORRAR_PREGUNTA_LISTAS', { nombre:nombre }),
+       cancelText: translations.NO,
+       okText: translations.SI
+     });
+     confirmPopup.then(function(res) {
+       if(res) {
+          logdata.messageLog('ElementosCtrl:showConfirm:Se decide borrar '+nombre+'|'+JSON.stringify(res));
+          $rootScope.elementosLista = $filter('filter')($rootScope.elementosLista, function(value, index) {return value.nombreElemento !== nombre;});
+          LocalStorage.set('cantidadElementosLista',$rootScope.elementosLista);
+       }
+     });     
    });
   };
   /**

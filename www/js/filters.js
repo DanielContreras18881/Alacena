@@ -9,6 +9,24 @@ angular.module('alacena.filters',[])
         return input.replace('.json','');
       };
   })
+  /**
+  * Filtro del nombre del elemento seleccionado en el autocompletar
+  */
+  .filter('filterNombreElemento', function($filter)
+    {
+      return function(input)
+        {
+          if(input.originalObject!==undefined){
+            if(input.originalObject.nombreElemento!==undefined){
+              return input.originalObject.nombreElemento;
+            }else{
+              return input.originalObject;
+            }
+          }else{
+            return input;
+          }
+        };
+    })
 /**
 * Filtro de las fechas que controla cómo se muestran las fechas de backup
 */

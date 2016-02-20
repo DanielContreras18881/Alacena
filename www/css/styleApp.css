@@ -8,6 +8,21 @@ body {
 	background: #AAAAAA !important;
 }
 
+.angucomplete-selected-row {
+    background-color: lightblue;
+    color: #ffffff;
+}
+
+.angucomplete-searching {
+    font-size: .05em;
+}
+
+.highlight {
+	position:relative;
+	background-color: #9F7ACC;
+	color: #ffffff;
+}
+
 #capaTexto{
 	position:absolute;
 	z-index:5;
