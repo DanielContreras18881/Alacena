@@ -237,6 +237,18 @@ angular.module('alacena.cantidadElementosController', ['ionic'])
       }
     });
   };
+  $scope.elementSelected = function(data){
+    logdata.messageLog('ListaCtrl:elementSelected:'+JSON.stringify(data));
+    if(data.originalObject!==undefined){
+      if(data.originalObject.nombreElemento!==undefined){
+        $scope.newElement.nombreElemento = data.originalObject.nombreElemento;
+        logdata.messageLog('ListaCtrl:elementSelected:1:'+$scope.newElement.nombreElemento);
+      }else{
+        $scope.newElement.nombreElemento = data.originalObject;
+        logdata.messageLog('ListaCtrl:elementSelected:2:'+$scope.newElement.nombreElemento);
+      }
+    }
+  }
   /**
   * Guarda un elemento creado o editado
   */

@@ -19,13 +19,15 @@ angular.module('alacena.filters',[])
           if (input!==undefined && input!==null){
             if(input.originalObject!==undefined){
               if(input.originalObject.nombreElemento!==undefined){
+                input = input.originalObject.nombreElemento;
                 return input.originalObject.nombreElemento;
               }else{
+                input = input.originalObject; 
                 return input.originalObject;
               }
             }else{
               return input;
-            }            
+            }
           }
         };
     })

@@ -21,3 +21,12 @@ heroku git:remote -a alacena
 git remote -v
 git push -f heroku
 heroku open --app alacena
+
+## URL
+https://alacena.herokuapp.com
+
+## Google Play
+https://play.google.com/store/apps/details?id=developapps.chony.alacena
+
+## AppStore
+https://itunes.apple.com/es/app/alacena/id1078098531?mt=8
