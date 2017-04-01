@@ -1,0 +1,41 @@
+.itemName h2{
+  font-size: 1.35rem;
+  white-space: normal;
+}
+
+.items {
+    background-color: #999
+}
+
+ion-badge {
+    border-radius: 1rem;
+    color: #fff;
+    background-color: #9F7ACC;
+    font-size: 1.25em;
+}
+
+ion-list .item-inner{
+  border: none
+}
+
+.item-button.button-icon-only{
+  padding: 1.1em .45em;
+  font-size: 1.25em;
+  margin: -.75rem;
+}
+
+.item-icon{
+  margin-right: 0.5em;
+}
+
+.item-info{
+  white-space: normal;
+  font-size: 1rem!important;
+}
+
+.item p.item-advice{
+  padding-left: 2rem;
+  white-space: normal;
+  font-style: italic;
+  color: red;
+}

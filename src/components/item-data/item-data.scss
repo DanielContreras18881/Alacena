@@ -1,0 +1,48 @@
+ion-card ion-card-content{
+  padding: 1rem 1rem 1rem 1rem;
+}
+
+ion-list .item .item-inner{
+  border-bottom: 0
+}
+
+.buttonOperation{
+  padding: 0 1.5rem 0 1.5rem
+}
+
+.nameElement{
+  font-size: 1.25rem;
+  white-space: normal;
+}
+
+.labelExpire{
+  font-size: .95rem;
+}
+
+.labelExpireDate{
+  font-size: .95rem;
+}
+
+.expireDate{
+  font-size: 1.1rem;
+  padding: 0 0 0 0;
+}
+
+.labelCategory{
+  font-size: .95rem;
+  padding-left: 3rem;
+}
+.labelMeasurement{
+  font-size: .95rem;
+}
+.measurement{
+  font-size: .85rem;
+  padding: .1rem .25rem .1rem 0px;
+  max-width: 100%;
+}
+.labelMinAmout{
+  font-size: .95rem;
+}
+.labelAmount{
+  font-size: .95rem;
+}

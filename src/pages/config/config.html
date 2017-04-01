@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar dark>
+    <button menuToggle>
+      <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
+    </button>
+    <ion-title>Configuration</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="config">
+    <ion-card dark>
+      <ion-card-header>
+        CONFIGURACION_LISTAS
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label stacked>CANTIDAD_MINIMA_DEFECTO</ion-label>
+          <ion-input text-right [(ngModel)]="configData.cantidadMinimaDefecto" min="1" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>BORRAR_AL_LLEGAR_0</ion-label>
+          <ion-toggle [(ngModel)]="configData.deleteAt0" checked="{{configData.deleteAt0}}" dark></ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>PREGUNTA_INCLUIR_LISTA_COMPRA</ion-label>
+          <ion-toggle [(ngModel)]="configData.askAddListaCompra" checked="{{configData.askAddListaCompra}}" dark></ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>AVISOS_FECHA_CADUCIDAD</ion-label>
+          <ion-toggle [(ngModel)]="configData.expireReminders" checked="{{configData.expireReminders}}" dark></ion-toggle>
+        </ion-item>
+         <ion-item>
+           <ion-label stacked>CATEGORIA_DEFECTO</ion-label>
+           <ion-select text-right [(ngModel)]="configData.categoryDefault">
+             <ion-option *ngFor="let category of categories" value="{{category.categoryName}}">
+               {{category.categoryName}}
+             </ion-option>
+           </ion-select>
+         </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        CONFIGURACION_APP
+      </ion-card-header>
+      <ion-card-content>
+         <ion-item>
+           <ion-label stacked>IDIOMA</ion-label>
+           <ion-select text-right [(ngModel)]="configData.idiomaDefault">
+             <ion-option *ngFor="let idioma of idiomas" value="{{idioma.id_iso}}">{{idioma.idiomaSeleccionado}}</ion-option>
+           </ion-select>
+         </ion-item>
+      </ion-card-content>
+    </ion-card>
+</ion-content>

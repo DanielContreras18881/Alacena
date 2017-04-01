@@ -1,0 +1,63 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Shared Imports
+// --------------------------------------------------
+// These are the imports which make up the design of this app.
+// By default each design mode includes these shared imports.
+// App Shared Sass variables belong in app.variables.scss.
+
+@import "../pages/getting-started/getting-started";
+@import "../pages/items/items.scss";
+
+@import "../pages/list/list.scss";
+@import "../pages/lists/lists.scss";
+
+@import "../pages/config/config.scss";
+
+@import "../pages/about/about.scss";
+
+@import "../components/item-data/item-data.scss";
+
+@import "../pages/categories/list-icons.scss";
+@import "../pages/categories/categories.scss";
+
+.body{
+  font-family:fantasy;
+}
+
+.item-header-toolbar{
+  background-color: #222;
+  color: #fff;
+}
+.item .item-inner{
+  border: none;
+}
+.item-header-toolbar-avatar img.icon{
+  border-radius: 0;
+  margin-left: -.15rem
+}
+.add-button{
+  background-color: blue;
+  z-index: 99;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+.add-button:hover{
+  background-color: blue!important;
+  z-index: 99;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+.remove-button{
+  background-color: red;
+  z-index: 99;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+.remove-button:hover{
+  background-color: red!important;
+  z-index: 99;
+  width: 3.5rem;
+  height: 3.5rem;
+}

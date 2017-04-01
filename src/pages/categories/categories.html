@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-navbar dark [hidden]="searchBar">
+    <button menuToggle>
+      <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
+    </button>
+    <ion-title>Categories management</ion-title>
+    <ion-buttons end>
+      <button (click)="reorder($event)">
+         <ion-icon secondary class="reorderAllowed" *ngIf="reorderAllowed" ios="ios-repeat" md="md-repeat"></ion-icon>
+         <ion-icon secondary class="reorderNotAllowed" *ngIf="!reorderAllowed" ios="ios-repeat" md="md-repeat"></ion-icon>
+      </button>
+      <button secondary (click)="toggleSearchBar($event)">
+        <ion-icon ios="ios-search" md="md-search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-searchbar
+    [hidden]="!searchBar"
+    [(ngModel)]="searchCategory"
+    [showCancelButton]="true"
+    [cancelButtonText]="CANCEL"
+    [debounce]=500
+    [autocomplete]="true"
+    [placeholder]="Search"
+    (ionInput)="searchMatches($event)"
+    (ionCancel)="toggleSearchBar($event)">
+  </ion-searchbar>
+</ion-header>
+
+<ion-content padding class="categories">
+  <button class="add-button" fab fab-bottom fab-right fab-fixed (click)="addCategory($event)">
+    <ion-icon ios="ios-add" md="md-add"></ion-icon>
+  </button>
+  <button  *ngIf="enableSelectToRemove" class="remove-button" fab fab-bottom fab-left fab-fixed (click)="removeCategories($event)">
+    <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+  </button>
+  <button  *ngIf="!enableSelectToRemove" class="remove-button" fab fab-bottom fab-left fab-fixed (click)="selectToRemove($event)">
+    <ion-icon ios="ios-remove" md="md-remove"></ion-icon>
+  </button>
+  <ion-list>
+    <ion-card *ngFor="let category of categories; let i = index" >
+      <ion-card-header>
+        <ion-row>
+          <ion-col width-66>
+            <ion-avatar item-left class="category-icon">
+              <img class="icon" src="{{category.icon}}" (click)="changeCategoryIcon($event, category)"/>
+            </ion-avatar>
+          </ion-col>
+          <ion-col width-33>
+            <button item-center danger large clear (click)="deleteCategory($event, category)">
+              <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col width-33>
+          <ion-input  class="categoryName"
+                      type="text"
+                      [(ngModel)]="category.categoryName">
+          </ion-input>
+          </ion-col>
+          <ion-col width-33>
+            <ion-item>
+              <ion-select class="categoryMeasurement" id="measurement" [(ngModel)]="category.measurement" (ngModelChange)="onMeasurementChange($event,category)">
+                <ion-option>UNIDADES</ion-option>
+                <ion-option>LITROS</ion-option>
+                <ion-option>GRAMOS</ion-option>
+                <ion-option>KG</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col width-25>
+            <ion-item class="measurementUnitStep">
+              <ion-label stacked>PASO_MEDIDA</ion-label>
+              <ion-input text-right [(ngModel)]="category.unitStep" min="1" type="number"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col width-10 *ngIf="enableSelectToRemove">
+            <ion-checkbox danger (click)="selectedCategory($event,category)"></ion-checkbox>
+          </ion-col>
+        </ion-row>
+      </ion-card-header>
+    </ion-card>
+  </ion-list>
+</ion-content>

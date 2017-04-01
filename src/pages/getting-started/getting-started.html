@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-navbar dark>
+    <button menuToggle>
+      <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
+    </button>
+    <ion-title>Inicio</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="list getting-started">
+    <ion-list>
+      <ion-card *ngIf="userAccount">
+        <ion-card-header>
+          <ion-item  (click)="addRemoveUserAccount()">
+            <ion-avatar item-right>
+              <button clear dark>
+                <ion-icon class="userAccountIcon" ios="ios-person" md="md-person"></ion-icon>
+              </button>
+            </ion-avatar>
+            <h2 class="userAccountLabel">NOMBRE DE USUARIO</h2>
+          </ion-item>
+        </ion-card-header>
+      </ion-card>
+      <ion-card *ngIf="reminders">
+        <ion-card-header>
+          <ion-item (click)="showReminders()">
+            <ion-avatar item-right>
+              <button clear dark>
+                <ion-icon class="reminderIcon" ios="ios-notifications" md="md-notifications"></ion-icon>
+              </button>
+            </ion-avatar>
+            <h2 class="reminderLabel">RECORDATORIOS</h2>
+          </ion-item>
+          <ion-list inset>
+              <ion-item ion-item  (click)="editReminder()">
+                <p class="item-info">
+                  <ion-icon class="item-icon" ios="ios-eye" md="md-eye"></ion-icon>
+                  Recuerda ... antes de HH:MM dd/mm/YYYY
+                </p>
+              </ion-item>
+          </ion-list>
+        </ion-card-header>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-item>
+            <ion-avatar item-right>
+              <button clear dark>
+                <ion-icon class="neededsIcon" large item-right ios="ios-cart" md="md-cart"></ion-icon>
+              </button>
+            </ion-avatar>
+            <h2 class="neededsLabel">ELEMENTOS NECESARIOS DE COMPRAR</h2>
+          </ion-item>
+          <ion-list inset>
+              <ion-item ion-item (click)="openInternalPage(shoppingListPage)">
+                <p class="item-info">
+                  <ion-icon class="item-icon" ios="ios-cart" md="md-cart"></ion-icon>
+                  Ver la lista de la compra
+                </p>
+              </ion-item>
+              <ion-item ion-item (click)="showItemsToShop()">
+                <p class="item-info">
+                  <ion-icon class="item-icon" ios="ios-basket" md="md-basket"></ion-icon>
+                  Ver lista de elementos necesarios de comprar
+                </p>
+              </ion-item>
+              <ion-item ion-item (click)="addItemsToShoppingList()">
+                <p class="item-info">
+                  <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+                  Añadir todos a la lista de la compra
+                </p>
+              </ion-item>
+          </ion-list>
+        </ion-card-header>
+      </ion-card>
+      <ion-card *ngIf="expires">
+        <ion-card-header>
+          <ion-item>
+            <ion-avatar item-right>
+              <button clear dark>
+                <ion-icon class="expiresIcon" large item-right ios="ios-warning" md="md-warning"></ion-icon>
+              </button>
+            </ion-avatar>
+            <h2 class="expiresLabel">ELEMENTOS CERCANOS A CADUCAR</h2>
+          </ion-item>
+          <ion-list inset>
+              <ion-item ion-item  (click)="showExpireItems()">
+                <p class="item-info">
+                  <ion-icon class="item-icon" ios="ios-eye" md="md-eye"></ion-icon>
+                  Ver lista de elementos a punto de caducar
+                </p>
+              </ion-item>
+          </ion-list>
+        </ion-card-header>
+      </ion-card>
+    </ion-list>
+</ion-content>

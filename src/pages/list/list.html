@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-navbar dark [hidden]="searchBar">
+    <button ion-button menuToggle>
+      <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
+    </button>
+    <ion-title>{{selectedItem}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="presentPopover($event)">
+        <ion-icon ios="ios-apps" md="md-apps"></ion-icon>
+      </button>
+      <button ion-button secondary (click)="reorder($event)">
+        <ion-icon ios="ios-repeat" md="md-repeat"></ion-icon>
+      </button>
+      <button ion-button secondary (click)="toggleSearchBar($event)">
+        <ion-icon ios="ios-search" md="md-search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-searchbar
+    [hidden]="!searchBar"
+    [(ngModel)]="searchItem"
+    [cancelButtonText]="CANCEL"
+    [debounce]=500
+    [showCancelButton]="true"
+    [autocomplete]="true"
+    [placeholder]="Search"
+    (ionInput)="searchMatches($event)"
+    (ionCancel)="toggleSearchBar($event)">
+  </ion-searchbar>
+</ion-header>
+
+<ion-content #popoverContent class="list" >
+  <button ion-button class="notifications-button" fab fab-top fab-right fab-fixed (click)="setNotification($event)">
+    <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+  </button>
+  <button ion-button class="star-button" fab fab-top fab-left fab-fixed (click)="saveRecoverList($event)">
+    <ion-icon ios="ios-star" md="md-star"></ion-icon>
+  </button>
+  <button ion-button class="add-button" fab fab-bottom fab-right fab-fixed (click)="addItem($event)">
+    <ion-icon ios="ios-add" md="md-add"></ion-icon>
+  </button>
+  <button ion-button class="remove-button" fab fab-bottom fab-left fab-fixed (click)="removeItems($event)">
+    <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+  </button>
+  <ion-list  #popoverText inset>
+
+    <div *ngIf="selectedItem!=='LISTA_COMPRA'">
+      <div *ngFor="let itemData of list; let i = index">
+        <item-data [(item)]="list[i]" [creating]="false" [icons]="icons"
+                    (edit)="editItem(list[i])"
+                    (remove)="removeItem(list[i])"
+                    (move)="moveItem(list[i])"></item-data>
+      </div>
+    </div>
+
+    <div *ngIf="selectedItem==='LISTA_COMPRA'">
+      <div *ngFor="let itemData of list; let i = index">
+        <item-data [(item)]="list[i]" [creating]="false" [icons]="icons"
+                    (edit)="editItem(list[i])"
+                    (remove)="removeItem(list[i])"
+                    (move)="moveItem(list[i])"></item-data>
+      </div>
+    </div>
+
+  </ion-list>
+</ion-content>

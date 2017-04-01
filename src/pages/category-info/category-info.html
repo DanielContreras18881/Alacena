@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar dark>
+      <ion-title [hidden]="!editing">
+          EDITING_CATEGORY
+      </ion-title>
+      <ion-title [hidden]="editing">
+          ADDING_CATEGORY
+      </ion-title>
+      <ion-buttons end>
+          <button primary (click)="save()"><ion-icon ios="ios-archive" md="md-archive"></ion-icon></button>
+          <button (click)="close()"><ion-icon ios="ios-close" md="md-close"></ion-icon></button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="item-info">
+  <ion-card>
+    <ion-card-header>
+      <ion-row>
+        <ion-col width-66>
+          <ion-avatar item-left class="category-icon">
+            <img class="icon" src="{{category.icon}}" (click)="changeCategoryIcon($event, category)"/>
+          </ion-avatar>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col width-50>
+        <ion-input  class="categoryName"
+                    type="text"
+                    [(ngModel)]="category.categoryName">
+        </ion-input>
+        </ion-col>
+        <ion-col width-50>
+        <ion-item>
+          <ion-select class="measurement" id="measurement" [(ngModel)]="category.measurement" (ngModelChange)="measurementChange($event)">
+            <ion-option>UNIDADES</ion-option>
+            <ion-option>LITROS</ion-option>
+            <ion-option>GRAMOS</ion-option>
+            <ion-option>KG</ion-option>
+          </ion-select>
+        </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+  </ion-card>
+</ion-content>

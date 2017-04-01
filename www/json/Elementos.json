@@ -1,0 +1,25 @@
+[ {
+  "nombreElemento": "Desodorante",
+  "category": {
+    "categoryName": "a",
+    "icon": "assets/images/icons/default.png",
+    "measurement": "UNIDADES",
+    "unitStep": 1
+  }
+}, {
+  "nombreElemento": "Otro",
+  "category": {
+    "categoryName": "a",
+    "icon": "assets/images/icons/default.png",
+    "measurement": "UNIDADES",
+    "unitStep": 1
+  }
+}, {
+  "nombreElemento": "Menos",
+  "category": {
+    "categoryName": "a",
+    "icon": "assets/images/icons/default.png",
+    "measurement": "UNIDADES",
+    "unitStep": 1
+  }
+} ]

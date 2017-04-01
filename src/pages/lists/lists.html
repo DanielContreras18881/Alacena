@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-navbar dark>
+    <button menuToggle>
+      <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
+    </button>
+    <ion-title>List management</ion-title>
+    <ion-buttons end>
+      <button (click)="reorder($event)">
+         <ion-icon secondary class="reorderAllowed" *ngIf="reorderAllowed" ios="ios-repeat" md="md-repeat"></ion-icon>
+         <ion-icon secondary class="reorderNotAllowed" *ngIf="!reorderAllowed" ios="ios-repeat" md="md-repeat"></ion-icon>
+      </button>
+      <button secondary (click)="toggleSearchBar($event)">
+        <ion-icon ios="ios-search" md="md-search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-searchbar
+    [hidden]="!searchBar"
+    [(ngModel)]="searchList"
+    [showCancelButton]="true"
+    [cancelButtonText]="CANCEL"
+    [debounce]=500
+    [autocomplete]="true"
+    [placeholder]="Search"
+    (ionInput)="searchMatches($event)"
+    (ionCancel)="toggleSearchBar($event)">
+  </ion-searchbar>
+</ion-header>
+
+<ion-content padding class="lists">
+  <button class="add-button" fab fab-bottom fab-right fab-fixed (click)="addList($event)">
+    <ion-icon ios="ios-add" md="md-add"></ion-icon>
+  </button>
+  <button class="remove-button" fab fab-bottom fab-left fab-fixed (click)="removeLists($event)">
+    <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+  </button>
+  <ion-list inset reorder="{{reorderAllowed}}" (ionItemReorder)="reorderItems($event)">
+    <div *ngFor="let list of lists">
+      <ion-card ion-item *ngIf="list.nombreLista!=='LISTA_COMPRA'" class="listCard">
+        <ion-card-header>
+<ion-row>
+          <ion-col width-75>
+            <ion-icon class="listName"
+                      dark large
+                      ios="ios-clipboard-outline" md="md-clipboard"
+                      (click)="listSelected($event, list.nombreLista)">
+              {{list.nombreLista}}
+            </ion-icon>
+</ion-col>
+<ion-col width-20>
+            <button item-center secondary clear (click)="editList($event,list)" class="buttonOperation">
+              <ion-icon ios="ios-create" md="md-create"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col width-20>
+            <button item-center danger clear (click)="removeList($event)" class="buttonOperation">
+              <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+            </button>
+          </ion-col>
+</ion-row>
+        </ion-card-header>
+        <ion-card-content>
+          <p class="info-list-items">
+            <ion-icon large primary ios="ios-cart" md="md-cart" class="iconListAdvice">
+              Tienes<ion-badge large item-right class="badge-info-list-items">4</ion-badge>elementos que deberías comprar
+            </ion-icon>
+          </p>
+          <p class="info-list-items">
+            <ion-icon large danger ios="ios-warning" md="md-warning" class="iconListAdvice">
+              Tienes<ion-badge large item-right  class="badge-info-list-items">3</ion-badge>elementos cercanos a caducar
+            </ion-icon>
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-list>
+</ion-content>

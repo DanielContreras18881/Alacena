@@ -1,0 +1,58 @@
+.listCard{
+  margin-bottom: 1rem;
+}
+
+.ion-ios-clipboard-outline:before{
+  font-size: 3.5rem;
+  margin-left: -2rem;
+}
+
+.listName{
+  font-size: 1.5rem;
+  white-space: normal;
+}
+
+.reorderAllowed{
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
+.reorderNotAllowed{
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.lists {
+    background-color: #999
+}
+
+ion-icon.iconListAdvice.item-icon.ion-ios-cart:before,
+ion-icon.iconListAdvice.item-icon.ion-ios-warning:before,
+ion-icon.iconListAdvice.item-icon.ion-md-cart:before,
+ion-icon.iconListAdvice.item-icon.ion-md-warning:before,
+{
+  font-size: 2.5rem;
+}
+
+p.info-list-items {
+    font-size: 1.15rem;
+    white-space: normal;
+}
+
+ion-badge.badge-info-list-items{
+  margin-top: 0.15rem;
+  margin-right: .15rem;
+  margin-bottom: 0.15rem;
+  margin-left: 0.15rem;
+  border-top-left-radius: 1.25rem;
+  border-top-right-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+  border-bottom-left-radius: 1.25rem;
+  font-size: 1rem;
+}

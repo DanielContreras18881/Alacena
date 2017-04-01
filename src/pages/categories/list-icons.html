@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar dark>
+      <ion-title>
+          SELECT ICON
+      </ion-title>
+      <ion-buttons end>
+          <button (click)="close()"><ion-icon ios="ios-close" md="md-close"></ion-icon></button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <button full large ion-button class="button-icon-search" (click)="selected($event,{})"><ion-icon ios="ios-search" md="md-search"></ion-icon></button>
+
+  <ion-row class="icon-row">
+    <ion-col *ngFor="let icon of icons" class="icon-col">
+      <img class="icon-img" src="{{icon.src}}" (click)="selected($event,icon)"/>
+    </ion-col>
+  </ion-row>
+</ion-content>

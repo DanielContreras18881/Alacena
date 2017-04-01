@@ -1,0 +1,25 @@
+<ion-menu [content]="content">
+
+  <ion-toolbar dark>
+    <ion-title>
+      <ion-item class="item-header-toolbar">
+        <ion-avatar item-left class="item-header-toolbar-avatar">
+          <img class="icon" src="icon.png"/>
+        </ion-avatar>
+        <ion-title>Alacena</ion-title>
+      </ion-item>
+    </ion-title>
+  </ion-toolbar>
+
+  <ion-content dark>
+    <ion-list>
+      <ion-item *ngFor="let p of pages" (click)="openPage(p)">
+          <ion-icon ios="ios-{{p.icon}}" md="md-{{p.icon}}"></ion-icon>
+          {{p.title}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false" dark></ion-nav>
