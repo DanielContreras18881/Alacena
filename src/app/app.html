@@ -1,5 +1,6 @@
 <ion-menu [content]="content">
 
+  <ion-content class="menu-content">
   <ion-toolbar dark>
     <ion-title>
       <ion-item class="item-header-toolbar">
@@ -10,16 +11,14 @@
       </ion-item>
     </ion-title>
   </ion-toolbar>
-
-  <ion-content dark>
-    <ion-list>
-      <ion-item *ngFor="let p of pages" (click)="openPage(p)">
+    <ion-list class="menu-list">
+      <button ion-item detail-none *ngFor="let p of pages" (click)="openPage(p)">
           <ion-icon ios="ios-{{p.icon}}" md="md-{{p.icon}}"></ion-icon>
           {{p.title}}
-      </ion-item>
+      </button>
     </ion-list>
   </ion-content>
 
 </ion-menu>
 
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false" dark></ion-nav>
+<ion-nav [root]="rootPage" #content swipe-back-enabled="false" dark></ion-nav>
