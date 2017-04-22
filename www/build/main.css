@@ -25407,6 +25407,15 @@ ion-navbar.toolbar {
   margin-left: -.15rem;
 }
 
+.item-md.item-block .item-inner {
+  border: none;
+}
+
+.publicidad {
+  background-color: black;
+  opacity: 1;
+}
+
 .add-button {
   background-color: blue;
   z-index: 99;
