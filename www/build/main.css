@@ -25394,7 +25394,7 @@ ion-navbar.toolbar {
 }
 
 .item-header-toolbar {
-  background-color: #222;
+  background-color: #f8f8f8;
   color: #fff;
 }
 
@@ -25405,6 +25405,38 @@ ion-navbar.toolbar {
 .item-header-toolbar-avatar img.icon {
   border-radius: 0;
   margin-left: -.15rem;
+}
+
+.add-button {
+  background-color: blue;
+  z-index: 99;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.add-button:hover {
+  background-color: blue !important;
+  z-index: 99;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.remove-button {
+  background-color: red;
+  z-index: 99;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.remove-button:hover {
+  background-color: red !important;
+  z-index: 99;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+button {
+  background-color: transparent;
 }
 
 .about {
@@ -25423,6 +25455,10 @@ ion-navbar.toolbar {
 
 .categoryMeasurementUnitStep {
   border: none;
+}
+
+.category-icon {
+  max-width: 5rem;
 }
 
 .button-icon-search {
@@ -25462,6 +25498,14 @@ ion-navbar.toolbar {
   background-color-margin: .75rem 0;
   background-color-line-height: .65rem;
   background-color-font-size: .35rem;
+}
+
+.getting-started button {
+  background-color: transparent;
+}
+
+p.item-info {
+  background-color: transparent;
 }
 
 p.item-info .ion-ios-eye:before,

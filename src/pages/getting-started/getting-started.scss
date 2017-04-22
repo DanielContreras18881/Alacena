@@ -7,6 +7,13 @@
     font-size: .35rem;
   }
 
+  button {
+      background-color:transparent;
+  }
+}
+
+p.item-info{
+  background-color:transparent;
 }
 
 p.item-info .ion-ios-eye:before,
@@ -23,40 +30,40 @@ p.item-info .ion-md-cart:before
 
 .userAccountIcon{
   font-size: 1.8rem;
-  color: #167140
+  color: #167140;
 }
 .userAccountLabel{
   font-size: 2.25rem!important;
   color: #167140;
-  white-space: normal
+  white-space: normal;
 }
 
 .reminderIcon{
   font-size: 1.65rem;
-  color: #320440
+  color: #320440;
 }
 .reminderLabel{
   font-size: 2rem!important;
   color: #320440;
-  white-space: normal
+  white-space: normal;
 }
 
 .neededsIcon{
   font-size: 1.5rem;
-  color: #F43300
+  color: #F43300;
 }
 .neededsLabel{
   font-size: 1.75rem!important;
   color: #F43300;
-  white-space: normal
+  white-space: normal;
 }
 
 .expiresIcon{
   font-size: 1.35rem;
-  color: #006655
+  color: #006655;
 }
 .expiresLabel{
   font-size: 1.5rem!important;
   color: #006655;
-  white-space: normal
+  white-space: normal;
 }

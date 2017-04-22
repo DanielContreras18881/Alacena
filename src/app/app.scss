@@ -11,7 +11,7 @@
 }
 
 .item-header-toolbar{
-  background-color: #222;
+  background-color: #f8f8f8;
   color: #fff;
 }
 .item .item-inner{
@@ -20,6 +20,33 @@
 .item-header-toolbar-avatar img.icon{
   border-radius: 0;
   margin-left: -.15rem
+}
+.add-button{
+  background-color: blue;
+  z-index: 99;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+.add-button:hover{
+  background-color: blue!important;
+  z-index: 99;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+.remove-button{
+  background-color: red;
+  z-index: 99;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+.remove-button:hover{
+  background-color: red!important;
+  z-index: 99;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+button{
+  background-color: transparent;
 }
 // App Global Sass
 // --------------------------------------------------
