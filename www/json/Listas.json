@@ -3,4 +3,14 @@
   "colorLista": "item-dark item item-complex",
   "colorBotones": "button-dark",
   "listaEditable": false
+}, {
+  "nombreLista": "aaaaa",
+  "colorLista": "item-dark item item-complex",
+  "colorBotones": "button-dark",
+  "listaEditable": false
+}, {
+  "nombreLista": "bbbb",
+  "colorLista": "item-dark item item-complex",
+  "colorBotones": "button-dark",
+  "listaEditable": false
 } ]

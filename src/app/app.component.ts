@@ -2,7 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav, App,
 //  LoadingController
 } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';;
 
 import {GettingStartedPage} from '../pages/getting-started/getting-started';
 import {ListPage} from '../pages/list/list';
@@ -11,14 +12,7 @@ import {ItemsPage} from '../pages/items/items';
 import {ConfigPage} from '../pages/config/config';
 import {AboutPage} from '../pages/about/about';
 import {CategoriesPage} from '../pages/categories/categories';
-
-import {ConfigData} from '../providers/data/config-data';
-import {ItemData} from '../providers/data/item-data';
-import {ListData} from '../providers/data/list-data';
-import {ListsData} from '../providers/data/lists-data';
-import {CategoriesData} from '../providers/data/categories-data';
-import {DefaultIcons} from '../providers/default-icons/default-icons';
-import {GlobalVars} from '../providers/global-vars/global-vars';
+//import {GlobalVars} from '../providers/global-vars/global-vars';
 
 
 @Component({
@@ -29,8 +23,8 @@ export class Alacena {
 
   @ViewChild(Nav) nav: Nav;
 
-  rootPage = GettingStartedPage;
-  // rootPage: any = ListsPage;
+  // rootPage = GettingStartedPage;
+  rootPage: any = ListsPage;
   // rootPage: any = ConfigPage;
   // rootPage: any = ItemsPage;
   // rootPage: any = CategoriesPage;
@@ -42,16 +36,12 @@ export class Alacena {
     platform: Platform,
     public menu: MenuController,
     public app: App,
-    //private load: LoadingController,
-    globalVars: GlobalVars,
-    private config: ConfigData,
-    private items: ItemData,
-    private list: ListData,
-    private lists: ListsData,
-    private categories: CategoriesData,
-    private icons: DefaultIcons
+    public splashScreen: SplashScreen,
+    public statusBar: StatusBar,
+    // private load: LoadingController,
+    // public globalVars: GlobalVars
   ) {
-
+/*
     config.getConfigData().then(data => {
       globalVars.setConfigData(data);
     });
@@ -61,21 +51,18 @@ export class Alacena {
     list.getListData().then(data => {
       globalVars.setListData(data);
     });
-    lists.getListsData().then(data => {
-      globalVars.setListsData(data);
-    });
     categories.getCategoriesData().then(data => {
       globalVars.setCategoriesData(data);
     });
     icons.getIcons().then(data => {
       globalVars.setDefaultIconsData(data);
     });
-
+*/
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      Splashscreen.hide();
-      StatusBar.styleDefault();
+      this.splashScreen.hide();
+      this.statusBar.styleDefault();
     });
 
     //loading: any;

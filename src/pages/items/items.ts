@@ -6,7 +6,9 @@ import {PipeFilterElements} from '../../pipes/pipefilterElements';
 
 import {OrderBy} from '../../pipes/orderBy';
 
-import {GlobalVars} from '../../providers/global-vars/global-vars';
+import {ItemData} from '../../providers/data/item-data';
+import {DefaultIcons} from '../../providers/default-icons/default-icons';
+import {ListsData} from '../../providers/data/lists-data';
 
 import {CategoriesService} from '../../providers/categories/categoriesService';
 /*
@@ -29,30 +31,39 @@ export class ItemsPage {
 
   constructor(
               public nav: NavController,
-              private globalVars: GlobalVars,
               public alertCtrl: AlertController,
               private order: OrderBy,
               private catService: CategoriesService,
+              private iconsData: DefaultIcons,
+              private itemsData: ItemData,
+              private listsData: ListsData,
               private filterElements: PipeFilterElements) {}
 
   ngOnInit() {
     this.itemsToRemove = [];
     this.searchBar = false;
     this.enableSelectToRemove = false;
-    this.icons = this.globalVars.getDefaulIconsData();
-    this.initializeItems();
+    this.itemsData.getItemsData().then(data => {
+      this.items = data;
+      this.initializeItems();
+    });
+    this.iconsData.getIcons().then(data => {
+      this.icons = data;
+    });
   }
 
   initializeItems() {
-    this.items = this.order.transform(this.globalVars.getItemsData(), ['+nombreElemento']);
-    let lists = this.globalVars.getListData();
-    let itemsFilled = [];
-    this.items.forEach((item, index) => {
-      let auxItem = item;
-      auxItem.lists = this.filterElements.transform(lists, item.nombreElemento);
-      itemsFilled.push(auxItem);
+    this.items = this.order.transform(this.items, ['+nombreElemento']);
+    this.listsData.getListsData().then(data => {
+      let lists = data;
+      let itemsFilled = [];
+      this.items.forEach((item, index) => {
+        let auxItem = item;
+        auxItem.lists = this.filterElements.transform(lists, item.nombreElemento);
+        itemsFilled.push(auxItem);
+      });
+      this.items = itemsFilled;
     });
-    this.items = itemsFilled;
   }
 
   searchMatches(event) {
@@ -86,9 +97,9 @@ export class ItemsPage {
         {
           text: 'Yes',
           handler: () => {
-            this.globalVars.getItemsData().splice(this.globalVars.getItemsData().indexOf(item), 1);
+            // this.globalVars.getItemsData().splice(this.globalVars.getItemsData().indexOf(item), 1);
             this.items.splice(this.items.indexOf(item), 1);
-            // TODO: Save data to storage
+            // TODO : Store changes
           }
         }
       ]
@@ -136,7 +147,8 @@ export class ItemsPage {
                   'cantidadMinima': 1,
                   'marked': false
                 };
-          this.globalVars.getListData().push(newItem);
+          // TODO : Store changes
+          // this.globalVars.getListData().push(newItem);
           auxItem.lists.push(newItem);
         });
       }
@@ -206,7 +218,8 @@ export class ItemsPage {
 
   removeItems(event) {
     this.itemsToRemove.forEach((item, index) => {
-      this.globalVars.getItemsData().splice(this.globalVars.getItemsData().indexOf(item), 1);
+      // this.globalVars.getItemsData().splice(this.globalVars.getItemsData().indexOf(item), 1);
+      // TODO : Store changes
       this.items.splice(this.items.indexOf(item), 1);
     });
     this.itemsToRemove = [];
@@ -244,7 +257,8 @@ addItem(event) {
       'marked': false
     };
     this.items[this.items.indexOf(item)].lists.push(newShoppingListItem);
-    this.globalVars.getListData().push(newShoppingListItem);
+    // TODO : Store changes
+    // this.globalVars.getListData().push(newShoppingListItem);
     // Logic to add to shopping list
   }
   /*

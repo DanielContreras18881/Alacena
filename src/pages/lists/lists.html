@@ -28,6 +28,7 @@
 </ion-header>
 
 <ion-content padding class="lists">
+
 <!--
   <button class="add-button" fab fab-bottom fab-right fab-fixed (click)="addList($event)">
     <ion-icon ios="ios-add" md="md-add"></ion-icon>
@@ -40,26 +41,26 @@
     <div *ngFor="let list of lists">
       <ion-card ion-item *ngIf="list.nombreLista!=='LISTA_COMPRA'" class="listCard">
         <ion-card-header>
-<ion-row>
-          <ion-col width-75>
-            <ion-icon class="listName"
-                      dark large
-                      ios="ios-clipboard-outline" md="md-clipboard"
-                      (click)="listSelected($event, list.nombreLista)">
-              {{list.nombreLista}}
-            </ion-icon>
-</ion-col>
-<ion-col width-20>
-            <button item-center secondary clear (click)="editList($event,list)" class="buttonOperation">
-              <ion-icon ios="ios-create" md="md-create"></ion-icon>
-            </button>
+          <ion-row>
+                    <ion-col width-75>
+                      <ion-icon class="listName"
+                                dark large
+                                ios="ios-clipboard-outline" md="md-clipboard"
+                                (click)="listSelected($event, list.nombreLista)">
+                        {{list.nombreLista}}
+                      </ion-icon>
           </ion-col>
           <ion-col width-20>
-            <button item-center danger clear (click)="removeList($event)" class="buttonOperation">
-              <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
-            </button>
-          </ion-col>
-</ion-row>
+                      <button item-center secondary clear (click)="editList($event,list)" class="buttonOperation">
+                        <ion-icon ios="ios-create" md="md-create"></ion-icon>
+                      </button>
+                    </ion-col>
+                    <ion-col width-20>
+                      <button item-center danger clear (click)="removeList($event)" class="buttonOperation">
+                        <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+                      </button>
+                    </ion-col>
+          </ion-row>
         </ion-card-header>
         <ion-card-content>
           <p class="info-list-items">

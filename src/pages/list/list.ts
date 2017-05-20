@@ -2,13 +2,13 @@ import {Component, ViewChild, ElementRef, EventEmitter, Input, Output} from '@an
 
 import { ModalController, AlertController, ViewController, NavParams, PopoverController} from 'ionic-angular';
 
-import {GlobalVars} from '../../providers/global-vars/global-vars';
-
-import {ItemData} from '../../components/item-data/item-data';
-
 import {PopoverPage} from '../../components/popover/popover';
 
 import {ItemInfoPage} from '../item-info/item-info';
+
+import {ListsData} from '../../providers/data/lists-data';
+import {ListData} from '../../providers/data/list-data';
+import {DefaultIcons} from '../../providers/default-icons/default-icons';
 
 import {OrderBy} from '../../pipes/orderBy';
 
@@ -32,21 +32,27 @@ export class ListPage {
             public mod: ModalController,
             public alertCtrl: AlertController,
             private popoverCtrl: PopoverController,
-            private globalVars: GlobalVars,
+            private listData: ListData,
+            private listsData: ListsData,
+            private iconsData: DefaultIcons,
             private order: OrderBy) {}
 
   ngOnInit() {
     this.searchBar = false;
     this.selectedItem = this.navParams.get('list');
-    this.icons = this.globalVars.getDefaulIconsData();
-    this.initializeItems();
+    this.iconsData.getIcons().then(data => {
+      this.icons = data;
+      this.initializeItems();
+    });
   }
 
   initializeItems() {
-    this.list = this.globalVars.getListData().filter((item) => {
-      if (item.nombreLista === this.selectedItem) {
-        return item;
-      }
+    this.listData.getListData().then(data => {
+      this.list = data.filter((item) => {
+        if (item.nombreLista === this.selectedItem) {
+          return item;
+        }
+      });
     });
   }
 
@@ -127,7 +133,7 @@ export class ListPage {
         {
           text: 'Yes',
           handler: () => {
-            this.globalVars.getListData().splice(this.globalVars.getListData().indexOf(item), 1);
+            // TODO : Store changes
             this.list.splice(this.list.indexOf(item), 1);
           }
         }
@@ -139,7 +145,7 @@ export class ListPage {
   editItem(item) {
     let infoListModal = this.mod.create(ItemInfoPage, {newItem: item, editing: true, icons: this.icons});
     infoListModal.onDidDismiss((item) => {
-// TODO: check if needed or action with items list
+      // TODO: check if needed or action with items list
     });
     infoListModal.present();
   }
@@ -148,37 +154,38 @@ export class ListPage {
     let move = this.alertCtrl.create();
     move.setTitle('Move to');
 
-    let lists: any = this.globalVars.getListsData();
-
-    lists.forEach((list: any) => {
-      let selected = false;
-      if (list.nombreLista !== item.nombreLista) {
-        if (list.nombreLista === 'LISTA_COMPRA') {
-          selected = true;
+    this.listsData.getListsData().then(data => {
+      let lists:any = data;
+      lists.forEach((list: any) => {
+        let selected = false;
+        if (list.nombreLista !== item.nombreLista) {
+          if (list.nombreLista === 'LISTA_COMPRA') {
+            selected = true;
+          }
+          move.addInput({
+            type: 'radio',
+            label: list.nombreLista,
+            value: list.nombreLista,
+            checked: selected
+          });
         }
-        move.addInput({
-          type: 'radio',
-          label: list.nombreLista,
-          value: list.nombreLista,
-          checked: selected
-        });
-      }
-    });
-
-    move.addButton('Cancel');
-    move.addButton({
-      text: 'OK',
-      handler: data => {
-        // this.globalVars.getListData().splice(this.globalVars.getListData().indexOf(item), 1);
-        if (item.nombreLista === 'LISTA_COMPRA') {
-          item.caduca = false;
+      });
+      move.addButton('Cancel');
+      move.addButton({
+        text: 'OK',
+        handler: data => {
+          // this.globalVars.getListData().splice(this.globalVars.getListData().indexOf(item), 1);
+          if (item.nombreLista === 'LISTA_COMPRA') {
+            item.caduca = false;
+          }
+          this.list.splice(this.list.indexOf(item), 1);
+          // TODO : Store changes
+          // this.globalVars.getListData()[this.globalVars.getListData().indexOf(item)].nombreLista = data;
+          // this.globalVars.getListData().push(item);
         }
-        this.list.splice(this.list.indexOf(item), 1);
-        this.globalVars.getListData()[this.globalVars.getListData().indexOf(item)].nombreLista = data;
-        // this.globalVars.getListData().push(item);
-      }
+      });
+      move.present();
     });
-    move.present();
   }
 
   addItem(event) {
@@ -201,7 +208,7 @@ export class ListPage {
     let infoListModal = this.mod.create(ItemInfoPage, {newItem: newItem, editing: false, icons: this.icons});
     infoListModal.onDidDismiss((item) => {
       if (item !== undefined) {
-        this.globalVars.getListData().push(item);
+        // TODO : Store changes
         this.list.push(item);
       }
     });
@@ -212,7 +219,7 @@ export class ListPage {
     let popover = this.popoverCtrl.create(PopoverPage, {
       list: this.list,
       selectedItem: this.selectedItem,
-      globalVars: this.globalVars
+      // TODO : Store changes
     });
     popover.present({
       ev: event

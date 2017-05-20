@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 
 import { ViewController, NavParams} from 'ionic-angular';
 
-import {ItemData} from '../../components/item-data/item-data';
+import {Item} from '../../components/item-data/item-data';
 
 /*
   Generated class for the ItemInfoPage page.

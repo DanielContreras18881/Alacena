@@ -1,7 +1,5 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 
-import {GlobalVars} from '../../providers/global-vars/global-vars';
-
 import {CategoriesService} from '../../providers/categories/categoriesService';
 /*
   Generated class for the ItemData component.
@@ -10,13 +8,13 @@ import {CategoriesService} from '../../providers/categories/categoriesService';
   for more info on Angular 2 Components.
 */
 @Component({
-  selector: 'item-data',
+  selector: 'item',
   templateUrl: 'item-data.html',
   inputs: ['item', 'creating'],
   providers: [CategoriesService]
   // outputs: ['remove', 'move', 'edit']
 })
-export class ItemData {
+export class Item {
   @Input() item: any;
   @Input() creating: boolean;
   @Input() icons: any;
@@ -26,7 +24,7 @@ export class ItemData {
 
   unitStep: number = 0.1;
 
-  constructor(private catService: CategoriesService, private globalVars: GlobalVars) {}
+  constructor(private catService: CategoriesService) {}
 
   changeUnitStep(measurement) {
     if (measurement === 'UNIDADES') {

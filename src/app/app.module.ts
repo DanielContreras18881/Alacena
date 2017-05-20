@@ -1,6 +1,11 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
+import { BrowserModule } from '@angular/platform-browser';
 import { Alacena } from './app.component';
+import { HttpModule } from '@angular/http';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+
 
 import {ConfigData} from '../providers/data/config-data';
 import {ItemData} from '../providers/data/item-data';
@@ -9,7 +14,7 @@ import {ListsData} from '../providers/data/lists-data';
 import {CategoriesData} from '../providers/data/categories-data';
 import {DefaultIcons} from '../providers/default-icons/default-icons';
 
-import {GlobalVars} from '../providers/global-vars/global-vars';
+//import {GlobalVars} from '../providers/global-vars/global-vars';
 import {CategoriesService} from '../providers/categories/categoriesService';
 
 import {GettingStartedPage} from '../pages/getting-started/getting-started';
@@ -19,6 +24,8 @@ import {ItemsPage} from '../pages/items/items';
 import {ConfigPage} from '../pages/config/config';
 import {AboutPage} from '../pages/about/about';
 import {CategoriesPage} from '../pages/categories/categories';
+
+import { Item } from '../components/item-data/item-data';
 
 @NgModule({
   declarations: [
@@ -30,8 +37,11 @@ import {CategoriesPage} from '../pages/categories/categories';
     ConfigPage,
     AboutPage,
     CategoriesPage,
+    Item,
   ],
   imports: [
+    BrowserModule,
+    HttpModule,
     IonicModule.forRoot(Alacena)
   ],
   bootstrap: [IonicApp],
@@ -44,8 +54,9 @@ import {CategoriesPage} from '../pages/categories/categories';
     ConfigPage,
     AboutPage,
     CategoriesPage,
+    Item,
   ],
-  providers: [CategoriesService, GlobalVars, DefaultIcons, CategoriesData, ListsData, ListData, ItemData, ConfigData],
+  providers: [CategoriesService, DefaultIcons, CategoriesData, ListsData, ListData, ItemData, ConfigData, SplashScreen, StatusBar],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule {}

@@ -3,10 +3,10 @@ import {Component} from '@angular/core';
 import { ModalController, AlertController} from 'ionic-angular';
 
 import {CategoriesService} from '../../providers/categories/categoriesService';
+import {CategoriesData} from '../../providers/data/categories-data';
+import {DefaultIcons} from '../../providers/default-icons/default-icons';
 
 import {OrderBy} from '../../pipes/orderBy';
-
-import {GlobalVars} from '../../providers/global-vars/global-vars';
 
 import {CategoryInfoPage} from '../category-info/category-info';
 
@@ -29,22 +29,28 @@ export class CategoriesPage {
   public categoriesToRemove: any;
 
   constructor(
-              private globalVars: GlobalVars,
               public mod: ModalController,
               public alertCtrl: AlertController,
               private catService: CategoriesService,
+              private categoriesData: CategoriesData,
+              private iconsData: DefaultIcons,
               private order: OrderBy) {}
 
   ngOnInit() {
     this.searchBar = false;
     this.enableSelectToRemove = false;
     this.categoriesToRemove = [];
-    this.icons = this.globalVars.getDefaulIconsData();
+    this.categoriesData.getCategoriesData().then(data => {
+      this.categories = data;
+    });
+    this.iconsData.getIcons().then(data => {
+      this.icons = data;
+    });
     this.initializeCategories();
   }
 
   initializeCategories() {
-    this.categories = this.order.transform(this.globalVars.getCategoriesData(), ['+categoryName']);
+    this.categories = this.order.transform(this.categories, ['+categoryName']);
   }
 
   searchMatches(event) {
@@ -78,9 +84,9 @@ export class CategoriesPage {
         {
           text: 'Yes',
           handler: () => {
-            this.globalVars.getCategoriesData().splice(this.globalVars.getCategoriesData().indexOf(category), 1);
+            // this.globalVars.getCategoriesData().splice(this.globalVars.getCategoriesData().indexOf(category), 1);
             this.categories.splice(this.categories.indexOf(category), 1);
-            // Save data to storage
+            // TODO : Store changes
           }
         }
       ]
@@ -98,7 +104,8 @@ export class CategoriesPage {
     let categoryModal = this.mod.create(CategoryInfoPage, {newCategory: newCategory, icons: this.icons});
     categoryModal.onDidDismiss((item) => {
       if (item !== undefined) {
-        this.globalVars.getCategoriesData().push(item);
+        // TODO : Store changes
+        // this.globalVars.getCategoriesData().push(item);
         // this.categories.push(newCategory);
       }
     });
@@ -130,7 +137,8 @@ removeCategories(event) {
 
   removeCategories(event) {
     this.categoriesToRemove.forEach((category, index) => {
-      this.globalVars.getCategoriesData().splice(this.globalVars.getCategoriesData().indexOf(category), 1);
+      // TODO : Store changes
+      //this.globalVars.getCategoriesData().splice(this.globalVars.getCategoriesData().indexOf(category), 1);
       this.categories.splice(this.categories.indexOf(category), 1);
     });
     this.categoriesToRemove = [];
