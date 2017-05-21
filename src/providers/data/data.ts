@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 
-// TODO: remove or redefine 
+// TODO: remove or redefine
 
 /*
   Generated class for the Data provider.
@@ -20,7 +20,7 @@ export class Data {
   constructor(public http: Http) {}
 
   getConfigData(): any {
-    let path = 'json/Configuracion.json';
+    let path = 'assets/json/Configuracion.json';
     return this.http.get(path);
   }
 

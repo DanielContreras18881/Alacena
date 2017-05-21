@@ -6,9 +6,7 @@ import {PopoverPage} from '../../components/popover/popover';
 
 import {ItemInfoPage} from '../item-info/item-info';
 
-import {ListsData} from '../../providers/data/lists-data';
-import {ListData} from '../../providers/data/list-data';
-import {DefaultIcons} from '../../providers/default-icons/default-icons';
+import {GlobalVars} from '../../providers/global-vars/global-vars';
 
 import {OrderBy} from '../../pipes/orderBy';
 
@@ -32,22 +30,20 @@ export class ListPage {
             public mod: ModalController,
             public alertCtrl: AlertController,
             private popoverCtrl: PopoverController,
-            private listData: ListData,
-            private listsData: ListsData,
-            private iconsData: DefaultIcons,
+            private globalVars: GlobalVars,
             private order: OrderBy) {}
 
   ngOnInit() {
     this.searchBar = false;
     this.selectedItem = this.navParams.get('list');
-    this.iconsData.getIcons().then(data => {
+    this.globalVars.getDefaulIconsData().then(data => {
       this.icons = data;
       this.initializeItems();
     });
   }
 
   initializeItems() {
-    this.listData.getListData().then(data => {
+    this.globalVars.getListData().then(data => {
       this.list = data.filter((item) => {
         if (item.nombreLista === this.selectedItem) {
           return item;
@@ -154,7 +150,7 @@ export class ListPage {
     let move = this.alertCtrl.create();
     move.setTitle('Move to');
 
-    this.listsData.getListsData().then(data => {
+    this.globalVars.getListsData().then(data => {
       let lists:any = data;
       lists.forEach((list: any) => {
         let selected = false;
@@ -174,14 +170,13 @@ export class ListPage {
       move.addButton({
         text: 'OK',
         handler: data => {
-          // this.globalVars.getListData().splice(this.globalVars.getListData().indexOf(item), 1);
           if (item.nombreLista === 'LISTA_COMPRA') {
             item.caduca = false;
           }
-          this.list.splice(this.list.indexOf(item), 1);
+          //item.nombreLista = data.nombreLista;
+          // this.list.splice(this.list.indexOf(item), 1);
           // TODO : Store changes
-          // this.globalVars.getListData()[this.globalVars.getListData().indexOf(item)].nombreLista = data;
-          // this.globalVars.getListData().push(item);
+          //this.globalVars.setListData(this.list);
         }
       });
       move.present();
@@ -210,6 +205,7 @@ export class ListPage {
       if (item !== undefined) {
         // TODO : Store changes
         this.list.push(item);
+        //this.globalVars.setListData(this.list);
       }
     });
     infoListModal.present();

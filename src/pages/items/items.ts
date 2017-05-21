@@ -6,9 +6,7 @@ import {PipeFilterElements} from '../../pipes/pipefilterElements';
 
 import {OrderBy} from '../../pipes/orderBy';
 
-import {ItemData} from '../../providers/data/item-data';
-import {DefaultIcons} from '../../providers/default-icons/default-icons';
-import {ListsData} from '../../providers/data/lists-data';
+import {GlobalVars} from '../../providers/global-vars/global-vars';
 
 import {CategoriesService} from '../../providers/categories/categoriesService';
 /*
@@ -34,27 +32,25 @@ export class ItemsPage {
               public alertCtrl: AlertController,
               private order: OrderBy,
               private catService: CategoriesService,
-              private iconsData: DefaultIcons,
-              private itemsData: ItemData,
-              private listsData: ListsData,
+              private globalVars: GlobalVars,
               private filterElements: PipeFilterElements) {}
 
   ngOnInit() {
     this.itemsToRemove = [];
     this.searchBar = false;
     this.enableSelectToRemove = false;
-    this.itemsData.getItemsData().then(data => {
+    this.globalVars.getItemsData().then(data => {
       this.items = data;
       this.initializeItems();
     });
-    this.iconsData.getIcons().then(data => {
+    this.globalVars.getDefaulIconsData().then(data => {
       this.icons = data;
     });
   }
 
   initializeItems() {
     this.items = this.order.transform(this.items, ['+nombreElemento']);
-    this.listsData.getListsData().then(data => {
+    this.globalVars.getListsData().then(data => {
       let lists = data;
       let itemsFilled = [];
       this.items.forEach((item, index) => {

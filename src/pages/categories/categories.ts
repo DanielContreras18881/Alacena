@@ -3,8 +3,8 @@ import {Component} from '@angular/core';
 import { ModalController, AlertController} from 'ionic-angular';
 
 import {CategoriesService} from '../../providers/categories/categoriesService';
-import {CategoriesData} from '../../providers/data/categories-data';
-import {DefaultIcons} from '../../providers/default-icons/default-icons';
+
+import {GlobalVars} from '../../providers/global-vars/global-vars';
 
 import {OrderBy} from '../../pipes/orderBy';
 
@@ -32,18 +32,17 @@ export class CategoriesPage {
               public mod: ModalController,
               public alertCtrl: AlertController,
               private catService: CategoriesService,
-              private categoriesData: CategoriesData,
-              private iconsData: DefaultIcons,
+              private globalVars: GlobalVars,
               private order: OrderBy) {}
 
   ngOnInit() {
     this.searchBar = false;
     this.enableSelectToRemove = false;
     this.categoriesToRemove = [];
-    this.categoriesData.getCategoriesData().then(data => {
+    this.globalVars.getCategoriesData().then(data => {
       this.categories = data;
     });
-    this.iconsData.getIcons().then(data => {
+    this.globalVars.getDefaulIconsData().then(data => {
       this.icons = data;
     });
     this.initializeCategories();

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {ConfigData} from '../../providers/data/config-data';
+import {GlobalVars} from '../../providers/global-vars/global-vars';
 
 /*
   Generated class for the ConfigPage page.
@@ -19,8 +19,10 @@ export class ConfigPage {
   public idiomas;
   public idiomaSelecciondo;
 
-  constructor(private configDataStore: ConfigData) {
-    this.configDataStore.getConfigData().then(data => {
+  constructor(
+    private globalVars: GlobalVars
+  ) {
+    this.globalVars.getConfigData().then(data => {
       this.configData = data;
       this.idiomas = this.configData.idiomas;
       this.idiomaSelecciondo = this.configData.idiomaDefault;

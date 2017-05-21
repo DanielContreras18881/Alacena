@@ -14,7 +14,7 @@ import {ListsData} from '../providers/data/lists-data';
 import {CategoriesData} from '../providers/data/categories-data';
 import {DefaultIcons} from '../providers/default-icons/default-icons';
 
-//import {GlobalVars} from '../providers/global-vars/global-vars';
+import {GlobalVars} from '../providers/global-vars/global-vars';
 import {CategoriesService} from '../providers/categories/categoriesService';
 
 import {GettingStartedPage} from '../pages/getting-started/getting-started';
@@ -56,7 +56,7 @@ import { Item } from '../components/item-data/item-data';
     CategoriesPage,
     Item,
   ],
-  providers: [CategoriesService, DefaultIcons, CategoriesData, ListsData, ListData, ItemData, ConfigData, SplashScreen, StatusBar],
+  providers: [CategoriesService, DefaultIcons, CategoriesData, ListsData, ListData, ItemData, ConfigData, SplashScreen, StatusBar, GlobalVars],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule {}

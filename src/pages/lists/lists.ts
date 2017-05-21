@@ -2,7 +2,7 @@ import {Component, ChangeDetectorRef, OnDestroy} from '@angular/core';
 
 import { Modal, ModalController, AlertController, NavController, NavParams, Popover} from 'ionic-angular';
 
-import {ListsData} from '../../providers/data/lists-data';
+import {GlobalVars} from '../../providers/global-vars/global-vars';
 
 import {ListPage} from '../list/list';
 
@@ -21,8 +21,8 @@ export class ListsPage {
               navParams: NavParams,
               public mod: ModalController,
               public alertCtrl: AlertController,
-              private listsData: ListsData) {
-      listsData.getListsData().then(data => {
+              private globalVars: GlobalVars) {
+      globalVars.getListsData().then(data => {
         this.lists = data;
         this.reorderAllowed = false;
       });

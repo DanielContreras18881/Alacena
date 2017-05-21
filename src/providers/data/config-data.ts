@@ -14,7 +14,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ConfigData {
   configData: any = null;
-  path = 'json/Configuracion.json';
+  path = 'assets/json/Configuracion.json';
 
   constructor(public http: Http) {}
 

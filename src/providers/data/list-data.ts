@@ -14,7 +14,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ListData {
   listData: any = null;
-  path = 'json/CantidadElementoLista.json';
+  path = 'assets/json/CantidadElementoLista.json';
 
   constructor(public http: Http) {}
 

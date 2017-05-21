@@ -14,7 +14,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DefaultIcons {
   icons: any = null;
-  path = 'json/defaultIcons.json';
+  path = 'assets/json/defaultIcons.json';
 
   constructor(public http: Http) {}
 

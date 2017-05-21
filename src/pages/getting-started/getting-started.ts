@@ -4,6 +4,7 @@ import { NavController} from 'ionic-angular';
 
 import {ListPage} from '../list/list';
 
+import {GlobalVars} from '../../providers/global-vars/global-vars';
 
 @Component({
   templateUrl: 'getting-started.html'
@@ -14,7 +15,15 @@ export class GettingStartedPage {
   private expires: boolean = true;
   private reminders: boolean = true;
 
-  constructor(public navCtrl: NavController) {
+  constructor(
+    public navCtrl: NavController,
+    private globalVars: GlobalVars) {
+      globalVars.getListsData().then(data => {
+
+      });
+      globalVars.getListData().then(data => {
+
+      });
   }
 
   openInternalPage(page) {
