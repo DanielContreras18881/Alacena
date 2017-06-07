@@ -4,7 +4,9 @@
     "build": "ionic-app-scripts build",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
-    "test": "karma start karma.conf.js"
+    "test": "karma start karma.conf.js",
+    "toGit": "git push -uf git master",
+    "toBit": "git push -uf origin master"
   },
   "dependencies": {
     "@angular/common": "4.0.2",
