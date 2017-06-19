@@ -1,6 +1,5 @@
 {
   "name": "AlacenaTest",
   "app_id": "fdb00fb5",
-  "v2": true,
-  "typescript": true
+  "type": "ionic-angular"
 }

@@ -14,6 +14,9 @@ import {AboutPage} from '../pages/about/about';
 import {CategoriesPage} from '../pages/categories/categories';
 
 
+import { Storage } from '@ionic/storage';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.html'
@@ -32,6 +35,7 @@ export class Alacena {
     public app: App,
     public splashScreen: SplashScreen,
     public statusBar: StatusBar,
+    private storage: Storage
     // private load: LoadingController
   ) {
     platform.ready().then(() => {
@@ -41,6 +45,7 @@ export class Alacena {
       this.statusBar.styleDefault();
     });
 
+    this.storage.set('name', 'Max');
     //loading: any;
 
     this.pages = [
@@ -55,6 +60,9 @@ export class Alacena {
   }
 
   openPage(page) {
+      this.storage.get('name').then((val) => {
+        console.log('Your name is', val);
+      });
     // close the menu when clicking a link from the menu
     this.menu.close();
     // TODO: check this behaviour, not always shows spinner

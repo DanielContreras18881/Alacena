@@ -1,11 +1,13 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { BrowserModule } from '@angular/platform-browser';
 import { Alacena } from './app.component';
 import { HttpModule } from '@angular/http';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { IonicStorageModule } from '@ionic/storage';
 
+import { SentryErrorHandler } from '../services/sentry-errorhandler';
 
 import {ConfigData} from '../providers/data/config-data';
 import {ItemData} from '../providers/data/item-data';
@@ -42,7 +44,8 @@ import { Item } from '../components/item-data/item-data';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(Alacena)
+    IonicModule.forRoot(Alacena),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -56,7 +59,7 @@ import { Item } from '../components/item-data/item-data';
     CategoriesPage,
     Item,
   ],
-  providers: [CategoriesService, DefaultIcons, CategoriesData, ListsData, ListData, ItemData, ConfigData, SplashScreen, StatusBar, GlobalVars],
+  providers: [{provide: ErrorHandler, useClass: SentryErrorHandler},CategoriesService, DefaultIcons, CategoriesData, ListsData, ListData, ItemData, ConfigData, SplashScreen, StatusBar, GlobalVars],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule {}

@@ -6,10 +6,10 @@ import {ListIconsPage} from '../../pages/categories/list-icons';
 
 import {DefaultIcons} from '../../providers/default-icons/default-icons';
 import {CategoriesData} from '../../providers/data/categories-data';
-
+/*
 import { Camera } from 'ionic-native';
 import { ImagePicker } from 'ionic-native';
-
+*/
 @Injectable()
 
 export class CategoriesService {
@@ -72,6 +72,7 @@ export class CategoriesService {
               {
                 text: 'Camera',
                 handler: () => {
+                  /*
                   Camera.getPicture({}).then((imageData) => {
                     console.log(imageData);
                     category.icon = imageData;
@@ -83,21 +84,24 @@ export class CategoriesService {
                   }, (err) => {
                    // Handle error
                   });
+                  */
                 }
               },
               {
                 text: 'Gallery',
                 handler: () => {
+                  /*
                   ImagePicker.getPictures({}).then((results) => {
                     console.log(results[0]);
                     category.icon = results[0];
-                    /*
+
                     for (var i = 0; i < results.length; i++) {
                         console.log('Image URI: ' + results[i]);
                         // Save data to storage
                     }
-                    */
+
                   }, (err) => { });
+                  */
                 }
               }
             ]
