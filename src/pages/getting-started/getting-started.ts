@@ -1,6 +1,7 @@
 import {Component,NgZone} from '@angular/core';
 
 import { GooglePlus } from '@ionic-native/google-plus';
+//import { DriveService } from '../../services/drive.service';
 import firebase from 'firebase';
 
 import { NavController, Platform} from 'ionic-angular';
@@ -8,6 +9,8 @@ import { NavController, Platform} from 'ionic-angular';
 import {ListPage} from '../list/list';
 
 import {GlobalVars} from '../../providers/global-vars/global-vars';
+
+declare var gapi: any;
 
 @Component({
   templateUrl: 'getting-started.html'
@@ -32,6 +35,7 @@ export class GettingStartedPage {
         this.zone.run( () => {
           if (user){
             this.userProfile = user;
+            gapi.load('client',this.listFiles);
           } else {
             this.userProfile = null;
           }
@@ -83,6 +87,8 @@ export class GettingStartedPage {
         (result) => {
           console.log(result)
           this.userProfile = result.user;
+              gapi.auth.setToken(this.userProfile.oauthAccessToken);
+              gapi.client.load('drive', 'v3', this.listFiles);
         },
         (error) => {
           console.log(error)
@@ -93,6 +99,8 @@ export class GettingStartedPage {
             (result) => {
               console.log(result)
               this.userProfile = result.user;
+              gapi.auth.setToken(this.userProfile.oauthAccessToken);
+              gapi.client.load('drive', 'v3', this.listFiles);
             },
             (error) => {
               console.log(error)
@@ -112,6 +120,47 @@ export class GettingStartedPage {
           .catch( error => console.log("Firebase failure: " + JSON.stringify(error)));
       }).catch(err => console.error("Error: ", err));
       */
+  }
+
+  listFiles(){
+    //gapi.auth.setToken(this.userProfile.oauthAccessToken);
+    var request = gapi.client.request({
+      'path': 'https://content.googleapis.com/drive/v2/files?key=AIzaSyD-a9IF8KKYgoC3cpgS-Al7hLQDbugrDcw',
+    });
+    console.log(request);
+    request.execute(function(resp) {
+      console.log(resp)
+    })
+    /*
+        gapi.client.people.people.get({
+          'resourceName': 'people/me',
+          'requestMask.includeField': 'person.names'
+        }).then(function(response) {
+          console.log('Hello, ' + response.result.names[0].givenName);
+        }, function(reason) {
+          console.log('Error: ' + reason.result.error.message);
+        });
+    */
+/*
+var request = gapi.client.drive.files.list({
+            'pageSize': 10,
+            'fields': "nextPageToken, files(id, name)"
+          });
+
+          request.execute(function(resp) {
+        this.appendPre('Files:');
+        var files = resp.files;
+        if (files && files.length > 0) {
+          for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            console.log(file.name + ' (' + file.id + ')');
+          }
+        } else {
+          console.log('no')
+        }
+      });
+*/
+
   }
 
   addItemsToShoppingList() {
