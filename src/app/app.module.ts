@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 import { SentryErrorHandler } from '../services/sentry-errorhandler';
 
@@ -59,7 +60,11 @@ import { Item } from '../components/item-data/item-data';
     CategoriesPage,
     Item,
   ],
-  providers: [{provide: ErrorHandler, useClass: SentryErrorHandler},CategoriesService, DefaultIcons, CategoriesData, ListsData, ListData, ItemData, ConfigData, SplashScreen, StatusBar, GlobalVars],
+  providers: [
+    {provide: ErrorHandler, useClass: SentryErrorHandler},
+    GooglePlus,
+    CategoriesService, DefaultIcons, CategoriesData, ListsData, ListData, ItemData, ConfigData, SplashScreen, StatusBar, GlobalVars
+  ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule {}

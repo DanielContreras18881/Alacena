@@ -15,6 +15,7 @@ import {CategoriesPage} from '../pages/categories/categories';
 
 
 import { Storage } from '@ionic/storage';
+import firebase from 'firebase';
 
 
 @Component({
@@ -38,6 +39,16 @@ export class Alacena {
     private storage: Storage
     // private load: LoadingController
   ) {
+
+    firebase.initializeApp({
+      apiKey: "AIzaSyCq_XZBezFcC_iAWa-i12swT0YL9sqvjfM",
+      authDomain: "alacena-58699.firebaseapp.com",
+      databaseURL: "https://alacena-58699.firebaseio.com",
+      projectId: "alacena-58699",
+      storageBucket: "alacena-58699.appspot.com",
+      messagingSenderId: "354280052179"
+    });
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
