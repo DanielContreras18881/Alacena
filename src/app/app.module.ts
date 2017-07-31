@@ -16,6 +16,7 @@ import {ListData} from '../providers/data/list-data';
 import {ListsData} from '../providers/data/lists-data';
 import {CategoriesData} from '../providers/data/categories-data';
 import {DefaultIcons} from '../providers/default-icons/default-icons';
+import { CloudStorage } from '../providers/data/cloudStorage';
 
 import {GlobalVars} from '../providers/global-vars/global-vars';
 import {CategoriesService} from '../providers/categories/categoriesService';
@@ -61,9 +62,9 @@ import { Item } from '../components/item-data/item-data';
     Item,
   ],
   providers: [
-    {provide: ErrorHandler, useClass: SentryErrorHandler},
+    //{provide: ErrorHandler, useClass: SentryErrorHandler},
     GooglePlus,
-    CategoriesService, DefaultIcons, CategoriesData, ListsData, ListData, ItemData, ConfigData, SplashScreen, StatusBar, GlobalVars
+    CloudStorage, CategoriesService, DefaultIcons, CategoriesData, ListsData, ListData, ItemData, ConfigData, SplashScreen, StatusBar, GlobalVars
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

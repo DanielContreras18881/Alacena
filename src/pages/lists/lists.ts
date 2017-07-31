@@ -22,7 +22,7 @@ export class ListsPage {
               public mod: ModalController,
               public alertCtrl: AlertController,
               private globalVars: GlobalVars) {
-      globalVars.getListsData().then(data => {
+      globalVars.getListsData({}).then(data => {
         this.lists = data;
         this.reorderAllowed = false;
       });

@@ -50,7 +50,7 @@ export class ItemsPage {
 
   initializeItems() {
     this.items = this.order.transform(this.items, ['+nombreElemento']);
-    this.globalVars.getListsData().then(data => {
+    this.globalVars.getListsData({}).then(data => {
       let lists = data;
       let itemsFilled = [];
       this.items.forEach((item, index) => {

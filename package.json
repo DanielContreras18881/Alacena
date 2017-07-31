@@ -24,6 +24,7 @@
     "@ionic-native/status-bar": "3.4.2",
     "@ionic/storage": "^2.0.1",
     "@types/gapi": "0.0.33",
+    "@types/google-drive-realtime-api": "0.0.33",
     "bourbon": "4.3.4",
     "cordova-android": "~5.1.1",
     "cordova-ios": "~4.1.1",

@@ -41,7 +41,8 @@ export class Alacena {
   ) {
 
     firebase.initializeApp({
-      apiKey: "AIzaSyCq_XZBezFcC_iAWa-i12swT0YL9sqvjfM",
+      apiKey: "AIzaSyCq_XZBezFcC_iAWa-i12swT0YL9sqvjfM",//Firebase
+      //apiKey: "AIzaSyCYbNChWjDtLYXkm_ayPQeb4t4TjWDXWd0",//GoogleDevConsole
       authDomain: "alacena-58699.firebaseapp.com",
       databaseURL: "https://alacena-58699.firebaseio.com",
       projectId: "alacena-58699",

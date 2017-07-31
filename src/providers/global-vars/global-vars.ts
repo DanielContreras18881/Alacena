@@ -52,12 +52,13 @@ export class GlobalVars {
     this.listsData = value;
   }
 
-  getListsData() {
+  getListsData(userProfile:any) {
+	  //console.log(1+':'+JSON.stringify(userProfile))
     if(this.listsData){
       return Promise.resolve(this.listsData);
     }else{
       return new Promise(resolve => {
-        this.listsDataService.getListsData().then(data => {
+			this.listsDataService.getListsData(userProfile).then(data => {
           this.listsData = data;
           resolve(data);
         });

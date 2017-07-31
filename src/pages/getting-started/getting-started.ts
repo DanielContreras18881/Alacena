@@ -1,7 +1,7 @@
 import {Component,NgZone} from '@angular/core';
 
 import { GooglePlus } from '@ionic-native/google-plus';
-//import { DriveService } from '../../services/drive.service';
+//import * as Drive from "gapi.drive.realtime";
 import firebase from 'firebase';
 
 import { NavController, Platform} from 'ionic-angular';
@@ -11,6 +11,7 @@ import {ListPage} from '../list/list';
 import {GlobalVars} from '../../providers/global-vars/global-vars';
 
 declare var gapi: any;
+declare var self: any;
 
 @Component({
   templateUrl: 'getting-started.html'
@@ -28,25 +29,30 @@ export class GettingStartedPage {
     public plt: Platform,
     private googlePlus: GooglePlus,
     public navCtrl: NavController,
-    private globalVars: GlobalVars) {
+	 private globalVars: GlobalVars) {
 
-      this.zone = new NgZone({});
+	  //var ref = new firebase.initializeApp("https://<YOUR-FIREBASE-APP>.firebaseio.com");
+	  //ref.onAuth(authDataCallback);
+
+		this.zone = new NgZone({});
+		self = this;
       firebase.auth().onAuthStateChanged( user => {
         this.zone.run( () => {
           if (user){
-            this.userProfile = user;
-            gapi.load('client',this.listFiles);
+				this.userProfile = user;
+				//gapi.auth.setToken(this.userProfile.oauthAccessToken);
+				//gapi.client.load('drive', 'v3', this.listFiles);			
           } else {
             this.userProfile = null;
           }
-        });
-      });
+		  });
+		  
+		  globalVars.getListsData(this.userProfile).then(data => {
+			//console.log(data)
+		  });
+		  globalVars.getListData().then(data => {
 
-      globalVars.getListsData().then(data => {
-
-      });
-      globalVars.getListData().then(data => {
-
+		  });		  
       });
   }
 
@@ -86,7 +92,8 @@ export class GettingStartedPage {
       firebase.auth().signInWithPopup(provider).then(
         (result) => {
           console.log(result)
-          this.userProfile = result.user;
+			 this.userProfile = result.user;
+			 console.log(2)
               gapi.auth.setToken(this.userProfile.oauthAccessToken);
               gapi.client.load('drive', 'v3', this.listFiles);
         },
@@ -98,7 +105,8 @@ export class GettingStartedPage {
           firebase.auth().signInWithRedirect(provider).then(
             (result) => {
               console.log(result)
-              this.userProfile = result.user;
+				  this.userProfile = result.user;
+				  console.log(3)
               gapi.auth.setToken(this.userProfile.oauthAccessToken);
               gapi.client.load('drive', 'v3', this.listFiles);
             },
@@ -123,14 +131,62 @@ export class GettingStartedPage {
   }
 
   listFiles(){
-    //gapi.auth.setToken(this.userProfile.oauthAccessToken);
+/*	  
+	  const storage = firebase.storage();
+	  let fileName = 'prueba.json';
+	  let fileRef = storage.ref('lists/' + fileName);
+	  var uploadTask = fileRef.putString(`
+	  [{
+		  "categoryName": "fruta",
+		  "icon": "assets/images/icons/102.png",
+		  "measurement": "UNIDADES",
+		  "unitStep": 1
+	  }, {
+		  "categoryName": "queso",
+		  "icon": "assets/images/icons/104.png",
+		  "measurement": "KG",
+		  "unitStep": 0.5
+	  }, {
+		  "categoryName": "pollo",
+		  "icon": "assets/images/icons/103.png",
+		  "measurement": "UNIDADES",
+		  "unitStep": 1
+	  }, {
+		  "categoryName": "verdura",
+		  "icon": "assets/images/icons/79.png",
+		  "measurement": "GRAMOS",
+		  "unitStep": 100
+	  }, {
+			  "categoryName": "cerveza",
+			  "icon": "assets/images/icons/101.png",
+			  "measurement": "LITROS",
+			  "unitStep": 0.5
+		  }]  
+	  `);
+
+	  uploadTask.on('state_changed', (snapshot) => {
+		  console.log('snapshot progess ' + snapshot);
+	  }, (error) => {
+		  console.log(error)
+	  }, () => {
+		  console.log(uploadTask.snapshot);
+	  });	  
+*/
+
+
+
+
+	 //gapi.auth.setToken(this.userProfile.oauthAccessToken);
+	 /*
     var request = gapi.client.request({
-      'path': 'https://content.googleapis.com/drive/v2/files?key=AIzaSyD-a9IF8KKYgoC3cpgS-Al7hLQDbugrDcw',
+      //'path': 'https://content.googleapis.com/drive/v3/files?key=AIzaSyCYbNChWjDtLYXkm_ayPQeb4t4TjWDXWd0',
+      'path': 'https://www.googleapis.com/drive/v2/files??key=AIzaSyCYbNChWjDtLYXkm_ayPQeb4t4TjWDXWd0',
     });
     console.log(request);
     request.execute(function(resp) {
       console.log(resp)
-    })
+	 })
+	 */
     /*
         gapi.client.people.people.get({
           'resourceName': 'people/me',

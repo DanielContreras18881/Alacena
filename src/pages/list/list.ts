@@ -150,7 +150,7 @@ export class ListPage {
     let move = this.alertCtrl.create();
     move.setTitle('Move to');
 
-    this.globalVars.getListsData().then(data => {
+    this.globalVars.getListsData({}).then(data => {
       let lists:any = data;
       lists.forEach((list: any) => {
         let selected = false;
