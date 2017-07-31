@@ -1,4 +1,5 @@
 {
+	"version":"1.4.0",
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
