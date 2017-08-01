@@ -1,48 +1,31 @@
 <ion-menu [content]="content">
 
-  <ion-content class="menu-content">
-  <ion-toolbar dark>
-    <ion-title>
-      <ion-item class="item-header-toolbar">
-        <ion-avatar item-left class="item-header-toolbar-avatar">
-          <img class="icon" src="icon.png"/>
-        </ion-avatar>
-        <ion-title>Alacena</ion-title>
-      </ion-item>
-    </ion-title>
-  </ion-toolbar>
-    <ion-list class="menu-list">
-      <button ion-item detail-none *ngFor="let p of pages" (click)="openPage(p)">
+	<ion-content class="menu-content">
+		<ion-toolbar dark>
+			<ion-title>
+				<ion-item class="item-header-toolbar">
+					<ion-avatar item-left class="item-header-toolbar-avatar">
+						<img class="icon" src="icon.png" />
+					</ion-avatar>
+					<ion-title>Alacena</ion-title>
+				</ion-item>
+			</ion-title>
+		</ion-toolbar>
+		<ion-list class="menu-list">
+			<button ion-item detail-none *ngFor="let p of pages" (click)="openPage(p)">
           <ion-icon ios="ios-{{p.icon}}" md="md-{{p.icon}}"></ion-icon>
           {{p.title}}
       </button>
-    </ion-list>
-  </ion-content>
+		</ion-list>
+	</ion-content>
 
 </ion-menu>
 
-<ion-nav [root]="rootPage" #content swipe-back-enabled="false" dark></ion-nav>
+<ion-nav class="app-content" [root]="rootPage" #content swipe-back-enabled="false" dark></ion-nav>
 
 <ion-footer>
-  <ion-toolbar>
-    <ion-segment>
-      <ion-segment-button (click)="setNotification($event)" value="">
-        <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button (click)="saveRecoverList($event)" value="">
-        <ion-icon ios="ios-star" md="md-star"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button (click)="removeItems($event)" value="">
-        <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button (click)="addItem($event)" value="">
-        <ion-icon ios="ios-add" md="md-add"></ion-icon>
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
-<!--
-  <ion-segment class="publicidad">
-    <ion-segment-button clear full block  value="">AQUI VA EL BANNER DE PUBLICIDAD</ion-segment-button>
-  </ion-segment>
--->
+	<ion-segment class="publicidad">
+		<ion-segment-button clear full block value="">AQUI VA EL BANNER DE PUBLICIDAD</ion-segment-button>
+	</ion-segment>
+
 </ion-footer>

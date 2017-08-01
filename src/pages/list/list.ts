@@ -1,22 +1,37 @@
-import {Component, ViewChild, ElementRef, EventEmitter, Input, Output} from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output
+} from "@angular/core";
 
-import { ModalController, AlertController, ViewController, NavParams, PopoverController} from 'ionic-angular';
+import {
+  ModalController,
+  AlertController,
+  ViewController,
+  NavParams,
+  PopoverController
+} from "ionic-angular";
 
-import {PopoverPage} from '../../components/popover/popover';
+import { PopoverPage } from "../../components/popover/popover";
 
-import {ItemInfoPage} from '../item-info/item-info';
+import { ItemInfoPage } from "../item-info/item-info";
 
-import {GlobalVars} from '../../providers/global-vars/global-vars';
+import { GlobalVars } from "../../providers/global-vars/global-vars";
 
-import {OrderBy} from '../../pipes/orderBy';
+import { OrderBy } from "../../pipes/orderBy";
 
 @Component({
-  templateUrl: 'list.html',
+  templateUrl: "list.html",
   providers: [OrderBy]
 })
 export class ListPage {
-  @ViewChild('popoverContent', {read: ElementRef}) content: ElementRef;
-  @ViewChild('popoverText', {read: ElementRef}) text: ElementRef;
+  @ViewChild("popoverContent", { read: ElementRef })
+  content: ElementRef;
+  @ViewChild("popoverText", { read: ElementRef })
+  text: ElementRef;
 
   selectedItem: any;
   list: any;
@@ -25,17 +40,18 @@ export class ListPage {
   icons: any;
 
   constructor(
-            private navParams: NavParams,
-            private view: ViewController,
-            public mod: ModalController,
-            public alertCtrl: AlertController,
-            private popoverCtrl: PopoverController,
-            private globalVars: GlobalVars,
-            private order: OrderBy) {}
+    private navParams: NavParams,
+    private view: ViewController,
+    public mod: ModalController,
+    public alertCtrl: AlertController,
+    private popoverCtrl: PopoverController,
+    private globalVars: GlobalVars,
+    private order: OrderBy
+  ) {}
 
   ngOnInit() {
     this.searchBar = false;
-    this.selectedItem = this.navParams.get('list');
+    this.selectedItem = this.navParams.get("list");
     this.globalVars.getDefaulIconsData().then(data => {
       this.icons = data;
       this.initializeItems();
@@ -44,7 +60,7 @@ export class ListPage {
 
   initializeItems() {
     this.globalVars.getListData().then(data => {
-      this.list = data.filter((item) => {
+      this.list = data.filter(item => {
         if (item.nombreLista === this.selectedItem) {
           return item;
         }
@@ -54,9 +70,13 @@ export class ListPage {
 
   searchMatches(event) {
     this.initializeItems();
-    if (this.searchItem && this.searchItem.trim() !== '') {
-      this.list = this.list.filter((item) => {
-        return (item.nombreElemento.toLowerCase().indexOf(this.searchItem.toLowerCase()) > -1);
+    if (this.searchItem && this.searchItem.trim() !== "") {
+      this.list = this.list.filter(item => {
+        return (
+          item.nombreElemento
+            .toLowerCase()
+            .indexOf(this.searchItem.toLowerCase()) > -1
+        );
       });
     }
   }
@@ -67,46 +87,46 @@ export class ListPage {
 
   sortItems(orderBy: number) {
     switch (orderBy) {
-    case 1:
-        this.list = this.order.transform(this.list, ['+category']);
+      case 1:
+        this.list = this.order.transform(this.list, ["+category"]);
         break;
-    case 2:
-        this.list = this.order.transform(this.list, ['+nombreElemento']);
+      case 2:
+        this.list = this.order.transform(this.list, ["+nombreElemento"]);
         break;
-    case 3:
-        this.list = this.order.transform(this.list, ['+fechaCaducidad']);
+      case 3:
+        this.list = this.order.transform(this.list, ["+fechaCaducidad"]);
         break;
     }
   }
 
   reorder(event) {
     let reorder = this.alertCtrl.create();
-    reorder.setTitle('Sort by');
+    reorder.setTitle("Sort by");
 
-    if (this.selectedItem !== 'LISTA_COMPRA') {
+    if (this.selectedItem !== "LISTA_COMPRA") {
       reorder.addInput({
-        type: 'radio',
-        label: 'FECHA_CADUCIDAD',
-        value: '3',
+        type: "radio",
+        label: "FECHA_CADUCIDAD",
+        value: "3",
         checked: false
       });
     }
     reorder.addInput({
-      type: 'radio',
-      label: 'NOMBRE',
-      value: '1',
+      type: "radio",
+      label: "NOMBRE",
+      value: "1",
       checked: true
     });
     reorder.addInput({
-      type: 'radio',
-      label: 'CATEGORIA',
-      value: '2',
+      type: "radio",
+      label: "CATEGORIA",
+      value: "2",
       checked: false
     });
 
-    reorder.addButton('Cancel');
+    reorder.addButton("Cancel");
     reorder.addButton({
-      text: 'OK',
+      text: "OK",
       handler: data => {
         console.log(data);
         this.sortItems(Number.parseInt(data.value));
@@ -117,17 +137,21 @@ export class ListPage {
 
   removeItem(item) {
     let confirm = this.alertCtrl.create({
-      title: 'Removing ' + item.nombreElemento,
-      message: 'Do you like to remove ' + item.nombreElemento + ' from ' + item.nombreLista,
+      title: "Removing " + item.nombreElemento,
+      message:
+        "Do you like to remove " +
+        item.nombreElemento +
+        " from " +
+        item.nombreLista,
       buttons: [
         {
-          text: 'No',
+          text: "No",
           handler: () => {
-            console.log('No removed');
+            console.log("No removed");
           }
         },
         {
-          text: 'Yes',
+          text: "Yes",
           handler: () => {
             // TODO : Store changes
             this.list.splice(this.list.indexOf(item), 1);
@@ -139,8 +163,12 @@ export class ListPage {
   }
 
   editItem(item) {
-    let infoListModal = this.mod.create(ItemInfoPage, {newItem: item, editing: true, icons: this.icons});
-    infoListModal.onDidDismiss((item) => {
+    let infoListModal = this.mod.create(ItemInfoPage, {
+      newItem: item,
+      editing: true,
+      icons: this.icons
+    });
+    infoListModal.onDidDismiss(item => {
       // TODO: check if needed or action with items list
     });
     infoListModal.present();
@@ -148,29 +176,29 @@ export class ListPage {
 
   moveItem(item) {
     let move = this.alertCtrl.create();
-    move.setTitle('Move to');
+    move.setTitle("Move to");
 
-    this.globalVars.getListsData({}).then(data => {
-      let lists:any = data;
+    this.globalVars.getListsData().then(data => {
+      let lists: any = data;
       lists.forEach((list: any) => {
         let selected = false;
         if (list.nombreLista !== item.nombreLista) {
-          if (list.nombreLista === 'LISTA_COMPRA') {
+          if (list.nombreLista === "LISTA_COMPRA") {
             selected = true;
           }
           move.addInput({
-            type: 'radio',
+            type: "radio",
             label: list.nombreLista,
             value: list.nombreLista,
             checked: selected
           });
         }
       });
-      move.addButton('Cancel');
+      move.addButton("Cancel");
       move.addButton({
-        text: 'OK',
+        text: "OK",
         handler: data => {
-          if (item.nombreLista === 'LISTA_COMPRA') {
+          if (item.nombreLista === "LISTA_COMPRA") {
             item.caduca = false;
           }
           //item.nombreLista = data.nombreLista;
@@ -186,22 +214,26 @@ export class ListPage {
   addItem(event) {
     // TODO: Check data structure, redefine and refactor with category, measurement and unitStep
     let newItem = {
-            'category': { 'icon': 'images/icons/default.png' },
-            'measurement': 'UNIDADES',
-            'nombreElemento': 'NEW_ELEMENT',
-            'colorElemento': '',
-            'colorBotones': '',
-            'colorElementoNoCaducado': '',
-            'colorBotonesNoCaducado': '',
-            'nombreLista': this.selectedItem,
-            'cantidadElemento': 1,
-            'caduca': false,
-            'fechaCaducidad': new Date(),
-            'cantidadMinima': 1,
-            'marked': false
-          };
-    let infoListModal = this.mod.create(ItemInfoPage, {newItem: newItem, editing: false, icons: this.icons});
-    infoListModal.onDidDismiss((item) => {
+      category: { icon: "images/icons/default.png" },
+      measurement: "UNIDADES",
+      nombreElemento: "NEW_ELEMENT",
+      colorElemento: "",
+      colorBotones: "",
+      colorElementoNoCaducado: "",
+      colorBotonesNoCaducado: "",
+      nombreLista: this.selectedItem,
+      cantidadElemento: 1,
+      caduca: false,
+      fechaCaducidad: new Date(),
+      cantidadMinima: 1,
+      marked: false
+    };
+    let infoListModal = this.mod.create(ItemInfoPage, {
+      newItem: newItem,
+      editing: false,
+      icons: this.icons
+    });
+    infoListModal.onDidDismiss(item => {
       if (item !== undefined) {
         // TODO : Store changes
         this.list.push(item);
@@ -210,11 +242,11 @@ export class ListPage {
     });
     infoListModal.present();
   }
-// TODO: check if needed
+  // TODO: check if needed
   presentPopover(event) {
     let popover = this.popoverCtrl.create(PopoverPage, {
       list: this.list,
-      selectedItem: this.selectedItem,
+      selectedItem: this.selectedItem
       // TODO : Store changes
     });
     popover.present({

@@ -1,18 +1,19 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from "@angular/core";
 
 // TODO: get data from firebase or local if not found, meke central service for data
 
-import {ListsData} from '../data/lists-data';
-import {ListData} from '../data/list-data';
-import {ItemData} from '../data/item-data';
-import {CategoriesData} from '../data/categories-data';
-import {DefaultIcons} from '../default-icons/default-icons';
-import {ConfigData} from '../data/config-data';
+import { ListsData } from "../data/lists-data";
+import { ListData } from "../data/list-data";
+import { ItemData } from "../data/item-data";
+import { CategoriesData } from "../data/categories-data";
+import { DefaultIcons } from "../default-icons/default-icons";
+import { ConfigData } from "../data/config-data";
 
 @Injectable()
 export class GlobalVars {
-
   server: boolean = false;
+
+  userProfile: any = null;
 
   configData: any;
   itemsData: any;
@@ -27,8 +28,11 @@ export class GlobalVars {
     private itemDataService: ItemData,
     private iconsDataService: DefaultIcons,
     private categoriesDataService: CategoriesData,
-    private configDataService: ConfigData,
-  ) {
+    private configDataService: ConfigData
+  ) {}
+
+  setUserProfile(userProfile: any) {
+    this.userProfile = userProfile;
   }
 
   setConfigData(value) {
@@ -36,9 +40,9 @@ export class GlobalVars {
   }
 
   getConfigData() {
-    if(this.configData){
+    if (this.configData) {
       return Promise.resolve(this.configData);
-    }else{
+    } else {
       return new Promise(resolve => {
         this.configDataService.getConfigData().then(data => {
           this.configData = data;
@@ -50,15 +54,16 @@ export class GlobalVars {
 
   setListsData(value) {
     this.listsData = value;
+    this.listsDataService.setListsData(value, this.userProfile);
   }
 
-  getListsData(userProfile:any) {
-	  //console.log(1+':'+JSON.stringify(userProfile))
-    if(this.listsData){
+  getListsData() {
+    console.log(1 + ":" + JSON.stringify(this.userProfile));
+    if (this.listsData) {
       return Promise.resolve(this.listsData);
-    }else{
+    } else {
       return new Promise(resolve => {
-			this.listsDataService.getListsData(userProfile).then(data => {
+        this.listsDataService.getListsData(this.userProfile).then(data => {
           this.listsData = data;
           resolve(data);
         });
@@ -67,14 +72,14 @@ export class GlobalVars {
   }
 
   setListData(value) {
-    console.log(value)
+    console.log(value);
     this.listData = value;
   }
 
   getListData() {
-    if(this.listData){
+    if (this.listData) {
       return Promise.resolve(this.listData);
-    }else{
+    } else {
       return new Promise(resolve => {
         this.listDataService.getListData().then(data => {
           this.listData = data;
@@ -89,9 +94,9 @@ export class GlobalVars {
   }
 
   getItemsData() {
-    if(this.itemsData){
+    if (this.itemsData) {
       return Promise.resolve(this.itemsData);
-    }else{
+    } else {
       return new Promise(resolve => {
         this.itemDataService.getItemsData().then(data => {
           this.itemsData = data;
@@ -106,9 +111,9 @@ export class GlobalVars {
   }
 
   getCategoriesData() {
-    if(this.categoriesData){
+    if (this.categoriesData) {
       return Promise.resolve(this.categoriesData);
-    }else{
+    } else {
       return new Promise(resolve => {
         this.categoriesDataService.getCategoriesData().then(data => {
           this.categoriesData = data;
@@ -123,9 +128,9 @@ export class GlobalVars {
   }
 
   getDefaulIconsData() {
-    if(this.iconsData){
+    if (this.iconsData) {
       return Promise.resolve(this.iconsData);
-    }else{
+    } else {
       return new Promise(resolve => {
         this.iconsDataService.getIcons().then(data => {
           this.iconsData = data;
@@ -134,5 +139,4 @@ export class GlobalVars {
       });
     }
   }
-
 }

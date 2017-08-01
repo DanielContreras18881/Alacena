@@ -1,23 +1,27 @@
-import {Component,NgZone} from '@angular/core';
+import { Component, NgZone } from "@angular/core";
 
-import { GooglePlus } from '@ionic-native/google-plus';
+import { GooglePlus } from "@ionic-native/google-plus";
 //import * as Drive from "gapi.drive.realtime";
-import firebase from 'firebase';
+import firebase from "firebase";
 
-import { NavController, Platform} from 'ionic-angular';
+import { NavController, Platform } from "ionic-angular";
 
-import {ListPage} from '../list/list';
+import { ListPage } from "../list/list";
 
-import {GlobalVars} from '../../providers/global-vars/global-vars';
+import { GlobalVars } from "../../providers/global-vars/global-vars";
 
 declare var gapi: any;
 declare var self: any;
 
 @Component({
-  templateUrl: 'getting-started.html'
+  templateUrl: "getting-started.html"
 })
 export class GettingStartedPage {
-  private shoppingListPage = { title: 'LISTA_COMPRA', component: ListPage, icon: 'basket' };
+  private shoppingListPage = {
+    title: "LISTA_COMPRA",
+    component: ListPage,
+    icon: "basket"
+  };
   private userAccount: boolean = true;
   private expires: boolean = true;
   private reminders: boolean = true;
@@ -29,31 +33,30 @@ export class GettingStartedPage {
     public plt: Platform,
     private googlePlus: GooglePlus,
     public navCtrl: NavController,
-	 private globalVars: GlobalVars) {
+    private globalVars: GlobalVars
+  ) {
+    //var ref = new firebase.initializeApp("https://<YOUR-FIREBASE-APP>.firebaseio.com");
+    //ref.onAuth(authDataCallback);
 
-	  //var ref = new firebase.initializeApp("https://<YOUR-FIREBASE-APP>.firebaseio.com");
-	  //ref.onAuth(authDataCallback);
-
-		this.zone = new NgZone({});
-		self = this;
-      firebase.auth().onAuthStateChanged( user => {
-        this.zone.run( () => {
-          if (user){
-				this.userProfile = user;
-				//gapi.auth.setToken(this.userProfile.oauthAccessToken);
-				//gapi.client.load('drive', 'v3', this.listFiles);			
-          } else {
-            this.userProfile = null;
-          }
-		  });
-		  
-		  globalVars.getListsData(this.userProfile).then(data => {
-			//console.log(data)
-		  });
-		  globalVars.getListData().then(data => {
-
-		  });		  
+    this.zone = new NgZone({});
+    self = this;
+    firebase.auth().onAuthStateChanged(user => {
+      this.zone.run(() => {
+        if (user) {
+          this.userProfile = user;
+          self.globalVars.setUserProfile(user);
+          //gapi.auth.setToken(this.userProfile.oauthAccessToken);
+          //gapi.client.load('drive', 'v3', this.listFiles);
+        } else {
+          this.userProfile = null;
+        }
       });
+
+      globalVars.getListsData().then(data => {
+        //console.log(data)
+      });
+      globalVars.getListData().then(data => {});
+    });
   }
 
   openInternalPage(page) {
@@ -63,57 +66,57 @@ export class GettingStartedPage {
   }
 
   showItemsToShop() {
-// TODO: show alert with items to shop
-    alert('Items a comprar');
+    // TODO: show alert with items to shop
+    alert("Items a comprar");
   }
 
   showExpireItems() {
-// TODO: show alert with items to expire, expiry date and list
-    alert('showExpireItems');
+    // TODO: show alert with items to expire, expiry date and list
+    alert("showExpireItems");
   }
 
   showReminders() {
-// TODO: show list of reminders,view, loaded from local
-    alert('showReminders');
+    // TODO: show list of reminders,view, loaded from local
+    alert("showReminders");
   }
 
   editReminder() {
-// TODO: view to edit a reminder
-    alert('editReminder');
+    // TODO: view to edit a reminder
+    alert("editReminder");
   }
 
   addRemoveUserAccount() {
-// TODO: login/logout from firebase
-//https://console.developers.google.com/apis/credentials?project=develop-apps-chony-alacena&authuser=1
-//https://console.firebase.google.com/u/1/project/alacena-58699/settings/general/
+    // TODO: login/logout from firebase
+    //https://console.developers.google.com/apis/credentials?project=develop-apps-chony-alacena&authuser=1
+    //https://console.firebase.google.com/u/1/project/alacena-58699/settings/general/
     var provider = new firebase.auth.GoogleAuthProvider();
     var res = null;
-    if(this.plt.is('mobile')){
+    if (this.plt.is("mobile")) {
       firebase.auth().signInWithPopup(provider).then(
-        (result) => {
-          console.log(result)
-			 this.userProfile = result.user;
-			 console.log(2)
-              gapi.auth.setToken(this.userProfile.oauthAccessToken);
-              gapi.client.load('drive', 'v3', this.listFiles);
+        result => {
+          console.log(result);
+          this.userProfile = result.user;
+          console.log(2);
+          gapi.auth.setToken(this.userProfile.oauthAccessToken);
+          gapi.client.load("drive", "v3", this.listFiles);
         },
-        (error) => {
-          console.log(error)
+        error => {
+          console.log(error);
         }
       );
-    }else{
-          firebase.auth().signInWithRedirect(provider).then(
-            (result) => {
-              console.log(result)
-				  this.userProfile = result.user;
-				  console.log(3)
-              gapi.auth.setToken(this.userProfile.oauthAccessToken);
-              gapi.client.load('drive', 'v3', this.listFiles);
-            },
-            (error) => {
-              console.log(error)
-            }
-          );
+    } else {
+      firebase.auth().signInWithRedirect(provider).then(
+        result => {
+          console.log(result);
+          this.userProfile = result.user;
+          console.log(3);
+          gapi.auth.setToken(this.userProfile.oauthAccessToken);
+          gapi.client.load("drive", "v3", this.listFiles);
+        },
+        error => {
+          console.log(error);
+        }
+      );
     }
 
     /*
@@ -130,8 +133,8 @@ export class GettingStartedPage {
       */
   }
 
-  listFiles(){
-/*	  
+  listFiles() {
+    /*	  
 	  const storage = firebase.storage();
 	  let fileName = 'prueba.json';
 	  let fileRef = storage.ref('lists/' + fileName);
@@ -172,12 +175,8 @@ export class GettingStartedPage {
 		  console.log(uploadTask.snapshot);
 	  });	  
 */
-
-
-
-
-	 //gapi.auth.setToken(this.userProfile.oauthAccessToken);
-	 /*
+    //gapi.auth.setToken(this.userProfile.oauthAccessToken);
+    /*
     var request = gapi.client.request({
       //'path': 'https://content.googleapis.com/drive/v3/files?key=AIzaSyCYbNChWjDtLYXkm_ayPQeb4t4TjWDXWd0',
       'path': 'https://www.googleapis.com/drive/v2/files??key=AIzaSyCYbNChWjDtLYXkm_ayPQeb4t4TjWDXWd0',
@@ -197,7 +196,7 @@ export class GettingStartedPage {
           console.log('Error: ' + reason.result.error.message);
         });
     */
-/*
+    /*
 var request = gapi.client.drive.files.list({
             'pageSize': 10,
             'fields': "nextPageToken, files(id, name)"
@@ -216,11 +215,10 @@ var request = gapi.client.drive.files.list({
         }
       });
 */
-
   }
 
   addItemsToShoppingList() {
-// TODO: add all items required to shop to the shopping list
-    alert('addItemsToShoppinList');
+    // TODO: add all items required to shop to the shopping list
+    alert("addItemsToShoppinList");
   }
 }

@@ -25616,6 +25616,15 @@ button {
   background-color: transparent;
 }
 
+.app-content {
+  max-height: 95%;
+}
+
+bottom-buttons-component .toolbar .segment-md .segment-button.activated,
+bottom-buttons-component .toolbar .segment-md .segment-button.segment-activated {
+  border-color: transparent;
+}
+
 ion-card ion-card-content {
   padding: 1rem 1rem 1rem 1rem;
 }

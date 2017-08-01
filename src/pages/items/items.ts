@@ -1,14 +1,14 @@
-import {Component} from '@angular/core';
+import { Component } from "@angular/core";
 
-import { NavController, AlertController} from 'ionic-angular';
+import { NavController, AlertController } from "ionic-angular";
 
-import {PipeFilterElements} from '../../pipes/pipefilterElements';
+import { PipeFilterElements } from "../../pipes/pipefilterElements";
 
-import {OrderBy} from '../../pipes/orderBy';
+import { OrderBy } from "../../pipes/orderBy";
 
-import {GlobalVars} from '../../providers/global-vars/global-vars';
+import { GlobalVars } from "../../providers/global-vars/global-vars";
 
-import {CategoriesService} from '../../providers/categories/categoriesService';
+import { CategoriesService } from "../../providers/categories/categoriesService";
 /*
   Generated class for the ItemsPage page.
 
@@ -16,7 +16,7 @@ import {CategoriesService} from '../../providers/categories/categoriesService';
   Ionic pages and navigation.
 */
 @Component({
-  templateUrl: 'items.html',
+  templateUrl: "items.html",
   providers: [PipeFilterElements, OrderBy, CategoriesService]
 })
 export class ItemsPage {
@@ -28,12 +28,13 @@ export class ItemsPage {
   public itemsToRemove: any;
 
   constructor(
-              public nav: NavController,
-              public alertCtrl: AlertController,
-              private order: OrderBy,
-              private catService: CategoriesService,
-              private globalVars: GlobalVars,
-              private filterElements: PipeFilterElements) {}
+    public nav: NavController,
+    public alertCtrl: AlertController,
+    private order: OrderBy,
+    private catService: CategoriesService,
+    private globalVars: GlobalVars,
+    private filterElements: PipeFilterElements
+  ) {}
 
   ngOnInit() {
     this.itemsToRemove = [];
@@ -49,13 +50,16 @@ export class ItemsPage {
   }
 
   initializeItems() {
-    this.items = this.order.transform(this.items, ['+nombreElemento']);
-    this.globalVars.getListsData({}).then(data => {
+    this.items = this.order.transform(this.items, ["+nombreElemento"]);
+    this.globalVars.getListsData().then(data => {
       let lists = data;
       let itemsFilled = [];
       this.items.forEach((item, index) => {
         let auxItem = item;
-        auxItem.lists = this.filterElements.transform(lists, item.nombreElemento);
+        auxItem.lists = this.filterElements.transform(
+          lists,
+          item.nombreElemento
+        );
         itemsFilled.push(auxItem);
       });
       this.items = itemsFilled;
@@ -64,9 +68,13 @@ export class ItemsPage {
 
   searchMatches(event) {
     this.initializeItems();
-    if (this.searchItem && this.searchItem.trim() !== '') {
-      this.items = this.items.filter((item) => {
-        return (item.nombreElemento.toLowerCase().indexOf(this.searchItem.toLowerCase()) > -1);
+    if (this.searchItem && this.searchItem.trim() !== "") {
+      this.items = this.items.filter(item => {
+        return (
+          item.nombreElemento
+            .toLowerCase()
+            .indexOf(this.searchItem.toLowerCase()) > -1
+        );
       });
     }
   }
@@ -81,17 +89,17 @@ export class ItemsPage {
 
   removeItem(event, item) {
     let confirm = this.alertCtrl.create({
-      title: 'Removing ' + item.nombreElemento,
-      message: 'Do you like to remove ' + item.nombreElemento,
+      title: "Removing " + item.nombreElemento,
+      message: "Do you like to remove " + item.nombreElemento,
       buttons: [
         {
-          text: 'No',
+          text: "No",
           handler: () => {
-            console.log('No removed');
+            console.log("No removed");
           }
         },
         {
-          text: 'Yes',
+          text: "Yes",
           handler: () => {
             // this.globalVars.getItemsData().splice(this.globalVars.getItemsData().indexOf(item), 1);
             this.items.splice(this.items.indexOf(item), 1);
@@ -105,13 +113,13 @@ export class ItemsPage {
 
   selectToSendShoppingList(event) {
     let move = this.alertCtrl.create();
-    move.setTitle('Move to LISTA_COMPRA');
+    move.setTitle("Move to LISTA_COMPRA");
 
     this.items.forEach((item: any) => {
       console.log(item.lists);
       if (item.lists.length === 0) {
         move.addInput({
-          type: 'checkbox',
+          type: "checkbox",
           label: item.nombreElemento,
           value: item.nombreElemento,
           checked: false
@@ -119,9 +127,9 @@ export class ItemsPage {
       }
     });
 
-    move.addButton('Cancel');
+    move.addButton("Cancel");
     move.addButton({
-      text: 'OK',
+      text: "OK",
       handler: data => {
         data.forEach((item, index) => {
           console.log(item);
@@ -129,20 +137,20 @@ export class ItemsPage {
           let auxItem = this.filterElements.transform(this.items, item)[0];
           console.log(auxItem);
           let newItem = {
-                  'category': auxItem.category,
-                  'measurement': auxItem.category.measurement,
-                  'nombreElemento': auxItem.nombreElemento,
-                  'colorElemento': '',
-                  'colorBotones': '',
-                  'colorElementoNoCaducado': '',
-                  'colorBotonesNoCaducado': '',
-                  'nombreLista': 'LISTA_COMPRA',
-                  'cantidadElemento': 1,
-                  'caduca': false,
-                  'fechaCaducidad': new Date(),
-                  'cantidadMinima': 1,
-                  'marked': false
-                };
+            category: auxItem.category,
+            measurement: auxItem.category.measurement,
+            nombreElemento: auxItem.nombreElemento,
+            colorElemento: "",
+            colorBotones: "",
+            colorElementoNoCaducado: "",
+            colorBotonesNoCaducado: "",
+            nombreLista: "LISTA_COMPRA",
+            cantidadElemento: 1,
+            caduca: false,
+            fechaCaducidad: new Date(),
+            cantidadMinima: 1,
+            marked: false
+          };
           // TODO : Store changes
           // this.globalVars.getListData().push(newItem);
           auxItem.lists.push(newItem);
@@ -153,63 +161,65 @@ export class ItemsPage {
   }
 
   discardOrShop(event, item) {
-      let discardRemove = this.alertCtrl.create();
-      discardRemove.setTitle('Discard ' + item.nombreElemento + ' or move to SHOPPING_LIST?');
+    let discardRemove = this.alertCtrl.create();
+    discardRemove.setTitle(
+      "Discard " + item.nombreElemento + " or move to SHOPPING_LIST?"
+    );
 
-      discardRemove.addButton({
-        text: 'To SHOPPING_LIST',
-        handler: data => {
-          // TODO: Move selected elements to shopping list
-          console.log('move to shopping list');
-        }
-      });
-      discardRemove.addButton({
-        text: 'Discard',
-        handler: data => {
-          // TODO: Remove elements from items list and lists
-          console.log('discard from lists and item list');
-        }
-      });
-      discardRemove.present();
+    discardRemove.addButton({
+      text: "To SHOPPING_LIST",
+      handler: data => {
+        // TODO: Move selected elements to shopping list
+        console.log("move to shopping list");
+      }
+    });
+    discardRemove.addButton({
+      text: "Discard",
+      handler: data => {
+        // TODO: Remove elements from items list and lists
+        console.log("discard from lists and item list");
+      }
+    });
+    discardRemove.present();
   }
 
   selectToRemove(event) {
-      let remove = this.alertCtrl.create();
-      remove.setTitle('Remove items');
+    let remove = this.alertCtrl.create();
+    remove.setTitle("Remove items");
 
-      remove.addInput({
-        type: 'radio',
-        label: 'Empty items',
-        value: 'empty',
-        checked: false
-      });
+    remove.addInput({
+      type: "radio",
+      label: "Empty items",
+      value: "empty",
+      checked: false
+    });
 
-      remove.addInput({
-        type: 'radio',
-        label: 'Selected',
-        value: 'selected',
-        checked: false
-      });
+    remove.addInput({
+      type: "radio",
+      label: "Selected",
+      value: "selected",
+      checked: false
+    });
 
-      remove.addButton('Cancel');
-      remove.addButton({
-        text: 'OK',
-        handler: data => {
-          if (data === 'selected') {
-            this.itemsToRemove = [];
-            this.enableSelectToRemove = !this.enableSelectToRemove;
-          }
-          if (data === 'empty') {
-            // TODO: remove elements wihout list and 0 amount from lists
-          }
+    remove.addButton("Cancel");
+    remove.addButton({
+      text: "OK",
+      handler: data => {
+        if (data === "selected") {
+          this.itemsToRemove = [];
+          this.enableSelectToRemove = !this.enableSelectToRemove;
         }
-      });
-      remove.present();
+        if (data === "empty") {
+          // TODO: remove elements wihout list and 0 amount from lists
+        }
+      }
+    });
+    remove.present();
   }
 
   selectedItem(event, item) {
-      console.log('Item selected' + JSON.stringify(item));
-      this.itemsToRemove.push(item);
+    console.log("Item selected" + JSON.stringify(item));
+    this.itemsToRemove.push(item);
   }
 
   removeItems(event) {
@@ -222,15 +232,15 @@ export class ItemsPage {
     this.enableSelectToRemove = !this.enableSelectToRemove;
   }
 
-addItem(event) {
-// TODO: create new item, opening modal[create modal such as category]
-   let newItem = {
-      'nombreElemento': 'NEW_ITEM',
-      'category': {
-        'categoryName': '',
-        'icon': 'images/icons/default.png'
+  addItem(event) {
+    // TODO: create new item, opening modal[create modal such as category]
+    let newItem = {
+      nombreElemento: "NEW_ITEM",
+      category: {
+        categoryName: "",
+        icon: "images/icons/default.png"
       },
-      'measurement': 'UNIDADES'
+      measurement: "UNIDADES"
     };
     console.log(JSON.stringify(event));
   }
@@ -238,19 +248,19 @@ addItem(event) {
   sendToShoppingList(event, item) {
     let itemSelected = this.items[this.items.indexOf(item)];
     let newShoppingListItem = {
-      'category': itemSelected.category,
-      'measurement': 'UNIDADES',
-      'nombreElemento': itemSelected.nombreElemento,
-      'colorElemento': '',
-      'colorBotones': '',
-      'colorElementoNoCaducado': '',
-      'colorBotonesNoCaducado': '',
-      'nombreLista': 'LISTA_COMPRA',
-      'cantidadElemento': 1,
-      'caduca': false,
-      'fechaCaducidad': new Date(),
-      'cantidadMinima': 1,
-      'marked': false
+      category: itemSelected.category,
+      measurement: "UNIDADES",
+      nombreElemento: itemSelected.nombreElemento,
+      colorElemento: "",
+      colorBotones: "",
+      colorElementoNoCaducado: "",
+      colorBotonesNoCaducado: "",
+      nombreLista: "LISTA_COMPRA",
+      cantidadElemento: 1,
+      caduca: false,
+      fechaCaducidad: new Date(),
+      cantidadMinima: 1,
+      marked: false
     };
     this.items[this.items.indexOf(item)].lists.push(newShoppingListItem);
     // TODO : Store changes
