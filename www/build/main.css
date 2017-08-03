@@ -25580,6 +25580,7 @@ ion-navbar.toolbar {
 }
 
 .publicidad {
+  height: 5rem;
   background-color: black;
   opacity: 1;
 }
@@ -25617,7 +25618,7 @@ button {
 }
 
 .app-content {
-  max-height: 95%;
+  max-height: 96%;
 }
 
 bottom-buttons-component .toolbar .segment-md .segment-button.activated,

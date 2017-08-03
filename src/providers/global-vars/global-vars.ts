@@ -58,7 +58,6 @@ export class GlobalVars {
   }
 
   getListsData() {
-    console.log(1 + ":" + JSON.stringify(this.userProfile));
     if (this.listsData) {
       return Promise.resolve(this.listsData);
     } else {
@@ -69,6 +68,10 @@ export class GlobalVars {
         });
       });
     }
+  }
+
+  setItemListData(name: string, data: any[]) {
+    this.listDataService.setListData(name, data, this.userProfile);
   }
 
   setListData(value) {

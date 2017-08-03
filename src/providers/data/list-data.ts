@@ -1,6 +1,9 @@
-import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import 'rxjs/add/operator/map';
+import { Injectable } from "@angular/core";
+import { Http } from "@angular/http";
+import "rxjs/add/operator/map";
+
+import { CloudStorage } from "./cloudStorage";
+import { Storage } from "@ionic/storage";
 
 /*
   Generated class for the ListData provider.
@@ -14,9 +17,17 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ListData {
   listData: any = null;
-  path = 'assets/json/CantidadElementoLista.json';
+  path = "assets/json/CantidadElementoLista.json";
 
-  constructor(public http: Http) {}
+  constructor(
+    private http: Http,
+    private cloudStorage: CloudStorage,
+    private storage: Storage
+  ) {}
+
+  setListData(name: string, data: any[], userProfile: any): void {
+    this.cloudStorage.uploadListData(name, data, userProfile.uid);
+  }
 
   getListData(): any {
     if (this.listData) {
@@ -29,14 +40,12 @@ export class ListData {
       // We're using Angular Http provider to request the data,
       // then on the response it'll map the JSON data to a parsed JS object.
       // Next we process the data and resolve the promise with the new data.
-      this.http.get(this.path)
-        .map(res => res.json())
-        .subscribe(data => {
-          // we've got back the raw data, now generate the core schedule data
-          // and save the data for later reference
-          this.listData = data;
-          resolve(this.listData);
-        });
+      this.http.get(this.path).map(res => res.json()).subscribe(data => {
+        // we've got back the raw data, now generate the core schedule data
+        // and save the data for later reference
+        this.listData = data;
+        resolve(this.listData);
+      });
     });
   }
 }

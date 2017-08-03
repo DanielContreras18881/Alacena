@@ -53,15 +53,9 @@ export class CloudStorage {
     });
   }
 
-  uploadListsData(lists: any, uid: string) {
-    let newKey = firebase.database().ref().child("lists").push().key;
-    let updates = {};
-    updates["/lists/" + newKey] = lists;
-    firebase.database().ref("lists/" + uid).set(lists);
-  }
   loadListData(uid: string) {
     return new Promise(resolve => {
-      let ref = firebase.database().ref("/lists/");
+      let ref = firebase.database().ref("/listItems/");
       ref.once("value").then(function(snapshot) {
         // We need to create this array first to store our local data
         let object = JSON.parse(JSON.stringify(snapshot));
@@ -76,6 +70,45 @@ export class CloudStorage {
         resolve(listArray);
       });
     });
+  }
+
+  uploadListData(name: string, data: any[], uid: string) {
+    const storage = firebase.storage();
+    let fileName = uid + "_" + name + ".json";
+    let fileRef = storage.ref("lists/" + fileName);
+    var uploadTask = fileRef.putString(JSON.stringify(data));
+
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        console.log("snapshot progess " + snapshot);
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        console.log(uploadTask.snapshot);
+        let ref = firebase.database().ref("listItems");
+        let dataToSave = {
+          URL: uploadTask.snapshot.downloadURL,
+          name: uploadTask.snapshot.metadata.name,
+          owners: [uid],
+          lastUpdated: new Date().getTime()
+        };
+
+        ref
+          .push(dataToSave, response => {
+            console.log(response);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+    );
+  }
+
+  uploadListsData(lists: any, uid: string) {
+    firebase.database().ref("lists/" + uid).set(lists);
   }
 
   loadListsData(uid: string) {

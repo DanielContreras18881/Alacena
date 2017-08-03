@@ -21,7 +21,7 @@ import { OrderBy } from "../../pipes/orderBy";
 })
 export class ListsPage {
   type: string = "List";
-  public lists: any;
+  public lists: any = [];
   reorderAllowed: boolean;
 
   constructor(
@@ -65,6 +65,7 @@ export class ListsPage {
       listaEditable: true
     });
     this.globalVars.setListsData(this.lists);
+    this.globalVars.setItemListData(data, []);
   }
 
   removeLists(event) {
