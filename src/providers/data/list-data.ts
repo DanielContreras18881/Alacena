@@ -33,7 +33,7 @@ export class ListData {
     this.cloudStorage.removeListData(name, userProfile.uid);
   }
 
-  getListItemsData(name: string, userProfile: any): any {
+  getListItemsData(name: string, userProfile: any) {
     return new Promise(resolve => {
       this.cloudStorage.loadListData(name, userProfile.uid).then(data => {
         this.http
@@ -43,7 +43,6 @@ export class ListData {
             // we've got back the raw data, now generate the core schedule data
             // and save the data for later reference
             this.listData = data;
-            console.log(data);
             resolve(this.listData);
           });
       });

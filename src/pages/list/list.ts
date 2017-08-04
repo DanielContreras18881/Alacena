@@ -59,13 +59,18 @@ export class ListPage {
   }
 
   initializeItems() {
+    this.globalVars.getItemsListData(this.selectedItem).then(listData => {
+      this.list = listData;
+    });
+    /*				  
     this.globalVars.getListData().then(data => {
       this.list = data.filter(item => {
         if (item.nombreLista === this.selectedItem) {
           return item;
         }
       });
-    });
+	 });
+	 */
   }
 
   searchMatches(event) {

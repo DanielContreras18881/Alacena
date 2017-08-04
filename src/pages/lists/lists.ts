@@ -54,12 +54,13 @@ export class ListsPage {
   }
 
   editList(event, list) {
+    let oldName = list.nombreLista;
     let edit = this.alertCtrl.create({
       title: "Edit List",
       inputs: [
         {
-          name: "name",
-          value: list.nombreLista,
+          name: "nombreLista",
+          value: oldName,
           type: "text",
           placeholder: "Name"
         }
@@ -72,12 +73,15 @@ export class ListsPage {
         {
           text: "Confirm",
           handler: data => {
-            //this.globalVars.setListsData(this.lists);
-            this.globalVars.setItemListData(
-              data.nombreLista,
-              this.globalVars.getItemsListData(list.nombreLista)
-            );
-            //this.globalVars.removetItemListData(list.nombreLista);
+            this.globalVars.getItemsListData(oldName).then(listData => {
+              list.nombreLista = data.nombreLista;
+              this.globalVars.setListsData(this.lists);
+              this.globalVars.setItemListData(
+                data.nombreLista,
+                <any[]>listData
+              );
+              this.globalVars.removetItemListData(oldName);
+            });
           }
         }
       ]
