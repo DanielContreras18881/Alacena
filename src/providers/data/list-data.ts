@@ -29,6 +29,27 @@ export class ListData {
     this.cloudStorage.uploadListData(name, data, userProfile.uid);
   }
 
+  removeListData(name: string, userProfile: any): void {
+    this.cloudStorage.removeListData(name, userProfile.uid);
+  }
+
+  getListItemsData(name: string, userProfile: any): any {
+    return new Promise(resolve => {
+      this.cloudStorage.loadListData(name, userProfile.uid).then(data => {
+        this.http
+          .get(data.toString())
+          .map(res => res.json())
+          .subscribe(data => {
+            // we've got back the raw data, now generate the core schedule data
+            // and save the data for later reference
+            this.listData = data;
+            console.log(data);
+            resolve(this.listData);
+          });
+      });
+    });
+  }
+
   getListData(): any {
     if (this.listData) {
       // already loaded data

@@ -22,7 +22,7 @@ export class BottomButtonsComponent {
 
   @Output() finishedNotifications = new EventEmitter<any>();
   @Output() finishedFavorites = new EventEmitter<any>();
-  @Output() finishedRemove = new EventEmitter<any>();
+  @Output() finishedRemoved = new EventEmitter<any>();
   @Output() finishedAdd = new EventEmitter<any>();
 
   constructor(
@@ -39,7 +39,40 @@ export class BottomButtonsComponent {
   }
 
   removeItems(event: Event) {
-    console.log("removeItems");
+    let remove = this.alertCtrl.create();
+    remove.setTitle("Remove");
+
+    this.object.forEach((item: any) => {
+      remove.addInput({
+        type: "checkbox",
+        label: item.nombreLista,
+        value: item.nombreLista,
+        checked: false
+      });
+    });
+    remove.addButton("Cancel");
+    remove.addButton({
+      text: "OK",
+      handler: data => {
+        if (data.length === 0) {
+          const toast = this.toastCtrl.create({
+            message: "Please select at least one " + this.type + " to remove!",
+            duration: 1500,
+            position: "bottom"
+          });
+          toast.present();
+          return;
+        }
+        this.finishedRemoved.emit(data);
+        const toast = this.toastCtrl.create({
+          message: data.length + " " + this.type + " removed!",
+          duration: 1500,
+          position: "bottom"
+        });
+        toast.present();
+      }
+    });
+    remove.present();
   }
 
   addItem(event: Event) {

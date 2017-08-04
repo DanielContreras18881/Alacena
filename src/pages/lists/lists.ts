@@ -47,31 +47,64 @@ export class ListsPage {
     this.lists.splice(indexes.to, 0, element);
   }
 
-  removeList(event) {
-    // TODO: remove list functionality, asking for remove or move items on that
-    console.log(JSON.stringify(event));
+  removeList(event, name) {
+    this.lists = this.lists.filter(list => list.nombreLista !== name);
+    this.globalVars.setListsData(this.lists);
+    this.globalVars.removetItemListData(name);
   }
 
-  editList(event) {
-    // TODO: edit list functionality
-    console.log(JSON.stringify(event));
+  editList(event, list) {
+    let edit = this.alertCtrl.create({
+      title: "Edit List",
+      inputs: [
+        {
+          name: "name",
+          value: list.nombreLista,
+          type: "text",
+          placeholder: "Name"
+        }
+      ],
+      buttons: [
+        {
+          text: "Cancel",
+          role: "cancel"
+        },
+        {
+          text: "Confirm",
+          handler: data => {
+            //this.globalVars.setListsData(this.lists);
+            this.globalVars.setItemListData(
+              data.nombreLista,
+              this.globalVars.getItemsListData(list.nombreLista)
+            );
+            //this.globalVars.removetItemListData(list.nombreLista);
+          }
+        }
+      ]
+    });
+
+    edit.present();
   }
 
-  addList(data) {
+  addList(newList: string) {
     this.lists.push({
-      nombreLista: data,
+      nombreLista: newList,
       colorLista: "item-dark item item-complex",
       colorBotones: "button-dark",
       listaEditable: true
     });
     this.globalVars.setListsData(this.lists);
-    this.globalVars.setItemListData(data, []);
+    this.globalVars.setItemListData(newList, []);
   }
 
-  removeLists(event) {
-    // TODO: remove multiple lists functionality, looping wiyh removeList
-    console.log("removeList");
-    console.log(JSON.stringify(event));
+  removeLists(removed: any[]) {
+    this.lists = this.lists.filter(
+      list => removed.indexOf(list.nombreLista) < 0
+    );
+    this.globalVars.setListsData(this.lists);
+    removed.forEach(listToRemove => {
+      this.globalVars.removetItemListData(listToRemove);
+    });
   }
 
   listSelected(event, list) {

@@ -53,21 +53,14 @@ export class CloudStorage {
     });
   }
 
-  loadListData(uid: string) {
+  loadListData(name: string, uid: string) {
     return new Promise(resolve => {
-      let ref = firebase.database().ref("/listItems/");
-      ref.once("value").then(function(snapshot) {
-        // We need to create this array first to store our local data
-        let object = JSON.parse(JSON.stringify(snapshot));
-        let lists = JSON.parse(JSON.stringify(object[uid]));
-        let listArray = [];
-        for (let key in lists) {
-          if (lists.hasOwnProperty(key)) {
-            let list = JSON.parse(JSON.stringify(lists[key]));
-            listArray.push(list);
-          }
-        }
-        resolve(listArray);
+      let ref = firebase
+        .database()
+        .ref("/listItems/" + uid + "_" + name + "/URL");
+
+      ref.on("value", snapshot => {
+        resolve(snapshot.val());
       });
     });
   }
@@ -87,24 +80,26 @@ export class CloudStorage {
         console.log(error);
       },
       () => {
-        console.log(uploadTask.snapshot);
-        let ref = firebase.database().ref("listItems");
         let dataToSave = {
           URL: uploadTask.snapshot.downloadURL,
           name: uploadTask.snapshot.metadata.name,
           owners: [uid],
           lastUpdated: new Date().getTime()
         };
-
-        ref
-          .push(dataToSave, response => {
-            console.log(response);
-          })
-          .catch(error => {
-            console.log(error);
-          });
+        firebase
+          .database()
+          .ref("listItems/" + uid + "_" + name)
+          .set(dataToSave);
       }
     );
+  }
+
+  removeListData(name: string, uid: string) {
+    const storage = firebase.storage();
+    let fileName = uid + "_" + name + ".json";
+    let fileRef = storage.ref("lists/" + fileName);
+    fileRef.delete();
+    firebase.database().ref("listItems/" + uid + "_" + name).remove();
   }
 
   uploadListsData(lists: any, uid: string) {

@@ -70,8 +70,15 @@ export class GlobalVars {
     }
   }
 
+  getItemsListData(name: string): any[] {
+    return this.listDataService.getListItemsData(name, this.userProfile);
+  }
   setItemListData(name: string, data: any[]) {
     this.listDataService.setListData(name, data, this.userProfile);
+  }
+
+  removetItemListData(name: string) {
+    this.listDataService.removeListData(name, this.userProfile);
   }
 
   setListData(value) {
