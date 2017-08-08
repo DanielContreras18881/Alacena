@@ -1,50 +1,27 @@
-import {Component} from '@angular/core';
-
-import {ModalController, AlertController, ViewController, NavParams} from 'ionic-angular';
+import { Component } from "@angular/core";
+import { ViewController } from "ionic-angular";
 
 @Component({
-  selector: 'popover',
-  templateUrl: 'popover.html'
+  selector: "popover",
+  template: `
+    <ion-grid text-center>
+      <ion-row>
+        <ion-col>
+          <button ion-button full outline small clear (click)="onAction('load')">Load List</button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button ion-button full outline small clear (click)="onAction('store')">Save List</button>  
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  `
 })
-
-// TODO: check the need of this component
-
 export class PopoverPage {
-  list: any;
-  selectedItem: string;
-  globalVars: any;
+  constructor(private viewCtrl: ViewController) {}
 
-  constructor(
-              private navParams: NavParams,
-              private mod: ModalController,
-              public alertCtrl: AlertController,
-              private viewCtrl: ViewController) {}
-
-  ngOnInit() {
-    if (this.navParams.data) {
-      this.list = this.navParams.data.list;
-      this.selectedItem = this.navParams.data.selectedItem;
-      this.globalVars = this.navParams.data.globalVars;
-    }
-  }
-
-  optNotifications(event) {
-    console.log('recordatorios');
-  }
-
-  optRecoverList(event) {
-    console.log('recuperarLista');
-  }
-
-  optSaveList(event) {
-    console.log('salvarLista');
-  }
-
-  optClean(event) {
-    console.log('limpiar');
-  }
-
-  optCleanMarked(event) {
-    console.log('limpiarMarcados');
+  onAction(action: string) {
+    this.viewCtrl.dismiss({ action: action });
   }
 }

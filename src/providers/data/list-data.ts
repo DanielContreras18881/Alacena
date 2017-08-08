@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
-import "rxjs/add/operator/map";
 
 import { CloudStorage } from "./cloudStorage";
-import { Storage } from "@ionic/storage";
+import { LocalStorage } from "./localStorage";
+import { Network } from "@ionic-native/network";
 
 /*
   Generated class for the ListData provider.
@@ -20,9 +19,9 @@ export class ListData {
   path = "assets/json/CantidadElementoLista.json";
 
   constructor(
-    private http: Http,
     private cloudStorage: CloudStorage,
-    private storage: Storage
+    private localStorage: LocalStorage,
+    private network: Network
   ) {}
 
   setListData(name: string, data: any[], userProfile: any): void {
@@ -35,37 +34,60 @@ export class ListData {
 
   getListItemsData(name: string, userProfile: any) {
     return new Promise(resolve => {
-      this.cloudStorage.loadListData(name, userProfile.uid).then(data => {
-        this.http
-          .get(data.toString())
-          .map(res => res.json())
-          .subscribe(data => {
-            // we've got back the raw data, now generate the core schedule data
-            // and save the data for later reference
-            this.listData = data;
-            resolve(this.listData);
-          });
-      });
-    });
-  }
-
-  getListData(): any {
-    if (this.listData) {
-      // already loaded data
-      return Promise.resolve(this.listData);
+      if (userProfile) {
+        if (
+          this.network.type === undefined ||
+          this.network.type === null ||
+          this.network.type === "NONE"
+        ) {
+          /*
+let connectSubscription = this.network.onConnect().subscribe(() => {
+  console.log('network connected!');
+  // We just got a connection but we need to wait briefly
+   // before we determine the connection type. Might need to wait.
+  // prior to doing any api requests as well.
+  setTimeout(() => {
+    if (this.network.type === 'wifi') {
+      console.log('we got a wifi connection, woohoo!');
     }
+  }, 3000);
+});
 
-    // don't have the data yet
-    return new Promise(resolve => {
-      // We're using Angular Http provider to request the data,
-      // then on the response it'll map the JSON data to a parsed JS object.
-      // Next we process the data and resolve the promise with the new data.
-      this.http.get(this.path).map(res => res.json()).subscribe(data => {
-        // we've got back the raw data, now generate the core schedule data
-        // and save the data for later reference
-        this.listData = data;
-        resolve(this.listData);
-      });
+// stop connect watch
+connectSubscription.unsubscribe();
+			   */
+          this.localStorage.getFromLocal(name, this.path).then(data => {
+            if (data !== undefined && data !== null) {
+              resolve(data);
+            } else {
+              resolve([]);
+            }
+          });
+        } else {
+          this.cloudStorage.loadListData(name, userProfile.uid).then(data => {
+            if (data !== undefined && data !== null) {
+              this.localStorage.setToLocalStorage(name, data);
+              resolve(data);
+            } else {
+              this.localStorage.getFromLocal(name, this.path).then(data => {
+                if (data !== undefined && data !== null) {
+                  resolve(data);
+                } else {
+                  resolve([]);
+                }
+              });
+            }
+          });
+        }
+      } else {
+        this.localStorage.getFromLocal(name, this.path).then(data => {
+          if (data !== undefined && data !== null) {
+            resolve(data);
+          } else {
+            resolve([]);
+          }
+        });
+      }
     });
   }
 }

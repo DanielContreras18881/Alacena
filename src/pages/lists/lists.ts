@@ -4,14 +4,16 @@ import {
   Modal,
   ModalController,
   AlertController,
+  PopoverController,
   NavController,
-  NavParams,
-  Popover
+  NavParams
 } from "ionic-angular";
 
 import { GlobalVars } from "../../providers/global-vars/global-vars";
 
 import { ListPage } from "../list/list";
+
+import { PopoverPage } from "../../components/popover/popover";
 
 import { OrderBy } from "../../pipes/orderBy";
 
@@ -29,11 +31,26 @@ export class ListsPage {
     navParams: NavParams,
     public mod: ModalController,
     public alertCtrl: AlertController,
+    private popoverCtrl: PopoverController,
     private globalVars: GlobalVars
   ) {
     globalVars.getListsData().then(data => {
       this.lists = data;
       this.reorderAllowed = false;
+    });
+  }
+  onShowOptions(event: MouseEvent) {
+    const popover = this.popoverCtrl.create(
+      PopoverPage,
+      {},
+      { cssClass: "popover", showBackdrop: true, enableBackdropDismiss: true }
+    );
+    popover.present({ ev: event });
+    popover.onDidDismiss(data => {
+      if (!data) {
+        return;
+      }
+      console.log(data.action);
     });
   }
 
@@ -73,13 +90,10 @@ export class ListsPage {
         {
           text: "Confirm",
           handler: data => {
-            this.globalVars.getItemsListData(oldName).then(listData => {
+            this.globalVars.getListData(oldName).then(listData => {
               list.nombreLista = data.nombreLista;
               this.globalVars.setListsData(this.lists);
-              this.globalVars.setItemListData(
-                data.nombreLista,
-                <any[]>listData
-              );
+              this.globalVars.setListData(data.nombreLista, <any[]>listData);
               this.globalVars.removetItemListData(oldName);
             });
           }
@@ -98,7 +112,7 @@ export class ListsPage {
       listaEditable: true
     });
     this.globalVars.setListsData(this.lists);
-    this.globalVars.setItemListData(newList, []);
+    this.globalVars.setListData(newList, []);
   }
 
   removeLists(removed: any[]) {

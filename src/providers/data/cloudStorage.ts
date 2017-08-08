@@ -107,7 +107,6 @@ export class CloudStorage {
   }
 
   loadListsData(uid: string) {
-    //TODO: check if there is connectivity https://ionicframework.com/docs/native/network/
     return new Promise(resolve => {
       let ref = firebase.database().ref("/lists/");
       ref.once("value").then(function(snapshot) {

@@ -59,7 +59,7 @@ export class ListPage {
   }
 
   initializeItems() {
-    this.globalVars.getItemsListData(this.selectedItem).then(listData => {
+    this.globalVars.getListData(this.selectedItem).then(listData => {
       this.list = listData;
     });
     /*				  

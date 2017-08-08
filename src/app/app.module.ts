@@ -6,6 +6,7 @@ import { HttpModule } from "@angular/http";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
 import { IonicStorageModule } from "@ionic/storage";
+import { Network } from "@ionic-native/network";
 import { GooglePlus } from "@ionic-native/google-plus";
 
 import { SentryErrorHandler } from "../services/sentry-errorhandler";
@@ -17,6 +18,7 @@ import { ListsData } from "../providers/data/lists-data";
 import { CategoriesData } from "../providers/data/categories-data";
 import { DefaultIcons } from "../providers/default-icons/default-icons";
 import { CloudStorage } from "../providers/data/cloudStorage";
+import { LocalStorage } from "../providers/data/localStorage";
 
 import { GlobalVars } from "../providers/global-vars/global-vars";
 import { CategoriesService } from "../providers/categories/categoriesService";
@@ -31,6 +33,7 @@ import { CategoriesPage } from "../pages/categories/categories";
 
 import { Item } from "../components/item-data/item-data";
 import { BottomButtonsComponent } from "../components/bottom-buttons-component/bottom-buttons-component";
+import { PopoverPage } from "../components/popover/popover";
 
 @NgModule({
   declarations: [
@@ -43,7 +46,8 @@ import { BottomButtonsComponent } from "../components/bottom-buttons-component/b
     AboutPage,
     CategoriesPage,
     Item,
-    BottomButtonsComponent
+    BottomButtonsComponent,
+    PopoverPage
   ],
   imports: [
     BrowserModule,
@@ -62,12 +66,15 @@ import { BottomButtonsComponent } from "../components/bottom-buttons-component/b
     AboutPage,
     CategoriesPage,
     Item,
-    BottomButtonsComponent
+    BottomButtonsComponent,
+    PopoverPage
   ],
   providers: [
     //{provide: ErrorHandler, useClass: SentryErrorHandler},
     GooglePlus,
+    Network,
     CloudStorage,
+    LocalStorage,
     CategoriesService,
     DefaultIcons,
     CategoriesData,

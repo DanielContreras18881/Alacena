@@ -55,7 +55,7 @@ export class GettingStartedPage {
       globalVars.getListsData().then(data => {
         //console.log(data)
       });
-      globalVars.getListData().then(data => {});
+      //globalVars.getListData().then(data => {});
     });
   }
 

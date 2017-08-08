@@ -70,7 +70,7 @@ export class GlobalVars {
     }
   }
 
-  getItemsListData(name: string) {
+  getListData(name: string) {
     return new Promise(resolve => {
       this.listDataService
         .getListItemsData(name, this.userProfile)
@@ -79,30 +79,12 @@ export class GlobalVars {
         });
     });
   }
-  setItemListData(name: string, data: any[]) {
+  setListData(name: string, data: any[]) {
     this.listDataService.setListData(name, data, this.userProfile);
   }
 
   removetItemListData(name: string) {
     this.listDataService.removeListData(name, this.userProfile);
-  }
-
-  setListData(value) {
-    console.log(value);
-    this.listData = value;
-  }
-
-  getListData() {
-    if (this.listData) {
-      return Promise.resolve(this.listData);
-    } else {
-      return new Promise(resolve => {
-        this.listDataService.getListData().then(data => {
-          this.listData = data;
-          resolve(data);
-        });
-      });
-    }
   }
 
   setItemsData(value) {
