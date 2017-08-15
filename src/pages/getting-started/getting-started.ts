@@ -36,7 +36,11 @@ export class GettingStartedPage {
     private globalVars: GlobalVars
   ) {
     //var ref = new firebase.initializeApp("https://<YOUR-FIREBASE-APP>.firebaseio.com");
-    //ref.onAuth(authDataCallback);
+	 //ref.onAuth(authDataCallback);
+	 
+	 console.log(this.plt.platforms());
+	 console.log(this.plt.is('ios'));
+	 console.log(this.plt.is('android'));
 
     this.zone = new NgZone({});
     self = this;
@@ -86,39 +90,49 @@ export class GettingStartedPage {
   }
 
   addRemoveUserAccount() {
+	  console.log(this.plt)
     // TODO: login/logout from firebase
     //https://console.developers.google.com/apis/credentials?project=develop-apps-chony-alacena&authuser=1
-    //https://console.firebase.google.com/u/1/project/alacena-58699/settings/general/
-    var provider = new firebase.auth.GoogleAuthProvider();
-    var res = null;
-    if (this.plt.is("mobile")) {
-      firebase.auth().signInWithPopup(provider).then(
-        result => {
-          console.log(result);
-          this.userProfile = result.user;
-          console.log(2);
-          gapi.auth.setToken(this.userProfile.oauthAccessToken);
-          gapi.client.load("drive", "v3", this.listFiles);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    } else {
-      firebase.auth().signInWithRedirect(provider).then(
-        result => {
-          console.log(result);
-          this.userProfile = result.user;
-          console.log(3);
-          gapi.auth.setToken(this.userProfile.oauthAccessToken);
-          gapi.client.load("drive", "v3", this.listFiles);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    }
-
+	 //https://console.firebase.google.com/u/1/project/alacena-58699/settings/general/
+	 if(this.userProfile){
+		firebase.auth().signOut();
+	 }else{
+	    var provider = new firebase.auth.GoogleAuthProvider();
+		 var res = null;
+	    if (this.plt.is("ios") || this.plt.is("android")) {
+      this.googlePlus
+        .login({
+          webClientId:
+            "354280052179-fkmk7g20grbpkctmdgtt53oiel3be7a1.apps.googleusercontent.com",
+          //"1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com",
+          offline: true
+        })
+        .then(res => {
+          firebase
+            .auth()
+            .signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken))
+            .then(success => {
+              console.log("Firebase success: " + JSON.stringify(success));
+            })
+            .catch(error =>
+              console.log("Firebase failure: " + JSON.stringify(error))
+            );
+        })
+        .catch(err => console.error("Error: ", JSON.stringify(err)));
+	    } else {
+	      firebase.auth().signInWithRedirect(provider).then(
+	        result => {
+	          console.log(result);
+	          this.userProfile = result.user;
+	          console.log(3);
+	          gapi.auth.setToken(this.userProfile.oauthAccessToken);
+	        },
+	        error => {
+	          console.log(error);
+	        }
+	      );
+	    }
+	}
     /*
       this.googlePlus.login({
         'webClientId': '1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com',

@@ -29,7 +29,7 @@ export class ListsData {
         this.network.type === undefined ||
         this.network.type === null ||
         this.network.type === "NONE"
-      ) {
+		) {
         this.cloudStorage.uploadListsData(lists, userProfile.uid);
       } else {
         this.localStorage.setToLocalStorage("lists", lists);
