@@ -35,6 +35,7 @@ export class ListsPage {
     private globalVars: GlobalVars
   ) {
     globalVars.getListsData().then(data => {
+		 console.log('lists:'+JSON.stringify(data))
       this.lists = data;
       this.reorderAllowed = false;
     });

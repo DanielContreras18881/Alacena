@@ -1,3 +1,5 @@
+import { AuthService } from '../providers/auth/auth.service';
+import { LoginComponent } from "../components/login-component/login-component";
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from "@angular/core";
 import { IonicApp, IonicModule } from "ionic-angular";
 import { BrowserModule } from "@angular/platform-browser";
@@ -47,7 +49,8 @@ import { PopoverPage } from "../components/popover/popover";
     CategoriesPage,
     Item,
     BottomButtonsComponent,
-    PopoverPage
+    PopoverPage,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,8 @@ import { PopoverPage } from "../components/popover/popover";
     CategoriesPage,
     Item,
     BottomButtonsComponent,
-    PopoverPage
+    PopoverPage,
+    LoginComponent
   ],
   providers: [
     //{provide: ErrorHandler, useClass: SentryErrorHandler},
@@ -84,7 +88,8 @@ import { PopoverPage } from "../components/popover/popover";
     ConfigData,
     SplashScreen,
     StatusBar,
-    GlobalVars
+	 GlobalVars,
+	 AuthService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

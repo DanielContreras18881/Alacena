@@ -11,8 +11,6 @@ import { Network } from "@ionic-native/network";
   for more info on providers and Angular 2 DI.
 */
 
-// TODO: get data from firebase or local if not found
-
 @Injectable()
 export class ListsData {
   path = "assets/json/Listas.json";
@@ -26,8 +24,6 @@ export class ListsData {
   setListsData(lists: any, userProfile: any): void {
     if (userProfile) {
       if (
-        this.network.type === undefined ||
-        this.network.type === null ||
         this.network.type === "NONE"
 		) {
         this.cloudStorage.uploadListsData(lists, userProfile.uid);
@@ -41,10 +37,9 @@ export class ListsData {
 
   getListsData(userProfile: any): any {
     return new Promise(resolve => {
+
       if (userProfile) {
         if (
-          this.network.type === undefined ||
-          this.network.type === null ||
           this.network.type === "NONE"
         ) {
           /*
@@ -64,6 +59,7 @@ let connectSubscription = this.network.onConnect().subscribe(() => {
 connectSubscription.unsubscribe();
 			   */
           this.localStorage.getFromLocal("lists", this.path).then(data => {
+				 //console.log("localStorage:" + JSON.stringify(data));
             if (data !== undefined && data !== null) {
               resolve(data);
             } else {
@@ -72,11 +68,13 @@ connectSubscription.unsubscribe();
           });
         } else {
           this.cloudStorage.loadListsData(userProfile.uid).then(data => {
+				 //console.log("cloudStorage:" + JSON.stringify(data));
             if (data !== undefined && data !== null) {
               this.localStorage.setToLocalStorage("lists", data);
               resolve(data);
             } else {
               this.localStorage.getFromLocal("lists", this.path).then(data => {
+					  //console.log("getFromLocal:" + JSON.stringify(data));
                 if (data !== undefined && data !== null) {
                   resolve(data);
                 } else {
@@ -88,6 +86,7 @@ connectSubscription.unsubscribe();
         }
       } else {
         this.localStorage.getFromLocal("lists", this.path).then(data => {
+			  //console.log("localStorage2:" + JSON.stringify(data));
           if (data !== undefined && data !== null) {
             resolve(data);
           } else {

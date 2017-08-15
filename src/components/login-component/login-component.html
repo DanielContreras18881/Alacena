@@ -1,4 +1,43 @@
-<!-- Generated template for the LoginComponent component -->
-<div>
-  {{text}}
-</div>
+<ion-header>
+	<ion-navbar>
+		<ion-title>Select Login Type</ion-title>
+		<ion-buttons end>
+			<button ion-button icon-only (click)="goBack()">
+			<ion-icon name="close"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-list>
+		<ion-row>
+			<ion-col width-50>
+				<button type="button" outline ion-button block icon-only (click)="twitterLogin()">
+		<ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon>
+	</button>
+			</ion-col>
+			<ion-col width-50>
+				<button type="button" outline ion-button block icon-only (click)="googleLogin()">
+		<ion-icon ios="logo-google" md="logo-google"></ion-icon>
+	</button>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col width-50>
+				<button type="button" outline ion-button block icon-only (click)="facebookLogin()">
+		<ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
+	</button>
+			</ion-col>
+			<ion-col width-50>
+				<button type="button" outline ion-button block icon-only (click)="emailLogin()">
+		<ion-icon ios="ios-mail" md="md-mail"></ion-icon>
+	</button>
+			</ion-col>
+		</ion-row>
+	</ion-list>
+
+
+
+
+</ion-content>

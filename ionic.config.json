@@ -1,5 +1,8 @@
 {
   "name": "AlacenaTest",
   "app_id": "fdb00fb5",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }

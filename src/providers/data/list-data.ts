@@ -36,8 +36,6 @@ export class ListData {
     return new Promise(resolve => {
       if (userProfile) {
         if (
-          this.network.type === undefined ||
-          this.network.type === null ||
           this.network.type === "NONE"
         ) {
           /*

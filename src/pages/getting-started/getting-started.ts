@@ -1,10 +1,11 @@
+import { AuthService } from '../../providers/auth/auth.service';
+import { LoginComponent } from '../../components/login-component/login-component';
 import { Component, NgZone } from "@angular/core";
 
 import { GooglePlus } from "@ionic-native/google-plus";
-//import * as Drive from "gapi.drive.realtime";
 import firebase from "firebase";
 
-import { NavController, Platform } from "ionic-angular";
+import { ModalController, NavController, Platform } from 'ionic-angular';
 
 import { ListPage } from "../list/list";
 
@@ -25,6 +26,7 @@ export class GettingStartedPage {
   private userAccount: boolean = true;
   private expires: boolean = true;
   private reminders: boolean = true;
+  private type: string;
 
   userProfile: any = null;
   zone: NgZone;
@@ -33,24 +35,19 @@ export class GettingStartedPage {
     public plt: Platform,
     private googlePlus: GooglePlus,
     public navCtrl: NavController,
-    private globalVars: GlobalVars
+    private globalVars: GlobalVars,
+    public modalCtrl: ModalController,
+    private authService: AuthService
   ) {
-    //var ref = new firebase.initializeApp("https://<YOUR-FIREBASE-APP>.firebaseio.com");
-	 //ref.onAuth(authDataCallback);
-	 
-	 console.log(this.plt.platforms());
-	 console.log(this.plt.is('ios'));
-	 console.log(this.plt.is('android'));
-
     this.zone = new NgZone({});
     self = this;
     firebase.auth().onAuthStateChanged(user => {
       this.zone.run(() => {
         if (user) {
+			  this.type = 'google';
           this.userProfile = user;
           self.globalVars.setUserProfile(user);
           //gapi.auth.setToken(this.userProfile.oauthAccessToken);
-          //gapi.client.load('drive', 'v3', this.listFiles);
         } else {
           this.userProfile = null;
         }
@@ -89,146 +86,22 @@ export class GettingStartedPage {
     alert("editReminder");
   }
 
-  addRemoveUserAccount() {
-	  console.log(this.plt)
-    // TODO: login/logout from firebase
-    //https://console.developers.google.com/apis/credentials?project=develop-apps-chony-alacena&authuser=1
-	 //https://console.firebase.google.com/u/1/project/alacena-58699/settings/general/
-	 if(this.userProfile){
-		firebase.auth().signOut();
-	 }else{
-	    var provider = new firebase.auth.GoogleAuthProvider();
-		 var res = null;
-	    if (this.plt.is("ios") || this.plt.is("android")) {
-      this.googlePlus
-        .login({
-          webClientId:
-            "354280052179-fkmk7g20grbpkctmdgtt53oiel3be7a1.apps.googleusercontent.com",
-          //"1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com",
-          offline: true
-        })
-        .then(res => {
-          firebase
-            .auth()
-            .signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken))
-            .then(success => {
-              console.log("Firebase success: " + JSON.stringify(success));
-            })
-            .catch(error =>
-              console.log("Firebase failure: " + JSON.stringify(error))
-            );
-        })
-        .catch(err => console.error("Error: ", JSON.stringify(err)));
-	    } else {
-	      firebase.auth().signInWithRedirect(provider).then(
-	        result => {
-	          console.log(result);
-	          this.userProfile = result.user;
-	          console.log(3);
-	          gapi.auth.setToken(this.userProfile.oauthAccessToken);
-	        },
-	        error => {
-	          console.log(error);
-	        }
-	      );
-	    }
-	}
-    /*
-      this.googlePlus.login({
-        'webClientId': '1053014364968-i826ic0mfi6g0p4rk47ma09jl0gehgai.apps.googleusercontent.com',
-        'offline': true
-      }).then( res => {
-        firebase.auth().signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken))
-          .then( success => {
-            console.log("Firebase success: " + JSON.stringify(success));
-          })
-          .catch( error => console.log("Firebase failure: " + JSON.stringify(error)));
-      }).catch(err => console.error("Error: ", err));
-      */
+  selectLoginType() {
+    let loginModal = this.modalCtrl.create(LoginComponent);
+    loginModal.onDidDismiss(data => {
+		 console.log(data)
+      if (data === "google") {
+        console.log("LOGGED");
+        this.type = data;
+      } else {
+        console.log(data);
+      }
+    });
+    loginModal.present();
   }
 
-  listFiles() {
-    /*	  
-	  const storage = firebase.storage();
-	  let fileName = 'prueba.json';
-	  let fileRef = storage.ref('lists/' + fileName);
-	  var uploadTask = fileRef.putString(`
-	  [{
-		  "categoryName": "fruta",
-		  "icon": "assets/images/icons/102.png",
-		  "measurement": "UNIDADES",
-		  "unitStep": 1
-	  }, {
-		  "categoryName": "queso",
-		  "icon": "assets/images/icons/104.png",
-		  "measurement": "KG",
-		  "unitStep": 0.5
-	  }, {
-		  "categoryName": "pollo",
-		  "icon": "assets/images/icons/103.png",
-		  "measurement": "UNIDADES",
-		  "unitStep": 1
-	  }, {
-		  "categoryName": "verdura",
-		  "icon": "assets/images/icons/79.png",
-		  "measurement": "GRAMOS",
-		  "unitStep": 100
-	  }, {
-			  "categoryName": "cerveza",
-			  "icon": "assets/images/icons/101.png",
-			  "measurement": "LITROS",
-			  "unitStep": 0.5
-		  }]  
-	  `);
-
-	  uploadTask.on('state_changed', (snapshot) => {
-		  console.log('snapshot progess ' + snapshot);
-	  }, (error) => {
-		  console.log(error)
-	  }, () => {
-		  console.log(uploadTask.snapshot);
-	  });	  
-*/
-    //gapi.auth.setToken(this.userProfile.oauthAccessToken);
-    /*
-    var request = gapi.client.request({
-      //'path': 'https://content.googleapis.com/drive/v3/files?key=AIzaSyCYbNChWjDtLYXkm_ayPQeb4t4TjWDXWd0',
-      'path': 'https://www.googleapis.com/drive/v2/files??key=AIzaSyCYbNChWjDtLYXkm_ayPQeb4t4TjWDXWd0',
-    });
-    console.log(request);
-    request.execute(function(resp) {
-      console.log(resp)
-	 })
-	 */
-    /*
-        gapi.client.people.people.get({
-          'resourceName': 'people/me',
-          'requestMask.includeField': 'person.names'
-        }).then(function(response) {
-          console.log('Hello, ' + response.result.names[0].givenName);
-        }, function(reason) {
-          console.log('Error: ' + reason.result.error.message);
-        });
-    */
-    /*
-var request = gapi.client.drive.files.list({
-            'pageSize': 10,
-            'fields': "nextPageToken, files(id, name)"
-          });
-
-          request.execute(function(resp) {
-        this.appendPre('Files:');
-        var files = resp.files;
-        if (files && files.length > 0) {
-          for (var i = 0; i < files.length; i++) {
-            var file = files[i];
-            console.log(file.name + ' (' + file.id + ')');
-          }
-        } else {
-          console.log('no')
-        }
-      });
-*/
+  logout() {
+    this.authService.logout(this.type);
   }
 
   addItemsToShoppingList() {

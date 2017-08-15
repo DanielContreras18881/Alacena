@@ -29,7 +29,7 @@ ItemsPageModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_2__items_page__["a" /* ItemsPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__items_page__["a" /* ItemsPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__items_page__["a" /* ItemsPage */]),
         ],
         exports: [
             __WEBPACK_IMPORTED_MODULE_2__items_page__["a" /* ItemsPage */]
@@ -76,11 +76,11 @@ var ItemsPage = (function () {
     return ItemsPage;
 }());
 ItemsPage = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPage */])(),
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
         selector: 'page-items-page',template:/*ion-inline-start:"/Volumes/Macintosh HD - Datos/ChonyDevelopApps/AlacenaTestBeta/src/pages/items-page/items-page.html"*/'<!--\n  Generated template for the ItemsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>items.page</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"/Volumes/Macintosh HD - Datos/ChonyDevelopApps/AlacenaTestBeta/src/pages/items-page/items-page.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
 ], ItemsPage);
 
 //# sourceMappingURL=items-page.js.map
