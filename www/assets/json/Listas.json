@@ -1,16 +1,16 @@
 [ {
   "nombreLista": "LISTA_COMPRA",
-  "colorLista": "item-dark item item-complex",
-  "colorBotones": "button-dark",
+"colorLista": "white-list",
+"colorBotones": "black-buttons",
   "listaEditable": false
 }, {
   "nombreLista": "aaaaa",
-  "colorLista": "item-dark item item-complex",
-  "colorBotones": "button-dark",
+  "colorLista": "white-list",
+  "colorBotones": "black-buttons",
   "listaEditable": false
 }, {
   "nombreLista": "bbbb",
-  "colorLista": "item-dark item item-complex",
-  "colorBotones": "button-dark",
+"colorLista": "white-list",
+"colorBotones": "black-buttons",
   "listaEditable": false
 } ]

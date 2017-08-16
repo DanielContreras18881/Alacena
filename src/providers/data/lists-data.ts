@@ -1,3 +1,4 @@
+import { Platform } from 'ionic-angular';
 import { Injectable } from "@angular/core";
 
 import { CloudStorage } from "./cloudStorage";
@@ -18,17 +19,22 @@ export class ListsData {
   constructor(
     private cloudStorage: CloudStorage,
     private localStorage: LocalStorage,
-    private network: Network
+	 private network: Network,
+	 private plt: Platform
   ) {}
 
   setListsData(lists: any, userProfile: any): void {
     if (userProfile) {
       if (
-        this.network.type === "NONE"
+			!this.plt.is("ios") && !this.plt.is("android")
 		) {
         this.cloudStorage.uploadListsData(lists, userProfile.uid);
       } else {
-        this.localStorage.setToLocalStorage("lists", lists);
+			if(this.network.type==="NONE"){
+        		this.localStorage.setToLocalStorage("lists", lists);
+			}else{
+				this.cloudStorage.uploadListsData(lists, userProfile.uid);
+			}
       }
     } else {
       this.localStorage.setToLocalStorage("lists", lists);

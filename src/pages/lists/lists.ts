@@ -83,7 +83,8 @@ export class ListsPage {
           cssClass: "black-list",
           handler: () => {
             list.colorLista = "black-list";
-            list.colorBotones = "white-buttons";
+				list.colorBotones = "white-buttons";
+				this.globalVars.setListsData(this.lists);
           }
         },
         {
@@ -91,7 +92,8 @@ export class ListsPage {
           cssClass: "purple-list",
           handler: () => {
             list.colorLista = "purple-list";
-            list.colorBotones = "black-buttons";
+				list.colorBotones = "black-buttons";
+				this.globalVars.setListsData(this.lists);
           }
         },
         {
@@ -99,7 +101,8 @@ export class ListsPage {
           cssClass: "green-list",
           handler: () => {
             list.colorLista = "green-list";
-            list.colorBotones = "black-buttons";
+				list.colorBotones = "black-buttons";
+				this.globalVars.setListsData(this.lists);
           }
         },
         {
@@ -107,7 +110,8 @@ export class ListsPage {
           cssClass: "blue-list",
           handler: () => {
             list.colorLista = "blue-list";
-            list.colorBotones = "black-buttons";
+				list.colorBotones = "black-buttons";
+				this.globalVars.setListsData(this.lists);
           }
         },
         {
@@ -115,7 +119,8 @@ export class ListsPage {
           cssClass: "yellow-list",
           handler: () => {
             list.colorLista = "yellow-list";
-            list.colorBotones = "black-buttons";
+				list.colorBotones = "black-buttons";
+				this.globalVars.setListsData(this.lists);
           }
         },
         {
@@ -123,7 +128,8 @@ export class ListsPage {
           cssClass: "red-list",
           handler: () => {
             list.colorLista = "red-list";
-            list.colorBotones = "white-buttons";
+				list.colorBotones = "white-buttons";
+				this.globalVars.setListsData(this.lists);
           }
         },
         {
@@ -131,7 +137,8 @@ export class ListsPage {
           cssClass: "white-list",
           handler: () => {
             list.colorLista = "white-list";
-            list.colorBotones = "black-buttons";
+				list.colorBotones = "black-buttons";
+				this.globalVars.setListsData(this.lists);
           }
         },
         {
@@ -139,7 +146,8 @@ export class ListsPage {
           cssClass: "grey-list",
           handler: () => {
             list.colorLista = "grey-list";
-            list.colorBotones = "black-buttons";
+				list.colorBotones = "black-buttons";
+				this.globalVars.setListsData(this.lists);
           }
         }
       ]
@@ -184,8 +192,8 @@ export class ListsPage {
   addList(newList: string) {
     this.lists.push({
       nombreLista: newList,
-      colorLista: "item-dark item item-complex",
-      colorBotones: "button-dark",
+      colorLista: "white-list",
+      colorBotones: "black-buttons",
       listaEditable: true
     });
     this.globalVars.setListsData(this.lists);
