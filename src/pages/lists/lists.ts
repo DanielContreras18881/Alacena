@@ -79,66 +79,67 @@ export class ListsPage {
       title: "Change list color",
       buttons: [
         {
-          text: "Blanco",
-          cssClass: "blanco",
+          text: "NEGRO",
+          cssClass: "black-list",
           handler: () => {
-            list.colorLista = "blanco";
+            list.colorLista = "black-list";
+            list.colorBotones = "white-buttons";
           }
         },
         {
-          text: "Negro",
-          cssClass: "negro",
+          text: "MORADO",
+          cssClass: "purple-list",
           handler: () => {
-            list.colorLista = "negro";
+            list.colorLista = "purple-list";
+            list.colorBotones = "black-buttons";
           }
         },
         {
-          text: "Azul",
-          cssClass: "azul",
+          text: "VERDE",
+          cssClass: "green-list",
           handler: () => {
-            list.colorLista = "azul";
+            list.colorLista = "green-list";
+            list.colorBotones = "black-buttons";
           }
         },
         {
-          text: "Negro",
-          cssClass: "negro",
+          text: "AZUL",
+          cssClass: "blue-list",
           handler: () => {
-            list.colorLista = "negro";
+            list.colorLista = "blue-list";
+            list.colorBotones = "black-buttons";
           }
         },
         {
-          text: "Azul",
-          cssClass: "azul",
+          text: "AMARILLO",
+          cssClass: "yellow-list",
           handler: () => {
-            list.colorLista = "azul";
+            list.colorLista = "yellow-list";
+            list.colorBotones = "black-buttons";
           }
         },
         {
-          text: "Negro",
-          cssClass: "negro",
+          text: "ROJO",
+          cssClass: "red-list",
           handler: () => {
-            list.colorLista = "negro";
+            list.colorLista = "red-list";
+            list.colorBotones = "white-buttons";
           }
         },
         {
-          text: "Azul",
-          cssClass: "azul",
+          text: "BLANCO",
+          cssClass: "white-list",
           handler: () => {
-            list.colorLista = "azul";
+            list.colorLista = "white-list";
+            list.colorBotones = "black-buttons";
           }
         },
         {
-          text: "Negro",
-          cssClass: "negro",
+          text: "GRIS",
+          cssClass: "grey-list",
           handler: () => {
-            list.colorLista = "negro";
-          }
-        },
-        {
-          text: "Azul",
-          cssClass: "azul",
-          handler: () => {
-            list.colorLista = "azul";
+            list.colorLista = "grey-list";
+            list.colorBotones = "black-buttons";
           }
         }
       ]

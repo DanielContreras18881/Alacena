@@ -43,22 +43,24 @@
 					<ion-grid>
 						<ion-row>
 							<ion-col col-6>
-								<ion-icon class="listName" dark large ios="ios-clipboard-outline" md="md-clipboard" (click)="listSelected($event, list.nombreLista)">
+								<ion-icon class="listName" dark large ios="ios-clipboard-outline" md="md-clipboard" (click)="listSelected($event, list.nombreLista)"
+								 [ngClass]="list.colorBotones">
 									{{list.nombreLista}}
 								</ion-icon>
 							</ion-col>
 							<ion-col col-2>
-								<button item-center secondary clear (click)="editList($event,list)" class="buttonOperation" *ngIf="list.listaEditable">
+								<button item-center secondary clear (click)="editList($event,list)" class="buttonOperation" *ngIf="list.listaEditable" [ngClass]="list.colorBotones">
                         <ion-icon ios="ios-create" md="md-create"></ion-icon>
                       </button>
 							</ion-col>
 							<ion-col col-2>
-								<button item-center secondary clear (click)="editColor($event,list)" class="buttonOperation" *ngIf="list.listaEditable">
+								<button item-center secondary clear (click)="editColor($event,list)" class="buttonOperation" *ngIf="list.listaEditable" [ngClass]="list.colorBotones">
 								<ion-icon ios="ios-color-palette" md="md-color-palette"></ion-icon>
                       </button>
 							</ion-col>
 							<ion-colcol-2>
-								<button item-center danger clear (click)="removeList($event, list.nombreLista)" class="buttonOperation" *ngIf="list.listaEditable">
+								<button item-center danger clear (click)="removeList($event, list.nombreLista)" class="buttonOperation" *ngIf="list.listaEditable"
+								 [ngClass]="list.colorBotones">
                         <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
                       </button>
 							</ion-colcol-2>
@@ -67,13 +69,13 @@
 				</ion-card-header>
 				<ion-card-content>
 					<p class="info-list-items">
-						<ion-icon large primary ios="ios-cart" md="md-cart" class="iconListAdvice">
+						<ion-icon large primary ios="ios-cart" md="md-cart" class="iconListAdvice" [ngClass]="list.colorBotones">
 							Tienes
 							<ion-badge large item-right class="badge-info-list-items">4</ion-badge>elementos que deberías comprar
 						</ion-icon>
 					</p>
 					<p class="info-list-items">
-						<ion-icon large danger ios="ios-warning" md="md-warning" class="iconListAdvice">
+						<ion-icon large danger ios="ios-warning" md="md-warning" class="iconListAdvice" [ngClass]="list.colorBotones">
 							Tienes
 							<ion-badge large item-right class="badge-info-list-items">3</ion-badge>elementos cercanos a caducar
 						</ion-icon>

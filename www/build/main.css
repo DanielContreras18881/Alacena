@@ -25996,18 +25996,51 @@ ion-badge.badge-info-list-items {
   font-size: 1rem;
 }
 
-.negro {
-  background-color: #000;
-  color: #fff;
+.black-list {
+  background-color: #0f0f0f !important;
+  color: #cfcfcf !important;
 }
 
-.azul {
-  background-color: #2000f9;
-  color: #fff;
+.white-list {
+  background-color: #fff !important;
+  color: #0f0f0f !important;
 }
 
-.blanco {
-  background-color: #fff;
-  color: #000;
+.purple-list {
+  background-color: #5589df !important;
+  color: #0f0f0f !important;
+}
+
+.green-list {
+  background-color: #7bc157 !important;
+  color: #0f0f0f !important;
+}
+
+.blue-list {
+  background-color: #52c5d9 !important;
+  color: #0f0f0f !important;
+}
+
+.yellow-list {
+  background-color: #f7e466 !important;
+  color: #0f0f0f !important;
+}
+
+.red-list {
+  background-color: #a63e32 !important;
+  color: #cfcfcf !important;
+}
+
+.grey-list {
+  background-color: #cfcfcf !important;
+  color: #0f0f0f !important;
+}
+
+.white-buttons {
+  color: #cfcfcf !important;
+}
+
+.black-buttons {
+  color: #0f0f0f !important;
 }
 /*# sourceMappingURL=main.css.map */
