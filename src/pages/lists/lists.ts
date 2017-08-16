@@ -37,7 +37,7 @@ export class ListsPage {
     private globalVars: GlobalVars
   ) {
     globalVars.getListsData().then(data => {
-      console.log("lists:" + JSON.stringify(data));
+      //console.log("lists:" + JSON.stringify(data));
       this.lists = data;
       this.reorderAllowed = false;
     });
@@ -73,87 +73,28 @@ export class ListsPage {
     this.globalVars.removetItemListData(name);
   }
   editColor(event, list) {
-    console.log(event);
-    console.log(list);
-    let actionSheet = this.actionSheetCtrl.create({
-      title: "Change list color",
-      buttons: [
-        {
-          text: "NEGRO",
-          cssClass: "black-list",
-          handler: () => {
-            list.colorLista = "black-list";
-				list.colorBotones = "white-buttons";
-				this.globalVars.setListsData(this.lists);
-          }
-        },
-        {
-          text: "MORADO",
-          cssClass: "purple-list",
-          handler: () => {
-            list.colorLista = "purple-list";
-				list.colorBotones = "black-buttons";
-				this.globalVars.setListsData(this.lists);
-          }
-        },
-        {
-          text: "VERDE",
-          cssClass: "green-list",
-          handler: () => {
-            list.colorLista = "green-list";
-				list.colorBotones = "black-buttons";
-				this.globalVars.setListsData(this.lists);
-          }
-        },
-        {
-          text: "AZUL",
-          cssClass: "blue-list",
-          handler: () => {
-            list.colorLista = "blue-list";
-				list.colorBotones = "black-buttons";
-				this.globalVars.setListsData(this.lists);
-          }
-        },
-        {
-          text: "AMARILLO",
-          cssClass: "yellow-list",
-          handler: () => {
-            list.colorLista = "yellow-list";
-				list.colorBotones = "black-buttons";
-				this.globalVars.setListsData(this.lists);
-          }
-        },
-        {
-          text: "ROJO",
-          cssClass: "red-list",
-          handler: () => {
-            list.colorLista = "red-list";
-				list.colorBotones = "white-buttons";
-				this.globalVars.setListsData(this.lists);
-          }
-        },
-        {
-          text: "BLANCO",
-          cssClass: "white-list",
-          handler: () => {
-            list.colorLista = "white-list";
-				list.colorBotones = "black-buttons";
-				this.globalVars.setListsData(this.lists);
-          }
-        },
-        {
-          text: "GRIS",
-          cssClass: "grey-list",
-          handler: () => {
-            list.colorLista = "grey-list";
-				list.colorBotones = "black-buttons";
-				this.globalVars.setListsData(this.lists);
-          }
-        }
-      ]
+	 this.globalVars.getColorsData().then(data=>{
+		let buttons: any = [];
+		let colorsList = JSON.parse(JSON.stringify(data));		
+		colorsList.forEach(colorData => {
+	      if (colorData.cssClass !== list.colorLista) {
+	        buttons.push({
+	          text: colorData.color,
+	          cssClass: colorData.cssClass,
+	          handler: () => {
+	            list.colorLista = colorData.cssClass;
+	            list.colorBotones = colorData.buttons;
+	            this.globalVars.setListsData(this.lists);
+	          }
+	        });
+      }
     });
-
-    actionSheet.present();
+	    let actionSheet = this.actionSheetCtrl.create({
+			title: "Change list color",
+			buttons:buttons
+		 });		
+		 actionSheet.present();
+	 });
   }
   editList(event, list) {
     let oldName = list.nombreLista;

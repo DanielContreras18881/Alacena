@@ -106,6 +106,24 @@ export class CloudStorage {
     firebase.database().ref("lists/" + uid).set(lists);
   }
 
+  loadColorsData(uid: string) {
+    return new Promise(resolve => {
+      let ref = firebase.database().ref("/colors/");
+      ref.once("value").then(function(snapshot) {
+		  // We need to create this array first to store our local data
+		  let colorsList = JSON.parse(JSON.stringify(snapshot));
+        let colorArray = [];
+        for (let key in colorsList) {
+          if (colorsList.hasOwnProperty(key)) {
+            let color = JSON.parse(JSON.stringify(colorsList[key]));
+            colorArray.push(color);
+          }
+        }		  
+		  resolve(colorArray);
+      });
+    });
+  }
+
   loadListsData(uid: string) {
     return new Promise(resolve => {
       let ref = firebase.database().ref("/lists/");

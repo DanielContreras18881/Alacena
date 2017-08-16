@@ -52,6 +52,16 @@ export class GlobalVars {
     }
   }
 
+  getColorsData(){
+		return new Promise(resolve => {
+		this.listsDataService
+			.getColorsData(this.userProfile)
+			.then(data => {
+				resolve(data);
+			});
+		});
+  }
+
   setListsData(value) {
     this.listsData = value;
     this.listsDataService.setListsData(value, this.userProfile);

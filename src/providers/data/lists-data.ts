@@ -15,26 +15,46 @@ import { Network } from "@ionic-native/network";
 @Injectable()
 export class ListsData {
   path = "assets/json/Listas.json";
+  colors = "assets/json/Colors.json";
 
   constructor(
     private cloudStorage: CloudStorage,
     private localStorage: LocalStorage,
-	 private network: Network,
-	 private plt: Platform
+    private network: Network,
+    private plt: Platform
   ) {}
+
+  getColorsData(userProfile: any): any {
+    return new Promise(resolve => {
+      this.cloudStorage.loadColorsData(userProfile.uid).then(data => {
+        if (data !== undefined && data !== null) {
+          this.localStorage.setToLocalStorage("colors", data);
+          resolve(data);
+        } else {
+          this.localStorage
+            .getFromLocal("colors", this.colors)
+            .then(data => {
+              if (data !== undefined && data !== null) {
+                resolve(data);
+              } else {
+                resolve([]);
+              }
+            });
+        }
+      });
+    });
+  }
 
   setListsData(lists: any, userProfile: any): void {
     if (userProfile) {
-      if (
-			!this.plt.is("ios") && !this.plt.is("android")
-		) {
+      if (!this.plt.is("ios") && !this.plt.is("android")) {
         this.cloudStorage.uploadListsData(lists, userProfile.uid);
       } else {
-			if(this.network.type==="NONE"){
-        		this.localStorage.setToLocalStorage("lists", lists);
-			}else{
-				this.cloudStorage.uploadListsData(lists, userProfile.uid);
-			}
+        if (this.network.type === "NONE") {
+          this.localStorage.setToLocalStorage("lists", lists);
+        } else {
+          this.cloudStorage.uploadListsData(lists, userProfile.uid);
+        }
       }
     } else {
       this.localStorage.setToLocalStorage("lists", lists);
@@ -43,11 +63,8 @@ export class ListsData {
 
   getListsData(userProfile: any): any {
     return new Promise(resolve => {
-
       if (userProfile) {
-        if (
-          this.network.type === "NONE"
-        ) {
+        if (this.network.type === "NONE") {
           /*
 let connectSubscription = this.network.onConnect().subscribe(() => {
   console.log('network connected!');
@@ -65,7 +82,7 @@ let connectSubscription = this.network.onConnect().subscribe(() => {
 connectSubscription.unsubscribe();
 			   */
           this.localStorage.getFromLocal("lists", this.path).then(data => {
-				 //console.log("localStorage:" + JSON.stringify(data));
+            //console.log("localStorage:" + JSON.stringify(data));
             if (data !== undefined && data !== null) {
               resolve(data);
             } else {
@@ -74,13 +91,13 @@ connectSubscription.unsubscribe();
           });
         } else {
           this.cloudStorage.loadListsData(userProfile.uid).then(data => {
-				 //console.log("cloudStorage:" + JSON.stringify(data));
+            //console.log("cloudStorage:" + JSON.stringify(data));
             if (data !== undefined && data !== null) {
               this.localStorage.setToLocalStorage("lists", data);
               resolve(data);
             } else {
               this.localStorage.getFromLocal("lists", this.path).then(data => {
-					  //console.log("getFromLocal:" + JSON.stringify(data));
+                //console.log("getFromLocal:" + JSON.stringify(data));
                 if (data !== undefined && data !== null) {
                   resolve(data);
                 } else {
@@ -92,7 +109,7 @@ connectSubscription.unsubscribe();
         }
       } else {
         this.localStorage.getFromLocal("lists", this.path).then(data => {
-			  //console.log("localStorage2:" + JSON.stringify(data));
+          //console.log("localStorage2:" + JSON.stringify(data));
           if (data !== undefined && data !== null) {
             resolve(data);
           } else {

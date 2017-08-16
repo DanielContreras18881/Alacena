@@ -1,0 +1,37 @@
+[
+	{
+		"color": "NEGRO",
+		"cssClass": "black-list",
+		"buttons": "white-buttons"
+	},
+	{
+		"color": "MORADO",
+		"cssClass": "grey-list",
+		"buttons": "black-buttons"
+	},
+	{
+		"color": "VERDE",
+		"cssClass": "grey-list",
+		"buttons": "black-buttons"
+	},
+	{
+		"color": "AMARILLO",
+		"cssClass": "grey-list",
+		"buttons": "black-buttons"
+	},
+	{
+		"color": "ROJO",
+		"cssClass": "grey-list",
+		"buttons": "white-buttons"
+	},
+	{
+		"color": "BLANCO",
+		"cssClass": "grey-list",
+		"buttons": "black-buttons"
+	},
+	{
+		"color": "GRIS",
+		"cssClass": "grey-list",
+		"buttons": "black-buttons"
+	},
+]
