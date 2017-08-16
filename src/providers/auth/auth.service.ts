@@ -1,4 +1,4 @@
-import { GlobalVars } from '../global-vars/global-vars';
+import { GlobalVars } from "../global-vars/global-vars";
 import { Injectable } from "@angular/core";
 import { NgZone } from "@angular/core";
 import { GooglePlus } from "@ionic-native/google-plus";
@@ -37,16 +37,16 @@ export class AuthService {
       });
     });
   }
-  logout(type:string){
-	  console.log(type)
-	  return new Promise(resolve => {
-		  self = this;
+  logout(type: string) {
+    console.log(type);
+    return new Promise(resolve => {
+      self = this;
       switch (type) {
         case "twitter":
           resolve("OK");
           break;
-		  case "google":
-		    firebase.auth().signOut();
+        case "google":
+          firebase.auth().signOut();
           this.userProfile = null;
           self.globalVars.setUserProfile(null);
           resolve("OK");
@@ -62,59 +62,59 @@ export class AuthService {
   }
   twitterLogin() {
     return new Promise(resolve => {
-		 resolve("OK");
-	 });
+      resolve("twitter");
+    });
   }
   facebookLogin() {
     return new Promise(resolve => {
-		 resolve("OK");
-	 });
+      resolve("facebook");
+    });
   }
   emailLogin() {
     return new Promise(resolve => {
-		 resolve('OK');
-	 });
+      resolve("email");
+    });
   }
   googleAuth() {
     return new Promise(resolve => {
       self = this;
-        var provider = new firebase.auth.GoogleAuthProvider();
-        var res = null;
-        if (this.plt.is("ios") || this.plt.is("android")) {
-          this.googlePlus
-            .login({
-              webClientId:
-                "354280052179-fkmk7g20grbpkctmdgtt53oiel3be7a1.apps.googleusercontent.com",
-              offline: true
-            })
-            .then(res => {
-              firebase
-                .auth()
-                .signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken))
-                .then(success => {
-                  this.userProfile = success.user;
-                  self.globalVars.setUserProfile(this.userProfile);
-                  resolve("google");
-                })
-                .catch(error =>
-                  resolve(
-                    "Firebase failure: " + JSON.stringify(error)
-                  )
-                );
-            })
-            .catch(err => resolve("Error: "+ JSON.stringify(err)));
-        } else {
-          firebase.auth().signInWithRedirect(provider).then(
-            result => {
-              this.userProfile = result.user;
-              self.globalVars.setUserProfile(this.userProfile);
-              resolve("google");
-            },
-            error => {
-              resolve("Firebase failure: " + JSON.stringify(error));
-            }
-          );
-        }
+      var provider = new firebase.auth.GoogleAuthProvider();
+      var res = null;
+      if (this.plt.is("ios") || this.plt.is("android")) {
+        this.googlePlus
+          .login({
+            webClientId:
+              "354280052179-fkmk7g20grbpkctmdgtt53oiel3be7a1.apps.googleusercontent.com",
+            offline: true
+          })
+          .then(res => {
+            firebase
+              .auth()
+              .signInWithCredential(
+                firebase.auth.GoogleAuthProvider.credential(res.idToken)
+              )
+              .then(success => {
+                this.userProfile = success.user;
+                self.globalVars.setUserProfile(this.userProfile);
+                resolve("google");
+              })
+              .catch(error =>
+                resolve("Firebase failure: " + JSON.stringify(error))
+              );
+          })
+          .catch(err => resolve("Error: " + JSON.stringify(err)));
+      } else {
+        firebase.auth().signInWithRedirect(provider).then(
+          result => {
+            this.userProfile = result.user;
+            self.globalVars.setUserProfile(this.userProfile);
+            resolve("google");
+          },
+          error => {
+            resolve("Firebase failure: " + JSON.stringify(error));
+          }
+        );
+      }
     });
   }
 }

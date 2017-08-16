@@ -5,6 +5,7 @@ import {
   ModalController,
   AlertController,
   PopoverController,
+  ActionSheetController,
   NavController,
   NavParams
 } from "ionic-angular";
@@ -27,15 +28,16 @@ export class ListsPage {
   reorderAllowed: boolean;
 
   constructor(
-    public nav: NavController,
-    navParams: NavParams,
-    public mod: ModalController,
-    public alertCtrl: AlertController,
+    private actionSheetCtrl: ActionSheetController,
+    private nav: NavController,
+    private navParams: NavParams,
+    private mod: ModalController,
+    private alertCtrl: AlertController,
     private popoverCtrl: PopoverController,
     private globalVars: GlobalVars
   ) {
     globalVars.getListsData().then(data => {
-		 console.log('lists:'+JSON.stringify(data))
+      console.log("lists:" + JSON.stringify(data));
       this.lists = data;
       this.reorderAllowed = false;
     });
@@ -70,7 +72,80 @@ export class ListsPage {
     this.globalVars.setListsData(this.lists);
     this.globalVars.removetItemListData(name);
   }
+  editColor(event, list) {
+    console.log(event);
+    console.log(list);
+    let actionSheet = this.actionSheetCtrl.create({
+      title: "Change list color",
+      buttons: [
+        {
+          text: "Blanco",
+          cssClass: "blanco",
+          handler: () => {
+            list.colorLista = "blanco";
+          }
+        },
+        {
+          text: "Negro",
+          cssClass: "negro",
+          handler: () => {
+            list.colorLista = "negro";
+          }
+        },
+        {
+          text: "Azul",
+          cssClass: "azul",
+          handler: () => {
+            list.colorLista = "azul";
+          }
+        },
+        {
+          text: "Negro",
+          cssClass: "negro",
+          handler: () => {
+            list.colorLista = "negro";
+          }
+        },
+        {
+          text: "Azul",
+          cssClass: "azul",
+          handler: () => {
+            list.colorLista = "azul";
+          }
+        },
+        {
+          text: "Negro",
+          cssClass: "negro",
+          handler: () => {
+            list.colorLista = "negro";
+          }
+        },
+        {
+          text: "Azul",
+          cssClass: "azul",
+          handler: () => {
+            list.colorLista = "azul";
+          }
+        },
+        {
+          text: "Negro",
+          cssClass: "negro",
+          handler: () => {
+            list.colorLista = "negro";
+          }
+        },
+        {
+          text: "Azul",
+          cssClass: "azul",
+          handler: () => {
+            list.colorLista = "azul";
+          }
+        }
+      ]
+    });
 
+    actionSheet.present();
+  }
   editList(event, list) {
     let oldName = list.nombreLista;
     let edit = this.alertCtrl.create({

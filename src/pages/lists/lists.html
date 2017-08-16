@@ -38,7 +38,7 @@
 -->
 	<ion-list inset reorder="{{reorderAllowed}}" (ionItemReorder)="reorderItems($event)">
 		<div *ngFor="let list of lists">
-			<ion-card ion-item *ngIf="list.nombreLista!=='LISTA_COMPRA'" class="listCard">
+			<ion-card ion-item *ngIf="list.nombreLista!=='LISTA_COMPRA'" class="listCard" [ngClass]="list.colorLista">
 				<ion-card-header>
 					<ion-grid>
 						<ion-row>
@@ -53,8 +53,8 @@
                       </button>
 							</ion-col>
 							<ion-col col-2>
-								<button item-center secondary clear (click)="editList($event,list)" class="buttonOperation" *ngIf="list.listaEditable">
-                        <ion-icon ios="ios-color-palette" md="md-color-palette"></ion-icon>
+								<button item-center secondary clear (click)="editColor($event,list)" class="buttonOperation" *ngIf="list.listaEditable">
+								<ion-icon ios="ios-color-palette" md="md-color-palette"></ion-icon>
                       </button>
 							</ion-col>
 							<ion-colcol-2>

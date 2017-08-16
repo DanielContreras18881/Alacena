@@ -1,11 +1,10 @@
-import { AuthService } from '../../providers/auth/auth.service';
-import { LoginComponent } from '../../components/login-component/login-component';
+import { AuthService } from "../../providers/auth/auth.service";
 import { Component, NgZone } from "@angular/core";
 
 import { GooglePlus } from "@ionic-native/google-plus";
 import firebase from "firebase";
 
-import { ModalController, NavController, Platform } from 'ionic-angular';
+import { NavController, Platform } from "ionic-angular";
 
 import { ListPage } from "../list/list";
 
@@ -36,7 +35,6 @@ export class GettingStartedPage {
     private googlePlus: GooglePlus,
     public navCtrl: NavController,
     private globalVars: GlobalVars,
-    public modalCtrl: ModalController,
     private authService: AuthService
   ) {
     this.zone = new NgZone({});
@@ -44,10 +42,9 @@ export class GettingStartedPage {
     firebase.auth().onAuthStateChanged(user => {
       this.zone.run(() => {
         if (user) {
-			  this.type = 'google';
+          this.type = "google";
           this.userProfile = user;
           self.globalVars.setUserProfile(user);
-          //gapi.auth.setToken(this.userProfile.oauthAccessToken);
         } else {
           this.userProfile = null;
         }
@@ -86,18 +83,32 @@ export class GettingStartedPage {
     alert("editReminder");
   }
 
-  selectLoginType() {
-    let loginModal = this.modalCtrl.create(LoginComponent);
-    loginModal.onDidDismiss(data => {
-		 console.log(data)
-      if (data === "google") {
-        console.log("LOGGED");
-        this.type = data;
-      } else {
-        console.log(data);
-      }
+  emailLogin() {
+    this.type = "email";
+    this.authService.emailLogin().then(data => {
+      console.log(data);
     });
-    loginModal.present();
+  }
+
+  facebookLogin() {
+    this.type = "facebook";
+    this.authService.facebookLogin().then(data => {
+      console.log(data);
+    });
+  }
+
+  googleLogin() {
+    this.type = "google";
+    this.authService.googleAuth().then(data => {
+      console.log(data);
+    });
+  }
+
+  twitterLogin() {
+    this.type = "twitter";
+    this.authService.twitterLogin().then(data => {
+      console.log(data);
+    });
   }
 
   logout() {

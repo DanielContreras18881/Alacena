@@ -13,6 +13,34 @@
 	<ion-list>
 		<ion-card *ngIf="!userProfile">
 			<ion-card-header>
+				<ion-grid>
+					<ion-row>
+						<ion-col col-4>
+							<h2 class="userAccountLabel">Login with ...</h2>
+						</ion-col>
+						<ion-col col-2>
+							<button type="button" class="mailLogo" clear ion-button block icon-only (click)="emailLogin()">
+								<ion-icon ios="ios-mail" md="md-mail"></ion-icon>
+							</button>
+						</ion-col>
+						<ion-col col-2>
+							<button type="button" class="fbLogo" clear ion-button block icon-only (click)="facebookLogin()">
+								<ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
+							</button>
+						</ion-col>
+						<ion-col col-2>
+							<button type="button" class="twLogo" clear ion-button block icon-only (click)="twitterLogin()">
+								<ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon>
+							</button>
+						</ion-col>
+						<ion-col col-2>
+							<button type="button" class="googleLogo" clear ion-button block icon-only (click)="googleLogin()">
+								<ion-icon ios="logo-goggle" md="logo-google"></ion-icon>
+							</button>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+				<!--
 				<ion-item (click)="selectLoginType()">
 					<ion-avatar item-right>
 						<button clear default>
@@ -23,6 +51,7 @@
 						<h2 class="userAccountLabel">Login</h2>
 					</ion-item>
 				</ion-item>
+			-->
 			</ion-card-header>
 		</ion-card>
 		<ion-card *ngIf="userProfile">
