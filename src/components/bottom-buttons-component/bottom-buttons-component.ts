@@ -43,10 +43,16 @@ export class BottomButtonsComponent {
     remove.setTitle("Remove");
 
     this.object.forEach((item: any) => {
+      let nombre =
+        this.type === "Lists"
+          ? item.nombreLista
+          : this.type === "Categories"
+            ? item.categoryName
+            : item.nombreElemento;
       remove.addInput({
         type: "checkbox",
-        label: item.nombreLista,
-        value: item.nombreLista,
+        label: nombre,
+        value: nombre,
         checked: false
       });
     });
@@ -77,42 +83,46 @@ export class BottomButtonsComponent {
 
   addItem(event: Event) {
     let type = this.type;
-    this.alertCtrl
-      .create({
-        title: "Add New " + type,
-        inputs: [
-          {
-            name: "name"
-          }
-        ],
-        buttons: [
-          {
-            text: "Cancel",
-            role: "cancel"
-          },
-          {
-            text: "Add",
-            handler: data => {
-              if (data.name.trim() == "" || data.name == null) {
+    if (type !== "List") {
+      this.alertCtrl
+        .create({
+          title: "Add New " + type,
+          inputs: [
+            {
+              name: "name"
+            }
+          ],
+          buttons: [
+            {
+              text: "Cancel",
+              role: "cancel"
+            },
+            {
+              text: "Add",
+              handler: data => {
+                if (data.name.trim() == "" || data.name == null) {
+                  const toast = this.toastCtrl.create({
+                    message: "Please enter a valid value!",
+                    duration: 1500,
+                    position: "bottom"
+                  });
+                  toast.present();
+                  return;
+                }
+                this.finishedAdd.emit(data.name);
                 const toast = this.toastCtrl.create({
-                  message: "Please enter a valid value!",
+                  message: this.type + " " + data.name + " added!",
                   duration: 1500,
                   position: "bottom"
                 });
                 toast.present();
-                return;
               }
-              this.finishedAdd.emit(data.name);
-              const toast = this.toastCtrl.create({
-                message: this.type + " " + data.name + " added!",
-                duration: 1500,
-                position: "bottom"
-              });
-              toast.present();
             }
-          }
-        ]
-      })
-      .present();
+          ]
+        })
+        .present();
+    } else {
+      this.finishedAdd.emit();
+    }
   }
 }

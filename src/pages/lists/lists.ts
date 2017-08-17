@@ -73,28 +73,28 @@ export class ListsPage {
     this.globalVars.removetItemListData(name);
   }
   editColor(event, list) {
-	 this.globalVars.getColorsData().then(data=>{
-		let buttons: any = [];
-		let colorsList = JSON.parse(JSON.stringify(data));		
-		colorsList.forEach(colorData => {
-	      if (colorData.cssClass !== list.colorLista) {
-	        buttons.push({
-	          text: colorData.color,
-	          cssClass: colorData.cssClass,
-	          handler: () => {
-	            list.colorLista = colorData.cssClass;
-	            list.colorBotones = colorData.buttons;
-	            this.globalVars.setListsData(this.lists);
-	          }
-	        });
-      }
+    this.globalVars.getColorsData().then(data => {
+      let buttons: any = [];
+      let colorsList = JSON.parse(JSON.stringify(data));
+      colorsList.forEach(colorData => {
+        if (colorData.cssClass !== list.colorLista) {
+          buttons.push({
+            text: colorData.color,
+            cssClass: colorData.cssClass,
+            handler: () => {
+              list.colorLista = colorData.cssClass;
+              list.colorBotones = colorData.buttons;
+              this.globalVars.setListsData(this.lists);
+            }
+          });
+        }
+      });
+      let actionSheet = this.actionSheetCtrl.create({
+        title: "Change list color",
+        buttons: buttons
+      });
+      actionSheet.present();
     });
-	    let actionSheet = this.actionSheetCtrl.create({
-			title: "Change list color",
-			buttons:buttons
-		 });		
-		 actionSheet.present();
-	 });
   }
   editList(event, list) {
     let oldName = list.nombreLista;

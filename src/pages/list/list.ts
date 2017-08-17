@@ -33,6 +33,8 @@ export class ListPage {
   @ViewChild("popoverText", { read: ElementRef })
   text: ElementRef;
 
+  type: string = "List";
+
   selectedItem: any;
   list: any;
   searchBar: boolean;
@@ -51,7 +53,9 @@ export class ListPage {
 
   ngOnInit() {
     this.searchBar = false;
-    this.selectedItem = this.navParams.get("list");
+    this.selectedItem = this.navParams.get("list")
+      ? this.navParams.get("list")
+      : "LISTA_COMPRA";
     this.globalVars.getDefaulIconsData().then(data => {
       this.icons = data;
       this.initializeItems();
@@ -216,6 +220,14 @@ export class ListPage {
     });
   }
 
+  addElement(newElement: string) {
+    console.log(newElement);
+  }
+
+  removeElements(removed: any[]) {
+    console.log(removed);
+  }
+
   addItem(event) {
     // TODO: Check data structure, redefine and refactor with category, measurement and unitStep
     let newItem = {
@@ -242,6 +254,7 @@ export class ListPage {
       if (item !== undefined) {
         // TODO : Store changes
         this.list.push(item);
+        this.globalVars.setListData(this.selectedItem, this.list);
         //this.globalVars.setListData(this.list);
       }
     });

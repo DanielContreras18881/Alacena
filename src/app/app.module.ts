@@ -1,3 +1,4 @@
+import { ItemInfoPage } from "../pages/item-info/item-info";
 import { AuthService } from "../providers/auth/auth.service";
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from "@angular/core";
 import { IonicApp, IonicModule } from "ionic-angular";
@@ -9,6 +10,7 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { IonicStorageModule } from "@ionic/storage";
 import { Network } from "@ionic-native/network";
 import { GooglePlus } from "@ionic-native/google-plus";
+import { AdMobFree } from "@ionic-native/admob-free";
 
 import { SentryErrorHandler } from "../services/sentry-errorhandler";
 
@@ -43,6 +45,7 @@ import { PopoverPage } from "../components/popover/popover";
     ListPage,
     ListsPage,
     ItemsPage,
+    ItemInfoPage,
     ConfigPage,
     AboutPage,
     CategoriesPage,
@@ -63,6 +66,7 @@ import { PopoverPage } from "../components/popover/popover";
     ListPage,
     ListsPage,
     ItemsPage,
+    ItemInfoPage,
     ConfigPage,
     AboutPage,
     CategoriesPage,
@@ -72,6 +76,7 @@ import { PopoverPage } from "../components/popover/popover";
   ],
   providers: [
     //{provide: ErrorHandler, useClass: SentryErrorHandler},
+    AdMobFree,
     GooglePlus,
     Network,
     CloudStorage,
@@ -82,6 +87,7 @@ import { PopoverPage } from "../components/popover/popover";
     ListsData,
     ListData,
     ItemData,
+    ItemInfoPage,
     ConfigData,
     SplashScreen,
     StatusBar,

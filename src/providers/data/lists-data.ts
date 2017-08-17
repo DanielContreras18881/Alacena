@@ -1,4 +1,4 @@
-import { Platform } from 'ionic-angular';
+import { Platform } from "ionic-angular";
 import { Injectable } from "@angular/core";
 
 import { CloudStorage } from "./cloudStorage";
@@ -26,20 +26,11 @@ export class ListsData {
 
   getColorsData(userProfile: any): any {
     return new Promise(resolve => {
-      this.cloudStorage.loadColorsData(userProfile.uid).then(data => {
+      this.localStorage.getFromLocal("colors", this.colors).then(data => {
         if (data !== undefined && data !== null) {
-          this.localStorage.setToLocalStorage("colors", data);
           resolve(data);
         } else {
-          this.localStorage
-            .getFromLocal("colors", this.colors)
-            .then(data => {
-              if (data !== undefined && data !== null) {
-                resolve(data);
-              } else {
-                resolve([]);
-              }
-            });
+          resolve([]);
         }
       });
     });
@@ -64,32 +55,7 @@ export class ListsData {
   getListsData(userProfile: any): any {
     return new Promise(resolve => {
       if (userProfile) {
-        if (this.network.type === "NONE") {
-          /*
-let connectSubscription = this.network.onConnect().subscribe(() => {
-  console.log('network connected!');
-  // We just got a connection but we need to wait briefly
-   // before we determine the connection type. Might need to wait.
-  // prior to doing any api requests as well.
-  setTimeout(() => {
-    if (this.network.type === 'wifi') {
-      console.log('we got a wifi connection, woohoo!');
-    }
-  }, 3000);
-});
-
-// stop connect watch
-connectSubscription.unsubscribe();
-			   */
-          this.localStorage.getFromLocal("lists", this.path).then(data => {
-            //console.log("localStorage:" + JSON.stringify(data));
-            if (data !== undefined && data !== null) {
-              resolve(data);
-            } else {
-              resolve([]);
-            }
-          });
-        } else {
+        if (!this.plt.is("ios") && !this.plt.is("android")) {
           this.cloudStorage.loadListsData(userProfile.uid).then(data => {
             //console.log("cloudStorage:" + JSON.stringify(data));
             if (data !== undefined && data !== null) {
@@ -106,6 +72,52 @@ connectSubscription.unsubscribe();
               });
             }
           });
+        } else {
+          if (this.network.type === "NONE") {
+            /*
+let connectSubscription = this.network.onConnect().subscribe(() => {
+  console.log('network connected!');
+  // We just got a connection but we need to wait briefly
+   // before we determine the connection type. Might need to wait.
+  // prior to doing any api requests as well.
+  setTimeout(() => {
+    if (this.network.type === 'wifi') {
+      console.log('we got a wifi connection, woohoo!');
+    }
+  }, 3000);
+});
+
+// stop connect watch
+connectSubscription.unsubscribe();
+			   */
+            this.localStorage.getFromLocal("lists", this.path).then(data => {
+              //console.log("localStorage:" + JSON.stringify(data));
+              if (data !== undefined && data !== null) {
+                resolve(data);
+              } else {
+                resolve([]);
+              }
+            });
+          } else {
+            this.cloudStorage.loadListsData(userProfile.uid).then(data => {
+              //console.log("cloudStorage:" + JSON.stringify(data));
+              if (data !== undefined && data !== null) {
+                this.localStorage.setToLocalStorage("lists", data);
+                resolve(data);
+              } else {
+                this.localStorage
+                  .getFromLocal("lists", this.path)
+                  .then(data => {
+                    //console.log("getFromLocal:" + JSON.stringify(data));
+                    if (data !== undefined && data !== null) {
+                      resolve(data);
+                    } else {
+                      resolve([]);
+                    }
+                  });
+              }
+            });
+          }
         }
       } else {
         this.localStorage.getFromLocal("lists", this.path).then(data => {

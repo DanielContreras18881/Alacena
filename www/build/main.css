@@ -25308,123 +25308,6 @@ ion-navbar.toolbar {
   font-weight: bold;
 }
 
-html {
-  font-size: 62.5%;
-}
-
-a {
-  background-color: transparent;
-}
-
-.enable-hover a:hover {
-  opacity: .7;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-top: 1.6rem;
-  margin-bottom: 1rem;
-  font-weight: 500;
-  line-height: 1.2;
-}
-
-[padding] h1:first-child,
-[padding] h2:first-child,
-[padding] h3:first-child,
-[padding] h4:first-child,
-[padding] h5:first-child,
-[padding] h6:first-child {
-  margin-top: -.3rem;
-}
-
-h1 + h2,
-h1 + h3,
-h2 + h3 {
-  margin-top: -.3rem;
-}
-
-h1 {
-  margin-top: 2rem;
-  font-size: 2.6rem;
-}
-
-h2 {
-  margin-top: 1.8rem;
-  font-size: 2.4rem;
-}
-
-h3 {
-  font-size: 2.2rem;
-}
-
-h4 {
-  font-size: 2rem;
-}
-
-h5 {
-  font-size: 1.8rem;
-}
-
-h6 {
-  font-size: 1.6rem;
-}
-
-small {
-  font-size: 75%;
-}
-
-sub,
-sup {
-  position: relative;
-  font-size: 75%;
-  line-height: 0;
-  vertical-align: baseline;
-}
-
-sup {
-  top: -.5em;
-}
-
-sub {
-  bottom: -.25em;
-}
-
-[text-left] {
-  text-align: left;
-}
-
-[text-center] {
-  text-align: center;
-}
-
-[text-right] {
-  text-align: right;
-}
-
-[text-justify] {
-  text-align: justify;
-}
-
-[text-nowrap] {
-  white-space: nowrap;
-}
-
-[text-uppercase] {
-  text-transform: uppercase;
-}
-
-[text-lowercase] {
-  text-transform: lowercase;
-}
-
-[text-capitalize] {
-  text-transform: capitalize;
-}
-
 .text-ios-primary {
   color: #387ef5;
 }
@@ -25734,13 +25617,13 @@ button {
   background-color: transparent;
 }
 
-.app-content {
-  max-height: 96%;
-}
-
-bottom-buttons-component .toolbar .segment-md .segment-button.activated,
-bottom-buttons-component .toolbar .segment-md .segment-button.segment-activated {
-  border-color: transparent;
+bottom-buttons-component .segment-button,
+bottom-buttons-component .segment-button.activated,
+bottom-buttons-component .segment-button.segment-activated {
+  border-color: transparent !important;
+  background-color: transparent !important;
+  color: #0f0f0f !important;
+  border-style: none !important;
 }
 
 ion-card ion-card-content {
@@ -25861,6 +25744,13 @@ ion-list .item .item-inner {
   background-color: transparent;
 }
 
+.getting-started .googleLogo,
+.getting-started .mailLogo,
+.getting-started .fbLogo,
+.getting-started .twLogo {
+  background-color: #e5e5e5;
+}
+
 .getting-started .googleLogo {
   color: #e82a37;
 }
@@ -25889,50 +25779,49 @@ p.item-info .ion-md-eye:before,
 p.item-info .ion-md-add-circle:before,
 p.item-info .ion-md-basket:before,
 p.item-info .ion-md-cart:before {
-  font-size: 2.15rem;
+  font-size: 1.65rem;
 }
 
 .userAccountIcon {
-  font-size: 1.8rem;
-  color: #167140;
+  font-size: 2.25rem;
+  color: #167140 !important;
 }
 
 .userAccountLabel {
-  font-size: 2.25rem !important;
-  color: #167140;
+  color: #167140 !important;
   white-space: normal;
 }
 
 .reminderIcon {
-  font-size: 1.65rem;
+  font-size: 2.25rem;
   color: #320440;
 }
 
 .reminderLabel {
-  font-size: 2rem !important;
+  font-size: 1.5rem !important;
   color: #320440;
   white-space: normal;
 }
 
 .neededsIcon {
-  font-size: 1.5rem;
+  font-size: 2.25rem;
   color: #f43300;
 }
 
 .neededsLabel {
-  font-size: 1.75rem !important;
+  font-size: 1.5rem !important;
   color: #f43300;
   white-space: normal;
 }
 
 .expiresIcon {
-  font-size: 1.35rem;
-  color: #006655;
+  font-size: 2.25rem;
+  color: #006655 !important;
 }
 
 .expiresLabel {
   font-size: 1.5rem !important;
-  color: #006655;
+  color: #006655 !important;
   white-space: normal;
 }
 
@@ -25997,7 +25886,7 @@ ion-list .item-inner {
 ion-badge.amount {
   border-radius: 1.5rem;
   color: #fff;
-  background-color: #9F7ACC;
+  background-color: #9f7acc;
   font-size: 1.25em;
 }
 

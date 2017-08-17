@@ -1,3 +1,4 @@
+import { Platform } from "ionic-angular";
 import { Injectable } from "@angular/core";
 
 import { CloudStorage } from "./cloudStorage";
@@ -21,11 +22,24 @@ export class ListData {
   constructor(
     private cloudStorage: CloudStorage,
     private localStorage: LocalStorage,
-    private network: Network
+    private network: Network,
+    private plt: Platform
   ) {}
 
   setListData(name: string, data: any[], userProfile: any): void {
-    this.cloudStorage.uploadListData(name, data, userProfile.uid);
+    if (userProfile) {
+      if (!this.plt.is("ios") && !this.plt.is("android")) {
+        this.cloudStorage.uploadListData(name, data, userProfile.uid);
+      } else {
+        if (this.network.type === "NONE") {
+          this.localStorage.setToLocalStorage(name, data);
+        } else {
+          this.cloudStorage.uploadListData(name, data, userProfile.uid);
+        }
+      }
+    } else {
+      this.localStorage.setToLocalStorage(name, data);
+    }
   }
 
   removeListData(name: string, userProfile: any): void {
@@ -35,10 +49,24 @@ export class ListData {
   getListItemsData(name: string, userProfile: any) {
     return new Promise(resolve => {
       if (userProfile) {
-        if (
-          this.network.type === "NONE"
-        ) {
-          /*
+        if (!this.plt.is("ios") && !this.plt.is("android")) {
+          this.cloudStorage.loadListData(name, userProfile.uid).then(data => {
+            if (data !== undefined && data !== null) {
+              this.localStorage.setToLocalStorage(name, data);
+              resolve(data);
+            } else {
+              this.localStorage.getFromLocal(name, this.path).then(data => {
+                if (data !== undefined && data !== null) {
+                  resolve(data);
+                } else {
+                  resolve([]);
+                }
+              });
+            }
+          });
+        } else {
+          if (this.network.type === "NONE") {
+            /*
 let connectSubscription = this.network.onConnect().subscribe(() => {
   console.log('network connected!');
   // We just got a connection but we need to wait briefly
@@ -54,28 +82,29 @@ let connectSubscription = this.network.onConnect().subscribe(() => {
 // stop connect watch
 connectSubscription.unsubscribe();
 			   */
-          this.localStorage.getFromLocal(name, this.path).then(data => {
-            if (data !== undefined && data !== null) {
-              resolve(data);
-            } else {
-              resolve([]);
-            }
-          });
-        } else {
-          this.cloudStorage.loadListData(name, userProfile.uid).then(data => {
-            if (data !== undefined && data !== null) {
-              this.localStorage.setToLocalStorage(name, data);
-              resolve(data);
-            } else {
-              this.localStorage.getFromLocal(name, this.path).then(data => {
-                if (data !== undefined && data !== null) {
-                  resolve(data);
-                } else {
-                  resolve([]);
-                }
-              });
-            }
-          });
+            this.localStorage.getFromLocal(name, this.path).then(data => {
+              if (data !== undefined && data !== null) {
+                resolve(data);
+              } else {
+                resolve([]);
+              }
+            });
+          } else {
+            this.cloudStorage.loadListData(name, userProfile.uid).then(data => {
+              if (data !== undefined && data !== null) {
+                this.localStorage.setToLocalStorage(name, data);
+                resolve(data);
+              } else {
+                this.localStorage.getFromLocal(name, this.path).then(data => {
+                  if (data !== undefined && data !== null) {
+                    resolve(data);
+                  } else {
+                    resolve([]);
+                  }
+                });
+              }
+            });
+          }
         }
       } else {
         this.localStorage.getFromLocal(name, this.path).then(data => {

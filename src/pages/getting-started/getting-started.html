@@ -16,42 +16,36 @@
 				<ion-grid>
 					<ion-row>
 						<ion-col col-4>
-							<h2 class="userAccountLabel">Login with ...</h2>
+							<h4 class="userAccountLabel">Login with</h4>
 						</ion-col>
-						<ion-col col-2>
-							<button type="button" class="mailLogo" clear ion-button block icon-only (click)="emailLogin()">
-								<ion-icon ios="ios-mail" md="md-mail"></ion-icon>
-							</button>
-						</ion-col>
-						<ion-col col-2>
-							<button type="button" class="fbLogo" clear ion-button block icon-only (click)="facebookLogin()">
-								<ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
-							</button>
-						</ion-col>
-						<ion-col col-2>
-							<button type="button" class="twLogo" clear ion-button block icon-only (click)="twitterLogin()">
-								<ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon>
-							</button>
-						</ion-col>
-						<ion-col col-2>
-							<button type="button" class="googleLogo" clear ion-button block icon-only (click)="googleLogin()">
-								<ion-icon ios="logo-goggle" md="logo-google"></ion-icon>
-							</button>
+						<ion-col col-8>
+							<ion-row>
+								<ion-col col-6>
+									<button type="button" class="mailLogo" ion-button icon-only (click)="emailLogin()">
+										<ion-icon ios="ios-mail" md="md-mail"></ion-icon>
+									</button>
+								</ion-col>
+								<ion-col col-6>
+									<button type="button" class="twLogo" ion-button icon-only (click)="twitterLogin()">
+										<ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon>
+									</button>
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col col-6>
+									<button type="button" class="fbLogo" ion-button icon-only (click)="facebookLogin()">
+										<ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
+									</button>
+								</ion-col>
+								<ion-col col-6>
+									<button type="button" class="googleLogo" ion-button icon-only (click)="googleLogin()">
+										<ion-icon name="logo-google"></ion-icon>
+									</button>
+								</ion-col>
+							</ion-row>
 						</ion-col>
 					</ion-row>
 				</ion-grid>
-				<!--
-				<ion-item (click)="selectLoginType()">
-					<ion-avatar item-right>
-						<button clear default>
-                <ion-icon class="userAccountIcon" ios="ios-log-in" md="md-log-in"></ion-icon>
-              </button>
-					</ion-avatar>
-					<ion-item>
-						<h2 class="userAccountLabel">Login</h2>
-					</ion-item>
-				</ion-item>
-			-->
 			</ion-card-header>
 		</ion-card>
 		<ion-card *ngIf="userProfile">
@@ -66,8 +60,8 @@
 						<ion-avatar item-left>
 							<img [src]="userProfile.photoURL">
 						</ion-avatar>
-						<h2 class="userAccountLabel">{{ userProfile.displayName }}</h2>
-						<h3>{{ userProfile.email }}</h3>
+						<h3 class="userAccountLabel">{{ userProfile.displayName }}</h3>
+						<!--<h3>{{ userProfile.email }}</h3>-->
 					</ion-item>
 				</ion-item>
 			</ion-card-header>
@@ -80,7 +74,7 @@
                 <ion-icon class="reminderIcon" ios="ios-notifications" md="md-notifications"></ion-icon>
               </button>
 					</ion-avatar>
-					<h2 class="reminderLabel">RECORDATORIOS</h2>
+					<h5 class="reminderLabel">RECORDATORIOS</h5>
 				</ion-item>
 				<ion-list inset>
 					<ion-item ion-item (click)="editReminder()">
@@ -100,7 +94,7 @@
                 <ion-icon class="neededsIcon" large item-right ios="ios-cart" md="md-cart"></ion-icon>
               </button>
 					</ion-avatar>
-					<h2 class="neededsLabel">ELEMENTOS NECESARIOS DE COMPRAR</h2>
+					<h5 class="neededsLabel">ELEMENTOS NECESARIOS DE COMPRAR</h5>
 				</ion-item>
 				<ion-list inset>
 					<ion-item ion-item (click)="openInternalPage(shoppingListPage)">
@@ -132,7 +126,7 @@
                 <ion-icon class="expiresIcon" large item-right ios="ios-warning" md="md-warning"></ion-icon>
               </button>
 					</ion-avatar>
-					<h2 class="expiresLabel">ELEMENTOS CERCANOS A CADUCAR</h2>
+					<h5 class="expiresLabel">ELEMENTOS CERCANOS A CADUCAR</h5>
 				</ion-item>
 				<ion-list inset>
 					<ion-item ion-item (click)="showExpireItems()">

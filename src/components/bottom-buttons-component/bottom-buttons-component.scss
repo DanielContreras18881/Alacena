@@ -1,6 +1,10 @@
 bottom-buttons-component {
-  .toolbar .segment-md .segment-button.activated,
-  .toolbar .segment-md .segment-button.segment-activated {
-    border-color: transparent;
+  .segment-button,
+  .segment-button.activated,
+  .segment-button.segment-activated {
+    border-color: transparent !important;
+    background-color: transparent !important;
+    color: #0f0f0f !important;
+    border-style: none !important;
   }
 }

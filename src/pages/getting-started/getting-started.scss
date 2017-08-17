@@ -9,6 +9,13 @@
     background-color: transparent;
   }
 
+  .googleLogo,
+  .mailLogo,
+  .fbLogo,
+  .twLogo {
+    background-color: #e5e5e5;
+  }
+
   .googleLogo {
     color: #e82a37;
   }
@@ -38,45 +45,44 @@ p.item-info .ion-md-eye:before,
 p.item-info .ion-md-add-circle:before,
 p.item-info .ion-md-basket:before,
 p.item-info .ion-md-cart:before {
-  font-size: 2.15rem;
+  font-size: 1.65rem;
 }
 
 .userAccountIcon {
-  font-size: 1.8rem;
-  color: #167140;
+  font-size: 2.25rem;
+  color: #167140 !important;
 }
 .userAccountLabel {
-  font-size: 2.25rem !important;
-  color: #167140;
+  color: #167140 !important;
   white-space: normal;
 }
 
 .reminderIcon {
-  font-size: 1.65rem;
+  font-size: 2.25rem;
   color: #320440;
 }
 .reminderLabel {
-  font-size: 2rem !important;
+  font-size: 1.5rem !important;
   color: #320440;
   white-space: normal;
 }
 
 .neededsIcon {
-  font-size: 1.5rem;
+  font-size: 2.25rem;
   color: #f43300;
 }
 .neededsLabel {
-  font-size: 1.75rem !important;
+  font-size: 1.5rem !important;
   color: #f43300;
   white-space: normal;
 }
 
 .expiresIcon {
-  font-size: 1.35rem;
-  color: #006655;
+  font-size: 2.25rem;
+  color: #006655 !important;
 }
 .expiresLabel {
   font-size: 1.5rem !important;
-  color: #006655;
+  color: #006655 !important;
   white-space: normal;
 }
