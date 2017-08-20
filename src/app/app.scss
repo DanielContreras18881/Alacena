@@ -9,10 +9,6 @@
 .body {
   font-family: fantasy;
 }
-.item-header-toolbar {
-  background-color: #f8f8f8;
-  color: #fff;
-}
 .item .item-inner {
   border: none;
 }
@@ -23,11 +19,8 @@
 .item-md.item-block .item-inner {
   border: none;
 }
-
-.publicidad {
-  height: 5rem;
-  background-color: black;
-  opacity: 1;
+.menu-content{
+	background-color: #222;
 }
 
 .add-button {

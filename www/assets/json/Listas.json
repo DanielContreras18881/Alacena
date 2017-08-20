@@ -4,13 +4,13 @@
 "colorBotones": "black-buttons",
   "listaEditable": false
 }, {
-  "nombreLista": "aaaaa",
-  "colorLista": "white-list",
+  "nombreLista": "Prueba1",
+  "colorLista": "red-list",
   "colorBotones": "black-buttons",
-  "listaEditable": false
+  "listaEditable": true
 }, {
-  "nombreLista": "bbbb",
+  "nombreLista": "Prueba2",
 "colorLista": "white-list",
 "colorBotones": "black-buttons",
-  "listaEditable": false
+  "listaEditable": true
 } ]

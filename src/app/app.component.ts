@@ -44,7 +44,8 @@ export class Alacena {
       // for ios
       adMobId = "ca-app-pub-7863580056712493/9663378563";
     }
-    console.log("app:run:AdMob Banner inicializado");
+	 console.log("app:run:AdMob Banner inicializado");
+	 console.log("app:run:" + adMobId);
     const bannerConfig: AdMobFreeBannerConfig = {
       // add your config here
       // for the sake of this example we will just use the test config
@@ -58,7 +59,8 @@ export class Alacena {
       .prepare()
       .then(() => {
         // banner Ad is ready
-        // if we set autoShow to false, then we will need to call the show method here
+		  // if we set autoShow to false, then we will need to call the show method here
+		  this.admobFree.banner.show();
       })
       .catch(e => console.log(e));
 

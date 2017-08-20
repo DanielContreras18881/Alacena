@@ -1,9 +1,9 @@
 <ion-menu [content]="content">
 
-	<ion-content class="menu-content">
-		<ion-toolbar dark>
+	<ion-content color="dark" class="menu-content">
+		<ion-toolbar color="dark">
 			<ion-title>
-				<ion-item class="item-header-toolbar">
+				<ion-item color="dark" class="item-header-toolbar">
 					<ion-avatar item-left class="item-header-toolbar-avatar">
 						<img class="icon" src="icon.png" />
 					</ion-avatar>
@@ -11,8 +11,8 @@
 				</ion-item>
 			</ion-title>
 		</ion-toolbar>
-		<ion-list class="menu-list">
-			<button ion-item detail-none *ngFor="let p of pages" (click)="openPage(p)">
+		<ion-list color="dark" class="menu-list">
+			<button color="dark" ion-item detail-none *ngFor="let p of pages" (click)="openPage(p)">
           <ion-icon ios="ios-{{p.icon}}" md="md-{{p.icon}}"></ion-icon>
           {{p.title}}
       </button>
@@ -22,11 +22,3 @@
 </ion-menu>
 
 <ion-nav class="app-content" [root]="rootPage" #content swipe-back-enabled="false" dark></ion-nav>
-
-<ion-footer>
-	<!--
-	<ion-segment class="publicidad">
-		<ion-segment-button clear full block value="">AQUI VA EL BANNER DE PUBLICIDAD</ion-segment-button>
-	</ion-segment>
-	-->
-</ion-footer>

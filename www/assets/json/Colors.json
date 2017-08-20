@@ -6,32 +6,32 @@
 	},
 	{
 		"color": "MORADO",
-		"cssClass": "grey-list",
+		"cssClass": "purple-list",
 		"buttons": "black-buttons"
 	},
 	{
 		"color": "VERDE",
-		"cssClass": "grey-list",
+		"cssClass": "green-list",
 		"buttons": "black-buttons"
 	},
 	{
 		"color": "AMARILLO",
-		"cssClass": "grey-list",
+		"cssClass": "yellow-list",
 		"buttons": "black-buttons"
 	},
 	{
 		"color": "ROJO",
-		"cssClass": "grey-list",
+		"cssClass": "red-list",
 		"buttons": "white-buttons"
 	},
 	{
 		"color": "BLANCO",
-		"cssClass": "grey-list",
+		"cssClass": "white-list",
 		"buttons": "black-buttons"
 	},
 	{
 		"color": "GRIS",
 		"cssClass": "grey-list",
 		"buttons": "black-buttons"
-	},
+	}
 ]
