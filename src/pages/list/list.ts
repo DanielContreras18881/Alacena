@@ -33,7 +33,7 @@ export class ListPage {
   @ViewChild("popoverText", { read: ElementRef })
   text: ElementRef;
 
-  type: string = "List";
+  type: string = "ListItem";
 
   selectedItem: any;
   list: any;
@@ -164,6 +164,7 @@ export class ListPage {
           handler: () => {
             // TODO : Store changes
             this.list.splice(this.list.indexOf(item), 1);
+            this.globalVars.setListData(this.selectedItem, this.list);
           }
         }
       ]
@@ -179,6 +180,8 @@ export class ListPage {
     });
     infoListModal.onDidDismiss(item => {
       // TODO: check if needed or action with items list
+      this.list[this.list.indexOf(item)] = item;
+      this.globalVars.setListData(this.selectedItem, this.list);
     });
     infoListModal.present();
   }
@@ -225,7 +228,10 @@ export class ListPage {
   }
 
   removeElements(removed: any[]) {
-    console.log(removed);
+    removed.forEach(itemRemoved => {
+      this.list.splice(this.list.indexOf(itemRemoved), 1);
+      this.globalVars.setListData(this.selectedItem, this.list);
+    });
   }
 
   addItem(event) {
@@ -252,10 +258,8 @@ export class ListPage {
     });
     infoListModal.onDidDismiss(item => {
       if (item !== undefined) {
-        // TODO : Store changes
         this.list.push(item);
         this.globalVars.setListData(this.selectedItem, this.list);
-        //this.globalVars.setListData(this.list);
       }
     });
     infoListModal.present();

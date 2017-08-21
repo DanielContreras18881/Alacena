@@ -19,8 +19,8 @@
 .item-md.item-block .item-inner {
   border: none;
 }
-.menu-content{
-	background-color: #222;
+.menu-content {
+  background-color: #222;
 }
 
 .add-button {
@@ -49,6 +49,9 @@
 }
 button {
   background-color: transparent;
+}
+::-webkit-scrollbar {
+  display: none;
 }
 .app-content {
   //max-height: 96%;
