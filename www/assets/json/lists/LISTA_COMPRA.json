@@ -1,0 +1,116 @@
+[
+  {
+    "category": {
+      "categoryName": "",
+      "icon": "images/icons/default.png",
+      "measurement": "KG",
+      "unitStep": 0.5
+    },
+    "nombreElemento": "Leche1",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "LISTA_COMPRA",
+    "cantidadElemento": 4,
+    "caduca": false,
+    "fechaCaducidad": "3015-12-30T23:00:00.000Z",
+    "cantidadMinima": 2,
+    "marked": false
+  },
+  {
+    "category": {
+      "categoryName": "",
+      "icon": "images/icons/default.png",
+      "measurement": "KG",
+      "unitStep": 0.5
+    },
+    "nombreElemento": "Zumo",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "LISTA_COMPRA",
+    "cantidadElemento": 4,
+    "caduca": false,
+    "fechaCaducidad": "3015-12-30T23:00:00.000Z",
+    "cantidadMinima": 2,
+    "marked": false
+  },
+  {
+    "category": {
+      "categoryName": "",
+      "icon": "images/icons/default.png",
+      "measurement": "KG",
+      "unitStep": 0.5
+    },
+    "nombreElemento": "galletas chocolate",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "LISTA_COMPRA",
+    "cantidadElemento": 1,
+    "caduca": false,
+    "fechaCaducidad": "3015-12-30T23:00:00.000Z",
+    "cantidadMinima": 1,
+    "marked": false
+  },
+  {
+    "category": {
+      "categoryName": "",
+      "icon": "images/icons/default.png",
+      "measurement": "KG",
+      "unitStep": 0.5
+    },
+    "nombreElemento": "Patatas fritas",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "LISTA_COMPRA",
+    "cantidadElemento": 1,
+    "caduca": false,
+    "fechaCaducidad": "3015-12-30T23:00:00.000Z",
+    "cantidadMinima": 1,
+    "marked": false
+  },
+  {
+    "category": {
+      "categoryName": "",
+      "icon": "images/icons/default.png",
+      "measurement": "KG",
+      "unitStep": 0.5
+    },
+    "nombreElemento": "Sanuscol",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "LISTA_COMPRA",
+    "cantidadElemento": 9,
+    "caduca": false,
+    "fechaCaducidad": "3015-12-30T23:00:00.000Z",
+    "cantidadMinima": 3,
+    "marked": false
+  },
+  {
+    "category": {
+      "categoryName": "",
+      "icon": "images/icons/default.png",
+      "measurement": "KG",
+      "unitStep": 0.5
+    },
+    "nombreElemento": "Yogur",
+    "colorElemento": "item item-stable item-complex item-right-editable",
+    "colorBotones": "button-stable",
+    "colorElementoNoCaducado": "item item-stable item-complex item-right-editable",
+    "colorBotonesNoCaducado": "button-stable",
+    "nombreLista": "LISTA_COMPRA",
+    "cantidadElemento": 1,
+    "caduca": false,
+    "fechaCaducidad": "3015-12-30T23:00:00.000Z",
+    "cantidadMinima": 1,
+    "marked": false
+  }
+]

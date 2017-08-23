@@ -5,7 +5,7 @@ import {
   EventEmitter,
   Input,
   Output
-} from "@angular/core";
+} from '@angular/core';
 
 import {
   ModalController,
@@ -13,27 +13,27 @@ import {
   ViewController,
   NavParams,
   PopoverController
-} from "ionic-angular";
+} from 'ionic-angular';
 
-import { PopoverPage } from "../../components/popover/popover";
+import { PopoverPage } from '../../components/popover/popover';
 
-import { ItemInfoPage } from "../item-info/item-info";
+import { ItemInfoPage } from '../item-info/item-info';
 
-import { GlobalVars } from "../../providers/global-vars/global-vars";
+import { GlobalVars } from '../../providers/global-vars/global-vars';
 
-import { OrderBy } from "../../pipes/orderBy";
+import { OrderBy } from '../../pipes/orderBy';
 
 @Component({
-  templateUrl: "list.html",
+  templateUrl: 'list.html',
   providers: [OrderBy]
 })
 export class ListPage {
-  @ViewChild("popoverContent", { read: ElementRef })
+  @ViewChild('popoverContent', { read: ElementRef })
   content: ElementRef;
-  @ViewChild("popoverText", { read: ElementRef })
+  @ViewChild('popoverText', { read: ElementRef })
   text: ElementRef;
 
-  type: string = "ListItem";
+  type: string = 'ListItem';
 
   selectedItem: any;
   list: any;
@@ -53,9 +53,9 @@ export class ListPage {
 
   ngOnInit() {
     this.searchBar = false;
-    this.selectedItem = this.navParams.get("list")
-      ? this.navParams.get("list")
-      : "LISTA_COMPRA";
+    this.selectedItem = this.navParams.get('list')
+      ? this.navParams.get('list')
+      : 'LISTA_COMPRA';
     this.globalVars.getDefaulIconsData().then(data => {
       this.icons = data;
       this.initializeItems();
@@ -79,7 +79,7 @@ export class ListPage {
 
   searchMatches(event) {
     this.initializeItems();
-    if (this.searchItem && this.searchItem.trim() !== "") {
+    if (this.searchItem && this.searchItem.trim() !== '') {
       this.list = this.list.filter(item => {
         return (
           item.nombreElemento
@@ -97,45 +97,45 @@ export class ListPage {
   sortItems(orderBy: number) {
     switch (orderBy) {
       case 1:
-        this.list = this.order.transform(this.list, ["+category"]);
+        this.list = this.order.transform(this.list, ['+category']);
         break;
       case 2:
-        this.list = this.order.transform(this.list, ["+nombreElemento"]);
+        this.list = this.order.transform(this.list, ['+nombreElemento']);
         break;
       case 3:
-        this.list = this.order.transform(this.list, ["+fechaCaducidad"]);
+        this.list = this.order.transform(this.list, ['+fechaCaducidad']);
         break;
     }
   }
 
   reorder(event) {
     let reorder = this.alertCtrl.create();
-    reorder.setTitle("Sort by");
+    reorder.setTitle('Sort by');
 
-    if (this.selectedItem !== "LISTA_COMPRA") {
+    if (this.selectedItem !== 'LISTA_COMPRA') {
       reorder.addInput({
-        type: "radio",
-        label: "FECHA_CADUCIDAD",
-        value: "3",
+        type: 'radio',
+        label: 'FECHA_CADUCIDAD',
+        value: '3',
         checked: false
       });
     }
     reorder.addInput({
-      type: "radio",
-      label: "NOMBRE",
-      value: "1",
+      type: 'radio',
+      label: 'NOMBRE',
+      value: '1',
       checked: true
     });
     reorder.addInput({
-      type: "radio",
-      label: "CATEGORIA",
-      value: "2",
+      type: 'radio',
+      label: 'CATEGORIA',
+      value: '2',
       checked: false
     });
 
-    reorder.addButton("Cancel");
+    reorder.addButton('Cancel');
     reorder.addButton({
-      text: "OK",
+      text: 'OK',
       handler: data => {
         console.log(data);
         this.sortItems(Number.parseInt(data.value));
@@ -146,21 +146,21 @@ export class ListPage {
 
   removeItem(item) {
     let confirm = this.alertCtrl.create({
-      title: "Removing " + item.nombreElemento,
+      title: 'Removing ' + item.nombreElemento,
       message:
-        "Do you like to remove " +
+        'Do you like to remove ' +
         item.nombreElemento +
-        " from " +
+        ' from ' +
         item.nombreLista,
       buttons: [
         {
-          text: "No",
+          text: 'No',
           handler: () => {
-            console.log("No removed");
+            console.log('No removed');
           }
         },
         {
-          text: "Yes",
+          text: 'Yes',
           handler: () => {
             // TODO : Store changes
             this.list.splice(this.list.indexOf(item), 1);
@@ -188,33 +188,45 @@ export class ListPage {
 
   moveItem(item) {
     let move = this.alertCtrl.create();
-    move.setTitle("Move to");
+    move.setTitle('Move to');
 
     this.globalVars.getListsData().then(data => {
       let lists: any = data;
       lists.forEach((list: any) => {
         let selected = false;
         if (list.nombreLista !== item.nombreLista) {
-          if (list.nombreLista === "LISTA_COMPRA") {
+          if (list.nombreLista === 'LISTA_COMPRA') {
             selected = true;
           }
           move.addInput({
-            type: "radio",
+            type: 'radio',
             label: list.nombreLista,
             value: list.nombreLista,
             checked: selected
           });
         }
       });
-      move.addButton("Cancel");
+      move.addButton('Cancel');
       move.addButton({
-        text: "OK",
+        text: 'OK',
         handler: data => {
-          if (item.nombreLista === "LISTA_COMPRA") {
+          if (data === 'LISTA_COMPRA') {
             item.caduca = false;
           }
-          //item.nombreLista = data.nombreLista;
-          // this.list.splice(this.list.indexOf(item), 1);
+          this.list.splice(this.list.indexOf(item), 1);
+          this.globalVars.setListData(this.selectedItem, this.list);
+          item.nombreLista = data;
+          this.globalVars.getListData(data).then(result => {
+            let dest = (<any[]>result).find(
+              x => x.nombreElemento === item.nombreElemento
+            );
+            if (dest) {
+              dest.cantidadElemento += item.cantidadElemento;
+            } else {
+              (<any[]>result).push(item);
+            }
+            this.globalVars.setListData(data, <any[]>result);
+          });
           // TODO : Store changes
           //this.globalVars.setListData(this.list);
         }
@@ -237,13 +249,13 @@ export class ListPage {
   addItem(event) {
     // TODO: Check data structure, redefine and refactor with category, measurement and unitStep
     let newItem = {
-      category: { icon: "images/icons/default.png" },
-      measurement: "UNIDADES",
-      nombreElemento: "NEW_ELEMENT",
-      colorElemento: "",
-      colorBotones: "",
-      colorElementoNoCaducado: "",
-      colorBotonesNoCaducado: "",
+      category: { icon: 'images/icons/default.png' },
+      measurement: 'UNIDADES',
+      nombreElemento: 'NEW_ELEMENT',
+      colorElemento: '',
+      colorBotones: '',
+      colorElementoNoCaducado: '',
+      colorBotonesNoCaducado: '',
       nombreLista: this.selectedItem,
       cantidadElemento: 1,
       caduca: false,

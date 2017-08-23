@@ -1,6 +1,6 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import {CategoriesService} from '../../providers/categories/categoriesService';
+import { CategoriesService } from '../../providers/categories/categoriesService';
 /*
   Generated class for the ItemData component.
 
@@ -69,38 +69,42 @@ export class Item {
   }
   minusElement(event, amount) {
     if (amount) {
-      let removed: number = this.item.cantidadElemento - this.item.category.unitStep;
-      if (removed >= 0) this.item.cantidadElemento = Math.round(removed * 100) / 100;
-    }else {
-      let removed: number = this.item.cantidadMinima - this.item.category.unitStep;
-      if (removed >= 0) this.item.cantidadMinima = Math.round(removed * 100) / 100;
+      let removed: number =
+        this.item.cantidadElemento - this.item.category.unitStep;
+      if (removed >= 0)
+        this.item.cantidadElemento = Math.round(removed * 100) / 100;
+    } else {
+      let removed: number =
+        this.item.cantidadMinima - this.item.category.unitStep;
+      if (removed >= 0)
+        this.item.cantidadMinima = Math.round(removed * 100) / 100;
     }
   }
-// TODO: check these functions, their need and their functionality
+  // TODO: check these functions, their need and their functionality
 
   markItem(event) {
     console.log('markItem');
     this.item.marked = !this.item.marked;
+    this.edit.emit(this.item);
   }
 
   editItem(event) {
     console.log('editItem:' + JSON.stringify(this.item));
-    this.edit.emit(event);
+    this.edit.emit(this.item);
   }
 
   removeItem(event) {
     console.log('removeItem');
-    this.remove.emit(event);
+    this.remove.emit(this.item);
   }
 
   moveItem(event) {
     console.log('moveItem');
-    this.move.emit(event);
+    this.move.emit(this.item);
   }
 
-// TODO: request action to do on the category change,unitstep and measurement...do not change amounts
+  // TODO: request action to do on the category change,unitstep and measurement...do not change amounts
   editCategory(event) {
     this.catService.changeCategory(this.item.category, this.item);
   }
-
 }

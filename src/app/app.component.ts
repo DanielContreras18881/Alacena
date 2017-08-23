@@ -1,26 +1,29 @@
-import { Component, ViewChild } from "@angular/core";
-import { Platform, MenuController, Nav, App } from "ionic-angular";
-import { SplashScreen } from "@ionic-native/splash-screen";
-import { StatusBar } from "@ionic-native/status-bar";
-import { AdMobFree, AdMobFreeBannerConfig } from "@ionic-native/admob-free";
+import { GlobalVars } from '../providers/global-vars/global-vars';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, MenuController, Nav, App } from 'ionic-angular';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
 
-import { GettingStartedPage } from "../pages/getting-started/getting-started";
-import { ListPage } from "../pages/list/list";
-import { ListsPage } from "../pages/lists/lists";
-import { ItemsPage } from "../pages/items/items";
-import { ConfigPage } from "../pages/config/config";
-import { AboutPage } from "../pages/about/about";
-import { CategoriesPage } from "../pages/categories/categories";
+import { GettingStartedPage } from '../pages/getting-started/getting-started';
+import { ListPage } from '../pages/list/list';
+import { ListsPage } from '../pages/lists/lists';
+import { ItemsPage } from '../pages/items/items';
+import { ConfigPage } from '../pages/config/config';
+import { AboutPage } from '../pages/about/about';
+import { CategoriesPage } from '../pages/categories/categories';
 
-import { Storage } from "@ionic/storage";
-import firebase from "firebase";
+import { Storage } from '@ionic/storage';
+import firebase from 'firebase';
 
 @Component({
-  selector: "app-root",
-  templateUrl: "app.html"
+  selector: 'app-root',
+  templateUrl: 'app.html'
 })
 export class Alacena {
   @ViewChild(Nav) nav: Nav;
+
+  userProfile: any = null;
 
   //rootPage = GettingStartedPage;
   rootPage = ListPage;
@@ -34,18 +37,19 @@ export class Alacena {
     public splashScreen: SplashScreen,
     public statusBar: StatusBar,
     private storage: Storage,
-    private admobFree: AdMobFree
+    private admobFree: AdMobFree,
+    private globalVars: GlobalVars
   ) {
-    let adMobId = "ca-app-pub-7863580056712493/6709912168";
-    if (platform.is("android")) {
+    let adMobId = 'ca-app-pub-7863580056712493/6709912168';
+    if (platform.is('android')) {
       // for android
-      adMobId = "ca-app-pub-7863580056712493/6709912168";
-    } else if (platform.is("ios")) {
+      adMobId = 'ca-app-pub-7863580056712493/6709912168';
+    } else if (platform.is('ios')) {
       // for ios
-      adMobId = "ca-app-pub-7863580056712493/9663378563";
+      adMobId = 'ca-app-pub-7863580056712493/9663378563';
     }
-	 console.log("app:run:AdMob Banner inicializado");
-	 console.log("app:run:" + adMobId);
+    console.log('app:run:AdMob Banner inicializado');
+    console.log('app:run:' + adMobId);
     const bannerConfig: AdMobFreeBannerConfig = {
       // add your config here
       // for the sake of this example we will just use the test config
@@ -59,19 +63,19 @@ export class Alacena {
       .prepare()
       .then(() => {
         // banner Ad is ready
-		  // if we set autoShow to false, then we will need to call the show method here
-		  this.admobFree.banner.show();
+        // if we set autoShow to false, then we will need to call the show method here
+        this.admobFree.banner.show();
       })
       .catch(e => console.log(e));
 
     firebase.initializeApp({
-      apiKey: "AIzaSyCq_XZBezFcC_iAWa-i12swT0YL9sqvjfM", //Firebase
+      apiKey: 'AIzaSyCq_XZBezFcC_iAWa-i12swT0YL9sqvjfM', //Firebase
       //apiKey: "AIzaSyCYbNChWjDtLYXkm_ayPQeb4t4TjWDXWd0",//GoogleDevConsole
-      authDomain: "alacena-58699.firebaseapp.com",
-      databaseURL: "https://alacena-58699.firebaseio.com",
-      projectId: "alacena-58699",
-      storageBucket: "alacena-58699.appspot.com",
-      messagingSenderId: "354280052179"
+      authDomain: 'alacena-58699.firebaseapp.com',
+      databaseURL: 'https://alacena-58699.firebaseio.com',
+      projectId: 'alacena-58699',
+      storageBucket: 'alacena-58699.appspot.com',
+      messagingSenderId: '354280052179'
     });
 
     platform.ready().then(() => {
@@ -84,13 +88,13 @@ export class Alacena {
     //loading: any;
 
     this.pages = [
-      { title: "Inicio", component: GettingStartedPage, icon: "contact" },
-      { title: "LISTA_COMPRA", component: ListPage, icon: "basket" },
-      { title: "Lists", component: ListsPage, icon: "list-box" },
-      { title: "Items", component: ItemsPage, icon: "list" },
-      { title: "Categories", component: CategoriesPage, icon: "paper" },
-      { title: "Config", component: ConfigPage, icon: "cog" },
-      { title: "About", component: AboutPage, icon: "information-circle" }
+      { title: 'Inicio', component: GettingStartedPage, icon: 'contact' },
+      { title: 'LISTA_COMPRA', component: ListPage, icon: 'basket' },
+      { title: 'Lists', component: ListsPage, icon: 'list-box' },
+      { title: 'Items', component: ItemsPage, icon: 'list' },
+      { title: 'Categories', component: CategoriesPage, icon: 'paper' },
+      { title: 'Config', component: ConfigPage, icon: 'cog' },
+      { title: 'About', component: AboutPage, icon: 'information-circle' }
     ];
   }
 

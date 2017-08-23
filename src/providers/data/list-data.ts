@@ -17,7 +17,7 @@ import { Network } from "@ionic-native/network";
 @Injectable()
 export class ListData {
   listData: any = null;
-  path = "assets/json/CantidadElementoLista.json";
+  path = "assets/json/lists/";
 
   constructor(
     private cloudStorage: CloudStorage,
@@ -55,7 +55,7 @@ export class ListData {
               this.localStorage.setToLocalStorage(name, data);
               resolve(data);
             } else {
-              this.localStorage.getFromLocal(name, this.path).then(data => {
+              this.localStorage.getFromLocal(name, this.path + name + ".json").then(data => {
                 if (data !== undefined && data !== null) {
                   resolve(data);
                 } else {
@@ -82,7 +82,7 @@ let connectSubscription = this.network.onConnect().subscribe(() => {
 // stop connect watch
 connectSubscription.unsubscribe();
 			   */
-            this.localStorage.getFromLocal(name, this.path).then(data => {
+            this.localStorage.getFromLocal(name, this.path + name + ".json").then(data => {
               if (data !== undefined && data !== null) {
                 resolve(data);
               } else {
@@ -95,7 +95,7 @@ connectSubscription.unsubscribe();
                 this.localStorage.setToLocalStorage(name, data);
                 resolve(data);
               } else {
-                this.localStorage.getFromLocal(name, this.path).then(data => {
+                this.localStorage.getFromLocal(name, this.path + name + ".json").then(data => {
                   if (data !== undefined && data !== null) {
                     resolve(data);
                   } else {
@@ -107,7 +107,7 @@ connectSubscription.unsubscribe();
           }
         }
       } else {
-        this.localStorage.getFromLocal(name, this.path).then(data => {
+        this.localStorage.getFromLocal(name, this.path + name + ".json").then(data => {
           if (data !== undefined && data !== null) {
             resolve(data);
           } else {

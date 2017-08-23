@@ -1,13 +1,13 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 // TODO: get data from firebase or local if not found, meke central service for data
 
-import { ListsData } from "../data/lists-data";
-import { ListData } from "../data/list-data";
-import { ItemData } from "../data/item-data";
-import { CategoriesData } from "../data/categories-data";
-import { DefaultIcons } from "../default-icons/default-icons";
-import { ConfigData } from "../data/config-data";
+import { ListsData } from '../data/lists-data';
+import { ListData } from '../data/list-data';
+import { ItemData } from '../data/item-data';
+import { CategoriesData } from '../data/categories-data';
+import { DefaultIcons } from '../default-icons/default-icons';
+import { ConfigData } from '../data/config-data';
 
 @Injectable()
 export class GlobalVars {
@@ -35,6 +35,10 @@ export class GlobalVars {
     this.userProfile = userProfile;
   }
 
+  getUserProfile() {
+    return this.userProfile;
+  }
+
   setConfigData(value) {
     this.configData = value;
   }
@@ -52,14 +56,12 @@ export class GlobalVars {
     }
   }
 
-  getColorsData(){
-		return new Promise(resolve => {
-		this.listsDataService
-			.getColorsData(this.userProfile)
-			.then(data => {
-				resolve(data);
-			});
-		});
+  getColorsData() {
+    return new Promise(resolve => {
+      this.listsDataService.getColorsData(this.userProfile).then(data => {
+        resolve(data);
+      });
+    });
   }
 
   setListsData(value) {
