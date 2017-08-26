@@ -27,9 +27,11 @@ export class CategoriesService {
   }
 
   changeCategory(currentCategory, item) {
+	  return new Promise(resolve => {
     let change = this.alertCtrl.create();
     let currentCategoryName = currentCategory !== undefined ? currentCategory.categoryName : '';
-    change.setTitle('Change category ' + currentCategoryName + ' by:');
+	 change.setTitle('Change category ' + currentCategoryName + ' by:');
+	 
     this.categories.getCategoriesData().then(data => {
       let listCategories = data;
       listCategories.forEach((category: any) => {
@@ -47,11 +49,13 @@ export class CategoriesService {
       change.addButton({
         text: 'OK',
         handler: data => {
-          item.category = data;
+			 item.category = data;
+			 resolve(item)
         }
       });
       change.present();
-    });
+	 });
+	});
   }
 
   changeCategoryIcon(category, icons) {

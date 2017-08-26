@@ -2,13 +2,12 @@
   <ion-card-header>
     <ion-row>
           <ion-col width-20 *ngIf="!creating && item.nombreLista==='LISTA_COMPRA'">
-            <ion-checkbox secondary (click)="markItem($event)"></ion-checkbox>
-            <!--<button [hidden]="!item.marked" item-center dark clear (click)="markItem($event)">
+            <button [hidden]="!item.marked" item-center dark clear (click)="markItem($event)">
               <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon>
             </button>
             <button [hidden]="item.marked" item-center dark clear (click)="markItem($event)">
               <ion-icon ios="ios-radio-button-off" md="md-radio-button-off"></ion-icon>
-            </button>-->
+            </button>
           </ion-col>
       <ion-col width-50 *ngIf="!creating">
         <ion-label class="nameElement" id="nameElement">{{item.nombreElemento}}</ion-label>
@@ -125,7 +124,7 @@
                 <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
               </button>
               <button clear>
-                <ion-badge class="amount" large>{{item.cantidadElemento}}</ion-badge>
+                <ion-badge class="amount" large [(ngModel)]="item.cantidadElemento"></ion-badge>
               </button>
               <button item-center default large clear (click)="plusElement($event, true)">
                 <ion-icon default large ios="ios-add-circle" md="md-add-circle"></ion-icon>

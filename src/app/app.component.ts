@@ -16,6 +16,8 @@ import { CategoriesPage } from '../pages/categories/categories';
 import { Storage } from '@ionic/storage';
 import firebase from 'firebase';
 
+declare var cordova: any;
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.html'

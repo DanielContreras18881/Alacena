@@ -53,7 +53,7 @@ export class ListsPage {
       if (!data) {
         return;
       }
-      console.log(data.action);
+      //console.log(data.action);
     });
   }
 

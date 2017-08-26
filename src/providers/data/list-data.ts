@@ -5,6 +5,8 @@ import { CloudStorage } from "./cloudStorage";
 import { LocalStorage } from "./localStorage";
 import { Network } from "@ionic-native/network";
 
+declare var cordova: any;
+
 /*
   Generated class for the ListData provider.
 
@@ -32,18 +34,32 @@ export class ListData {
         this.cloudStorage.uploadListData(name, data, userProfile.uid);
       } else {
         if (this.network.type === "NONE") {
-          this.localStorage.setToLocalStorage(name, data);
+          this.localStorage.setToLocal(name, data);
         } else {
           this.cloudStorage.uploadListData(name, data, userProfile.uid);
         }
       }
     } else {
-      this.localStorage.setToLocalStorage(name, data);
+      this.localStorage.setToLocal(name, data);
     }
   }
 
   removeListData(name: string, userProfile: any): void {
-    this.cloudStorage.removeListData(name, userProfile.uid);
+      if (userProfile) {
+        if (!this.plt.is("ios") && !this.plt.is("android")) {	  
+			 this.cloudStorage.removeListData(name, userProfile.uid);
+			 this.localStorage.removeFromLocal(name);
+	   	} else {
+          if (this.network.type === "NONE") {
+				 this.localStorage.removeFromLocal(name);
+			 }else{
+				 this.cloudStorage.removeListData(name, userProfile.uid);
+				 this.localStorage.removeFromLocal(name);
+			 }
+			}
+		}else{
+			this.localStorage.removeFromLocal(name);
+		}
   }
 
   getListItemsData(name: string, userProfile: any) {
@@ -52,12 +68,12 @@ export class ListData {
         if (!this.plt.is("ios") && !this.plt.is("android")) {
           this.cloudStorage.loadListData(name, userProfile.uid).then(data => {
             if (data !== undefined && data !== null) {
-              this.localStorage.setToLocalStorage(name, data);
+              this.localStorage.setToLocal(name, data);
               resolve(data);
             } else {
               this.localStorage.getFromLocal(name, this.path + name + ".json").then(data => {
                 if (data !== undefined && data !== null) {
-                  resolve(data);
+						resolve(data);
                 } else {
                   resolve([]);
                 }
@@ -92,7 +108,7 @@ connectSubscription.unsubscribe();
           } else {
             this.cloudStorage.loadListData(name, userProfile.uid).then(data => {
               if (data !== undefined && data !== null) {
-                this.localStorage.setToLocalStorage(name, data);
+                this.localStorage.setToLocal(name, data);
                 resolve(data);
               } else {
                 this.localStorage.getFromLocal(name, this.path + name + ".json").then(data => {

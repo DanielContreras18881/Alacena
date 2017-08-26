@@ -12,6 +12,7 @@ import { GlobalVars } from "../../providers/global-vars/global-vars";
 
 declare var gapi: any;
 declare var self: any;
+declare var cordova: any;
 
 @Component({
   templateUrl: "getting-started.html"

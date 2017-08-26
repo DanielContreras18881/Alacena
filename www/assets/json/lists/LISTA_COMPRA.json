@@ -3,8 +3,8 @@
     "category": {
       "categoryName": "",
       "icon": "images/icons/default.png",
-      "measurement": "KG",
-      "unitStep": 0.5
+		"measurement": "UNIDADES",
+		"unitStep": 1
     },
     "nombreElemento": "Leche1",
     "colorElemento": "item item-stable item-complex item-right-editable",
@@ -22,8 +22,8 @@
     "category": {
       "categoryName": "",
       "icon": "images/icons/default.png",
-      "measurement": "KG",
-      "unitStep": 0.5
+		"measurement": "UNIDADES",
+		"unitStep": 1
     },
     "nombreElemento": "Zumo",
     "colorElemento": "item item-stable item-complex item-right-editable",
@@ -41,8 +41,8 @@
     "category": {
       "categoryName": "",
       "icon": "images/icons/default.png",
-      "measurement": "KG",
-      "unitStep": 0.5
+		"measurement": "UNIDADES",
+		"unitStep": 1
     },
     "nombreElemento": "galletas chocolate",
     "colorElemento": "item item-stable item-complex item-right-editable",
@@ -60,8 +60,8 @@
     "category": {
       "categoryName": "",
       "icon": "images/icons/default.png",
-      "measurement": "KG",
-      "unitStep": 0.5
+		"measurement": "UNIDADES",
+		"unitStep": 1
     },
     "nombreElemento": "Patatas fritas",
     "colorElemento": "item item-stable item-complex item-right-editable",
@@ -79,8 +79,8 @@
     "category": {
       "categoryName": "",
       "icon": "images/icons/default.png",
-      "measurement": "KG",
-      "unitStep": 0.5
+		"measurement": "UNIDADES",
+		"unitStep": 1
     },
     "nombreElemento": "Sanuscol",
     "colorElemento": "item item-stable item-complex item-right-editable",
@@ -98,8 +98,8 @@
     "category": {
       "categoryName": "",
       "icon": "images/icons/default.png",
-      "measurement": "KG",
-      "unitStep": 0.5
+      "measurement": "UNIDADES",
+      "unitStep": 1
     },
     "nombreElemento": "Yogur",
     "colorElemento": "item item-stable item-complex item-right-editable",

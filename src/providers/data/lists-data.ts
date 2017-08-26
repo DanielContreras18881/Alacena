@@ -5,6 +5,7 @@ import { CloudStorage } from "./cloudStorage";
 import { LocalStorage } from "./localStorage";
 import { Network } from "@ionic-native/network";
 
+declare var cordova: any;
 /*
   Generated class for the ListsData provider.
 
@@ -42,13 +43,13 @@ export class ListsData {
         this.cloudStorage.uploadListsData(lists, userProfile.uid);
       } else {
         if (this.network.type === "NONE") {
-          this.localStorage.setToLocalStorage("lists", lists);
+          this.localStorage.setToLocal("lists", lists);
         } else {
           this.cloudStorage.uploadListsData(lists, userProfile.uid);
         }
       }
     } else {
-      this.localStorage.setToLocalStorage("lists", lists);
+      this.localStorage.setToLocal("lists", lists);
     }
   }
 
@@ -59,7 +60,7 @@ export class ListsData {
           this.cloudStorage.loadListsData(userProfile.uid).then(data => {
             //console.log("cloudStorage:" + JSON.stringify(data));
             if (data !== undefined && data !== null) {
-              this.localStorage.setToLocalStorage("lists", data);
+              this.localStorage.setToLocal("lists", data);
               resolve(data);
             } else {
               this.localStorage.getFromLocal("lists", this.path).then(data => {
@@ -102,7 +103,7 @@ connectSubscription.unsubscribe();
             this.cloudStorage.loadListsData(userProfile.uid).then(data => {
               //console.log("cloudStorage:" + JSON.stringify(data));
               if (data !== undefined && data !== null) {
-                this.localStorage.setToLocalStorage("lists", data);
+                this.localStorage.setToLocal("lists", data);
                 resolve(data);
               } else {
                 this.localStorage
