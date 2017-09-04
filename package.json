@@ -6,8 +6,7 @@
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
     "test": "karma start karma.conf.js",
-    "toGit": "git push -uf git master",
-    "toBit": "git push -uf origin master"
+    "commit": "git push -uf git master && git push -uf origin master"
   },
   "dependencies": {
     "@angular/common": "4.0.2",
@@ -92,7 +91,8 @@
     "plugins": {
       "cordova-sqlite-storage": {},
       "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.354280052179-amrn5f7si36l9lsdinjf8u7q5a5thpri"
+        "REVERSED_CLIENT_ID":
+          "com.googleusercontent.apps.354280052179-amrn5f7si36l9lsdinjf8u7q5a5thpri"
       },
       "cordova-plugin-console": {},
       "cordova-plugin-device": {},
@@ -103,9 +103,6 @@
       "cordova-plugin-network-information": {},
       "cordova-plugin-admob-free": {}
     },
-    "platforms": [
-      "android",
-      "ios"
-    ]
+    "platforms": ["android", "ios"]
   }
 }
