@@ -10,21 +10,21 @@
 }
 
 ion-badge.amount {
-  border-radius: 1.5rem;
+  border-radius: 0.5rem;
   color: #fff;
   background-color: #9f7acc;
-  font-size: 1.25em;
+  font-size: 3.5rem;
 }
 
 ion-badge.minimum {
-  border-radius: 1.5rem;
+  border-radius: 0.5rem;
   color: #fff;
   background-color: red;
-  font-size: 1.25rem;
+  font-size: 3.5rem;
 }
 
 .popover_button {
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 .popover_button span.button-inner {
@@ -39,7 +39,7 @@ ion-badge.minimum {
 }
 
 ion-list[inset] .item {
-  border-bottom: 0;
+  border-bottom: 0 !important;
 }
 
 .notifications-button {

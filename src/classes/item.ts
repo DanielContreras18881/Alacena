@@ -1,5 +1,5 @@
-import { Category } from "./Category";
+import { Category } from './category';
 export class Item {
-         nombreElemento: string;
-         category: Category;
-       }
+  nombreElemento: string;
+  category: Category;
+}

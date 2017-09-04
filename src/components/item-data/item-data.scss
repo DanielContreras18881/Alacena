@@ -1,48 +1,59 @@
-ion-card ion-card-content{
+ion-card ion-card-content {
   padding: 1rem 1rem 1rem 1rem;
 }
 
-ion-list .item .item-inner{
-  border-bottom: 0
+ion-list .item .item-inner {
+  border-bottom: 0;
 }
 
-.buttonOperation{
-  padding: 0 1.5rem 0 1.5rem
+.amountButton {
+  display: inline-block;
+  margin: 0em;
+  margin-right: 0 !important;
 }
 
-.nameElement{
-  font-size: 1.25rem;
+.buttonOperation {
+  padding: 0 1.5rem 0 1.5rem;
+}
+
+.nameElement {
+  font-size: 1.35rem;
   white-space: normal;
+  margin: auto;
+  text-align: center;
 }
 
-.labelExpire{
-  font-size: .95rem;
+.labelExpire {
+  font-size: 0.95rem;
 }
 
-.labelExpireDate{
-  font-size: .95rem;
+.labelExpireDate {
+  font-size: 0.95rem;
 }
 
-.expireDate{
-  font-size: 1.1rem;
+.expireDate {
+  font-size: 1.15rem;
   padding: 0 0 0 0;
 }
 
-.labelCategory{
-  font-size: .95rem;
+.labelCategory {
+  font-size: 1.05rem;
   padding-left: 3rem;
 }
-.labelMeasurement{
-  font-size: .95rem;
+.labelMeasurement {
+  font-size: 1.25rem;
 }
-.measurement{
-  font-size: .85rem;
-  padding: .1rem .25rem .1rem 0px;
+.measurement {
+  font-size: 1.15rem;
+  padding: 0.1rem 0.25rem 0.1rem 0px;
   max-width: 100%;
 }
-.labelMinAmout{
-  font-size: .95rem;
+.labelMinAmout {
+  font-size: 0.95rem;
 }
-.labelAmount{
-  font-size: .95rem;
+.labelAmount {
+  font-size: 0.95rem;
+}
+.icon {
+  font-size: 3.25rem;
 }

@@ -25308,123 +25308,6 @@ ion-navbar.toolbar {
   font-weight: bold;
 }
 
-html {
-  font-size: 62.5%;
-}
-
-a {
-  background-color: transparent;
-}
-
-.enable-hover a:hover {
-  opacity: .7;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-top: 1.6rem;
-  margin-bottom: 1rem;
-  font-weight: 500;
-  line-height: 1.2;
-}
-
-[padding] h1:first-child,
-[padding] h2:first-child,
-[padding] h3:first-child,
-[padding] h4:first-child,
-[padding] h5:first-child,
-[padding] h6:first-child {
-  margin-top: -.3rem;
-}
-
-h1 + h2,
-h1 + h3,
-h2 + h3 {
-  margin-top: -.3rem;
-}
-
-h1 {
-  margin-top: 2rem;
-  font-size: 2.6rem;
-}
-
-h2 {
-  margin-top: 1.8rem;
-  font-size: 2.4rem;
-}
-
-h3 {
-  font-size: 2.2rem;
-}
-
-h4 {
-  font-size: 2rem;
-}
-
-h5 {
-  font-size: 1.8rem;
-}
-
-h6 {
-  font-size: 1.6rem;
-}
-
-small {
-  font-size: 75%;
-}
-
-sub,
-sup {
-  position: relative;
-  font-size: 75%;
-  line-height: 0;
-  vertical-align: baseline;
-}
-
-sup {
-  top: -.5em;
-}
-
-sub {
-  bottom: -.25em;
-}
-
-[text-left] {
-  text-align: left;
-}
-
-[text-center] {
-  text-align: center;
-}
-
-[text-right] {
-  text-align: right;
-}
-
-[text-justify] {
-  text-align: justify;
-}
-
-[text-nowrap] {
-  white-space: nowrap;
-}
-
-[text-uppercase] {
-  text-transform: uppercase;
-}
-
-[text-lowercase] {
-  text-transform: lowercase;
-}
-
-[text-capitalize] {
-  text-transform: capitalize;
-}
-
 .text-ios-primary {
   color: #387ef5;
 }
@@ -25748,49 +25631,61 @@ ion-list .item .item-inner {
   border-bottom: 0;
 }
 
+.amountButton {
+  display: inline-block;
+  margin: 0em;
+  margin-right: 0 !important;
+}
+
 .buttonOperation {
   padding: 0 1.5rem 0 1.5rem;
 }
 
 .nameElement {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   white-space: normal;
+  margin: auto;
+  text-align: center;
 }
 
 .labelExpire {
-  font-size: .95rem;
+  font-size: 0.95rem;
 }
 
 .labelExpireDate {
-  font-size: .95rem;
+  font-size: 0.95rem;
 }
 
 .expireDate {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   padding: 0 0 0 0;
 }
 
 .labelCategory {
-  font-size: .95rem;
+  font-size: 1.05rem;
   padding-left: 3rem;
 }
 
 .labelMeasurement {
-  font-size: .95rem;
+  font-size: 1.25rem;
 }
 
 .measurement {
-  font-size: .85rem;
-  padding: .1rem .25rem .1rem 0px;
+  font-size: 1.15rem;
+  padding: 0.1rem 0.25rem 0.1rem 0px;
   max-width: 100%;
 }
 
 .labelMinAmout {
-  font-size: .95rem;
+  font-size: 0.95rem;
 }
 
 .labelAmount {
-  font-size: .95rem;
+  font-size: 0.95rem;
+}
+
+.icon {
+  font-size: 3.25rem;
 }
 
 .about {
@@ -25998,21 +25893,21 @@ ion-list .item-inner {
 }
 
 ion-badge.amount {
-  border-radius: 1.5rem;
+  border-radius: 0.5rem;
   color: #fff;
   background-color: #9f7acc;
-  font-size: 1.25em;
+  font-size: 3.5rem;
 }
 
 ion-badge.minimum {
-  border-radius: 1.5rem;
+  border-radius: 0.5rem;
   color: #fff;
   background-color: red;
-  font-size: 1.25rem;
+  font-size: 3.5rem;
 }
 
 .popover_button {
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 .popover_button span.button-inner {
@@ -26029,7 +25924,7 @@ ion-badge.minimum {
 }
 
 ion-list[inset] .item {
-  border-bottom: 0;
+  border-bottom: 0 !important;
 }
 
 .notifications-button {
