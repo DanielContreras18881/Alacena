@@ -10,10 +10,12 @@ ion-list .item .item-inner {
   display: inline-block;
   margin: 0em;
   margin-right: 0 !important;
+  font-size: 2rem;
 }
-
+	 
 .buttonOperation {
-  padding: 0 1.5rem 0 1.5rem;
+	font-size: 2.75rem!important;
+	/*padding: 0 1.5rem 0 1.5rem;*/
 }
 
 .nameElement {
@@ -58,7 +60,4 @@ ion-list .item .item-inner {
 }
 .labelAmount {
   font-size: 0.95rem;
-}
-.icon {
-  font-size: 3.25rem;
 }

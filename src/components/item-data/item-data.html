@@ -1,51 +1,21 @@
 <ion-card>
 	<ion-card-header>
 		<ion-row>
-			<ion-label *ngIf="!creating" class="nameElement">{{item.nombreElemento}}</ion-label>
-			<ion-input *ngIf="creating" class="nameElement" id="nameElement" type="text" [(ngModel)]="item.nombreElemento" placeholder="NEW ELEMENT"></ion-input>
-		</ion-row>
-		<ion-row>
 			<ion-col col-1 *ngIf="!creating && item.nombreLista==='LISTA_COMPRA'">
-				<button [hidden]="!item.marked" item-center dark clear (click)="markItem($event)">
+				<button [hidden]="!item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">
               <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon>
             </button>
-				<button [hidden]="item.marked" item-center dark clear (click)="markItem($event)">
+				<button [hidden]="item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">
               <ion-icon ios="ios-radio-button-off" md="md-radio-button-off"></ion-icon>
             </button>
 			</ion-col>
-			<ion-col col-4 offset-6>
-				<ion-row *ngIf="!creating">
-					<ion-col col-4 class="buttonOperation">
-						<button item-center secondary clear (click)="moveItem($event)">
-              <ion-icon ios="ios-return-right" md="md-return-right"></ion-icon>
-            </button>
-					</ion-col>
-					<ion-col col-4 *ngIf="item.nombreLista!=='LISTA_COMPRA'" class="buttonOperation">
-						<button item-center secondary clear (click)="editItem($event)">
-              <ion-icon ios="ios-create" md="md-create"></ion-icon>
-            </button>
-					</ion-col>
-					<ion-col col-4 class="buttonOperation">
-						<button item-center danger clear (click)="removeItem($event)">
-              <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
-            </button>
-					</ion-col>
-				</ion-row>
+			<ion-col col-10 offset-1>
+				<ion-label *ngIf="!creating" class="nameElement">{{item.nombreElemento}}</ion-label>
+				<ion-input *ngIf="creating" class="nameElement" id="nameElement" type="text" [(ngModel)]="item.nombreElemento" placeholder="NEW ELEMENT"></ion-input>
 			</ion-col>
 		</ion-row>
 		<ion-row>
-			<ion-col *ngIf="creating">
-				<ion-item>
-					<ion-label stacked>MEASUREMENT</ion-label>
-					<ion-select class="measurement" id="measurement" [(ngModel)]="item.category.measurement" (ngModelChange)="onChange($event)">
-						<ion-option>UNIDADES</ion-option>
-						<ion-option>LITROS</ion-option>
-						<ion-option>GRAMOS</ion-option>
-						<ion-option>KG</ion-option>
-					</ion-select>
-				</ion-item>
-			</ion-col>
-			<ion-col col-3 col-span-3>
+			<ion-col col-2>
 				<div *ngIf="item.category">
 					<ion-avatar item-left class="category-icon">
 						<img class="icon" src="{{item.category.icon}}" (click)="editCategory($event)" />
@@ -58,7 +28,7 @@
 					</ion-avatar>
 				</div>
 			</ion-col>
-			<ion-col *ngIf="!creating">
+			<ion-col col-6 *ngIf="!creating">
 				<ion-item>
 					<button item-center default large clear (click)="minusElement($event, item, true)">
               <ion-icon class="amountButton" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
@@ -69,6 +39,36 @@
 					<button item-center default large clear (click)="plusElement($event, item, true)">
               <ion-icon class="amountButton" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>
             </button>
+				</ion-item>
+			</ion-col>
+			<ion-col col-4>
+				<ion-row *ngIf="!creating">
+					<ion-col col-4>
+						<button item-center secondary clear (click)="moveItem($event)" class="buttonOperation">
+              <ion-icon ios="ios-return-right" md="md-return-right"></ion-icon>
+            </button>
+					</ion-col>
+					<ion-col col-4 *ngIf="item.nombreLista!=='LISTA_COMPRA'">
+						<button item-center secondary clear (click)="editItem($event)" class="buttonOperation">
+              <ion-icon ios="ios-create" md="md-create"></ion-icon>
+            </button>
+					</ion-col>
+					<ion-col col-4>
+						<button item-center danger clear (click)="removeItem($event)" class="buttonOperation">
+              <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+            </button>
+					</ion-col>
+				</ion-row>
+			</ion-col>
+			<ion-col *ngIf="creating">
+				<ion-item>
+					<ion-label stacked>MEASUREMENT</ion-label>
+					<ion-select class="measurement" id="measurement" [(ngModel)]="item.category.measurement" (ngModelChange)="onChange($event)">
+						<ion-option>UNIDADES</ion-option>
+						<ion-option>LITROS</ion-option>
+						<ion-option>GRAMOS</ion-option>
+						<ion-option>KG</ion-option>
+					</ion-select>
 				</ion-item>
 			</ion-col>
 		</ion-row>

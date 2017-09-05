@@ -33,6 +33,7 @@ import { ItemsPage } from "../pages/items/items";
 import { ConfigPage } from "../pages/config/config";
 import { AboutPage } from "../pages/about/about";
 import { CategoriesPage } from "../pages/categories/categories";
+import { ListIconsPage } from "../pages/categories/list-icons";
 
 import { Item } from "../components/item-data/item-data";
 import { BottomButtonsComponent } from "../components/bottom-buttons-component/bottom-buttons-component";
@@ -51,7 +52,8 @@ import { PopoverPage } from "../components/popover/popover";
     CategoriesPage,
     Item,
     BottomButtonsComponent,
-    PopoverPage
+    PopoverPage,
+    ListIconsPage
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,8 @@ import { PopoverPage } from "../components/popover/popover";
     CategoriesPage,
     Item,
     BottomButtonsComponent,
-    PopoverPage
+    PopoverPage,
+    ListIconsPage
   ],
   providers: [
     //{provide: ErrorHandler, useClass: SentryErrorHandler},

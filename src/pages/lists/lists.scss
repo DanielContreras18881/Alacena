@@ -3,13 +3,20 @@
 }
 
 .ion-ios-clipboard-outline:before {
-  font-size: 3.5rem;
-  margin-left: -2rem;
+    font-size: 2.75rem;
+    margin-left: -2.75rem;
 }
 
 .listName {
-  font-size: 1.5rem;
-  white-space: normal;
+	font-size: 2.25rem;
+   white-space: nowrap;
+}
+
+.reorderNotAllowed,
+.reorderAllowed,
+ion-reorder{
+	color:#fff;
+	font-size: 3rem;
 }
 
 .reorderAllowed {
