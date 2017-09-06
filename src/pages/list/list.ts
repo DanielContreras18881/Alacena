@@ -255,7 +255,11 @@ export class ListPage {
   addItem(event) {
     // TODO: Check data structure, redefine and refactor with category, measurement and unitStep
     let newItem = {
-      category: { icon: 'images/icons/default.png', measurement: 'UNIDADES' },
+      category: {
+        icon: 'images/icons/default.png',
+        measurement: 'UNIDADES',
+        categoryName: 'default'
+      },
       nombreElemento: '',
       colorElemento: '',
       colorBotones: '',

@@ -43,9 +43,8 @@
 				<ion-card-header>
 					<ion-grid>
 						<ion-row>
-							<ion-col  (click)="listSelected($event, list.nombreLista)">
-								<ion-icon class="listName" dark large ios="ios-clipboard-outline" md="md-clipboard"
-								 [ngClass]="list.colorBotones">
+							<ion-col (click)="listSelected($event, list.nombreLista)">
+								<ion-icon class="listName" dark large ios="ios-clipboard-outline" md="md-clipboard" [ngClass]="list.colorBotones">
 									{{list.nombreLista}}
 								</ion-icon>
 							</ion-col>

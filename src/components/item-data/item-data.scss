@@ -6,20 +6,27 @@ ion-list .item .item-inner {
   border-bottom: 0;
 }
 
-.amountButton {
+.amountIcon {
   display: inline-block;
   margin: 0em;
   margin-right: 0 !important;
-  font-size: 2rem;
+  font-size: 2.25rem;
 }
-	 
+.amountButton {
+  padding: 0;
+}
+.amountItem {
+  margin-left: -.5rem;
+  padding-left: 0;
+}
+
 .buttonOperation {
-	font-size: 2.75rem!important;
-	/*padding: 0 1.5rem 0 1.5rem;*/
+  font-size: 2.75rem !important;
+  /*padding: 0 1.5rem 0 1.5rem;*/
 }
 
 .nameElement {
-  font-size: 2.5rem;
+  font-size: 1.95rem;
   white-space: normal;
   margin: auto;
   text-align: center;
@@ -31,27 +38,22 @@ ion-list .item .item-inner {
 }
 
 .labelExpire {
-  font-size: 0.95rem;
-}
-
-.labelExpireDate {
-  font-size: 0.95rem;
+  font-size: 1.85rem;
 }
 
 .expireDate {
-  font-size: 1.15rem;
+  font-size: 1.65rem;
   padding: 0 0 0 0;
 }
 
 .labelCategory {
-  font-size: 1.05rem;
-  padding-left: 3rem;
+  font-size: 1.05rem !important;
 }
 .labelMeasurement {
-  font-size: 1.25rem;
+  font-size: 1.85rem;
 }
 .measurement {
-  font-size: 1.15rem;
+  font-size: 1.35rem;
   padding: 0.1rem 0.25rem 0.1rem 0px;
   max-width: 100%;
 }
