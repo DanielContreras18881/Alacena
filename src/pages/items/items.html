@@ -1,15 +1,15 @@
 <ion-header>
-  <ion-navbar dark [hidden]="searchBar">
+  <ion-navbar color="dark" [hidden]="searchBar">
     <button ion-button menuToggle>
       <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
     </button>
     <ion-title>Item management</ion-title>
     <ion-buttons end>
       <button primary (click)="selectToSendShoppingList($event)">
-        <ion-icon ios="ios-basket" md="md-basket"></ion-icon>
+        <ion-icon class="icon-toolbar" ios="ios-basket" md="md-basket"></ion-icon>
       </button>
       <button secondary (click)="toggleSearchBar($event)">
-        <ion-icon ios="ios-search" md="md-search"></ion-icon>
+        <ion-icon class="icon-toolbar" ios="ios-search" md="md-search"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>

@@ -258,7 +258,7 @@ export class ListPage {
       category: {
         icon: 'images/icons/default.png',
         measurement: 'UNIDADES',
-        categoryName: 'default'
+        categoryName: 'No Category'
       },
       nombreElemento: '',
       colorElemento: '',

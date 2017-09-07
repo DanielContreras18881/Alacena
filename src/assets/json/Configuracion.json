@@ -12,6 +12,13 @@
     "id_iso": "en",
     "idiomaSeleccionado": "English"
   } ],
+  "categoryDefault":{
+        "icon": "images/icons/default.png",
+        "measurement": "UNIDADES",
+        "categoryName": "No Category"
+	},
+	"unitDefault":"UNIDADES",
+	"stepDefault": "1",
   "colorDefault": "item-dark item item-complex",
   "configColors": [ {
     "nombre": "NEGRO",

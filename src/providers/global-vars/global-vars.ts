@@ -40,7 +40,7 @@ export class GlobalVars {
   }
 
   setConfigData(value) {
-    this.configData = value;
+    this.configDataService.setConfigData(value);
   }
 
   getConfigData() {
@@ -117,7 +117,7 @@ export class GlobalVars {
   }
 
   setCategoriesData(value) {
-    this.categoriesData = value;
+    this.categoriesDataService.setCategoriesData(value);
   }
 
   getCategoriesData() {

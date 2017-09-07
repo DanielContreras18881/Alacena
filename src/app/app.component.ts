@@ -29,7 +29,8 @@ export class Alacena {
 
   //rootPage = GettingStartedPage;
   //rootPage = ListPage;
-  rootPage = ListsPage;
+  //rootPage = ListsPage;
+  rootPage = ConfigPage;
 
   pages: Array<{ title: string; icon: string; component: any }>;
 
