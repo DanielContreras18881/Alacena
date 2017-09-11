@@ -30,7 +30,6 @@ export class Item implements OnInit {
 
   ngOnInit() {
     this.oldMeasurement = this.item.category.measurement;
-    console.log(this.item.fechaCaducidad);
   }
 
   changeUnitStep(measurement) {

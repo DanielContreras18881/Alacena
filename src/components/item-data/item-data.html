@@ -1,6 +1,6 @@
 <ion-card>
 	<ion-card-header>
-		<ion-row>
+		<ion-row class="fila">
 			<ion-col col-1 *ngIf="!creating && item.nombreLista==='LISTA_COMPRA'">
 				<button [hidden]="!item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">
               <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon>
@@ -27,7 +27,7 @@
 				</div>
 			</ion-col>
 		</ion-row>
-		<ion-row *ngIf="!creating">
+		<ion-row class="fila" *ngIf="!creating">
 			<ion-col col-7>
 				<ion-item class="amountItem">
 					<button item-center default large clear (click)="minusElement($event, item, true)" class="amountButton">

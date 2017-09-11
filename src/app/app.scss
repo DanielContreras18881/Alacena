@@ -6,9 +6,6 @@
 // By default each design mode includes these shared imports.
 // App Shared Sass variables belong in app.variables.scss.
 
-.body {
-  font-family: fantasy;
-}
 .item .item-inner {
   border: none;
 }
@@ -54,11 +51,12 @@ button {
   display: none;
 }
 
-  .icon-toolbar{
-	  font-size:3rem!important;
-  }
-.app-content {
-  //max-height: 96%;
+.icon-toolbar {
+  font-size: 3rem !important;
+}
+
+ion-card-header {
+  padding: 8px 8px 0px 8px !important;
 }
 // App Global Sass
 // --------------------------------------------------
