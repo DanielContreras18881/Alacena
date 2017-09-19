@@ -15,11 +15,6 @@ export class GlobalVars {
 
   userProfile: any = null;
 
-  configData: any;
-  itemsData: any;
-  listData: any;
-  listsData: any;
-  categoriesData: any;
   iconsData: any;
 
   constructor(
@@ -40,20 +35,15 @@ export class GlobalVars {
   }
 
   setConfigData(value) {
-    this.configDataService.setConfigData(value);
+    this.configDataService.setConfigData(value, this.userProfile);
   }
 
   getConfigData() {
-    if (this.configData) {
-      return Promise.resolve(this.configData);
-    } else {
-      return new Promise(resolve => {
-        this.configDataService.getConfigData().then(data => {
-          this.configData = data;
-          resolve(data);
-        });
+    return new Promise(resolve => {
+      this.configDataService.getConfigData(this.userProfile).then(data => {
+        resolve(data);
       });
-    }
+    });
   }
 
   getColorsData() {
@@ -65,21 +55,15 @@ export class GlobalVars {
   }
 
   setListsData(value) {
-    this.listsData = value;
     this.listsDataService.setListsData(value, this.userProfile);
   }
 
   getListsData() {
-    if (this.listsData) {
-      return Promise.resolve(this.listsData);
-    } else {
-      return new Promise(resolve => {
-        this.listsDataService.getListsData(this.userProfile).then(data => {
-          this.listsData = data;
-          resolve(data);
-        });
+    return new Promise(resolve => {
+      this.listsDataService.getListsData(this.userProfile).then(data => {
+        resolve(data);
       });
-    }
+    });
   }
 
   getListData(name: string) {
@@ -100,37 +84,29 @@ export class GlobalVars {
   }
 
   setItemsData(value) {
-    this.itemsData = value;
+    this.itemDataService.setItemsData(value, this.userProfile);
   }
 
   getItemsData() {
-    if (this.itemsData) {
-      return Promise.resolve(this.itemsData);
-    } else {
-      return new Promise(resolve => {
-        this.itemDataService.getItemsData().then(data => {
-          this.itemsData = data;
-          resolve(data);
-        });
+    return new Promise(resolve => {
+      this.itemDataService.getItemsData(this.userProfile).then(data => {
+        resolve(data);
       });
-    }
+    });
   }
 
   setCategoriesData(value) {
-    this.categoriesDataService.setCategoriesData(value);
+    this.categoriesDataService.setCategoriesData(value, this.userProfile);
   }
 
   getCategoriesData() {
-    if (this.categoriesData) {
-      return Promise.resolve(this.categoriesData);
-    } else {
-      return new Promise(resolve => {
-        this.categoriesDataService.getCategoriesData().then(data => {
-          this.categoriesData = data;
+    return new Promise(resolve => {
+      this.categoriesDataService
+        .getCategoriesData(this.userProfile)
+        .then(data => {
           resolve(data);
         });
-      });
-    }
+    });
   }
 
   setDefaultIconsData(value) {

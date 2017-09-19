@@ -1,13 +1,11 @@
-import { Http }       from "@angular/http";
-import { Platform } from "ionic-angular";
-import { Injectable } from "@angular/core";
+import { Platform } from 'ionic-angular';
+import { Injectable } from '@angular/core';
 
-import { CloudStorage } from "./cloudStorage";
-import { LocalStorage } from "./localStorage";
-import { Network } from "@ionic-native/network";
+import { CloudStorage } from './cloudStorage';
+import { LocalStorage } from './localStorage';
+import { Network } from '@ionic-native/network';
 
-import 'rxjs/add/operator/map';
-
+declare var cordova: any;
 /*
   Generated class for the CategoriesData provider.
 
@@ -20,15 +18,33 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CategoriesData {
   categoriesData: any = null;
-  path = "assets/json/categories.json";
+  path = 'assets/json/categories.json';
 
-  constructor(private localStorage: LocalStorage, public http: Http) {}
+  constructor(
+    private cloudStorage: CloudStorage,
+    private localStorage: LocalStorage,
+    private network: Network,
+    private plt: Platform
+  ) {}
 
-  setCategoriesData(data: any[]) {
-    this.localStorage.setToLocal("categories", data);
+  setCategoriesData(data: any, userProfile: any) {
+    if (userProfile) {
+      if (!this.plt.is('ios') && !this.plt.is('android')) {
+        this.cloudStorage.uploadCategoriesData(data, userProfile.uid);
+      } else {
+        if (this.network.type === 'NONE') {
+          this.localStorage.setToLocal('categories', data);
+        } else {
+          this.cloudStorage.uploadCategoriesData(data, userProfile.uid);
+        }
+      }
+    } else {
+      this.localStorage.setToLocal('categories', data);
+    }
   }
 
-  getCategoriesData(): any {
+  getCategoriesData(userProfile: any): any {
+    /*
     if (this.categoriesData) {
       // already loaded data
       return Promise.resolve(this.categoriesData);
@@ -45,6 +61,88 @@ export class CategoriesData {
         this.categoriesData = data;
         resolve(this.categoriesData);
       });
+	 });
+	 */
+    return new Promise(resolve => {
+      if (userProfile) {
+        if (!this.plt.is('ios') && !this.plt.is('android')) {
+          this.cloudStorage.loadCategoriesData(userProfile.uid).then(data => {
+            //console.log("cloudStorage:" + JSON.stringify(data));
+            if (data !== undefined && data !== null) {
+              this.localStorage.setToLocal('categories', data);
+              resolve(data);
+            } else {
+              this.localStorage
+                .getFromLocal('categories', this.path)
+                .then(data => {
+                  //console.log("getFromLocal:" + JSON.stringify(data));
+                  if (data !== undefined && data !== null) {
+                    resolve(data);
+                  } else {
+                    resolve([]);
+                  }
+                });
+            }
+          });
+        } else {
+          if (this.network.type === 'NONE') {
+            /*
+let connectSubscription = this.network.onConnect().subscribe(() => {
+  console.log('network connected!');
+  // We just got a connection but we need to wait briefly
+   // before we determine the connection type. Might need to wait.
+  // prior to doing any api requests as well.
+  setTimeout(() => {
+    if (this.network.type === 'wifi') {
+      console.log('we got a wifi connection, woohoo!');
+    }
+  }, 3000);
+});
+
+// stop connect watch
+connectSubscription.unsubscribe();
+			   */
+            this.localStorage
+              .getFromLocal('categories', this.path)
+              .then(data => {
+                //console.log("localStorage:" + JSON.stringify(data));
+                if (data !== undefined && data !== null) {
+                  resolve(data);
+                } else {
+                  resolve([]);
+                }
+              });
+          } else {
+            this.cloudStorage.loadCategoriesData(userProfile.uid).then(data => {
+              //console.log("cloudStorage:" + JSON.stringify(data));
+              if (data !== undefined && data !== null) {
+                this.localStorage.setToLocal('categories', data);
+                resolve(data);
+              } else {
+                this.localStorage
+                  .getFromLocal('categories', this.path)
+                  .then(data => {
+                    //console.log("getFromLocal:" + JSON.stringify(data));
+                    if (data !== undefined && data !== null) {
+                      resolve(data);
+                    } else {
+                      resolve([]);
+                    }
+                  });
+              }
+            });
+          }
+        }
+      } else {
+        this.localStorage.getFromLocal('categories', this.path).then(data => {
+          //console.log("localStorage2:" + JSON.stringify(data));
+          if (data !== undefined && data !== null) {
+            resolve(data);
+          } else {
+            resolve([]);
+          }
+        });
+      }
     });
   }
 }

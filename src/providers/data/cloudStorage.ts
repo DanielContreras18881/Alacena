@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import "rxjs/add/operator/map";
+import { Injectable } from '@angular/core';
+import 'rxjs/add/operator/map';
 
-import firebase from "firebase";
+import firebase from 'firebase';
 
 // TODO: remove or redefine
 
@@ -17,27 +17,27 @@ export class CloudStorage {
 
   loadConfigData(uid: string) {
     return new Promise(resolve => {
-      let ref = firebase.database().ref("/lists/");
-      ref.once("value").then(function(snapshot) {
+      let ref = firebase.database().ref('/config/');
+      ref.once('value').then(function(snapshot) {
         // We need to create this array first to store our local data
         let object = JSON.parse(JSON.stringify(snapshot));
-        let lists = JSON.parse(JSON.stringify(object[uid]));
-        let listArray = [];
-        for (let key in lists) {
-          if (lists.hasOwnProperty(key)) {
-            let list = JSON.parse(JSON.stringify(lists[key]));
-            listArray.push(list);
+        let configs = JSON.parse(JSON.stringify(object[uid]));
+        let configArray = [];
+        for (let key in configs) {
+          if (configs.hasOwnProperty(key)) {
+            let config = JSON.parse(JSON.stringify(configs[key]));
+            configArray.push(config);
           }
         }
-        resolve(listArray);
+        resolve(configArray);
       });
     });
   }
 
   loadElementData(uid: string) {
     return new Promise(resolve => {
-      let ref = firebase.database().ref("/lists/");
-      ref.once("value").then(function(snapshot) {
+      let ref = firebase.database().ref('/lists/');
+      ref.once('value').then(function(snapshot) {
         // We need to create this array first to store our local data
         let object = JSON.parse(JSON.stringify(snapshot));
         let lists = JSON.parse(JSON.stringify(object[uid]));
@@ -57,9 +57,9 @@ export class CloudStorage {
     return new Promise(resolve => {
       let ref = firebase
         .database()
-        .ref("/listItems/" + uid + "_" + name + "/URL");
+        .ref('/listItems/' + uid + '_' + name + '/URL');
 
-      ref.on("value", snapshot => {
+      ref.on('value', snapshot => {
         resolve(snapshot.val());
       });
     });
@@ -67,14 +67,14 @@ export class CloudStorage {
 
   uploadListData(name: string, data: any[], uid: string) {
     const storage = firebase.storage();
-    let fileName = uid + "_" + name + ".json";
-    let fileRef = storage.ref("lists/" + fileName);
+    let fileName = uid + '_' + name + '.json';
+    let fileRef = storage.ref('lists/' + fileName);
     var uploadTask = fileRef.putString(JSON.stringify(data));
 
     uploadTask.on(
-      "state_changed",
+      'state_changed',
       snapshot => {
-        console.log("snapshot progess " + snapshot);
+        console.log('snapshot progess ' + snapshot);
       },
       error => {
         console.log(error);
@@ -88,7 +88,7 @@ export class CloudStorage {
         };
         firebase
           .database()
-          .ref("listItems/" + uid + "_" + name)
+          .ref('listItems/' + uid + '_' + name)
           .set(dataToSave);
       }
     );
@@ -96,38 +96,65 @@ export class CloudStorage {
 
   removeListData(name: string, uid: string) {
     const storage = firebase.storage();
-    let fileName = uid + "_" + name + ".json";
-    let fileRef = storage.ref("lists/" + fileName);
+    let fileName = uid + '_' + name + '.json';
+    let fileRef = storage.ref('lists/' + fileName);
     fileRef.delete();
-    firebase.database().ref("listItems/" + uid + "_" + name).remove();
+    firebase
+      .database()
+      .ref('listItems/' + uid + '_' + name)
+      .remove();
   }
 
   uploadListsData(lists: any, uid: string) {
-    firebase.database().ref("lists/" + uid).set(lists);
+    firebase
+      .database()
+      .ref('lists/' + uid)
+      .set(lists);
+  }
+
+  uploadConfigData(configs: any, uid: string) {
+    firebase
+      .database()
+      .ref('config/' + uid)
+      .set(configs);
+  }
+
+  uploadItemsData(items: any, uid: string) {
+    firebase
+      .database()
+      .ref('items/' + uid)
+      .set(items);
+  }
+
+  uploadCategoriesData(categories: any, uid: string) {
+    firebase
+      .database()
+      .ref('categories/' + uid)
+      .set(categories);
   }
 
   loadColorsData(uid: string) {
     return new Promise(resolve => {
-      let ref = firebase.database().ref("/colors/");
-      ref.once("value").then(function(snapshot) {
-		  // We need to create this array first to store our local data
-		  let colorsList = JSON.parse(JSON.stringify(snapshot));
+      let ref = firebase.database().ref('/colors/');
+      ref.once('value').then(function(snapshot) {
+        // We need to create this array first to store our local data
+        let colorsList = JSON.parse(JSON.stringify(snapshot));
         let colorArray = [];
         for (let key in colorsList) {
           if (colorsList.hasOwnProperty(key)) {
             let color = JSON.parse(JSON.stringify(colorsList[key]));
             colorArray.push(color);
           }
-        }		  
-		  resolve(colorArray);
+        }
+        resolve(colorArray);
       });
     });
   }
 
   loadListsData(uid: string) {
     return new Promise(resolve => {
-      let ref = firebase.database().ref("/lists/");
-      ref.once("value").then(function(snapshot) {
+      let ref = firebase.database().ref('/lists/');
+      ref.once('value').then(function(snapshot) {
         // We need to create this array first to store our local data
         let object = JSON.parse(JSON.stringify(snapshot));
         let lists = JSON.parse(JSON.stringify(object[uid]));
@@ -139,6 +166,44 @@ export class CloudStorage {
           }
         }
         resolve(listArray);
+      });
+    });
+  }
+
+  loadItemsData(uid: string) {
+    return new Promise(resolve => {
+      let ref = firebase.database().ref('/items/');
+      ref.once('value').then(function(snapshot) {
+        // We need to create this array first to store our local data
+        let object = JSON.parse(JSON.stringify(snapshot));
+        let items = JSON.parse(JSON.stringify(object[uid]));
+        let itemsArray = [];
+        for (let key in items) {
+          if (items.hasOwnProperty(key)) {
+            let item = JSON.parse(JSON.stringify(items[key]));
+            itemsArray.push(item);
+          }
+        }
+        resolve(itemsArray);
+      });
+    });
+  }
+
+  loadCategoriesData(uid: string) {
+    return new Promise(resolve => {
+      let ref = firebase.database().ref('/categories/');
+      ref.once('value').then(function(snapshot) {
+        // We need to create this array first to store our local data
+        let object = JSON.parse(JSON.stringify(snapshot));
+        let categories = JSON.parse(JSON.stringify(object[uid]));
+        let categoriesArray = [];
+        for (let key in categories) {
+          if (categories.hasOwnProperty(key)) {
+            let category = JSON.parse(JSON.stringify(categories[key]));
+            categoriesArray.push(category);
+          }
+        }
+        resolve(categoriesArray);
       });
     });
   }

@@ -1,33 +1,25 @@
 <ion-header>
-  <ion-navbar color="dark" [hidden]="searchBar">
-    <button ion-button menuToggle>
+	<ion-navbar color="dark" [hidden]="searchBar">
+		<button ion-button menuToggle>
       <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
     </button>
-    <ion-title>Item management</ion-title>
-    <ion-buttons end>
-      <button primary (click)="selectToSendShoppingList($event)">
+		<ion-title>Item management</ion-title>
+		<ion-buttons end>
+			<button primary (click)="selectToSendShoppingList($event)">
         <ion-icon class="icon-toolbar" ios="ios-basket" md="md-basket"></ion-icon>
       </button>
-      <button secondary (click)="toggleSearchBar($event)">
+			<button secondary (click)="toggleSearchBar($event)">
         <ion-icon class="icon-toolbar" ios="ios-search" md="md-search"></ion-icon>
       </button>
-    </ion-buttons>
-  </ion-navbar>
-  <ion-searchbar
-    [hidden]="!searchBar"
-    [(ngModel)]="searchItem"
-    [showCancelButton]="true"
-    [cancelButtonText]="CANCEL"
-    [debounce]=500
-    [autocomplete]="true"
-    [placeholder]="Search"
-    (ionInput)="searchMatches($event)"
-    (ionCancel)="toggleSearchBar($event)">
-  </ion-searchbar>
+		</ion-buttons>
+	</ion-navbar>
+	<ion-searchbar [hidden]="!searchBar" [(ngModel)]="searchItem" [showCancelButton]="true" [cancelButtonText]="CANCEL" [debounce]=500
+	 [autocomplete]="true" [placeholder]="Search" (ionInput)="searchMatches($event)" (ionCancel)="toggleSearchBar($event)">
+	</ion-searchbar>
 </ion-header>
 
 <ion-content padding class="items">
-<!--
+	<!--
   <button class="add-button" fab fab-bottom fab-right fab-fixed (click)="addItem($event)">
     <ion-icon ios="ios-add" md="md-add"></ion-icon>
   </button>
@@ -38,62 +30,60 @@
     <ion-icon ios="ios-remove" md="md-remove"></ion-icon>
   </button>
 -->
-  <ion-list>
-    <ion-card *ngFor="let item of items; let i = index">
-      <ion-card-header>
-        <ion-row>
-          <ion-col width-50>
-            <div *ngIf="item.category">
-              <ion-avatar item-left class="category-icon">
-                <img class="icon" src="{{item.category.icon}}" (click)="changeItemCategory($event,item)"/>
-                <h2 *ngIf="creating" class="labelCategory">{{item.category.categoryName}}</h2>
-              </ion-avatar>
-            </div>
-            <div *ngIf="!item.category">
-              <ion-avatar item-left class="category-icon">
-                <img class="icon" src="images/icons/default.png" (click)="changeItemCategory($event,item)"/>
-              </ion-avatar>
-            </div>
-          </ion-col>
-          <ion-col width-15 *ngIf="!enableSelectToRemove">
-            <button item-center primary large clear (click)="sendToShoppingList($event, item)">
+	<ion-list>
+		<ion-card *ngFor="let item of items; let i = index">
+			<ion-card-header>
+				<ion-row>
+					<ion-col width-50>
+						<div *ngIf="item.category">
+							<ion-avatar item-left class="category-icon">
+								<img class="icon" src="{{item.category.icon}}" (click)="changeItemCategory($event,item)" />
+								<h2 *ngIf="creating" class="labelCategory">{{item.category.categoryName}}</h2>
+							</ion-avatar>
+						</div>
+						<div *ngIf="!item.category">
+							<ion-avatar item-left class="category-icon">
+								<img class="icon" src="images/icons/default.png" (click)="changeItemCategory($event,item)" />
+							</ion-avatar>
+						</div>
+					</ion-col>
+					<ion-col width-15 *ngIf="!enableSelectToRemove">
+						<button item-center primary large clear (click)="sendToShoppingList($event, item)">
               <ion-icon ios="ios-basket" md="md-basket"></ion-icon>
             </button>
-          </ion-col>
-          <ion-col width-15 *ngIf="!enableSelectToRemove">
-            <button item-center danger large clear (click)="removeItem($event, item)">
+					</ion-col>
+					<ion-col width-15 *ngIf="!enableSelectToRemove">
+						<button item-center danger large clear (click)="removeItem($event, item)">
               <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
             </button>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col width-75>
-            <ion-item ion-item class="itemName">
-              <h2>{{item.nombreElemento}}</h2>
-            </ion-item>
-          </ion-col>
-          <ion-col width-10 *ngIf="enableSelectToRemove">
-            <ion-checkbox danger (click)="selectedItem($event,item)"></ion-checkbox>
-          </ion-col>
-        </ion-row>
-        <ion-row width-100 *ngIf="item.lists.length>0">
-          <ion-list inset>
-              <ion-item ion-item *ngFor="let list of item.lists">
-                <p class="item-info">
-                  <ion-icon class="item-icon" ios="ios-eye" md="md-eye"></ion-icon>
-                  TIENES en {{list.nombreLista}}
-                </p>
-                <ion-badge large item-right>{{list.cantidadElemento}}</ion-badge>
-                <p *ngIf="list.cantidadElemento==0" class="item-advice" (click)="discardOrShop($event,item)">HAY_QUE_COMPRAR</p>
-              </ion-item>
-          </ion-list>
-        </ion-row>
-        <ion-row width-100 *ngIf="item.lists.length==0">
-            <ion-item (click)="discardOrShop($event,item)">
-              <p class="item-advice">NO TIENES ESTE ELEMENTO EN TUS LISTAS</p>
-            </ion-item>
-        </ion-row>
-      </ion-card-header>
-    </ion-card>
-  </ion-list>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col width-75>
+						<ion-item ion-item class="itemName">
+							<h2>{{item.nombreElemento}}</h2>
+						</ion-item>
+					</ion-col>
+					<ion-col width-10 *ngIf="enableSelectToRemove">
+						<ion-checkbox danger (click)="selectedItem($event,item)"></ion-checkbox>
+					</ion-col>
+				</ion-row>
+				<ion-row width-100 *ngIf="item.lists">
+					<ion-item (click)="discardOrShop($event,item)" *ngIf="item.lists.length==0">
+						<p class="item-advice">NO TIENES ESTE ELEMENTO EN TUS LISTAS</p>
+					</ion-item>
+					<ion-list inset *ngIf="item.lists.length>0">
+						<ion-item ion-item *ngFor="let list of item.lists">
+							<p class="item-info">
+								<ion-icon class="item-icon" ios="ios-eye" md="md-eye"></ion-icon>
+								TIENES en {{list.nombreLista}}
+							</p>
+							<ion-badge large item-right>{{list.cantidadElemento}}</ion-badge>
+							<p *ngIf="list.cantidadElemento==0" class="item-advice" (click)="discardOrShop($event,item)">HAY_QUE_COMPRAR</p>
+						</ion-item>
+					</ion-list>
+				</ion-row>
+			</ion-card-header>
+		</ion-card>
+	</ion-list>
 </ion-content>

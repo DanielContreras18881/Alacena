@@ -1,74 +1,73 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {ModalController, AlertController} from 'ionic-angular';
+import { ModalController, AlertController } from 'ionic-angular';
 
-import {ListIconsPage} from '../../pages/categories/list-icons';
+import { ListIconsPage } from '../../pages/categories/list-icons';
 
-import {DefaultIcons} from '../../providers/default-icons/default-icons';
-import {CategoriesData} from '../../providers/data/categories-data';
+import { DefaultIcons } from '../../providers/default-icons/default-icons';
+import { GlobalVars } from '../../providers/global-vars/global-vars';
 /*
 import { Camera } from 'ionic-native';
 import { ImagePicker } from 'ionic-native';
 */
 @Injectable()
-
 export class CategoriesService {
-
   private icons: any;
 
   constructor(
     public mod: ModalController,
     public alertCtrl: AlertController,
-    private categories: CategoriesData,
-    private iconsData: DefaultIcons) {
-      this.iconsData.getIcons().then(data => {
-        this.icons = data;
-      });
+    private globalVars: GlobalVars,
+    private iconsData: DefaultIcons
+  ) {
+    this.iconsData.getIcons().then(data => {
+      this.icons = data;
+    });
   }
 
   changeCategory(currentCategory, item) {
-	  return new Promise(resolve => {
-    let change = this.alertCtrl.create();
-    let currentCategoryName = currentCategory !== undefined ? currentCategory.categoryName : '';
-	 change.setTitle('Change category ' + currentCategoryName + ' by:');
-	 
-    this.categories.getCategoriesData().then(data => {
-      let listCategories = data;
-      listCategories.forEach((category: any) => {
-        if (currentCategoryName !== category.categoryName) {
-          change.addInput({
-            type: 'radio',
-            label: category.categoryName,
-            value: category,
-            checked: false
-          });
-        }
-      });
+    return new Promise(resolve => {
+      let change = this.alertCtrl.create();
+      let currentCategoryName =
+        currentCategory !== undefined ? currentCategory.categoryName : '';
+      change.setTitle('Change category ' + currentCategoryName + ' by:');
 
-      change.addButton('Cancel');
-      change.addButton({
-        text: 'OK',
-        handler: data => {
-			 item.category = data;
-			 resolve(item)
-        }
+      this.globalVars.getCategoriesData().then(data => {
+        let listCategories = <any[]>data;
+        listCategories.forEach((category: any) => {
+          if (currentCategoryName !== category.categoryName) {
+            change.addInput({
+              type: 'radio',
+              label: category.categoryName,
+              value: category,
+              checked: false
+            });
+          }
+        });
+
+        change.addButton('Cancel');
+        change.addButton({
+          text: 'OK',
+          handler: data => {
+            item.category = data;
+            resolve(item);
+          }
+        });
+        change.present();
       });
-      change.present();
-	 });
-	});
+    });
   }
 
   changeCategoryIcon(category, icons) {
     let paramIcons = icons !== null ? icons : this.icons;
-    let changeIconModal = this.mod.create(ListIconsPage, { icons : paramIcons });
-    changeIconModal.onDidDismiss((icon) => {
+    let changeIconModal = this.mod.create(ListIconsPage, { icons: paramIcons });
+    changeIconModal.onDidDismiss(icon => {
       // Save data to storage
       if (icon !== undefined) {
         if (icon.src !== undefined && icon.src !== null) {
           category.icon = icon.src;
         } else {
-
-// TODO: check config for camera and gallery
+          // TODO: check config for camera and gallery
           let confirm = this.alertCtrl.create({
             title: 'Select Category Image',
             message: 'What image do you want to use?',
