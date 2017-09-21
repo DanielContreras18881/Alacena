@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
-import { AlertController, ToastController } from "ionic-angular";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AlertController, ToastController } from 'ionic-angular';
 
 /**
  * Generated class for the BottomButtonsComponent component.
@@ -8,8 +8,8 @@ import { AlertController, ToastController } from "ionic-angular";
  * for more info on Angular Components.
  */
 @Component({
-  selector: "bottom-buttons-component",
-  templateUrl: "bottom-buttons-component.html"
+  selector: 'bottom-buttons-component',
+  templateUrl: 'bottom-buttons-component.html'
 })
 export class BottomButtonsComponent {
   @Input() notifications: boolean;
@@ -31,49 +31,49 @@ export class BottomButtonsComponent {
   ) {}
 
   setNotification(event: Event) {
-    console.log("setNotification");
+    console.log('setNotification');
   }
 
   saveRecoverList(event: Event) {
-    console.log("saveRecoverList");
+    console.log('saveRecoverList');
   }
 
   removeItems(event: Event) {
     let remove = this.alertCtrl.create();
-    remove.setTitle("Remove");
+    remove.setTitle('Remove');
 
     this.object.forEach((item: any) => {
       let nombre =
-        this.type === "Lists"
+        this.type === 'Lists'
           ? item.nombreLista
-          : this.type === "Categories"
+          : this.type === 'Categories'
             ? item.categoryName
             : item.nombreElemento;
       remove.addInput({
-        type: "checkbox",
+        type: 'checkbox',
         label: nombre,
         value: nombre,
         checked: false
       });
     });
-    remove.addButton("Cancel");
+    remove.addButton('Cancel');
     remove.addButton({
-      text: "OK",
+      text: 'OK',
       handler: data => {
         if (data.length === 0) {
           const toast = this.toastCtrl.create({
-            message: "Please select at least one " + this.type + " to remove!",
+            message: 'Please select at least one ' + this.type + ' to remove!',
             duration: 1500,
-            position: "bottom"
+            position: 'bottom'
           });
           toast.present();
           return;
         }
         this.finishedRemoved.emit(data);
         const toast = this.toastCtrl.create({
-          message: data.length + " " + this.type + " removed!",
+          message: data.length + ' ' + this.type + ' removed!',
           duration: 1500,
-          position: "bottom"
+          position: 'bottom'
         });
         toast.present();
       }
@@ -83,37 +83,37 @@ export class BottomButtonsComponent {
 
   addItem(event: Event) {
     let type = this.type;
-    if (type !== "ListItem") {
+    if (type === 'List') {
       this.alertCtrl
         .create({
-          title: "Add New " + type,
+          title: 'Add New ' + type,
           inputs: [
             {
-              name: "name"
+              name: 'name'
             }
           ],
           buttons: [
             {
-              text: "Cancel",
-              role: "cancel"
+              text: 'Cancel',
+              role: 'cancel'
             },
             {
-              text: "Add",
+              text: 'Add',
               handler: data => {
-                if (data.name.trim() == "" || data.name == null) {
+                if (data.name.trim() == '' || data.name == null) {
                   const toast = this.toastCtrl.create({
-                    message: "Please enter a valid value!",
+                    message: 'Please enter a valid value!',
                     duration: 1500,
-                    position: "bottom"
+                    position: 'bottom'
                   });
                   toast.present();
                   return;
                 }
                 this.finishedAdd.emit(data.name);
                 const toast = this.toastCtrl.create({
-                  message: this.type + " " + data.name + " added!",
+                  message: this.type + ' ' + data.name + ' added!',
                   duration: 1500,
-                  position: "bottom"
+                  position: 'bottom'
                 });
                 toast.present();
               }

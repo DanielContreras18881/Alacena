@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
-
-import { NavController, AlertController } from 'ionic-angular';
-
-import { PipeFilterElements } from '../../pipes/pipefilterElements';
+import { AlertController, NavController } from 'ionic-angular';
 
 import { OrderBy } from '../../pipes/orderBy';
-
+import { PipeFilterElements } from '../../pipes/pipefilterElements';
+import { CategoriesService } from '../../providers/categories/categoriesService';
 import { GlobalVars } from '../../providers/global-vars/global-vars';
 
-import { CategoriesService } from '../../providers/categories/categoriesService';
 /*
   Generated class for the ItemsPage page.
 
@@ -220,6 +217,10 @@ export class ItemsPage {
   selectedItem(event, item) {
     console.log('Item selected' + JSON.stringify(item));
     this.itemsToRemove.push(item);
+  }
+
+  removeElements(removed: any[]) {
+    console.log(removed);
   }
 
   removeItems(event) {

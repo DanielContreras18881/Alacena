@@ -1,14 +1,10 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+import { AlertController, ModalController } from 'ionic-angular';
 
-import { ModalController, AlertController} from 'ionic-angular';
-
-import {CategoriesService} from '../../providers/categories/categoriesService';
-
-import {GlobalVars} from '../../providers/global-vars/global-vars';
-
-import {OrderBy} from '../../pipes/orderBy';
-
-import {CategoryInfoPage} from '../category-info/category-info';
+import { OrderBy } from '../../pipes/orderBy';
+import { CategoriesService } from '../../providers/categories/categoriesService';
+import { GlobalVars } from '../../providers/global-vars/global-vars';
+import { CategoryInfoPage } from '../category-info/category-info';
 
 /*
   Generated class for the ItemsPage page.
@@ -28,12 +24,15 @@ export class CategoriesPage {
   public enableSelectToRemove: boolean;
   public categoriesToRemove: any;
 
+  type: string = 'Categories';
+
   constructor(
-              public mod: ModalController,
-              public alertCtrl: AlertController,
-              private catService: CategoriesService,
-              private globalVars: GlobalVars,
-              private order: OrderBy) {}
+    public mod: ModalController,
+    public alertCtrl: AlertController,
+    private catService: CategoriesService,
+    private globalVars: GlobalVars,
+    private order: OrderBy
+  ) {}
 
   ngOnInit() {
     this.searchBar = false;
@@ -55,8 +54,12 @@ export class CategoriesPage {
   searchMatches(event) {
     this.initializeCategories();
     if (this.searchCategory && this.searchCategory.trim() !== '') {
-      this.categories = this.categories.filter((item) => {
-        return (item.categoryName.toLowerCase().indexOf(this.searchCategory.toLowerCase()) > -1);
+      this.categories = this.categories.filter(item => {
+        return (
+          item.categoryName
+            .toLowerCase()
+            .indexOf(this.searchCategory.toLowerCase()) > -1
+        );
       });
     }
   }
@@ -93,15 +96,24 @@ export class CategoriesPage {
     confirm.present();
   }
 
+  removeElements(removed: any[]) {
+    console.log(removed);
+  }
+  addItem(event) {
+    console.log(event);
+  }
   addCategory(event) {
     // Save data to storage
     let newCategory = {
-      'categoryName'  : 'NEW_CATEGORY',
-      'icon'          : 'images/icons/default.png',
-      'measurement'   : 'UNIDADES'
+      categoryName: 'NEW_CATEGORY',
+      icon: 'images/icons/default.png',
+      measurement: 'UNIDADES'
     };
-    let categoryModal = this.mod.create(CategoryInfoPage, {newCategory: newCategory, icons: this.icons});
-    categoryModal.onDidDismiss((item) => {
+    let categoryModal = this.mod.create(CategoryInfoPage, {
+      newCategory: newCategory,
+      icons: this.icons
+    });
+    categoryModal.onDidDismiss(item => {
       if (item !== undefined) {
         // TODO : Store changes
         // this.globalVars.getCategoriesData().push(item);
@@ -130,8 +142,8 @@ removeCategories(event) {
   }
   */
   selectedCategory(event, item) {
-      console.log('Category selected' + JSON.stringify(item));
-      this.categoriesToRemove.push(item);
+    console.log('Category selected' + JSON.stringify(item));
+    this.categoriesToRemove.push(item);
   }
 
   removeCategories(event) {

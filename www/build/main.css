@@ -25753,7 +25753,6 @@ ion-card {
 
 .config {
   background-color: #999;
-  margin-top: 4%;
 }
 
 .item-toggle ion-label {
@@ -25762,9 +25761,9 @@ ion-card {
 
 .getting-started {
   background-color: #999 p;
-  background-color-margin: .75rem 0;
-  background-color-line-height: .65rem;
-  background-color-font-size: .35rem;
+  background-color-margin: 0.75rem 0;
+  background-color-line-height: 0.65rem;
+  background-color-font-size: 0.35rem;
 }
 
 .getting-started button {
