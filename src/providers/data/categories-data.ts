@@ -1,9 +1,9 @@
-import { Platform } from 'ionic-angular';
 import { Injectable } from '@angular/core';
+import { Network } from '@ionic-native/network';
+import { Platform } from 'ionic-angular';
 
 import { CloudStorage } from './cloudStorage';
 import { LocalStorage } from './localStorage';
-import { Network } from '@ionic-native/network';
 
 declare var cordova: any;
 /*

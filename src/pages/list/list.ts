@@ -1,27 +1,10 @@
-import {
-  Component,
-  ViewChild,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output
-} from '@angular/core';
-
-import {
-  ModalController,
-  AlertController,
-  ViewController,
-  NavParams,
-  PopoverController
-} from 'ionic-angular';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AlertController, ModalController, NavParams, PopoverController, ViewController } from 'ionic-angular';
 
 import { PopoverPage } from '../../components/popover/popover';
-
-import { ItemInfoPage } from '../item-info/item-info';
-
-import { GlobalVars } from '../../providers/global-vars/global-vars';
-
 import { OrderBy } from '../../pipes/orderBy';
+import { GlobalVars } from '../../providers/global-vars/global-vars';
+import { ItemInfoPage } from '../item-info/item-info';
 
 @Component({
   templateUrl: 'list.html',
@@ -36,7 +19,7 @@ export class ListPage {
   type: string = 'ListItem';
 
   selectedItem: any;
-  list: any;
+  list: any[] = [];
   searchBar: boolean;
   searchItem: string;
   icons: any;
@@ -64,7 +47,7 @@ export class ListPage {
 
   initializeItems() {
     this.globalVars.getListData(this.selectedItem).then(listData => {
-      this.list = listData;
+      this.list = <any[]>listData;
     });
     /*				  
     this.globalVars.getListData().then(data => {
@@ -247,7 +230,7 @@ export class ListPage {
 
   removeElements(removed: any[]) {
     removed.forEach(itemRemoved => {
-      this.list.splice(this.list.indexOf(itemRemoved), 1);
+      this.list = this.list.filter(item => item.nombreElemento !== itemRemoved);
       this.globalVars.setListData(this.selectedItem, this.list);
     });
   }
@@ -281,6 +264,7 @@ export class ListPage {
       if (item !== undefined) {
         this.list.push(item);
         this.globalVars.setListData(this.selectedItem, this.list);
+        this.globalVars.addOneItem(item);
       }
     });
     infoListModal.present();

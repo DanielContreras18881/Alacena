@@ -77,6 +77,6 @@
 </ion-content>
 <ion-footer>
 	<bottom-buttons-component [type]="type" [object]="categories" [add]=true [remove]=true [notifications]=false [favorites]=false
-	 (finishedAdd)="addItem($event)" (finishedRemoved)="removeElements($event,category)">
+	 (finishedAdd)="addCategory($event)" (finishedRemoved)="removeElements($event,category)">
 	</bottom-buttons-component>
 </ion-footer>

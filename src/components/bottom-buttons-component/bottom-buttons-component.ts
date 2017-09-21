@@ -41,20 +41,23 @@ export class BottomButtonsComponent {
   removeItems(event: Event) {
     let remove = this.alertCtrl.create();
     remove.setTitle('Remove');
-
+    let existElements = false;
     this.object.forEach((item: any) => {
       let nombre =
-        this.type === 'Lists'
+        this.type === 'List'
           ? item.nombreLista
           : this.type === 'Categories'
             ? item.categoryName
             : item.nombreElemento;
-      remove.addInput({
-        type: 'checkbox',
-        label: nombre,
-        value: nombre,
-        checked: false
-      });
+      if (nombre !== 'LISTA_COMPRA') {
+        existElements = true;
+        remove.addInput({
+          type: 'checkbox',
+          label: nombre,
+          value: nombre,
+          checked: false
+        });
+      }
     });
     remove.addButton('Cancel');
     remove.addButton({
@@ -78,7 +81,7 @@ export class BottomButtonsComponent {
         toast.present();
       }
     });
-    remove.present();
+    if (existElements) remove.present();
   }
 
   addItem(event: Event) {
@@ -100,6 +103,7 @@ export class BottomButtonsComponent {
             {
               text: 'Add',
               handler: data => {
+                console.log(data);
                 if (data.name.trim() == '' || data.name == null) {
                   const toast = this.toastCtrl.create({
                     message: 'Please enter a valid value!',

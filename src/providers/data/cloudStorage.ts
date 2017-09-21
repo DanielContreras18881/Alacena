@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
+import { Injectable } from '@angular/core';
 import firebase from 'firebase';
 
 // TODO: remove or redefine
@@ -60,6 +60,12 @@ export class CloudStorage {
         .ref('/listItems/' + uid + '_' + name + '/URL');
 
       ref.on('value', snapshot => {
+        var storageRef = firebase
+          .storage()
+          .ref('/lists/' + uid + '_' + name + '.json');
+        storageRef.getDownloadURL().then(function(url) {
+          console.log(url);
+        });
         resolve(snapshot.val());
       });
     });

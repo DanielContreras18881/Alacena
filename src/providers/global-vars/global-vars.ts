@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
-// TODO: get data from firebase or local if not found, meke central service for data
-
-import { ListsData } from '../data/lists-data';
-import { ListData } from '../data/list-data';
-import { ItemData } from '../data/item-data';
 import { CategoriesData } from '../data/categories-data';
-import { DefaultIcons } from '../default-icons/default-icons';
 import { ConfigData } from '../data/config-data';
+import { ItemData } from '../data/item-data';
+import { ListData } from '../data/list-data';
+import { ListsData } from '../data/lists-data';
+import { DefaultIcons } from '../default-icons/default-icons';
+
+// TODO: get data from firebase or local if not found, meke central service for data
 
 @Injectable()
 export class GlobalVars {
@@ -28,6 +28,18 @@ export class GlobalVars {
 
   setUserProfile(userProfile: any) {
     this.userProfile = userProfile;
+    // TODO : Function to upload initial data
+    // Must create the new structure from old data,
+    // if it exist, if not exist use json files
+    this.setListsData([
+      {
+        nombreLista: 'LISTA_COMPRA',
+        colorLista: 'white-list',
+        colorBotones: 'black-buttons',
+        listaEditable: false
+      }
+    ]);
+    this.setListData('LISTA_COMPRA', []);
   }
 
   getUserProfile() {
@@ -85,6 +97,18 @@ export class GlobalVars {
 
   setItemsData(value) {
     this.itemDataService.setItemsData(value, this.userProfile);
+  }
+
+  addOneItem(value) {
+    this.itemDataService.getItemsData(this.userProfile).then(data => {
+      let exist =
+        data.filter(item => item.nombreElemento === value.nombreElemento)
+          .length > 0;
+      if (!exist) {
+        data.push(value);
+        this.itemDataService.setItemsData(data, this.userProfile);
+      }
+    });
   }
 
   getItemsData() {

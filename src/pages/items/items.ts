@@ -220,7 +220,12 @@ export class ItemsPage {
   }
 
   removeElements(removed: any[]) {
-    console.log(removed);
+    removed.forEach(itemRemoved => {
+      this.items = this.items.filter(
+        item => item.nombreElemento !== itemRemoved
+      );
+      this.globalVars.setItemsData(this.items);
+    });
   }
 
   removeItems(event) {

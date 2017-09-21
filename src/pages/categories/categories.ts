@@ -17,7 +17,7 @@ import { CategoryInfoPage } from '../category-info/category-info';
   providers: [OrderBy, CategoriesService]
 })
 export class CategoriesPage {
-  public categories: any;
+  public categories: any[] = [];
   public searchBar: boolean;
   public searchCategory: string;
   public icons: any;
@@ -39,7 +39,7 @@ export class CategoriesPage {
     this.enableSelectToRemove = false;
     this.categoriesToRemove = [];
     this.globalVars.getCategoriesData().then(data => {
-      this.categories = data;
+      this.categories = <any[]>data;
     });
     this.globalVars.getDefaulIconsData().then(data => {
       this.icons = data;
@@ -97,17 +97,20 @@ export class CategoriesPage {
   }
 
   removeElements(removed: any[]) {
-    console.log(removed);
-  }
-  addItem(event) {
-    console.log(event);
+    removed.forEach(categoryRemoved => {
+      this.categories = this.categories.filter(
+        category => category.categoryName !== categoryRemoved
+      );
+      this.globalVars.setCategoriesData(this.categories);
+    });
   }
   addCategory(event) {
     // Save data to storage
     let newCategory = {
       categoryName: 'NEW_CATEGORY',
       icon: 'images/icons/default.png',
-      measurement: 'UNIDADES'
+      measurement: 'UNIDADES',
+      unitStep: 1
     };
     let categoryModal = this.mod.create(CategoryInfoPage, {
       newCategory: newCategory,
@@ -115,9 +118,8 @@ export class CategoriesPage {
     });
     categoryModal.onDidDismiss(item => {
       if (item !== undefined) {
-        // TODO : Store changes
-        // this.globalVars.getCategoriesData().push(item);
-        // this.categories.push(newCategory);
+        this.categories.push(item);
+        this.globalVars.setCategoriesData(this.categories);
       }
     });
     categoryModal.present();

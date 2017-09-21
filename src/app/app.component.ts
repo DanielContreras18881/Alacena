@@ -1,20 +1,19 @@
-import { GlobalVars } from '../providers/global-vars/global-vars';
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, Nav, App } from 'ionic-angular';
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
-
-import { GettingStartedPage } from '../pages/getting-started/getting-started';
-import { ListPage } from '../pages/list/list';
-import { ListsPage } from '../pages/lists/lists';
-import { ItemsPage } from '../pages/items/items';
-import { ConfigPage } from '../pages/config/config';
-import { AboutPage } from '../pages/about/about';
-import { CategoriesPage } from '../pages/categories/categories';
-
 import { Storage } from '@ionic/storage';
 import firebase from 'firebase';
+import { App, MenuController, Nav, Platform } from 'ionic-angular';
+
+import { AboutPage } from '../pages/about/about';
+import { CategoriesPage } from '../pages/categories/categories';
+import { ConfigPage } from '../pages/config/config';
+import { GettingStartedPage } from '../pages/getting-started/getting-started';
+import { ItemsPage } from '../pages/items/items';
+import { ListPage } from '../pages/list/list';
+import { ListsPage } from '../pages/lists/lists';
+import { GlobalVars } from '../providers/global-vars/global-vars';
 
 declare var cordova: any;
 
@@ -27,10 +26,11 @@ export class Alacena {
 
   userProfile: any = null;
 
-  //rootPage = GettingStartedPage;
-  rootPage = ListPage;
+  rootPage = GettingStartedPage;
+  //rootPage = ListPage;
   //rootPage = ListsPage;
   //rootPage = ConfigPage;
+  //rootPage = CategoriesPage;
 
   pages: Array<{ title: string; icon: string; component: any }>;
 

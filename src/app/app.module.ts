@@ -1,43 +1,39 @@
-import { ItemInfoPage } from "../pages/item-info/item-info";
-import { AuthService } from "../providers/auth/auth.service";
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from "@angular/core";
-import { IonicApp, IonicModule } from "ionic-angular";
-import { BrowserModule } from "@angular/platform-browser";
-import { Alacena } from "./app.component";
-import { HttpModule } from "@angular/http";
-import { SplashScreen } from "@ionic-native/splash-screen";
-import { StatusBar } from "@ionic-native/status-bar";
-import { IonicStorageModule } from "@ionic/storage";
-import { Network } from "@ionic-native/network";
-import { GooglePlus } from "@ionic-native/google-plus";
-import { AdMobFree } from "@ionic-native/admob-free";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { AdMobFree } from '@ionic-native/admob-free';
+import { GooglePlus } from '@ionic-native/google-plus';
+import { Network } from '@ionic-native/network';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+import { IonicStorageModule } from '@ionic/storage';
+import { IonicApp, IonicModule } from 'ionic-angular';
 
-import { SentryErrorHandler } from "../services/sentry-errorhandler";
-
-import { ConfigData } from "../providers/data/config-data";
-import { ItemData } from "../providers/data/item-data";
-import { ListData } from "../providers/data/list-data";
-import { ListsData } from "../providers/data/lists-data";
-import { CategoriesData } from "../providers/data/categories-data";
-import { DefaultIcons } from "../providers/default-icons/default-icons";
-import { CloudStorage } from "../providers/data/cloudStorage";
-import { LocalStorage } from "../providers/data/localStorage";
-
-import { GlobalVars } from "../providers/global-vars/global-vars";
-import { CategoriesService } from "../providers/categories/categoriesService";
-
-import { GettingStartedPage } from "../pages/getting-started/getting-started";
-import { ListPage } from "../pages/list/list";
-import { ListsPage } from "../pages/lists/lists";
-import { ItemsPage } from "../pages/items/items";
-import { ConfigPage } from "../pages/config/config";
-import { AboutPage } from "../pages/about/about";
-import { CategoriesPage } from "../pages/categories/categories";
-import { ListIconsPage } from "../pages/categories/list-icons";
-
-import { Item } from "../components/item-data/item-data";
-import { BottomButtonsComponent } from "../components/bottom-buttons-component/bottom-buttons-component";
-import { PopoverPage } from "../components/popover/popover";
+import { BottomButtonsComponent } from '../components/bottom-buttons-component/bottom-buttons-component';
+import { Item } from '../components/item-data/item-data';
+import { PopoverPage } from '../components/popover/popover';
+import { AboutPage } from '../pages/about/about';
+import { CategoriesPage } from '../pages/categories/categories';
+import { ListIconsPage } from '../pages/categories/list-icons';
+import { CategoryInfoPage } from '../pages/category-info/category-info';
+import { ConfigPage } from '../pages/config/config';
+import { GettingStartedPage } from '../pages/getting-started/getting-started';
+import { ItemInfoPage } from '../pages/item-info/item-info';
+import { ItemsPage } from '../pages/items/items';
+import { ListPage } from '../pages/list/list';
+import { ListsPage } from '../pages/lists/lists';
+import { AuthService } from '../providers/auth/auth.service';
+import { CategoriesService } from '../providers/categories/categoriesService';
+import { CategoriesData } from '../providers/data/categories-data';
+import { CloudStorage } from '../providers/data/cloudStorage';
+import { ConfigData } from '../providers/data/config-data';
+import { ItemData } from '../providers/data/item-data';
+import { ListData } from '../providers/data/list-data';
+import { ListsData } from '../providers/data/lists-data';
+import { LocalStorage } from '../providers/data/localStorage';
+import { DefaultIcons } from '../providers/default-icons/default-icons';
+import { GlobalVars } from '../providers/global-vars/global-vars';
+import { Alacena } from './app.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +49,8 @@ import { PopoverPage } from "../components/popover/popover";
     Item,
     BottomButtonsComponent,
     PopoverPage,
-    ListIconsPage
+    ListIconsPage,
+    CategoryInfoPage
   ],
   imports: [
     BrowserModule,
@@ -75,7 +72,8 @@ import { PopoverPage } from "../components/popover/popover";
     Item,
     BottomButtonsComponent,
     PopoverPage,
-    ListIconsPage
+    ListIconsPage,
+    CategoryInfoPage
   ],
   providers: [
     //{provide: ErrorHandler, useClass: SentryErrorHandler},

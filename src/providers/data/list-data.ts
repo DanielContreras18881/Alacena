@@ -1,9 +1,9 @@
-import { Platform } from "ionic-angular";
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
+import { Network } from '@ionic-native/network';
+import { Platform } from 'ionic-angular';
 
-import { CloudStorage } from "./cloudStorage";
-import { LocalStorage } from "./localStorage";
-import { Network } from "@ionic-native/network";
+import { CloudStorage } from './cloudStorage';
+import { LocalStorage } from './localStorage';
 
 declare var cordova: any;
 
@@ -19,7 +19,7 @@ declare var cordova: any;
 @Injectable()
 export class ListData {
   listData: any = null;
-  path = "assets/json/lists/";
+  path = 'assets/json/lists/';
 
   constructor(
     private cloudStorage: CloudStorage,
@@ -30,10 +30,10 @@ export class ListData {
 
   setListData(name: string, data: any[], userProfile: any): void {
     if (userProfile) {
-      if (!this.plt.is("ios") && !this.plt.is("android")) {
+      if (!this.plt.is('ios') && !this.plt.is('android')) {
         this.cloudStorage.uploadListData(name, data, userProfile.uid);
       } else {
-        if (this.network.type === "NONE") {
+        if (this.network.type === 'NONE') {
           this.localStorage.setToLocal(name, data);
         } else {
           this.cloudStorage.uploadListData(name, data, userProfile.uid);
@@ -45,43 +45,45 @@ export class ListData {
   }
 
   removeListData(name: string, userProfile: any): void {
-      if (userProfile) {
-        if (!this.plt.is("ios") && !this.plt.is("android")) {	  
-			 this.cloudStorage.removeListData(name, userProfile.uid);
-			 this.localStorage.removeFromLocal(name);
-	   	} else {
-          if (this.network.type === "NONE") {
-				 this.localStorage.removeFromLocal(name);
-			 }else{
-				 this.cloudStorage.removeListData(name, userProfile.uid);
-				 this.localStorage.removeFromLocal(name);
-			 }
-			}
-		}else{
-			this.localStorage.removeFromLocal(name);
-		}
+    if (userProfile) {
+      if (!this.plt.is('ios') && !this.plt.is('android')) {
+        this.cloudStorage.removeListData(name, userProfile.uid);
+        this.localStorage.removeFromLocal(name);
+      } else {
+        if (this.network.type === 'NONE') {
+          this.localStorage.removeFromLocal(name);
+        } else {
+          this.cloudStorage.removeListData(name, userProfile.uid);
+          this.localStorage.removeFromLocal(name);
+        }
+      }
+    } else {
+      this.localStorage.removeFromLocal(name);
+    }
   }
 
   getListItemsData(name: string, userProfile: any) {
     return new Promise(resolve => {
       if (userProfile) {
-        if (!this.plt.is("ios") && !this.plt.is("android")) {
+        if (!this.plt.is('ios') && !this.plt.is('android')) {
           this.cloudStorage.loadListData(name, userProfile.uid).then(data => {
             if (data !== undefined && data !== null) {
               this.localStorage.setToLocal(name, data);
               resolve(data);
             } else {
-              this.localStorage.getFromLocal(name, this.path + name + ".json").then(data => {
-                if (data !== undefined && data !== null) {
-						resolve(data);
-                } else {
-                  resolve([]);
-                }
-              });
+              this.localStorage
+                .getFromLocal(name, this.path + name + '.json')
+                .then(data => {
+                  if (data !== undefined && data !== null) {
+                    resolve(data);
+                  } else {
+                    resolve([]);
+                  }
+                });
             }
           });
         } else {
-          if (this.network.type === "NONE") {
+          if (this.network.type === 'NONE') {
             /*
 let connectSubscription = this.network.onConnect().subscribe(() => {
   console.log('network connected!');
@@ -98,38 +100,44 @@ let connectSubscription = this.network.onConnect().subscribe(() => {
 // stop connect watch
 connectSubscription.unsubscribe();
 			   */
-            this.localStorage.getFromLocal(name, this.path + name + ".json").then(data => {
-              if (data !== undefined && data !== null) {
-                resolve(data);
-              } else {
-                resolve([]);
-              }
-            });
+            this.localStorage
+              .getFromLocal(name, this.path + name + '.json')
+              .then(data => {
+                if (data !== undefined && data !== null) {
+                  resolve(data);
+                } else {
+                  resolve([]);
+                }
+              });
           } else {
             this.cloudStorage.loadListData(name, userProfile.uid).then(data => {
               if (data !== undefined && data !== null) {
                 this.localStorage.setToLocal(name, data);
                 resolve(data);
               } else {
-                this.localStorage.getFromLocal(name, this.path + name + ".json").then(data => {
-                  if (data !== undefined && data !== null) {
-                    resolve(data);
-                  } else {
-                    resolve([]);
-                  }
-                });
+                this.localStorage
+                  .getFromLocal(name, this.path + name + '.json')
+                  .then(data => {
+                    if (data !== undefined && data !== null) {
+                      resolve(data);
+                    } else {
+                      resolve([]);
+                    }
+                  });
               }
             });
           }
         }
       } else {
-        this.localStorage.getFromLocal(name, this.path + name + ".json").then(data => {
-          if (data !== undefined && data !== null) {
-            resolve(data);
-          } else {
-            resolve([]);
-          }
-        });
+        this.localStorage
+          .getFromLocal(name, this.path + name + '.json')
+          .then(data => {
+            if (data !== undefined && data !== null) {
+              resolve(data);
+            } else {
+              resolve([]);
+            }
+          });
       }
     });
   }
