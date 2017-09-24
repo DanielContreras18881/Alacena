@@ -45,7 +45,18 @@ export class GettingStartedPage {
         if (user) {
           this.type = "google";
           this.userProfile = user;
-          self.globalVars.setUserProfile(user);
+			 self.globalVars.setUserProfile(user);
+			 self.globalVars.setItemsData([
+				 {
+				  "nombreElemento": "Desodorante",
+				  "category": {
+				    "categoryName": "a",
+				    "icon": "assets/images/icons/default.png",
+				    "measurement": "UNIDADES",
+				    "unitStep": 1
+				  }
+				}
+			 ]);
         } else {
           this.userProfile = null;
         }
