@@ -15,6 +15,7 @@ ion-badge.amount {
   color: #fff;
   background-color: #9f7acc;
   font-size: 1.85rem;
+  min-width: 6rem;
 }
 
 ion-badge.minimum {
@@ -22,6 +23,7 @@ ion-badge.minimum {
   color: #fff;
   background-color: red;
   font-size: 1.85rem;
+  min-width: 6rem;
 }
 
 .popover_button {

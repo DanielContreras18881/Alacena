@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { AlertController, NavController } from 'ionic-angular';
+import { Component } from "@angular/core";
+import { AlertController, NavController } from "ionic-angular";
 
-import { OrderBy } from '../../pipes/orderBy';
-import { PipeFilterElements } from '../../pipes/pipefilterElements';
-import { CategoriesService } from '../../providers/categories/categoriesService';
-import { GlobalVars } from '../../providers/global-vars/global-vars';
+import { OrderBy } from "../../pipes/orderBy";
+import { PipeFilterElements } from "../../pipes/pipefilterElements";
+import { CategoriesService } from "../../providers/categories/categoriesService";
+import { GlobalVars } from "../../providers/global-vars/global-vars";
 
 /*
   Generated class for the ItemsPage page.
@@ -13,7 +13,7 @@ import { GlobalVars } from '../../providers/global-vars/global-vars';
   Ionic pages and navigation.
 */
 @Component({
-  templateUrl: 'items.html',
+  templateUrl: "items.html",
   providers: [PipeFilterElements, OrderBy, CategoriesService]
 })
 export class ItemsPage {
@@ -47,7 +47,7 @@ export class ItemsPage {
   }
 
   initializeItems() {
-    this.items = this.order.transform(this.items, ['+nombreElemento']);
+    this.items = this.order.transform(this.items, ["+nombreElemento"]);
     this.globalVars.getListsData().then(data => {
       let lists = data;
       let itemsFilled = [];
@@ -65,7 +65,7 @@ export class ItemsPage {
 
   searchMatches(event) {
     this.initializeItems();
-    if (this.searchItem && this.searchItem.trim() !== '') {
+    if (this.searchItem && this.searchItem.trim() !== "") {
       this.items = this.items.filter(item => {
         return (
           item.nombreElemento
@@ -81,22 +81,26 @@ export class ItemsPage {
   }
 
   changeItemCategory(event, item) {
-    this.catService.changeCategoryIcon(item.category, this.icons);
+    this.catService
+      .changeCategory(item.category, item)
+      .then(data => {
+        item = data;
+      });
   }
 
   removeItem(event, item) {
     let confirm = this.alertCtrl.create({
-      title: 'Removing ' + item.nombreElemento,
-      message: 'Do you like to remove ' + item.nombreElemento,
+      title: "Removing " + item.nombreElemento,
+      message: "Do you like to remove " + item.nombreElemento,
       buttons: [
         {
-          text: 'No',
+          text: "No",
           handler: () => {
-            console.log('No removed');
+            console.log("No removed");
           }
         },
         {
-          text: 'Yes',
+          text: "Yes",
           handler: () => {
             // this.globalVars.getItemsData().splice(this.globalVars.getItemsData().indexOf(item), 1);
             this.items.splice(this.items.indexOf(item), 1);
@@ -110,13 +114,13 @@ export class ItemsPage {
 
   selectToSendShoppingList(event) {
     let move = this.alertCtrl.create();
-    move.setTitle('Move to LISTA_COMPRA');
+    move.setTitle("Move to LISTA_COMPRA");
 
     this.items.forEach((item: any) => {
       console.log(item.lists);
       if (item.lists.length === 0) {
         move.addInput({
-          type: 'checkbox',
+          type: "checkbox",
           label: item.nombreElemento,
           value: item.nombreElemento,
           checked: false
@@ -124,9 +128,9 @@ export class ItemsPage {
       }
     });
 
-    move.addButton('Cancel');
+    move.addButton("Cancel");
     move.addButton({
-      text: 'OK',
+      text: "OK",
       handler: data => {
         data.forEach((item, index) => {
           console.log(item);
@@ -137,11 +141,11 @@ export class ItemsPage {
             category: auxItem.category,
             measurement: auxItem.category.measurement,
             nombreElemento: auxItem.nombreElemento,
-            colorElemento: '',
-            colorBotones: '',
-            colorElementoNoCaducado: '',
-            colorBotonesNoCaducado: '',
-            nombreLista: 'LISTA_COMPRA',
+            colorElemento: "",
+            colorBotones: "",
+            colorElementoNoCaducado: "",
+            colorBotonesNoCaducado: "",
+            nombreLista: "LISTA_COMPRA",
             cantidadElemento: 1,
             caduca: false,
             fechaCaducidad: new Date(),
@@ -160,21 +164,21 @@ export class ItemsPage {
   discardOrShop(event, item) {
     let discardRemove = this.alertCtrl.create();
     discardRemove.setTitle(
-      'Discard ' + item.nombreElemento + ' or move to SHOPPING_LIST?'
+      "Discard " + item.nombreElemento + " or move to SHOPPING_LIST?"
     );
 
     discardRemove.addButton({
-      text: 'To SHOPPING_LIST',
+      text: "To SHOPPING_LIST",
       handler: data => {
         // TODO: Move selected elements to shopping list
-        console.log('move to shopping list');
+        console.log("move to shopping list");
       }
     });
     discardRemove.addButton({
-      text: 'Discard',
+      text: "Discard",
       handler: data => {
         // TODO: Remove elements from items list and lists
-        console.log('discard from lists and item list');
+        console.log("discard from lists and item list");
       }
     });
     discardRemove.present();
@@ -182,31 +186,31 @@ export class ItemsPage {
 
   selectToRemove(event) {
     let remove = this.alertCtrl.create();
-    remove.setTitle('Remove items');
+    remove.setTitle("Remove items");
 
     remove.addInput({
-      type: 'radio',
-      label: 'Empty items',
-      value: 'empty',
+      type: "radio",
+      label: "Empty items",
+      value: "empty",
       checked: false
     });
 
     remove.addInput({
-      type: 'radio',
-      label: 'Selected',
-      value: 'selected',
+      type: "radio",
+      label: "Selected",
+      value: "selected",
       checked: false
     });
 
-    remove.addButton('Cancel');
+    remove.addButton("Cancel");
     remove.addButton({
-      text: 'OK',
+      text: "OK",
       handler: data => {
-        if (data === 'selected') {
+        if (data === "selected") {
           this.itemsToRemove = [];
           this.enableSelectToRemove = !this.enableSelectToRemove;
         }
-        if (data === 'empty') {
+        if (data === "empty") {
           // TODO: remove elements wihout list and 0 amount from lists
         }
       }
@@ -215,7 +219,7 @@ export class ItemsPage {
   }
 
   selectedItem(event, item) {
-    console.log('Item selected' + JSON.stringify(item));
+    console.log("Item selected" + JSON.stringify(item));
     this.itemsToRemove.push(item);
   }
 
@@ -241,27 +245,79 @@ export class ItemsPage {
   addItem(event) {
     // TODO: create new item, opening modal[create modal such as category]
     let newItem = {
-      nombreElemento: 'NEW_ITEM',
+      nombreElemento: "NEW_ITEM",
       category: {
-        categoryName: '',
-        icon: 'images/icons/default.png'
+        categoryName: "",
+        icon: "images/icons/default.png"
       },
-      measurement: 'UNIDADES'
+      measurement: "UNIDADES"
     };
     console.log(JSON.stringify(event));
+  }
+
+  sortItems(orderBy: number) {
+    switch (orderBy) {
+      case 1:
+        this.items = this.order.transform(this.items, ["+nombreElemento"]);
+        break;
+      case 2:
+        this.items = this.order.transform(this.items, ["+category.categoryName"]);
+        break;
+      case 3:
+        this.items = this.order.transform(this.items, ["+category.measurement"]);
+        break;
+    }
+    console.log(this.items);
+  }
+
+  reorder(event) {
+    let reorder = this.alertCtrl.create();
+    reorder.setTitle("Sort by");
+
+    reorder.addInput({
+      type: "radio",
+      label: "NOMBRE",
+      value: "1",
+      checked: false
+    });
+
+    reorder.addInput({
+      type: "radio",
+      label: "CATEGORIA",
+      value: "2",
+      checked: false
+    });
+
+    reorder.addInput({
+      type: "radio",
+      label: "PASO_MEDIDA",
+      value: "3",
+      checked: false
+    });
+
+    reorder.addButton("Cancel");
+    reorder.addButton({
+      text: "OK",
+      handler: data => {
+        console.log(data);
+        this.sortItems(Number.parseInt(data.value));
+      }
+    });
+
+    reorder.present();
   }
 
   sendToShoppingList(event, item) {
     let itemSelected = this.items[this.items.indexOf(item)];
     let newShoppingListItem = {
       category: itemSelected.category,
-      measurement: 'UNIDADES',
+      measurement: "UNIDADES",
       nombreElemento: itemSelected.nombreElemento,
-      colorElemento: '',
-      colorBotones: '',
-      colorElementoNoCaducado: '',
-      colorBotonesNoCaducado: '',
-      nombreLista: 'LISTA_COMPRA',
+      colorElemento: "",
+      colorBotones: "",
+      colorElementoNoCaducado: "",
+      colorBotonesNoCaducado: "",
+      nombreLista: "LISTA_COMPRA",
       cantidadElemento: 1,
       caduca: false,
       fechaCaducidad: new Date(),
