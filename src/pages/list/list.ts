@@ -7,23 +7,23 @@ import { GlobalVars } from '../../providers/global-vars/global-vars';
 import { ItemInfoPage } from '../item-info/item-info';
 
 @Component({
-  templateUrl: "list.html",
+  templateUrl: 'list.html',
   providers: [OrderBy]
 })
 export class ListPage {
-  @ViewChild("popoverContent", { read: ElementRef })
+  @ViewChild('popoverContent', { read: ElementRef })
   content: ElementRef;
-  @ViewChild("popoverText", { read: ElementRef })
+  @ViewChild('popoverText', { read: ElementRef })
   text: ElementRef;
 
-  type: string = "ListItem";
+  type: string = 'ListItem';
 
   selectedItem: any;
   list: any[] = [];
   searchBar: boolean;
   searchItem: string;
   icons: any;
-  orderSelected:number = 1;
+  orderSelected: number = 1;
 
   constructor(
     private navParams: NavParams,
@@ -37,9 +37,9 @@ export class ListPage {
 
   ngOnInit() {
     this.searchBar = false;
-    this.selectedItem = this.navParams.get("list")
-      ? this.navParams.get("list")
-      : "LISTA_COMPRA";
+    this.selectedItem = this.navParams.get('list')
+      ? this.navParams.get('list')
+      : 'LISTA_COMPRA';
     this.globalVars.getDefaulIconsData().then(data => {
       this.icons = data;
       this.initializeItems(null);
@@ -49,22 +49,25 @@ export class ListPage {
   initializeItems(filter: string) {
     this.globalVars.getListData(this.selectedItem).then(listData => {
       this.list = <any[]>listData;
+      this.sortItems(this.orderSelected);
       if (filter) {
-	      this.list = this.list.filter(item => {
-	        return item.nombreElemento
-	            .toLowerCase()
-	            .indexOf(this.searchItem.toLowerCase()) > -1;
-	      });
+        this.list = this.list.filter(item => {
+          return (
+            item.nombreElemento
+              .toLowerCase()
+              .indexOf(this.searchItem.toLowerCase()) > -1
+          );
+        });
       }
     });
   }
 
   searchMatches(event) {
-    if (this.searchItem && this.searchItem.trim() !== "") {
+    if (this.searchItem && this.searchItem.trim() !== '') {
       this.initializeItems(this.searchItem);
-    }else{
-		 this.initializeItems(null);
-	 }
+    } else {
+      this.initializeItems(null);
+    }
   }
 
   toggleSearchBar(event) {
@@ -72,52 +75,52 @@ export class ListPage {
   }
 
   sortItems(orderBy: number) {
-	  this.orderSelected = orderBy;
+    this.orderSelected = orderBy;
     switch (orderBy) {
-		case 1:
-		  this.list = this.order.transform(this.list, ["+nombreElemento"]);
+      case 1:
+        this.list = this.order.transform(this.list, ['+nombreElemento']);
         break;
-      case 2: 
-			this.list = this.list.sort((a: any, b: any) => {
-				if (a.category.categoryName < b.category.categoryName) return -1;
-				if (a.category.categoryName > b.category.categoryName) return 1;
-				return 0;
-			});
+      case 2:
+        this.list = this.list.sort((a: any, b: any) => {
+          if (a.category.categoryName < b.category.categoryName) return -1;
+          if (a.category.categoryName > b.category.categoryName) return 1;
+          return 0;
+        });
         break;
       case 3:
-        this.list = this.order.transform(this.list, ["+fechaCaducidad"]);
+        this.list = this.order.transform(this.list, ['+fechaCaducidad']);
         break;
     }
   }
 
   reorder(event) {
     let reorder = this.alertCtrl.create();
-    reorder.setTitle("Sort by");
+    reorder.setTitle('Sort by');
 
-    if (this.selectedItem !== "LISTA_COMPRA") {
+    if (this.selectedItem !== 'LISTA_COMPRA') {
       reorder.addInput({
-        type: "radio",
-        label: "FECHA_CADUCIDAD",
-        value: "3",
+        type: 'radio',
+        label: 'FECHA_CADUCIDAD',
+        value: '3',
         checked: this.orderSelected === 3
       });
     }
     reorder.addInput({
-      type: "radio",
-      label: "NOMBRE",
-      value: "1",
+      type: 'radio',
+      label: 'NOMBRE',
+      value: '1',
       checked: this.orderSelected === 1
     });
     reorder.addInput({
-      type: "radio",
-      label: "CATEGORIA",
-      value: "2",
+      type: 'radio',
+      label: 'CATEGORIA',
+      value: '2',
       checked: this.orderSelected === 2
     });
 
-    reorder.addButton("Cancel");
+    reorder.addButton('Cancel');
     reorder.addButton({
-      text: "OK",
+      text: 'OK',
       handler: data => {
         this.sortItems(Number.parseInt(data));
       }
@@ -127,21 +130,21 @@ export class ListPage {
 
   removeItem(item) {
     let confirm = this.alertCtrl.create({
-      title: "Removing " + item.nombreElemento,
+      title: 'Removing ' + item.nombreElemento,
       message:
-        "Do you like to remove " +
+        'Do you like to remove ' +
         item.nombreElemento +
-        " from " +
+        ' from ' +
         item.nombreLista,
       buttons: [
         {
-          text: "No",
+          text: 'No',
           handler: () => {
-            console.log("No removed");
+            console.log('No removed');
           }
         },
         {
-          text: "Yes",
+          text: 'Yes',
           handler: () => {
             // TODO : Store changes
             this.list.splice(this.list.indexOf(item), 1);
@@ -174,29 +177,29 @@ export class ListPage {
 
   moveItem(item) {
     let move = this.alertCtrl.create();
-    move.setTitle("Move to");
+    move.setTitle('Move to');
 
     this.globalVars.getListsData().then(data => {
       let lists: any = data;
       lists.forEach((list: any) => {
         let selected = false;
         if (list.nombreLista !== item.nombreLista) {
-          if (list.nombreLista === "LISTA_COMPRA") {
+          if (list.nombreLista === 'LISTA_COMPRA') {
             selected = true;
           }
           move.addInput({
-            type: "radio",
+            type: 'radio',
             label: list.nombreLista,
             value: list.nombreLista,
             checked: selected
           });
         }
       });
-      move.addButton("Cancel");
+      move.addButton('Cancel');
       move.addButton({
-        text: "OK",
+        text: 'OK',
         handler: data => {
-          if (data === "LISTA_COMPRA") {
+          if (data === 'LISTA_COMPRA') {
             item.caduca = false;
           }
           this.list.splice(this.list.indexOf(item), 1);
@@ -236,15 +239,15 @@ export class ListPage {
     // TODO: Check data structure, redefine and refactor with category, measurement and unitStep
     let newItem = {
       category: {
-        icon: "images/icons/default.png",
-        measurement: "UNIDADES",
-        categoryName: "No Category"
+        icon: 'images/icons/default.png',
+        measurement: 'UNIDADES',
+        categoryName: 'No Category'
       },
-      nombreElemento: "",
-      colorElemento: "",
-      colorBotones: "",
-      colorElementoNoCaducado: "",
-      colorBotonesNoCaducado: "",
+      nombreElemento: '',
+      colorElemento: '',
+      colorBotones: '',
+      colorElementoNoCaducado: '',
+      colorBotonesNoCaducado: '',
       nombreLista: this.selectedItem,
       cantidadElemento: 1,
       caduca: false,

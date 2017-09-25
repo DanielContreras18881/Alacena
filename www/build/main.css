@@ -25308,123 +25308,6 @@ ion-navbar.toolbar {
   font-weight: bold;
 }
 
-html {
-  font-size: 62.5%;
-}
-
-a {
-  background-color: transparent;
-}
-
-.enable-hover a:hover {
-  opacity: .7;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-top: 1.6rem;
-  margin-bottom: 1rem;
-  font-weight: 500;
-  line-height: 1.2;
-}
-
-[padding] h1:first-child,
-[padding] h2:first-child,
-[padding] h3:first-child,
-[padding] h4:first-child,
-[padding] h5:first-child,
-[padding] h6:first-child {
-  margin-top: -.3rem;
-}
-
-h1 + h2,
-h1 + h3,
-h2 + h3 {
-  margin-top: -.3rem;
-}
-
-h1 {
-  margin-top: 2rem;
-  font-size: 2.6rem;
-}
-
-h2 {
-  margin-top: 1.8rem;
-  font-size: 2.4rem;
-}
-
-h3 {
-  font-size: 2.2rem;
-}
-
-h4 {
-  font-size: 2rem;
-}
-
-h5 {
-  font-size: 1.8rem;
-}
-
-h6 {
-  font-size: 1.6rem;
-}
-
-small {
-  font-size: 75%;
-}
-
-sub,
-sup {
-  position: relative;
-  font-size: 75%;
-  line-height: 0;
-  vertical-align: baseline;
-}
-
-sup {
-  top: -.5em;
-}
-
-sub {
-  bottom: -.25em;
-}
-
-[text-left] {
-  text-align: left;
-}
-
-[text-center] {
-  text-align: center;
-}
-
-[text-right] {
-  text-align: right;
-}
-
-[text-justify] {
-  text-align: justify;
-}
-
-[text-nowrap] {
-  white-space: nowrap;
-}
-
-[text-uppercase] {
-  text-transform: uppercase;
-}
-
-[text-lowercase] {
-  text-transform: lowercase;
-}
-
-[text-capitalize] {
-  text-transform: capitalize;
-}
-
 .text-ios-primary {
   color: #387ef5;
 }
@@ -25775,17 +25658,22 @@ ion-card {
 }
 
 .amountItem {
-  margin-left: -.5rem;
+  margin-left: 0.5rem;
   padding-left: 0;
   background-color: transparent;
 }
 
+.input-wrapper {
+  z-index: 1000;
+  overflow: visible;
+}
+
 .buttonOperation {
-  font-size: 2.75rem !important;
+  font-size: 2.25rem !important;
 }
 
 .nameElement {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   white-space: nowrap;
   margin: auto;
   text-align: center;
@@ -25837,7 +25725,7 @@ ion-card {
 
 .categoryMeasurement {
   font-size: 1.25rem;
-  padding: .1rem .25rem .1rem 0px;
+  padding: 0.1rem 0.25rem 0.1rem 0px;
   max-width: 100%;
 }
 
@@ -25846,7 +25734,11 @@ ion-card {
 }
 
 .category-icon {
-  max-width: 5rem;
+  max-width: 3.25rem;
+}
+
+.removeCategoryButton {
+  font-size: 2.25rem !important;
 }
 
 .button-icon-search {
@@ -26103,11 +25995,11 @@ ion-list[inset] .item {
 
 .ion-ios-clipboard-outline:before {
   font-size: 2.75rem;
-  margin-left: -2.75rem;
+  margin-left: -1.5rem;
 }
 
 .listName {
-  font-size: 2.25rem;
+  font-size: 1.75rem;
   white-space: nowrap;
   margin-left: 0.5rem;
 }

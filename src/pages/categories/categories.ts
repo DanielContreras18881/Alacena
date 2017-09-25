@@ -13,7 +13,7 @@ import { CategoryInfoPage } from '../category-info/category-info';
   Ionic pages and navigation.
 */
 @Component({
-  templateUrl: "categories.html",
+  templateUrl: 'categories.html',
   providers: [OrderBy, CategoriesService]
 })
 export class CategoriesPage {
@@ -24,7 +24,8 @@ export class CategoriesPage {
   public enableSelectToRemove: boolean;
   public categoriesToRemove: any;
 
-  type: string = "Categories";
+  type: string = 'Categories';
+  orderSelected: number = 1;
 
   constructor(
     public mod: ModalController,
@@ -48,12 +49,13 @@ export class CategoriesPage {
   }
 
   initializeCategories() {
-    this.categories = this.order.transform(this.categories, ["+categoryName"]);
+    //this.categories = this.order.transform(this.categories, ['+categoryName']);
+    this.sortItems(this.orderSelected);
   }
 
   searchMatches(event) {
     this.initializeCategories();
-    if (this.searchCategory && this.searchCategory.trim() !== "") {
+    if (this.searchCategory && this.searchCategory.trim() !== '') {
       this.categories = this.categories.filter(item => {
         return (
           item.categoryName
@@ -73,49 +75,52 @@ export class CategoriesPage {
   }
 
   sortItems(orderBy: number) {
+    this.orderSelected = orderBy;
     switch (orderBy) {
       case 1:
-        this.categories = this.order.transform(this.categories, ["+categoryName"]);
+        this.categories = this.order.transform(this.categories, [
+          '+categoryName'
+        ]);
         break;
       case 2:
-        this.categories = this.order.transform(this.categories, ["+measurement"]);
+        this.categories = this.order.transform(this.categories, [
+          '+measurement'
+        ]);
         break;
       case 3:
-        this.categories = this.order.transform(this.categories, ["+unitStep"]);
+        this.categories = this.order.transform(this.categories, ['+unitStep']);
         break;
     }
-    console.log(this.categories);
   }
 
   reorder(event) {
     let reorder = this.alertCtrl.create();
-    reorder.setTitle("Sort by");
+    reorder.setTitle('Sort by');
 
     reorder.addInput({
-      type: "radio",
-      label: "NOMBRE",
-      value: "1",
-      checked: true
+      type: 'radio',
+      label: 'NOMBRE',
+      value: '1',
+      checked: this.orderSelected === 1
     });
     reorder.addInput({
-      type: "radio",
-      label: "MEASUREMENT",
-      value: "2",
-      checked: false
-	 });
+      type: 'radio',
+      label: 'MEASUREMENT',
+      value: '2',
+      checked: this.orderSelected === 2
+    });
     reorder.addInput({
-      type: "radio",
-      label: "PASO_MEDIDA",
-      value: "3",
-      checked: false
-    });	 
+      type: 'radio',
+      label: 'PASO_MEDIDA',
+      value: '3',
+      checked: this.orderSelected === 3
+    });
 
-    reorder.addButton("Cancel");
+    reorder.addButton('Cancel');
     reorder.addButton({
-      text: "OK",
+      text: 'OK',
       handler: data => {
-        console.log(data);
-        this.sortItems(Number.parseInt(data.value));
+        this.sortItems(Number.parseInt(data));
       }
     });
     reorder.present();
@@ -123,17 +128,17 @@ export class CategoriesPage {
 
   deleteCategory(event, category) {
     let confirm = this.alertCtrl.create({
-      title: "Removing " + category.categoryName,
-      message: "Do you like to remove " + category.categoryName,
+      title: 'Removing ' + category.categoryName,
+      message: 'Do you like to remove ' + category.categoryName,
       buttons: [
         {
-          text: "No",
+          text: 'No',
           handler: () => {
-            console.log("No removed");
+            console.log('No removed');
           }
         },
         {
-          text: "Yes",
+          text: 'Yes',
           handler: () => {
             // this.globalVars.getCategoriesData().splice(this.globalVars.getCategoriesData().indexOf(category), 1);
             this.categories.splice(this.categories.indexOf(category), 1);
@@ -156,9 +161,9 @@ export class CategoriesPage {
   addCategory(event) {
     // Save data to storage
     let newCategory = {
-      categoryName: "NEW_CATEGORY",
-      icon: "images/icons/default.png",
-      measurement: "UNIDADES",
+      categoryName: 'NEW_CATEGORY',
+      icon: 'images/icons/default.png',
+      measurement: 'UNIDADES',
       unitStep: 1
     };
     let categoryModal = this.mod.create(CategoryInfoPage, {
@@ -176,11 +181,11 @@ export class CategoriesPage {
 
   onMeasurementChange(event, category) {
     // TODO: Save data to storage, reflect in the view
-    if (category.measurement === "UNIDADES") {
+    if (category.measurement === 'UNIDADES') {
       category.unitStep = 0.1;
-    } else if (category.measurement === "GRAMOS") {
+    } else if (category.measurement === 'GRAMOS') {
       category.unitStep = 100;
-    } else if (category.measurement === "LITROS") {
+    } else if (category.measurement === 'LITROS') {
       category.unitStep = 0.5;
     } else {
       category.unitStep = 0.5;
@@ -193,7 +198,7 @@ removeCategories(event) {
   }
   */
   selectedCategory(event, item) {
-    console.log("Category selected" + JSON.stringify(item));
+    console.log('Category selected' + JSON.stringify(item));
     this.categoriesToRemove.push(item);
   }
 
