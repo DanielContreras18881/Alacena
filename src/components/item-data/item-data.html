@@ -12,7 +12,8 @@
 			<ion-col col-8 offset-1>
 				<ion-label *ngIf="!creating" class="nameElement">{{item.nombreElemento}}</ion-label>
 				<!--<ion-input *ngIf="creating" class="nameElement" id="nameElement" type="text" [(ngModel)]="item.nombreElemento" placeholder="NEW ELEMENT"></ion-input>-->
-				<ion-auto-complete *ngIf="creating" #searchbar [dataProvider]="itemsOnList" (itemSelected)="seleccionado($event)" (autoBlur)="seleccionado($event)"></ion-auto-complete>
+				<ion-auto-complete *ngIf="creating" #searchbar [dataProvider]="itemsOnList" (itemSelected)="seleccionado($event)" (autoBlur)="seleccionado($event)"
+				 [options]="{ placeholder : 'NEW ELEMENT' }"></ion-auto-complete>
 			</ion-col>
 			<ion-col col-2>
 				<div *ngIf="item.category">

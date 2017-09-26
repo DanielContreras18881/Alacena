@@ -25769,6 +25769,11 @@ ion-auto-complete {
   width: 90%;
 }
 
+ion-auto-complete ul li {
+  text-transform: capitalize;
+  background-color: #d6cde9;
+}
+
 .about {
   background-color: #999;
 }
