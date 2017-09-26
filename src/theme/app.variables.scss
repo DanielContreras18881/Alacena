@@ -4,7 +4,8 @@
 // --------------------------------------------------
 // Makes Ionic Sass functions available to your App
 
-@import "globals.core";
+@import 'globals.core';
+@import '../../node_modules/ionic2-auto-complete/auto-complete';
 
 // App Shared Variables
 // --------------------------------------------------
@@ -14,7 +15,6 @@
 // Ionic's default Sass variable values. App Shared Sass imports belong
 // in the app.core.scss file and not this file. Sass variables specific
 // to the mode belong in either the app.ios.scss or app.md.scss files.
-
 
 // App Shared Color Variables
 // --------------------------------------------------
@@ -26,10 +26,10 @@
 // are different per mode.
 
 $colors: (
-  primary:    #387eff,
-  secondary:  #32db6a,
-  danger:     #f53d30,
-  light:      #f4f4ff,
-  dark:       #232323,
-  favorite:   #69BB00
+  primary: #387eff,
+  secondary: #32db6a,
+  danger: #f53d30,
+  light: #f4f4ff,
+  dark: #232323,
+  favorite: #69bb00
 );

@@ -1,7 +1,10 @@
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core/public_api';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { AutoCompleteComponent } from 'ionic2-auto-complete';
 
 import { CategoriesService } from '../../providers/categories/categoriesService';
+import { ItemsOnList } from './items-on-list';
+
 /*
   Generated class for the ItemData component.
 
@@ -12,7 +15,7 @@ import { CategoriesService } from '../../providers/categories/categoriesService'
   selector: 'item',
   templateUrl: 'item-data.html',
   inputs: ['item', 'creating'],
-  providers: [CategoriesService]
+  providers: [CategoriesService, ItemsOnList]
   // outputs: ['remove', 'move', 'edit']
 })
 export class Item implements OnInit {
@@ -24,9 +27,14 @@ export class Item implements OnInit {
   @Output() edit: EventEmitter<any> = new EventEmitter();
   @Output() save: EventEmitter<any> = new EventEmitter();
 
+  @ViewChild('searchbar') searchbar: AutoCompleteComponent;
+
   oldMeasurement: string = '';
 
-  constructor(private catService: CategoriesService) {}
+  constructor(
+    private catService: CategoriesService,
+    public itemsOnList: ItemsOnList
+  ) {}
 
   ngOnInit() {
     this.oldMeasurement = this.item.category.measurement;
@@ -121,5 +129,12 @@ export class Item implements OnInit {
       this.item = data;
       this.changeUnitStep(this.item.category.measurement);
     });
+  }
+  seleccionado(event) {
+    if (event) {
+      this.item.nombreElemento = event.nombreElemento;
+    } else {
+      this.item.nombreElemento = this.searchbar.getValue();
+    }
   }
 }

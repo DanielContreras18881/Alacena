@@ -39,30 +39,33 @@ export class CategoriesPage {
     this.searchBar = false;
     this.enableSelectToRemove = false;
     this.categoriesToRemove = [];
-    this.globalVars.getCategoriesData().then(data => {
-      this.categories = <any[]>data;
-    });
     this.globalVars.getDefaulIconsData().then(data => {
       this.icons = data;
     });
-    this.initializeCategories();
+    this.initializeCategories(null);
   }
 
-  initializeCategories() {
-    //this.categories = this.order.transform(this.categories, ['+categoryName']);
-    this.sortItems(this.orderSelected);
+  initializeCategories(filter: string) {
+    this.globalVars.getCategoriesData().then(data => {
+      this.categories = <any[]>data;
+      this.sortItems(this.orderSelected);
+      if (filter) {
+        this.categories = this.categories.filter(item => {
+          return (
+            item.categoryName
+              .toLowerCase()
+              .indexOf(this.searchCategory.toLowerCase()) > -1
+          );
+        });
+      }
+    });
   }
 
   searchMatches(event) {
-    this.initializeCategories();
     if (this.searchCategory && this.searchCategory.trim() !== '') {
-      this.categories = this.categories.filter(item => {
-        return (
-          item.categoryName
-            .toLowerCase()
-            .indexOf(this.searchCategory.toLowerCase()) > -1
-        );
-      });
+      this.initializeCategories(this.searchCategory);
+    } else {
+      this.initializeCategories(null);
     }
   }
 

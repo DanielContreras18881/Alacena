@@ -8,6 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicApp, IonicModule } from 'ionic-angular';
+import { AutoCompleteModule } from 'ionic2-auto-complete';
 
 import { BottomButtonsComponent } from '../components/bottom-buttons-component/bottom-buttons-component';
 import { Item } from '../components/item-data/item-data';
@@ -53,6 +54,7 @@ import { Alacena } from './app.component';
     CategoryInfoPage
   ],
   imports: [
+    AutoCompleteModule,
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(Alacena),

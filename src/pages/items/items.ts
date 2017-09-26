@@ -40,41 +40,44 @@ export class ItemsPage {
     this.enableSelectToRemove = false;
     this.globalVars.getDefaulIconsData().then(data => {
       this.icons = data;
-    });
-    this.globalVars.getItemsData().then(data => {
-      this.items = data;
-      this.initializeItems();
+      this.initializeItems(null);
     });
   }
 
-  initializeItems() {
-    //this.items = this.order.transform(this.items, ['+nombreElemento']);
-    this.globalVars.getListsData().then(data => {
-      let lists = data;
-      let itemsFilled = [];
-      this.items.forEach((item, index) => {
-        let auxItem = item;
-        auxItem.lists = this.filterElements.transform(
-          <any[]>lists,
-          item.nombreElemento
-        );
-        itemsFilled.push(auxItem);
+  initializeItems(filter: string) {
+    this.globalVars.getItemsData().then(data => {
+      this.items = data;
+      this.globalVars.getListsData().then(data => {
+        let lists = data;
+        let itemsFilled = [];
+        this.items.forEach((item, index) => {
+          let auxItem = item;
+          auxItem.lists = this.filterElements.transform(
+            <any[]>lists,
+            item.nombreElemento
+          );
+          itemsFilled.push(auxItem);
+        });
+        this.items = itemsFilled;
+        this.sortItems(this.orderSelected);
+        if (filter) {
+          this.items = this.items.filter(item => {
+            return (
+              item.nombreElemento
+                .toLowerCase()
+                .indexOf(this.searchItem.toLowerCase()) > -1
+            );
+          });
+        }
       });
-      this.items = itemsFilled;
-      this.sortItems(this.orderSelected);
     });
   }
 
   searchMatches(event) {
-    this.initializeItems();
     if (this.searchItem && this.searchItem.trim() !== '') {
-      this.items = this.items.filter(item => {
-        return (
-          item.nombreElemento
-            .toLowerCase()
-            .indexOf(this.searchItem.toLowerCase()) > -1
-        );
-      });
+      this.initializeItems(this.searchItem);
+    } else {
+      this.initializeItems(null);
     }
   }
 
