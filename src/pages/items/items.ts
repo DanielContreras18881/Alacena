@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { AlertController, NavController } from 'ionic-angular';
+import { AlertController, ModalController, NavController } from 'ionic-angular';
 
 import { OrderBy } from '../../pipes/orderBy';
 import { PipeFilterElements } from '../../pipes/pipefilterElements';
 import { CategoriesService } from '../../providers/categories/categoriesService';
 import { GlobalVars } from '../../providers/global-vars/global-vars';
+import { ItemInfoPage } from '../item-info/item-info';
 
 /*
   Generated class for the ItemsPage page.
@@ -17,6 +18,7 @@ import { GlobalVars } from '../../providers/global-vars/global-vars';
   providers: [PipeFilterElements, OrderBy, CategoriesService]
 })
 export class ItemsPage {
+  type: string = 'Items';
   public items: any;
   public searchBar: boolean;
   public searchItem: string;
@@ -24,8 +26,10 @@ export class ItemsPage {
   public enableSelectToRemove: boolean;
   public itemsToRemove: any;
   orderSelected: number = 1;
+  shoppingList: any[] = [];
 
   constructor(
+    public mod: ModalController,
     public nav: NavController,
     public alertCtrl: AlertController,
     private order: OrderBy,
@@ -41,6 +45,9 @@ export class ItemsPage {
     this.globalVars.getDefaulIconsData().then(data => {
       this.icons = data;
       this.initializeItems(null);
+    });
+    this.globalVars.getListData('LISTA_COMPRA').then(data => {
+      this.shoppingList = <any[]>data;
     });
   }
 
@@ -155,8 +162,8 @@ export class ItemsPage {
             cantidadMinima: 1,
             marked: false
           };
-          // TODO : Store changes
-          // this.globalVars.getListData().push(newItem);
+          this.shoppingList.push(newItem);
+          this.globalVars.setListData('LISTA_COMPRA', this.shoppingList);
           auxItem.lists.push(newItem);
         });
       }
@@ -246,7 +253,6 @@ export class ItemsPage {
   }
 
   addItem(event) {
-    // TODO: create new item, opening modal[create modal such as category]
     let newItem = {
       nombreElemento: 'NEW_ITEM',
       category: {
@@ -255,8 +261,18 @@ export class ItemsPage {
       },
       measurement: 'UNIDADES'
     };
-    this.items.push(newItem);
     this.globalVars.setItemsData(this.items);
+    let itemModal = this.mod.create(ItemInfoPage, {
+      newItem: newItem,
+      icons: this.icons
+    });
+    itemModal.onDidDismiss(item => {
+      if (item !== undefined) {
+        this.items.push(item);
+        this.globalVars.setItemsData(this.items);
+      }
+    });
+    itemModal.present();
   }
 
   sortItems(orderBy: number) {
@@ -336,9 +352,8 @@ export class ItemsPage {
       marked: false
     };
     this.items[this.items.indexOf(item)].lists.push(newShoppingListItem);
-    // TODO : Store changes
-    // this.globalVars.getListData().push(newShoppingListItem);
-    // Logic to add to shopping list
+    this.shoppingList.push(newShoppingListItem);
+    this.globalVars.setListData('LISTA_COMPRA', this.shoppingList);
   }
   /*
   itemTapped(event, item) {

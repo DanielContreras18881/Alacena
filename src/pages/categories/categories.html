@@ -20,17 +20,6 @@
 </ion-header>
 
 <ion-content padding class="categories">
-	<!--
-  <button class="add-button" fab fab-bottom fab-right fab-fixed (click)="addCategory($event)">
-    <ion-icon ios="ios-add" md="md-add"></ion-icon>
-  </button>
-  <button  *ngIf="enableSelectToRemove" class="remove-button" fab fab-bottom fab-left fab-fixed (click)="removeCategories($event)">
-    <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
-  </button>
-  <button  *ngIf="!enableSelectToRemove" class="remove-button" fab fab-bottom fab-left fab-fixed (click)="selectToRemove($event)">
-    <ion-icon ios="ios-remove" md="md-remove"></ion-icon>
-  </button>
--->
 	<ion-list>
 		<ion-card *ngFor="let category of categories; let i = index">
 			<ion-card-header>
@@ -40,7 +29,12 @@
 							<img class="icon" src="{{category.icon}}" (click)="changeCategoryIcon($event, category)" />
 						</ion-avatar>
 					</ion-col>
-					<ion-col width-33>
+					<ion-col width-15>
+						<button item-center secondary clear (click)="editItem($event)" class="buttonOperation">
+							<ion-icon ios="ios-create" md="md-create"></ion-icon>
+						</button>
+					</ion-col>
+					<ion-col width-15>
 						<button class="removeCategoryButton" item-center danger large clear (click)="deleteCategory($event, category)">
               <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
             </button>
@@ -48,12 +42,12 @@
 				</ion-row>
 				<ion-row>
 					<ion-col width-33>
-						<ion-input class="categoryName" type="text" [(ngModel)]="category.categoryName">
+						<ion-input readonly="true" class="categoryName" type="text" [(ngModel)]="category.categoryName">
 						</ion-input>
 					</ion-col>
 					<ion-col width-33>
 						<ion-item>
-							<ion-select class="categoryMeasurement" id="measurement" [(ngModel)]="category.measurement" (ngModelChange)="onMeasurementChange($event,category)">
+							<ion-select readonly="true" class="categoryMeasurement" id="measurement" [(ngModel)]="category.measurement" (ngModelChange)="onMeasurementChange($event,category)">
 								<ion-option>UNIDADES</ion-option>
 								<ion-option>LITROS</ion-option>
 								<ion-option>GRAMOS</ion-option>
@@ -62,7 +56,7 @@
 						</ion-item>
 					</ion-col>
 					<ion-col width-25>
-						<ion-item class="measurementUnitStep">
+						<ion-item readonly="true" class="measurementUnitStep">
 							<ion-label stacked>PASO_MEDIDA</ion-label>
 							<ion-input text-right [(ngModel)]="category.unitStep" min="1" type="number"></ion-input>
 						</ion-item>

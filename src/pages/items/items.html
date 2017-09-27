@@ -45,6 +45,11 @@
             </button>
 					</ion-col>
 					<ion-col width-15 *ngIf="!enableSelectToRemove">
+						<button item-center secondary clear (click)="editItem($event)" class="buttonOperation">
+							<ion-icon ios="ios-create" md="md-create"></ion-icon>
+						</button>
+					</ion-col>
+					<ion-col width-15 *ngIf="!enableSelectToRemove">
 						<button class="buttonOperation" item-center danger large clear (click)="removeItem($event, item)">
               <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
             </button>
