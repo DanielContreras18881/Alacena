@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, ModalController, NavController } from 'ionic-angular';
+import { AlertController, ModalController, NavController, ToastController } from 'ionic-angular';
 
 import { OrderBy } from '../../pipes/orderBy';
 import { PipeFilterElements } from '../../pipes/pipefilterElements';
@@ -35,7 +35,8 @@ export class ItemsPage {
     private order: OrderBy,
     private catService: CategoriesService,
     private globalVars: GlobalVars,
-    private filterElements: PipeFilterElements
+    private filterElements: PipeFilterElements,
+    private toastCtrl: ToastController
   ) {}
 
   ngOnInit() {
@@ -268,8 +269,23 @@ export class ItemsPage {
     });
     itemModal.onDidDismiss(item => {
       if (item !== undefined) {
-        this.items.push(item);
-        this.globalVars.setItemsData(this.items);
+        if (
+          this.items.filter(
+            it =>
+              it.nombreElemento.toLowerCase() ===
+              item.nombreElemento.toLowerCase()
+          ).length === 0
+        ) {
+          this.items.push(item);
+          this.globalVars.setItemsData(this.items);
+        } else {
+          const toast = this.toastCtrl.create({
+            message: 'This item already exists!',
+            duration: 1000,
+            position: 'bottom'
+          });
+          toast.present();
+        }
       }
     });
     itemModal.present();

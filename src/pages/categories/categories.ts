@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, ModalController } from 'ionic-angular';
+import { AlertController, ModalController, ToastController } from 'ionic-angular';
 
 import { OrderBy } from '../../pipes/orderBy';
 import { CategoriesService } from '../../providers/categories/categoriesService';
@@ -32,7 +32,8 @@ export class CategoriesPage {
     public alertCtrl: AlertController,
     private catService: CategoriesService,
     private globalVars: GlobalVars,
-    private order: OrderBy
+    private order: OrderBy,
+    private toastCtrl: ToastController
   ) {}
 
   ngOnInit() {
@@ -175,8 +176,22 @@ export class CategoriesPage {
     });
     categoryModal.onDidDismiss(item => {
       if (item !== undefined) {
-        this.categories.push(item);
-        this.globalVars.setCategoriesData(this.categories);
+        if (
+          this.categories.filter(
+            cat =>
+              cat.categoryName.toLowerCase() === item.categoryName.toLowerCase()
+          ).length === 0
+        ) {
+          this.categories.push(item);
+          this.globalVars.setCategoriesData(this.categories);
+        } else {
+          const toast = this.toastCtrl.create({
+            message: 'This category already exists!',
+            duration: 1000,
+            position: 'bottom'
+          });
+          toast.present();
+        }
       }
     });
     categoryModal.present();

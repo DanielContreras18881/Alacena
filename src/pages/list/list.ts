@@ -241,7 +241,8 @@ export class ListPage {
       category: {
         icon: 'images/icons/default.png',
         measurement: 'UNIDADES',
-        categoryName: 'No Category'
+        categoryName: 'No Category',
+        unitStep: 1
       },
       nombreElemento: '',
       colorElemento: '',
@@ -262,9 +263,36 @@ export class ListPage {
     });
     infoListModal.onDidDismiss(item => {
       if (item !== undefined) {
-        this.list.push(item);
-        this.globalVars.setListData(this.selectedItem, this.list);
-        this.globalVars.addOneItem(item);
+        console.log(item);
+        if (
+          this.list.filter(
+            element =>
+              element.nombreElemento.toLowerCase() === item.nombreElemento
+          ).length === 0
+        ) {
+          this.list.push(item);
+          this.globalVars.setListData(this.selectedItem, this.list);
+          this.globalVars.addOneItem(item);
+        } else {
+          let addAmount = this.alertCtrl.create();
+          addAmount.setTitle(
+            item.nombreElemento + ' already exists, choose an option'
+          );
+          addAmount.addButton('Discard');
+          addAmount.addButton({
+            text: 'Add amount',
+            handler: data => {
+              this.list.filter(
+                element =>
+                  element.nombreElemento.toLowerCase() ===
+                  item.nombreElemento.toLowerCase()
+              )[0].cantidadElemento +=
+                item.cantidadElemento;
+              this.globalVars.setListData(this.selectedItem, this.list);
+            }
+          });
+          addAmount.present();
+        }
       }
     });
     infoListModal.present();
