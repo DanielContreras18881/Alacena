@@ -102,7 +102,7 @@ export class ItemsPage {
   removeItem(event, item) {
     let confirm = this.alertCtrl.create({
       title: 'Removing ' + item.nombreElemento,
-      message: 'Do you like to remove ' + item.nombreElemento,
+      message: 'Do you like to remove ' + item.nombreElemento + '?',
       buttons: [
         {
           text: 'No',

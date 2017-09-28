@@ -1,29 +1,25 @@
-import { Component, ChangeDetectorRef, OnDestroy } from "@angular/core";
-
+import { Component } from '@angular/core';
 import {
-  Modal,
-  ModalController,
-  AlertController,
-  PopoverController,
-  ActionSheetController,
-  NavController,
-  NavParams
-} from "ionic-angular";
+   ActionSheetController,
+   AlertController,
+   ModalController,
+   NavController,
+   NavParams,
+   PopoverController,
+   ToastController,
+} from 'ionic-angular';
 
-import { GlobalVars } from "../../providers/global-vars/global-vars";
-
-import { ListPage } from "../list/list";
-
-import { PopoverPage } from "../../components/popover/popover";
-
-import { OrderBy } from "../../pipes/orderBy";
+import { PopoverPage } from '../../components/popover/popover';
+import { OrderBy } from '../../pipes/orderBy';
+import { GlobalVars } from '../../providers/global-vars/global-vars';
+import { ListPage } from '../list/list';
 
 @Component({
-  templateUrl: "lists.html",
+  templateUrl: 'lists.html',
   providers: [OrderBy]
 })
 export class ListsPage {
-  type: string = "List";
+  type: string = 'List';
   public lists: any = [];
   reorderAllowed: boolean;
 
@@ -34,7 +30,8 @@ export class ListsPage {
     private mod: ModalController,
     private alertCtrl: AlertController,
     private popoverCtrl: PopoverController,
-    private globalVars: GlobalVars
+    private globalVars: GlobalVars,
+    private toastCtrl: ToastController
   ) {
     globalVars.getListsData().then(data => {
       //console.log("lists:" + JSON.stringify(data));
@@ -46,7 +43,7 @@ export class ListsPage {
     const popover = this.popoverCtrl.create(
       PopoverPage,
       {},
-      { cssClass: "popover", showBackdrop: true, enableBackdropDismiss: true }
+      { cssClass: 'popover', showBackdrop: true, enableBackdropDismiss: true }
     );
     popover.present({ ev: event });
     popover.onDidDismiss(data => {
@@ -68,9 +65,27 @@ export class ListsPage {
   }
 
   removeList(event, name) {
-    this.lists = this.lists.filter(list => list.nombreLista !== name);
-    this.globalVars.setListsData(this.lists);
-    this.globalVars.removetItemListData(name);
+    let confirm = this.alertCtrl.create({
+      title: 'Removing ' + name,
+      message: 'Do you like to remove ' + name + ' list?',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            console.log('No removed');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.lists = this.lists.filter(list => list.nombreLista !== name);
+            this.globalVars.setListsData(this.lists);
+            this.globalVars.removetItemListData(name);
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
   editColor(event, list) {
     this.globalVars.getColorsData().then(data => {
@@ -90,7 +105,7 @@ export class ListsPage {
         }
       });
       let actionSheet = this.actionSheetCtrl.create({
-        title: "Change list color",
+        title: 'Change list color',
         buttons: buttons
       });
       actionSheet.present();
@@ -99,22 +114,22 @@ export class ListsPage {
   editList(event, list) {
     let oldName = list.nombreLista;
     let edit = this.alertCtrl.create({
-      title: "Edit List",
+      title: 'Edit List',
       inputs: [
         {
-          name: "nombreLista",
+          name: 'nombreLista',
           value: oldName,
-          type: "text",
-          placeholder: "Name"
+          type: 'text',
+          placeholder: 'Name'
         }
       ],
       buttons: [
         {
-          text: "Cancel",
-          role: "cancel"
+          text: 'Cancel',
+          role: 'cancel'
         },
         {
-          text: "Confirm",
+          text: 'Confirm',
           handler: data => {
             this.globalVars.getListData(oldName).then(listData => {
               list.nombreLista = data.nombreLista;
@@ -131,14 +146,27 @@ export class ListsPage {
   }
 
   addList(newList: string) {
-    this.lists.push({
-      nombreLista: newList,
-      colorLista: "white-list",
-      colorBotones: "black-buttons",
-      listaEditable: true
-    });
-    this.globalVars.setListsData(this.lists);
-    this.globalVars.setListData(newList, []);
+    if (
+      this.lists.filter(
+        list => list.nombreLista.toLowerCase() === newList.toLowerCase()
+      ).length === 0
+    ) {
+      this.lists.push({
+        nombreLista: newList,
+        colorLista: 'white-list',
+        colorBotones: 'black-buttons',
+        listaEditable: true
+      });
+      this.globalVars.setListsData(this.lists);
+      this.globalVars.setListData(newList, []);
+    } else {
+      const toast = this.toastCtrl.create({
+        message: 'This list already exists!',
+        duration: 1000,
+        position: 'bottom'
+      });
+      toast.present();
+    }
   }
 
   removeLists(removed: any[]) {

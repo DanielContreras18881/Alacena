@@ -114,12 +114,6 @@ export class BottomButtonsComponent {
                   return;
                 }
                 this.finishedAdd.emit(data.name);
-                const toast = this.toastCtrl.create({
-                  message: this.type + ' ' + data.name + ' added!',
-                  duration: 1500,
-                  position: 'bottom'
-                });
-                toast.present();
               }
             }
           ]

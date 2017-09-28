@@ -135,7 +135,8 @@ export class ListPage {
         'Do you like to remove ' +
         item.nombreElemento +
         ' from ' +
-        item.nombreLista,
+        item.nombreLista +
+        ' ?',
       buttons: [
         {
           text: 'No',
@@ -146,7 +147,6 @@ export class ListPage {
         {
           text: 'Yes',
           handler: () => {
-            // TODO : Store changes
             this.list.splice(this.list.indexOf(item), 1);
             this.globalVars.setListData(this.selectedItem, this.list);
           }

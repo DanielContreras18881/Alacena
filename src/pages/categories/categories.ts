@@ -133,7 +133,7 @@ export class CategoriesPage {
   deleteCategory(event, category) {
     let confirm = this.alertCtrl.create({
       title: 'Removing ' + category.categoryName,
-      message: 'Do you like to remove ' + category.categoryName,
+      message: 'Do you like to remove ' + category.categoryName + '?',
       buttons: [
         {
           text: 'No',
