@@ -263,7 +263,6 @@ export class ListPage {
     });
     infoListModal.onDidDismiss(item => {
       if (item !== undefined) {
-        console.log(item);
         if (
           this.list.filter(
             element =>

@@ -11,11 +11,15 @@ import { Injectable, Pipe, PipeTransform } from '@angular/core';
 })
 @Injectable()
 export class PipeFilterElements implements PipeTransform {
-  transform(value: any[], args: any[]): any {
-    if (value !== undefined) {
-      return value.filter(valueData => valueData.nombreElemento === args);
-    } else {
-      return [];
-    }
+  transform(value: any[], args: string): any {
+    let aux = [];
+    value.forEach(dataValue => {
+      if (dataValue.nombreElemento.toLowerCase() === args.toLowerCase())
+        aux.push({
+          nombreLista: dataValue.nombreLista,
+          cantidadElemento: dataValue.cantidadElemento
+        });
+    });
+    return aux;
   }
 }

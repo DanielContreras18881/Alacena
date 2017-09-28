@@ -56,27 +56,35 @@ export class ItemsPage {
     this.globalVars.getItemsData().then(data => {
       this.items = data;
       this.globalVars.getListsData().then(data => {
-        let lists = data;
-        let itemsFilled = [];
-        this.items.forEach((item, index) => {
-          let auxItem = item;
-          auxItem.lists = this.filterElements.transform(
-            <any[]>lists,
-            item.nombreElemento
-          );
-          itemsFilled.push(auxItem);
-        });
-        this.items = itemsFilled;
-        this.sortItems(this.orderSelected);
-        if (filter) {
-          this.items = this.items.filter(item => {
-            return (
-              item.nombreElemento
-                .toLowerCase()
-                .indexOf(this.searchItem.toLowerCase()) > -1
-            );
+        let lists = <any[]>data;
+        let itemsOnLists = [];
+        lists.forEach(element => {
+          this.globalVars.getListData(element.nombreLista).then(data => {
+            (<any[]>data).forEach(item => {
+              itemsOnLists.push(item);
+            });
+            let itemsFilled = [];
+            this.items.forEach((item, index) => {
+              let auxItem = item;
+              auxItem.lists = this.filterElements.transform(
+                itemsOnLists,
+                item.nombreElemento
+              );
+              itemsFilled.push(auxItem);
+            });
+            this.items = itemsFilled;
+            this.sortItems(this.orderSelected);
+            if (filter) {
+              this.items = this.items.filter(item => {
+                return (
+                  item.nombreElemento
+                    .toLowerCase()
+                    .indexOf(this.searchItem.toLowerCase()) > -1
+                );
+              });
+            }
           });
-        }
+        });
       });
     });
   }
@@ -367,9 +375,35 @@ export class ItemsPage {
       cantidadMinima: 1,
       marked: false
     };
-    this.items[this.items.indexOf(item)].lists.push(newShoppingListItem);
-    this.shoppingList.push(newShoppingListItem);
-    this.globalVars.setListData('LISTA_COMPRA', this.shoppingList);
+    if (
+      this.shoppingList.filter(
+        element => element.nombreElemento.toLowerCase() === item.nombreElemento
+      ).length === 0
+    ) {
+      this.items[this.items.indexOf(item)].lists.push(newShoppingListItem);
+      this.shoppingList.push(newShoppingListItem);
+      this.globalVars.setListData('LISTA_COMPRA', this.shoppingList);
+    } else {
+      let addAmount = this.alertCtrl.create();
+      addAmount.setTitle(
+        item.nombreElemento + ' already exists, choose an option'
+      );
+      addAmount.addButton('Discard');
+      addAmount.addButton({
+        text: 'Add amount',
+        handler: data => {
+          this.shoppingList.filter(
+            element =>
+              element.nombreElemento.toLowerCase() ===
+              item.nombreElemento.toLowerCase()
+          )[0].cantidadElemento +=
+            item.cantidadElemento;
+          this.globalVars.setListData('LISTA_COMPRA', this.shoppingList);
+          this.initializeItems(null);
+        }
+      });
+      addAmount.present();
+    }
   }
   /*
   itemTapped(event, item) {
