@@ -1,4 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AdMobFree } from '@ionic-native/admob-free';
@@ -9,6 +10,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { AutoCompleteModule } from 'ionic2-auto-complete';
+import { AppVersion } from "@ionic-native/app-version";
+import { Camera } from "@ionic-native/camera";
+import { ImagePicker } from "@ionic-native/image-picker";
 
 import { BottomButtonsComponent } from '../components/bottom-buttons-component/bottom-buttons-component';
 import { Item } from '../components/item-data/item-data';
@@ -79,7 +83,10 @@ import { Alacena } from './app.component';
   ],
   providers: [
     //{provide: ErrorHandler, useClass: SentryErrorHandler},
-    AdMobFree,
+	 AdMobFree,
+	 AppVersion,
+	 Camera,
+	 ImagePicker,
     GooglePlus,
     Network,
     CloudStorage,
