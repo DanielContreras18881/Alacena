@@ -1,10 +1,14 @@
+import { CategoryInfoPage } from '../category-info/category-info';
 import { Component } from '@angular/core';
-import { AlertController, ModalController, ToastController } from 'ionic-angular';
+import {
+  AlertController,
+  ModalController,
+  ToastController
+} from 'ionic-angular';
 
 import { OrderBy } from '../../pipes/orderBy';
 import { CategoriesService } from '../../providers/categories/categoriesService';
 import { GlobalVars } from '../../providers/global-vars/global-vars';
-import { CategoryInfoPage } from '../category-info/category-info';
 
 /*
   Generated class for the ItemsPage page.
@@ -23,6 +27,8 @@ export class CategoriesPage {
   public icons: any;
   public enableSelectToRemove: boolean;
   public categoriesToRemove: any;
+  unitStep: number;
+  measurement: string;
 
   type: string = 'Categories';
   orderSelected: number = 1;
@@ -34,7 +40,14 @@ export class CategoriesPage {
     private globalVars: GlobalVars,
     private order: OrderBy,
     private toastCtrl: ToastController
-  ) {}
+  ) {
+    this.globalVars.getConfigData().then(data => {
+      this.measurement = (<any>data).unitDefault;
+      this.unitStep = (<any>data).stepDefault;
+      console.log(this.unitStep);
+      console.log(this.measurement);
+    });
+  }
 
   ngOnInit() {
     this.searchBar = false;
@@ -163,12 +176,13 @@ export class CategoriesPage {
     });
   }
   addCategory(event) {
+    console.log(this.measurement);
     // Save data to storage
     let newCategory = {
       categoryName: 'NEW_CATEGORY',
       icon: 'images/icons/default.png',
-      measurement: 'UNIDADES',
-      unitStep: 1
+      measurement: this.measurement,
+      unitStep: this.unitStep
     };
     let categoryModal = this.mod.create(CategoryInfoPage, {
       newCategory: newCategory,

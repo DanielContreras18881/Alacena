@@ -29,6 +29,9 @@ export class ConfigData {
   ) {}
 
   setConfigData(data: any, userProfile: any) {
+    console.log(userProfile);
+    console.log(!this.plt.is('ios') && !this.plt.is('android'));
+    console.log(this.network.type);
     if (userProfile) {
       if (!this.plt.is('ios') && !this.plt.is('android')) {
         this.cloudStorage.uploadConfigData(data, userProfile.uid);
@@ -40,6 +43,7 @@ export class ConfigData {
         }
       }
     } else {
+      console.log(data);
       this.localStorage.setToLocal('config', data);
     }
   }
@@ -71,13 +75,13 @@ export class ConfigData {
       if (userProfile) {
         if (!this.plt.is('ios') && !this.plt.is('android')) {
           this.cloudStorage.loadConfigData(userProfile.uid).then(data => {
-            //console.log("cloudStorage:" + JSON.stringify(data));
+            console.log('cloudStorage:' + JSON.stringify(data));
             if (data !== undefined && data !== null) {
               this.localStorage.setToLocal('config', data);
               resolve(data);
             } else {
               this.localStorage.getFromLocal('config', this.path).then(data => {
-                //console.log("getFromLocal:" + JSON.stringify(data));
+                console.log('getFromLocal:' + JSON.stringify(data));
                 if (data !== undefined && data !== null) {
                   resolve(data);
                 } else {
@@ -105,7 +109,7 @@ let connectSubscription = this.network.onConnect().subscribe(() => {
 connectSubscription.unsubscribe();
 			   */
             this.localStorage.getFromLocal('config', this.path).then(data => {
-              //console.log("localStorage:" + JSON.stringify(data));
+              console.log('localStorage:' + JSON.stringify(data));
               if (data !== undefined && data !== null) {
                 resolve(data);
               } else {
@@ -114,7 +118,7 @@ connectSubscription.unsubscribe();
             });
           } else {
             this.cloudStorage.loadConfigData(userProfile.uid).then(data => {
-              //console.log("cloudStorage:" + JSON.stringify(data));
+              console.log('cloudStorage2:' + JSON.stringify(data));
               if (data !== undefined && data !== null) {
                 this.localStorage.setToLocal('config', data);
                 resolve(data);
@@ -122,7 +126,7 @@ connectSubscription.unsubscribe();
                 this.localStorage
                   .getFromLocal('config', this.path)
                   .then(data => {
-                    //console.log("getFromLocal:" + JSON.stringify(data));
+                    console.log('getFromLocal2:' + JSON.stringify(data));
                     if (data !== undefined && data !== null) {
                       resolve(data);
                     } else {
@@ -135,7 +139,7 @@ connectSubscription.unsubscribe();
         }
       } else {
         this.localStorage.getFromLocal('config', this.path).then(data => {
-          //console.log("localStorage2:" + JSON.stringify(data));
+          console.log('localStorage2:' + JSON.stringify(data));
           if (data !== undefined && data !== null) {
             resolve(data);
           } else {

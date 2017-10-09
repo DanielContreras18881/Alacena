@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
-import "rxjs/add/operator/map";
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 
-import { Storage } from "@ionic/storage";
+import { Storage } from '@ionic/storage';
 
 declare var cordova: any;
 
@@ -21,19 +21,23 @@ export class LocalStorage {
       this.storage
         .get(name)
         .then(val => {
-          if (val !== undefined && val !== null && val.length > 0) {
+          console.log(val);
+          if (val !== undefined && val !== null) {
             resolve(val);
           } else {
-            this.http.get(path).map(res => res.json()).subscribe(
-              data => {
-                this.storage.set(name, data);
-                resolve(data);
-              },
-              err => {
-                this.storage.set(name, []);
-                resolve([]);
-              }
-            );
+            this.http
+              .get(path)
+              .map(res => res.json())
+              .subscribe(
+                data => {
+                  this.storage.set(name, data);
+                  resolve(data);
+                },
+                err => {
+                  this.storage.set(name, []);
+                  resolve([]);
+                }
+              );
           }
         })
         .catch(error => {

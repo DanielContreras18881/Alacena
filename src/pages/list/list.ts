@@ -1,5 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { AlertController, ModalController, NavParams, PopoverController, ViewController } from 'ionic-angular';
+import {
+  AlertController,
+  ModalController,
+  NavParams,
+  PopoverController,
+  ViewController
+} from 'ionic-angular';
 
 import { PopoverPage } from '../../components/popover/popover';
 import { OrderBy } from '../../pipes/orderBy';
@@ -24,6 +30,8 @@ export class ListPage {
   searchItem: string;
   icons: any;
   orderSelected: number = 1;
+  defaultCategory: any;
+  minimumAmount: number;
 
   constructor(
     private navParams: NavParams,
@@ -43,6 +51,10 @@ export class ListPage {
     this.globalVars.getDefaulIconsData().then(data => {
       this.icons = data;
       this.initializeItems(null);
+    });
+    this.globalVars.getConfigData().then(data => {
+      this.defaultCategory = (<any>data).categoryDefault;
+      this.minimumAmount = (<any>data).cantidadMinimaDefecto;
     });
   }
 
@@ -238,22 +250,17 @@ export class ListPage {
   addItem(event) {
     // TODO: Check data structure, redefine and refactor with category, measurement and unitStep
     let newItem = {
-      category: {
-        icon: 'images/icons/default.png',
-        measurement: 'UNIDADES',
-        categoryName: 'No Category',
-        unitStep: 1
-      },
+      category: this.defaultCategory,
       nombreElemento: '',
       colorElemento: '',
       colorBotones: '',
       colorElementoNoCaducado: '',
       colorBotonesNoCaducado: '',
       nombreLista: this.selectedItem,
-      cantidadElemento: 1,
+      cantidadElemento: this.minimumAmount,
       caduca: false,
       fechaCaducidad: new Date().toISOString(),
-      cantidadMinima: 1,
+      cantidadMinima: this.minimumAmount,
       marked: false
     };
     let infoListModal = this.mod.create(ItemInfoPage, {

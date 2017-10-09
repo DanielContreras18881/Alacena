@@ -5,54 +5,68 @@
   "expireReminders": true,
   "deleteAt0": true,
   "idiomaDefault": "en",
-  "idiomas": [ {
-    "id_iso": "es",
-    "idiomaSeleccionado": "Español"
-  }, {
-    "id_iso": "en",
-    "idiomaSeleccionado": "English"
-  } ],
-  "categoryDefault":{
-        "icon": "images/icons/default.png",
-        "measurement": "UNIDADES",
-        "categoryName": "No Category"
-	},
-	"unitDefault":"UNIDADES",
-	"stepDefault": "1",
+  "idiomas": [
+    {
+      "id_iso": "es",
+      "idiomaSeleccionado": "Español"
+    },
+    {
+      "id_iso": "en",
+      "idiomaSeleccionado": "English"
+    }
+  ],
+  "categoryDefault": {
+    "icon": "images/icons/default.png",
+    "measurement": "UNIDADES",
+    "categoryName": "No Category",
+    "unitStep": 1
+  },
+  "unitDefault": "UNIDADES",
+  "stepDefault": "1",
   "colorDefault": "item-dark item item-complex",
-  "configColors": [ {
-    "nombre": "NEGRO",
-    "claseLista": "item-dark item item-complex",
-    "botonesEditables": "button-dark"
-  }, {
-    "nombre": "MORADO",
-    "claseLista": "item-royal item item-complex",
-    "botonesEditables": "button-royal"
-  }, {
-    "nombre": "VERDE",
-    "claseLista": "item-balanced item item-complex",
-    "botonesEditables": "button-balanced"
-  }, {
-    "nombre": "AZUL",
-    "claseLista": "item-positive item item-complex",
-    "botonesEditables": "button-positive"
-  }, {
-    "nombre": "AMARILLO",
-    "claseLista": "item-energized item item-complex",
-    "botonesEditables": "button-energized"
-  } ],
+  "configColors": [
+    {
+      "nombre": "NEGRO",
+      "claseLista": "item-dark item item-complex",
+      "botonesEditables": "button-dark"
+    },
+    {
+      "nombre": "MORADO",
+      "claseLista": "item-royal item item-complex",
+      "botonesEditables": "button-royal"
+    },
+    {
+      "nombre": "VERDE",
+      "claseLista": "item-balanced item item-complex",
+      "botonesEditables": "button-balanced"
+    },
+    {
+      "nombre": "AZUL",
+      "claseLista": "item-positive item item-complex",
+      "botonesEditables": "button-positive"
+    },
+    {
+      "nombre": "AMARILLO",
+      "claseLista": "item-energized item item-complex",
+      "botonesEditables": "button-energized"
+    }
+  ],
   "colorDefaultElement": "item item-stable item-complex item-right-editable",
-  "configColorsElements": [ {
-    "nombre": "BLANCO",
-    "claseElemento": "item item-stable item-complex item-right-editable",
-    "botonesEditables": "button-stable"
-  }, {
-    "nombre": "VERDE",
-    "claseElemento": "item item-balanced item-complex item-right-editable",
-    "botonesEditables": "button-balanced"
-  }, {
-    "nombre": "AZUL",
-    "claseElemento": "item item-calm item-complex item-right-editable",
-    "botonesEditables": "button-calm"
-  } ]
+  "configColorsElements": [
+    {
+      "nombre": "BLANCO",
+      "claseElemento": "item item-stable item-complex item-right-editable",
+      "botonesEditables": "button-stable"
+    },
+    {
+      "nombre": "VERDE",
+      "claseElemento": "item item-balanced item-complex item-right-editable",
+      "botonesEditables": "button-balanced"
+    },
+    {
+      "nombre": "AZUL",
+      "claseElemento": "item item-calm item-complex item-right-editable",
+      "botonesEditables": "button-calm"
+    }
+  ]
 }
