@@ -86,7 +86,7 @@ export class BottomButtonsComponent {
 
   addItem(event: Event) {
     let type = this.type;
-    if (type === 'List') {
+    if (type === 'List' || type === 'Item') {
       this.alertCtrl
         .create({
           title: 'Add New ' + type,

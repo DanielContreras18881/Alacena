@@ -211,6 +211,35 @@ export class CategoriesPage {
     categoryModal.present();
   }
 
+  editCategory(event, category) {
+    let oldCategory = category.categoryName;
+    let edit = this.alertCtrl.create({
+      title: 'Edit Category',
+      inputs: [
+        {
+          name: 'nombreCategory',
+          value: oldCategory,
+          type: 'text',
+          placeholder: 'Name'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Confirm',
+          handler: data => {
+            category.categoryName = data.nombreCategory;
+            this.globalVars.setCategoriesData(this.categories);
+          }
+        }
+      ]
+    });
+    edit.present();
+  }
+
   onMeasurementChange(event, category) {
     // TODO: Save data to storage, reflect in the view
     if (category.measurement === 'UNIDADES') {

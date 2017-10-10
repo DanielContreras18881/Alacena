@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { AlertController, ModalController, NavController, ToastController } from 'ionic-angular';
+import {
+  AlertController,
+  ModalController,
+  NavController,
+  ToastController
+} from 'ionic-angular';
 
 import { OrderBy } from '../../pipes/orderBy';
 import { PipeFilterElements } from '../../pipes/pipefilterElements';
@@ -18,7 +23,7 @@ import { ItemInfoPage } from '../item-info/item-info';
   providers: [PipeFilterElements, OrderBy, CategoriesService]
 })
 export class ItemsPage {
-  type: string = 'Items';
+  type: string = 'Item';
   public items: any;
   public searchBar: boolean;
   public searchItem: string;
@@ -27,6 +32,7 @@ export class ItemsPage {
   public itemsToRemove: any;
   orderSelected: number = 1;
   shoppingList: any[] = [];
+  defaultCategory: any;
 
   constructor(
     public mod: ModalController,
@@ -49,6 +55,9 @@ export class ItemsPage {
     });
     this.globalVars.getListData('LISTA_COMPRA').then(data => {
       this.shoppingList = <any[]>data;
+    });
+    this.globalVars.getConfigData().then(data => {
+      this.defaultCategory = (<any>data).categoryDefault;
     });
   }
 
@@ -261,42 +270,59 @@ export class ItemsPage {
     this.enableSelectToRemove = !this.enableSelectToRemove;
   }
 
-  addItem(event) {
-    let newItem = {
-      nombreElemento: 'NEW_ITEM',
-      category: {
-        categoryName: '',
-        icon: 'images/icons/default.png'
-      },
-      measurement: 'UNIDADES'
-    };
-    this.globalVars.setItemsData(this.items);
-    let itemModal = this.mod.create(ItemInfoPage, {
-      newItem: newItem,
-      icons: this.icons
-    });
-    itemModal.onDidDismiss(item => {
-      if (item !== undefined) {
-        if (
-          this.items.filter(
-            it =>
-              it.nombreElemento.toLowerCase() ===
-              item.nombreElemento.toLowerCase()
-          ).length === 0
-        ) {
-          this.items.push(item);
-          this.globalVars.setItemsData(this.items);
-        } else {
-          const toast = this.toastCtrl.create({
-            message: 'This item already exists!',
-            duration: 1000,
-            position: 'bottom'
-          });
-          toast.present();
+  editItem(event, item) {
+    let oldItem = item.nombreElemento;
+    let edit = this.alertCtrl.create({
+      title: 'Edit Item',
+      inputs: [
+        {
+          name: 'nombreElemento',
+          value: oldItem,
+          type: 'text',
+          placeholder: 'Name'
         }
-      }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Confirm',
+          handler: data => {
+            if (item.lists.length > 0) {
+              this.items.push(JSON.parse(JSON.stringify(item)));
+              item.lists = [];
+            }
+            item.nombreElemento = data.nombreElemento;
+            this.globalVars.setItemsData(this.items);
+            this.sortItems(this.orderSelected);
+          }
+        }
+      ]
     });
-    itemModal.present();
+    edit.present();
+  }
+
+  addItem(newItem: string) {
+    if (
+      this.items.filter(
+        item => item.nombreElemento.toLowerCase() === newItem.toLowerCase()
+      ).length === 0
+    ) {
+      this.items.push({
+        nombreElemento: newItem,
+        category: this.defaultCategory
+      });
+      this.globalVars.setItemsData(this.items);
+    } else {
+      const toast = this.toastCtrl.create({
+        message: 'This item already exists!',
+        duration: 1000,
+        position: 'bottom'
+      });
+      toast.present();
+    }
   }
 
   sortItems(orderBy: number) {
