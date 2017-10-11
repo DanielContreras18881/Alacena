@@ -21,7 +21,6 @@ export class LocalStorage {
       this.storage
         .get(name)
         .then(val => {
-          console.log(val);
           if (val !== undefined && val !== null) {
             resolve(val);
           } else {

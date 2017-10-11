@@ -33,6 +33,8 @@ export class ListPage {
   defaultCategory: any;
   minimumAmount: number;
 
+  dataConfig: any = {};
+
   constructor(
     private navParams: NavParams,
     private view: ViewController,
@@ -55,6 +57,10 @@ export class ListPage {
     this.globalVars.getConfigData().then(data => {
       this.defaultCategory = (<any>data).categoryDefault;
       this.minimumAmount = (<any>data).cantidadMinimaDefecto;
+      this.dataConfig = {
+        deleteAt0: (<any>data).deleteAt0,
+        askAddListaCompra: (<any>data).askAddListaCompra
+      };
     });
   }
 
@@ -187,53 +193,69 @@ export class ListPage {
     infoListModal.present();
   }
 
-  moveItem(item) {
-    let move = this.alertCtrl.create();
-    move.setTitle('Move to');
+  moveItem(event) {
+    let item = event.item;
+    if (event.toShopingList) {
+      this.globalVars.getListData('LISTA_COMPRA').then(result => {
+        let dest = (<any[]>result).find(
+          x => x.nombreElemento === item.nombreElemento
+        );
+        if (dest) {
+          dest.cantidadElemento += item.cantidadMinima;
+        } else {
+          item.marked = false;
+          item.caduca = false;
+          item.cantidadElemento = item.cantidadMinima;
+          (<any[]>result).push(item);
+        }
+        this.globalVars.setListData('LISTA_COMPRA', <any[]>result);
+      });
+    } else {
+      let move = this.alertCtrl.create();
+      move.setTitle('Move to');
 
-    this.globalVars.getListsData().then(data => {
-      let lists: any = data;
-      lists.forEach((list: any) => {
-        let selected = false;
-        if (list.nombreLista !== item.nombreLista) {
-          if (list.nombreLista === 'LISTA_COMPRA') {
-            selected = true;
-          }
-          move.addInput({
-            type: 'radio',
-            label: list.nombreLista,
-            value: list.nombreLista,
-            checked: selected
-          });
-        }
-      });
-      move.addButton('Cancel');
-      move.addButton({
-        text: 'OK',
-        handler: data => {
-          if (data === 'LISTA_COMPRA') {
-            item.caduca = false;
-          }
-          this.list.splice(this.list.indexOf(item), 1);
-          this.globalVars.setListData(this.selectedItem, this.list);
-          item.nombreLista = data;
-          this.globalVars.getListData(data).then(result => {
-            let dest = (<any[]>result).find(
-              x => x.nombreElemento === item.nombreElemento
-            );
-            if (dest) {
-              dest.cantidadElemento += item.cantidadElemento;
-            } else {
-              (<any[]>result).push(item);
+      this.globalVars.getListsData().then(data => {
+        let lists: any = data;
+        lists.forEach((list: any) => {
+          let selected = false;
+          if (list.nombreLista !== item.nombreLista) {
+            if (list.nombreLista === 'LISTA_COMPRA') {
+              selected = true;
             }
-            this.globalVars.setListData(data, <any[]>result);
-          });
-          // TODO : Store changes
-          //this.globalVars.setListData(this.list);
-        }
+            move.addInput({
+              type: 'radio',
+              label: list.nombreLista,
+              value: list.nombreLista,
+              checked: selected
+            });
+          }
+        });
+        move.addButton('Cancel');
+        move.addButton({
+          text: 'OK',
+          handler: data => {
+            if (data === 'LISTA_COMPRA') {
+              item.caduca = false;
+            }
+            this.list.splice(this.list.indexOf(item), 1);
+            this.globalVars.setListData(this.selectedItem, this.list);
+            item.nombreLista = data;
+            this.globalVars.getListData(data).then(result => {
+              let dest = (<any[]>result).find(
+                x => x.nombreElemento === item.nombreElemento
+              );
+              if (dest) {
+                dest.cantidadElemento += item.cantidadElemento;
+              } else {
+                (<any[]>result).push(item);
+              }
+              this.globalVars.setListData(data, <any[]>result);
+            });
+          }
+        });
+        move.present();
       });
-      move.present();
-    });
+    }
   }
 
   addElement(newElement: string) {
