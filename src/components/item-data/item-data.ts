@@ -1,4 +1,5 @@
-import { AlertController } from 'ionic-angular';
+import moment from 'moment';
+import { ToastController, AlertController } from 'ionic-angular';
 import {
   Component,
   EventEmitter,
@@ -42,7 +43,8 @@ export class Item implements OnInit {
   constructor(
     private catService: CategoriesService,
     public alertCtrl: AlertController,
-    public itemsOnList: ItemsOnList
+    public itemsOnList: ItemsOnList,
+    private toastCtrl: ToastController
   ) {}
 
   ngOnInit() {
@@ -148,6 +150,38 @@ export class Item implements OnInit {
       if (removed < 0) this.item.cantidadMinima = 0;
       else this.item.cantidadMinima = removed;
       this.save.emit(this.item);
+    }
+  }
+
+  showExpiryDate(item: any) {
+    let text = this.checkExpiryDate(item.fechaCaducidad);
+    // TODO: Translate text variable
+    const toast = this.toastCtrl.create({
+      message:
+        item.nombreElemento +
+        ' ' +
+        text +
+        ' ' +
+        moment(item.fechaCaducidad).format('DD/MMM/YYYY'),
+      duration: 2500,
+      position: 'top',
+      cssClass: 'expiryWarning'
+    });
+    toast.present();
+  }
+  checkExpiryDate(expiryDate) {
+    if (moment().isAfter(moment(expiryDate, 'YYYY-MM-DDTHH:mm:ss.SSSZ'))) {
+      return 'expired';
+    } else {
+      if (
+        moment().isAfter(
+          moment(expiryDate, 'YYYY-MM-DDTHH:mm:ss.SSSZ').subtract(7, 'days')
+        )
+      ) {
+        return 'nearToExpire';
+      } else {
+        return 'onTime';
+      }
     }
   }
   // TODO: check these functions, their need and their functionality

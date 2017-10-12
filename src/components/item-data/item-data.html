@@ -3,13 +3,13 @@
 		<ion-row class="fila">
 			<ion-col col-1 *ngIf="!creating && item.nombreLista==='LISTA_COMPRA'">
 				<button [hidden]="!item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">
-              <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon>
-            </button>
+					<ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon>
+				</button>
 				<button [hidden]="item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">
-              <ion-icon ios="ios-radio-button-off" md="md-radio-button-off"></ion-icon>
-            </button>
+					<ion-icon ios="ios-radio-button-off" md="md-radio-button-off"></ion-icon>
+				</button>
 			</ion-col>
-			<ion-col col-8 offset-1>
+			<ion-col col-7 offset-1>
 				<ion-label *ngIf="!creating" class="nameElement">{{item.nombreElemento}}</ion-label>
 				<!--<ion-input *ngIf="creating" class="nameElement" id="nameElement" type="text" [(ngModel)]="item.nombreElemento" placeholder="NEW ELEMENT"></ion-input>-->
 				<ion-auto-complete *ngIf="creating" #searchbar [dataProvider]="itemsOnList" (itemSelected)="seleccionado($event)" (autoBlur)="seleccionado($event)"
@@ -28,19 +28,24 @@
 					</ion-avatar>
 				</div>
 			</ion-col>
+			<ion-col col-1>
+				<div *ngIf="item.caduca && item.fechaCaducidad">
+					<ion-icon ios="ios-alert" md="md-alert" (click)="showExpiryDate(item)" [ngClass]="checkExpiryDate(item.fechaCaducidad)"></ion-icon>
+				</div>
+			</ion-col>
 		</ion-row>
 		<ion-row class="fila" *ngIf="!creating">
 			<ion-col col-7>
 				<ion-item class="amountItem">
 					<button item-center default large clear (click)="minusElement($event, item, true)" class="amountButton">
-              <ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
-            </button>
+						<ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
+					</button>
 					<button clear class="amountButton">
-              <ion-badge class="amount amountIcon" large>{{item.cantidadElemento}}</ion-badge>
-            </button>
+						<ion-badge class="amount amountIcon" large>{{item.cantidadElemento}}</ion-badge>
+					</button>
 					<button item-center default large clear (click)="plusElement($event, item, true)" class="amountButton">
-              <ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>
-            </button>
+						<ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>
+					</button>
 				</ion-item>
 			</ion-col>
 			<ion-col col-5>
@@ -99,14 +104,14 @@
 			<ion-col col-7>
 				<ion-item>
 					<button item-center default large clear (click)="minusElement($event, false)" class="amountButton">
-                <ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
-              </button>
+						<ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
+					</button>
 					<button clear class="amountButton">
-                <ion-badge class="minimum amountIcon" large>{{item.cantidadMinima}}</ion-badge>
-              </button>
+						<ion-badge class="minimum amountIcon" large>{{item.cantidadMinima}}</ion-badge>
+					</button>
 					<button item-center default large clear (click)="plusElement($event, false)" class="amountButton">
-                <ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>
-              </button>
+						<ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>
+					</button>
 				</ion-item>
 			</ion-col>
 		</ion-row>
@@ -119,14 +124,14 @@
 			<ion-col col-7>
 				<ion-item>
 					<button item-center default large clear (click)="minusElement($event, true)" class="amountButton">
-                <ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
-              </button>
+						<ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
+					</button>
 					<button clear class="amountButton">
-                <ion-badge class="amount amountIcon" large>{{item.cantidadElemento}}</ion-badge>
-              </button>
+						<ion-badge class="amount amountIcon" large>{{item.cantidadElemento}}</ion-badge>
+					</button>
 					<button item-center default large clear (click)="plusElement($event, true)" class="amountButton">
-                <ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>
-              </button>
+						<ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>
+					</button>
 				</ion-item>
 			</ion-col>
 		</ion-row>

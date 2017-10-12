@@ -25774,6 +25774,29 @@ ion-auto-complete ul li {
   background-color: #d6cde9;
 }
 
+.expiryWarning .toast-container {
+  background-color: cadetblue;
+}
+
+.expiryWarning .toast-message {
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: bolder;
+  font-family: fantasy;
+}
+
+.expired {
+  color: red;
+}
+
+.nearToExpire {
+  color: yellowgreen;
+}
+
+.onTime {
+  visibility: hidden;
+}
+
 .about {
   background-color: #999;
 }

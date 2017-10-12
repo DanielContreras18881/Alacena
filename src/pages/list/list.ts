@@ -175,6 +175,17 @@ export class ListPage {
   }
 
   saveItem(item) {
+    /*
+    if(element.caduca){
+      logdata.messageLog('ListaCtrl:save:Se transforma la fecha de caducidad');
+      element.fechaCaducidad = moment(element.fechaCaducidad).hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
+      if($scope.expireReminders){
+        $scope.establishExpireReminders(element);
+      }
+    }else{
+      element.fechaCaducidad = moment('3015-12-31T22:00:00.000Z').hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
+    }
+	  */
     this.list[this.list.indexOf(item)] = item;
     this.globalVars.setListData(this.selectedItem, this.list);
   }
