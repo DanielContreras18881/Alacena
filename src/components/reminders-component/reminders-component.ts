@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import moment from 'moment';
+
+import { ViewController, NavParams } from 'ionic-angular';
 
 /**
  * Generated class for the RemindersComponent component.
@@ -11,12 +14,24 @@ import { Component } from '@angular/core';
   templateUrl: 'reminders-component.html'
 })
 export class RemindersComponent {
+  minDate: string = moment()
+    .toDate()
+    .toISOString();
+  data: any = {
+    notificationDate: moment()
+      .toDate()
+      .toISOString()
+  };
 
-  text: string;
-
-  constructor() {
-    console.log('Hello RemindersComponent Component');
-    this.text = 'Hello World';
+  constructor(private view: ViewController) {
+    console.log(this.minDate);
   }
 
+  save() {
+    this.view.dismiss(this.data);
+  }
+
+  close() {
+    this.view.dismiss();
+  }
 }

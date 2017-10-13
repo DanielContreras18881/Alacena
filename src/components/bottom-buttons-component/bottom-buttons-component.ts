@@ -24,14 +24,16 @@ export class BottomButtonsComponent {
   @Output() finishedFavorites = new EventEmitter<any>();
   @Output() finishedRemoved = new EventEmitter<any>();
   @Output() finishedAdd = new EventEmitter<any>();
+  @Output() finishNotification = new EventEmitter<any>();
 
   constructor(
     private alertCtrl: AlertController,
     private toastCtrl: ToastController
   ) {}
 
-  setNotification(event: Event) {
+  setNotification() {
     console.log('setNotification');
+    this.finishNotification.emit();
   }
 
   saveRecoverList(event: Event) {

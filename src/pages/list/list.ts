@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import moment from 'moment';
 import {
   AlertController,
   ModalController,
@@ -7,7 +8,10 @@ import {
   ViewController
 } from 'ionic-angular';
 
+import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
+
 import { PopoverPage } from '../../components/popover/popover';
+import { RemindersComponent } from '../../components/reminders-component/reminders-component';
 import { OrderBy } from '../../pipes/orderBy';
 import { GlobalVars } from '../../providers/global-vars/global-vars';
 import { ItemInfoPage } from '../item-info/item-info';
@@ -42,7 +46,8 @@ export class ListPage {
     public alertCtrl: AlertController,
     private popoverCtrl: PopoverController,
     private globalVars: GlobalVars,
-    private order: OrderBy
+    private order: OrderBy,
+    private localNotification: PhonegapLocalNotification
   ) {}
 
   ngOnInit() {
@@ -175,17 +180,51 @@ export class ListPage {
   }
 
   saveItem(item) {
-    /*
-    if(element.caduca){
-      logdata.messageLog('ListaCtrl:save:Se transforma la fecha de caducidad');
-      element.fechaCaducidad = moment(element.fechaCaducidad).hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
-      if($scope.expireReminders){
-        $scope.establishExpireReminders(element);
-      }
-    }else{
-      element.fechaCaducidad = moment('3015-12-31T22:00:00.000Z').hours(0).minutes(0).seconds(0).milliseconds(0).toDate();
+    //TODO: Check on device
+    if (item.caduca) {
+      let milisecondsToCaducidad1 =
+        moment(item.fechaCaducidad)
+          .add(-1, 'days')
+          .subtract(1, 'hour')
+          .toDate()
+          .getTime() -
+        moment()
+          .toDate()
+          .getTime();
+      setTimeout(() => {
+        this.localNotification.create('CADUCIDAD_ELEMENTO', {
+          tag: 'CADUCA_MANIANA',
+          body:
+            item.nombreLista +
+            '\n' +
+            item.nombreElemento +
+            '\n' +
+            'CADUCA_MANIANA',
+          icon: 'assets/icon/favicon.ico'
+        });
+      }, milisecondsToCaducidad1);
+      let milisecondsToCaducidad3 =
+        moment(item.fechaCaducidad)
+          .add(-7, 'days')
+          .subtract(1, 'hour')
+          .toDate()
+          .getTime() -
+        moment()
+          .toDate()
+          .getTime();
+      setTimeout(() => {
+        this.localNotification.create('CADUCIDAD_ELEMENTO', {
+          tag: 'CADUCA_7_DIAS',
+          body:
+            item.nombreLista +
+            '\n' +
+            item.nombreElemento +
+            '\n' +
+            'CADUCA_7_DIAS',
+          icon: 'assets/icon/favicon.ico'
+        });
+      }, milisecondsToCaducidad3);
     }
-	  */
     this.list[this.list.indexOf(item)] = item;
     this.globalVars.setListData(this.selectedItem, this.list);
   }
@@ -269,8 +308,30 @@ export class ListPage {
     }
   }
 
-  addElement(newElement: string) {
-    //console.log(newElement);
+  addNotification() {
+    let reminderModal = this.mod.create(RemindersComponent);
+    reminderModal.onDidDismiss(data => {
+      if (data) {
+        this.localNotification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            let milliseconds =
+              moment(data.notificationDate)
+                .toDate()
+                .getTime() -
+              moment()
+                .toDate()
+                .getTime();
+            setTimeout(() => {
+              this.localNotification.create('REMINDER!', {
+                body: data.message,
+                icon: 'assets/icon/favicon.ico'
+              });
+            }, milliseconds);
+          }
+        });
+      }
+    });
+    reminderModal.present();
   }
 
   removeElements(removed: any[]) {

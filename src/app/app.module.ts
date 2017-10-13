@@ -1,5 +1,6 @@
+import { RemindersComponent } from '../components/reminders-component/reminders-component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AdMobFree } from '@ionic-native/admob-free';
@@ -10,9 +11,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { AutoCompleteModule } from 'ionic2-auto-complete';
-import { AppVersion } from "@ionic-native/app-version";
-import { Camera } from "@ionic-native/camera";
-import { ImagePicker } from "@ionic-native/image-picker";
+import { AppVersion } from '@ionic-native/app-version';
+import { Camera } from '@ionic-native/camera';
+import { ImagePicker } from '@ionic-native/image-picker';
+
+import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
 
 import { BottomButtonsComponent } from '../components/bottom-buttons-component/bottom-buttons-component';
 import { Item } from '../components/item-data/item-data';
@@ -55,7 +58,8 @@ import { Alacena } from './app.component';
     BottomButtonsComponent,
     PopoverPage,
     ListIconsPage,
-    CategoryInfoPage
+    CategoryInfoPage,
+    RemindersComponent
   ],
   imports: [
     AutoCompleteModule,
@@ -79,14 +83,15 @@ import { Alacena } from './app.component';
     BottomButtonsComponent,
     PopoverPage,
     ListIconsPage,
-    CategoryInfoPage
+    CategoryInfoPage,
+    RemindersComponent
   ],
   providers: [
     //{provide: ErrorHandler, useClass: SentryErrorHandler},
-	 AdMobFree,
-	 AppVersion,
-	 Camera,
-	 ImagePicker,
+    AdMobFree,
+    AppVersion,
+    Camera,
+    ImagePicker,
     GooglePlus,
     Network,
     CloudStorage,
@@ -99,6 +104,7 @@ import { Alacena } from './app.component';
     ItemData,
     ItemInfoPage,
     ConfigData,
+    PhonegapLocalNotification,
     SplashScreen,
     StatusBar,
     GlobalVars,

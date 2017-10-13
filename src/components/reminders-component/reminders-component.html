@@ -1,4 +1,28 @@
-<!-- Generated template for the RemindersComponent component -->
-<div>
-  {{text}}
-</div>
+<ion-header>
+	<ion-toolbar dark>
+		<ion-title>
+			ADD_REMINDER
+		</ion-title>
+		<ion-buttons end>
+			<button primary (click)="save()">
+				<ion-icon ios="ios-archive" md="md-archive"></ion-icon>
+			</button>
+			<button (click)="close()">
+				<ion-icon ios="ios-close" md="md-close"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-item>
+		<ion-label>MESSAGE</ion-label>
+		<ion-input id="message" type="text" [(ngModel)]="data.message" placeholder="NEW MESSAGE"></ion-input>
+	</ion-item>
+	<ion-item>
+		{{data.notificationDate}}
+		<ion-datetime class="expireDate" id="notificationDate" displayFormat="DD MMMM YYYY HH:mm" pickerFormat="HH:mm DD MMMM YYYY"
+		 [(ngModel)]="data.notificationDate" min="{{minDate}}">
+		</ion-datetime>
+	</ion-item>
+</ion-content>

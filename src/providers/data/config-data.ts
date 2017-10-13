@@ -139,7 +139,7 @@ connectSubscription.unsubscribe();
         }
       } else {
         this.localStorage.getFromLocal('config', this.path).then(data => {
-          console.log('localStorage2:' + JSON.stringify(data));
+          //console.log('localStorage2:' + JSON.stringify(data));
           if (data !== undefined && data !== null) {
             resolve(data);
           } else {

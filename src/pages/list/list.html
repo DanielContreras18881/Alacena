@@ -48,6 +48,6 @@
 </ion-content>
 <ion-footer>
 	<bottom-buttons-component [type]="type" [object]="list" [add]=true [remove]=true [notifications]=true [favorites]="selectedItem==='LISTA_COMPRA'"
-	 (finishedAdd)="addItem($event)" (finishedRemoved)="removeElements($event,list)">
+	 (finishedAdd)="addItem($event)" (finishedRemoved)="removeElements($event,list)" (finishNotification)="addNotification()">
 	</bottom-buttons-component>
 </ion-footer>
