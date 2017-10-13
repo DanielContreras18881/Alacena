@@ -1,4 +1,5 @@
 {
+  "version": true,
   "ListaDefecto": "Lista de la Compra",
   "cantidadMinimaDefecto": 1,
   "askAddListaCompra": false,
@@ -23,50 +24,5 @@
   },
   "unitDefault": "UNIDADES",
   "stepDefault": "1",
-  "colorDefault": "item-dark item item-complex",
-  "configColors": [
-    {
-      "nombre": "NEGRO",
-      "claseLista": "item-dark item item-complex",
-      "botonesEditables": "button-dark"
-    },
-    {
-      "nombre": "MORADO",
-      "claseLista": "item-royal item item-complex",
-      "botonesEditables": "button-royal"
-    },
-    {
-      "nombre": "VERDE",
-      "claseLista": "item-balanced item item-complex",
-      "botonesEditables": "button-balanced"
-    },
-    {
-      "nombre": "AZUL",
-      "claseLista": "item-positive item item-complex",
-      "botonesEditables": "button-positive"
-    },
-    {
-      "nombre": "AMARILLO",
-      "claseLista": "item-energized item item-complex",
-      "botonesEditables": "button-energized"
-    }
-  ],
-  "colorDefaultElement": "item item-stable item-complex item-right-editable",
-  "configColorsElements": [
-    {
-      "nombre": "BLANCO",
-      "claseElemento": "item item-stable item-complex item-right-editable",
-      "botonesEditables": "button-stable"
-    },
-    {
-      "nombre": "VERDE",
-      "claseElemento": "item item-balanced item-complex item-right-editable",
-      "botonesEditables": "button-balanced"
-    },
-    {
-      "nombre": "AZUL",
-      "claseElemento": "item item-calm item-complex item-right-editable",
-      "botonesEditables": "button-calm"
-    }
-  ]
+  "colorDefault": "item-dark item item-complex"
 }

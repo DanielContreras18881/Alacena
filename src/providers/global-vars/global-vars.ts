@@ -28,9 +28,7 @@ export class GlobalVars {
 
   setUserProfile(userProfile: any) {
     this.userProfile = userProfile;
-    // TODO : Function to upload initial data
-    // Must create the new structure from old data,
-    // if it exist, if not exist use json files
+    /*
     this.setListsData([
       {
         nombreLista: 'LISTA_COMPRA',
@@ -39,7 +37,9 @@ export class GlobalVars {
         listaEditable: false
       }
     ]);
-    this.setListData('LISTA_COMPRA', []);
+	 this.setListData('LISTA_COMPRA', []);
+	 */
+    //this.getOldData();
   }
 
   getUserProfile() {
@@ -148,5 +148,19 @@ export class GlobalVars {
         });
       });
     }
+  }
+
+  getOldData() {
+    return new Promise(resolve => {
+      this.configDataService.getOldConfigData().then(data => {
+        resolve(data);
+      });
+      this.itemDataService.getOldItems();
+      this.categoriesDataService.getCategoriesData(null);
+      this.listsDataService.getOldLists(); //make promise
+      this.getListsData().then(lists => {
+        this.listDataService.getOldListItemsData(<any[]>lists);
+      });
+    });
   }
 }

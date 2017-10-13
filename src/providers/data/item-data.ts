@@ -42,28 +42,6 @@ export class ItemData {
   }
 
   getItemsData(userProfile): any {
-    /*
-    if (this.itemData) {
-      // already loaded data
-      return Promise.resolve(this.itemData);
-    }
-
-    // don't have the data yet
-    return new Promise(resolve => {
-      // We're using Angular Http provider to request the data,
-      // then on the response it'll map the JSON data to a parsed JS object.
-      // Next we process the data and resolve the promise with the new data.
-      this.http
-        .get(this.path)
-        .map(res => res.json())
-        .subscribe(data => {
-          // we've got back the raw data, now generate the core schedule data
-          // and save the data for later reference
-          this.itemData = data;
-          resolve(this.itemData);
-        });
-	 });
-	 */
     return new Promise(resolve => {
       if (userProfile) {
         if (!this.plt.is('ios') && !this.plt.is('android')) {
@@ -73,7 +51,7 @@ export class ItemData {
               this.localStorage.setToLocal('items', data);
               resolve(data);
             } else {
-              this.localStorage.getFromLocal('items', this.path).then(data => {
+              this.localStorage.getFromLocal('items', null).then(data => {
                 //console.log("getFromLocal:" + JSON.stringify(data));
                 if (data !== undefined && data !== null) {
                   resolve(data);
@@ -85,23 +63,7 @@ export class ItemData {
           });
         } else {
           if (this.network.type === 'NONE') {
-            /*
-let connectSubscription = this.network.onConnect().subscribe(() => {
-  console.log('network connected!');
-  // We just got a connection but we need to wait briefly
-   // before we determine the connection type. Might need to wait.
-  // prior to doing any api requests as well.
-  setTimeout(() => {
-    if (this.network.type === 'wifi') {
-      console.log('we got a wifi connection, woohoo!');
-    }
-  }, 3000);
-});
-
-// stop connect watch
-connectSubscription.unsubscribe();
-			   */
-            this.localStorage.getFromLocal('items', this.path).then(data => {
+            this.localStorage.getFromLocal('items', null).then(data => {
               //console.log("localStorage:" + JSON.stringify(data));
               if (data !== undefined && data !== null) {
                 resolve(data);
@@ -116,28 +78,51 @@ connectSubscription.unsubscribe();
                 this.localStorage.setToLocal('items', data);
                 resolve(data);
               } else {
-                this.localStorage
-                  .getFromLocal('items', this.path)
-                  .then(data => {
-                    //console.log("getFromLocal:" + JSON.stringify(data));
-                    if (data !== undefined && data !== null) {
-                      resolve(data);
-                    } else {
-                      resolve([]);
-                    }
-                  });
+                this.localStorage.getFromLocal('items', null).then(data => {
+                  //console.log("getFromLocal:" + JSON.stringify(data));
+                  if (data !== undefined && data !== null) {
+                    resolve(data);
+                  } else {
+                    resolve([]);
+                  }
+                });
               }
             });
           }
         }
       } else {
-        this.localStorage.getFromLocal('items', this.path).then(data => {
+        this.localStorage.getFromLocal('items', null).then(data => {
           //console.log("localStorage2:" + JSON.stringify(data));
           if (data !== undefined && data !== null) {
             resolve(data);
           } else {
             resolve([]);
           }
+        });
+      }
+    });
+  }
+  getOldItems() {
+    this.localStorage.getFromLocal('elementos', null).then(data => {
+      if (data !== undefined && data !== null) {
+        this.localStorage.getFromLocal('items', this.path).then(result => {
+          if ((<any[]>data).length === 0) {
+            data = result;
+          } else {
+            (<any[]>data).forEach(item => {
+              item.category = {
+                icon: 'images/icons/default.png',
+                measurement: 'UNIDADES',
+                categoryName: 'No Category',
+                unitStep: 1
+              };
+            });
+          }
+          this.localStorage.setToLocal('items', data);
+        });
+      } else {
+        this.localStorage.getFromLocal('items', this.path).then(result => {
+          this.localStorage.setToLocal('items', result);
         });
       }
     });

@@ -44,47 +44,63 @@ export class Alacena {
     private admobFree: AdMobFree,
     private globalVars: GlobalVars
   ) {
+    this.globalVars.getConfigData().then(data => {
+      let version: boolean = (<any>data).version;
+      if (!version) {
+        console.log('noexiste version');
+        //TODO : recuperar datos de version anterior, si existen, y cargarlos en localstorage
+        this.globalVars.getOldData().then(data => {
+          console.log(data);
+        });
+      }
+      // TODO : Se necesita hacer algo generico?
+    });
 
-		firebase.initializeApp({
-	      apiKey: "AIzaSyCq_XZBezFcC_iAWa-i12swT0YL9sqvjfM", //Firebase
-	      //apiKey: "AIzaSyCYbNChWjDtLYXkm_ayPQeb4t4TjWDXWd0",//GoogleDevConsole
-	      authDomain: "alacena-58699.firebaseapp.com",
-	      databaseURL: "https://alacena-58699.firebaseio.com",
-	      projectId: "alacena-58699",
-	      storageBucket: "alacena-58699.appspot.com",
-	      messagingSenderId: "354280052179"
-		 });	
-		 
+    firebase.initializeApp({
+      apiKey: 'AIzaSyCq_XZBezFcC_iAWa-i12swT0YL9sqvjfM', //Firebase
+      //apiKey: "AIzaSyCYbNChWjDtLYXkm_ayPQeb4t4TjWDXWd0",//GoogleDevConsole
+      authDomain: 'alacena-58699.firebaseapp.com',
+      databaseURL: 'https://alacena-58699.firebaseio.com',
+      projectId: 'alacena-58699',
+      storageBucket: 'alacena-58699.appspot.com',
+      messagingSenderId: '354280052179'
+    });
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.splashScreen.hide();
-		this.statusBar.styleBlackTranslucent();
-		this.statusBar.backgroundColorByHexString("#222");
-		this.statusBar.overlaysWebView(true);
-		
-	    let adMobId = "ca-app-pub-7863580056712493/6709912168";
-	    if (platform.is("android")) {
-	      // for android
-	      adMobId = "ca-app-pub-7863580056712493/6709912168";
-	    } else if (platform.is("ios")) {
-	      // for ios
-	      adMobId = "ca-app-pub-7863580056712493/9663378563";
-	    }
-	    console.log("app:run:AdMob Banner inicializado");
-	    console.log("app:run:" + adMobId);
-	    const bannerConfig: AdMobFreeBannerConfig = { // add your config here
-	      // for the sake of this example we will just use the test config
-	      id: adMobId, isTesting: true, autoShow: true, overlap: false };
-	    this.admobFree.banner.config(bannerConfig);
-	    this.admobFree.banner
-	      .prepare()
-	      .then(() => {
-	        // banner Ad is ready
-	        // if we set autoShow to false, then we will need to call the show method here
-	        this.admobFree.banner.show();
-	      })
-	      .catch(e => console.log(e));
+      this.statusBar.styleBlackTranslucent();
+      this.statusBar.backgroundColorByHexString('#222');
+      this.statusBar.overlaysWebView(true);
+
+      let adMobId = 'ca-app-pub-7863580056712493/6709912168';
+      if (platform.is('android')) {
+        // for android
+        adMobId = 'ca-app-pub-7863580056712493/6709912168';
+      } else if (platform.is('ios')) {
+        // for ios
+        adMobId = 'ca-app-pub-7863580056712493/9663378563';
+      }
+      console.log('app:run:AdMob Banner inicializado');
+      console.log('app:run:' + adMobId);
+      const bannerConfig: AdMobFreeBannerConfig = {
+        // add your config here
+        // for the sake of this example we will just use the test config
+        id: adMobId,
+        isTesting: true,
+        autoShow: true,
+        overlap: false
+      };
+      this.admobFree.banner.config(bannerConfig);
+      this.admobFree.banner
+        .prepare()
+        .then(() => {
+          // banner Ad is ready
+          // if we set autoShow to false, then we will need to call the show method here
+          this.admobFree.banner.show();
+        })
+        .catch(e => console.log(e));
     });
 
     //loading: any;

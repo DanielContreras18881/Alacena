@@ -84,22 +84,6 @@ export class ListData {
           });
         } else {
           if (this.network.type === 'NONE') {
-            /*
-let connectSubscription = this.network.onConnect().subscribe(() => {
-  console.log('network connected!');
-  // We just got a connection but we need to wait briefly
-   // before we determine the connection type. Might need to wait.
-  // prior to doing any api requests as well.
-  setTimeout(() => {
-    if (this.network.type === 'wifi') {
-      console.log('we got a wifi connection, woohoo!');
-    }
-  }, 3000);
-});
-
-// stop connect watch
-connectSubscription.unsubscribe();
-			   */
             this.localStorage
               .getFromLocal(name, this.path + name + '.json')
               .then(data => {
@@ -140,5 +124,24 @@ connectSubscription.unsubscribe();
           });
       }
     });
+  }
+
+  getOldListItemsData(lists: any[]) {
+    //  TODO : Search old lists items
+    console.log(lists);
+    this.localStorage
+      .getFromLocal('cantidadElementosLista', null)
+      .then(data => {
+        if (data !== undefined && data !== null) {
+        } else {
+          /*
+          this.localStorage
+            .getFromLocal('lists', this.path)
+            .then(result => {
+              this.localStorage.setToLocal('lists', result);
+				});
+				*/
+        }
+      });
   }
 }

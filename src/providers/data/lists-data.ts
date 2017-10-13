@@ -1,9 +1,9 @@
-import { Platform } from "ionic-angular";
-import { Injectable } from "@angular/core";
+import { Platform } from 'ionic-angular';
+import { Injectable } from '@angular/core';
 
-import { CloudStorage } from "./cloudStorage";
-import { LocalStorage } from "./localStorage";
-import { Network } from "@ionic-native/network";
+import { CloudStorage } from './cloudStorage';
+import { LocalStorage } from './localStorage';
+import { Network } from '@ionic-native/network';
 
 declare var cordova: any;
 /*
@@ -15,8 +15,8 @@ declare var cordova: any;
 
 @Injectable()
 export class ListsData {
-  path = "assets/json/Listas.json";
-  colors = "assets/json/Colors.json";
+  path = 'assets/json/Listas.json';
+  colors = 'assets/json/Colors.json';
 
   constructor(
     private cloudStorage: CloudStorage,
@@ -27,7 +27,7 @@ export class ListsData {
 
   getColorsData(userProfile: any): any {
     return new Promise(resolve => {
-      this.localStorage.getFromLocal("colors", this.colors).then(data => {
+      this.localStorage.getFromLocal('colors', this.colors).then(data => {
         if (data !== undefined && data !== null) {
           resolve(data);
         } else {
@@ -39,31 +39,31 @@ export class ListsData {
 
   setListsData(lists: any, userProfile: any): void {
     if (userProfile) {
-      if (!this.plt.is("ios") && !this.plt.is("android")) {
+      if (!this.plt.is('ios') && !this.plt.is('android')) {
         this.cloudStorage.uploadListsData(lists, userProfile.uid);
       } else {
-        if (this.network.type === "NONE") {
-          this.localStorage.setToLocal("lists", lists);
+        if (this.network.type === 'NONE') {
+          this.localStorage.setToLocal('lists', lists);
         } else {
           this.cloudStorage.uploadListsData(lists, userProfile.uid);
         }
       }
     } else {
-      this.localStorage.setToLocal("lists", lists);
+      this.localStorage.setToLocal('lists', lists);
     }
   }
 
   getListsData(userProfile: any): any {
     return new Promise(resolve => {
       if (userProfile) {
-        if (!this.plt.is("ios") && !this.plt.is("android")) {
+        if (!this.plt.is('ios') && !this.plt.is('android')) {
           this.cloudStorage.loadListsData(userProfile.uid).then(data => {
             //console.log("cloudStorage:" + JSON.stringify(data));
             if (data !== undefined && data !== null) {
-              this.localStorage.setToLocal("lists", data);
+              this.localStorage.setToLocal('lists', data);
               resolve(data);
             } else {
-              this.localStorage.getFromLocal("lists", this.path).then(data => {
+              this.localStorage.getFromLocal('lists', null).then(data => {
                 //console.log("getFromLocal:" + JSON.stringify(data));
                 if (data !== undefined && data !== null) {
                   resolve(data);
@@ -74,24 +74,8 @@ export class ListsData {
             }
           });
         } else {
-          if (this.network.type === "NONE") {
-            /*
-let connectSubscription = this.network.onConnect().subscribe(() => {
-  console.log('network connected!');
-  // We just got a connection but we need to wait briefly
-   // before we determine the connection type. Might need to wait.
-  // prior to doing any api requests as well.
-  setTimeout(() => {
-    if (this.network.type === 'wifi') {
-      console.log('we got a wifi connection, woohoo!');
-    }
-  }, 3000);
-});
-
-// stop connect watch
-connectSubscription.unsubscribe();
-			   */
-            this.localStorage.getFromLocal("lists", this.path).then(data => {
+          if (this.network.type === 'NONE') {
+            this.localStorage.getFromLocal('lists', null).then(data => {
               //console.log("localStorage:" + JSON.stringify(data));
               if (data !== undefined && data !== null) {
                 resolve(data);
@@ -103,31 +87,80 @@ connectSubscription.unsubscribe();
             this.cloudStorage.loadListsData(userProfile.uid).then(data => {
               //console.log("cloudStorage:" + JSON.stringify(data));
               if (data !== undefined && data !== null) {
-                this.localStorage.setToLocal("lists", data);
+                this.localStorage.setToLocal('lists', data);
                 resolve(data);
               } else {
-                this.localStorage
-                  .getFromLocal("lists", this.path)
-                  .then(data => {
-                    //console.log("getFromLocal:" + JSON.stringify(data));
-                    if (data !== undefined && data !== null) {
-                      resolve(data);
-                    } else {
-                      resolve([]);
-                    }
-                  });
+                this.localStorage.getFromLocal('lists', null).then(data => {
+                  //console.log("getFromLocal:" + JSON.stringify(data));
+                  if (data !== undefined && data !== null) {
+                    resolve(data);
+                  } else {
+                    resolve([]);
+                  }
+                });
               }
             });
           }
         }
       } else {
-        this.localStorage.getFromLocal("lists", this.path).then(data => {
+        this.localStorage.getFromLocal('lists', null).then(data => {
           //console.log("localStorage2:" + JSON.stringify(data));
           if (data !== undefined && data !== null) {
             resolve(data);
           } else {
             resolve([]);
           }
+        });
+      }
+    });
+  }
+
+  getOldLists() {
+    this.localStorage.getFromLocal('listas', null).then(data => {
+      if (data !== undefined && data !== null) {
+        this.localStorage.getFromLocal('lists', this.path).then(result => {
+          if ((<any[]>data).length === 0) {
+            data = result;
+          } else {
+            (<any[]>data).forEach(item => {
+              switch (item.colorBotones) {
+                case 'button-dark':
+                  item.colorLista = 'black-list';
+                  item.colorBotones = 'white-buttons';
+                  break;
+
+                case 'button-royal':
+                  item.colorLista = 'purple-list';
+                  item.colorBotones = 'black-buttons';
+                  break;
+
+                case 'button-balanced':
+                  item.colorLista = 'green-list';
+                  item.colorBotones = 'black-buttons';
+                  break;
+
+                case 'button-positive':
+                  item.colorLista = 'grey-list';
+                  item.colorBotones = 'black-buttons';
+                  break;
+
+                case 'button-energized':
+                  item.colorLista = 'yellow-list';
+                  item.colorBotones = 'black-buttons';
+                  break;
+
+                default:
+                  item.colorLista = 'white-list';
+                  item.colorBotones = 'black-buttons';
+                  break;
+              }
+            });
+          }
+          this.localStorage.setToLocal('lists', data);
+        });
+      } else {
+        this.localStorage.getFromLocal('lists', this.path).then(result => {
+          this.localStorage.setToLocal('lists', result);
         });
       }
     });

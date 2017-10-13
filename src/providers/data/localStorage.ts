@@ -33,14 +33,12 @@ export class LocalStorage {
                   resolve(data);
                 },
                 err => {
-                  this.storage.set(name, []);
-                  resolve([]);
+                  resolve(null);
                 }
               );
           }
         })
         .catch(error => {
-          this.storage.set(name, []);
           resolve([]);
         });
     });
