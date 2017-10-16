@@ -113,7 +113,7 @@ import { Alacena } from './app.component';
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}
-// TODO: check and configure general iomic app settings
+// TODO: check and configure general ioni app settings
 //@App({
 //  templateUrl: 'build/app.html',
 //  providers: [GlobalVars, ConfigData, ItemData, ListData, ListsData],

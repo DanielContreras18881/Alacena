@@ -157,9 +157,8 @@ export class CategoriesPage {
         {
           text: 'Yes',
           handler: () => {
-            // this.globalVars.getCategoriesData().splice(this.globalVars.getCategoriesData().indexOf(category), 1);
             this.categories.splice(this.categories.indexOf(category), 1);
-            // TODO : Store changes
+            this.globalVars.setCategoriesData(this.categories);
           }
         }
       ]
@@ -176,8 +175,6 @@ export class CategoriesPage {
     });
   }
   addCategory(event) {
-    console.log(this.measurement);
-    // Save data to storage
     let newCategory = {
       categoryName: 'NEW_CATEGORY',
       icon: 'images/icons/default.png',
@@ -241,7 +238,6 @@ export class CategoriesPage {
   }
 
   onMeasurementChange(event, category) {
-    // TODO: Save data to storage, reflect in the view
     if (category.measurement === 'UNIDADES') {
       category.unitStep = 0.1;
     } else if (category.measurement === 'GRAMOS') {
@@ -252,21 +248,12 @@ export class CategoriesPage {
       category.unitStep = 0.5;
     }
   }
-  /*
-removeCategories(event) {
-            this.categoriesToRemove = [];
-            this.enableSelectToRemove = !this.enableSelectToRemove;
-  }
-  */
   selectedCategory(event, item) {
-    console.log('Category selected' + JSON.stringify(item));
     this.categoriesToRemove.push(item);
   }
 
   removeCategories(event) {
     this.categoriesToRemove.forEach((category, index) => {
-      // TODO : Store changes
-      //this.globalVars.getCategoriesData().splice(this.globalVars.getCategoriesData().indexOf(category), 1);
       this.categories.splice(this.categories.indexOf(category), 1);
     });
     this.categoriesToRemove = [];

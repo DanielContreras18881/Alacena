@@ -207,7 +207,6 @@ export class Item implements OnInit {
     this.move.emit({ item: this.item, toShopingList: false });
   }
 
-  // TODO: request action to do on the category change,unitstep and measurement...do not change amounts
   editCategory(event) {
     this.catService.changeCategory(this.item.category, this.item).then(data => {
       this.item = data;

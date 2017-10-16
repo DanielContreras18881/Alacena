@@ -130,9 +130,8 @@ export class ItemsPage {
         {
           text: 'Yes',
           handler: () => {
-            // this.globalVars.getItemsData().splice(this.globalVars.getItemsData().indexOf(item), 1);
             this.items.splice(this.items.indexOf(item), 1);
-            // TODO : Store changes
+            this.globalVars.setItemsData(this.items);
           }
         }
       ]
@@ -198,14 +197,12 @@ export class ItemsPage {
     discardRemove.addButton({
       text: 'To SHOPPING_LIST',
       handler: data => {
-        // TODO: Move selected elements to shopping list
         console.log('move to shopping list');
       }
     });
     discardRemove.addButton({
       text: 'Discard',
       handler: data => {
-        // TODO: Remove elements from items list and lists
         console.log('discard from lists and item list');
       }
     });
@@ -239,7 +236,6 @@ export class ItemsPage {
           this.enableSelectToRemove = !this.enableSelectToRemove;
         }
         if (data === 'empty') {
-          // TODO: remove elements wihout list and 0 amount from lists
         }
       }
     });
@@ -262,8 +258,6 @@ export class ItemsPage {
 
   removeItems(event) {
     this.itemsToRemove.forEach((item, index) => {
-      // this.globalVars.getItemsData().splice(this.globalVars.getItemsData().indexOf(item), 1);
-      // TODO : Store changes
       this.items.splice(this.items.indexOf(item), 1);
     });
     this.itemsToRemove = [];

@@ -7,8 +7,6 @@ import { ListData } from '../data/list-data';
 import { ListsData } from '../data/lists-data';
 import { DefaultIcons } from '../default-icons/default-icons';
 
-// TODO: get data from firebase or local if not found, meke central service for data
-
 @Injectable()
 export class GlobalVars {
   server: boolean = false;
@@ -26,20 +24,32 @@ export class GlobalVars {
     private configDataService: ConfigData
   ) {}
 
-  setUserProfile(userProfile: any) {
-    this.userProfile = userProfile;
-    /*
-    this.setListsData([
-      {
-        nombreLista: 'LISTA_COMPRA',
-        colorLista: 'white-list',
-        colorBotones: 'black-buttons',
-        listaEditable: false
-      }
-    ]);
-	 this.setListData('LISTA_COMPRA', []);
-	 */
-    //this.getOldData();
+  setUserProfile(userProfile: any): any {
+    return new Promise(resolve => {
+      this.userProfile = userProfile;
+      this.categoriesDataService
+        .getCategoriesData(this.userProfile)
+        .then(data => {
+          this.setCategoriesData(data);
+        });
+      this.configDataService.getConfigData(this.userProfile).then(data => {
+        this.setConfigData(data);
+      });
+      this.itemDataService.getItemsData(this.userProfile).then(data => {
+        this.setItemsData(data);
+      });
+      this.listsDataService.getListsData(this.userProfile).then(data => {
+        this.setListsData(data);
+        data.forEach(element => {
+          this.listDataService
+            .getListItemsData(element.nombreLista, userProfile)
+            .then(result => {
+              this.setListData(element.nombreLista, <any[]>result);
+            });
+        });
+      });
+      resolve();
+    });
   }
 
   getUserProfile() {
@@ -152,9 +162,7 @@ export class GlobalVars {
 
   getOldData() {
     return new Promise(resolve => {
-      this.configDataService.getOldConfigData().then(data => {
-        resolve(data);
-      });
+      this.configDataService.getOldConfigData();
       this.itemDataService.getOldItems();
       this.categoriesDataService.getCategoriesData(null);
       this.listsDataService.getOldLists().then(lists => {

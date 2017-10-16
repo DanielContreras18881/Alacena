@@ -236,7 +236,6 @@ export class ListPage {
       icons: this.icons
     });
     infoListModal.onDidDismiss(item => {
-      // TODO: check if needed or action with items list
       this.list[this.list.indexOf(item)] = item;
       this.globalVars.setListData(this.selectedItem, this.list);
     });
@@ -342,7 +341,6 @@ export class ListPage {
   }
 
   addItem(event) {
-    // TODO: Check data structure, redefine and refactor with category, measurement and unitStep
     let newItem = {
       category: this.defaultCategory,
       nombreElemento: '',
@@ -397,17 +395,4 @@ export class ListPage {
     });
     infoListModal.present();
   }
-  // TODO: check if needed
-  presentPopover(event) {
-    let popover = this.popoverCtrl.create(PopoverPage, {
-      list: this.list,
-      selectedItem: this.selectedItem
-      // TODO : Store changes
-    });
-    popover.present({
-      ev: event
-    });
-  }
 }
-
-// TODO: reminders functionality

@@ -45,18 +45,19 @@ export class GettingStartedPage {
         if (user) {
           this.type = 'google';
           this.userProfile = user;
-          self.globalVars.setUserProfile(user);
-          //TODO: Set data from local to cloud
+          self.globalVars.setUserProfile(user).then(() => {
+            this.getDashboardData();
+          });
         } else {
           this.userProfile = null;
+          this.getDashboardData();
         }
       });
-
-      globalVars.getListsData().then(data => {
-        //console.log(data)
-      });
-      //globalVars.getListData().then(data => {});
     });
+  }
+
+  getDashboardData() {
+    console.log('dashboard');
   }
 
   openInternalPage(page) {

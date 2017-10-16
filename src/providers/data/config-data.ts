@@ -14,8 +14,6 @@ declare var cordova: any;
   for more info on providers and Angular 2 DI.
 */
 
-// TODO: get data from firebase or local if not found
-
 @Injectable()
 export class ConfigData {
   configData: any = null;

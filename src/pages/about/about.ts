@@ -10,7 +10,7 @@ import { Platform } from 'ionic-angular';
   Ionic pages and navigation.
 */
 
-// TODO: get data from device and manage tutorials
+// TODO: manage tutorials
 
 @Component({
   templateUrl: 'about.html'

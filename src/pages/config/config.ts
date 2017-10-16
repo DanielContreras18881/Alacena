@@ -9,7 +9,7 @@ import { GlobalVars } from '../../providers/global-vars/global-vars';
   Ionic pages and navigation.
 */
 
-// TODO: get data from firebase or local if not found, add functionality to manage config data
+// TODO: Manage left or right pages behaviour
 
 @Component({
   templateUrl: 'config.html'
