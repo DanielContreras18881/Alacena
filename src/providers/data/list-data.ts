@@ -4,6 +4,7 @@ import { Platform } from 'ionic-angular';
 
 import { CloudStorage } from './cloudStorage';
 import { LocalStorage } from './localStorage';
+import moment from 'moment';
 
 declare var cordova: any;
 
@@ -127,20 +128,38 @@ export class ListData {
   }
 
   getOldListItemsData(lists: any[]) {
-    //  TODO : Search old lists items
-    console.log(lists);
     this.localStorage
       .getFromLocal('cantidadElementosLista', null)
       .then(data => {
         if (data !== undefined && data !== null) {
+          lists.forEach(list => {
+            let listData = (<any[]>data).filter(
+              item =>
+                item.nombreLista
+                  .toLowerCase()
+                  .indexOf(list.nombreLista.toLowerCase()) > -1
+            );
+            listData.forEach(item => {
+              item.category = {
+                icon: 'images/icons/default.png',
+                measurement: 'UNIDADES',
+                categoryName: 'No Category',
+                unitStep: 1
+              };
+              let fecha =
+                item.fechaCaducidad !== null
+                  ? item.fechaCaducidad
+                  : '3000-01-01';
+              item.fechaCaducidad = moment(fecha)
+                .toDate()
+                .toISOString();
+            });
+            this.localStorage.setToLocal(list.nombreLista, listData);
+          });
         } else {
-          /*
-          this.localStorage
-            .getFromLocal('lists', this.path)
-            .then(result => {
-              this.localStorage.setToLocal('lists', result);
-				});
-				*/
+          lists.forEach(list => {
+            this.localStorage.setToLocal(list.nombreLista, []);
+          });
         }
       });
   }

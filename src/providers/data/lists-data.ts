@@ -115,54 +115,58 @@ export class ListsData {
     });
   }
 
-  getOldLists() {
-    this.localStorage.getFromLocal('listas', null).then(data => {
-      if (data !== undefined && data !== null) {
-        this.localStorage.getFromLocal('lists', this.path).then(result => {
-          if ((<any[]>data).length === 0) {
-            data = result;
-          } else {
-            (<any[]>data).forEach(item => {
-              switch (item.colorBotones) {
-                case 'button-dark':
-                  item.colorLista = 'black-list';
-                  item.colorBotones = 'white-buttons';
-                  break;
+  getOldLists(): any {
+    return new Promise(resolve => {
+      this.localStorage.getFromLocal('listas', null).then(data => {
+        if (data !== undefined && data !== null) {
+          this.localStorage.getFromLocal('lists', this.path).then(result => {
+            if ((<any[]>data).length === 0) {
+              data = result;
+            } else {
+              (<any[]>data).forEach(item => {
+                switch (item.colorBotones) {
+                  case 'button-dark':
+                    item.colorLista = 'black-list';
+                    item.colorBotones = 'white-buttons';
+                    break;
 
-                case 'button-royal':
-                  item.colorLista = 'purple-list';
-                  item.colorBotones = 'black-buttons';
-                  break;
+                  case 'button-royal':
+                    item.colorLista = 'purple-list';
+                    item.colorBotones = 'black-buttons';
+                    break;
 
-                case 'button-balanced':
-                  item.colorLista = 'green-list';
-                  item.colorBotones = 'black-buttons';
-                  break;
+                  case 'button-balanced':
+                    item.colorLista = 'green-list';
+                    item.colorBotones = 'black-buttons';
+                    break;
 
-                case 'button-positive':
-                  item.colorLista = 'grey-list';
-                  item.colorBotones = 'black-buttons';
-                  break;
+                  case 'button-positive':
+                    item.colorLista = 'grey-list';
+                    item.colorBotones = 'black-buttons';
+                    break;
 
-                case 'button-energized':
-                  item.colorLista = 'yellow-list';
-                  item.colorBotones = 'black-buttons';
-                  break;
+                  case 'button-energized':
+                    item.colorLista = 'yellow-list';
+                    item.colorBotones = 'black-buttons';
+                    break;
 
-                default:
-                  item.colorLista = 'white-list';
-                  item.colorBotones = 'black-buttons';
-                  break;
-              }
-            });
-          }
-          this.localStorage.setToLocal('lists', data);
-        });
-      } else {
-        this.localStorage.getFromLocal('lists', this.path).then(result => {
-          this.localStorage.setToLocal('lists', result);
-        });
-      }
+                  default:
+                    item.colorLista = 'white-list';
+                    item.colorBotones = 'black-buttons';
+                    break;
+                }
+              });
+            }
+            this.localStorage.setToLocal('lists', data);
+            resolve(data);
+          });
+        } else {
+          this.localStorage.getFromLocal('lists', this.path).then(result => {
+            this.localStorage.setToLocal('lists', result);
+            resolve(result);
+          });
+        }
+      });
     });
   }
 }

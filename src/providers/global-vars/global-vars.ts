@@ -157,8 +157,7 @@ export class GlobalVars {
       });
       this.itemDataService.getOldItems();
       this.categoriesDataService.getCategoriesData(null);
-      this.listsDataService.getOldLists(); //make promise
-      this.getListsData().then(lists => {
+      this.listsDataService.getOldLists().then(lists => {
         this.listDataService.getOldListItemsData(<any[]>lists);
       });
     });

@@ -47,6 +47,52 @@ export class Alacena {
     this.globalVars.getConfigData().then(data => {
       let version: boolean = (<any>data).version;
       if (!version) {
+        this.storage.set('cantidadElementosLista', [
+          {
+            nombreElemento: 'Panecillos',
+            nombreLista: 'LISTA_COMPRA',
+            cantidadElemento: 2,
+            colorElemento: 'item item-calm item-complex item-right-editable',
+            colorBotones: 'button-calm',
+            colorElementoNoCaducado:
+              'item item-calm item-complex item-right-editable',
+            colorBotonesNoCaducado: 'button-calm',
+            caduca: true,
+            fechaCaducidad: '2015-09-29',
+            cantidadMinima: 1,
+            marked: false
+          },
+          {
+            nombreElemento: 'Cervezas',
+            nombreLista: 'LISTA_COMPRA',
+            cantidadElemento: 3,
+            colorElemento:
+              'item item-balanced item-complex item-right-editable',
+            colorBotones: 'button-balanced',
+            colorElementoNoCaducado:
+              'item item-balanced item-complex item-right-editable',
+            colorBotonesNoCaducado: 'button-balanced',
+            caduca: true,
+            fechaCaducidad: '2016-05-18',
+            cantidadMinima: 2,
+            marked: false
+          },
+          {
+            nombreElemento: 'Papel de cocina',
+            nombreLista: 'LISTA_COMPRA',
+            cantidadElemento: 5,
+            colorElemento: 'item item-stable item-complex item-right-editable',
+            colorBotones: 'button-stable',
+            colorElementoNoCaducado:
+              'item item-stable item-complex item-right-editable',
+            colorBotonesNoCaducado: 'button-stable',
+            caduca: false,
+            fechaCaducidad: null,
+            cantidadMinima: 3,
+            marked: false
+          }
+        ]);
+
         console.log('noexiste version');
         //TODO : recuperar datos de version anterior, si existen, y cargarlos en localstorage
         this.globalVars.getOldData().then(data => {
