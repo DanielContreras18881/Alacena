@@ -112,18 +112,7 @@ export class Alacena {
   openPage(page) {
     // close the menu when clicking a link from the menu
     this.menu.close();
-    // TODO: check this behaviour, not always shows spinner
-    /*
-    this.loading = this.load.create({
-          spinner: 'bubbles',
-          content: 'Loading ...',
-          duration: 3000,
-          dismissOnPageChange: true,
-          showBackdrop: true
-        });
 
-    this.loading.present();
-    */
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component, {
       list: page.title

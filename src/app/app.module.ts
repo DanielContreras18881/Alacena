@@ -65,7 +65,15 @@ import { Alacena } from './app.component';
     AutoCompleteModule,
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(Alacena),
+    IonicModule.forRoot(Alacena, {
+      backButtonText: '',
+      modalEnter: 'modal-slide-in',
+      modalLeave: 'modal-slide-out',
+      spinner: 'bubbles',
+      loadingEnter: 'slide-in',
+      loadingLEave: 'slide-out',
+      pageTransition: 'slide'
+    }),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
@@ -113,17 +121,3 @@ import { Alacena } from './app.component';
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}
-// TODO: check and configure general ioni app settings
-//@App({
-//  templateUrl: 'build/app.html',
-//  providers: [GlobalVars, ConfigData, ItemData, ListData, ListsData],
-//  config: { // http://ionicframework.com/docs/v2/api/config/Config/
-//    backButtonText: '',
-//    spinner: 'bubbles',
-//    modalEnter: 'modal-slide-in',
-//    modalLeave: 'modal-slide-out',
-//    loadingEnter: 'slide-in',
-//    loadingLEave: 'slide-out',
-//    pageTransition: 'slide'
-//  }
-//})
