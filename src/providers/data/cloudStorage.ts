@@ -71,13 +71,11 @@ export class CloudStorage {
           .ref('/lists/' + uid + '_' + name + '.json');
         storageRef.getDownloadURL().then(
           url => {
-            console.log(url);
             content
               .get(url)
               .map(res => res.json())
               .subscribe(
                 data => {
-                  console.log(data);
                   resolve(data);
                 },
                 error => {

@@ -27,21 +27,19 @@ export class ConfigData {
   ) {}
 
   setConfigData(data: any, userProfile: any) {
-    console.log(userProfile);
-    console.log(!this.plt.is('ios') && !this.plt.is('android'));
-    console.log(this.network.type);
+    let arrData = [];
+    arrData.push(data);
     if (userProfile) {
       if (!this.plt.is('ios') && !this.plt.is('android')) {
-        this.cloudStorage.uploadConfigData(data, userProfile.uid);
+        this.cloudStorage.uploadConfigData(arrData, userProfile.uid);
       } else {
         if (this.network.type === 'NONE') {
           this.localStorage.setToLocal('config', data);
         } else {
-          this.cloudStorage.uploadConfigData(data, userProfile.uid);
+          this.cloudStorage.uploadConfigData(arrData, userProfile.uid);
         }
       }
     } else {
-      console.log(data);
       this.localStorage.setToLocal('config', data);
     }
   }
@@ -51,17 +49,15 @@ export class ConfigData {
       if (userProfile) {
         if (!this.plt.is('ios') && !this.plt.is('android')) {
           this.cloudStorage.loadConfigData(userProfile.uid).then(data => {
-            //console.log('cloudStorage:' + JSON.stringify(data));
             if (data !== undefined && data !== null) {
-              this.localStorage.setToLocal('config', data);
-              resolve(data);
+              this.localStorage.setToLocal('config', data[0]);
+              resolve(data[0]);
             } else {
               this.localStorage.getFromLocal('config', null).then(data => {
-                //console.log('getFromLocal:' + JSON.stringify(data));
                 if (data !== undefined && data !== null) {
                   resolve(data);
                 } else {
-                  resolve([]);
+                  resolve({});
                 }
               });
             }
@@ -69,26 +65,23 @@ export class ConfigData {
         } else {
           if (this.network.type === 'NONE') {
             this.localStorage.getFromLocal('config', this.path).then(data => {
-              //console.log('localStorage:' + JSON.stringify(data));
               if (data !== undefined && data !== null) {
                 resolve(data);
               } else {
-                resolve([]);
+                resolve({});
               }
             });
           } else {
             this.cloudStorage.loadConfigData(userProfile.uid).then(data => {
-              //console.log('cloudStorage2:' + JSON.stringify(data));
               if (data !== undefined && data !== null) {
-                this.localStorage.setToLocal('config', data);
-                resolve(data);
+                this.localStorage.setToLocal('config', data[0]);
+                resolve(data[0]);
               } else {
                 this.localStorage.getFromLocal('config', null).then(data => {
-                  console.log('getFromLocal2:' + JSON.stringify(data));
                   if (data !== undefined && data !== null) {
                     resolve(data);
                   } else {
-                    resolve([]);
+                    resolve({});
                   }
                 });
               }
@@ -97,11 +90,10 @@ export class ConfigData {
         }
       } else {
         this.localStorage.getFromLocal('config', null).then(data => {
-          //console.log('localStorage2:' + JSON.stringify(data));
           if (data !== undefined && data !== null) {
             resolve(data);
           } else {
-            resolve([]);
+            resolve({});
           }
         });
       }

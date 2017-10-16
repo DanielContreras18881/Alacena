@@ -26,14 +26,15 @@ export class ConfigPage {
   constructor(private globalVars: GlobalVars) {
     this.globalVars.getCategoriesData().then(data => {
       this.categories = <any[]>data;
-      this.globalVars.getConfigData().then(data => {
-        this.configData = data;
+      this.globalVars.getConfigData().then(result => {
+        this.configData = result;
         this.idiomas = this.configData.idiomas;
         this.idiomaSelecciondo = this.configData.idiomaDefault;
         this.categorySelected = this.configData.categoryDefault.categoryName;
       });
     });
   }
+
   onChange() {
     this.configData.categoryDefault = this.categories.filter(
       cat => cat.categoryName === this.categorySelected
