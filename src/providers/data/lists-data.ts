@@ -5,6 +5,8 @@ import { CloudStorage } from './cloudStorage';
 import { LocalStorage } from './localStorage';
 import { Network } from '@ionic-native/network';
 
+import { List } from '../../classes/list';
+
 declare var cordova: any;
 /*
   Generated class for the ListsData provider.
@@ -58,13 +60,11 @@ export class ListsData {
       if (userProfile) {
         if (!this.plt.is('ios') && !this.plt.is('android')) {
           this.cloudStorage.loadListsData(userProfile.uid).then(data => {
-            //console.log("cloudStorage:" + JSON.stringify(data));
             if (data !== undefined && data !== null) {
               this.localStorage.setToLocal('lists', data);
               resolve(data);
             } else {
               this.localStorage.getFromLocal('lists', null).then(data => {
-                //console.log("getFromLocal:" + JSON.stringify(data));
                 if (data !== undefined && data !== null) {
                   resolve(data);
                 } else {
@@ -76,7 +76,6 @@ export class ListsData {
         } else {
           if (this.network.type === 'NONE') {
             this.localStorage.getFromLocal('lists', null).then(data => {
-              //console.log("localStorage:" + JSON.stringify(data));
               if (data !== undefined && data !== null) {
                 resolve(data);
               } else {
@@ -85,13 +84,11 @@ export class ListsData {
             });
           } else {
             this.cloudStorage.loadListsData(userProfile.uid).then(data => {
-              //console.log("cloudStorage:" + JSON.stringify(data));
               if (data !== undefined && data !== null) {
                 this.localStorage.setToLocal('lists', data);
                 resolve(data);
               } else {
                 this.localStorage.getFromLocal('lists', null).then(data => {
-                  //console.log("getFromLocal:" + JSON.stringify(data));
                   if (data !== undefined && data !== null) {
                     resolve(data);
                   } else {
@@ -104,7 +101,6 @@ export class ListsData {
         }
       } else {
         this.localStorage.getFromLocal('lists', null).then(data => {
-          //console.log("localStorage2:" + JSON.stringify(data));
           if (data !== undefined && data !== null) {
             resolve(data);
           } else {
@@ -120,10 +116,10 @@ export class ListsData {
       this.localStorage.getFromLocal('listas', null).then(data => {
         if (data !== undefined && data !== null) {
           this.localStorage.getFromLocal('lists', this.path).then(result => {
-            if ((<any[]>data).length === 0) {
+            if ((<List[]>data).length === 0) {
               data = result;
             } else {
-              (<any[]>data).forEach(item => {
+              (<List[]>data).forEach(item => {
                 switch (item.colorBotones) {
                   case 'button-dark':
                     item.colorLista = 'black-list';

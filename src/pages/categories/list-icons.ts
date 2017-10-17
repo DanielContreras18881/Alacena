@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import { Icon } from '../../classes/icon';
+import { Component } from '@angular/core';
 
-import { ViewController, NavController, NavParams} from 'ionic-angular';
+import { ViewController, NavController, NavParams } from 'ionic-angular';
 
 /*
   Generated class for the ListIcons page.
@@ -9,16 +10,20 @@ import { ViewController, NavController, NavParams} from 'ionic-angular';
   Ionic pages and navigation.
 */
 @Component({
-  templateUrl: 'list-icons.html',
+  templateUrl: 'list-icons.html'
 })
 export class ListIconsPage {
-  icons: any;
-  selectedIcon: any;
-  constructor(public nav: NavController, private view: ViewController, public params: NavParams) {}
+  icons: Icon[];
+  selectedIcon: Icon;
+  constructor(
+    public nav: NavController,
+    private view: ViewController,
+    public params: NavParams
+  ) {}
 
   ngOnInit() {
     this.icons = this.params.get('icons');
-    this.selectedIcon = [];
+    this.selectedIcon = <Icon>{};
   }
 
   selected(event, icon) {
@@ -27,6 +32,6 @@ export class ListIconsPage {
   }
 
   close() {
-      this.view.dismiss();
+    this.view.dismiss();
   }
 }

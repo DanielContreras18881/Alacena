@@ -1,3 +1,6 @@
+import { Icon } from '../../classes/icon';
+import { ListItem } from '../../classes/listItem';
+import { List } from '../../classes/list';
 import { Injectable } from '@angular/core';
 
 import { CategoriesData } from '../data/categories-data';
@@ -13,7 +16,7 @@ export class GlobalVars {
 
   userProfile: any = null;
 
-  iconsData: any;
+  iconsData: Icon[];
 
   constructor(
     private listsDataService: ListsData,
@@ -44,7 +47,7 @@ export class GlobalVars {
           this.listDataService
             .getListItemsData(element.nombreLista, userProfile)
             .then(result => {
-              this.setListData(element.nombreLista, <any[]>result);
+              this.setListData(element.nombreLista, <ListItem[]>result);
             });
         });
       });
@@ -97,7 +100,7 @@ export class GlobalVars {
         });
     });
   }
-  setListData(name: string, data: any[]) {
+  setListData(name: string, data: ListItem[]) {
     this.listDataService.setListData(name, data, this.userProfile);
   }
 
@@ -109,7 +112,7 @@ export class GlobalVars {
     this.itemDataService.setItemsData(value, this.userProfile);
   }
 
-  addOneItem(value) {
+  addOneItem(value: ListItem) {
     this.itemDataService.getItemsData(this.userProfile).then(data => {
       let exist =
         data.filter(item => item.nombreElemento === value.nombreElemento)
@@ -166,7 +169,7 @@ export class GlobalVars {
       this.itemDataService.getOldItems();
       this.categoriesDataService.getCategoriesData(null);
       this.listsDataService.getOldLists().then(lists => {
-        this.listDataService.getOldListItemsData(<any[]>lists);
+        this.listDataService.getOldListItemsData(<List[]>lists);
       });
     });
   }

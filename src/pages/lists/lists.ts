@@ -1,12 +1,14 @@
+import { ListItem } from '../../classes/listItem';
+import { List } from '../../classes/list';
 import { Component } from '@angular/core';
 import {
-   ActionSheetController,
-   AlertController,
-   ModalController,
-   NavController,
-   NavParams,
-   PopoverController,
-   ToastController,
+  ActionSheetController,
+  AlertController,
+  ModalController,
+  NavController,
+  NavParams,
+  PopoverController,
+  ToastController
 } from 'ionic-angular';
 
 import { PopoverPage } from '../../components/popover/popover';
@@ -14,13 +16,15 @@ import { OrderBy } from '../../pipes/orderBy';
 import { GlobalVars } from '../../providers/global-vars/global-vars';
 import { ListPage } from '../list/list';
 
+import { Color } from '../../classes/color';
+
 @Component({
   templateUrl: 'lists.html',
   providers: [OrderBy]
 })
 export class ListsPage {
   type: string = 'List';
-  public lists: any = [];
+  public lists: List[] = [];
   reorderAllowed: boolean;
 
   constructor(
@@ -34,8 +38,7 @@ export class ListsPage {
     private toastCtrl: ToastController
   ) {
     globalVars.getListsData().then(data => {
-      //console.log("lists:" + JSON.stringify(data));
-      this.lists = data;
+      this.lists = <List[]>data;
       this.reorderAllowed = false;
     });
   }
@@ -50,7 +53,6 @@ export class ListsPage {
       if (!data) {
         return;
       }
-      //console.log(data.action);
     });
   }
 
@@ -64,7 +66,7 @@ export class ListsPage {
     this.lists.splice(indexes.to, 0, element);
   }
 
-  removeList(event, name) {
+  removeList(event, name: string) {
     let confirm = this.alertCtrl.create({
       title: 'Removing ' + name,
       message: 'Do you like to remove ' + name + ' list?',
@@ -87,10 +89,10 @@ export class ListsPage {
     });
     confirm.present();
   }
-  editColor(event, list) {
+  editColor(event, list: List) {
     this.globalVars.getColorsData().then(data => {
       let buttons: any = [];
-      let colorsList = JSON.parse(JSON.stringify(data));
+      let colorsList: Color[] = JSON.parse(JSON.stringify(data));
       colorsList.forEach(colorData => {
         if (colorData.cssClass !== list.colorLista) {
           buttons.push({
@@ -111,7 +113,7 @@ export class ListsPage {
       actionSheet.present();
     });
   }
-  editList(event, list) {
+  editList(event, list: List) {
     let oldName = list.nombreLista;
     let edit = this.alertCtrl.create({
       title: 'Edit List',
@@ -134,7 +136,10 @@ export class ListsPage {
             this.globalVars.getListData(oldName).then(listData => {
               list.nombreLista = data.nombreLista;
               this.globalVars.setListsData(this.lists);
-              this.globalVars.setListData(data.nombreLista, <any[]>listData);
+              this.globalVars.setListData(
+                data.nombreLista,
+                <ListItem[]>listData
+              );
               this.globalVars.removetItemListData(oldName);
             });
           }
@@ -169,7 +174,7 @@ export class ListsPage {
     }
   }
 
-  removeLists(removed: any[]) {
+  removeLists(removed: string[]) {
     this.lists = this.lists.filter(
       list => removed.indexOf(list.nombreLista) < 0
     );
@@ -179,20 +184,9 @@ export class ListsPage {
     });
   }
 
-  listSelected(event, list) {
+  listSelected(event, list: List) {
     this.nav.push(ListPage, {
       list: list
     });
-    /*
-    let infoListModal = this.mod.create(ListPage, {list: list});
-      infoListModal.onDidDismiss((item) => {
-    });
-    infoListModal.present();
-    */
-    /*
-    this.nav.push(ListPage, {
-      list: list
-    });
-    */
   }
 }

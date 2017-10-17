@@ -1,3 +1,6 @@
+import { Icon } from '../../classes/icon';
+import { ListItem } from '../../classes/listItem';
+import { List } from '../../classes/list';
 import moment from 'moment';
 import { ToastController, AlertController } from 'ionic-angular';
 import {
@@ -27,14 +30,14 @@ import { ItemsOnList } from './items-on-list';
   // outputs: ['remove', 'move', 'edit']
 })
 export class Item implements OnInit {
-  @Input() item: any;
+  @Input() item: ListItem;
   @Input() creating: boolean;
-  @Input() icons: any;
+  @Input() icons: Icon[];
   @Input() config: any;
-  @Output() remove: EventEmitter<any> = new EventEmitter();
+  @Output() remove: EventEmitter<ListItem> = new EventEmitter();
   @Output() move: EventEmitter<any> = new EventEmitter();
-  @Output() edit: EventEmitter<any> = new EventEmitter();
-  @Output() save: EventEmitter<any> = new EventEmitter();
+  @Output() edit: EventEmitter<ListItem> = new EventEmitter();
+  @Output() save: EventEmitter<ListItem> = new EventEmitter();
 
   @ViewChild('searchbar') searchbar: AutoCompleteComponent;
 
@@ -123,7 +126,7 @@ export class Item implements OnInit {
                 {
                   text: 'Yes',
                   handler: () => {
-                    let newItem = JSON.parse(JSON.stringify(this.item));
+                    let newItem: List = JSON.parse(JSON.stringify(this.item));
                     newItem.nombreLista = 'LISTA_COMPRA';
                     this.move.emit({ item: newItem, toShopingList: true });
                   }
@@ -153,7 +156,7 @@ export class Item implements OnInit {
     }
   }
 
-  showExpiryDate(item: any) {
+  showExpiryDate(item: ListItem) {
     let text = this.checkExpiryDate(item.fechaCaducidad);
     // TODO: Translate text variable
     const toast = this.toastCtrl.create({
@@ -209,7 +212,7 @@ export class Item implements OnInit {
 
   editCategory(event) {
     this.catService.changeCategory(this.item.category, this.item).then(data => {
-      this.item = data;
+      this.item = <ListItem>data;
       this.changeUnitStep(this.item.category.measurement);
     });
   }

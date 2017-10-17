@@ -1,3 +1,5 @@
+import { Category } from '../../classes/category';
+import { Icon } from '../../classes/icon';
 import { Injectable } from '@angular/core';
 import { AlertController, ModalController } from 'ionic-angular';
 
@@ -10,7 +12,7 @@ import { GlobalVars } from '../../providers/global-vars/global-vars';
 
 @Injectable()
 export class CategoriesService {
-  private icons: any;
+  private icons: Icon[];
 
   constructor(
     public mod: ModalController,
@@ -19,11 +21,11 @@ export class CategoriesService {
     private iconsData: DefaultIcons
   ) {
     this.iconsData.getIcons().then(data => {
-      this.icons = data;
+      this.icons = <Icon[]>data;
     });
   }
 
-  changeCategory(currentCategory, item) {
+  changeCategory(currentCategory: Category, item) {
     return new Promise(resolve => {
       let change = this.alertCtrl.create();
       let currentCategoryName =
@@ -31,13 +33,13 @@ export class CategoriesService {
       change.setTitle('Change category ' + currentCategoryName + ' by:');
 
       this.globalVars.getCategoriesData().then(data => {
-        let listCategories = <any[]>data;
-        listCategories.forEach((category: any) => {
+        let listCategories = <Category[]>data;
+        listCategories.forEach((category: Category) => {
           if (currentCategoryName !== category.categoryName) {
             change.addInput({
               type: 'radio',
               label: category.categoryName,
-              value: category,
+              value: <any>category,
               checked: false
             });
           }
@@ -56,7 +58,7 @@ export class CategoriesService {
     });
   }
 
-  changeCategoryIcon(category, icons) {
+  changeCategoryIcon(category: Category, icons: Icon[]) {
     let paramIcons = icons !== null ? icons : this.icons;
     let changeIconModal = this.mod.create(ListIconsPage, { icons: paramIcons });
     changeIconModal.onDidDismiss(icon => {

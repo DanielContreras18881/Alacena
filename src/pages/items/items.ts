@@ -1,3 +1,8 @@
+import { Category } from '../../classes/category';
+import { ListItem } from '../../classes/listItem';
+import { Icon } from '../../classes/icon';
+import { Item } from '../../classes/item';
+import { List } from '../../classes/list';
 import { Component } from '@angular/core';
 import {
   AlertController,
@@ -24,15 +29,15 @@ import { ItemInfoPage } from '../item-info/item-info';
 })
 export class ItemsPage {
   type: string = 'Item';
-  public items: any;
+  public items: Item[];
   public searchBar: boolean;
   public searchItem: string;
-  public icons: any;
+  public icons: Icon[];
   public enableSelectToRemove: boolean;
-  public itemsToRemove: any;
+  public itemsToRemove: Item[];
   orderSelected: number = 1;
-  shoppingList: any[] = [];
-  defaultCategory: any;
+  shoppingList: ListItem[] = [];
+  defaultCategory: Category;
 
   constructor(
     public mod: ModalController,
@@ -50,11 +55,11 @@ export class ItemsPage {
     this.searchBar = false;
     this.enableSelectToRemove = false;
     this.globalVars.getDefaulIconsData().then(data => {
-      this.icons = data;
+      this.icons = <Icon[]>data;
       this.initializeItems(null);
     });
     this.globalVars.getListData('LISTA_COMPRA').then(data => {
-      this.shoppingList = <any[]>data;
+      this.shoppingList = <ListItem[]>data;
     });
     this.globalVars.getConfigData().then(data => {
       this.defaultCategory = (<any>data).categoryDefault;
@@ -63,13 +68,13 @@ export class ItemsPage {
 
   initializeItems(filter: string) {
     this.globalVars.getItemsData().then(data => {
-      this.items = data;
+      this.items = <Item[]>data;
       this.globalVars.getListsData().then(data => {
-        let lists = <any[]>data;
+        let lists = <List[]>data;
         let itemsOnLists = [];
         lists.forEach(element => {
           this.globalVars.getListData(element.nombreLista).then(data => {
-            (<any[]>data).forEach(item => {
+            (<ListItem[]>data).forEach(item => {
               itemsOnLists.push(item);
             });
             let itemsFilled = [];
@@ -110,13 +115,13 @@ export class ItemsPage {
     this.searchBar = !this.searchBar;
   }
 
-  changeItemCategory(event, item) {
+  changeItemCategory(event, item: Item) {
     this.catService.changeCategory(item.category, item).then(data => {
-      item = data;
+      item = <Item>data;
     });
   }
 
-  removeItem(event, item) {
+  removeItem(event, item: Item) {
     let confirm = this.alertCtrl.create({
       title: 'Removing ' + item.nombreElemento,
       message: 'Do you like to remove ' + item.nombreElemento + '?',
@@ -143,7 +148,7 @@ export class ItemsPage {
     let move = this.alertCtrl.create();
     move.setTitle('Move to LISTA_COMPRA');
 
-    this.items.forEach((item: any) => {
+    this.items.forEach((item: Item) => {
       console.log(item.lists);
       if (item.lists.length === 0) {
         move.addInput({
@@ -164,18 +169,15 @@ export class ItemsPage {
           console.log(this.items);
           let auxItem = this.filterElements.transform(this.items, item)[0];
           console.log(auxItem);
-          let newItem = {
+          let newItem: ListItem = {
             category: auxItem.category,
-            measurement: auxItem.category.measurement,
             nombreElemento: auxItem.nombreElemento,
             colorElemento: '',
             colorBotones: '',
-            colorElementoNoCaducado: '',
-            colorBotonesNoCaducado: '',
             nombreLista: 'LISTA_COMPRA',
             cantidadElemento: 1,
             caduca: false,
-            fechaCaducidad: new Date(),
+            fechaCaducidad: null,
             cantidadMinima: 1,
             marked: false
           };
@@ -188,7 +190,7 @@ export class ItemsPage {
     move.present();
   }
 
-  discardOrShop(event, item) {
+  discardOrShop(event, item: Item) {
     let discardRemove = this.alertCtrl.create();
     discardRemove.setTitle(
       'Discard ' + item.nombreElemento + ' or move to SHOPPING_LIST?'
@@ -242,12 +244,12 @@ export class ItemsPage {
     remove.present();
   }
 
-  selectedItem(event, item) {
+  selectedItem(event, item: Item) {
     console.log('Item selected' + JSON.stringify(item));
     this.itemsToRemove.push(item);
   }
 
-  removeElements(removed: any[]) {
+  removeElements(removed: string[]) {
     removed.forEach(itemRemoved => {
       this.items = this.items.filter(
         item => item.nombreElemento !== itemRemoved
@@ -264,7 +266,7 @@ export class ItemsPage {
     this.enableSelectToRemove = !this.enableSelectToRemove;
   }
 
-  editItem(event, item) {
+  editItem(event, item: Item) {
     let oldItem = item.nombreElemento;
     let edit = this.alertCtrl.create({
       title: 'Edit Item',
@@ -378,20 +380,17 @@ export class ItemsPage {
     reorder.present();
   }
 
-  sendToShoppingList(event, item) {
+  sendToShoppingList(event, item: ListItem) {
     let itemSelected = this.items[this.items.indexOf(item)];
-    let newShoppingListItem = {
+    let newShoppingListItem: ListItem = {
       category: itemSelected.category,
-      measurement: 'UNIDADES',
       nombreElemento: itemSelected.nombreElemento,
       colorElemento: '',
       colorBotones: '',
-      colorElementoNoCaducado: '',
-      colorBotonesNoCaducado: '',
       nombreLista: 'LISTA_COMPRA',
       cantidadElemento: 1,
       caduca: false,
-      fechaCaducidad: new Date(),
+      fechaCaducidad: null,
       cantidadMinima: 1,
       marked: false
     };

@@ -1,5 +1,5 @@
-export class Category {
-	color:string;
-	cssClass:string;
-	buttons:string;
+export class Color {
+  color: string;
+  cssClass: string;
+  buttons: string;
 }

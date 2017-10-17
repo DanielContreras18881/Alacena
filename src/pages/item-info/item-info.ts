@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
+import { Icon } from '../../classes/icon';
+import { Component } from '@angular/core';
 
-import { ViewController, NavParams} from 'ionic-angular';
+import { ViewController, NavParams } from 'ionic-angular';
 
-import {Item} from '../../components/item-data/item-data';
+import { Item } from '../../components/item-data/item-data';
 
 /*
   Generated class for the ItemInfoPage page.
@@ -11,12 +12,12 @@ import {Item} from '../../components/item-data/item-data';
   Ionic pages and navigation.
 */
 @Component({
-  templateUrl: 'item-info.html',
+  templateUrl: 'item-info.html'
 })
 export class ItemInfoPage {
-  item: any;
+  item: Item;
   editing: boolean;
-  icons: any;
+  icons: Icon[];
   constructor(private view: ViewController, params: NavParams) {
     this.item = params.get('newItem');
     this.editing = params.get('editing');
@@ -24,10 +25,10 @@ export class ItemInfoPage {
   }
 
   save() {
-      this.view.dismiss(this.item);
+    this.view.dismiss(this.item);
   }
 
   close() {
-      this.view.dismiss();
+    this.view.dismiss();
   }
 }

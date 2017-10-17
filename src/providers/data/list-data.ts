@@ -1,3 +1,4 @@
+import { List } from '../../classes/list';
 import { Injectable } from '@angular/core';
 import { Network } from '@ionic-native/network';
 import { Platform } from 'ionic-angular';
@@ -125,7 +126,7 @@ export class ListData {
     });
   }
 
-  getOldListItemsData(lists: any[]) {
+  getOldListItemsData(lists: List[]) {
     this.localStorage
       .getFromLocal('cantidadElementosLista', null)
       .then(data => {

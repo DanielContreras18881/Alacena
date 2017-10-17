@@ -1,3 +1,4 @@
+import { Category } from '../../classes/category';
 import { Component } from '@angular/core';
 
 import { GlobalVars } from '../../providers/global-vars/global-vars';
@@ -18,14 +19,14 @@ export class ConfigPage {
   public configData;
   public idiomas;
   public idiomaSelecciondo;
-  public categories: any[];
+  public categories: Category[];
   public units = ['UNIDADES', 'LITROS', 'GRAMOS', 'KG'];
   public pasos = ['0.25', '0.5', '1', '100'];
   categorySelected: string;
 
   constructor(private globalVars: GlobalVars) {
     this.globalVars.getCategoriesData().then(data => {
-      this.categories = <any[]>data;
+      this.categories = <Category[]>data;
       this.globalVars.getConfigData().then(result => {
         this.configData = result;
         this.idiomas = this.configData.idiomas;

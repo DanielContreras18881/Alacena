@@ -1,3 +1,5 @@
+import { Category } from '../../classes/category';
+import { Icon } from '../../classes/icon';
 import { CategoryInfoPage } from '../category-info/category-info';
 import { Component } from '@angular/core';
 import {
@@ -21,10 +23,10 @@ import { GlobalVars } from '../../providers/global-vars/global-vars';
   providers: [OrderBy, CategoriesService]
 })
 export class CategoriesPage {
-  public categories: any[] = [];
+  public categories: Category[] = [];
   public searchBar: boolean;
   public searchCategory: string;
-  public icons: any;
+  public icons: Icon[];
   public enableSelectToRemove: boolean;
   public categoriesToRemove: any;
   unitStep: number;
@@ -44,8 +46,6 @@ export class CategoriesPage {
     this.globalVars.getConfigData().then(data => {
       this.measurement = (<any>data).unitDefault;
       this.unitStep = (<any>data).stepDefault;
-      console.log(this.unitStep);
-      console.log(this.measurement);
     });
   }
 
@@ -54,14 +54,14 @@ export class CategoriesPage {
     this.enableSelectToRemove = false;
     this.categoriesToRemove = [];
     this.globalVars.getDefaulIconsData().then(data => {
-      this.icons = data;
+      this.icons = <Icon[]>data;
     });
     this.initializeCategories(null);
   }
 
   initializeCategories(filter: string) {
     this.globalVars.getCategoriesData().then(data => {
-      this.categories = <any[]>data;
+      this.categories = <Category[]>data;
       this.sortItems(this.orderSelected);
       if (filter) {
         this.categories = this.categories.filter(item => {
@@ -143,7 +143,7 @@ export class CategoriesPage {
     reorder.present();
   }
 
-  deleteCategory(event, category) {
+  deleteCategory(event, category: Category) {
     let confirm = this.alertCtrl.create({
       title: 'Removing ' + category.categoryName,
       message: 'Do you like to remove ' + category.categoryName + '?',
@@ -166,7 +166,7 @@ export class CategoriesPage {
     confirm.present();
   }
 
-  removeElements(removed: any[]) {
+  removeElements(removed: string[]) {
     removed.forEach(categoryRemoved => {
       this.categories = this.categories.filter(
         category => category.categoryName !== categoryRemoved
@@ -208,7 +208,7 @@ export class CategoriesPage {
     categoryModal.present();
   }
 
-  editCategory(event, category) {
+  editCategory(event, category: Category) {
     let oldCategory = category.categoryName;
     let edit = this.alertCtrl.create({
       title: 'Edit Category',
@@ -237,7 +237,7 @@ export class CategoriesPage {
     edit.present();
   }
 
-  onMeasurementChange(event, category) {
+  onMeasurementChange(event, category: Category) {
     if (category.measurement === 'UNIDADES') {
       category.unitStep = 0.1;
     } else if (category.measurement === 'GRAMOS') {
@@ -248,7 +248,7 @@ export class CategoriesPage {
       category.unitStep = 0.5;
     }
   }
-  selectedCategory(event, item) {
+  selectedCategory(event, item: Category) {
     this.categoriesToRemove.push(item);
   }
 

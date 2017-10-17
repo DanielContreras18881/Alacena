@@ -1,3 +1,4 @@
+import { ListItem } from '../classes/listItem';
 import { Injectable, Pipe, PipeTransform } from '@angular/core';
 
 /*

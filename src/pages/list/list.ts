@@ -1,3 +1,7 @@
+import { List } from '../../classes/list';
+import { Category } from '../../classes/category';
+import { Icon } from '../../classes/icon';
+import { ListItem } from '../../classes/listItem';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import moment from 'moment';
 import {
@@ -28,13 +32,13 @@ export class ListPage {
 
   type: string = 'ListItem';
 
-  selectedItem: any;
-  list: any[] = [];
+  selectedItem: string;
+  list: ListItem[] = [];
   searchBar: boolean;
   searchItem: string;
-  icons: any;
+  icons: Icon[];
   orderSelected: number = 1;
-  defaultCategory: any;
+  defaultCategory: Category;
   minimumAmount: number;
 
   dataConfig: any = {};
@@ -56,7 +60,7 @@ export class ListPage {
       ? this.navParams.get('list')
       : 'LISTA_COMPRA';
     this.globalVars.getDefaulIconsData().then(data => {
-      this.icons = data;
+      this.icons = <Icon[]>data;
       this.initializeItems(null);
     });
     this.globalVars.getConfigData().then(data => {
@@ -71,7 +75,7 @@ export class ListPage {
 
   initializeItems(filter: string) {
     this.globalVars.getListData(this.selectedItem).then(listData => {
-      this.list = <any[]>listData;
+      this.list = <ListItem[]>listData;
       this.sortItems(this.orderSelected);
       if (filter) {
         this.list = this.list.filter(item => {
@@ -151,7 +155,7 @@ export class ListPage {
     reorder.present();
   }
 
-  removeItem(item) {
+  removeItem(item: ListItem) {
     let confirm = this.alertCtrl.create({
       title: 'Removing ' + item.nombreElemento,
       message:
@@ -179,7 +183,7 @@ export class ListPage {
     confirm.present();
   }
 
-  saveItem(item) {
+  saveItem(item: ListItem) {
     //TODO: Check on device
     if (item.caduca) {
       let milisecondsToCaducidad1 =
@@ -229,7 +233,7 @@ export class ListPage {
     this.globalVars.setListData(this.selectedItem, this.list);
   }
 
-  editItem(item) {
+  editItem(item: ListItem) {
     let infoListModal = this.mod.create(ItemInfoPage, {
       newItem: item,
       editing: true,
@@ -246,7 +250,7 @@ export class ListPage {
     let item = event.item;
     if (event.toShopingList) {
       this.globalVars.getListData('LISTA_COMPRA').then(result => {
-        let dest = (<any[]>result).find(
+        let dest = (<ListItem[]>result).find(
           x => x.nombreElemento === item.nombreElemento
         );
         if (dest) {
@@ -255,17 +259,17 @@ export class ListPage {
           item.marked = false;
           item.caduca = false;
           item.cantidadElemento = item.cantidadMinima;
-          (<any[]>result).push(item);
+          (<ListItem[]>result).push(item);
         }
-        this.globalVars.setListData('LISTA_COMPRA', <any[]>result);
+        this.globalVars.setListData('LISTA_COMPRA', <ListItem[]>result);
       });
     } else {
       let move = this.alertCtrl.create();
       move.setTitle('Move to');
 
       this.globalVars.getListsData().then(data => {
-        let lists: any = data;
-        lists.forEach((list: any) => {
+        let lists: List[] = <List[]>data;
+        lists.forEach((list: List) => {
           let selected = false;
           if (list.nombreLista !== item.nombreLista) {
             if (list.nombreLista === 'LISTA_COMPRA') {
@@ -290,15 +294,15 @@ export class ListPage {
             this.globalVars.setListData(this.selectedItem, this.list);
             item.nombreLista = data;
             this.globalVars.getListData(data).then(result => {
-              let dest = (<any[]>result).find(
+              let dest = (<ListItem[]>result).find(
                 x => x.nombreElemento === item.nombreElemento
               );
               if (dest) {
                 dest.cantidadElemento += item.cantidadElemento;
               } else {
-                (<any[]>result).push(item);
+                (<ListItem[]>result).push(item);
               }
-              this.globalVars.setListData(data, <any[]>result);
+              this.globalVars.setListData(data, <ListItem[]>result);
             });
           }
         });
@@ -333,7 +337,7 @@ export class ListPage {
     reminderModal.present();
   }
 
-  removeElements(removed: any[]) {
+  removeElements(removed: string[]) {
     removed.forEach(itemRemoved => {
       this.list = this.list.filter(item => item.nombreElemento !== itemRemoved);
       this.globalVars.setListData(this.selectedItem, this.list);

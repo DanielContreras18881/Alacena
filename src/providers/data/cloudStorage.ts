@@ -1,3 +1,7 @@
+import { Item } from '../../classes/item';
+import { Category } from '../../classes/category';
+import { List } from '../../classes/list';
+import { ListItem } from '../../classes/listItem';
 import 'rxjs/add/operator/map';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
@@ -91,7 +95,7 @@ export class CloudStorage {
     });
   }
 
-  uploadListData(name: string, data: any[], uid: string) {
+  uploadListData(name: string, data: ListItem[], uid: string) {
     const storage = firebase.storage();
     let fileName = uid + '_' + name + '.json';
     let fileRef = storage.ref('lists/' + fileName);
@@ -131,7 +135,7 @@ export class CloudStorage {
       .remove();
   }
 
-  uploadListsData(lists: any, uid: string) {
+  uploadListsData(lists: List[], uid: string) {
     firebase
       .database()
       .ref('lists/' + uid)
@@ -145,14 +149,14 @@ export class CloudStorage {
       .set(configs);
   }
 
-  uploadItemsData(items: any, uid: string) {
+  uploadItemsData(items: Item[], uid: string) {
     firebase
       .database()
       .ref('elements/' + uid)
       .set(items);
   }
 
-  uploadCategoriesData(categories: any, uid: string) {
+  uploadCategoriesData(categories: Category[], uid: string) {
     firebase
       .database()
       .ref('categories/' + uid)

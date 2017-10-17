@@ -1,8 +1,10 @@
-import {Component} from '@angular/core';
+import { Icon } from '../../classes/icon';
+import { Category } from '../../classes/category';
+import { Component } from '@angular/core';
 
-import {ViewController, NavParams} from 'ionic-angular';
+import { ViewController, NavParams } from 'ionic-angular';
 
-import {CategoriesService} from '../../providers/categories/categoriesService';
+import { CategoriesService } from '../../providers/categories/categoriesService';
 
 /*
   Generated class for the CategoryInfoPage page.
@@ -15,20 +17,21 @@ import {CategoriesService} from '../../providers/categories/categoriesService';
   providers: [CategoriesService]
 })
 export class CategoryInfoPage {
-  category: any;
-  icons: any;
+  category: Category;
+  icons: Icon[];
 
   constructor(
-      private view: ViewController,
-      private catService: CategoriesService,
-      public params: NavParams) {}
+    private view: ViewController,
+    private catService: CategoriesService,
+    public params: NavParams
+  ) {}
 
   ngOnInit() {
     this.category = this.params.get('newCategory');
     this.icons = this.params.get('icons');
   }
 
-  changeCategoryIcon(event, category) {
+  changeCategoryIcon(event, category: Category) {
     this.catService.changeCategoryIcon(category, this.icons);
   }
 
@@ -38,10 +41,10 @@ export class CategoryInfoPage {
   }
 
   save() {
-      this.view.dismiss(this.category);
+    this.view.dismiss(this.category);
   }
 
   close() {
-      this.view.dismiss();
+    this.view.dismiss();
   }
 }

@@ -1,3 +1,4 @@
+import { Category } from '../../classes/category';
 import { Injectable } from '@angular/core';
 import { Network } from '@ionic-native/network';
 import { Platform } from 'ionic-angular';
@@ -15,7 +16,6 @@ declare var cordova: any;
 
 @Injectable()
 export class CategoriesData {
-  categoriesData: any = null;
   path = 'assets/json/categories.json';
 
   constructor(
@@ -25,7 +25,7 @@ export class CategoriesData {
     private plt: Platform
   ) {}
 
-  setCategoriesData(data: any, userProfile: any) {
+  setCategoriesData(data: Category[], userProfile: any) {
     if (userProfile) {
       if (!this.plt.is('ios') && !this.plt.is('android')) {
         this.cloudStorage.uploadCategoriesData(data, userProfile.uid);
@@ -46,7 +46,6 @@ export class CategoriesData {
       if (userProfile) {
         if (!this.plt.is('ios') && !this.plt.is('android')) {
           this.cloudStorage.loadCategoriesData(userProfile.uid).then(data => {
-            //console.log("cloudStorage:" + JSON.stringify(data));
             if (data !== undefined && data !== null) {
               this.localStorage.setToLocal('categories', data);
               resolve(data);
@@ -54,7 +53,6 @@ export class CategoriesData {
               this.localStorage
                 .getFromLocal('categories', this.path)
                 .then(data => {
-                  //console.log("getFromLocal:" + JSON.stringify(data));
                   if (data !== undefined && data !== null) {
                     resolve(data);
                   } else {
@@ -68,7 +66,6 @@ export class CategoriesData {
             this.localStorage
               .getFromLocal('categories', this.path)
               .then(data => {
-                //console.log("localStorage:" + JSON.stringify(data));
                 if (data !== undefined && data !== null) {
                   resolve(data);
                 } else {
@@ -77,7 +74,6 @@ export class CategoriesData {
               });
           } else {
             this.cloudStorage.loadCategoriesData(userProfile.uid).then(data => {
-              //console.log("cloudStorage:" + JSON.stringify(data));
               if (data !== undefined && data !== null) {
                 this.localStorage.setToLocal('categories', data);
                 resolve(data);
@@ -85,7 +81,6 @@ export class CategoriesData {
                 this.localStorage
                   .getFromLocal('categories', this.path)
                   .then(data => {
-                    //console.log("getFromLocal:" + JSON.stringify(data));
                     if (data !== undefined && data !== null) {
                       resolve(data);
                     } else {
@@ -98,7 +93,6 @@ export class CategoriesData {
         }
       } else {
         this.localStorage.getFromLocal('categories', this.path).then(data => {
-          //console.log("localStorage2:" + JSON.stringify(data));
           if (data !== undefined && data !== null) {
             resolve(data);
           } else {
