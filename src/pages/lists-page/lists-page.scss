@@ -1,3 +1,106 @@
 page-lists-page {
+  .listCard {
+    margin-bottom: 1rem !important;
+    margin-left: 0.25rem !important;
+  }
 
+  .ion-ios-clipboard-outline:before {
+    font-size: 2.75rem;
+    margin-left: -1.5rem;
+  }
+
+  .listName {
+    font-size: 1.75rem;
+    white-space: nowrap;
+    margin-left: 0.5rem;
+  }
+
+  .reorderNotAllowed,
+  .reorderAllowed,
+  ion-reorder {
+    color: #fff;
+  }
+
+  .reorderAllowed {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+  }
+
+  .reorderNotAllowed {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  .lists {
+    background-color: #999;
+  }
+
+  ion-icon.iconListAdvice.item-icon.ion-ios-cart:before,
+  ion-icon.iconListAdvice.item-icon.ion-ios-warning:before,
+  ion-icon.iconListAdvice.item-icon.ion-md-cart:before,
+  ion-icon.iconListAdvice.item-icon.ion-md-warning:before {
+    font-size: 2.5rem;
+  }
+
+  p.info-list-items {
+    font-size: 1.15rem;
+    white-space: normal;
+  }
+
+  ion-badge.badge-info-list-items {
+    margin-top: 0.15rem !important;
+    margin-right: 0.15rem !important;
+    margin-bottom: 0.15rem !important;
+    margin-left: 0.15rem !important;
+    border-top-left-radius: 1.25rem;
+    border-top-right-radius: 1.25rem;
+    border-bottom-right-radius: 1.25rem;
+    border-bottom-left-radius: 1.25rem;
+    font-size: 1rem;
+  }
+
+  .black-list {
+    background-color: #0f0f0f !important;
+    color: #cfcfcf !important;
+  }
+  .white-list {
+    background-color: #fff !important;
+    color: #0f0f0f !important;
+  }
+  .purple-list {
+    background-color: #5589df !important;
+    color: #0f0f0f !important;
+  }
+  .green-list {
+    background-color: #7bc157 !important;
+    color: #0f0f0f !important;
+  }
+  .blue-list {
+    background-color: #52c5d9 !important;
+    color: #0f0f0f !important;
+  }
+  .yellow-list {
+    background-color: #f7e466 !important;
+    color: #0f0f0f !important;
+  }
+  .red-list {
+    background-color: #a63e32 !important;
+    color: #cfcfcf !important;
+  }
+  .grey-list {
+    background-color: #cfcfcf !important;
+    color: #0f0f0f !important;
+  }
+  .white-buttons {
+    color: #cfcfcf !important;
+  }
+  .black-buttons {
+    color: #0f0f0f !important;
+  }
 }

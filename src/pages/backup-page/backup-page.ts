@@ -10,15 +10,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-backup-page',
-  templateUrl: 'backup-page.html',
+  templateUrl: 'backup-page.html'
 })
 export class BackupPage {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad BackupPage');
-  }
-
+  ionViewDidLoad() {}
 }

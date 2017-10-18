@@ -6,13 +6,14 @@ import { Storage } from '@ionic/storage';
 import firebase from 'firebase';
 import { App, MenuController, Nav, Platform } from 'ionic-angular';
 
-import { AboutPage } from '../pages/about/about';
-import { CategoriesPage } from '../pages/categories/categories';
-import { ConfigPage } from '../pages/config/config';
-import { GettingStartedPage } from '../pages/getting-started/getting-started';
-import { ItemsPage } from '../pages/items/items';
-import { ListPage } from '../pages/list/list';
-import { ListsPage } from '../pages/lists/lists';
+import { AboutPage } from '../pages/about-page/about-page';
+import { BackupPage } from '../pages/backup-page/backup-page';
+import { CategorysPage } from '../pages/categorys-page/categorys-page';
+import { ConfigPage } from '../pages/config-page/config-page';
+import { DashboardPage } from '../pages/dashboard-page/dashboard-page';
+import { ItemsPage } from '../pages/items-page/items-page';
+import { ListPage } from '../pages/list-page/list-page';
+import { ListsPage } from '../pages/lists-page/lists-page';
 import { GlobalVars } from '../providers/global-vars/global-vars';
 
 declare var cordova: any;
@@ -26,11 +27,7 @@ export class Alacena {
 
   userProfile: any = null;
 
-  rootPage = GettingStartedPage;
-  //rootPage = ListPage;
-  //rootPage = ListsPage;
-  //rootPage = ConfigPage;
-  //rootPage = CategoriesPage;
+  rootPage = DashboardPage;
 
   pages: Array<{ title: string; icon: string; component: any }>;
 
@@ -99,12 +96,13 @@ export class Alacena {
     //loading: any;
 
     this.pages = [
-      { title: 'Inicio', component: GettingStartedPage, icon: 'contact' },
+      { title: 'Inicio', component: DashboardPage, icon: 'contact' },
       { title: 'LISTA_COMPRA', component: ListPage, icon: 'basket' },
       { title: 'Lists', component: ListsPage, icon: 'list-box' },
       { title: 'Items', component: ItemsPage, icon: 'list' },
-      { title: 'Categories', component: CategoriesPage, icon: 'paper' },
+      { title: 'Categories', component: CategorysPage, icon: 'paper' },
       { title: 'Config', component: ConfigPage, icon: 'cog' },
+      { title: 'Backup', component: BackupPage, icon: 'disc' },
       { title: 'About', component: AboutPage, icon: 'information-circle' }
     ];
   }

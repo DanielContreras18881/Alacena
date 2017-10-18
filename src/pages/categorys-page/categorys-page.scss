@@ -1,3 +1,21 @@
 page-categorys-page {
-
+  .categories {
+    background-color: #999 !important;
+  }
+  .categoryMeasurement {
+    font-size: 1.25rem;
+    padding: 0.1rem 0.25rem 0.1rem 0px;
+    max-width: 100%;
+  }
+  .categoryMeasurementUnitStep {
+    border: none;
+  }
+  .category-icon {
+    max-width: 3.25rem;
+  }
+  .removeCategoryButton {
+    font-size: 2.25rem !important;
+  }
+  .categoryName {
+  }
 }

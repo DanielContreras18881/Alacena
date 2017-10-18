@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
+
+import { Category } from '../../classes/category';
+
+import { GlobalVars } from '../../providers/global-vars/global-vars';
 
 /**
  * Generated class for the ConfigPage page.
@@ -10,15 +14,35 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-config-page',
-  templateUrl: 'config-page.html',
+  templateUrl: 'config-page.html'
 })
 export class ConfigPage {
+  configData;
+  idiomas;
+  idiomaSelecciondo;
+  categories: Category[];
+  units = ['UNIDADES', 'LITROS', 'GRAMOS', 'KG'];
+  pasos = ['0.25', '0.5', '1', '100'];
+  categorySelected: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  constructor(public navCtrl: NavController, private globalVars: GlobalVars) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ConfigPage');
+    this.globalVars.getCategoriesData().then(data => {
+      this.categories = <Category[]>data;
+      this.globalVars.getConfigData().then(result => {
+        this.configData = result;
+        this.idiomas = this.configData.idiomas;
+        this.idiomaSelecciondo = this.configData.idiomaDefault;
+        this.categorySelected = this.configData.categoryDefault.categoryName;
+      });
+    });
   }
 
+  onChange() {
+    this.configData.categoryDefault = this.categories.filter(
+      cat => cat.categoryName === this.categorySelected
+    )[0];
+    this.globalVars.setConfigData(this.configData);
+  }
 }

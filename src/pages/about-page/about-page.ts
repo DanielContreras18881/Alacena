@@ -1,24 +1,33 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
+import { AppVersion } from '@ionic-native/app-version';
+import { Platform } from 'ionic-angular';
 
-/**
- * Generated class for the AboutPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-about-page',
-  templateUrl: 'about-page.html',
+  templateUrl: 'about-page.html'
 })
 export class AboutPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  version: string = '';
+  constructor(
+    public navCtrl: NavController,
+    private appVersion: AppVersion,
+    public plt: Platform
+  ) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AboutPage');
+    if (this.plt.is('android') || this.plt.is('ios')) {
+      this.appVersion.getVersionNumber().then(version => {
+        this.version = version;
+        this.appVersion.getVersionCode().then(code => {
+          this.version += ' : ' + code;
+        });
+      });
+    } else {
+      this.version = 'browser';
+    }
   }
 
+  // TODO: manage tutorials, contact form with error logs
 }

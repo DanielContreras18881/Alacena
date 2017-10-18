@@ -1,3 +1,78 @@
 page-list-page {
+  .icon {
+    border-radius: 0;
+  }
 
+  .list {
+    background-color: #999;
+  }
+
+  .button-icon-only {
+    margin: -0.75rem;
+  }
+
+  ion-badge.amount {
+    border-radius: 0.5rem;
+    color: #fff;
+    background-color: #9f7acc;
+    font-size: 1.85rem;
+    min-width: 6rem;
+  }
+
+  ion-badge.minimum {
+    border-radius: 0.5rem;
+    color: #fff;
+    background-color: red;
+    font-size: 1.85rem;
+    min-width: 6rem;
+  }
+
+  .popover_button {
+    font-size: 0.9rem;
+  }
+
+  .popover_button span.button-inner {
+    font-size: 1rem;
+    padding-left: 1.5rem;
+    justify-content: flex-start;
+  }
+
+  .popover_button span.button-inner ion-icon::before {
+    font-size: 3rem;
+    padding-right: 1.5rem;
+  }
+
+  ion-list[inset] .item {
+    border-bottom: 0 !important;
+  }
+
+  .notifications-button {
+    background-color: green;
+    z-index: 99;
+    top: 7.75rem;
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  .notifications-button:hover {
+    background-color: green !important;
+    z-index: 99;
+    top: 7.75rem;
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .star-button {
+    background-color: orange;
+    z-index: 99;
+    top: 7.75rem;
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  .star-button:hover {
+    background-color: orange !important;
+    z-index: 99;
+    top: 7.75rem;
+    width: 3.5rem;
+    height: 3.5rem;
+  }
 }

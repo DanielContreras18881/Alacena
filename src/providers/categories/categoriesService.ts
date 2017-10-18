@@ -3,7 +3,7 @@ import { Icon } from '../../classes/icon';
 import { Injectable } from '@angular/core';
 import { AlertController, ModalController } from 'ionic-angular';
 
-import { ListIconsPage } from '../../pages/categories/list-icons';
+import { ListIconsPage } from '../../components/icons/list-icons';
 import { DefaultIcons } from '../../providers/default-icons/default-icons';
 import { GlobalVars } from '../../providers/global-vars/global-vars';
 

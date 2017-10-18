@@ -20,16 +20,17 @@ import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notifica
 import { BottomButtonsComponent } from '../components/bottom-buttons-component/bottom-buttons-component';
 import { Item } from '../components/item-data/item-data';
 import { PopoverPage } from '../components/popover/popover';
-import { AboutPage } from '../pages/about/about';
-import { CategoriesPage } from '../pages/categories/categories';
-import { ListIconsPage } from '../pages/categories/list-icons';
+import { AboutPage } from '../pages/about-page/about-page';
+import { BackupPage } from '../pages/backup-page/backup-page';
+import { CategorysPage } from '../pages/categorys-page/categorys-page';
+import { ListIconsPage } from '../components/icons/list-icons';
 import { CategoryInfoPage } from '../pages/category-info/category-info';
-import { ConfigPage } from '../pages/config/config';
-import { GettingStartedPage } from '../pages/getting-started/getting-started';
-import { ItemInfoPage } from '../pages/item-info/item-info';
-import { ItemsPage } from '../pages/items/items';
-import { ListPage } from '../pages/list/list';
-import { ListsPage } from '../pages/lists/lists';
+import { ConfigPage } from '../pages/config-page/config-page';
+import { DashboardPage } from '../pages/dashboard-page/dashboard-page';
+import { ItemInfoPage } from '../components/item-info/item-info';
+import { ItemsPage } from '../pages/items-page/items-page';
+import { ListPage } from '../pages/list-page/list-page';
+import { ListsPage } from '../pages/lists-page/lists-page';
 import { AuthService } from '../providers/auth/auth.service';
 import { CategoriesService } from '../providers/categories/categoriesService';
 import { CategoriesData } from '../providers/data/categories-data';
@@ -46,14 +47,15 @@ import { Alacena } from './app.component';
 @NgModule({
   declarations: [
     Alacena,
-    GettingStartedPage,
+    DashboardPage,
     ListPage,
     ListsPage,
     ItemsPage,
     ItemInfoPage,
     ConfigPage,
     AboutPage,
-    CategoriesPage,
+    BackupPage,
+    CategorysPage,
     Item,
     BottomButtonsComponent,
     PopoverPage,
@@ -79,14 +81,15 @@ import { Alacena } from './app.component';
   bootstrap: [IonicApp],
   entryComponents: [
     Alacena,
-    GettingStartedPage,
+    DashboardPage,
     ListPage,
     ListsPage,
     ItemsPage,
     ItemInfoPage,
     ConfigPage,
     AboutPage,
-    CategoriesPage,
+    BackupPage,
+    CategorysPage,
     Item,
     BottomButtonsComponent,
     PopoverPage,
