@@ -19,12 +19,11 @@ import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notifica
 
 import { BottomButtonsComponent } from '../components/bottom-buttons-component/bottom-buttons-component';
 import { Item } from '../components/item-data/item-data';
-import { PopoverPage } from '../components/popover/popover';
 import { AboutPage } from '../pages/about-page/about-page';
 import { BackupPage } from '../pages/backup-page/backup-page';
 import { CategorysPage } from '../pages/categorys-page/categorys-page';
 import { ListIconsPage } from '../components/icons/list-icons';
-import { CategoryInfoPage } from '../pages/category-info/category-info';
+import { CategoryInfoPage } from '../components/category-info/category-info';
 import { ConfigPage } from '../pages/config-page/config-page';
 import { DashboardPage } from '../pages/dashboard-page/dashboard-page';
 import { ItemInfoPage } from '../components/item-info/item-info';
@@ -33,12 +32,12 @@ import { ListPage } from '../pages/list-page/list-page';
 import { ListsPage } from '../pages/lists-page/lists-page';
 import { AuthService } from '../providers/auth/auth.service';
 import { CategoriesService } from '../providers/categories/categoriesService';
-import { CategoriesData } from '../providers/data/categories-data';
+import { CategorysProvider } from '../providers/categorys-provider';
 import { CloudStorage } from '../providers/data/cloudStorage';
-import { ConfigData } from '../providers/data/config-data';
-import { ItemData } from '../providers/data/item-data';
-import { ListData } from '../providers/data/list-data';
-import { ListsData } from '../providers/data/lists-data';
+import { ConfigProvider } from '../providers/config-provider';
+import { ItemsProvider } from '../providers/items-provider';
+import { ListProvider } from '../providers/list-provider';
+import { ListsProvider } from '../providers/lists-provider';
 import { LocalStorage } from '../providers/data/localStorage';
 import { DefaultIcons } from '../providers/default-icons/default-icons';
 import { GlobalVars } from '../providers/global-vars/global-vars';
@@ -58,7 +57,6 @@ import { Alacena } from './app.component';
     CategorysPage,
     Item,
     BottomButtonsComponent,
-    PopoverPage,
     ListIconsPage,
     CategoryInfoPage,
     RemindersComponent
@@ -92,7 +90,6 @@ import { Alacena } from './app.component';
     CategorysPage,
     Item,
     BottomButtonsComponent,
-    PopoverPage,
     ListIconsPage,
     CategoryInfoPage,
     RemindersComponent
@@ -109,12 +106,12 @@ import { Alacena } from './app.component';
     LocalStorage,
     CategoriesService,
     DefaultIcons,
-    CategoriesData,
-    ListsData,
-    ListData,
-    ItemData,
+    CategorysProvider,
+    ListsProvider,
+    ListProvider,
+    ItemsProvider,
     ItemInfoPage,
-    ConfigData,
+    ConfigProvider,
     PhonegapLocalNotification,
     SplashScreen,
     StatusBar,

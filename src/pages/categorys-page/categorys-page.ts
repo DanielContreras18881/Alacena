@@ -12,7 +12,7 @@ import { GlobalVars } from '../../providers/global-vars/global-vars';
 
 import { Category } from '../../classes/category';
 import { Icon } from '../../classes/icon';
-import { CategoryInfoPage } from '../category-info/category-info';
+import { CategoryInfoPage } from '../../components/category-info/category-info';
 
 /**
  * Generated class for the CategorysPage page.

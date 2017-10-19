@@ -1,18 +1,98 @@
+import { Category } from '../classes/category';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { Network } from '@ionic-native/network';
+import { Platform } from 'ionic-angular';
 
-/*
-  Generated class for the CategorysProvider provider.
+import { CloudStorage } from './data/cloudStorage';
+import { LocalStorage } from './data/localStorage';
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
+declare var cordova: any;
+
 @Injectable()
 export class CategorysProvider {
+  path = 'assets/json/categories.json';
 
-  constructor(public http: Http) {
-    console.log('Hello CategorysProvider Provider');
+  constructor(
+    private cloudStorage: CloudStorage,
+    private localStorage: LocalStorage,
+    private network: Network,
+    private plt: Platform
+  ) {}
+  setCategoriesData(data: Category[], userProfile: any) {
+    if (userProfile) {
+      if (!this.plt.is('ios') && !this.plt.is('android')) {
+        this.cloudStorage.uploadCategoriesData(data, userProfile.uid);
+      } else {
+        if (this.network.type === 'NONE') {
+          this.localStorage.setToLocal('categories', data);
+        } else {
+          this.cloudStorage.uploadCategoriesData(data, userProfile.uid);
+        }
+      }
+    } else {
+      this.localStorage.setToLocal('categories', data);
+    }
   }
 
+  getCategoriesData(userProfile: any): any {
+    return new Promise(resolve => {
+      if (userProfile) {
+        if (!this.plt.is('ios') && !this.plt.is('android')) {
+          this.cloudStorage.loadCategoriesData(userProfile.uid).then(data => {
+            if (data !== undefined && data !== null) {
+              this.localStorage.setToLocal('categories', data);
+              resolve(data);
+            } else {
+              this.localStorage
+                .getFromLocal('categories', this.path)
+                .then(data => {
+                  if (data !== undefined && data !== null) {
+                    resolve(data);
+                  } else {
+                    resolve([]);
+                  }
+                });
+            }
+          });
+        } else {
+          if (this.network.type === 'NONE') {
+            this.localStorage
+              .getFromLocal('categories', this.path)
+              .then(data => {
+                if (data !== undefined && data !== null) {
+                  resolve(data);
+                } else {
+                  resolve([]);
+                }
+              });
+          } else {
+            this.cloudStorage.loadCategoriesData(userProfile.uid).then(data => {
+              if (data !== undefined && data !== null) {
+                this.localStorage.setToLocal('categories', data);
+                resolve(data);
+              } else {
+                this.localStorage
+                  .getFromLocal('categories', this.path)
+                  .then(data => {
+                    if (data !== undefined && data !== null) {
+                      resolve(data);
+                    } else {
+                      resolve([]);
+                    }
+                  });
+              }
+            });
+          }
+        }
+      } else {
+        this.localStorage.getFromLocal('categories', this.path).then(data => {
+          if (data !== undefined && data !== null) {
+            resolve(data);
+          } else {
+            resolve([]);
+          }
+        });
+      }
+    });
+  }
 }
