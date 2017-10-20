@@ -5,12 +5,12 @@ import { ViewController, NavParams } from 'ionic-angular';
 
 import { Item } from '../../components/item-data/item-data';
 
-/*
-  Generated class for the ItemInfoPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+/**
+ * Modal continer to show item data to edit or create
+ * 
+ * @export
+ * @class ItemInfoPage
+ */
 @Component({
   templateUrl: 'item-info.html'
 })
@@ -23,11 +23,19 @@ export class ItemInfoPage {
     this.editing = params.get('editing');
     this.icons = params.get('icons');
   }
-
+  /**
+	 * Close modal saving data
+	 * 
+	 * @memberof ItemInfoPage
+	 */
   save() {
     this.view.dismiss(this.item);
   }
-
+  /**
+	 * Close modal without saving data
+	 * 
+	 * @memberof ItemInfoPage
+	 */
   close() {
     this.view.dismiss();
   }

@@ -9,7 +9,12 @@ import { GlobalVars } from '../../providers/global-vars/global-vars';
 
 //import { Camera } from 'ionic-native';
 //import { ImagePicker } from 'ionic-native';
-
+/**
+ * Service to manage categories
+ * 
+ * @export
+ * @class CategoriesService
+ */
 @Injectable()
 export class CategoriesService {
   private icons: Icon[];
@@ -24,7 +29,14 @@ export class CategoriesService {
       this.icons = <Icon[]>data;
     });
   }
-
+  /**
+	 * Event to change the category of a item on a list or generic, showing a modal window
+	 * 
+	 * @param {Category} currentCategory 
+	 * @param {any} item 
+	 * @returns 
+	 * @memberof CategoriesService
+	 */
   changeCategory(currentCategory: Category, item) {
     return new Promise(resolve => {
       let change = this.alertCtrl.create();
@@ -57,7 +69,13 @@ export class CategoriesService {
       });
     });
   }
-
+  /**
+	 * Event to change the icon of a category, showing a modal window to select from gallery or taking a photo
+	 * 
+	 * @param {Category} category 
+	 * @param {Icon[]} icons 
+	 * @memberof CategoriesService
+	 */
   changeCategoryIcon(category: Category, icons: Icon[]) {
     let paramIcons = icons !== null ? icons : this.icons;
     let changeIconModal = this.mod.create(ListIconsPage, { icons: paramIcons });

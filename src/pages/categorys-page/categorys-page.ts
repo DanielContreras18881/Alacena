@@ -15,10 +15,10 @@ import { Icon } from '../../classes/icon';
 import { CategoryInfoPage } from '../../components/category-info/category-info';
 
 /**
- * Generated class for the CategorysPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * Page to manage custom categories by the user
+ * 
+ * @export
+ * @class CategorysPage
  */
 @IonicPage()
 @Component({
@@ -31,8 +31,6 @@ export class CategorysPage {
   searchBar: boolean;
   searchCategory: string;
   icons: Icon[];
-  enableSelectToRemove: boolean;
-  categoriesToRemove: any;
   unitStep: number;
   measurement: string;
 
@@ -51,8 +49,6 @@ export class CategorysPage {
 
   ionViewDidLoad() {
     this.searchBar = false;
-    this.enableSelectToRemove = false;
-    this.categoriesToRemove = [];
     this.globalVars.getDefaulIconsData().then(data => {
       this.icons = <Icon[]>data;
     });
@@ -62,7 +58,12 @@ export class CategorysPage {
     });
     this.initializeCategories(null);
   }
-
+  /**
+	 * Initialize data when open or search categories
+	 * 
+	 * @param {string} filter 
+	 * @memberof CategorysPage
+	 */
   initializeCategories(filter: string) {
     this.globalVars.getCategoriesData().then(data => {
       this.categories = <Category[]>data;
@@ -78,7 +79,12 @@ export class CategorysPage {
       }
     });
   }
-
+  /**
+	 * Event on search input filled
+	 * 
+	 * @param {any} event 
+	 * @memberof CategorysPage
+	 */
   searchMatches(event) {
     if (this.searchCategory && this.searchCategory.trim() !== '') {
       this.initializeCategories(this.searchCategory);
@@ -86,15 +92,31 @@ export class CategorysPage {
       this.initializeCategories(null);
     }
   }
-
+  /**
+	 * Event to show or hide search bar
+	 * 
+	 * @param {any} event 
+	 * @memberof CategorysPage
+	 */
   toggleSearchBar(event) {
     this.searchBar = !this.searchBar;
   }
-
+  /**
+	 * Event to change the category icon
+	 * 
+	 * @param {any} event 
+	 * @param {any} category 
+	 * @memberof CategorysPage
+	 */
   changeCategoryIcon(event, category) {
     this.catService.changeCategoryIcon(category, this.icons);
   }
-
+  /**
+	 * Event to sort items by a selected value
+	 * 
+	 * @param {number} orderBy 
+	 * @memberof CategorysPage
+	 */
   sortItems(orderBy: number) {
     this.orderSelected = orderBy;
     switch (orderBy) {
@@ -113,7 +135,12 @@ export class CategorysPage {
         break;
     }
   }
-
+  /**
+	 * Event to show options to sort items
+	 * 
+	 * @param {any} event 
+	 * @memberof CategorysPage
+	 */
   reorder(event) {
     let reorder = this.alertCtrl.create();
     reorder.setTitle('Sort by');
@@ -146,7 +173,13 @@ export class CategorysPage {
     });
     reorder.present();
   }
-
+  /**
+	 * Event to delete a selected category
+	 * 
+	 * @param {any} event 
+	 * @param {Category} category 
+	 * @memberof CategorysPage
+	 */
   deleteCategory(event, category: Category) {
     let confirm = this.alertCtrl.create({
       title: 'Removing ' + category.categoryName,
@@ -169,7 +202,12 @@ export class CategorysPage {
     });
     confirm.present();
   }
-
+  /**
+	 * Event to remove multiple categories
+	 * 
+	 * @param {string[]} removed 
+	 * @memberof CategorysPage
+	 */
   removeElements(removed: string[]) {
     removed.forEach(categoryRemoved => {
       this.categories = this.categories.filter(
@@ -178,6 +216,12 @@ export class CategorysPage {
       this.globalVars.setCategoriesData(this.categories);
     });
   }
+  /**
+	* Event to add new category
+	* 
+	* @param {any} event 
+	* @memberof CategorysPage
+   */
   addCategory(event) {
     let newCategory = {
       categoryName: 'NEW_CATEGORY',
@@ -211,7 +255,13 @@ export class CategorysPage {
     });
     categoryModal.present();
   }
-
+  /**
+	 * Even to edit a category
+	 * 
+	 * @param {any} event 
+	 * @param {Category} category 
+	 * @memberof CategorysPage
+	 */
   editCategory(event, category: Category) {
     let oldCategory = category.categoryName;
     let edit = this.alertCtrl.create({
@@ -240,7 +290,13 @@ export class CategorysPage {
     });
     edit.present();
   }
-
+  /**
+	 * Event to change unit step on measurement change
+	 * 
+	 * @param {any} event 
+	 * @param {Category} category 
+	 * @memberof CategorysPage
+	 */
   onMeasurementChange(event, category: Category) {
     if (category.measurement === 'UNIDADES') {
       category.unitStep = 0.1;
@@ -251,16 +307,5 @@ export class CategorysPage {
     } else {
       category.unitStep = 0.5;
     }
-  }
-  selectedCategory(event, item: Category) {
-    this.categoriesToRemove.push(item);
-  }
-
-  removeCategories(event) {
-    this.categoriesToRemove.forEach((category, index) => {
-      this.categories.splice(this.categories.indexOf(category), 1);
-    });
-    this.categoriesToRemove = [];
-    this.enableSelectToRemove = !this.enableSelectToRemove;
   }
 }

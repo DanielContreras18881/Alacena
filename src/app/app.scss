@@ -9,9 +9,13 @@
 .item .item-inner {
   border: none;
 }
+.item-md ion-avatar {
+  padding-left: 35%;
+}
 .item-header-toolbar-avatar img.icon {
-  border-radius: 0;
-  margin-left: -.15rem;
+  background-color: transparent;
+  border-radius: 1;
+  margin: 0 auto;
 }
 .item-md.item-block .item-inner {
   border: none;

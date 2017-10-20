@@ -1,21 +1,18 @@
-import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-
-// TODO: redefine as service for log on file to save and send if it's needed 
-
-/*
-  Generated class for the Log provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
+/**
+ * Service to get logs of the app behaviour, for support purposes (Sentry)
+ * 
+ * @export
+ * @class Log
+ */
 @Injectable()
 export class Log {
   data: any = null;
 
   constructor(public http: Http) {}
-
+  // TODO: redefine as service for log on file to save and send if it's needed
   load() {
     if (this.data) {
       // already loaded data
@@ -27,7 +24,8 @@ export class Log {
       // We're using Angular Http provider to request the data,
       // then on the response it'll map the JSON data to a parsed JS object.
       // Next we process the data and resolve the promise with the new data.
-      this.http.get('path/to/data.json')
+      this.http
+        .get('path/to/data.json')
         .map(res => res.json())
         .subscribe(data => {
           // we've got back the raw data, now generate the core schedule data
@@ -38,4 +36,3 @@ export class Log {
     });
   }
 }
-

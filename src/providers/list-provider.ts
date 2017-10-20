@@ -8,7 +8,12 @@ import { LocalStorage } from './data/localStorage';
 import moment from 'moment';
 
 declare var cordova: any;
-
+/**
+ * Provider to manage list data
+ * 
+ * @export
+ * @class ListProvider
+ */
 @Injectable()
 export class ListProvider {
   listData: any = null;
@@ -20,6 +25,14 @@ export class ListProvider {
     private network: Network,
     private plt: Platform
   ) {}
+  /**
+	* Save list data
+	* 
+	* @param {string} name 
+	* @param {any[]} data 
+	* @param {*} userProfile 
+	* @memberof ListProvider
+   */
   setListData(name: string, data: any[], userProfile: any): void {
     if (userProfile) {
       if (!this.plt.is('ios') && !this.plt.is('android')) {
@@ -35,7 +48,13 @@ export class ListProvider {
       this.localStorage.setToLocal(name, data);
     }
   }
-
+  /**
+	 * Remove list data
+	 * 
+	 * @param {string} name 
+	 * @param {*} userProfile 
+	 * @memberof ListProvider
+	 */
   removeListData(name: string, userProfile: any): void {
     if (userProfile) {
       if (!this.plt.is('ios') && !this.plt.is('android')) {
@@ -53,7 +72,14 @@ export class ListProvider {
       this.localStorage.removeFromLocal(name);
     }
   }
-
+  /**
+	 * Recover list data
+	 * 
+	 * @param {string} name 
+	 * @param {*} userProfile 
+	 * @returns 
+	 * @memberof ListProvider
+	 */
   getListItemsData(name: string, userProfile: any) {
     return new Promise(resolve => {
       if (userProfile) {
@@ -117,7 +143,12 @@ export class ListProvider {
       }
     });
   }
-
+  /**
+	 * Recover old version app list data
+	 * 
+	 * @param {List[]} lists 
+	 * @memberof ListProvider
+	 */
   getOldListItemsData(lists: List[]) {
     this.localStorage
       .getFromLocal('cantidadElementosLista', null)

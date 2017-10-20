@@ -4,7 +4,6 @@ import {
   AlertController,
   ModalController,
   NavParams,
-  PopoverController,
   ViewController
 } from 'ionic-angular';
 
@@ -16,12 +15,16 @@ import moment from 'moment';
 
 import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
 
-import { PopoverPage } from '../../components/popover/popover';
 import { RemindersComponent } from '../../components/reminders-component/reminders-component';
 import { OrderBy } from '../../pipes/orderBy';
 import { GlobalVars } from '../../providers/global-vars/global-vars';
 import { ItemInfoPage } from '../../components/item-info/item-info';
-
+/**
+ * Page to manage the items of a list
+ * 
+ * @export
+ * @class ListPage
+ */
 @IonicPage()
 @Component({
   selector: 'page-list-page',
@@ -47,7 +50,6 @@ export class ListPage {
     private view: ViewController,
     public mod: ModalController,
     public alertCtrl: AlertController,
-    private popoverCtrl: PopoverController,
     private globalVars: GlobalVars,
     private order: OrderBy,
     private localNotification: PhonegapLocalNotification
@@ -71,6 +73,12 @@ export class ListPage {
       };
     });
   }
+  /**
+		* Initialize the items of the list
+		* 
+		* @param {string} filter 
+		* @memberof ListPage
+	   */
   initializeItems(filter: string) {
     this.globalVars.getListData(this.selectedItem).then(listData => {
       this.list = <ListItem[]>listData;
@@ -86,7 +94,12 @@ export class ListPage {
       }
     });
   }
-
+  /**
+	 * Even to search based on input filled
+	 * 
+	 * @param {any} event 
+	 * @memberof ListPage
+	 */
   searchMatches(event) {
     if (this.searchItem && this.searchItem.trim() !== '') {
       this.initializeItems(this.searchItem);
@@ -94,11 +107,21 @@ export class ListPage {
       this.initializeItems(null);
     }
   }
-
+  /**
+	 * Event to show or hide a search bar
+	 * 
+	 * @param {any} event 
+	 * @memberof ListPage
+	 */
   toggleSearchBar(event) {
     this.searchBar = !this.searchBar;
   }
-
+  /**
+	 * Event to sort items on the list
+	 * 
+	 * @param {number} orderBy 
+	 * @memberof ListPage
+	 */
   sortItems(orderBy: number) {
     this.orderSelected = orderBy;
     switch (orderBy) {
@@ -117,7 +140,12 @@ export class ListPage {
         break;
     }
   }
-
+  /**
+	 * Event to show options to sort the list
+	 * 
+	 * @param {any} event 
+	 * @memberof ListPage
+	 */
   reorder(event) {
     let reorder = this.alertCtrl.create();
     reorder.setTitle('Sort by');
@@ -152,7 +180,12 @@ export class ListPage {
     });
     reorder.present();
   }
-
+  /**
+	 * Event to remove a item
+	 * 
+	 * @param {ListItem} item 
+	 * @memberof ListPage
+	 */
   removeItem(item: ListItem) {
     let confirm = this.alertCtrl.create({
       title: 'Removing ' + item.nombreElemento,
@@ -180,7 +213,12 @@ export class ListPage {
     });
     confirm.present();
   }
-
+  /**
+	 * Event to save edit item
+	 * 
+	 * @param {ListItem} item 
+	 * @memberof ListPage
+	 */
   saveItem(item: ListItem) {
     //TODO: Check on device
     if (item.caduca) {
@@ -230,7 +268,12 @@ export class ListPage {
     this.list[this.list.indexOf(item)] = item;
     this.globalVars.setListData(this.selectedItem, this.list);
   }
-
+  /**
+	 * Event to show a modal to edit item
+	 * 
+	 * @param {ListItem} item 
+	 * @memberof ListPage
+	 */
   editItem(item: ListItem) {
     let infoListModal = this.mod.create(ItemInfoPage, {
       newItem: item,
@@ -243,7 +286,12 @@ export class ListPage {
     });
     infoListModal.present();
   }
-
+  /**
+	 * Event to move item to other list
+	 * 
+	 * @param {any} event 
+	 * @memberof ListPage
+	 */
   moveItem(event) {
     let item = event.item;
     if (event.toShopingList) {
@@ -308,7 +356,11 @@ export class ListPage {
       });
     }
   }
-
+  /**
+	 * Event to add a notification on that list
+	 * 
+	 * @memberof ListPage
+	 */
   addNotification() {
     let reminderModal = this.mod.create(RemindersComponent);
     reminderModal.onDidDismiss(data => {
@@ -334,14 +386,24 @@ export class ListPage {
     });
     reminderModal.present();
   }
-
+  /**
+	 * Event to remove selected items
+	 * 
+	 * @param {string[]} removed 
+	 * @memberof ListPage
+	 */
   removeElements(removed: string[]) {
     removed.forEach(itemRemoved => {
       this.list = this.list.filter(item => item.nombreElemento !== itemRemoved);
       this.globalVars.setListData(this.selectedItem, this.list);
     });
   }
-
+  /**
+	 * Event to add a new item
+	 * 
+	 * @param {any} event 
+	 * @memberof ListPage
+	 */
   addItem(event) {
     let newItem = {
       category: this.defaultCategory,

@@ -1,11 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AlertController, ToastController } from 'ionic-angular';
-
 /**
- * Generated class for the BottomButtonsComponent component.
- *
- * See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
- * for more info on Angular Components.
+ * Bottom button component to use on App pages
+ * 
+ * @export
+ * @class BottomButtonsComponent
  */
 @Component({
   selector: 'bottom-buttons-component',
@@ -30,16 +29,30 @@ export class BottomButtonsComponent {
     private alertCtrl: AlertController,
     private toastCtrl: ToastController
   ) {}
-
+  /**
+	 * Method on response of notification button pushed
+	 * 
+	 * @memberof BottomButtonsComponent
+	 */
   setNotification() {
     console.log('setNotification');
     this.finishNotification.emit();
   }
-
+  /**
+	 * Method on response of save or recover button pushed
+	 * 
+	 * @param {Event} event Event object associated
+	 * @memberof BottomButtonsComponent
+	 */
   saveRecoverList(event: Event) {
     console.log('saveRecoverList');
   }
-
+  /**
+	 * Method on response of remove button pushed
+	 * 
+	 * @param {Event} event Event object associated
+	 * @memberof BottomButtonsComponent
+	 */
   removeItems(event: Event) {
     let remove = this.alertCtrl.create();
     remove.setTitle('Remove');
@@ -85,7 +98,12 @@ export class BottomButtonsComponent {
     });
     if (existElements) remove.present();
   }
-
+  /**
+	 * Method on response of add button pushed
+	 * 
+	 * @param {Event} event Event object associated
+	 * @memberof BottomButtonsComponent
+	 */
   addItem(event: Event) {
     let type = this.type;
     if (type === 'List' || type === 'Item') {

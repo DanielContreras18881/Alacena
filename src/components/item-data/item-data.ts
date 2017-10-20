@@ -16,18 +16,18 @@ import { AutoCompleteComponent } from 'ionic2-auto-complete';
 import { CategoriesService } from '../../providers/categories/categoriesService';
 import { ItemsOnList } from './items-on-list';
 
-/*
-  Generated class for the ItemData component.
-
-  See https://angular.io/docs/ts/latest/api/core/ComponentMetadata-class.html
-  for more info on Angular 2 Components.
-*/
+/**
+ * Component to show a form for a item of a list, in a modal window
+ * 
+ * @export
+ * @class Item
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'item',
   templateUrl: 'item-data.html',
   inputs: ['item', 'creating'],
   providers: [CategoriesService, ItemsOnList]
-  // outputs: ['remove', 'move', 'edit']
 })
 export class Item implements OnInit {
   @Input() item: ListItem;
@@ -53,7 +53,12 @@ export class Item implements OnInit {
   ngOnInit() {
     this.oldMeasurement = this.item.category.measurement;
   }
-
+  /**
+	 * Event to change measurement when unit step is changed
+	 * 
+	 * @param {any} measurement 
+	 * @memberof Item
+	 */
   changeUnitStep(measurement) {
     if (measurement === 'UNIDADES') {
       this.item.category.unitStep = 1;
@@ -83,11 +88,22 @@ export class Item implements OnInit {
     this.oldMeasurement = this.item.category.measurement;
     this.save.emit(this.item);
   }
-
+  /**
+	 * Event change on a new unit step selected
+	 * 
+	 * @param {any} event 
+	 * @memberof Item
+	 */
   onChange(event) {
     this.changeUnitStep(this.item.category.measurement);
   }
-
+  /**
+	 * Event on plus button pushed
+	 * 
+	 * @param {any} event 
+	 * @param {any} amount 
+	 * @memberof Item
+	 */
   plusElement(event, amount) {
     if (amount) {
       let added: number =
@@ -100,6 +116,13 @@ export class Item implements OnInit {
     }
     this.save.emit(this.item);
   }
+  /**
+		* Event on minus button pushed
+		* 
+		* @param {any} event 
+		* @param {any} amount 
+		* @memberof Item
+	   */
   minusElement(event, amount) {
     if (amount) {
       let removed: number =
@@ -155,7 +178,12 @@ export class Item implements OnInit {
       this.save.emit(this.item);
     }
   }
-
+  /**
+	 * Check if the expiry date needs to be shown
+	 * 
+	 * @param {ListItem} item 
+	 * @memberof Item
+	 */
   showExpiryDate(item: ListItem) {
     let text = this.checkExpiryDate(item.fechaCaducidad);
     // TODO: Translate text variable
@@ -172,6 +200,13 @@ export class Item implements OnInit {
     });
     toast.present();
   }
+  /**
+	* Check expiry date of the item
+	* 
+	* @param {any} expiryDate 
+	* @returns 
+	* @memberof Item
+	*/
   checkExpiryDate(expiryDate) {
     if (moment().isAfter(moment(expiryDate, 'YYYY-MM-DDTHH:mm:ss.SSSZ'))) {
       return 'expired';
@@ -187,35 +222,61 @@ export class Item implements OnInit {
       }
     }
   }
-  // TODO: check these functions, their need and their functionality
-
+  /**
+	 * Mark item on the shopping list
+	 * 
+	 * @param {any} event 
+	 * @memberof Item
+	 */
   markItem(event) {
-    console.log('markItem');
     this.item.marked = !this.item.marked;
     this.save.emit(this.item);
   }
-
+  /**
+	 * Edit item event
+	 * 
+	 * @param {any} event 
+	 * @memberof Item
+	 */
   editItem(event) {
-    console.log('editItem:' + JSON.stringify(this.item));
     this.edit.emit(this.item);
   }
-
+  /**
+	 * Remove item event
+	 * 
+	 * @param {any} event 
+	 * @memberof Item
+	 */
   removeItem(event) {
-    console.log('removeItem');
     this.remove.emit(this.item);
   }
-
+  /**
+	 * Move item event
+	 * 
+	 * @param {any} event 
+	 * @memberof Item
+	 */
   moveItem(event) {
-    console.log('moveItem');
     this.move.emit({ item: this.item, toShopingList: false });
   }
-
+  /**
+	 * Event to edit category of the item
+	 * 
+	 * @param {any} event 
+	 * @memberof Item
+	 */
   editCategory(event) {
     this.catService.changeCategory(this.item.category, this.item).then(data => {
       this.item = <ListItem>data;
       this.changeUnitStep(this.item.category.measurement);
     });
   }
+  /**
+	* Event on selected result on the search input results
+	* 
+	* @param {any} event 
+	* @memberof Item
+	*/
   seleccionado(event) {
     if (event) {
       this.item.nombreElemento = event.nombreElemento;

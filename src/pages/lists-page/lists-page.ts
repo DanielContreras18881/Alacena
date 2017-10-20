@@ -6,14 +6,12 @@ import {
   ModalController,
   NavController,
   NavParams,
-  PopoverController,
   ToastController
 } from 'ionic-angular';
 
 import { ListItem } from '../../classes/listItem';
 import { List } from '../../classes/list';
 
-import { PopoverPage } from '../../components/popover/popover';
 import { OrderBy } from '../../pipes/orderBy';
 import { GlobalVars } from '../../providers/global-vars/global-vars';
 import { ListPage } from '../list-page/list-page';
@@ -21,10 +19,10 @@ import { ListPage } from '../list-page/list-page';
 import { Color } from '../../classes/color';
 
 /**
- * Generated class for the ListsPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * Page to manage the list of lists
+ * 
+ * @export
+ * @class ListsPage
  */
 @IonicPage()
 @Component({
@@ -42,7 +40,6 @@ export class ListsPage {
     private navParams: NavParams,
     private mod: ModalController,
     private alertCtrl: AlertController,
-    private popoverCtrl: PopoverController,
     private globalVars: GlobalVars,
     private toastCtrl: ToastController
   ) {}
@@ -53,31 +50,33 @@ export class ListsPage {
       this.reorderAllowed = false;
     });
   }
-
-  onShowOptions(event: MouseEvent) {
-    const popover = this.popoverCtrl.create(
-      PopoverPage,
-      {},
-      { cssClass: 'popover', showBackdrop: true, enableBackdropDismiss: true }
-    );
-    popover.present({ ev: event });
-    popover.onDidDismiss(data => {
-      if (!data) {
-        return;
-      }
-    });
-  }
-
+  /**
+	 * Event to allow reorder the lists or not
+	 * 
+	 * @param {any} event 
+	 * @memberof ListsPage
+	 */
   reorder(event) {
     this.reorderAllowed = !this.reorderAllowed;
   }
-
+  /**
+	 * Event to reorder lists as user select
+	 * 
+	 * @param {any} indexes 
+	 * @memberof ListsPage
+	 */
   reorderItems(indexes) {
     let element = this.lists[indexes.from];
     this.lists.splice(indexes.from, 1);
     this.lists.splice(indexes.to, 0, element);
   }
-
+  /**
+	 * Event to remove a list
+	 * 
+	 * @param {any} event 
+	 * @param {string} name 
+	 * @memberof ListsPage
+	 */
   removeList(event, name: string) {
     let confirm = this.alertCtrl.create({
       title: 'Removing ' + name,
@@ -101,6 +100,13 @@ export class ListsPage {
     });
     confirm.present();
   }
+  /**
+		* Event to edit the color of a list
+		* 
+		* @param {any} event 
+		* @param {List} list 
+		* @memberof ListsPage
+	   */
   editColor(event, list: List) {
     this.globalVars.getColorsData().then(data => {
       let buttons: any = [];
@@ -125,6 +131,13 @@ export class ListsPage {
       actionSheet.present();
     });
   }
+  /**
+		* Event to edit the name of a list
+		* 
+		* @param {any} event 
+		* @param {List} list 
+		* @memberof ListsPage
+	   */
   editList(event, list: List) {
     let oldName = list.nombreLista;
     let edit = this.alertCtrl.create({
@@ -161,7 +174,12 @@ export class ListsPage {
 
     edit.present();
   }
-
+  /**
+	 * Event to add a new list
+	 * 
+	 * @param {string} newList 
+	 * @memberof ListsPage
+	 */
   addList(newList: string) {
     if (
       this.lists.filter(
@@ -185,7 +203,12 @@ export class ListsPage {
       toast.present();
     }
   }
-
+  /**
+	 * Event to remove a list of lists selected
+	 * 
+	 * @param {string[]} removed 
+	 * @memberof ListsPage
+	 */
   removeLists(removed: string[]) {
     this.lists = this.lists.filter(
       list => removed.indexOf(list.nombreLista) < 0
@@ -195,7 +218,13 @@ export class ListsPage {
       this.globalVars.removetItemListData(listToRemove);
     });
   }
-
+  /**
+	 * Event to navigate to selected list
+	 * 
+	 * @param {any} event 
+	 * @param {List} list 
+	 * @memberof ListsPage
+	 */
   listSelected(event, list: List) {
     this.nav.push(ListPage, {
       list: list

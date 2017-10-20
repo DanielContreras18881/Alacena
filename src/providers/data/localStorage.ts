@@ -5,17 +5,23 @@ import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 
 declare var cordova: any;
-
-/*
-  Generated class for the Data provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
+/**
+ * Provider to manage data on a local db
+ * 
+ * @export
+ * @class LocalStorage
+ */
 @Injectable()
 export class LocalStorage {
   constructor(private http: Http, private storage: Storage) {}
-
+  /**
+	 * Get data from local db
+	 * 
+	 * @param {string} name 
+	 * @param {string} path 
+	 * @returns 
+	 * @memberof LocalStorage
+	 */
   getFromLocal(name: string, path: string) {
     return new Promise((resolve, reject) => {
       this.storage
@@ -43,11 +49,22 @@ export class LocalStorage {
         });
     });
   }
-
+  /**
+	 * Store data on local db
+	 * 
+	 * @param {string} name 
+	 * @param {*} data 
+	 * @memberof LocalStorage
+	 */
   setToLocal(name: string, data: any) {
     this.storage.set(name, data);
   }
-
+  /**
+	 * Remove data from local db
+	 * 
+	 * @param {string} name 
+	 * @memberof LocalStorage
+	 */
   removeFromLocal(name: string) {
     this.storage.remove(name);
   }

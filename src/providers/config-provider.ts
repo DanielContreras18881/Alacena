@@ -6,12 +6,12 @@ import { LocalStorage } from './data/localStorage';
 import { Network } from '@ionic-native/network';
 
 declare var cordova: any;
-/*
-  Generated class for the ConfigProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
+/**
+ * Provider to manage config data
+ * 
+ * @export
+ * @class ConfigProvider
+ */
 @Injectable()
 export class ConfigProvider {
   configData: any = null;
@@ -23,7 +23,13 @@ export class ConfigProvider {
     private network: Network,
     private plt: Platform
   ) {}
-
+  /**
+	 * Save config data
+	 * 
+	 * @param {*} data 
+	 * @param {*} userProfile 
+	 * @memberof ConfigProvider
+	 */
   setConfigData(data: any, userProfile: any) {
     let arrData = [];
     arrData.push(data);
@@ -41,13 +47,20 @@ export class ConfigProvider {
       this.localStorage.setToLocal('config', data);
     }
   }
-
+  /**
+	 * Recover config data
+	 * 
+	 * @param {*} userProfile 
+	 * @returns {*} 
+	 * @memberof ConfigProvider
+	 */
   getConfigData(userProfile: any): any {
     return new Promise(resolve => {
       if (userProfile) {
         if (!this.plt.is('ios') && !this.plt.is('android')) {
           this.cloudStorage.loadConfigData(userProfile.uid).then(data => {
             if (data !== undefined && data !== null) {
+              console.log('data:' + JSON.stringify(data[0]));
               this.localStorage.setToLocal('config', data[0]);
               resolve(data[0]);
             } else {
@@ -97,7 +110,12 @@ export class ConfigProvider {
       }
     });
   }
-
+  /**
+	 * Recover old version app config data
+	 * 
+	 * @returns {*} 
+	 * @memberof ConfigProvider
+	 */
   getOldConfigData(): any {
     return new Promise(resolve => {
       this.localStorage.getFromLocal('configData', null).then(data => {

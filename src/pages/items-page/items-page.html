@@ -61,9 +61,6 @@
 							<h2>{{item.nombreElemento}}</h2>
 						</ion-item>
 					</ion-col>
-					<ion-col width-10 *ngIf="enableSelectToRemove">
-						<ion-checkbox danger (click)="selectedItem($event,item)"></ion-checkbox>
-					</ion-col>
 				</ion-row>
 				<ion-row width-100 *ngIf="item.lists">
 					<ion-item (click)="discardOrShop($event,item)" *ngIf="item.lists.length==0">

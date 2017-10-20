@@ -1,22 +1,22 @@
-import { GlobalVars } from "../global-vars/global-vars";
-import { Injectable } from "@angular/core";
-import { NgZone } from "@angular/core";
-import { GooglePlus } from "@ionic-native/google-plus";
-import firebase from "firebase";
-import { Platform } from "ionic-angular";
+import { GlobalVars } from '../global-vars/global-vars';
+import { Injectable } from '@angular/core';
+import { NgZone } from '@angular/core';
+import { GooglePlus } from '@ionic-native/google-plus';
+import firebase from 'firebase';
+import { Platform } from 'ionic-angular';
 
 declare var gapi: any;
 declare var self: any;
-/*
-  Generated class for the AuthService provider
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
-
+/**
+ * Servie to manage login and logout on the cloud services for the app
+ * 
+ * @export
+ * @class AuthService
+ */
 @Injectable()
 export class AuthService {
   userProfile: any = null;
+  type: string = 'google';
   zone: NgZone;
 
   constructor(
@@ -37,54 +37,90 @@ export class AuthService {
       });
     });
   }
-  logout(type: string) {
-    console.log(type);
+  /**
+	* Logout of the user
+	* 
+	* @param {string} type 
+	* @returns 
+	* @memberof AuthService
+   */
+  logout() {
+    console.log(this.type);
+    this.globalVars.disconnectUser();
     return new Promise(resolve => {
       self = this;
-      switch (type) {
-        case "twitter":
-          resolve("OK");
+      switch (this.type) {
+        case 'twitter':
+          resolve('OK');
           break;
-        case "google":
+        case 'google':
           firebase.auth().signOut();
           this.userProfile = null;
           self.globalVars.setUserProfile(null);
-          resolve("OK");
+          resolve('OK');
           break;
-        case "facebook":
-          resolve("OK");
+        case 'facebook':
+          resolve('OK');
           break;
-        case "email":
-          resolve("OK");
+        case 'email':
+          resolve('OK');
           break;
       }
     });
   }
+  /**
+	* Login with twitter
+	* 
+	* @returns 
+	* @memberof AuthService
+   */
   twitterLogin() {
+    this.type = 'twitter';
     return new Promise(resolve => {
-      resolve("twitter");
+      resolve('twitter');
     });
   }
+  /**
+	* Login with facebook
+	* 
+	* @returns 
+	* @memberof AuthService
+   */
   facebookLogin() {
+    this.type = 'facebook';
     return new Promise(resolve => {
-      resolve("facebook");
+      resolve('facebook');
     });
   }
+  /**
+	* Login with email
+	* 
+	* @returns 
+	* @memberof AuthService
+   */
   emailLogin() {
+    this.type = 'email';
     return new Promise(resolve => {
-      resolve("email");
+      resolve('email');
     });
   }
+  /**
+	* Login with google
+	* 
+	* @returns 
+	* @memberof AuthService
+   */
   googleAuth() {
+    this.type = 'google';
     return new Promise(resolve => {
       self = this;
       var provider = new firebase.auth.GoogleAuthProvider();
       var res = null;
-      if (this.plt.is("ios") || this.plt.is("android")) {
+      if (this.plt.is('ios') || this.plt.is('android')) {
         this.googlePlus
           .login({
             webClientId:
-              "354280052179-fkmk7g20grbpkctmdgtt53oiel3be7a1.apps.googleusercontent.com",
+              '354280052179-fkmk7g20grbpkctmdgtt53oiel3be7a1.apps.googleusercontent.com',
             offline: true
           })
           .then(res => {
@@ -96,24 +132,27 @@ export class AuthService {
               .then(success => {
                 this.userProfile = success.user;
                 self.globalVars.setUserProfile(this.userProfile);
-                resolve("google");
+                resolve('google');
               })
               .catch(error =>
-                resolve("Firebase failure: " + JSON.stringify(error))
+                resolve('Firebase failure: ' + JSON.stringify(error))
               );
           })
-          .catch(err => resolve("Error: " + JSON.stringify(err)));
+          .catch(err => resolve('Error: ' + JSON.stringify(err)));
       } else {
-        firebase.auth().signInWithRedirect(provider).then(
-          result => {
-            this.userProfile = result.user;
-            self.globalVars.setUserProfile(this.userProfile);
-            resolve("google");
-          },
-          error => {
-            resolve("Firebase failure: " + JSON.stringify(error));
-          }
-        );
+        firebase
+          .auth()
+          .signInWithRedirect(provider)
+          .then(
+            result => {
+              this.userProfile = result.user;
+              self.globalVars.setUserProfile(this.userProfile);
+              resolve('google');
+            },
+            error => {
+              resolve('Firebase failure: ' + JSON.stringify(error));
+            }
+          );
       }
     });
   }

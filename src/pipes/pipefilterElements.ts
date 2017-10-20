@@ -1,12 +1,13 @@
 import { ListItem } from '../classes/listItem';
 import { Injectable, Pipe, PipeTransform } from '@angular/core';
 
-/*
-  Generated class for the PipeElementLists pipe.
-
-  See https://angular.io/docs/ts/latest/guide/pipes.html for more info on
-  Angular 2 Pipes.
-*/
+/**
+ * Pipe to filter elements on a list
+ * 
+ * @export
+ * @class PipeFilterElements
+ * @implements {PipeTransform}
+ */
 @Pipe({
   name: 'pipefilterElements'
 })

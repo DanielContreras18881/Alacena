@@ -25,8 +25,6 @@ declare var cordova: any;
 export class Alacena {
   @ViewChild(Nav) nav: Nav;
 
-  userProfile: any = null;
-
   rootPage = DashboardPage;
 
   pages: Array<{ title: string; icon: string; component: any }>;
@@ -47,7 +45,7 @@ export class Alacena {
         this.globalVars.getOldData();
       }
     });
-
+    //Firebase configuration
     firebase.initializeApp({
       apiKey: 'AIzaSyCq_XZBezFcC_iAWa-i12swT0YL9sqvjfM', //Firebase
       //apiKey: "AIzaSyCYbNChWjDtLYXkm_ayPQeb4t4TjWDXWd0",//GoogleDevConsole
@@ -59,11 +57,12 @@ export class Alacena {
     });
 
     platform.ready().then(() => {
+      //Initial platform configuration
       this.splashScreen.hide();
       this.statusBar.styleBlackTranslucent();
       this.statusBar.backgroundColorByHexString('#222');
-      this.statusBar.overlaysWebView(true);
-
+      this.statusBar.overlaysWebView(false);
+      //Admob Configuration
       let adMobId = 'ca-app-pub-7863580056712493/6709912168';
       if (platform.is('android')) {
         // for android
@@ -72,13 +71,10 @@ export class Alacena {
         // for ios
         adMobId = 'ca-app-pub-7863580056712493/9663378563';
       }
-      console.log('app:run:AdMob Banner inicializado');
-      console.log('app:run:' + adMobId);
+      //Show admob banner
       const bannerConfig: AdMobFreeBannerConfig = {
-        // add your config here
-        // for the sake of this example we will just use the test config
         id: adMobId,
-        isTesting: true,
+        isTesting: true, //remove for production
         autoShow: true,
         overlap: false
       };
@@ -86,15 +82,11 @@ export class Alacena {
       this.admobFree.banner
         .prepare()
         .then(() => {
-          // banner Ad is ready
-          // if we set autoShow to false, then we will need to call the show method here
           this.admobFree.banner.show();
         })
         .catch(e => console.log(e));
     });
-
-    //loading: any;
-
+    //List of pages for side menu
     this.pages = [
       { title: 'Inicio', component: DashboardPage, icon: 'contact' },
       { title: 'LISTA_COMPRA', component: ListPage, icon: 'basket' },
@@ -106,21 +98,16 @@ export class Alacena {
       { title: 'About', component: AboutPage, icon: 'information-circle' }
     ];
   }
-
+  /**
+	 * Open a page from side menu
+	 * 
+	 * @param {any} page Object with the page information
+	 * @memberof Alacena
+	 */
   openPage(page) {
-    // close the menu when clicking a link from the menu
     this.menu.close();
-
-    // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component, {
       list: page.title
     });
-  }
-
-  pushPage(page) {
-    // close the menu when clicking a link from the menu
-    this.menu.close();
-    // rootNav is now deprecated (since beta 11) (https://forum.ionicframework.com/t/cant-access-rootnav-after-upgrade-to-beta-11/59889)
-    this.app.getRootNav().push(page.component);
   }
 }

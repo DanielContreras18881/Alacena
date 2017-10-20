@@ -3,12 +3,12 @@ import { Component } from '@angular/core';
 
 import { ViewController, NavController, NavParams } from 'ionic-angular';
 
-/*
-  Generated class for the ListIcons page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+/**
+ * Component to show a list of icons to choose, on a modal window
+ * 
+ * @export
+ * @class ListIconsPage
+ */
 @Component({
   templateUrl: 'list-icons.html'
 })
@@ -25,12 +25,22 @@ export class ListIconsPage {
     this.icons = this.params.get('icons');
     this.selectedIcon = <Icon>{};
   }
-
+  /**
+	 * Selected icon event
+	 * 
+	 * @param {any} event 
+	 * @param {any} icon 
+	 * @memberof ListIconsPage
+	 */
   selected(event, icon) {
     this.selectedIcon = icon;
     this.view.dismiss(this.selectedIcon);
   }
-
+  /**
+	 * Close modal window
+	 * 
+	 * @memberof ListIconsPage
+	 */
   close() {
     this.view.dismiss();
   }

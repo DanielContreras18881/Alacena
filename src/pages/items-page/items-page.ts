@@ -18,12 +18,11 @@ import { PipeFilterElements } from '../../pipes/pipefilterElements';
 import { CategoriesService } from '../../providers/categories/categoriesService';
 import { GlobalVars } from '../../providers/global-vars/global-vars';
 import { ItemInfoPage } from '../../components/item-info/item-info';
-
 /**
- * Generated class for the ItemsPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * Page to manage items on the app
+ * 
+ * @export
+ * @class ItemsPage
  */
 @IonicPage()
 @Component({
@@ -37,8 +36,6 @@ export class ItemsPage {
   searchBar: boolean;
   searchItem: string;
   icons: Icon[];
-  enableSelectToRemove: boolean;
-  itemsToRemove: Item[];
   orderSelected: number = 1;
   shoppingList: ListItem[] = [];
   defaultCategory: Category;
@@ -55,9 +52,7 @@ export class ItemsPage {
   ) {}
 
   ionViewDidLoad() {
-    this.itemsToRemove = [];
     this.searchBar = false;
-    this.enableSelectToRemove = false;
     this.globalVars.getDefaulIconsData().then(data => {
       this.icons = <Icon[]>data;
       this.initializeItems(null);
@@ -69,7 +64,12 @@ export class ItemsPage {
       this.defaultCategory = (<any>data).categoryDefault;
     });
   }
-
+  /**
+	 * Initialize items data
+	 * 
+	 * @param {string} filter 
+	 * @memberof ItemsPage
+	 */
   initializeItems(filter: string) {
     this.globalVars.getItemsData().then(data => {
       this.items = <Item[]>data;
@@ -106,7 +106,12 @@ export class ItemsPage {
       });
     });
   }
-
+  /**
+	 * Event to search items based on input filled
+	 * 
+	 * @param {any} event 
+	 * @memberof ItemsPage
+	 */
   searchMatches(event) {
     if (this.searchItem && this.searchItem.trim() !== '') {
       this.initializeItems(this.searchItem);
@@ -114,17 +119,34 @@ export class ItemsPage {
       this.initializeItems(null);
     }
   }
-
+  /**
+	 * Event to show or hide search bar
+	 * 
+	 * @param {any} event 
+	 * @memberof ItemsPage
+	 */
   toggleSearchBar(event) {
     this.searchBar = !this.searchBar;
   }
-
+  /**
+	 * Event to change category of the item
+	 * 
+	 * @param {any} event 
+	 * @param {Item} item 
+	 * @memberof ItemsPage
+	 */
   changeItemCategory(event, item: Item) {
     this.catService.changeCategory(item.category, item).then(data => {
       item = <Item>data;
     });
   }
-
+  /**
+	 * Event to remove a item
+	 * 
+	 * @param {any} event 
+	 * @param {Item} item 
+	 * @memberof ItemsPage
+	 */
   removeItem(event, item: Item) {
     let confirm = this.alertCtrl.create({
       title: 'Removing ' + item.nombreElemento,
@@ -147,7 +169,12 @@ export class ItemsPage {
     });
     confirm.present();
   }
-
+  /**
+	 * Event to show events to send to shopping list
+	 * 
+	 * @param {any} event 
+	 * @memberof ItemsPage
+	 */
   selectToSendShoppingList(event) {
     let move = this.alertCtrl.create();
     move.setTitle('Move to LISTA_COMPRA');
@@ -193,7 +220,13 @@ export class ItemsPage {
     });
     move.present();
   }
-
+  /**
+	 * Event to confirm to send to shopping list or discard elements
+	 * 
+	 * @param {any} event 
+	 * @param {Item} item 
+	 * @memberof ItemsPage
+	 */
   discardOrShop(event, item: Item) {
     let discardRemove = this.alertCtrl.create();
     discardRemove.setTitle(
@@ -214,45 +247,12 @@ export class ItemsPage {
     });
     discardRemove.present();
   }
-
-  selectToRemove(event) {
-    let remove = this.alertCtrl.create();
-    remove.setTitle('Remove items');
-
-    remove.addInput({
-      type: 'radio',
-      label: 'Empty items',
-      value: 'empty',
-      checked: false
-    });
-
-    remove.addInput({
-      type: 'radio',
-      label: 'Selected',
-      value: 'selected',
-      checked: false
-    });
-
-    remove.addButton('Cancel');
-    remove.addButton({
-      text: 'OK',
-      handler: data => {
-        if (data === 'selected') {
-          this.itemsToRemove = [];
-          this.enableSelectToRemove = !this.enableSelectToRemove;
-        }
-        if (data === 'empty') {
-        }
-      }
-    });
-    remove.present();
-  }
-
-  selectedItem(event, item: Item) {
-    console.log('Item selected' + JSON.stringify(item));
-    this.itemsToRemove.push(item);
-  }
-
+  /**
+	* Event to remove selected items
+	* 
+	* @param {string[]} removed 
+	* @memberof ItemsPage
+   */
   removeElements(removed: string[]) {
     removed.forEach(itemRemoved => {
       this.items = this.items.filter(
@@ -261,15 +261,13 @@ export class ItemsPage {
       this.globalVars.setItemsData(this.items);
     });
   }
-
-  removeItems(event) {
-    this.itemsToRemove.forEach((item, index) => {
-      this.items.splice(this.items.indexOf(item), 1);
-    });
-    this.itemsToRemove = [];
-    this.enableSelectToRemove = !this.enableSelectToRemove;
-  }
-
+  /**
+	 * Event to edit a item
+	 * 
+	 * @param {any} event 
+	 * @param {Item} item 
+	 * @memberof ItemsPage
+	 */
   editItem(event, item: Item) {
     let oldItem = item.nombreElemento;
     let edit = this.alertCtrl.create({
@@ -303,7 +301,12 @@ export class ItemsPage {
     });
     edit.present();
   }
-
+  /**
+	 * Even to add a new item
+	 * 
+	 * @param {string} newItem 
+	 * @memberof ItemsPage
+	 */
   addItem(newItem: string) {
     if (
       this.items.filter(
@@ -324,7 +327,12 @@ export class ItemsPage {
       toast.present();
     }
   }
-
+  /**
+	 * Event to sort items
+	 * 
+	 * @param {number} orderBy 
+	 * @memberof ItemsPage
+	 */
   sortItems(orderBy: number) {
     this.orderSelected = orderBy;
     switch (orderBy) {
@@ -347,7 +355,12 @@ export class ItemsPage {
         break;
     }
   }
-
+  /**
+	 * Even to show options to sort items
+	 * 
+	 * @param {any} event 
+	 * @memberof ItemsPage
+	 */
   reorder(event) {
     let reorder = this.alertCtrl.create();
     reorder.setTitle('Sort by');
@@ -383,7 +396,13 @@ export class ItemsPage {
 
     reorder.present();
   }
-
+  /**
+	 * Event to send a item to shopping list
+	 * 
+	 * @param {any} event 
+	 * @param {ListItem} item 
+	 * @memberof ItemsPage
+	 */
   sendToShoppingList(event, item: ListItem) {
     let itemSelected = this.items[this.items.indexOf(item)];
     let newShoppingListItem: ListItem = {

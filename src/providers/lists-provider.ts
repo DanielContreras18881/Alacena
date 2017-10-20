@@ -8,6 +8,12 @@ import { Network } from '@ionic-native/network';
 import { List } from '../classes/list';
 
 declare var cordova: any;
+/**
+ * Provider to manage lists data
+ * 
+ * @export
+ * @class ListsProvider
+ */
 @Injectable()
 export class ListsProvider {
   path = 'assets/json/Listas.json';
@@ -19,6 +25,13 @@ export class ListsProvider {
     private network: Network,
     private plt: Platform
   ) {}
+  /**
+	* Get colors data from local file
+	* 
+	* @param {*} userProfile 
+	* @returns {*} 
+	* @memberof ListsProvider
+   */
   getColorsData(userProfile: any): any {
     return new Promise(resolve => {
       this.localStorage.getFromLocal('colors', this.colors).then(data => {
@@ -30,7 +43,13 @@ export class ListsProvider {
       });
     });
   }
-
+  /**
+	 * Save lists data
+	 * 
+	 * @param {*} lists 
+	 * @param {*} userProfile 
+	 * @memberof ListsProvider
+	 */
   setListsData(lists: any, userProfile: any): void {
     if (userProfile) {
       if (!this.plt.is('ios') && !this.plt.is('android')) {
@@ -46,7 +65,13 @@ export class ListsProvider {
       this.localStorage.setToLocal('lists', lists);
     }
   }
-
+  /**
+	 * Recover lists data
+	 * 
+	 * @param {*} userProfile 
+	 * @returns {*} 
+	 * @memberof ListsProvider
+	 */
   getListsData(userProfile: any): any {
     return new Promise(resolve => {
       if (userProfile) {
@@ -102,7 +127,12 @@ export class ListsProvider {
       }
     });
   }
-
+  /**
+	 * Recover old version app lists data
+	 * 
+	 * @returns {*} 
+	 * @memberof ListsProvider
+	 */
   getOldLists(): any {
     return new Promise(resolve => {
       this.localStorage.getFromLocal('listas', null).then(data => {

@@ -2,7 +2,12 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { AppVersion } from '@ionic-native/app-version';
 import { Platform } from 'ionic-angular';
-
+/**
+ * Page to show data about the author, the app, tutorials and a contact form
+ * 
+ * @export
+ * @class AboutPage
+ */
 @IonicPage()
 @Component({
   selector: 'page-about-page',

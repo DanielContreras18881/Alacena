@@ -1,22 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-
-/*
-  Generated class for the BackupData provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
-
-// TODO: add backup functionality to local files
-
+/**
+ * Service to manage backup local data for the user
+ * 
+ * @export
+ * @class BackupData
+ */
 @Injectable()
 export class BackupData {
   data: any = null;
 
   constructor(public http: Http) {}
-
+  // TODO: add backup functionality to local files
   load() {
     if (this.data) {
       // already loaded data

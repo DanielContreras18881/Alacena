@@ -25607,9 +25607,14 @@ ion-auto-complete ul li:hover {
   border: none;
 }
 
+.item-md ion-avatar {
+  padding-left: 35%;
+}
+
 .item-header-toolbar-avatar img.icon {
-  border-radius: 0;
-  margin-left: -.15rem;
+  background-color: transparent;
+  border-radius: 1;
+  margin: 0 auto;
 }
 
 .item-md.item-block .item-inner {
@@ -25911,16 +25916,6 @@ page-dashboard-page p.item-info .ion-md-cart:before {
   font-size: 1.65rem;
 }
 
-page-dashboard-page .userAccountIcon {
-  font-size: 2.25rem;
-  color: #167140 !important;
-}
-
-page-dashboard-page .userAccountLabel {
-  color: #167140 !important;
-  white-space: normal;
-}
-
 page-dashboard-page .reminderIcon {
   font-size: 2.25rem;
   color: #320440;
@@ -25932,14 +25927,24 @@ page-dashboard-page .reminderLabel {
   white-space: normal;
 }
 
+page-dashboard-page .userAccountIcon {
+  font-size: 2.25rem;
+  color: #cc0a00 !important;
+}
+
+page-dashboard-page .userAccountLabel {
+  color: #cc0a00 !important;
+  white-space: normal;
+}
+
 page-dashboard-page .neededsIcon {
   font-size: 2.25rem;
-  color: #f43300;
+  color: #f4bb00;
 }
 
 page-dashboard-page .neededsLabel {
   font-size: 1.5rem !important;
-  color: #f43300;
+  color: #f4bb00;
   white-space: normal;
 }
 

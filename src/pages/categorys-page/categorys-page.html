@@ -61,9 +61,6 @@
 							<ion-input text-right [(ngModel)]="category.unitStep" min="1" type="number"></ion-input>
 						</ion-item>
 					</ion-col>
-					<ion-col width-10 *ngIf="enableSelectToRemove">
-						<ion-checkbox danger (click)="selectedCategory($event,category)"></ion-checkbox>
-					</ion-col>
 				</ion-row>
 			</ion-card-header>
 		</ion-card>

@@ -48,6 +48,7 @@
 				</ion-grid>
 			</ion-card-header>
 		</ion-card>
+		<!--
 		<ion-card *ngIf="userProfile">
 			<ion-card-header>
 				<ion-item (click)="logout()">
@@ -61,11 +62,11 @@
 							<img [src]="userProfile.photoURL">
 						</ion-avatar>
 						<h3 class="userAccountLabel">{{ userProfile.displayName }}</h3>
-						<!--<h3>{{ userProfile.email }}</h3>-->
 					</ion-item>
 				</ion-item>
 			</ion-card-header>
 		</ion-card>
+	-->
 		<ion-card *ngIf="reminders">
 			<ion-card-header>
 				<ion-item (click)="showReminders()">
@@ -136,6 +137,20 @@
 						</p>
 					</ion-item>
 				</ion-list>
+			</ion-card-header>
+		</ion-card>
+		<ion-card *ngIf="userProfile">
+			<ion-card-header>
+				<ion-item (click)="logout()">
+					<ion-avatar item-right>
+						<button clear danger>
+							<ion-icon class="userAccountIcon" ios="ios-log-out" md="md-log-out"></ion-icon>
+						</button>
+					</ion-avatar>
+					<ion-item>
+						<h3 class="userAccountLabel">{{ userProfile.displayName }}</h3>
+					</ion-item>
+				</ion-item>
 			</ion-card-header>
 		</ion-card>
 	</ion-list>

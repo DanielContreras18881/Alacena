@@ -8,12 +8,12 @@ import { LocalStorage } from './data/localStorage';
 import { Network } from '@ionic-native/network';
 
 declare var cordova: any;
-/*
-  Generated class for the ItemsProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
+/**
+ * Provider to manage items data
+ * 
+ * @export
+ * @class ItemsProvider
+ */
 @Injectable()
 export class ItemsProvider {
   itemData: any = null;
@@ -25,7 +25,13 @@ export class ItemsProvider {
     private network: Network,
     private plt: Platform
   ) {}
-
+  /**
+	 * Save items data
+	 * 
+	 * @param {Item[]} items 
+	 * @param {*} userProfile 
+	 * @memberof ItemsProvider
+	 */
   setItemsData(items: Item[], userProfile: any): void {
     if (userProfile) {
       if (!this.plt.is('ios') && !this.plt.is('android')) {
@@ -41,7 +47,13 @@ export class ItemsProvider {
       this.localStorage.setToLocal('items', items);
     }
   }
-
+  /**
+	 * Recover items data
+	 * 
+	 * @param {any} userProfile 
+	 * @returns {*} 
+	 * @memberof ItemsProvider
+	 */
   getItemsData(userProfile): any {
     return new Promise(resolve => {
       if (userProfile) {
@@ -103,6 +115,11 @@ export class ItemsProvider {
       }
     });
   }
+  /**
+	* Recover old version app items
+	* 
+	* @memberof ItemsProvider
+   */
   getOldItems() {
     this.localStorage.getFromLocal('elementos', null).then(data => {
       if (data !== undefined && data !== null) {

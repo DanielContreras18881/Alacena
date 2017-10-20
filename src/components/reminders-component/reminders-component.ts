@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import moment from 'moment';
 
 import { ViewController, NavParams } from 'ionic-angular';
-
 /**
- * Generated class for the RemindersComponent component.
- *
- * See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
- * for more info on Angular Components.
+ * Component to show and control reminders for a list, on a modal window
+ * 
+ * @export
+ * @class RemindersComponent
  */
 @Component({
   selector: 'reminders-component',
@@ -26,11 +25,19 @@ export class RemindersComponent {
   constructor(private view: ViewController) {
     console.log(this.minDate);
   }
-
+  /**
+	 * Close modal saving data
+	 * 
+	 * @memberof RemindersComponent
+	 */
   save() {
     this.view.dismiss(this.data);
   }
-
+  /**
+	 * Close modal discarding data
+	 * 
+	 * @memberof RemindersComponent
+	 */
   close() {
     this.view.dismiss();
   }

@@ -6,22 +6,26 @@ import 'rxjs/add/operator/map';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
-
-/*
-  Generated class for the Data provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
+/**
+ * Provider to manage cloud storage of logged user
+ * 
+ * @export
+ * @class CloudStorage
+ */
 @Injectable()
 export class CloudStorage {
   constructor(private http: Http) {}
-
+  /**
+	 * Get config data
+	 * 
+	 * @param {string} uid 
+	 * @returns 
+	 * @memberof CloudStorage
+	 */
   loadConfigData(uid: string) {
     return new Promise(resolve => {
       let ref = firebase.database().ref('/config/');
       ref.once('value').then(function(snapshot) {
-        // We need to create this array first to store our local data
         let object = JSON.parse(JSON.stringify(snapshot));
         if (object) {
           let configs = JSON.parse(JSON.stringify(object[uid]));
@@ -32,6 +36,7 @@ export class CloudStorage {
               configArray.push(config);
             }
           }
+          console.log('configArray:' + JSON.stringify(configArray));
           resolve(configArray);
         } else {
           resolve(null);
@@ -39,12 +44,17 @@ export class CloudStorage {
       });
     });
   }
-
+  /**
+	 * Get elements data
+	 * 
+	 * @param {string} uid 
+	 * @returns 
+	 * @memberof CloudStorage
+	 */
   loadElementData(uid: string) {
     return new Promise(resolve => {
       let ref = firebase.database().ref('/lists/');
       ref.once('value').then(function(snapshot) {
-        // We need to create this array first to store our local data
         let object = JSON.parse(JSON.stringify(snapshot));
         if (object) {
           let lists = JSON.parse(JSON.stringify(object[uid]));
@@ -62,7 +72,14 @@ export class CloudStorage {
       });
     });
   }
-
+  /**
+	 * Get data of a list provided
+	 * 
+	 * @param {string} name 
+	 * @param {string} uid 
+	 * @returns 
+	 * @memberof CloudStorage
+	 */
   loadListData(name: string, uid: string) {
     return new Promise(resolve => {
       let ref = firebase
@@ -94,7 +111,14 @@ export class CloudStorage {
       });
     });
   }
-
+  /**
+	 * Upload data for a list provided
+	 * 
+	 * @param {string} name 
+	 * @param {ListItem[]} data 
+	 * @param {string} uid 
+	 * @memberof CloudStorage
+	 */
   uploadListData(name: string, data: ListItem[], uid: string) {
     const storage = firebase.storage();
     let fileName = uid + '_' + name + '.json';
@@ -103,12 +127,8 @@ export class CloudStorage {
 
     uploadTask.on(
       'state_changed',
-      snapshot => {
-        console.log('snapshot progess ' + snapshot);
-      },
-      error => {
-        console.log(error);
-      },
+      snapshot => {},
+      error => {},
       () => {
         let dataToSave = {
           URL: uploadTask.snapshot.downloadURL,
@@ -123,7 +143,13 @@ export class CloudStorage {
       }
     );
   }
-
+  /**
+	 * Remove data of a list provided
+	 * 
+	 * @param {string} name 
+	 * @param {string} uid 
+	 * @memberof CloudStorage
+	 */
   removeListData(name: string, uid: string) {
     const storage = firebase.storage();
     let fileName = uid + '_' + name + '.json';
@@ -134,62 +160,69 @@ export class CloudStorage {
       .ref('listItems/' + uid + '_' + name)
       .remove();
   }
-
+  /**
+	 * Upload data of lists
+	 * 
+	 * @param {List[]} lists 
+	 * @param {string} uid 
+	 * @memberof CloudStorage
+	 */
   uploadListsData(lists: List[], uid: string) {
     firebase
       .database()
       .ref('lists/' + uid)
       .set(lists);
   }
-
+  /**
+	 * Upload config data
+	 * 
+	 * @param {*} configs 
+	 * @param {string} uid 
+	 * @memberof CloudStorage
+	 */
   uploadConfigData(configs: any, uid: string) {
     firebase
       .database()
       .ref('config/' + uid)
       .set(configs);
   }
-
+  /**
+	 * Upload elements data
+	 * 
+	 * @param {Item[]} items 
+	 * @param {string} uid 
+	 * @memberof CloudStorage
+	 */
   uploadItemsData(items: Item[], uid: string) {
     firebase
       .database()
       .ref('elements/' + uid)
       .set(items);
   }
-
+  /**
+	 * Upload categories data
+	 * 
+	 * @param {Category[]} categories 
+	 * @param {string} uid 
+	 * @memberof CloudStorage
+	 */
   uploadCategoriesData(categories: Category[], uid: string) {
     firebase
       .database()
       .ref('categories/' + uid)
       .set(categories);
   }
-
-  loadColorsData(uid: string) {
-    return new Promise(resolve => {
-      let ref = firebase.database().ref('/colors/');
-      ref.once('value').then(function(snapshot) {
-        // We need to create this array first to store our local data
-        let colorsList = JSON.parse(JSON.stringify(snapshot));
-        if (colorsList) {
-          let colorArray = [];
-          for (let key in colorsList) {
-            if (colorsList.hasOwnProperty(key)) {
-              let color = JSON.parse(JSON.stringify(colorsList[key]));
-              colorArray.push(color);
-            }
-          }
-          resolve(colorArray);
-        } else {
-          resolve(null);
-        }
-      });
-    });
-  }
-
+  /**
+	 * Get lists data
+	 * 
+	 * @param {string} uid 
+	 * @returns 
+	 * @memberof CloudStorage
+	 */
   loadListsData(uid: string) {
     return new Promise(resolve => {
       let ref = firebase.database().ref('/lists/');
       ref.once('value').then(function(snapshot) {
-        // We need to create this array first to store our local data
         let object = JSON.parse(JSON.stringify(snapshot));
         if (object) {
           let lists = JSON.parse(JSON.stringify(object[uid]));
@@ -207,12 +240,17 @@ export class CloudStorage {
       });
     });
   }
-
+  /**
+	 * Get elements data
+	 * 
+	 * @param {string} uid 
+	 * @returns 
+	 * @memberof CloudStorage
+	 */
   loadItemsData(uid: string) {
     return new Promise(resolve => {
       let ref = firebase.database().ref('/elements/');
       ref.once('value').then(function(snapshot) {
-        // We need to create this array first to store our local data
         let object = JSON.parse(JSON.stringify(snapshot));
         if (object) {
           let items = JSON.parse(JSON.stringify(object[uid]));
@@ -230,12 +268,17 @@ export class CloudStorage {
       });
     });
   }
-
+  /**
+	 * Get categories data
+	 * 
+	 * @param {string} uid 
+	 * @returns 
+	 * @memberof CloudStorage
+	 */
   loadCategoriesData(uid: string) {
     return new Promise(resolve => {
       let ref = firebase.database().ref('/categories/');
       ref.once('value').then(function(snapshot) {
-        // We need to create this array first to store our local data
         let object = JSON.parse(JSON.stringify(snapshot));
         if (object) {
           let categories = JSON.parse(JSON.stringify(object[uid]));

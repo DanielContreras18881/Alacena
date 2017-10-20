@@ -7,7 +7,12 @@ import { CloudStorage } from './data/cloudStorage';
 import { LocalStorage } from './data/localStorage';
 
 declare var cordova: any;
-
+/**
+ * Provider to manage categories data
+ * 
+ * @export
+ * @class CategorysProvider
+ */
 @Injectable()
 export class CategorysProvider {
   path = 'assets/json/categories.json';
@@ -18,6 +23,13 @@ export class CategorysProvider {
     private network: Network,
     private plt: Platform
   ) {}
+  /**
+	* Save categories data
+	* 
+	* @param {Category[]} data 
+	* @param {*} userProfile 
+	* @memberof CategorysProvider
+   */
   setCategoriesData(data: Category[], userProfile: any) {
     if (userProfile) {
       if (!this.plt.is('ios') && !this.plt.is('android')) {
@@ -33,7 +45,13 @@ export class CategorysProvider {
       this.localStorage.setToLocal('categories', data);
     }
   }
-
+  /**
+	 * Recover caegories data
+	 * 
+	 * @param {*} userProfile 
+	 * @returns {*} 
+	 * @memberof CategorysProvider
+	 */
   getCategoriesData(userProfile: any): any {
     return new Promise(resolve => {
       if (userProfile) {
