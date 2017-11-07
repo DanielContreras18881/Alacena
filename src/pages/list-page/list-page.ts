@@ -1,3 +1,5 @@
+import { RemindersProvider } from '../../providers/reminders-provider';
+import { Reminder } from '../../classes/reminder';
 import { Component } from '@angular/core';
 import {
   IonicPage,
@@ -52,7 +54,8 @@ export class ListPage {
     public alertCtrl: AlertController,
     private globalVars: GlobalVars,
     private order: OrderBy,
-    private localNotification: PhonegapLocalNotification
+    private localNotification: PhonegapLocalNotification,
+    private reminders: RemindersProvider
   ) {}
 
   ionViewDidLoad() {
@@ -374,11 +377,18 @@ export class ListPage {
               moment()
                 .toDate()
                 .getTime();
+
+            let reminder: Reminder = {
+              message: data.message,
+              time: data.notificationDate
+            };
+            this.reminders.setReminder(reminder);
             setTimeout(() => {
               this.localNotification.create('REMINDER!', {
                 body: data.message,
                 icon: 'assets/icon/favicon.ico'
               });
+              this.reminders.removeReminder(reminder);
             }, milliseconds);
           }
         });

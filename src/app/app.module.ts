@@ -38,6 +38,7 @@ import { ConfigProvider } from '../providers/config-provider';
 import { ItemsProvider } from '../providers/items-provider';
 import { ListProvider } from '../providers/list-provider';
 import { ListsProvider } from '../providers/lists-provider';
+import { RemindersProvider } from '../providers/reminders-provider';
 import { LocalStorage } from '../providers/data/localStorage';
 import { DefaultIcons } from '../providers/default-icons/default-icons';
 import { GlobalVars } from '../providers/global-vars/global-vars';
@@ -110,6 +111,7 @@ import { Alacena } from './app.component';
     ListsProvider,
     ListProvider,
     ItemsProvider,
+    RemindersProvider,
     ItemInfoPage,
     ConfigProvider,
     PhonegapLocalNotification,

@@ -34,10 +34,10 @@ export class ConfigPage {
       this.idiomas = this.configData.idiomas;
       this.idiomaSelecciondo = this.configData.idiomaDefault;
       this.categorySelected = this.configData.categoryDefault.categoryName;
-      this.globalVars.getCategoriesData().then(data => {
-        console.log(data);
-        this.categories = <Category[]>data;
-      });
+    });
+    this.globalVars.getCategoriesData().then(data => {
+      console.log(data);
+      this.categories = <Category[]>data;
     });
   }
   /**

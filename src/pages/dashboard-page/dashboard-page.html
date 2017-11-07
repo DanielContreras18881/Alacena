@@ -48,25 +48,6 @@
 				</ion-grid>
 			</ion-card-header>
 		</ion-card>
-		<!--
-		<ion-card *ngIf="userProfile">
-			<ion-card-header>
-				<ion-item (click)="logout()">
-					<ion-avatar item-right>
-						<button clear danger>
-							<ion-icon class="userAccountIcon" ios="ios-log-out" md="md-log-out"></ion-icon>
-						</button>
-					</ion-avatar>
-					<ion-item *ngIf="userProfile">
-						<ion-avatar item-left>
-							<img [src]="userProfile.photoURL">
-						</ion-avatar>
-						<h3 class="userAccountLabel">{{ userProfile.displayName }}</h3>
-					</ion-item>
-				</ion-item>
-			</ion-card-header>
-		</ion-card>
-	-->
 		<ion-card *ngIf="reminders">
 			<ion-card-header>
 				<ion-item (click)="showReminders()">
@@ -78,10 +59,10 @@
 					<h5 class="reminderLabel">RECORDATORIOS</h5>
 				</ion-item>
 				<ion-list inset>
-					<ion-item ion-item (click)="editReminder()">
+					<ion-item ion-item (click)="editReminder(reminder)" *ngFor="let reminder of remindersList; let i = index">
 						<p class="item-info">
 							<ion-icon class="item-icon" ios="ios-eye" md="md-eye"></ion-icon>
-							Recuerda ... antes de HH:MM dd/mm/YYYY
+							Recuerda {{reminder.message}} antes de {{reminder.time | date:'yyyy-MM-dd HH:mm:ss'}}
 						</p>
 					</ion-item>
 				</ion-list>

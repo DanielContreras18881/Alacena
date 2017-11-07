@@ -1,6 +1,10 @@
+import { Reminder } from '../../classes/reminder';
+import { RemindersProvider } from '../../providers/reminders-provider';
 import { IonicPage, NavController, Platform } from 'ionic-angular';
 import { AuthService } from '../../providers/auth/auth.service';
 import { Component, NgZone } from '@angular/core';
+
+import { Pipe, PipeTransform } from '@angular/core';
 
 import { GooglePlus } from '@ionic-native/google-plus';
 import firebase from 'firebase';
@@ -31,7 +35,9 @@ export class DashboardPage {
   };
   userAccount: boolean = true;
   expires: boolean = true;
-  reminders: boolean = true;
+  reminders: boolean = false;
+
+  remindersList: Reminder[] = [];
 
   userProfile: any = null;
   zone: NgZone;
@@ -41,7 +47,8 @@ export class DashboardPage {
     public plt: Platform,
     private googlePlus: GooglePlus,
     private globalVars: GlobalVars,
-    private authService: AuthService
+    private authService: AuthService,
+    private remindersData: RemindersProvider
   ) {}
 
   ionViewDidLoad() {
@@ -69,6 +76,12 @@ export class DashboardPage {
 	 */
   getDashboardData() {
     console.log('dashboard');
+    this.remindersData.getReminders().then(data => {
+      this.remindersList = <Reminder[]>data;
+      if (this.remindersList.length > 0) {
+        this.reminders = true;
+      }
+    });
   }
   /**
 	 * Open a page of the app
@@ -107,15 +120,16 @@ export class DashboardPage {
   showReminders() {
     // TODO: show list of reminders,view, loaded from local
     alert('showReminders');
+    console.log(this.remindersList);
   }
   /**
 	 * Edit a reminder
 	 * 
 	 * @memberof DashboardPage
 	 */
-  editReminder() {
+  editReminder(reminder: Reminder) {
     // TODO: view to edit a reminder
-    alert('editReminder');
+    alert('editReminder' + reminder);
   }
   /**
 	 * Loggin by email
