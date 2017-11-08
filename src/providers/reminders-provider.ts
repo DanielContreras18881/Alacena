@@ -27,7 +27,7 @@ export class RemindersProvider {
         data = [];
       }
       data = (<Reminder[]>data).filter(
-        item => item.message === reminder.message && item.time === reminder.time
+        item => item.message !== reminder.message || item.time !== reminder.time
       );
       this.localStorage.setToLocal('reminders', data);
     });

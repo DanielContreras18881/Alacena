@@ -1,6 +1,12 @@
+import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
 import { Reminder } from '../../classes/reminder';
 import { RemindersProvider } from '../../providers/reminders-provider';
-import { IonicPage, NavController, Platform } from 'ionic-angular';
+import {
+  IonicPage,
+  ModalController,
+  NavController,
+  Platform
+} from 'ionic-angular';
 import { AuthService } from '../../providers/auth/auth.service';
 import { Component, NgZone } from '@angular/core';
 
@@ -9,8 +15,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { GooglePlus } from '@ionic-native/google-plus';
 import firebase from 'firebase';
 
-import { ListPage } from '../list-page/list-page';
+import moment from 'moment';
 
+import { RemindersComponent } from '../../components/reminders-component/reminders-component';
+
+import { ListPage } from '../list-page/list-page';
+import { OrderBy } from '../../pipes/orderBy';
 import { GlobalVars } from '../../providers/global-vars/global-vars';
 
 declare var gapi: any;
@@ -25,7 +35,8 @@ declare var cordova: any;
 @IonicPage()
 @Component({
   selector: 'page-dashboard-page',
-  templateUrl: 'dashboard-page.html'
+  templateUrl: 'dashboard-page.html',
+  providers: [OrderBy]
 })
 export class DashboardPage {
   shoppingListPage = {
@@ -45,10 +56,13 @@ export class DashboardPage {
   constructor(
     public navCtrl: NavController,
     public plt: Platform,
+    private order: OrderBy,
     private googlePlus: GooglePlus,
     private globalVars: GlobalVars,
     private authService: AuthService,
-    private remindersData: RemindersProvider
+    private remindersData: RemindersProvider,
+    private localNotification: PhonegapLocalNotification,
+    public mod: ModalController
   ) {}
 
   ionViewDidLoad() {
@@ -113,23 +127,49 @@ export class DashboardPage {
     alert('showExpireItems');
   }
   /**
-	 * Show list reminders created
-	 * 
-	 * @memberof DashboardPage
-	 */
-  showReminders() {
-    // TODO: show list of reminders,view, loaded from local
-    alert('showReminders');
-    console.log(this.remindersList);
-  }
-  /**
 	 * Edit a reminder
 	 * 
 	 * @memberof DashboardPage
 	 */
-  editReminder(reminder: Reminder) {
-    // TODO: view to edit a reminder
-    alert('editReminder' + reminder);
+  editReminder(data: Reminder) {
+    let oldReminder = JSON.parse(JSON.stringify(data));
+    let reminderModal = this.mod.create(RemindersComponent, data);
+    this.remindersList = this.remindersList.filter(
+      item =>
+        item.message !== oldReminder.message || item.time !== oldReminder.time
+    );
+    reminderModal.onDidDismiss(data => {
+      if (data) {
+        this.localNotification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            let milliseconds =
+              moment(data.notificationDate)
+                .toDate()
+                .getTime() -
+              moment()
+                .toDate()
+                .getTime();
+
+            let reminder: Reminder = {
+              message: data.message,
+              time: data.notificationDate
+            };
+            this.remindersData.setReminder(reminder);
+            this.remindersList.push(reminder);
+            //TODO : sort reminders list?
+            setTimeout(() => {
+              this.localNotification.create('REMINDER!', {
+                body: data.message,
+                icon: 'assets/icon/favicon.ico'
+              });
+              this.remindersData.removeReminder(reminder);
+            }, milliseconds);
+          }
+        });
+      }
+    });
+    reminderModal.present();
+    this.remindersData.removeReminder(oldReminder);
   }
   /**
 	 * Loggin by email

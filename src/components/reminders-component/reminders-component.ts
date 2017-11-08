@@ -22,8 +22,9 @@ export class RemindersComponent {
       .toISOString()
   };
 
-  constructor(private view: ViewController) {
-    console.log(this.minDate);
+  constructor(private view: ViewController, params: NavParams) {
+    this.data.notificationDate = params.data.time;
+    this.data.message = params.data.message;
   }
   /**
 	 * Close modal saving data

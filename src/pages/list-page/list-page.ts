@@ -15,7 +15,9 @@ import { Icon } from '../../classes/icon';
 import { ListItem } from '../../classes/listItem';
 import moment from 'moment';
 
-import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
+import {
+  PhonegapLocalNotification
+} from '@ionic-native/phonegap-local-notification';
 
 import { RemindersComponent } from '../../components/reminders-component/reminders-component';
 import { OrderBy } from '../../pipes/orderBy';
@@ -365,7 +367,7 @@ export class ListPage {
 	 * @memberof ListPage
 	 */
   addNotification() {
-    let reminderModal = this.mod.create(RemindersComponent);
+    let reminderModal = this.mod.create(RemindersComponent, {});
     reminderModal.onDidDismiss(data => {
       if (data) {
         this.localNotification.requestPermission().then(permission => {

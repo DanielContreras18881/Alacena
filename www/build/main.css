@@ -25959,6 +25959,11 @@ page-dashboard-page .expiresLabel {
   white-space: normal;
 }
 
+page-dashboard-page ion-icon.item-icon {
+  margin-right: 0.5em;
+  margin-left: 0.5em;
+}
+
 page-items-page .itemName h2 {
   font-size: 1.35rem;
   white-space: normal;
