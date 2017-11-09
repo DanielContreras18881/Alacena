@@ -1,4 +1,7 @@
+import { GlobalVars } from '../../providers/global-vars/global-vars';
+import { ListItem } from '../../classes/listItem';
 import { Component } from '@angular/core';
+import { ViewController } from 'ionic-angular';
 
 /**
  * Component to show and manage items near to expire for the dashboard
@@ -11,10 +14,22 @@ import { Component } from '@angular/core';
   templateUrl: 'items-best-before-component.html'
 })
 export class ItemsBestBeforeComponent {
-  text: string;
+  list: ListItem[];
 
-  constructor() {
-    console.log('Hello ItemsBestBeforeComponent Component');
-    this.text = 'Hello World';
+  constructor(private globalVars: GlobalVars, private view: ViewController) {}
+  ionViewDidLoad() {
+    // TODO: show alert with items to expire, expiry date and list
+    this.globalVars.getListData('LISTA_COMPRA').then(listData => {
+      console.log(listData);
+      this.list = <ListItem[]>listData;
+    });
+  }
+  /**
+	 * Close modal discarding data
+	 * 
+	 * @memberof ItemsBestBeforeComponent
+	 */
+  close() {
+    this.view.dismiss();
   }
 }

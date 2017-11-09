@@ -1,4 +1,40 @@
-<!-- Generated template for the ItemsBestBeforeComponent component -->
-<div>
-  {{text}}
+<ion-header>
+	<ion-toolbar dark>
+		<ion-title>
+			Items Best Before
+		</ion-title>
+		<ion-buttons end>
+			<button (click)="close()">
+				<ion-icon ios="ios-close" md="md-close"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<div class="list">
+	<ion-list inset>
+
+		<div *ngFor="let itemData of list; let i = index">
+			<ion-card>
+				<ion-card-header>
+					<ion-row class="fila">
+						<ion-col col-5>
+							<ion-label class="nameElement">{{itemData.nombreElemento}}</ion-label>
+						</ion-col>
+
+						<ion-col col-4>
+							<ion-label class="nameList">{{itemData.nombreLista}}</ion-label>
+						</ion-col>
+
+						<ion-col col-3>
+							<ion-item>
+								{{itemData.fechaCaducidad | date:'yyyy-MM-dd'}}
+							</ion-item>
+						</ion-col>
+					</ion-row>
+				</ion-card-header>
+			</ion-card>
+		</div>
+
+	</ion-list>
 </div>

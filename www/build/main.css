@@ -25826,6 +25826,22 @@ ion-auto-complete ul li {
   background-color: #999;
 }
 
+items-best-before-component .list {
+  padding-top: 3.5rem;
+}
+
+items-best-before-component .nameElement {
+  font-size: 1.95rem;
+}
+
+items-best-before-component .nameList {
+  font-size: 1.25rem;
+}
+
+items-needed-component .list {
+  padding-top: 3.5rem;
+}
+
 page-about-page .about {
   background-color: #999;
 }

@@ -1,4 +1,41 @@
-<!-- Generated template for the ItemsNeededComponent component -->
-<div>
-  {{text}}
+<ion-header>
+	<ion-toolbar dark>
+		<ion-title>
+			Items Needed to add to Shopping List
+		</ion-title>
+		<ion-buttons end>
+			<button (click)="addItemsToShoppingList()">
+				<ion-icon ios="ios-cart" md="md-cart"></ion-icon>
+			</button>
+			<button (click)="close()">
+				<ion-icon ios="ios-close" md="md-close"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<div class="list">
+	<ion-list inset>
+
+		<div *ngFor="let itemData of list; let i = index">
+			<ion-card>
+				<ion-card-header>
+					<ion-row class="fila">
+						<ion-col col-8>
+							<ion-label class="nameElement">{{itemData.nombreElemento}}</ion-label>
+						</ion-col>
+
+						<ion-col col-4>
+							<ion-item>
+								<ion-avatar item-left class="category-icon">
+									<img class="icon" src="{{itemData.category.icon}}" />
+									<h2 *ngIf="creating" class="labelCategory">{{itemData.category.categoryName}}</h2>
+								</ion-avatar>
+							</ion-item>
+						</ion-col>
+					</ion-row>
+				</ion-card-header>
+			</ion-card>
+		</div>
+	</ion-list>
 </div>

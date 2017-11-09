@@ -1,3 +1,4 @@
+import { ItemsNeededComponent } from '../../components/items-needed-component/items-needed-component';
 import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
 import { Reminder } from '../../classes/reminder';
 import { RemindersProvider } from '../../providers/reminders-provider';
@@ -18,6 +19,7 @@ import firebase from 'firebase';
 import moment from 'moment';
 
 import { RemindersComponent } from '../../components/reminders-component/reminders-component';
+import { ItemsBestBeforeComponent } from '../../components/items-best-before-component/items-best-before-component';
 
 import { ListPage } from '../list-page/list-page';
 import { OrderBy } from '../../pipes/orderBy';
@@ -114,8 +116,8 @@ export class DashboardPage {
 	 * @memberof DashboardPage
 	 */
   showItemsToShop() {
-    // TODO: show alert with items to shop
-    alert('Items a comprar');
+    let toShopModal = this.mod.create(ItemsNeededComponent);
+    toShopModal.present();
   }
   /**
 	 * Show list of items near to expire
@@ -123,8 +125,8 @@ export class DashboardPage {
 	 * @memberof DashboardPage
 	 */
   showExpireItems() {
-    // TODO: show alert with items to expire, expiry date and list
-    alert('showExpireItems');
+    let expiresModal = this.mod.create(ItemsBestBeforeComponent);
+    expiresModal.present();
   }
   /**
 	 * Edit a reminder
@@ -210,15 +212,6 @@ export class DashboardPage {
     this.authService.twitterLogin().then(data => {
       console.log(data);
     });
-  }
-  /**
-	 * Add items to shopping list, from needed to shop
-	 * 
-	 * @memberof DashboardPage
-	 */
-  addItemsToShoppingList() {
-    // TODO: add all items required to shop to the shopping list
-    alert('addItemsToShoppinList');
   }
   /**
 	 * Logout

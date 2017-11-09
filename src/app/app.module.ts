@@ -1,4 +1,3 @@
-import { RemindersComponent } from '../components/reminders-component/reminders-component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { HttpModule } from '@angular/http';
@@ -17,6 +16,9 @@ import { ImagePicker } from '@ionic-native/image-picker';
 
 import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
 
+import { RemindersComponent } from '../components/reminders-component/reminders-component';
+import { ItemsBestBeforeComponent } from '../components/items-best-before-component/items-best-before-component';
+import { ItemsNeededComponent } from '../components/items-needed-component/items-needed-component';
 import { BottomButtonsComponent } from '../components/bottom-buttons-component/bottom-buttons-component';
 import { Item } from '../components/item-data/item-data';
 import { AboutPage } from '../pages/about-page/about-page';
@@ -60,7 +62,9 @@ import { Alacena } from './app.component';
     BottomButtonsComponent,
     ListIconsPage,
     CategoryInfoPage,
-    RemindersComponent
+    RemindersComponent,
+    ItemsBestBeforeComponent,
+    ItemsNeededComponent
   ],
   imports: [
     AutoCompleteModule,
@@ -93,7 +97,9 @@ import { Alacena } from './app.component';
     BottomButtonsComponent,
     ListIconsPage,
     CategoryInfoPage,
-    RemindersComponent
+    RemindersComponent,
+    ItemsBestBeforeComponent,
+    ItemsNeededComponent
   ],
   providers: [
     //{provide: ErrorHandler, useClass: SentryErrorHandler},
