@@ -17,7 +17,7 @@
 		<div *ngFor="let itemData of list; let i = index">
 			<ion-card>
 				<ion-card-header>
-					<ion-row class="fila">
+					<ion-row class="fila" [ngClass]="checkExpiryDate(itemData.fechaCaducidad)">
 						<ion-col col-5>
 							<ion-label class="nameElement">{{itemData.nombreElemento}}</ion-label>
 						</ion-col>

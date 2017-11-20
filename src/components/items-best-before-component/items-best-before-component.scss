@@ -8,4 +8,11 @@ items-best-before-component {
   .nameList {
     font-size: 1.25rem;
   }
+  .expired {
+    color: red;
+  }
+
+  .nearToExpire {
+    color: yellowgreen;
+  }
 }

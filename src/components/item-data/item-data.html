@@ -90,7 +90,7 @@
 			<ion-item>
 				{{item.fechaCaducidad}}
 				<ion-datetime class="expireDate" id="fechaCaducidad" displayFormat="DD MMMM YYYY" pickerFormat="DD MMMM YYYY" [(ngModel)]="item.fechaCaducidad"
-				 [disabled]="!creating">
+				 [disabled]="!creating" max="3000">
 				</ion-datetime>
 			</ion-item>
 		</ion-row>

@@ -25838,6 +25838,14 @@ items-best-before-component .nameList {
   font-size: 1.25rem;
 }
 
+items-best-before-component .expired {
+  color: red;
+}
+
+items-best-before-component .nearToExpire {
+  color: yellowgreen;
+}
+
 items-needed-component .list {
   padding-top: 3.5rem;
 }

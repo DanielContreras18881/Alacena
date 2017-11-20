@@ -4,7 +4,7 @@
 			Items Needed to add to Shopping List
 		</ion-title>
 		<ion-buttons end>
-			<button (click)="addItemsToShoppingList()">
+			<button (click)="addItemsToShoppingList()" *ngIf="list.length>0">
 				<ion-icon ios="ios-cart" md="md-cart"></ion-icon>
 			</button>
 			<button (click)="close()">
@@ -14,7 +14,18 @@
 	</ion-toolbar>
 </ion-header>
 
-<div class="list">
+<div class="list" *ngIf="list.length===0">
+	<ion-list inset>
+		<div>
+			<ion-card>
+				NO HAY ELEMENTOS QUE COMPRAR
+			</ion-card>
+		</div>
+	</ion-list>
+
+</div>
+
+<div class="list" *ngIf="list.length>0">
 	<ion-list inset>
 
 		<div *ngFor="let itemData of list; let i = index">

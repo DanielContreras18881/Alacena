@@ -180,7 +180,6 @@ export class ItemsPage {
     move.setTitle('Move to LISTA_COMPRA');
 
     this.items.forEach((item: Item) => {
-      console.log(item.lists);
       if (item.lists.length === 0) {
         move.addInput({
           type: 'checkbox',
@@ -196,10 +195,7 @@ export class ItemsPage {
       text: 'OK',
       handler: data => {
         data.forEach((item, index) => {
-          console.log(item);
-          console.log(this.items);
           let auxItem = this.filterElements.transform(this.items, item)[0];
-          console.log(auxItem);
           let newItem: ListItem = {
             category: auxItem.category,
             nombreElemento: auxItem.nombreElemento,
