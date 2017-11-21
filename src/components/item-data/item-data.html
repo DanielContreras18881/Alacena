@@ -84,7 +84,7 @@
 	<ion-card-content *ngIf="creating">
 		<ion-row>
 			<ion-label class="labelExpire">CADUCA</ion-label>
-			<ion-toggle id="expire" checked="item.caduca" [(ngModel)]="item.caduca"></ion-toggle>
+			<ion-toggle id="expire" checked="item.caduca" [(ngModel)]="item.caduca" (ngModelChange)="newExpire($event)"></ion-toggle>
 		</ion-row>
 		<ion-row [hidden]="!item.caduca">
 			<ion-item>

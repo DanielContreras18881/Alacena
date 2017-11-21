@@ -200,6 +200,9 @@ export class Item implements OnInit {
     });
     toast.present();
   }
+  newExpire() {
+    if(this.item.caduca) this.item.fechaCaducidad = new Date().toISOString();
+  }
   /**
 	* Check expiry date of the item
 	* 
