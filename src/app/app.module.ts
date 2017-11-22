@@ -15,6 +15,8 @@ import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
 
 import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
 
 import { RemindersComponent } from '../components/reminders-component/reminders-component';
 import { ItemsBestBeforeComponent } from '../components/items-best-before-component/items-best-before-component';
@@ -120,7 +122,8 @@ import { Alacena } from './app.component';
     RemindersProvider,
     ItemInfoPage,
     ConfigProvider,
-    PhonegapLocalNotification,
+	 PhonegapLocalNotification,
+	 LocalNotifications,
     SplashScreen,
     StatusBar,
     GlobalVars,

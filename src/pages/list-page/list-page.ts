@@ -15,9 +15,8 @@ import { Icon } from '../../classes/icon';
 import { ListItem } from '../../classes/listItem';
 import moment from 'moment';
 
-import {
-  PhonegapLocalNotification
-} from '@ionic-native/phonegap-local-notification';
+import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 import { RemindersComponent } from '../../components/reminders-component/reminders-component';
 import { OrderBy } from '../../pipes/orderBy';
@@ -25,7 +24,7 @@ import { GlobalVars } from '../../providers/global-vars/global-vars';
 import { ItemInfoPage } from '../../components/item-info/item-info';
 /**
  * Page to manage the items of a list
- * 
+ *
  * @export
  * @class ListPage
  */
@@ -57,6 +56,7 @@ export class ListPage {
     private globalVars: GlobalVars,
     private order: OrderBy,
     private localNotification: PhonegapLocalNotification,
+    private localNotifications: LocalNotifications,
     private reminders: RemindersProvider
   ) {}
 
@@ -79,11 +79,11 @@ export class ListPage {
     });
   }
   /**
-		* Initialize the items of the list
-		* 
-		* @param {string} filter 
-		* @memberof ListPage
-	   */
+   * Initialize the items of the list
+   *
+   * @param {string} filter
+   * @memberof ListPage
+   */
   initializeItems(filter: string) {
     this.globalVars.getListData(this.selectedItem).then(listData => {
       this.list = <ListItem[]>listData;
@@ -100,11 +100,11 @@ export class ListPage {
     });
   }
   /**
-	 * Even to search based on input filled
-	 * 
-	 * @param {any} event 
-	 * @memberof ListPage
-	 */
+   * Even to search based on input filled
+   *
+   * @param {any} event
+   * @memberof ListPage
+   */
   searchMatches(event) {
     if (this.searchItem && this.searchItem.trim() !== '') {
       this.initializeItems(this.searchItem);
@@ -113,20 +113,20 @@ export class ListPage {
     }
   }
   /**
-	 * Event to show or hide a search bar
-	 * 
-	 * @param {any} event 
-	 * @memberof ListPage
-	 */
+   * Event to show or hide a search bar
+   *
+   * @param {any} event
+   * @memberof ListPage
+   */
   toggleSearchBar(event) {
     this.searchBar = !this.searchBar;
   }
   /**
-	 * Event to sort items on the list
-	 * 
-	 * @param {number} orderBy 
-	 * @memberof ListPage
-	 */
+   * Event to sort items on the list
+   *
+   * @param {number} orderBy
+   * @memberof ListPage
+   */
   sortItems(orderBy: number) {
     this.orderSelected = orderBy;
     switch (orderBy) {
@@ -146,11 +146,11 @@ export class ListPage {
     }
   }
   /**
-	 * Event to show options to sort the list
-	 * 
-	 * @param {any} event 
-	 * @memberof ListPage
-	 */
+   * Event to show options to sort the list
+   *
+   * @param {any} event
+   * @memberof ListPage
+   */
   reorder(event) {
     let reorder = this.alertCtrl.create();
     reorder.setTitle('Sort by');
@@ -186,11 +186,11 @@ export class ListPage {
     reorder.present();
   }
   /**
-	 * Event to remove a item
-	 * 
-	 * @param {ListItem} item 
-	 * @memberof ListPage
-	 */
+   * Event to remove a item
+   *
+   * @param {ListItem} item
+   * @memberof ListPage
+   */
   removeItem(item: ListItem) {
     let confirm = this.alertCtrl.create({
       title: 'Removing ' + item.nombreElemento,
@@ -219,66 +219,56 @@ export class ListPage {
     confirm.present();
   }
   /**
-	 * Event to save edit item
-	 * 
-	 * @param {ListItem} item 
-	 * @memberof ListPage
-	 */
+   * Event to save edit item
+   *
+   * @param {ListItem} item
+   * @memberof ListPage
+   */
   saveItem(item: ListItem) {
     //TODO: Check on device
     if (item.caduca) {
-      let milisecondsToCaducidad1 =
-        moment(item.fechaCaducidad)
+      this.localNotifications.schedule({
+        title: 'CADUCA_MANIANA',
+        text:
+          item.nombreLista +
+          '\n' +
+          item.nombreElemento +
+          '\n' +
+          'CADUCA_MANIANA',
+        icon: 'assets/icon/favicon.ico',
+        at: moment(item.fechaCaducidad)
           .add(-1, 'days')
           .subtract(1, 'hour')
-          .toDate()
-          .getTime() -
-        moment()
-          .toDate()
-          .getTime();
-      setTimeout(() => {
-        this.localNotification.create('CADUCIDAD_ELEMENTO', {
-          tag: 'CADUCA_MANIANA',
-          body:
-            item.nombreLista +
-            '\n' +
-            item.nombreElemento +
-            '\n' +
-            'CADUCA_MANIANA',
-          icon: 'assets/icon/favicon.ico'
-        });
-      }, milisecondsToCaducidad1);
-      let milisecondsToCaducidad3 =
-        moment(item.fechaCaducidad)
+          .toDate(),
+        led: 'FF0000',
+        sound: null
+      });
+      this.localNotifications.schedule({
+        title: 'CADUCA_7_DIAS',
+        text:
+          item.nombreLista +
+          '\n' +
+          item.nombreElemento +
+          '\n' +
+          'CADUCA_7_DIAS',
+        icon: 'assets/icon/favicon.ico',
+        at: moment(item.fechaCaducidad)
           .add(-7, 'days')
           .subtract(1, 'hour')
-          .toDate()
-          .getTime() -
-        moment()
-          .toDate()
-          .getTime();
-      setTimeout(() => {
-        this.localNotification.create('CADUCIDAD_ELEMENTO', {
-          tag: 'CADUCA_7_DIAS',
-          body:
-            item.nombreLista +
-            '\n' +
-            item.nombreElemento +
-            '\n' +
-            'CADUCA_7_DIAS',
-          icon: 'assets/icon/favicon.ico'
-        });
-      }, milisecondsToCaducidad3);
+          .toDate(),
+        led: 'FF0000',
+        sound: null
+      });
     }
     this.list[this.list.indexOf(item)] = item;
     this.globalVars.setListData(this.selectedItem, this.list);
   }
   /**
-	 * Event to show a modal to edit item
-	 * 
-	 * @param {ListItem} item 
-	 * @memberof ListPage
-	 */
+   * Event to show a modal to edit item
+   *
+   * @param {ListItem} item
+   * @memberof ListPage
+   */
   editItem(item: ListItem) {
     let infoListModal = this.mod.create(ItemInfoPage, {
       newItem: item,
@@ -292,11 +282,11 @@ export class ListPage {
     infoListModal.present();
   }
   /**
-	 * Event to move item to other list
-	 * 
-	 * @param {any} event 
-	 * @memberof ListPage
-	 */
+   * Event to move item to other list
+   *
+   * @param {any} event
+   * @memberof ListPage
+   */
   moveItem(event) {
     let item = event.item;
     if (event.toShopingList) {
@@ -362,36 +352,33 @@ export class ListPage {
     }
   }
   /**
-	 * Event to add a notification on that list
-	 * 
-	 * @memberof ListPage
-	 */
+   * Event to add a notification on that list
+   *
+   * @memberof ListPage
+   */
   addNotification() {
-    let reminderModal = this.mod.create(RemindersComponent, {});
+    let reminderModal = this.mod.create(RemindersComponent, {
+      time: moment()
+        .toDate()
+        .toISOString()
+    });
     reminderModal.onDidDismiss(data => {
       if (data) {
         this.localNotification.requestPermission().then(permission => {
           if (permission === 'granted') {
-            let milliseconds =
-              moment(data.notificationDate)
-                .toDate()
-                .getTime() -
-              moment()
-                .toDate()
-                .getTime();
-
             let reminder: Reminder = {
               message: data.message,
               time: data.notificationDate
             };
             this.reminders.setReminder(reminder);
-            setTimeout(() => {
-              this.localNotification.create('REMINDER!', {
-                body: data.message,
-                icon: 'assets/icon/favicon.ico'
-              });
-              this.reminders.removeReminder(reminder);
-            }, milliseconds);
+
+            this.localNotifications.schedule({
+              text: data.message,
+              icon: 'assets/icon/favicon.ico',
+              at: data.notificationDate,
+              led: 'FF0000',
+              sound: null
+            });
           }
         });
       }
@@ -399,11 +386,11 @@ export class ListPage {
     reminderModal.present();
   }
   /**
-	 * Event to remove selected items
-	 * 
-	 * @param {string[]} removed 
-	 * @memberof ListPage
-	 */
+   * Event to remove selected items
+   *
+   * @param {string[]} removed
+   * @memberof ListPage
+   */
   removeElements(removed: string[]) {
     removed.forEach(itemRemoved => {
       this.list = this.list.filter(item => item.nombreElemento !== itemRemoved);
@@ -411,11 +398,11 @@ export class ListPage {
     });
   }
   /**
-	 * Event to add a new item
-	 * 
-	 * @param {any} event 
-	 * @memberof ListPage
-	 */
+   * Event to add a new item
+   *
+   * @param {any} event
+   * @memberof ListPage
+   */
   addItem(event) {
     let newItem = {
       category: this.defaultCategory,

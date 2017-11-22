@@ -1,5 +1,7 @@
 import { ItemsNeededComponent } from '../../components/items-needed-component/items-needed-component';
 import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
 import { Reminder } from '../../classes/reminder';
 import { RemindersProvider } from '../../providers/reminders-provider';
 import {
@@ -30,7 +32,7 @@ declare var self: any;
 declare var cordova: any;
 /**
  * Page to show initial data and manage login
- * 
+ *
  * @export
  * @class DashboardPage
  */
@@ -64,6 +66,7 @@ export class DashboardPage {
     private authService: AuthService,
     private remindersData: RemindersProvider,
     private localNotification: PhonegapLocalNotification,
+    private localNotifications: LocalNotifications,
     public mod: ModalController
   ) {}
 
@@ -86,10 +89,10 @@ export class DashboardPage {
     });
   }
   /**
-	 * Get data to show on dashboard
-	 * 
-	 * @memberof DashboardPage
-	 */
+   * Get data to show on dashboard
+   *
+   * @memberof DashboardPage
+   */
   getDashboardData() {
     console.log('dashboard');
     this.remindersData.getReminders().then(data => {
@@ -100,72 +103,65 @@ export class DashboardPage {
     });
   }
   /**
-	 * Open a page of the app
-	 * 
-	 * @param {any} page 
-	 * @memberof DashboardPage
-	 */
+   * Open a page of the app
+   *
+   * @param {any} page
+   * @memberof DashboardPage
+   */
   openInternalPage(page) {
     this.navCtrl.push(page.component, {
       list: page.title
     });
   }
   /**
-	 * Show items needed to shop
-	 * 
-	 * @memberof DashboardPage
-	 */
+   * Show items needed to shop
+   *
+   * @memberof DashboardPage
+   */
   showItemsToShop() {
     let toShopModal = this.mod.create(ItemsNeededComponent);
     toShopModal.present();
   }
   /**
-	 * Show list of items near to expire
-	 * 
-	 * @memberof DashboardPage
-	 */
+   * Show list of items near to expire
+   *
+   * @memberof DashboardPage
+   */
   showExpireItems() {
     let expiresModal = this.mod.create(ItemsBestBeforeComponent);
     expiresModal.present();
   }
   /**
-	 * Edit a reminder
-	 * 
-	 * @memberof DashboardPage
-	 */
+   * Edit a reminder
+   *
+   * @memberof DashboardPage
+   */
   editReminder(data: Reminder) {
     let oldReminder = JSON.parse(JSON.stringify(data));
     let reminderModal = this.mod.create(RemindersComponent, data);
-    this.remindersList = this.remindersList.filter(
-      item =>
-        item.message !== oldReminder.message || item.time !== oldReminder.time
-    );
     reminderModal.onDidDismiss(data => {
       if (data) {
         this.localNotification.requestPermission().then(permission => {
           if (permission === 'granted') {
-            let milliseconds =
-              moment(data.notificationDate)
-                .toDate()
-                .getTime() -
-              moment()
-                .toDate()
-                .getTime();
-
             let reminder: Reminder = {
               message: data.message,
               time: data.notificationDate
             };
             this.remindersData.setReminder(reminder);
             this.remindersList.push(reminder);
+            this.remindersList = this.remindersList.filter(
+              item =>
+                item.message !== oldReminder.message ||
+                item.time !== oldReminder.time
+            );
             //TODO : sort reminders list?
-            setTimeout(() => {
-              this.localNotification.create('REMINDER!', {
-                body: data.message,
-                icon: 'assets/icon/favicon.ico'
-              });
-              this.remindersData.removeReminder(reminder);
-            }, milliseconds);
+            this.localNotifications.schedule({
+              text: data.message,
+              icon: 'assets/icon/favicon.ico',
+              at: data.notificationDate,
+              led: 'FF0000',
+              sound: null
+            });
           }
         });
       }
@@ -174,50 +170,50 @@ export class DashboardPage {
     this.remindersData.removeReminder(oldReminder);
   }
   /**
-	 * Loggin by email
-	 * 
-	 * @memberof DashboardPage
-	 */
+   * Loggin by email
+   *
+   * @memberof DashboardPage
+   */
   emailLogin() {
     this.authService.emailLogin().then(data => {
       console.log(data);
     });
   }
   /**
-	 * Login by facebook
-	 * 
-	 * @memberof DashboardPage
-	 */
+   * Login by facebook
+   *
+   * @memberof DashboardPage
+   */
   facebookLogin() {
     this.authService.facebookLogin().then(data => {
       console.log(data);
     });
   }
   /**
-	 * Login by google
-	 * 
-	 * @memberof DashboardPage
-	 */
+   * Login by google
+   *
+   * @memberof DashboardPage
+   */
   googleLogin() {
     this.authService.googleAuth().then(data => {
       console.log(data);
     });
   }
   /**
-	 * Login by twitter
-	 * 
-	 * @memberof DashboardPage
-	 */
+   * Login by twitter
+   *
+   * @memberof DashboardPage
+   */
   twitterLogin() {
     this.authService.twitterLogin().then(data => {
       console.log(data);
     });
   }
   /**
-	 * Logout
-	 * 
-	 * @memberof DashboardPage
-	 */
+   * Logout
+   *
+   * @memberof DashboardPage
+   */
   logout() {
     this.authService.logout();
   }

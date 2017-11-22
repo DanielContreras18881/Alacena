@@ -24,6 +24,7 @@
     "@ionic-native/core": "3.6.1",
     "@ionic-native/google-plus": "^3.12.1",
     "@ionic-native/image-picker": "^4.3.0",
+    "@ionic-native/local-notifications": "^4.4.2",
     "@ionic-native/network": "^4.1.0",
     "@ionic-native/phonegap-local-notification": "^4.3.1",
     "@ionic-native/spinner-dialog": "^4.3.0",
@@ -115,7 +116,8 @@
       "cordova-plugin-camera": {},
       "cordova-plugin-native-spinner": {},
       "cordova-plugin-app-version": {},
-      "phonegap-plugin-local-notification": {}
+      "phonegap-plugin-local-notification": {},
+      "de.appplant.cordova.plugin.local-notification": {}
     },
     "platforms": [
       "android",

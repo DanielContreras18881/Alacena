@@ -4,7 +4,7 @@ import moment from 'moment';
 import { ViewController, NavParams } from 'ionic-angular';
 /**
  * Component to show and control reminders for a list, on a modal window
- * 
+ *
  * @export
  * @class RemindersComponent
  */
@@ -16,29 +16,26 @@ export class RemindersComponent {
   minDate: string = moment()
     .toDate()
     .toISOString();
-  data: any = {
-    notificationDate: moment()
-      .toDate()
-      .toISOString()
-  };
+  data: any = {};
 
   constructor(private view: ViewController, params: NavParams) {
+    console.log(params);
     this.data.notificationDate = params.data.time;
     this.data.message = params.data.message;
   }
   /**
-	 * Close modal saving data
-	 * 
-	 * @memberof RemindersComponent
-	 */
+   * Close modal saving data
+   *
+   * @memberof RemindersComponent
+   */
   save() {
     this.view.dismiss(this.data);
   }
   /**
-	 * Close modal discarding data
-	 * 
-	 * @memberof RemindersComponent
-	 */
+   * Close modal discarding data
+   *
+   * @memberof RemindersComponent
+   */
   close() {
     this.view.dismiss();
   }
