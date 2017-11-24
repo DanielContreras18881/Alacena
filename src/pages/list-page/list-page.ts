@@ -228,6 +228,10 @@ export class ListPage {
     //TODO: Check on device
     if (item.caduca) {
       this.localNotifications.schedule({
+        id: moment(item.fechaCaducidad)
+          .add(-1, 'days')
+          .subtract(1, 'hour')
+          .unix(),
         title: 'CADUCA_MANIANA',
         text:
           item.nombreLista +
@@ -235,15 +239,16 @@ export class ListPage {
           item.nombreElemento +
           '\n' +
           'CADUCA_MANIANA',
-        icon: 'assets/icon/favicon.ico',
         at: moment(item.fechaCaducidad)
           .add(-1, 'days')
           .subtract(1, 'hour')
-          .toDate(),
-        led: 'FF0000',
-        sound: null
+          .toDate()
       });
       this.localNotifications.schedule({
+        id: moment(item.fechaCaducidad)
+          .add(-7, 'days')
+          .subtract(1, 'hour')
+          .unix(),
         title: 'CADUCA_7_DIAS',
         text:
           item.nombreLista +
@@ -251,13 +256,10 @@ export class ListPage {
           item.nombreElemento +
           '\n' +
           'CADUCA_7_DIAS',
-        icon: 'assets/icon/favicon.ico',
         at: moment(item.fechaCaducidad)
           .add(-7, 'days')
           .subtract(1, 'hour')
-          .toDate(),
-        led: 'FF0000',
-        sound: null
+          .toDate()
       });
     }
     this.list[this.list.indexOf(item)] = item;
@@ -373,11 +375,10 @@ export class ListPage {
             this.reminders.setReminder(reminder);
 
             this.localNotifications.schedule({
+              id: moment(data.notificationDate).unix(),
+              title: 'REMEMBER',
               text: data.message,
-              icon: 'assets/icon/favicon.ico',
-              at: data.notificationDate,
-              led: 'FF0000',
-              sound: null
+              at: data.notificationDate
             });
           }
         });

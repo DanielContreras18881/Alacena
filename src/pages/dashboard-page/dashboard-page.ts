@@ -154,13 +154,10 @@ export class DashboardPage {
                 item.message !== oldReminder.message ||
                 item.time !== oldReminder.time
             );
-            //TODO : sort reminders list?
             this.localNotifications.schedule({
+              id: moment(data.notificationDate).unix(),
               text: data.message,
-              icon: 'assets/icon/favicon.ico',
-              at: data.notificationDate,
-              led: 'FF0000',
-              sound: null
+              at: data.notificationDate
             });
           }
         });
