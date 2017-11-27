@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 import firebase from 'firebase';
 /**
  * Provider to manage cloud storage of logged user
- * 
+ *
  * @export
  * @class CloudStorage
  */
@@ -16,12 +16,12 @@ import firebase from 'firebase';
 export class CloudStorage {
   constructor(private http: Http) {}
   /**
-	 * Get config data
-	 * 
-	 * @param {string} uid 
-	 * @returns 
-	 * @memberof CloudStorage
-	 */
+   * Get config data
+   *
+   * @param {string} uid
+   * @returns
+   * @memberof CloudStorage
+   */
   loadConfigData(uid: string) {
     return new Promise(resolve => {
       let ref = firebase.database().ref('/config/');
@@ -36,8 +36,16 @@ export class CloudStorage {
               configArray.push(config);
             }
           }
-          console.log('configArray:' + JSON.stringify(configArray));
-          resolve(configArray);
+          let data = JSON.parse(JSON.stringify(configArray[0]));
+          let languages = [];
+          for (let key in data.idiomas) {
+            if (data.idiomas.hasOwnProperty(key)) {
+              let language = JSON.parse(JSON.stringify(data.idiomas[key]));
+              languages.push(language);
+            }
+          }
+          data.idiomas = languages;
+          resolve(data);
         } else {
           resolve(null);
         }
@@ -45,12 +53,12 @@ export class CloudStorage {
     });
   }
   /**
-	 * Get elements data
-	 * 
-	 * @param {string} uid 
-	 * @returns 
-	 * @memberof CloudStorage
-	 */
+   * Get elements data
+   *
+   * @param {string} uid
+   * @returns
+   * @memberof CloudStorage
+   */
   loadElementData(uid: string) {
     return new Promise(resolve => {
       let ref = firebase.database().ref('/lists/');
@@ -73,13 +81,13 @@ export class CloudStorage {
     });
   }
   /**
-	 * Get data of a list provided
-	 * 
-	 * @param {string} name 
-	 * @param {string} uid 
-	 * @returns 
-	 * @memberof CloudStorage
-	 */
+   * Get data of a list provided
+   *
+   * @param {string} name
+   * @param {string} uid
+   * @returns
+   * @memberof CloudStorage
+   */
   loadListData(name: string, uid: string) {
     return new Promise(resolve => {
       let ref = firebase
@@ -112,13 +120,13 @@ export class CloudStorage {
     });
   }
   /**
-	 * Upload data for a list provided
-	 * 
-	 * @param {string} name 
-	 * @param {ListItem[]} data 
-	 * @param {string} uid 
-	 * @memberof CloudStorage
-	 */
+   * Upload data for a list provided
+   *
+   * @param {string} name
+   * @param {ListItem[]} data
+   * @param {string} uid
+   * @memberof CloudStorage
+   */
   uploadListData(name: string, data: ListItem[], uid: string) {
     const storage = firebase.storage();
     let fileName = uid + '_' + name + '.json';
@@ -144,12 +152,12 @@ export class CloudStorage {
     );
   }
   /**
-	 * Remove data of a list provided
-	 * 
-	 * @param {string} name 
-	 * @param {string} uid 
-	 * @memberof CloudStorage
-	 */
+   * Remove data of a list provided
+   *
+   * @param {string} name
+   * @param {string} uid
+   * @memberof CloudStorage
+   */
   removeListData(name: string, uid: string) {
     const storage = firebase.storage();
     let fileName = uid + '_' + name + '.json';
@@ -161,12 +169,12 @@ export class CloudStorage {
       .remove();
   }
   /**
-	 * Upload data of lists
-	 * 
-	 * @param {List[]} lists 
-	 * @param {string} uid 
-	 * @memberof CloudStorage
-	 */
+   * Upload data of lists
+   *
+   * @param {List[]} lists
+   * @param {string} uid
+   * @memberof CloudStorage
+   */
   uploadListsData(lists: List[], uid: string) {
     firebase
       .database()
@@ -174,12 +182,12 @@ export class CloudStorage {
       .set(lists);
   }
   /**
-	 * Upload config data
-	 * 
-	 * @param {*} configs 
-	 * @param {string} uid 
-	 * @memberof CloudStorage
-	 */
+   * Upload config data
+   *
+   * @param {*} configs
+   * @param {string} uid
+   * @memberof CloudStorage
+   */
   uploadConfigData(configs: any, uid: string) {
     firebase
       .database()
@@ -187,12 +195,12 @@ export class CloudStorage {
       .set(configs);
   }
   /**
-	 * Upload elements data
-	 * 
-	 * @param {Item[]} items 
-	 * @param {string} uid 
-	 * @memberof CloudStorage
-	 */
+   * Upload elements data
+   *
+   * @param {Item[]} items
+   * @param {string} uid
+   * @memberof CloudStorage
+   */
   uploadItemsData(items: Item[], uid: string) {
     firebase
       .database()
@@ -200,12 +208,12 @@ export class CloudStorage {
       .set(items);
   }
   /**
-	 * Upload categories data
-	 * 
-	 * @param {Category[]} categories 
-	 * @param {string} uid 
-	 * @memberof CloudStorage
-	 */
+   * Upload categories data
+   *
+   * @param {Category[]} categories
+   * @param {string} uid
+   * @memberof CloudStorage
+   */
   uploadCategoriesData(categories: Category[], uid: string) {
     firebase
       .database()
@@ -213,12 +221,12 @@ export class CloudStorage {
       .set(categories);
   }
   /**
-	 * Get lists data
-	 * 
-	 * @param {string} uid 
-	 * @returns 
-	 * @memberof CloudStorage
-	 */
+   * Get lists data
+   *
+   * @param {string} uid
+   * @returns
+   * @memberof CloudStorage
+   */
   loadListsData(uid: string) {
     return new Promise(resolve => {
       let ref = firebase.database().ref('/lists/');
@@ -241,12 +249,12 @@ export class CloudStorage {
     });
   }
   /**
-	 * Get elements data
-	 * 
-	 * @param {string} uid 
-	 * @returns 
-	 * @memberof CloudStorage
-	 */
+   * Get elements data
+   *
+   * @param {string} uid
+   * @returns
+   * @memberof CloudStorage
+   */
   loadItemsData(uid: string) {
     return new Promise(resolve => {
       let ref = firebase.database().ref('/elements/');
@@ -269,12 +277,12 @@ export class CloudStorage {
     });
   }
   /**
-	 * Get categories data
-	 * 
-	 * @param {string} uid 
-	 * @returns 
-	 * @memberof CloudStorage
-	 */
+   * Get categories data
+   *
+   * @param {string} uid
+   * @returns
+   * @memberof CloudStorage
+   */
   loadCategoriesData(uid: string) {
     return new Promise(resolve => {
       let ref = firebase.database().ref('/categories/');

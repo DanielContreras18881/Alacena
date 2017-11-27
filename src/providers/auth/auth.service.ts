@@ -9,7 +9,7 @@ declare var gapi: any;
 declare var self: any;
 /**
  * Servie to manage login and logout on the cloud services for the app
- * 
+ *
  * @export
  * @class AuthService
  */
@@ -38,14 +38,13 @@ export class AuthService {
     });
   }
   /**
-	* Logout of the user
-	* 
-	* @param {string} type 
-	* @returns 
-	* @memberof AuthService
+   * Logout of the user
+   *
+   * @param {string} type
+   * @returns
+   * @memberof AuthService
    */
   logout() {
-    console.log(this.type);
     this.globalVars.disconnectUser();
     return new Promise(resolve => {
       self = this;
@@ -69,10 +68,10 @@ export class AuthService {
     });
   }
   /**
-	* Login with twitter
-	* 
-	* @returns 
-	* @memberof AuthService
+   * Login with twitter
+   *
+   * @returns
+   * @memberof AuthService
    */
   twitterLogin() {
     this.type = 'twitter';
@@ -81,10 +80,10 @@ export class AuthService {
     });
   }
   /**
-	* Login with facebook
-	* 
-	* @returns 
-	* @memberof AuthService
+   * Login with facebook
+   *
+   * @returns
+   * @memberof AuthService
    */
   facebookLogin() {
     this.type = 'facebook';
@@ -93,10 +92,10 @@ export class AuthService {
     });
   }
   /**
-	* Login with email
-	* 
-	* @returns 
-	* @memberof AuthService
+   * Login with email
+   *
+   * @returns
+   * @memberof AuthService
    */
   emailLogin() {
     this.type = 'email';
@@ -105,10 +104,10 @@ export class AuthService {
     });
   }
   /**
-	* Login with google
-	* 
-	* @returns 
-	* @memberof AuthService
+   * Login with google
+   *
+   * @returns
+   * @memberof AuthService
    */
   googleAuth() {
     this.type = 'google';

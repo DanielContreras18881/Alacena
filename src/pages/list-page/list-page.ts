@@ -203,9 +203,7 @@ export class ListPage {
       buttons: [
         {
           text: 'No',
-          handler: () => {
-            console.log('No removed');
-          }
+          handler: () => {}
         },
         {
           text: 'Yes',

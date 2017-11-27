@@ -94,7 +94,6 @@ export class DashboardPage {
    * @memberof DashboardPage
    */
   getDashboardData() {
-    console.log('dashboard');
     this.remindersData.getReminders().then(data => {
       this.remindersList = <Reminder[]>data;
       if (this.remindersList.length > 0) {

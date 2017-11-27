@@ -16,7 +16,7 @@ import { CategoryInfoPage } from '../../components/category-info/category-info';
 
 /**
  * Page to manage custom categories by the user
- * 
+ *
  * @export
  * @class CategorysPage
  */
@@ -59,11 +59,11 @@ export class CategorysPage {
     this.initializeCategories(null);
   }
   /**
-	 * Initialize data when open or search categories
-	 * 
-	 * @param {string} filter 
-	 * @memberof CategorysPage
-	 */
+   * Initialize data when open or search categories
+   *
+   * @param {string} filter
+   * @memberof CategorysPage
+   */
   initializeCategories(filter: string) {
     this.globalVars.getCategoriesData().then(data => {
       this.categories = <Category[]>data;
@@ -80,11 +80,11 @@ export class CategorysPage {
     });
   }
   /**
-	 * Event on search input filled
-	 * 
-	 * @param {any} event 
-	 * @memberof CategorysPage
-	 */
+   * Event on search input filled
+   *
+   * @param {any} event
+   * @memberof CategorysPage
+   */
   searchMatches(event) {
     if (this.searchCategory && this.searchCategory.trim() !== '') {
       this.initializeCategories(this.searchCategory);
@@ -93,30 +93,30 @@ export class CategorysPage {
     }
   }
   /**
-	 * Event to show or hide search bar
-	 * 
-	 * @param {any} event 
-	 * @memberof CategorysPage
-	 */
+   * Event to show or hide search bar
+   *
+   * @param {any} event
+   * @memberof CategorysPage
+   */
   toggleSearchBar(event) {
     this.searchBar = !this.searchBar;
   }
   /**
-	 * Event to change the category icon
-	 * 
-	 * @param {any} event 
-	 * @param {any} category 
-	 * @memberof CategorysPage
-	 */
+   * Event to change the category icon
+   *
+   * @param {any} event
+   * @param {any} category
+   * @memberof CategorysPage
+   */
   changeCategoryIcon(event, category) {
     this.catService.changeCategoryIcon(category, this.icons);
   }
   /**
-	 * Event to sort items by a selected value
-	 * 
-	 * @param {number} orderBy 
-	 * @memberof CategorysPage
-	 */
+   * Event to sort items by a selected value
+   *
+   * @param {number} orderBy
+   * @memberof CategorysPage
+   */
   sortItems(orderBy: number) {
     this.orderSelected = orderBy;
     switch (orderBy) {
@@ -136,11 +136,11 @@ export class CategorysPage {
     }
   }
   /**
-	 * Event to show options to sort items
-	 * 
-	 * @param {any} event 
-	 * @memberof CategorysPage
-	 */
+   * Event to show options to sort items
+   *
+   * @param {any} event
+   * @memberof CategorysPage
+   */
   reorder(event) {
     let reorder = this.alertCtrl.create();
     reorder.setTitle('Sort by');
@@ -174,12 +174,12 @@ export class CategorysPage {
     reorder.present();
   }
   /**
-	 * Event to delete a selected category
-	 * 
-	 * @param {any} event 
-	 * @param {Category} category 
-	 * @memberof CategorysPage
-	 */
+   * Event to delete a selected category
+   *
+   * @param {any} event
+   * @param {Category} category
+   * @memberof CategorysPage
+   */
   deleteCategory(event, category: Category) {
     let confirm = this.alertCtrl.create({
       title: 'Removing ' + category.categoryName,
@@ -187,9 +187,7 @@ export class CategorysPage {
       buttons: [
         {
           text: 'No',
-          handler: () => {
-            console.log('No removed');
-          }
+          handler: () => {}
         },
         {
           text: 'Yes',
@@ -203,11 +201,11 @@ export class CategorysPage {
     confirm.present();
   }
   /**
-	 * Event to remove multiple categories
-	 * 
-	 * @param {string[]} removed 
-	 * @memberof CategorysPage
-	 */
+   * Event to remove multiple categories
+   *
+   * @param {string[]} removed
+   * @memberof CategorysPage
+   */
   removeElements(removed: string[]) {
     removed.forEach(categoryRemoved => {
       this.categories = this.categories.filter(
@@ -217,10 +215,10 @@ export class CategorysPage {
     });
   }
   /**
-	* Event to add new category
-	* 
-	* @param {any} event 
-	* @memberof CategorysPage
+   * Event to add new category
+   *
+   * @param {any} event
+   * @memberof CategorysPage
    */
   addCategory(event) {
     let newCategory = {
@@ -256,12 +254,12 @@ export class CategorysPage {
     categoryModal.present();
   }
   /**
-	 * Even to edit a category
-	 * 
-	 * @param {any} event 
-	 * @param {Category} category 
-	 * @memberof CategorysPage
-	 */
+   * Even to edit a category
+   *
+   * @param {any} event
+   * @param {Category} category
+   * @memberof CategorysPage
+   */
   editCategory(event, category: Category) {
     let oldCategory = category.categoryName;
     let edit = this.alertCtrl.create({
@@ -291,12 +289,12 @@ export class CategorysPage {
     edit.present();
   }
   /**
-	 * Event to change unit step on measurement change
-	 * 
-	 * @param {any} event 
-	 * @param {Category} category 
-	 * @memberof CategorysPage
-	 */
+   * Event to change unit step on measurement change
+   *
+   * @param {any} event
+   * @param {Category} category
+   * @memberof CategorysPage
+   */
   onMeasurementChange(event, category: Category) {
     if (category.measurement === 'UNIDADES') {
       category.unitStep = 0.1;

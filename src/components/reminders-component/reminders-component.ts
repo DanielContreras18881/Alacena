@@ -19,7 +19,6 @@ export class RemindersComponent {
   data: any = {};
 
   constructor(private view: ViewController, params: NavParams) {
-    console.log(params);
     this.data.notificationDate = params.data.time;
     this.data.message = params.data.message;
   }

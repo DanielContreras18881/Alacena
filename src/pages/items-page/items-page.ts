@@ -20,7 +20,7 @@ import { GlobalVars } from '../../providers/global-vars/global-vars';
 import { ItemInfoPage } from '../../components/item-info/item-info';
 /**
  * Page to manage items on the app
- * 
+ *
  * @export
  * @class ItemsPage
  */
@@ -65,11 +65,11 @@ export class ItemsPage {
     });
   }
   /**
-	 * Initialize items data
-	 * 
-	 * @param {string} filter 
-	 * @memberof ItemsPage
-	 */
+   * Initialize items data
+   *
+   * @param {string} filter
+   * @memberof ItemsPage
+   */
   initializeItems(filter: string) {
     this.globalVars.getItemsData().then(data => {
       this.items = <Item[]>data;
@@ -91,7 +91,8 @@ export class ItemsPage {
               itemsFilled.push(auxItem);
             });
             this.items = itemsFilled;
-            this.sortItems(this.orderSelected);
+            /*				
+				this.sortItems(this.orderSelected);
             if (filter) {
               this.items = this.items.filter(item => {
                 return (
@@ -100,18 +101,19 @@ export class ItemsPage {
                     .indexOf(this.searchItem.toLowerCase()) > -1
                 );
               });
-            }
+				}
+				*/
           });
         });
       });
     });
   }
   /**
-	 * Event to search items based on input filled
-	 * 
-	 * @param {any} event 
-	 * @memberof ItemsPage
-	 */
+   * Event to search items based on input filled
+   *
+   * @param {any} event
+   * @memberof ItemsPage
+   */
   searchMatches(event) {
     if (this.searchItem && this.searchItem.trim() !== '') {
       this.initializeItems(this.searchItem);
@@ -120,33 +122,33 @@ export class ItemsPage {
     }
   }
   /**
-	 * Event to show or hide search bar
-	 * 
-	 * @param {any} event 
-	 * @memberof ItemsPage
-	 */
+   * Event to show or hide search bar
+   *
+   * @param {any} event
+   * @memberof ItemsPage
+   */
   toggleSearchBar(event) {
     this.searchBar = !this.searchBar;
   }
   /**
-	 * Event to change category of the item
-	 * 
-	 * @param {any} event 
-	 * @param {Item} item 
-	 * @memberof ItemsPage
-	 */
+   * Event to change category of the item
+   *
+   * @param {any} event
+   * @param {Item} item
+   * @memberof ItemsPage
+   */
   changeItemCategory(event, item: Item) {
     this.catService.changeCategory(item.category, item).then(data => {
       item = <Item>data;
     });
   }
   /**
-	 * Event to remove a item
-	 * 
-	 * @param {any} event 
-	 * @param {Item} item 
-	 * @memberof ItemsPage
-	 */
+   * Event to remove a item
+   *
+   * @param {any} event
+   * @param {Item} item
+   * @memberof ItemsPage
+   */
   removeItem(event, item: Item) {
     let confirm = this.alertCtrl.create({
       title: 'Removing ' + item.nombreElemento,
@@ -154,9 +156,7 @@ export class ItemsPage {
       buttons: [
         {
           text: 'No',
-          handler: () => {
-            console.log('No removed');
-          }
+          handler: () => {}
         },
         {
           text: 'Yes',
@@ -170,11 +170,11 @@ export class ItemsPage {
     confirm.present();
   }
   /**
-	 * Event to show events to send to shopping list
-	 * 
-	 * @param {any} event 
-	 * @memberof ItemsPage
-	 */
+   * Event to show events to send to shopping list
+   *
+   * @param {any} event
+   * @memberof ItemsPage
+   */
   selectToSendShoppingList(event) {
     let move = this.alertCtrl.create();
     move.setTitle('Move to LISTA_COMPRA');
@@ -210,6 +210,9 @@ export class ItemsPage {
           };
           this.shoppingList.push(newItem);
           this.globalVars.setListData('LISTA_COMPRA', this.shoppingList);
+          if (!auxItem.lists) {
+            auxItem.lists = [];
+          }
           auxItem.lists.push(newItem);
         });
       }
@@ -217,12 +220,12 @@ export class ItemsPage {
     move.present();
   }
   /**
-	 * Event to confirm to send to shopping list or discard elements
-	 * 
-	 * @param {any} event 
-	 * @param {Item} item 
-	 * @memberof ItemsPage
-	 */
+   * Event to confirm to send to shopping list or discard elements
+   *
+   * @param {any} event
+   * @param {Item} item
+   * @memberof ItemsPage
+   */
   discardOrShop(event, item: Item) {
     let discardRemove = this.alertCtrl.create();
     discardRemove.setTitle(
@@ -232,22 +235,22 @@ export class ItemsPage {
     discardRemove.addButton({
       text: 'To SHOPPING_LIST',
       handler: data => {
-        console.log('move to shopping list');
+        this.sendToShoppingList(event, <ListItem>item);
       }
     });
     discardRemove.addButton({
       text: 'Discard',
       handler: data => {
-        console.log('discard from lists and item list');
+        this.removeElements([item.nombreElemento]);
       }
     });
     discardRemove.present();
   }
   /**
-	* Event to remove selected items
-	* 
-	* @param {string[]} removed 
-	* @memberof ItemsPage
+   * Event to remove selected items
+   *
+   * @param {string[]} removed
+   * @memberof ItemsPage
    */
   removeElements(removed: string[]) {
     removed.forEach(itemRemoved => {
@@ -258,12 +261,12 @@ export class ItemsPage {
     });
   }
   /**
-	 * Event to edit a item
-	 * 
-	 * @param {any} event 
-	 * @param {Item} item 
-	 * @memberof ItemsPage
-	 */
+   * Event to edit a item
+   *
+   * @param {any} event
+   * @param {Item} item
+   * @memberof ItemsPage
+   */
   editItem(event, item: Item) {
     let oldItem = item.nombreElemento;
     let edit = this.alertCtrl.create({
@@ -298,11 +301,11 @@ export class ItemsPage {
     edit.present();
   }
   /**
-	 * Even to add a new item
-	 * 
-	 * @param {string} newItem 
-	 * @memberof ItemsPage
-	 */
+   * Even to add a new item
+   *
+   * @param {string} newItem
+   * @memberof ItemsPage
+   */
   addItem(newItem: string) {
     if (
       this.items.filter(
@@ -324,11 +327,11 @@ export class ItemsPage {
     }
   }
   /**
-	 * Event to sort items
-	 * 
-	 * @param {number} orderBy 
-	 * @memberof ItemsPage
-	 */
+   * Event to sort items
+   *
+   * @param {number} orderBy
+   * @memberof ItemsPage
+   */
   sortItems(orderBy: number) {
     this.orderSelected = orderBy;
     switch (orderBy) {
@@ -352,11 +355,11 @@ export class ItemsPage {
     }
   }
   /**
-	 * Even to show options to sort items
-	 * 
-	 * @param {any} event 
-	 * @memberof ItemsPage
-	 */
+   * Even to show options to sort items
+   *
+   * @param {any} event
+   * @memberof ItemsPage
+   */
   reorder(event) {
     let reorder = this.alertCtrl.create();
     reorder.setTitle('Sort by');
@@ -393,12 +396,12 @@ export class ItemsPage {
     reorder.present();
   }
   /**
-	 * Event to send a item to shopping list
-	 * 
-	 * @param {any} event 
-	 * @param {ListItem} item 
-	 * @memberof ItemsPage
-	 */
+   * Event to send a item to shopping list
+   *
+   * @param {any} event
+   * @param {ListItem} item
+   * @memberof ItemsPage
+   */
   sendToShoppingList(event, item: ListItem) {
     let itemSelected = this.items[this.items.indexOf(item)];
     let newShoppingListItem: ListItem = {

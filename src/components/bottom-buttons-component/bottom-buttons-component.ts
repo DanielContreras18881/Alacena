@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AlertController, ToastController } from 'ionic-angular';
 /**
  * Bottom button component to use on App pages
- * 
+ *
  * @export
  * @class BottomButtonsComponent
  */
@@ -30,29 +30,28 @@ export class BottomButtonsComponent {
     private toastCtrl: ToastController
   ) {}
   /**
-	 * Method on response of notification button pushed
-	 * 
-	 * @memberof BottomButtonsComponent
-	 */
+   * Method on response of notification button pushed
+   *
+   * @memberof BottomButtonsComponent
+   */
   setNotification() {
-    console.log('setNotification');
     this.finishNotification.emit();
   }
   /**
-	 * Method on response of save or recover button pushed
-	 * 
-	 * @param {Event} event Event object associated
-	 * @memberof BottomButtonsComponent
-	 */
+   * Method on response of save or recover button pushed
+   *
+   * @param {Event} event Event object associated
+   * @memberof BottomButtonsComponent
+   */
   saveRecoverList(event: Event) {
     console.log('saveRecoverList');
   }
   /**
-	 * Method on response of remove button pushed
-	 * 
-	 * @param {Event} event Event object associated
-	 * @memberof BottomButtonsComponent
-	 */
+   * Method on response of remove button pushed
+   *
+   * @param {Event} event Event object associated
+   * @memberof BottomButtonsComponent
+   */
   removeItems(event: Event) {
     let remove = this.alertCtrl.create();
     remove.setTitle('Remove');
@@ -99,11 +98,11 @@ export class BottomButtonsComponent {
     if (existElements) remove.present();
   }
   /**
-	 * Method on response of add button pushed
-	 * 
-	 * @param {Event} event Event object associated
-	 * @memberof BottomButtonsComponent
-	 */
+   * Method on response of add button pushed
+   *
+   * @param {Event} event Event object associated
+   * @memberof BottomButtonsComponent
+   */
   addItem(event: Event) {
     let type = this.type;
     if (type === 'List' || type === 'Item') {
@@ -123,7 +122,6 @@ export class BottomButtonsComponent {
             {
               text: 'Add',
               handler: data => {
-                console.log(data);
                 if (data.name.trim() == '' || data.name == null) {
                   const toast = this.toastCtrl.create({
                     message: 'Please enter a valid value!',

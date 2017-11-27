@@ -20,7 +20,7 @@ import { Color } from '../../classes/color';
 
 /**
  * Page to manage the list of lists
- * 
+ *
  * @export
  * @class ListsPage
  */
@@ -51,32 +51,32 @@ export class ListsPage {
     });
   }
   /**
-	 * Event to allow reorder the lists or not
-	 * 
-	 * @param {any} event 
-	 * @memberof ListsPage
-	 */
+   * Event to allow reorder the lists or not
+   *
+   * @param {any} event
+   * @memberof ListsPage
+   */
   reorder(event) {
     this.reorderAllowed = !this.reorderAllowed;
   }
   /**
-	 * Event to reorder lists as user select
-	 * 
-	 * @param {any} indexes 
-	 * @memberof ListsPage
-	 */
+   * Event to reorder lists as user select
+   *
+   * @param {any} indexes
+   * @memberof ListsPage
+   */
   reorderItems(indexes) {
     let element = this.lists[indexes.from];
     this.lists.splice(indexes.from, 1);
     this.lists.splice(indexes.to, 0, element);
   }
   /**
-	 * Event to remove a list
-	 * 
-	 * @param {any} event 
-	 * @param {string} name 
-	 * @memberof ListsPage
-	 */
+   * Event to remove a list
+   *
+   * @param {any} event
+   * @param {string} name
+   * @memberof ListsPage
+   */
   removeList(event, name: string) {
     let confirm = this.alertCtrl.create({
       title: 'Removing ' + name,
@@ -84,9 +84,7 @@ export class ListsPage {
       buttons: [
         {
           text: 'No',
-          handler: () => {
-            console.log('No removed');
-          }
+          handler: () => {}
         },
         {
           text: 'Yes',
@@ -101,12 +99,12 @@ export class ListsPage {
     confirm.present();
   }
   /**
-		* Event to edit the color of a list
-		* 
-		* @param {any} event 
-		* @param {List} list 
-		* @memberof ListsPage
-	   */
+   * Event to edit the color of a list
+   *
+   * @param {any} event
+   * @param {List} list
+   * @memberof ListsPage
+   */
   editColor(event, list: List) {
     this.globalVars.getColorsData().then(data => {
       let buttons: any = [];
@@ -132,12 +130,12 @@ export class ListsPage {
     });
   }
   /**
-		* Event to edit the name of a list
-		* 
-		* @param {any} event 
-		* @param {List} list 
-		* @memberof ListsPage
-	   */
+   * Event to edit the name of a list
+   *
+   * @param {any} event
+   * @param {List} list
+   * @memberof ListsPage
+   */
   editList(event, list: List) {
     let oldName = list.nombreLista;
     let edit = this.alertCtrl.create({
@@ -175,11 +173,11 @@ export class ListsPage {
     edit.present();
   }
   /**
-	 * Event to add a new list
-	 * 
-	 * @param {string} newList 
-	 * @memberof ListsPage
-	 */
+   * Event to add a new list
+   *
+   * @param {string} newList
+   * @memberof ListsPage
+   */
   addList(newList: string) {
     if (
       this.lists.filter(
@@ -204,11 +202,11 @@ export class ListsPage {
     }
   }
   /**
-	 * Event to remove a list of lists selected
-	 * 
-	 * @param {string[]} removed 
-	 * @memberof ListsPage
-	 */
+   * Event to remove a list of lists selected
+   *
+   * @param {string[]} removed
+   * @memberof ListsPage
+   */
   removeLists(removed: string[]) {
     this.lists = this.lists.filter(
       list => removed.indexOf(list.nombreLista) < 0
@@ -219,12 +217,12 @@ export class ListsPage {
     });
   }
   /**
-	 * Event to navigate to selected list
-	 * 
-	 * @param {any} event 
-	 * @param {List} list 
-	 * @memberof ListsPage
-	 */
+   * Event to navigate to selected list
+   *
+   * @param {any} event
+   * @param {List} list
+   * @memberof ListsPage
+   */
   listSelected(event, list: List) {
     this.nav.push(ListPage, {
       list: list

@@ -10,7 +10,7 @@ import { Network } from '@ionic-native/network';
 declare var cordova: any;
 /**
  * Provider to manage items data
- * 
+ *
  * @export
  * @class ItemsProvider
  */
@@ -26,12 +26,12 @@ export class ItemsProvider {
     private plt: Platform
   ) {}
   /**
-	 * Save items data
-	 * 
-	 * @param {Item[]} items 
-	 * @param {*} userProfile 
-	 * @memberof ItemsProvider
-	 */
+   * Save items data
+   *
+   * @param {Item[]} items
+   * @param {*} userProfile
+   * @memberof ItemsProvider
+   */
   setItemsData(items: Item[], userProfile: any): void {
     if (userProfile) {
       if (!this.plt.is('ios') && !this.plt.is('android')) {
@@ -48,24 +48,22 @@ export class ItemsProvider {
     }
   }
   /**
-	 * Recover items data
-	 * 
-	 * @param {any} userProfile 
-	 * @returns {*} 
-	 * @memberof ItemsProvider
-	 */
+   * Recover items data
+   *
+   * @param {any} userProfile
+   * @returns {*}
+   * @memberof ItemsProvider
+   */
   getItemsData(userProfile): any {
     return new Promise(resolve => {
       if (userProfile) {
         if (!this.plt.is('ios') && !this.plt.is('android')) {
           this.cloudStorage.loadItemsData(userProfile.uid).then(data => {
-            //console.log("cloudStorage:" + JSON.stringify(data));
             if (data !== undefined && data !== null) {
               this.localStorage.setToLocal('items', data);
               resolve(data);
             } else {
               this.localStorage.getFromLocal('items', null).then(data => {
-                //console.log("getFromLocal:" + JSON.stringify(data));
                 if (data !== undefined && data !== null) {
                   resolve(data);
                 } else {
@@ -77,7 +75,6 @@ export class ItemsProvider {
         } else {
           if (this.network.type === 'NONE') {
             this.localStorage.getFromLocal('items', null).then(data => {
-              //console.log("localStorage:" + JSON.stringify(data));
               if (data !== undefined && data !== null) {
                 resolve(data);
               } else {
@@ -86,13 +83,11 @@ export class ItemsProvider {
             });
           } else {
             this.cloudStorage.loadItemsData(userProfile.uid).then(data => {
-              //console.log("cloudStorage:" + JSON.stringify(data));
               if (data !== undefined && data !== null) {
                 this.localStorage.setToLocal('items', data);
                 resolve(data);
               } else {
                 this.localStorage.getFromLocal('items', null).then(data => {
-                  //console.log("getFromLocal:" + JSON.stringify(data));
                   if (data !== undefined && data !== null) {
                     resolve(data);
                   } else {
@@ -105,7 +100,6 @@ export class ItemsProvider {
         }
       } else {
         this.localStorage.getFromLocal('items', null).then(data => {
-          //console.log("localStorage2:" + JSON.stringify(data));
           if (data !== undefined && data !== null) {
             resolve(data);
           } else {
@@ -116,9 +110,9 @@ export class ItemsProvider {
     });
   }
   /**
-	* Recover old version app items
-	* 
-	* @memberof ItemsProvider
+   * Recover old version app items
+   *
+   * @memberof ItemsProvider
    */
   getOldItems() {
     this.localStorage.getFromLocal('elementos', null).then(data => {

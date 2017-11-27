@@ -3,7 +3,7 @@ import { Injectable, Pipe, PipeTransform } from '@angular/core';
 
 /**
  * Pipe to filter elements on a list
- * 
+ *
  * @export
  * @class PipeFilterElements
  * @implements {PipeTransform}
@@ -16,11 +16,13 @@ export class PipeFilterElements implements PipeTransform {
   transform(value: any[], args: string): any {
     let aux = [];
     value.forEach(dataValue => {
-      if (dataValue.nombreElemento.toLowerCase() === args.toLowerCase())
-        aux.push({
-          nombreLista: dataValue.nombreLista,
-          cantidadElemento: dataValue.cantidadElemento
-        });
+      if (dataValue.nombreElemento && args) {
+        if (dataValue.nombreElemento.toLowerCase() === args.toLowerCase())
+          aux.push({
+            nombreLista: dataValue.nombreLista,
+            cantidadElemento: dataValue.cantidadElemento
+          });
+      }
     });
     return aux;
   }

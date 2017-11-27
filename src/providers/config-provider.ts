@@ -8,7 +8,7 @@ import { Network } from '@ionic-native/network';
 declare var cordova: any;
 /**
  * Provider to manage config data
- * 
+ *
  * @export
  * @class ConfigProvider
  */
@@ -24,12 +24,12 @@ export class ConfigProvider {
     private plt: Platform
   ) {}
   /**
-	 * Save config data
-	 * 
-	 * @param {*} data 
-	 * @param {*} userProfile 
-	 * @memberof ConfigProvider
-	 */
+   * Save config data
+   *
+   * @param {*} data
+   * @param {*} userProfile
+   * @memberof ConfigProvider
+   */
   setConfigData(data: any, userProfile: any) {
     let arrData = [];
     arrData.push(data);
@@ -48,21 +48,20 @@ export class ConfigProvider {
     }
   }
   /**
-	 * Recover config data
-	 * 
-	 * @param {*} userProfile 
-	 * @returns {*} 
-	 * @memberof ConfigProvider
-	 */
+   * Recover config data
+   *
+   * @param {*} userProfile
+   * @returns {*}
+   * @memberof ConfigProvider
+   */
   getConfigData(userProfile: any): any {
     return new Promise(resolve => {
       if (userProfile) {
         if (!this.plt.is('ios') && !this.plt.is('android')) {
           this.cloudStorage.loadConfigData(userProfile.uid).then(data => {
             if (data !== undefined && data !== null) {
-              console.log('data:' + JSON.stringify(data[0]));
-              this.localStorage.setToLocal('config', data[0]);
-              resolve(data[0]);
+              this.localStorage.setToLocal('config', data);
+              resolve(data);
             } else {
               this.localStorage.getFromLocal('config', null).then(data => {
                 if (data !== undefined && data !== null) {
@@ -111,11 +110,11 @@ export class ConfigProvider {
     });
   }
   /**
-	 * Recover old version app config data
-	 * 
-	 * @returns {*} 
-	 * @memberof ConfigProvider
-	 */
+   * Recover old version app config data
+   *
+   * @returns {*}
+   * @memberof ConfigProvider
+   */
   getOldConfigData(): any {
     return new Promise(resolve => {
       this.localStorage.getFromLocal('configData', null).then(data => {

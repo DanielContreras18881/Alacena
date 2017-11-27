@@ -39,17 +39,17 @@
 							</ion-avatar>
 						</div>
 					</ion-col>
-					<ion-col width-15 *ngIf="!enableSelectToRemove">
+					<ion-col width-15>
 						<button class="buttonOperation" item-center primary large clear (click)="sendToShoppingList($event, item)">
 							<ion-icon ios="ios-basket" md="md-basket"></ion-icon>
 						</button>
 					</ion-col>
-					<ion-col width-15 *ngIf="!enableSelectToRemove">
+					<ion-col width-15>
 						<button item-center secondary clear (click)="editItem($event,item)" class="buttonOperation">
 							<ion-icon ios="ios-create" md="md-create"></ion-icon>
 						</button>
 					</ion-col>
-					<ion-col width-15 *ngIf="!enableSelectToRemove">
+					<ion-col width-15>
 						<button class="buttonOperation" item-center danger large clear (click)="removeItem($event, item)">
 							<ion-icon ios="ios-trash" md="md-trash"></ion-icon>
 						</button>
