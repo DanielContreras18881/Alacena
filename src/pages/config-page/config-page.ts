@@ -40,7 +40,7 @@ export class ConfigPage {
             .length <= 0
         ) {
           this.categories.push({
-            icon: { src: 'images/icons/default.png' },
+            icon: 'images/icons/default.png',
             measurement: 'UNIDADES',
             categoryName: 'No Category',
             unitStep: 1

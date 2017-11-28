@@ -1,4 +1,3 @@
-import { Icon } from '../../classes/icon';
 import { ListItem } from '../../classes/listItem';
 import { List } from '../../classes/list';
 import { Injectable } from '@angular/core';
@@ -22,7 +21,7 @@ export class GlobalVars {
   userProfile: any = null;
   userConnected: boolean = false;
 
-  iconsData: Icon[];
+  iconsData: string[];
 
   constructor(
     private listsDataProvider: ListsProvider,

@@ -1,4 +1,3 @@
-import { Icon } from '../../classes/icon';
 import { Category } from '../../classes/category';
 import { Component } from '@angular/core';
 
@@ -7,7 +6,7 @@ import { ViewController, NavParams } from 'ionic-angular';
 import { CategoriesService } from '../../providers/categories/categoriesService';
 /**
  * Category Info Page to add a Category, in a modal window
- * 
+ *
  * @export
  * @class CategoryInfoPage
  */
@@ -17,7 +16,7 @@ import { CategoriesService } from '../../providers/categories/categoriesService'
 })
 export class CategoryInfoPage {
   category: Category;
-  icons: Icon[];
+  icons: string[];
 
   constructor(
     private view: ViewController,
@@ -30,21 +29,21 @@ export class CategoryInfoPage {
     this.icons = this.params.get('icons');
   }
   /**
-	 * Change category event
-	 * 
-	 * @param {any} event 
-	 * @param {Category} category 
-	 * @memberof CategoryInfoPage
-	 */
+   * Change category event
+   *
+   * @param {any} event
+   * @param {Category} category
+   * @memberof CategoryInfoPage
+   */
   changeCategoryIcon(event, category: Category) {
     this.catService.changeCategoryIcon(category, this.icons);
   }
   /**
-	 * Change measurement type event
-	 * 
-	 * @param {any} event 
-	 * @memberof CategoryInfoPage
-	 */
+   * Change measurement type event
+   *
+   * @param {any} event
+   * @memberof CategoryInfoPage
+   */
   measurementChange(event) {
     if (this.category.measurement === 'UNIDADES') {
       this.category.unitStep = 0.1;
@@ -57,18 +56,18 @@ export class CategoryInfoPage {
     }
   }
   /**
-	 * Close the modal window, saving changes
-	 * 
-	 * @memberof CategoryInfoPage
-	 */
+   * Close the modal window, saving changes
+   *
+   * @memberof CategoryInfoPage
+   */
   save() {
     this.view.dismiss(this.category);
   }
   /**
-	 * Close the modal window, discarding changes
-	 * 
-	 * @memberof CategoryInfoPage
-	 */
+   * Close the modal window, discarding changes
+   *
+   * @memberof CategoryInfoPage
+   */
   close() {
     this.view.dismiss();
   }

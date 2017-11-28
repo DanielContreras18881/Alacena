@@ -9,7 +9,6 @@ import {
 
 import { Category } from '../../classes/category';
 import { ListItem } from '../../classes/listItem';
-import { Icon } from '../../classes/icon';
 import { Item } from '../../classes/item';
 import { List } from '../../classes/list';
 
@@ -35,7 +34,7 @@ export class ItemsPage {
   items: Item[];
   searchBar: boolean;
   searchItem: string;
-  icons: Icon[];
+  icons: string[];
   orderSelected: number = 1;
   shoppingList: ListItem[] = [];
   defaultCategory: Category;
@@ -54,7 +53,7 @@ export class ItemsPage {
   ionViewDidLoad() {
     this.searchBar = false;
     this.globalVars.getDefaulIconsData().then(data => {
-      this.icons = <Icon[]>data;
+      this.icons = <string[]>data;
       this.initializeItems(null);
     });
     this.globalVars.getListData('LISTA_COMPRA').then(data => {

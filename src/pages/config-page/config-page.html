@@ -32,12 +32,8 @@
 					<ion-toggle [(ngModel)]="configData.expireReminders" checked="{{configData.expireReminders}}" color="dark" (ngModelChange)='onChange()'></ion-toggle>
 				</ion-item>
 				<ion-item>
-					<ion-label stacked>CATEGORIA_DEFECTO</ion-label>
-					<ion-select text-right [(ngModel)]="categorySelected" (ngModelChange)='onChange()'>
-						<ion-option *ngFor="let category of categories" value="{{category.categoryName}}">
-							{{category.categoryName}}
-						</ion-option>
-					</ion-select>
+					<ion-label stacked>DIESTRO</ion-label>
+					<ion-toggle [(ngModel)]="configData.rightHand" checked="{{configData.rightHand}}" color="dark" (ngModelChange)='onChange()'></ion-toggle>
 				</ion-item>
 			</ion-card-content>
 		</ion-card>
@@ -46,6 +42,14 @@
 				CONFIGURACION_CATEGORIAS
 			</ion-card-header>
 			<ion-card-content>
+				<ion-item>
+					<ion-label stacked>CATEGORIA_DEFECTO</ion-label>
+					<ion-select text-right [(ngModel)]="categorySelected" (ngModelChange)='onChange()'>
+						<ion-option *ngFor="let category of categories" value="{{category.categoryName}}">
+							{{category.categoryName}}
+						</ion-option>
+					</ion-select>
+				</ion-item>
 				<ion-item>
 					<ion-label stacked>PASO_MEDIDA_DEFECTO</ion-label>
 					<ion-select text-right [(ngModel)]="configData.stepDefault" (ngModelChange)='onChange()'>

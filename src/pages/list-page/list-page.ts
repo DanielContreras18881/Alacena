@@ -11,7 +11,6 @@ import {
 
 import { List } from '../../classes/list';
 import { Category } from '../../classes/category';
-import { Icon } from '../../classes/icon';
 import { ListItem } from '../../classes/listItem';
 import moment from 'moment';
 
@@ -41,7 +40,7 @@ export class ListPage {
   list: ListItem[] = [];
   searchBar: boolean;
   searchItem: string;
-  icons: Icon[];
+  icons: string[];
   orderSelected: number = 1;
   defaultCategory: Category;
   minimumAmount: number;
@@ -66,7 +65,7 @@ export class ListPage {
       ? this.navParams.get('list')
       : 'LISTA_COMPRA';
     this.globalVars.getDefaulIconsData().then(data => {
-      this.icons = <Icon[]>data;
+      this.icons = <string[]>data;
       this.initializeItems(null);
     });
     this.globalVars.getConfigData().then(data => {
@@ -74,7 +73,8 @@ export class ListPage {
       this.minimumAmount = (<any>data).cantidadMinimaDefecto;
       this.dataConfig = {
         deleteAt0: (<any>data).deleteAt0,
-        askAddListaCompra: (<any>data).askAddListaCompra
+        askAddListaCompra: (<any>data).askAddListaCompra,
+        rightHand: (<any>data).rightHand
       };
     });
   }

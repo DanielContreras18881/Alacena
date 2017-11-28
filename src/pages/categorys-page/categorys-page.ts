@@ -11,7 +11,6 @@ import { CategoriesService } from '../../providers/categories/categoriesService'
 import { GlobalVars } from '../../providers/global-vars/global-vars';
 
 import { Category } from '../../classes/category';
-import { Icon } from '../../classes/icon';
 import { CategoryInfoPage } from '../../components/category-info/category-info';
 
 /**
@@ -30,7 +29,7 @@ export class CategorysPage {
   categories: Category[] = [];
   searchBar: boolean;
   searchCategory: string;
-  icons: Icon[];
+  icons: string[];
   unitStep: number;
   measurement: string;
 
@@ -50,7 +49,7 @@ export class CategorysPage {
   ionViewDidLoad() {
     this.searchBar = false;
     this.globalVars.getDefaulIconsData().then(data => {
-      this.icons = <Icon[]>data;
+      this.icons = <string[]>data;
     });
     this.globalVars.getConfigData().then(data => {
       this.measurement = (<any>data).unitDefault;

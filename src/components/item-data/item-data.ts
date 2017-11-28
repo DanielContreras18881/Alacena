@@ -1,4 +1,3 @@
-import { Icon } from '../../classes/icon';
 import { ListItem } from '../../classes/listItem';
 import { List } from '../../classes/list';
 import moment from 'moment';
@@ -18,7 +17,7 @@ import { ItemsOnList } from './items-on-list';
 
 /**
  * Component to show a form for a item of a list, in a modal window
- * 
+ *
  * @export
  * @class Item
  * @implements {OnInit}
@@ -32,7 +31,7 @@ import { ItemsOnList } from './items-on-list';
 export class Item implements OnInit {
   @Input() item: ListItem;
   @Input() creating: boolean;
-  @Input() icons: Icon[];
+  @Input() icons: string[];
   @Input() config: any;
   @Output() remove: EventEmitter<ListItem> = new EventEmitter();
   @Output() move: EventEmitter<any> = new EventEmitter();
@@ -42,6 +41,7 @@ export class Item implements OnInit {
   @ViewChild('searchbar') searchbar: AutoCompleteComponent;
 
   oldMeasurement: string = '';
+  right: boolean = true;
 
   constructor(
     private catService: CategoriesService,
@@ -52,13 +52,14 @@ export class Item implements OnInit {
 
   ngOnInit() {
     this.oldMeasurement = this.item.category.measurement;
+    this.right = this.config !== undefined ? this.config.rightHand : true;
   }
   /**
-	 * Event to change measurement when unit step is changed
-	 * 
-	 * @param {any} measurement 
-	 * @memberof Item
-	 */
+   * Event to change measurement when unit step is changed
+   *
+   * @param {any} measurement
+   * @memberof Item
+   */
   changeUnitStep(measurement) {
     if (measurement === 'UNIDADES') {
       this.item.category.unitStep = 1;
@@ -89,21 +90,21 @@ export class Item implements OnInit {
     this.save.emit(this.item);
   }
   /**
-	 * Event change on a new unit step selected
-	 * 
-	 * @param {any} event 
-	 * @memberof Item
-	 */
+   * Event change on a new unit step selected
+   *
+   * @param {any} event
+   * @memberof Item
+   */
   onChange(event) {
     this.changeUnitStep(this.item.category.measurement);
   }
   /**
-	 * Event on plus button pushed
-	 * 
-	 * @param {any} event 
-	 * @param {any} amount 
-	 * @memberof Item
-	 */
+   * Event on plus button pushed
+   *
+   * @param {any} event
+   * @param {any} amount
+   * @memberof Item
+   */
   plusElement(event, amount) {
     if (amount) {
       let added: number =
@@ -117,12 +118,12 @@ export class Item implements OnInit {
     this.save.emit(this.item);
   }
   /**
-		* Event on minus button pushed
-		* 
-		* @param {any} event 
-		* @param {any} amount 
-		* @memberof Item
-	   */
+   * Event on minus button pushed
+   *
+   * @param {any} event
+   * @param {any} amount
+   * @memberof Item
+   */
   minusElement(event, amount) {
     if (amount) {
       let removed: number =
@@ -179,11 +180,11 @@ export class Item implements OnInit {
     }
   }
   /**
-	 * Check if the expiry date needs to be shown
-	 * 
-	 * @param {ListItem} item 
-	 * @memberof Item
-	 */
+   * Check if the expiry date needs to be shown
+   *
+   * @param {ListItem} item
+   * @memberof Item
+   */
   showExpiryDate(item: ListItem) {
     let text = this.checkExpiryDate(item.fechaCaducidad);
     // TODO: Translate text variable
@@ -201,15 +202,15 @@ export class Item implements OnInit {
     toast.present();
   }
   newExpire() {
-    if(this.item.caduca) this.item.fechaCaducidad = new Date().toISOString();
+    if (this.item.caduca) this.item.fechaCaducidad = new Date().toISOString();
   }
   /**
-	* Check expiry date of the item
-	* 
-	* @param {any} expiryDate 
-	* @returns 
-	* @memberof Item
-	*/
+   * Check expiry date of the item
+   *
+   * @param {any} expiryDate
+   * @returns
+   * @memberof Item
+   */
   checkExpiryDate(expiryDate) {
     if (moment().isAfter(moment(expiryDate, 'YYYY-MM-DDTHH:mm:ss.SSSZ'))) {
       return 'expired';
@@ -226,60 +227,61 @@ export class Item implements OnInit {
     }
   }
   /**
-	 * Mark item on the shopping list
-	 * 
-	 * @param {any} event 
-	 * @memberof Item
-	 */
+   * Mark item on the shopping list
+   *
+   * @param {any} event
+   * @memberof Item
+   */
   markItem(event) {
     this.item.marked = !this.item.marked;
     this.save.emit(this.item);
   }
   /**
-	 * Edit item event
-	 * 
-	 * @param {any} event 
-	 * @memberof Item
-	 */
+   * Edit item event
+   *
+   * @param {any} event
+   * @memberof Item
+   */
   editItem(event) {
     this.edit.emit(this.item);
   }
   /**
-	 * Remove item event
-	 * 
-	 * @param {any} event 
-	 * @memberof Item
-	 */
+   * Remove item event
+   *
+   * @param {any} event
+   * @memberof Item
+   */
   removeItem(event) {
     this.remove.emit(this.item);
   }
   /**
-	 * Move item event
-	 * 
-	 * @param {any} event 
-	 * @memberof Item
-	 */
+   * Move item event
+   *
+   * @param {any} event
+   * @memberof Item
+   */
   moveItem(event) {
     this.move.emit({ item: this.item, toShopingList: false });
   }
   /**
-	 * Event to edit category of the item
-	 * 
-	 * @param {any} event 
-	 * @memberof Item
-	 */
+   * Event to edit category of the item
+   *
+   * @param {any} event
+   * @memberof Item
+   */
   editCategory(event) {
+    console.log(event);
     this.catService.changeCategory(this.item.category, this.item).then(data => {
       this.item = <ListItem>data;
       this.changeUnitStep(this.item.category.measurement);
     });
   }
   /**
-	* Event on selected result on the search input results
-	* 
-	* @param {any} event 
-	* @memberof Item
-	*/
+   * Event on selected result on the search input results
+   *
+   * @param {any} event
+   * @memberof Item
+   */
   seleccionado(event) {
     if (event) {
       this.item.nombreElemento = event.nombreElemento;

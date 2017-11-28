@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AlertController, ToastController } from 'ionic-angular';
+import { GlobalVars } from '../../providers/global-vars/global-vars';
 /**
  * Bottom button component to use on App pages
  *
@@ -25,10 +26,18 @@ export class BottomButtonsComponent {
   @Output() finishedAdd = new EventEmitter<any>();
   @Output() finishNotification = new EventEmitter<any>();
 
+  right: boolean = false;
+
   constructor(
     private alertCtrl: AlertController,
-    private toastCtrl: ToastController
-  ) {}
+    private toastCtrl: ToastController,
+    private globalVars: GlobalVars
+  ) {
+    globalVars.getConfigData().then(config => {
+      this.right =
+        (<any>config).rightHand !== undefined ? (<any>config).rightHand : true;
+    });
+  }
   /**
    * Method on response of notification button pushed
    *

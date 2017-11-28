@@ -1,5 +1,4 @@
 import { Category } from '../../classes/category';
-import { Icon } from '../../classes/icon';
 import { Injectable } from '@angular/core';
 import { AlertController, ModalController } from 'ionic-angular';
 
@@ -11,13 +10,13 @@ import { GlobalVars } from '../../providers/global-vars/global-vars';
 //import { ImagePicker } from 'ionic-native';
 /**
  * Service to manage categories
- * 
+ *
  * @export
  * @class CategoriesService
  */
 @Injectable()
 export class CategoriesService {
-  private icons: Icon[];
+  private icons: string[];
 
   constructor(
     public mod: ModalController,
@@ -26,17 +25,17 @@ export class CategoriesService {
     private iconsData: DefaultIcons
   ) {
     this.iconsData.getIcons().then(data => {
-      this.icons = <Icon[]>data;
+      this.icons = <string[]>data;
     });
   }
   /**
-	 * Event to change the category of a item on a list or generic, showing a modal window
-	 * 
-	 * @param {Category} currentCategory 
-	 * @param {any} item 
-	 * @returns 
-	 * @memberof CategoriesService
-	 */
+   * Event to change the category of a item on a list or generic, showing a modal window
+   *
+   * @param {Category} currentCategory
+   * @param {any} item
+   * @returns
+   * @memberof CategoriesService
+   */
   changeCategory(currentCategory: Category, item) {
     return new Promise(resolve => {
       let change = this.alertCtrl.create();
@@ -70,30 +69,29 @@ export class CategoriesService {
     });
   }
   /**
-	 * Event to change the icon of a category, showing a modal window to select from gallery or taking a photo
-	 * 
-	 * @param {Category} category 
-	 * @param {Icon[]} icons 
-	 * @memberof CategoriesService
-	 */
-  changeCategoryIcon(category: Category, icons: Icon[]) {
+   * Event to change the icon of a category, showing a modal window to select from gallery or taking a photo
+   *
+   * @param {Category} category
+   * @param {Icon[]} icons
+   * @memberof CategoriesService
+   */
+  changeCategoryIcon(category: Category, icons: string[]) {
     let paramIcons = icons !== null ? icons : this.icons;
     let changeIconModal = this.mod.create(ListIconsPage, { icons: paramIcons });
     changeIconModal.onDidDismiss(icon => {
       // Save data to storage
       if (icon !== undefined) {
-        if (icon.src !== undefined && icon.src !== null) {
-          category.icon = icon.src;
-        } else {
-          // TODO: check config for camera and gallery
-          let confirm = this.alertCtrl.create({
-            title: 'Select Category Image',
-            message: 'What image do you want to use?',
-            buttons: [
-              {
-                text: 'Camera',
-                handler: () => {
-                  /*
+        category.icon = icon;
+      } else {
+        // TODO: check config for camera and gallery
+        let confirm = this.alertCtrl.create({
+          title: 'Select Category Image',
+          message: 'What image do you want to use?',
+          buttons: [
+            {
+              text: 'Camera',
+              handler: () => {
+                /*
                   Camera.getPicture({}).then(
                     imageData => {
                       console.log(imageData);
@@ -109,12 +107,12 @@ export class CategoriesService {
                     }
 						);
 						*/
-                }
-              },
-              {
-                text: 'Gallery',
-                handler: () => {
-                  /*
+              }
+            },
+            {
+              text: 'Gallery',
+              handler: () => {
+                /*
                   ImagePicker.getPictures({}).then(
                     results => {
                       console.log(results[0]);
@@ -128,12 +126,11 @@ export class CategoriesService {
                     err => {}
 						);
 						*/
-                }
               }
-            ]
-          });
-          confirm.present();
-        }
+            }
+          ]
+        });
+        confirm.present();
       }
     });
     changeIconModal.present();

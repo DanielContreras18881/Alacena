@@ -5,6 +5,7 @@
   "askAddListaCompra": false,
   "expireReminders": true,
   "deleteAt0": true,
+  "rightHand": true,
   "idiomaDefault": "en",
   "idiomas": [
     {

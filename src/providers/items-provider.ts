@@ -123,7 +123,7 @@ export class ItemsProvider {
           } else {
             (<Item[]>data).forEach(item => {
               item.category = <Category>{
-                icon: { src: 'images/icons/default.png' },
+                icon: 'images/icons/default.png' ,
                 measurement: 'UNIDADES',
                 categoryName: 'No Category',
                 unitStep: 1
