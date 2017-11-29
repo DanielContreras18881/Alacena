@@ -14,7 +14,7 @@
 				<ion-auto-complete *ngIf="creating" #searchbar [dataProvider]="itemsOnList" (itemSelected)="seleccionado($event)" (autoBlur)="seleccionado($event)"
 				 [options]="{ placeholder : 'NEW ELEMENT' }"></ion-auto-complete>
 			</ion-col>
-			<ion-col col-2>
+			<ion-col col-2 offset-1>
 				<div *ngIf="item.category">
 					<ion-avatar item-left class="category-icon">
 						<img class="icon" src="{{item.category.icon}}" (click)="editCategory($event)" />
@@ -34,11 +34,6 @@
 			</ion-col>
 		</ion-row>
 		<ion-row class="fila" *ngIf="right">
-			<ion-col col-7>
-				<ion-label *ngIf="!creating" class="nameElement">{{item.nombreElemento}}</ion-label>
-				<ion-auto-complete *ngIf="creating" #searchbar [dataProvider]="itemsOnList" (itemSelected)="seleccionado($event)" (autoBlur)="seleccionado($event)"
-				 [options]="{ placeholder : 'NEW ELEMENT' }"></ion-auto-complete>
-			</ion-col>
 			<ion-col col-2>
 				<div *ngIf="item.category">
 					<ion-avatar item-left class="category-icon">
@@ -51,6 +46,11 @@
 						<img class="icon" src="images/icons/default.png" (click)="editCategory($event)" />
 					</ion-avatar>
 				</div>
+			</ion-col>
+			<ion-col col-7>
+				<ion-label *ngIf="!creating" class="nameElement">{{item.nombreElemento}}</ion-label>
+				<ion-auto-complete *ngIf="creating" #searchbar [dataProvider]="itemsOnList" (itemSelected)="seleccionado($event)" (autoBlur)="seleccionado($event)"
+				 [options]="{ placeholder : 'NEW ELEMENT' }"></ion-auto-complete>
 			</ion-col>
 			<ion-col col-1>
 				<div *ngIf="item.caduca && item.fechaCaducidad">
@@ -67,7 +67,7 @@
 			</ion-col>
 		</ion-row>
 		<ion-row class="fila" *ngIf="!creating && !right">
-			<ion-col col-7>
+			<ion-col col-4>
 				<ion-item class="amountItem">
 					<button item-center default large clear (click)="minusElement($event, item, true)" class="amountButton">
 						<ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
@@ -80,14 +80,14 @@
 					</button>
 				</ion-item>
 			</ion-col>
-			<ion-col col-5>
+			<ion-col col-4>
 				<ion-row>
 					<ion-col col-4>
 						<button item-center secondary clear (click)="moveItem($event)" class="buttonOperation">
 							<ion-icon ios="ios-return-right" md="md-return-right"></ion-icon>
 						</button>
 					</ion-col>
-					<ion-col col-4 *ngIf="item.nombreLista!=='LISTA_COMPRA'">
+					<ion-col col-4>
 						<button item-center secondary clear (click)="editItem($event)" class="buttonOperation">
 							<ion-icon ios="ios-create" md="md-create"></ion-icon>
 						</button>
@@ -101,14 +101,14 @@
 			</ion-col>
 		</ion-row>
 		<ion-row class="fila" *ngIf="!creating && right">
-			<ion-col col-5>
+			<ion-col col-4 offset-4>
 				<ion-row>
 					<ion-col col-4>
 						<button item-center secondary clear (click)="moveItem($event)" class="buttonOperation">
 							<ion-icon ios="ios-return-right" md="md-return-right"></ion-icon>
 						</button>
 					</ion-col>
-					<ion-col col-4 *ngIf="item.nombreLista!=='LISTA_COMPRA'">
+					<ion-col col-4>
 						<button item-center secondary clear (click)="editItem($event)" class="buttonOperation">
 							<ion-icon ios="ios-create" md="md-create"></ion-icon>
 						</button>
@@ -120,7 +120,7 @@
 					</ion-col>
 				</ion-row>
 			</ion-col>
-			<ion-col col-7>
+			<ion-col col-4>
 				<ion-item class="amountItem">
 					<button item-center default large clear (click)="minusElement($event, item, true)" class="amountButton">
 						<ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
