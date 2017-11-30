@@ -10,7 +10,7 @@ import { List } from '../classes/list';
 declare var cordova: any;
 /**
  * Provider to manage lists data
- * 
+ *
  * @export
  * @class ListsProvider
  */
@@ -26,11 +26,11 @@ export class ListsProvider {
     private plt: Platform
   ) {}
   /**
-	* Get colors data from local file
-	* 
-	* @param {*} userProfile 
-	* @returns {*} 
-	* @memberof ListsProvider
+   * Get colors data from local file
+   *
+   * @param {*} userProfile
+   * @returns {*}
+   * @memberof ListsProvider
    */
   getColorsData(userProfile: any): any {
     return new Promise(resolve => {
@@ -44,21 +44,47 @@ export class ListsProvider {
     });
   }
   /**
-	 * Save lists data
-	 * 
-	 * @param {*} lists 
-	 * @param {*} userProfile 
-	 * @memberof ListsProvider
-	 */
+   * Save favorite lists data
+   *
+   * @param {*} lists
+   * @param {*} userProfile
+   * @memberof ListsProvider
+   */
+  setFavoriteListsData(lists: any, userProfile: any): void {
+    if (userProfile) {
+      if (!this.plt.is('ios') && !this.plt.is('android')) {
+        this.cloudStorage.uploadFavoritesListsData(lists, userProfile.uid);
+        this.localStorage.setToLocal('favorites', lists);
+      } else {
+        if (this.network.type === 'NONE') {
+          this.localStorage.setToLocal('favorites', lists);
+        } else {
+          this.cloudStorage.uploadFavoritesListsData(lists, userProfile.uid);
+          this.localStorage.setToLocal('favorites', lists);
+        }
+      }
+    } else {
+      this.localStorage.setToLocal('favorites', lists);
+    }
+  }
+  /**
+   * Save lists data
+   *
+   * @param {*} lists
+   * @param {*} userProfile
+   * @memberof ListsProvider
+   */
   setListsData(lists: any, userProfile: any): void {
     if (userProfile) {
       if (!this.plt.is('ios') && !this.plt.is('android')) {
         this.cloudStorage.uploadListsData(lists, userProfile.uid);
+        this.localStorage.setToLocal('lists', lists);
       } else {
         if (this.network.type === 'NONE') {
           this.localStorage.setToLocal('lists', lists);
         } else {
           this.cloudStorage.uploadListsData(lists, userProfile.uid);
+          this.localStorage.setToLocal('lists', lists);
         }
       }
     } else {
@@ -66,12 +92,80 @@ export class ListsProvider {
     }
   }
   /**
-	 * Recover lists data
-	 * 
-	 * @param {*} userProfile 
-	 * @returns {*} 
-	 * @memberof ListsProvider
-	 */
+   * Recover favorites lists data
+   *
+   * @param {*} userProfile
+   * @returns {*}
+   * @memberof ListsProvider
+   */
+  getFavoritesListsData(userProfile: any): any {
+    return new Promise(resolve => {
+      if (userProfile) {
+        if (!this.plt.is('ios') && !this.plt.is('android')) {
+          this.cloudStorage
+            .loadFavoritesListsData(userProfile.uid)
+            .then(data => {
+              if (data !== undefined && data !== null) {
+                this.localStorage.setToLocal('favorites', data);
+                resolve(data);
+              } else {
+                this.localStorage.getFromLocal('favorites', null).then(data => {
+                  if (data !== undefined && data !== null) {
+                    resolve(data);
+                  } else {
+                    resolve([]);
+                  }
+                });
+              }
+            });
+        } else {
+          if (this.network.type === 'NONE') {
+            this.localStorage.getFromLocal('favorites', null).then(data => {
+              if (data !== undefined && data !== null) {
+                resolve(data);
+              } else {
+                resolve([]);
+              }
+            });
+          } else {
+            this.cloudStorage
+              .loadFavoritesListsData(userProfile.uid)
+              .then(data => {
+                if (data !== undefined && data !== null) {
+                  this.localStorage.setToLocal('favorites', data);
+                  resolve(data);
+                } else {
+                  this.localStorage
+                    .getFromLocal('favorites', null)
+                    .then(data => {
+                      if (data !== undefined && data !== null) {
+                        resolve(data);
+                      } else {
+                        resolve([]);
+                      }
+                    });
+                }
+              });
+          }
+        }
+      } else {
+        this.localStorage.getFromLocal('favorites', null).then(data => {
+          if (data !== undefined && data !== null) {
+            resolve(data);
+          } else {
+            resolve([]);
+          }
+        });
+      }
+    });
+  }
+  /**
+   * Recover lists data
+   *
+   * @param {*} userProfile
+   * @returns {*}
+   * @memberof ListsProvider
+   */
   getListsData(userProfile: any): any {
     return new Promise(resolve => {
       if (userProfile) {
@@ -128,11 +222,11 @@ export class ListsProvider {
     });
   }
   /**
-	 * Recover old version app lists data
-	 * 
-	 * @returns {*} 
-	 * @memberof ListsProvider
-	 */
+   * Recover old version app lists data
+   *
+   * @returns {*}
+   * @memberof ListsProvider
+   */
   getOldLists(): any {
     return new Promise(resolve => {
       this.localStorage.getFromLocal('listas', null).then(data => {

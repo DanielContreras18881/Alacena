@@ -1,6 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AlertController, ToastController } from 'ionic-angular';
+import {
+  ActionSheetController,
+  AlertController,
+  ToastController
+} from 'ionic-angular';
 import { GlobalVars } from '../../providers/global-vars/global-vars';
+import { ListItem } from '../../classes/listItem';
 /**
  * Bottom button component to use on App pages
  *
@@ -21,14 +26,15 @@ export class BottomButtonsComponent {
   @Input() type: string;
 
   @Output() finishedNotifications = new EventEmitter<any>();
-  @Output() finishedFavorites = new EventEmitter<any>();
   @Output() finishedRemoved = new EventEmitter<any>();
   @Output() finishedAdd = new EventEmitter<any>();
   @Output() finishNotification = new EventEmitter<any>();
+  @Output() finishFavorite = new EventEmitter<any>();
 
   right: boolean = false;
 
   constructor(
+    private actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
     private globalVars: GlobalVars
@@ -53,7 +59,104 @@ export class BottomButtonsComponent {
    * @memberof BottomButtonsComponent
    */
   saveRecoverList(event: Event) {
-    console.log('saveRecoverList');
+    this.globalVars.getFavoritesListsData().then(listFavorites => {
+      let askButtons: any = [];
+      askButtons.push({
+        text: 'Save',
+        handler: () => {
+          this.alertCtrl
+            .create({
+              title: 'Save as...',
+              inputs: [
+                {
+                  name: 'name'
+                }
+              ],
+              buttons: [
+                {
+                  text: 'Cancel',
+                  role: 'cancel'
+                },
+                {
+                  text: 'Save',
+                  handler: data => {
+                    if (data.name.trim() == '' || data.name == null) {
+                      const toast = this.toastCtrl.create({
+                        message: 'Please enter a valid value!',
+                        duration: 1500,
+                        position: 'bottom'
+                      });
+                      toast.present();
+                      return;
+                    }
+                    this.globalVars.setListData(data.name.trim(), this.object);
+                    (<any[]>listFavorites).push(data.name.trim());
+                    this.globalVars.setFavoritesListsData(listFavorites);
+                  }
+                }
+              ]
+            })
+            .present();
+        }
+      });
+      if ((<any[]>listFavorites).length > 0) {
+        askButtons.push({
+          text: 'Load',
+          handler: () => {
+            let buttons: any = [];
+            (<any[]>listFavorites).forEach(favorite => {
+              buttons.push({
+                text: favorite,
+                handler: () => {
+                  this.globalVars.getListData(favorite).then(data => {
+                    this.globalVars.setListData(
+                      'LISTA_COMPRA',
+                      <ListItem[]>data
+                    );
+                    this.finishFavorite.emit(<ListItem[]>data);
+                  });
+                }
+              });
+            });
+            let actionSheet = this.actionSheetCtrl.create({
+              title: 'Select list to Load',
+              buttons: buttons
+            });
+            actionSheet.present();
+          }
+        });
+        askButtons.push({
+          text: 'Remove',
+          handler: () => {
+            let buttons: any = [];
+            (<any[]>listFavorites).forEach(favorite => {
+              buttons.push({
+                text: favorite,
+                handler: () => {
+                  this.globalVars.removetItemListData(favorite);
+                  listFavorites = (<any[]>listFavorites).filter(
+                    list => list !== favorite
+                  );
+                  this.globalVars.setFavoritesListsData(listFavorites);
+                }
+              });
+            });
+            let actionSheet = this.actionSheetCtrl.create({
+              title: 'Select list to Remove',
+              buttons: buttons
+            });
+            actionSheet.present();
+          }
+        });
+      }
+      askButtons.push({ text: 'Cancel', role: 'cancel' });
+      let askFavorite = this.alertCtrl.create({
+        title: 'Save or Load ShoppingList',
+        buttons: askButtons
+      });
+
+      askFavorite.present();
+    });
   }
   /**
    * Method on response of remove button pushed

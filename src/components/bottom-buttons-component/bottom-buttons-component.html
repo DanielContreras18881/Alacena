@@ -1,30 +1,30 @@
 <ion-toolbar>
-	<ion-segment *ngIf="right">
-		<ion-segment-button (click)="setNotification($event)" value="" *ngIf="notifications">
-			<ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
-		</ion-segment-button>
-		<ion-segment-button (click)="saveRecoverList($event)" value="" *ngIf="favorite">
-			<ion-icon ios="ios-star" md="md-star"></ion-icon>
-		</ion-segment-button>
-		<ion-segment-button (click)="removeItems($event)" value="" *ngIf="remove">
-			<ion-icon ios="ios-trash" md="md-trash"></ion-icon>
-		</ion-segment-button>
-		<ion-segment-button (click)="addItem($event)" value="" *ngIf="add">
-			<ion-icon ios="ios-add" md="md-add"></ion-icon>
-		</ion-segment-button>
-	</ion-segment>
-	<ion-segment *ngIf="!right">
-		<ion-segment-button (click)="addItem($event)" value="" *ngIf="add">
-			<ion-icon ios="ios-add" md="md-add"></ion-icon>
-		</ion-segment-button>
-		<ion-segment-button (click)="removeItems($event)" value="" *ngIf="remove">
-			<ion-icon ios="ios-trash" md="md-trash"></ion-icon>
-		</ion-segment-button>
-		<ion-segment-button (click)="saveRecoverList($event)" value="" *ngIf="favorite">
-			<ion-icon ios="ios-star" md="md-star"></ion-icon>
-		</ion-segment-button>
-		<ion-segment-button (click)="setNotification($event)" value="" *ngIf="notifications">
-			<ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
-		</ion-segment-button>
-	</ion-segment>
+  <ion-segment *ngIf="right">
+    <ion-segment-button (click)="setNotification($event)" value="" *ngIf="notifications">
+      <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button (click)="saveRecoverList($event)" value="" *ngIf="favorites">
+      <ion-icon ios="ios-star" md="md-star"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button (click)="removeItems($event)" value="" *ngIf="remove">
+      <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button (click)="addItem($event)" value="" *ngIf="add">
+      <ion-icon ios="ios-add" md="md-add"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-segment *ngIf="!right">
+    <ion-segment-button (click)="addItem($event)" value="" *ngIf="add">
+      <ion-icon ios="ios-add" md="md-add"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button (click)="removeItems($event)" value="" *ngIf="remove">
+      <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button (click)="saveRecoverList($event)" value="" *ngIf="favorites">
+      <ion-icon ios="ios-star" md="md-star"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button (click)="setNotification($event)" value="" *ngIf="notifications">
+      <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
 </ion-toolbar>

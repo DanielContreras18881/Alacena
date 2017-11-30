@@ -457,4 +457,7 @@ export class ListPage {
     });
     infoListModal.present();
   }
+  loadFavorite(list: ListItem[]) {
+    this.list = list;
+  }
 }

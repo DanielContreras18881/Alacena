@@ -129,6 +129,30 @@ export class GlobalVars {
     });
   }
   /**
+   * Save favorites lists data
+   *
+   * @param {any} value
+   * @memberof GlobalVars
+   */
+  setFavoritesListsData(value) {
+    this.listsDataProvider.setFavoriteListsData(value, this.userProfile);
+  }
+  /**
+   * Recover favorites lists data
+   *
+   * @returns
+   * @memberof GlobalVars
+   */
+  getFavoritesListsData() {
+    return new Promise(resolve => {
+      this.listsDataProvider
+        .getFavoritesListsData(this.userProfile)
+        .then(data => {
+          resolve(data);
+        });
+    });
+  }
+  /**
    * Save lists data
    *
    * @param {any} value

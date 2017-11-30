@@ -152,6 +152,23 @@ export class CloudStorage {
     );
   }
   /**
+   * Remove data of a favorite list provided
+   *
+   * @param {string} name
+   * @param {string} uid
+   * @memberof CloudStorage
+   */
+  removeFavoritesListData(name: string, uid: string) {
+    const storage = firebase.storage();
+    let fileName = uid + '_' + name + '.json';
+    let fileRef = storage.ref('favorites/' + fileName);
+    fileRef.delete();
+    firebase
+      .database()
+      .ref('listItems/' + uid + '_' + name)
+      .remove();
+  }
+  /**
    * Remove data of a list provided
    *
    * @param {string} name
@@ -167,6 +184,19 @@ export class CloudStorage {
       .database()
       .ref('listItems/' + uid + '_' + name)
       .remove();
+  }
+  /**
+   * Upload data of favorites lists
+   *
+   * @param {List[]} lists
+   * @param {string} uid
+   * @memberof CloudStorage
+   */
+  uploadFavoritesListsData(lists: List[], uid: string) {
+    firebase
+      .database()
+      .ref('favorites/' + uid)
+      .set(lists);
   }
   /**
    * Upload data of lists
@@ -219,6 +249,34 @@ export class CloudStorage {
       .database()
       .ref('categories/' + uid)
       .set(categories);
+  }
+  /**
+   * Get favorites lists data
+   *
+   * @param {string} uid
+   * @returns
+   * @memberof CloudStorage
+   */
+  loadFavoritesListsData(uid: string) {
+    return new Promise(resolve => {
+      let ref = firebase.database().ref('/favorites/');
+      ref.once('value').then(function(snapshot) {
+        let object = JSON.parse(JSON.stringify(snapshot));
+        if (object) {
+          let lists = JSON.parse(JSON.stringify(object[uid]));
+          let listArray = [];
+          for (let key in lists) {
+            if (lists.hasOwnProperty(key)) {
+              let list = JSON.parse(JSON.stringify(lists[key]));
+              listArray.push(list);
+            }
+          }
+          resolve(listArray);
+        } else {
+          resolve(null);
+        }
+      });
+    });
   }
   /**
    * Get lists data
