@@ -44,6 +44,7 @@ export class ListPage {
   orderSelected: number = 1;
   defaultCategory: Category;
   minimumAmount: number;
+  expireReminders: boolean;
 
   dataConfig: any = {};
 
@@ -71,6 +72,7 @@ export class ListPage {
     this.globalVars.getConfigData().then(data => {
       this.defaultCategory = (<any>data).categoryDefault;
       this.minimumAmount = (<any>data).cantidadMinimaDefecto;
+      this.expireReminders = (<any>data).expireReminders;
       this.dataConfig = {
         deleteAt0: (<any>data).deleteAt0,
         askAddListaCompra: (<any>data).askAddListaCompra,
@@ -224,41 +226,43 @@ export class ListPage {
    */
   saveItem(item: ListItem) {
     //TODO: Check on device
-    if (item.caduca) {
-      this.localNotifications.schedule({
-        id: moment(item.fechaCaducidad)
-          .add(-1, 'days')
-          .subtract(1, 'hour')
-          .unix(),
-        title: 'CADUCA_MANIANA',
-        text:
-          item.nombreLista +
-          '\n' +
-          item.nombreElemento +
-          '\n' +
-          'CADUCA_MANIANA',
-        at: moment(item.fechaCaducidad)
-          .add(-1, 'days')
-          .subtract(1, 'hour')
-          .toDate()
-      });
-      this.localNotifications.schedule({
-        id: moment(item.fechaCaducidad)
-          .add(-7, 'days')
-          .subtract(1, 'hour')
-          .unix(),
-        title: 'CADUCA_7_DIAS',
-        text:
-          item.nombreLista +
-          '\n' +
-          item.nombreElemento +
-          '\n' +
-          'CADUCA_7_DIAS',
-        at: moment(item.fechaCaducidad)
-          .add(-7, 'days')
-          .subtract(1, 'hour')
-          .toDate()
-      });
+    if (this.expireReminders) {
+      if (item.caduca) {
+        this.localNotifications.schedule({
+          id: moment(item.fechaCaducidad)
+            .add(-1, 'days')
+            .subtract(1, 'hour')
+            .unix(),
+          title: 'CADUCA_MANIANA',
+          text:
+            item.nombreLista +
+            '\n' +
+            item.nombreElemento +
+            '\n' +
+            'CADUCA_MANIANA',
+          at: moment(item.fechaCaducidad)
+            .add(-1, 'days')
+            .subtract(1, 'hour')
+            .toDate()
+        });
+        this.localNotifications.schedule({
+          id: moment(item.fechaCaducidad)
+            .add(-7, 'days')
+            .subtract(1, 'hour')
+            .unix(),
+          title: 'CADUCA_7_DIAS',
+          text:
+            item.nombreLista +
+            '\n' +
+            item.nombreElemento +
+            '\n' +
+            'CADUCA_7_DIAS',
+          at: moment(item.fechaCaducidad)
+            .add(-7, 'days')
+            .subtract(1, 'hour')
+            .toDate()
+        });
+      }
     }
     this.list[this.list.indexOf(item)] = item;
     this.globalVars.setListData(this.selectedItem, this.list);
@@ -271,13 +275,17 @@ export class ListPage {
    */
   editItem(item: ListItem) {
     let infoListModal = this.mod.create(ItemInfoPage, {
-      newItem: item,
+      newItem: JSON.parse(JSON.stringify(item)),
       editing: true,
       icons: this.icons
     });
-    infoListModal.onDidDismiss(item => {
-      this.list[this.list.indexOf(item)] = item;
-      this.globalVars.setListData(this.selectedItem, this.list);
+    infoListModal.onDidDismiss(itemEdited => {
+      if (itemEdited !== undefined) {
+        this.list[this.list.indexOf(item)] = itemEdited;
+        this.globalVars.setListData(this.selectedItem, this.list);
+      } else {
+        this.list[this.list.indexOf(item)] = item;
+      }
     });
     infoListModal.present();
   }
@@ -419,7 +427,7 @@ export class ListPage {
     };
     let infoListModal = this.mod.create(ItemInfoPage, {
       newItem: newItem,
-      editing: false,
+      editing: true,
       icons: this.icons
     });
     infoListModal.onDidDismiss(item => {
@@ -431,7 +439,7 @@ export class ListPage {
           ).length === 0
         ) {
           this.list.push(item);
-          this.globalVars.setListData(this.selectedItem, this.list);
+          this.saveItem(item);
           this.globalVars.addOneItem(item);
         } else {
           let addAmount = this.alertCtrl.create();

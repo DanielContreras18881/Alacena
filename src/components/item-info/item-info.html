@@ -1,18 +1,22 @@
 <ion-header>
   <ion-toolbar dark>
-      <ion-title [hidden]="!editing">
-          EDITING_ELEMENT
-      </ion-title>
-      <ion-title [hidden]="editing">
-          ADDING_ELEMENT
-      </ion-title>
-      <ion-buttons end>
-          <button primary (click)="save()"><ion-icon ios="ios-archive" md="md-archive"></ion-icon></button>
-          <button (click)="close()"><ion-icon ios="ios-close" md="md-close"></ion-icon></button>
-      </ion-buttons>
+    <ion-title [hidden]="!editing">
+      EDITING_ELEMENT
+    </ion-title>
+    <ion-title [hidden]="editing">
+      ADDING_ELEMENT
+    </ion-title>
+    <ion-buttons end>
+      <button primary (click)="save()">
+        <ion-icon ios="ios-archive" md="md-archive"></ion-icon>
+      </button>
+      <button (click)="close()">
+        <ion-icon ios="ios-close" md="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="item-info">
-  <item [(item)]="item" [creating]="true" [icons]="icons"></item>
+  <item [(item)]="item" [creating]="editing" [icons]="icons"></item>
 </ion-content>

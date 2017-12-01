@@ -1,205 +1,201 @@
 <ion-card>
-	<ion-card-header>
-		<ion-row class="fila" *ngIf="!right">
-			<ion-col col-1 *ngIf="!creating && item.nombreLista==='LISTA_COMPRA'">
-				<button [hidden]="!item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">
-					<ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon>
-				</button>
-				<button [hidden]="item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">
-					<ion-icon ios="ios-radio-button-off" md="md-radio-button-off"></ion-icon>
-				</button>
-			</ion-col>
-			<ion-col col-7 offset-1>
-				<ion-label *ngIf="!creating" class="nameElement">{{item.nombreElemento}}</ion-label>
-				<ion-auto-complete *ngIf="creating" #searchbar [dataProvider]="itemsOnList" (itemSelected)="seleccionado($event)" (autoBlur)="seleccionado($event)"
-				 [options]="{ placeholder : 'NEW ELEMENT' }"></ion-auto-complete>
-			</ion-col>
-			<ion-col col-2 offset-1>
-				<div *ngIf="item.category">
-					<ion-avatar item-left class="category-icon">
-						<img class="icon" src="{{item.category.icon}}" (click)="editCategory($event)" />
-						<h2 *ngIf="creating" class="labelCategory">{{item.category.categoryName}}</h2>
-					</ion-avatar>
-				</div>
-				<div *ngIf="!item.category">
-					<ion-avatar item-left class="category-icon">
-						<img class="icon" src="images/icons/default.png" (click)="editCategory($event)" />
-					</ion-avatar>
-				</div>
-			</ion-col>
-			<ion-col col-1>
-				<div *ngIf="item.caduca && item.fechaCaducidad">
-					<ion-icon ios="ios-alert" md="md-alert" (click)="showExpiryDate(item)" [ngClass]="checkExpiryDate(item.fechaCaducidad)"></ion-icon>
-				</div>
-			</ion-col>
-		</ion-row>
-		<ion-row class="fila" *ngIf="right">
-			<ion-col col-2>
-				<div *ngIf="item.category">
-					<ion-avatar item-left class="category-icon">
-						<img class="icon" src="{{item.category.icon}}" (click)="editCategory($event)" />
-						<h2 *ngIf="creating" class="labelCategory">{{item.category.categoryName}}</h2>
-					</ion-avatar>
-				</div>
-				<div *ngIf="!item.category">
-					<ion-avatar item-left class="category-icon">
-						<img class="icon" src="images/icons/default.png" (click)="editCategory($event)" />
-					</ion-avatar>
-				</div>
-			</ion-col>
-			<ion-col col-7>
-				<ion-label *ngIf="!creating" class="nameElement">{{item.nombreElemento}}</ion-label>
-				<ion-auto-complete *ngIf="creating" #searchbar [dataProvider]="itemsOnList" (itemSelected)="seleccionado($event)" (autoBlur)="seleccionado($event)"
-				 [options]="{ placeholder : 'NEW ELEMENT' }"></ion-auto-complete>
-			</ion-col>
-			<ion-col col-1>
-				<div *ngIf="item.caduca && item.fechaCaducidad">
-					<ion-icon ios="ios-alert" md="md-alert" (click)="showExpiryDate(item)" [ngClass]="checkExpiryDate(item.fechaCaducidad)"></ion-icon>
-				</div>
-			</ion-col>
-			<ion-col col-1 *ngIf="!creating && item.nombreLista==='LISTA_COMPRA'">
-				<button [hidden]="!item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">
-					<ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon>
-				</button>
-				<button [hidden]="item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">
-					<ion-icon ios="ios-radio-button-off" md="md-radio-button-off"></ion-icon>
-				</button>
-			</ion-col>
-		</ion-row>
-		<ion-row class="fila" *ngIf="!creating && !right">
-			<ion-col col-4>
-				<ion-item class="amountItem">
-					<button item-center default large clear (click)="minusElement($event, item, true)" class="amountButton">
-						<ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
-					</button>
-					<button clear class="amountButton">
-						<ion-badge class="amount amountIcon" large>{{item.cantidadElemento}}</ion-badge>
-					</button>
-					<button item-center default large clear (click)="plusElement($event, item, true)" class="amountButton">
-						<ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>
-					</button>
-				</ion-item>
-			</ion-col>
-			<ion-col col-4>
-				<ion-row>
-					<ion-col col-4>
-						<button item-center secondary clear (click)="moveItem($event)" class="buttonOperation">
-							<ion-icon ios="ios-return-right" md="md-return-right"></ion-icon>
-						</button>
-					</ion-col>
-					<ion-col col-4>
-						<button item-center secondary clear (click)="editItem($event)" class="buttonOperation">
-							<ion-icon ios="ios-create" md="md-create"></ion-icon>
-						</button>
-					</ion-col>
-					<ion-col col-4>
-						<button item-center danger clear (click)="removeItem($event)" class="buttonOperation">
-							<ion-icon ios="ios-trash" md="md-trash"></ion-icon>
-						</button>
-					</ion-col>
-				</ion-row>
-			</ion-col>
-		</ion-row>
-		<ion-row class="fila" *ngIf="!creating && right">
-			<ion-col col-4 offset-4>
-				<ion-row>
-					<ion-col col-4>
-						<button item-center secondary clear (click)="moveItem($event)" class="buttonOperation">
-							<ion-icon ios="ios-return-right" md="md-return-right"></ion-icon>
-						</button>
-					</ion-col>
-					<ion-col col-4>
-						<button item-center secondary clear (click)="editItem($event)" class="buttonOperation">
-							<ion-icon ios="ios-create" md="md-create"></ion-icon>
-						</button>
-					</ion-col>
-					<ion-col col-4>
-						<button item-center danger clear (click)="removeItem($event)" class="buttonOperation">
-							<ion-icon ios="ios-trash" md="md-trash"></ion-icon>
-						</button>
-					</ion-col>
-				</ion-row>
-			</ion-col>
-			<ion-col col-4>
-				<ion-item class="amountItem">
-					<button item-center default large clear (click)="minusElement($event, item, true)" class="amountButton">
-						<ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
-					</button>
-					<button clear class="amountButton">
-						<ion-badge class="amount amountIcon" large>{{item.cantidadElemento}}</ion-badge>
-					</button>
-					<button item-center default large clear (click)="plusElement($event, item, true)" class="amountButton">
-						<ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>
-					</button>
-				</ion-item>
-			</ion-col>
-		</ion-row>
-		<ion-row *ngIf="creating">
-			<ion-col>
-				<ion-item>
-					<!--<ion-label stacked>MEASUREMENT</ion-label>-->
-					<ion-select class="measurement" id="measurement" [(ngModel)]="item.category.measurement" (ngModelChange)="onChange($event)">
-						<ion-option>UNIDADES</ion-option>
-						<ion-option>LITROS</ion-option>
-						<ion-option>GRAMOS</ion-option>
-						<ion-option>KG</ion-option>
-					</ion-select>
-				</ion-item>
-			</ion-col>
-		</ion-row>
-	</ion-card-header>
-	<ion-card-content *ngIf="creating">
-		<ion-row>
-			<ion-label class="labelExpire">CADUCA</ion-label>
-			<ion-toggle id="expire" checked="item.caduca" [(ngModel)]="item.caduca" (ngModelChange)="newExpire($event)"></ion-toggle>
-		</ion-row>
-		<ion-row [hidden]="!item.caduca">
-			<ion-item>
-				{{item.fechaCaducidad}}
-				<ion-datetime class="expireDate" id="fechaCaducidad" displayFormat="DD MMMM YYYY" pickerFormat="DD MMMM YYYY" [(ngModel)]="item.fechaCaducidad"
-				 [disabled]="!creating" max="3000">
-				</ion-datetime>
-			</ion-item>
-		</ion-row>
-		<ion-row>
-			<ion-col col-5>
-				<p class="labelMinAmout">
-					CANTIDAD MINIMA:
-				</p>
-			</ion-col>
-			<ion-col col-7>
-				<ion-item>
-					<button item-center default large clear (click)="minusElement($event, false)" class="amountButton">
-						<ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
-					</button>
-					<button clear class="amountButton">
-						<ion-badge class="minimum amountIcon" large>{{item.cantidadMinima}}</ion-badge>
-					</button>
-					<button item-center default large clear (click)="plusElement($event, false)" class="amountButton">
-						<ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>
-					</button>
-				</ion-item>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col col-5>
-				<p class="labelAmount">
-					CANTIDAD:
-				</p>
-			</ion-col>
-			<ion-col col-7>
-				<ion-item>
-					<button item-center default large clear (click)="minusElement($event, true)" class="amountButton">
-						<ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
-					</button>
-					<button clear class="amountButton">
-						<ion-badge class="amount amountIcon" large>{{item.cantidadElemento}}</ion-badge>
-					</button>
-					<button item-center default large clear (click)="plusElement($event, true)" class="amountButton">
-						<ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>
-					</button>
-				</ion-item>
-			</ion-col>
-		</ion-row>
-	</ion-card-content>
+  <ion-card-header>
+    <ion-row class="fila" *ngIf="!right">
+      <ion-col col-1 *ngIf="!creating && item.nombreLista==='LISTA_COMPRA'">
+        <button [hidden]="!item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">
+          <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon>
+        </button>
+        <button [hidden]="item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">
+          <ion-icon ios="ios-radio-button-off" md="md-radio-button-off"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-7 offset-1>
+        <ion-label *ngIf="!creating" class="nameElement">{{item.nombreElemento}}</ion-label>
+        <ion-auto-complete *ngIf="creating" #searchbar [dataProvider]="itemsOnList" (itemSelected)="seleccionado($event)" (autoBlur)="seleccionado($event)"
+          [options]="{ placeholder : nombreantiguo }"></ion-auto-complete>
+      </ion-col>
+      <ion-col col-2 offset-1>
+        <div>
+          <ion-avatar item-left class="category-icon" (click)="editCategory($event)">
+            <img class="icon" src="item.category.icon" *ngIf="item.category" />
+            <img class="icon" src="defaultIcon" *ngIf="!item.category" />
+            <h2 *ngIf="creating" class="labelCategory">{{item.category.categoryName}}</h2>
+          </ion-avatar>
+        </div>
+      </ion-col>
+      <ion-col col-1>
+        <div *ngIf="item.caduca && item.fechaCaducidad">
+          <ion-icon ios="ios-alert" md="md-alert" (click)="showExpiryDate(item)" [ngClass]="checkExpiryDate(item.fechaCaducidad)"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="fila" *ngIf="right">
+      <ion-col col-2>
+        <div *ngIf="item.category">
+          <ion-avatar item-left class="category-icon">
+            <img class="icon" src="{{item.category.icon}}" (click)="editCategory($event)" />
+            <h2 *ngIf="creating" class="labelCategory">{{item.category.categoryName}}</h2>
+          </ion-avatar>
+        </div>
+        <div *ngIf="!item.category">
+          <ion-avatar item-left class="category-icon">
+            <img class="icon" src="images/icons/default.png" (click)="editCategory($event)" />
+          </ion-avatar>
+        </div>
+      </ion-col>
+      <ion-col col-7>
+        <ion-label *ngIf="!creating" class="nameElement">{{item.nombreElemento}}</ion-label>
+        <ion-auto-complete *ngIf="creating" #searchbar [dataProvider]="itemsOnList" (itemSelected)="seleccionado($event)" (autoBlur)="seleccionado($event)"
+          [options]="{ placeholder : nombreantiguo }"></ion-auto-complete>
+      </ion-col>
+      <ion-col col-1>
+        <div *ngIf="item.caduca && item.fechaCaducidad">
+          <ion-icon ios="ios-alert" md="md-alert" (click)="showExpiryDate(item)" [ngClass]="checkExpiryDate(item.fechaCaducidad)"></ion-icon>
+        </div>
+      </ion-col>
+      <ion-col col-1 *ngIf="!creating && item.nombreLista==='LISTA_COMPRA'">
+        <button [hidden]="!item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">
+          <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon>
+        </button>
+        <button [hidden]="item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">
+          <ion-icon ios="ios-radio-button-off" md="md-radio-button-off"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="fila" *ngIf="!creating && !right">
+      <ion-col col-4>
+        <ion-item class="amountItem">
+          <button item-center default large clear (click)="minusElement($event, item, true)" class="amountButton">
+            <ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
+          </button>
+          <button clear class="amountButton">
+            <ion-badge class="amount amountIcon" large>{{item.cantidadElemento}}</ion-badge>
+          </button>
+          <button item-center default large clear (click)="plusElement($event, item, true)" class="amountButton">
+            <ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>
+          </button>
+        </ion-item>
+      </ion-col>
+      <ion-col col-4>
+        <ion-row>
+          <ion-col col-4>
+            <button item-center secondary clear (click)="moveItem($event)" class="buttonOperation">
+              <ion-icon ios="ios-return-right" md="md-return-right"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-4>
+            <button item-center secondary clear (click)="editItem($event)" class="buttonOperation">
+              <ion-icon ios="ios-create" md="md-create"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-4>
+            <button item-center danger clear (click)="removeItem($event)" class="buttonOperation">
+              <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row class="fila" *ngIf="!creating && right">
+      <ion-col col-4 offset-4>
+        <ion-row>
+          <ion-col col-4>
+            <button item-center secondary clear (click)="moveItem($event)" class="buttonOperation">
+              <ion-icon ios="ios-return-right" md="md-return-right"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-4>
+            <button item-center secondary clear (click)="editItem($event)" class="buttonOperation">
+              <ion-icon ios="ios-create" md="md-create"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-4>
+            <button item-center danger clear (click)="removeItem($event)" class="buttonOperation">
+              <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-4>
+        <ion-item class="amountItem">
+          <button item-center default large clear (click)="minusElement($event, item, true)" class="amountButton">
+            <ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
+          </button>
+          <button clear class="amountButton">
+            <ion-badge class="amount amountIcon" large>{{item.cantidadElemento}}</ion-badge>
+          </button>
+          <button item-center default large clear (click)="plusElement($event, item, true)" class="amountButton">
+            <ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>
+          </button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="creating">
+      <ion-col>
+        <ion-item>
+          <!--<ion-label stacked>MEASUREMENT</ion-label>-->
+          <ion-select class="measurement" id="measurement" [(ngModel)]="item.category.measurement" (ngModelChange)="onChange($event)">
+            <ion-option>UNIDADES</ion-option>
+            <ion-option>LITROS</ion-option>
+            <ion-option>GRAMOS</ion-option>
+            <ion-option>KG</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-card-header>
+  <ion-card-content *ngIf="creating">
+    <ion-row>
+      <ion-label class="labelExpire">CADUCA</ion-label>
+      <ion-toggle id="expire" checked="item.caduca" [(ngModel)]="item.caduca" (ngModelChange)="newExpire($event)"></ion-toggle>
+    </ion-row>
+    <ion-row [hidden]="!item.caduca">
+      <ion-item>
+        {{item.fechaCaducidad}}
+        <ion-datetime class="expireDate" id="fechaCaducidad" displayFormat="DD MMMM YYYY" pickerFormat="DD MMMM YYYY" [(ngModel)]="item.fechaCaducidad"
+          [disabled]="!creating" max="3000">
+        </ion-datetime>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+        <p class="labelMinAmout">
+          CANTIDAD MINIMA:
+        </p>
+      </ion-col>
+      <ion-col col-7>
+        <ion-item>
+          <button item-center default large clear (click)="minusElement($event, false)" class="amountButton">
+            <ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
+          </button>
+          <button clear class="amountButton">
+            <ion-badge class="minimum amountIcon" large>{{item.cantidadMinima}}</ion-badge>
+          </button>
+          <button item-center default large clear (click)="plusElement($event, false)" class="amountButton">
+            <ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>
+          </button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+        <p class="labelAmount">
+          CANTIDAD:
+        </p>
+      </ion-col>
+      <ion-col col-7>
+        <ion-item>
+          <button item-center default large clear (click)="minusElement($event, true)" class="amountButton">
+            <ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
+          </button>
+          <button clear class="amountButton">
+            <ion-badge class="amount amountIcon" large>{{item.cantidadElemento}}</ion-badge>
+          </button>
+          <button item-center default large clear (click)="plusElement($event, true)" class="amountButton">
+            <ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>
+          </button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
 </ion-card>

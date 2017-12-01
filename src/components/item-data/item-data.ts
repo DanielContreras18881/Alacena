@@ -43,6 +43,9 @@ export class Item implements OnInit {
   oldMeasurement: string = '';
   right: boolean = true;
 
+  defaultIcon: string = 'images/icons/default.png';
+  nombreantiguo: string = 'NEW ELEMENT';
+
   constructor(
     private catService: CategoriesService,
     public alertCtrl: AlertController,
@@ -52,6 +55,7 @@ export class Item implements OnInit {
 
   ngOnInit() {
     this.oldMeasurement = this.item.category.measurement;
+    this.nombreantiguo = this.item.nombreElemento;
     this.right = this.config !== undefined ? this.config.rightHand : true;
   }
   /**
@@ -270,7 +274,6 @@ export class Item implements OnInit {
    * @memberof Item
    */
   editCategory(event) {
-    console.log(event);
     this.catService.changeCategory(this.item.category, this.item).then(data => {
       this.item = <ListItem>data;
       this.changeUnitStep(this.item.category.measurement);
