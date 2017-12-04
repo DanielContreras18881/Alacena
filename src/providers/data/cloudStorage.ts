@@ -27,7 +27,7 @@ export class CloudStorage {
       let ref = firebase.database().ref('/config/');
       ref.once('value').then(function(snapshot) {
         let object = JSON.parse(JSON.stringify(snapshot));
-        if (object) {
+        if (object && object[uid]) {
           let configs = JSON.parse(JSON.stringify(object[uid]));
           let configArray = [];
           for (let key in configs) {
@@ -64,7 +64,7 @@ export class CloudStorage {
       let ref = firebase.database().ref('/lists/');
       ref.once('value').then(function(snapshot) {
         let object = JSON.parse(JSON.stringify(snapshot));
-        if (object) {
+        if (object && object[uid]) {
           let lists = JSON.parse(JSON.stringify(object[uid]));
           let listArray = [];
           for (let key in lists) {
@@ -262,7 +262,7 @@ export class CloudStorage {
       let ref = firebase.database().ref('/favorites/');
       ref.once('value').then(function(snapshot) {
         let object = JSON.parse(JSON.stringify(snapshot));
-        if (object) {
+        if (object && object[uid]) {
           let lists = JSON.parse(JSON.stringify(object[uid]));
           let listArray = [];
           for (let key in lists) {
@@ -290,7 +290,7 @@ export class CloudStorage {
       let ref = firebase.database().ref('/lists/');
       ref.once('value').then(function(snapshot) {
         let object = JSON.parse(JSON.stringify(snapshot));
-        if (object) {
+        if (object && object[uid]) {
           let lists = JSON.parse(JSON.stringify(object[uid]));
           let listArray = [];
           for (let key in lists) {
@@ -318,7 +318,7 @@ export class CloudStorage {
       let ref = firebase.database().ref('/elements/');
       ref.once('value').then(function(snapshot) {
         let object = JSON.parse(JSON.stringify(snapshot));
-        if (object) {
+        if (object && object[uid]) {
           let items = JSON.parse(JSON.stringify(object[uid]));
           let itemsArray = [];
           for (let key in items) {
@@ -346,7 +346,7 @@ export class CloudStorage {
       let ref = firebase.database().ref('/categories/');
       ref.once('value').then(function(snapshot) {
         let object = JSON.parse(JSON.stringify(snapshot));
-        if (object) {
+        if (object && object[uid]) {
           let categories = JSON.parse(JSON.stringify(object[uid]));
           let categoriesArray = [];
           for (let key in categories) {

@@ -1,33 +1,33 @@
 <ion-split-pane>
 
-	<ion-menu type="overlay" swipeEnabled="true" [content]="content">
+  <ion-menu type="overlay" swipeEnabled="true" [content]="content">
 
-		<ion-content color="dark" class="menu-content">
-			<ion-toolbar color="dark">
-				<ion-title>
-					<ion-item color="dark" class="item-header-toolbar" *ngIf="!globalVars.getUserConnected()">
-						<ion-avatar item-left class="item-header-toolbar-avatar">
-							<img class="icon" src="icon.png" />
-						</ion-avatar>
-					</ion-item>
-					<ion-item color="dark" class="item-header-toolbar" *ngIf="globalVars.getUserConnected()">
-						<ion-avatar item-left class="item-header-toolbar-avatar">
-							<img class="icon" [src]="globalVars.getUserProfile().photoURL">
-						</ion-avatar>
-					</ion-item>
-				</ion-title>
-			</ion-toolbar>
-			<ion-list color="dark" class="menu-list">
-				<button color="dark" ion-item detail-none *ngFor="let p of pages" (click)="openPage(p)">
-					<ion-icon ios="ios-{{p.icon}}" md="md-{{p.icon}}"></ion-icon>
-					{{p.title}}
-				</button>
-			</ion-list>
+    <ion-content color="dark" class="menu-content">
+      <ion-toolbar color="dark">
+        <ion-title>
+          <ion-item color="dark" class="item-header-toolbar" *ngIf="!globalVars.getUserConnected() || !globalVars.getUserProfile().photoURL">
+            <ion-avatar item-left class="item-header-toolbar-avatar">
+              <img class="icon" src="icon.png" />
+            </ion-avatar>
+          </ion-item>
+          <ion-item color="dark" class="item-header-toolbar" *ngIf="globalVars.getUserConnected() && globalVars.getUserProfile().photoURL">
+            <ion-avatar item-left class="item-header-toolbar-avatar">
+              <img class="icon" [src]="globalVars.getUserProfile().photoURL">
+            </ion-avatar>
+          </ion-item>
+        </ion-title>
+      </ion-toolbar>
+      <ion-list color="dark" class="menu-list">
+        <button color="dark" ion-item detail-none *ngFor="let p of pages" (click)="openPage(p)">
+          <ion-icon ios="ios-{{p.icon}}" md="md-{{p.icon}}"></ion-icon>
+          {{p.title}}
+        </button>
+      </ion-list>
 
-		</ion-content>
+    </ion-content>
 
-	</ion-menu>
+  </ion-menu>
 
-	<ion-nav class="app-content" [root]="rootPage" main #content swipe-back-enabled="false" dark></ion-nav>
+  <ion-nav class="app-content" [root]="rootPage" main #content swipe-back-enabled="false" dark></ion-nav>
 
 </ion-split-pane>

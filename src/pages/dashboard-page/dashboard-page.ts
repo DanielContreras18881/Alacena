@@ -7,6 +7,7 @@ import { RemindersProvider } from '../../providers/reminders-provider';
 import {
   IonicPage,
   ModalController,
+  AlertController,
   NavController,
   Platform
 } from 'ionic-angular';
@@ -59,6 +60,7 @@ export class DashboardPage {
 
   constructor(
     public navCtrl: NavController,
+    public alertCtrl: AlertController,
     public plt: Platform,
     private order: OrderBy,
     private googlePlus: GooglePlus,
@@ -166,13 +168,46 @@ export class DashboardPage {
     this.remindersData.removeReminder(oldReminder);
   }
   /**
-   * Loggin by email
+   * Loggin by phone number
    *
    * @memberof DashboardPage
    */
-  emailLogin() {
-    this.authService.emailLogin().then(data => {
-      console.log(data);
+  phoneLogin() {
+    this.authService.phoneLogin().then(result => {
+      let prompt = this.alertCtrl.create({
+        title: 'Enter the Confirmation code',
+        inputs: [
+          {
+            name: 'confirmationCode',
+            placeholder: 'Confirmation Code'
+          }
+        ],
+        buttons: [
+          {
+            text: 'Cancel',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Send',
+            handler: data => {
+              (<any>result)
+                .confirm(data.confirmationCode)
+                .then(function(result) {
+                  // User signed in successfully.
+                  console.log(result.user);
+                  // ...
+                })
+                .catch(function(error) {
+                  // User couldn't sign in (bad verification code?)
+                  // ...
+                });
+            }
+          }
+        ]
+      });
+      prompt.present();
     });
   }
   /**
@@ -211,6 +246,9 @@ export class DashboardPage {
    * @memberof DashboardPage
    */
   logout() {
-    this.authService.logout();
+    this.authService.logout().then(data => {
+      this.userProfile = null;
+      this.ionViewDidLoad();
+    });
   }
 }

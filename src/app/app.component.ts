@@ -37,7 +37,7 @@ export class Alacena {
     public statusBar: StatusBar,
     private storage: Storage,
     private admobFree: AdMobFree,
-    private globalVars: GlobalVars
+    public globalVars: GlobalVars
   ) {
     this.globalVars.getConfigData().then(data => {
       let version: boolean = (<any>data).version;
@@ -99,11 +99,11 @@ export class Alacena {
     ];
   }
   /**
-	 * Open a page from side menu
-	 * 
-	 * @param {any} page Object with the page information
-	 * @memberof Alacena
-	 */
+   * Open a page from side menu
+   *
+   * @param {any} page Object with the page information
+   * @memberof Alacena
+   */
   openPage(page) {
     this.menu.close();
     this.nav.setRoot(page.component, {

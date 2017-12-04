@@ -41,29 +41,34 @@ export class GlobalVars {
   setUserProfile(userProfile: any): any {
     return new Promise(resolve => {
       this.userProfile = userProfile;
-      this.userConnected = true;
-      this.categoriesDataProvider
-        .getCategoriesData(this.userProfile)
-        .then(data => {
-          this.setCategoriesData(data);
+      if (userProfile !== null) {
+        this.userConnected = true;
+        this.categoriesDataProvider
+          .getCategoriesData(this.userProfile)
+          .then(data => {
+            this.setCategoriesData(data);
+          });
+        this.configProvider.getConfigData(this.userProfile).then(data => {
+          this.setConfigData(data);
         });
-      this.configProvider.getConfigData(this.userProfile).then(data => {
-        this.setConfigData(data);
-      });
-      this.itemsDataProvider.getItemsData(this.userProfile).then(data => {
-        this.setItemsData(data);
-      });
-      this.listsDataProvider.getListsData(this.userProfile).then(data => {
-        this.setListsData(data);
-        data.forEach(element => {
-          this.listDataProvider
-            .getListItemsData(element.nombreLista, userProfile)
-            .then(result => {
-              this.setListData(element.nombreLista, <ListItem[]>result);
-            });
+        this.itemsDataProvider.getItemsData(this.userProfile).then(data => {
+          this.setItemsData(data);
         });
-      });
-      resolve();
+        this.listsDataProvider.getListsData(this.userProfile).then(data => {
+          this.setListsData(data);
+          data.forEach(element => {
+            this.listDataProvider
+              .getListItemsData(element.nombreLista, userProfile)
+              .then(result => {
+                this.setListData(element.nombreLista, <ListItem[]>result);
+              });
+          });
+        });
+        resolve();
+      } else {
+        this.userConnected = false;
+        resolve();
+      }
     });
   }
   /**

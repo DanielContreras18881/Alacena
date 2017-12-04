@@ -1,134 +1,135 @@
 <ion-header>
-	<ion-navbar color="dark">
-		<button ion-button menuToggle>
-			<ion-icon ios="ios-menu" md="md-menu"></ion-icon>
-		</button>
-		<ion-title>Inicio</ion-title>
-	</ion-navbar>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle>
+      <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
+    </button>
+    <ion-title>Inicio</ion-title>
+  </ion-navbar>
 </ion-header>
 
 
 <ion-content padding class="dashboard">
 
-	<ion-list>
-		<ion-card *ngIf="!userProfile">
-			<ion-card-header>
-				<ion-grid>
-					<ion-row>
-						<ion-col col-4>
-							<h4 class="userAccountLabel">Login with</h4>
-						</ion-col>
-						<ion-col col-8>
-							<ion-row>
-								<ion-col col-6>
-									<button type="button" class="mailLogo" ion-button icon-only (click)="emailLogin()">
-										<ion-icon ios="ios-mail" md="md-mail"></ion-icon>
-									</button>
-								</ion-col>
-								<ion-col col-6>
-									<button type="button" class="twLogo" ion-button icon-only (click)="twitterLogin()">
-										<ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon>
-									</button>
-								</ion-col>
-							</ion-row>
-							<ion-row>
-								<ion-col col-6>
-									<button type="button" class="fbLogo" ion-button icon-only (click)="facebookLogin()">
-										<ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
-									</button>
-								</ion-col>
-								<ion-col col-6>
-									<button type="button" class="googleLogo" ion-button icon-only (click)="googleLogin()">
-										<ion-icon name="logo-google"></ion-icon>
-									</button>
-								</ion-col>
-							</ion-row>
-						</ion-col>
-					</ion-row>
-				</ion-grid>
-			</ion-card-header>
-		</ion-card>
-		<ion-card *ngIf="reminders">
-			<ion-card-header>
-				<ion-item>
-					<ion-avatar item-right>
-						<button clear dark>
-							<ion-icon class="reminderIcon" ios="ios-notifications" md="md-notifications"></ion-icon>
-						</button>
-					</ion-avatar>
-					<h5 class="reminderLabel">RECORDATORIOS</h5>
-				</ion-item>
-				<ion-list inset>
-					<ion-item ion-item (click)="editReminder(reminder)" *ngFor="let reminder of remindersList; let i = index">
-						<p class="item-info">
-							<ion-icon class="item-icon" ios="ios-eye" md="md-eye"></ion-icon>
-							{{reminder.time | date:'yyyy-MM-dd HH:mm'}}
-							<ion-icon class="item-icon" ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>{{reminder.message}}
-						</p>
-					</ion-item>
-				</ion-list>
-			</ion-card-header>
-		</ion-card>
-		<ion-card>
-			<ion-card-header>
-				<ion-item>
-					<ion-avatar item-right>
-						<button clear dark>
-							<ion-icon class="neededsIcon" large item-right ios="ios-cart" md="md-cart"></ion-icon>
-						</button>
-					</ion-avatar>
-					<h5 class="neededsLabel">ELEMENTOS NECESARIOS DE COMPRAR</h5>
-				</ion-item>
-				<ion-list inset>
-					<ion-item ion-item (click)="openInternalPage(shoppingListPage)">
-						<p class="item-info">
-							<ion-icon class="item-icon" ios="ios-cart" md="md-cart"></ion-icon>
-							Ver la lista de la compra
-						</p>
-					</ion-item>
-					<ion-item ion-item (click)="showItemsToShop()">
-						<p class="item-info">
-							<ion-icon class="item-icon" ios="ios-basket" md="md-basket"></ion-icon>
-							Ver lista de elementos necesarios de comprar
-						</p>
-					</ion-item>
+  <ion-list>
+    <ion-card *ngIf="!userProfile">
+      <ion-card-header>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4>
+              <h4 class="userAccountLabel">Login with</h4>
+            </ion-col>
+            <ion-col col-8>
+              <ion-row>
+                <ion-col col-6>
+                  <button type="button" class="mailLogo" ion-button icon-only (click)="phoneLogin()">
+                    <ion-icon ios="ios-call" md="md-call"></ion-icon>
+                    <div id="recaptcha-container"></div>
+                  </button>
+                </ion-col>
+                <ion-col col-6>
+                  <button type="button" class="twLogo" ion-button icon-only (click)="twitterLogin()">
+                    <ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon>
+                  </button>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-6>
+                  <button type="button" class="fbLogo" ion-button icon-only (click)="facebookLogin()">
+                    <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
+                  </button>
+                </ion-col>
+                <ion-col col-6>
+                  <button type="button" class="googleLogo" ion-button icon-only (click)="googleLogin()">
+                    <ion-icon name="logo-google"></ion-icon>
+                  </button>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+    </ion-card>
+    <ion-card *ngIf="reminders">
+      <ion-card-header>
+        <ion-item>
+          <ion-avatar item-right>
+            <button clear dark>
+              <ion-icon class="reminderIcon" ios="ios-notifications" md="md-notifications"></ion-icon>
+            </button>
+          </ion-avatar>
+          <h5 class="reminderLabel">RECORDATORIOS</h5>
+        </ion-item>
+        <ion-list inset>
+          <ion-item ion-item (click)="editReminder(reminder)" *ngFor="let reminder of remindersList; let i = index">
+            <p class="item-info">
+              <ion-icon class="item-icon" ios="ios-eye" md="md-eye"></ion-icon>
+              {{reminder.time | date:'yyyy-MM-dd HH:mm'}}
+              <ion-icon class="item-icon" ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>{{reminder.message}}
+            </p>
+          </ion-item>
+        </ion-list>
+      </ion-card-header>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-item>
+          <ion-avatar item-right>
+            <button clear dark>
+              <ion-icon class="neededsIcon" large item-right ios="ios-cart" md="md-cart"></ion-icon>
+            </button>
+          </ion-avatar>
+          <h5 class="neededsLabel">ELEMENTOS NECESARIOS DE COMPRAR</h5>
+        </ion-item>
+        <ion-list inset>
+          <ion-item ion-item (click)="openInternalPage(shoppingListPage)">
+            <p class="item-info">
+              <ion-icon class="item-icon" ios="ios-cart" md="md-cart"></ion-icon>
+              Ver la lista de la compra
+            </p>
+          </ion-item>
+          <ion-item ion-item (click)="showItemsToShop()">
+            <p class="item-info">
+              <ion-icon class="item-icon" ios="ios-basket" md="md-basket"></ion-icon>
+              Ver lista de elementos necesarios de comprar
+            </p>
+          </ion-item>
 
-				</ion-list>
-			</ion-card-header>
-		</ion-card>
-		<ion-card *ngIf="expires">
-			<ion-card-header>
-				<ion-item>
-					<ion-avatar item-right>
-						<button clear dark>
-							<ion-icon class="expiresIcon" large item-right ios="ios-warning" md="md-warning"></ion-icon>
-						</button>
-					</ion-avatar>
-					<h5 class="expiresLabel">ELEMENTOS CERCANOS A CADUCAR</h5>
-				</ion-item>
-				<ion-list inset>
-					<ion-item ion-item (click)="showExpireItems()">
-						<p class="item-info">
-							<ion-icon class="item-icon" ios="ios-eye" md="md-eye"></ion-icon>
-							Ver lista de elementos a punto de caducar
-						</p>
-					</ion-item>
-				</ion-list>
-			</ion-card-header>
-		</ion-card>
-		<ion-card *ngIf="userProfile">
-			<ion-card-header>
-				<ion-item (click)="logout()">
-					<ion-avatar item-right>
-						<button clear danger>
-							<ion-icon class="userAccountIcon" ios="ios-log-out" md="md-log-out"></ion-icon>
-						</button>
-					</ion-avatar>
-					<ion-item>
-						<h3 class="userAccountLabel">{{ userProfile.displayName }}</h3>
-					</ion-item>
-				</ion-item>
-			</ion-card-header>
-		</ion-card>
-	</ion-list>
+        </ion-list>
+      </ion-card-header>
+    </ion-card>
+    <ion-card *ngIf="expires">
+      <ion-card-header>
+        <ion-item>
+          <ion-avatar item-right>
+            <button clear dark>
+              <ion-icon class="expiresIcon" large item-right ios="ios-warning" md="md-warning"></ion-icon>
+            </button>
+          </ion-avatar>
+          <h5 class="expiresLabel">ELEMENTOS CERCANOS A CADUCAR</h5>
+        </ion-item>
+        <ion-list inset>
+          <ion-item ion-item (click)="showExpireItems()">
+            <p class="item-info">
+              <ion-icon class="item-icon" ios="ios-eye" md="md-eye"></ion-icon>
+              Ver lista de elementos a punto de caducar
+            </p>
+          </ion-item>
+        </ion-list>
+      </ion-card-header>
+    </ion-card>
+    <ion-card *ngIf="userProfile">
+      <ion-card-header>
+        <ion-item (click)="logout()">
+          <ion-avatar item-right>
+            <button clear danger>
+              <ion-icon class="userAccountIcon" ios="ios-log-out" md="md-log-out"></ion-icon>
+            </button>
+          </ion-avatar>
+          <ion-item>
+            <h3 class="userAccountLabel">DESCONECTAR DE LA NUBE</h3>
+          </ion-item>
+        </ion-item>
+      </ion-card-header>
+    </ion-card>
+  </ion-list>
 </ion-content>

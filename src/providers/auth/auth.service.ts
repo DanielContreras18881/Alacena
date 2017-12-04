@@ -61,7 +61,10 @@ export class AuthService {
         case 'facebook':
           resolve('OK');
           break;
-        case 'email':
+        case 'phone':
+          firebase.auth().signOut();
+          this.userProfile = null;
+          self.globalVars.setUserProfile(null);
           resolve('OK');
           break;
       }
@@ -74,6 +77,8 @@ export class AuthService {
    * @memberof AuthService
    */
   twitterLogin() {
+    //https://github.com/DanielContreras18881/ionic2-twitter-login
+    //https://github.com/DanielContreras18881/ionic2-facebook-login
     this.type = 'twitter';
     return new Promise(resolve => {
       resolve('twitter');
@@ -92,15 +97,33 @@ export class AuthService {
     });
   }
   /**
-   * Login with email
+   * Login with phone number
    *
    * @returns
    * @memberof AuthService
    */
-  emailLogin() {
-    this.type = 'email';
+  phoneLogin() {
+    //https://firebase.google.com/docs/auth/ios/phone-auth
+    //https://firebase.google.com/docs/auth/android/phone-auth
+    //https://javebratt.com/firebase-phone-authentication/
+    //https://github.com/DanielContreras18881/firebase-phone-authentication
+    this.type = 'phone';
     return new Promise(resolve => {
-      resolve('email');
+      const appVerifier = new firebase.auth.RecaptchaVerifier(
+        'recaptcha-container'
+      );
+      const phoneNumberString = '+447751562703'; //'+' + phoneNumber;
+      firebase
+        .auth()
+        .signInWithPhoneNumber(phoneNumberString, appVerifier)
+        .then(confirmationResult => {
+          // SMS sent. Prompt user to type the code from the message, then sign the
+          // user in with confirmationResult.confirm(code).
+          resolve(confirmationResult);
+        })
+        .catch(function(error) {
+          console.error('SMS not sent', error);
+        });
     });
   }
   /**
