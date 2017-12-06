@@ -102,20 +102,20 @@ export class AuthService {
    * @returns
    * @memberof AuthService
    */
-  phoneLogin() {
+  phoneLogin(data: any) {
     //https://firebase.google.com/docs/auth/ios/phone-auth
     //https://firebase.google.com/docs/auth/android/phone-auth
     //https://javebratt.com/firebase-phone-authentication/
     //https://github.com/DanielContreras18881/firebase-phone-authentication
     this.type = 'phone';
     return new Promise(resolve => {
-      const appVerifier = new firebase.auth.RecaptchaVerifier(
-        'recaptcha-container'
+      let appVerifier = new firebase.auth.RecaptchaVerifier(
+        'recaptcha-container',
+        { size: 'invisible' }
       );
-      const phoneNumberString = '+447751562703'; //'+' + phoneNumber;
       firebase
         .auth()
-        .signInWithPhoneNumber(phoneNumberString, appVerifier)
+        .signInWithPhoneNumber(data, appVerifier)
         .then(confirmationResult => {
           // SMS sent. Prompt user to type the code from the message, then sign the
           // user in with confirmationResult.confirm(code).
@@ -123,6 +123,7 @@ export class AuthService {
         })
         .catch(function(error) {
           console.error('SMS not sent', error);
+          appVerifier = null;
         });
     });
   }
