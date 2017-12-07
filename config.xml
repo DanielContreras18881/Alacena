@@ -128,4 +128,8 @@
     <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
     <plugin name="phonegap-plugin-local-notification" spec="^1.0.1" />
     <plugin name="de.appplant.cordova.plugin.local-notification" spec="~0.8.5" />
+    <plugin name="cordova-plugin-facebook4" spec="^1.9.1">
+        <variable name="APP_ID" value="157863821611771" />
+        <variable name="APP_NAME" value="Alacena" />
+    </plugin>
 </widget>

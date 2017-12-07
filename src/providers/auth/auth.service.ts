@@ -2,6 +2,8 @@ import { GlobalVars } from '../global-vars/global-vars';
 import { Injectable } from '@angular/core';
 import { NgZone } from '@angular/core';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { TwitterConnect } from '@ionic-native/twitter-connect';
+import { Facebook } from '@ionic-native/facebook';
 import firebase from 'firebase';
 import { Platform } from 'ionic-angular';
 
@@ -18,12 +20,16 @@ export class AuthService {
   userProfile: any = null;
   type: string = 'google';
   zone: NgZone;
+  FB_APP_ID: number = 157863821611771;
 
   constructor(
     public plt: Platform,
     private googlePlus: GooglePlus,
-    private globalVars: GlobalVars
+    private globalVars: GlobalVars,
+    private twitter: TwitterConnect,
+    public fb: Facebook
   ) {
+    this.fb.browserInit(this.FB_APP_ID, 'v2.8');
     this.zone = new NgZone({});
     self = this;
     firebase.auth().onAuthStateChanged(user => {
@@ -79,9 +85,38 @@ export class AuthService {
   twitterLogin() {
     //https://github.com/DanielContreras18881/ionic2-twitter-login
     //https://github.com/DanielContreras18881/ionic2-facebook-login
+    //https://ionicframework.com/docs/native/twitter-connect/
+    //https://fabric.io/kits?show_signup=true
+    //https://apps.twitter.com/app/14555731
     this.type = 'twitter';
     return new Promise(resolve => {
-      resolve('twitter');
+      this.twitter.login().then(
+        response => {
+          const twitterCredential = firebase.auth.TwitterAuthProvider.credential(
+            response.token,
+            response.secret
+          );
+
+          firebase
+            .auth()
+            .signInWithCredential(twitterCredential)
+            .then(
+              userProfile => {
+                this.zone.run(() => {
+                  this.userProfile = userProfile;
+                  this.userProfile.twName = response.userName;
+                  resolve(this.userProfile);
+                });
+              },
+              error => {
+                console.log(error);
+              }
+            );
+        },
+        error => {
+          console.log('Error connecting to twitter: ', error);
+        }
+      );
     });
   }
   /**
@@ -91,9 +126,101 @@ export class AuthService {
    * @memberof AuthService
    */
   facebookLogin() {
+    /*
+    IOS
+    info.plist
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+  <key>CFBundleURLSchemes</key>
+  <array>
+    <string>fb157863821611771</string>
+  </array>
+  </dict>
+</array>
+<key>FacebookAppID</key>
+<string>157863821611771</string>
+<key>FacebookDisplayName</key>
+<string>Alacena</string>
+
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>fbapi</string>
+  <string>fb-messenger-api</string>
+  <string>fbauth2</string>
+  <string>fbshareextension</string>
+</array>
+
+AppDelegate.m
+
+//  AppDelegate.m
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+
+- (BOOL)application:(UIApplication *)application
+    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+  [[FBSDKApplicationDelegate sharedInstance] application:application
+    didFinishLaunchingWithOptions:launchOptions];
+  // Add any custom logic here.
+  return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+    sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+
+  BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
+    openURL:url
+    sourceApplication:sourceApplication
+    annotation:annotation
+  ];
+  // Add any custom logic here.
+  return handled;
+}
+
+
+IOS10 o posterior
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+
+  BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
+    openURL:url
+    sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+    annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
+  ];
+  // Add any custom logic here.
+  return handled;
+
+
+    */
+    //https://github.com/javebratt/ionic2-firebase3-facebook-auth/blob/master/src/pages/home/home.ts
+    //https://github.com/DanielContreras18881/ionic2-facebook-login/blob/master
+    //https://ionicthemes.com/tutorials/about/ionic2-facebook-login
+    //https://javebratt.com/ionic-2-facebook-login/
+    //https://developers.facebook.com/apps/157863821611771/settings/
     this.type = 'facebook';
     return new Promise(resolve => {
-      resolve('facebook');
+      let permissions = new Array<string>();
+      let env = this;
+      //the permissions your facebook app needs from the user
+      permissions = ['public_profile'];
+      this.fb.login(permissions).then(
+        function(response) {
+          let userId = response.authResponse.userID;
+          let params = new Array<string>();
+
+          //Getting name and gender properties
+          env.fb.api('/me?fields=name,gender', params).then(function(user) {
+            user.picture =
+              'https://graph.facebook.com/' + userId + '/picture?type=large';
+            resolve('facebook');
+          });
+        },
+        function(error) {
+          console.log(error);
+        }
+      );
     });
   }
   /**
