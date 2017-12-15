@@ -197,7 +197,7 @@ IOS10 o posterior
     //https://github.com/javebratt/ionic2-firebase3-facebook-auth/blob/master/src/pages/home/home.ts
     //https://github.com/DanielContreras18881/ionic2-facebook-login/blob/master
     //https://ionicthemes.com/tutorials/about/ionic2-facebook-login
-    //https://javebratt.com/ionic-2-facebook-login/
+    //https://javebratt.com/ionic-2-facebook-login/157863821611771
     //https://developers.facebook.com/apps/157863821611771/settings/
     this.type = 'facebook';
     return new Promise(resolve => {
