@@ -13,8 +13,6 @@ import { AutoCompleteModule } from 'ionic2-auto-complete';
 import { AppVersion } from '@ionic-native/app-version';
 import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
-import { TwitterConnect } from '@ionic-native/twitter-connect';
-import { Facebook } from '@ionic-native/facebook';
 
 import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
 import { LocalNotifications } from '@ionic-native/local-notifications';
@@ -126,8 +124,6 @@ import { Alacena } from './app.component';
     PhonegapLocalNotification,
     LocalNotifications,
     SplashScreen,
-    TwitterConnect,
-    Facebook,
     StatusBar,
     GlobalVars,
     AuthService

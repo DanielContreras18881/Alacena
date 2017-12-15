@@ -2,8 +2,8 @@ import { GlobalVars } from '../global-vars/global-vars';
 import { Injectable } from '@angular/core';
 import { NgZone } from '@angular/core';
 import { GooglePlus } from '@ionic-native/google-plus';
-import { TwitterConnect } from '@ionic-native/twitter-connect';
-import { Facebook } from '@ionic-native/facebook';
+//import { TwitterConnect } from '@ionic-native/twitter-connect';
+//import { Facebook } from '@ionic-native/facebook';
 import firebase from 'firebase';
 import { Platform } from 'ionic-angular';
 
@@ -25,11 +25,11 @@ export class AuthService {
   constructor(
     public plt: Platform,
     private googlePlus: GooglePlus,
-    private globalVars: GlobalVars,
-    private twitter: TwitterConnect,
-    public fb: Facebook
-  ) {
-    this.fb.browserInit(this.FB_APP_ID, 'v2.8');
+    private globalVars: GlobalVars
+  ) //private twitter: TwitterConnect,
+  //public fb: Facebook
+  {
+    //this.fb.browserInit(this.FB_APP_ID, 'v2.8');
     this.zone = new NgZone({});
     self = this;
     firebase.auth().onAuthStateChanged(user => {
@@ -90,6 +90,7 @@ export class AuthService {
     //https://apps.twitter.com/app/14555731
     this.type = 'twitter';
     return new Promise(resolve => {
+      /*
       this.twitter.login().then(
         response => {
           const twitterCredential = firebase.auth.TwitterAuthProvider.credential(
@@ -117,6 +118,8 @@ export class AuthService {
           console.log('Error connecting to twitter: ', error);
         }
       );
+      */
+      resolve(this.type);
     });
   }
   /**
@@ -205,6 +208,7 @@ IOS10 o posterior
       let env = this;
       //the permissions your facebook app needs from the user
       permissions = ['public_profile'];
+      /*
       this.fb.login(permissions).then(
         function(response) {
           let userId = response.authResponse.userID;
@@ -221,6 +225,8 @@ IOS10 o posterior
           console.log(error);
         }
       );
+      */
+      resolve(this.type);
     });
   }
   /**
