@@ -104,6 +104,8 @@ import { Alacena } from './app.component';
   ],
   providers: [
     //{provide: ErrorHandler, useClass: SentryErrorHandler},
+//test and maybe change
+//{provide: ErrorHandler, useClass: IonicErrorHandler}
     AdMobFree,
     AppVersion,
     Camera,

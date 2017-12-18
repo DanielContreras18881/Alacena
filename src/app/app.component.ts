@@ -59,7 +59,7 @@ export class Alacena {
     platform.ready().then(() => {
       //Initial platform configuration
       this.splashScreen.hide();
-      this.statusBar.styleBlackTranslucent();
+      this.statusBar.styleDefault();
       this.statusBar.backgroundColorByHexString('#222');
       this.statusBar.overlaysWebView(false);
       //Admob Configuration
