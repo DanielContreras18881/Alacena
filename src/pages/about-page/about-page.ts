@@ -43,6 +43,7 @@ export class AboutPage {
           Validators.required
         ])
       ],
+      copy: [false, Validators.compose([Validators.required])],
       message: ['', Validators.compose([Validators.required])]
     });
   }
