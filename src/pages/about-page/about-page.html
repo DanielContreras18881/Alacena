@@ -1,25 +1,58 @@
 <ion-header>
-	<ion-navbar color="dark">
-		<button ion-button menuToggle>
-			<ion-icon ios="ios-menu" md="md-menu"></ion-icon>
-		</button>
-		<ion-title>About</ion-title>
-	</ion-navbar>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle>
+      <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
+    </button>
+    <ion-title>About</ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding class="about">
-	<ion-card>
-		<ion-card-header>
-			<h2>Cupboard - Version : {{version}}</h2>
-			<p>Developed by Chony Apps Develop</p>
-		</ion-card-header>
-		<ion-card-content>
-			<p>
-				This is an application designed for those who want to have order on your fridge, cupboards, pantry ...
-			</p>
-			<p>
-				In addition to manage the shopping list, even sharing it with friends or family.
-			</p>
-		</ion-card-content>
-	</ion-card>
+  <ion-card>
+    <ion-card-header>
+      <h2>Cupboard - Version : {{version}}</h2>
+      <p>Developed by Chony Apps Develop</p>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        This is an application designed for those who want to have order on your fridge, cupboards, pantry ...
+      </p>
+      <p>
+        In addition to manage the shopping list, even sharing it with friends or family.
+      </p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-item *ngIf="submitAttempt">
+      <p style="color: #ea6153;">Please fill out all details accurately.</p>
+    </ion-item>
+
+
+    <ion-list no-lines>
+
+      <form [formGroup]="contactForm" (ngSubmit)="save()">
+
+        <ion-item>
+          <ion-label floating>Name</ion-label>
+          <ion-input formControlName="name" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input formControlName="email" type="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Message</ion-label>
+          <ion-textarea formControlName="message" type="text"></ion-textarea>
+        </ion-item>
+
+      </form>
+
+    </ion-list>
+
+    <button ion-button full color="dark" (click)="save()">Send Message</button>
+
+
+  </ion-card>
 </ion-content>
