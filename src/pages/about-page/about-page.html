@@ -43,20 +43,19 @@
         </ion-item>
 
         <ion-item>
-          <ion-label>Copy to email</ion-label>
-          <ion-toggle formControlName="copy"></ion-toggle>
-        </ion-item>
-
-        <ion-item>
           <ion-label floating>Message</ion-label>
-          <ion-textarea formControlName="message" type="text"></ion-textarea>
+          <ion-textarea formControlName="message" type="text" [attr.rows]="messageRows"></ion-textarea>
         </ion-item>
 
       </form>
 
     </ion-list>
 
-    <button ion-button full color="dark" (click)="save()">Send Message</button>
+    <ion-item>
+      <button ion-button block round outline color="dark" (click)="save()">Send Message</button>
+
+    </ion-item>
+
 
 
   </ion-card>

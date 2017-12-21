@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { AppVersion } from '@ionic-native/app-version';
 import { Platform } from 'ionic-angular';
+import { Http } from '@angular/http';
 /**
  * Page to show data about the author, the app, tutorials and a contact form
  *
@@ -18,12 +19,15 @@ export class AboutPage {
   version: string = '';
   submitAttempt: boolean = false;
   contactForm: FormGroup;
+  messageRows: number = 10;
 
   constructor(
     public navCtrl: NavController,
     private appVersion: AppVersion,
     public plt: Platform,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public http: Http,
+    private toastCtrl: ToastController
   ) {
     this.contactForm = formBuilder.group({
       name: [
@@ -39,23 +43,40 @@ export class AboutPage {
         Validators.compose([
           Validators.pattern(
             "[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*"
-          ),
-          Validators.required
+          )
         ])
       ],
-      copy: [false, Validators.compose([Validators.required])],
       message: ['', Validators.compose([Validators.required])]
     });
   }
 
   save() {
-    this.submitAttempt = true;
-
-    if (!this.contactForm.valid) {
-      console.log('error!');
+    if (this.contactForm.valid) {
+      this.http
+        .post(
+          //'https://us-central1-alacena-58699.cloudfunctions.net/mail',
+          'http://localhost:5000/alacena-58699/us-central1/mail',
+          this.contactForm.value
+        )
+        .subscribe(data => {
+          if (data.status === 200) {
+            const toast = this.toastCtrl.create({
+              message: data['_body'],
+              duration: 1000,
+              position: 'bottom'
+            });
+            toast.present();
+          } else {
+            const toast = this.toastCtrl.create({
+              message: `${data['_body']}, try again later`,
+              duration: 1000,
+              position: 'bottom'
+            });
+            toast.present();
+          }
+        });
     } else {
-      console.log('success!');
-      console.log(this.contactForm.value);
+      this.submitAttempt = true;
     }
   }
 
