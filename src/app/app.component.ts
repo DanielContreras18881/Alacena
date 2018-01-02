@@ -63,13 +63,13 @@ export class Alacena {
       this.statusBar.backgroundColorByHexString('#222');
       this.statusBar.overlaysWebView(false);
       //Admob Configuration
-      let adMobId = "ca-app-pub-7863580056712493~5233178966";
+      let adMobId = 'ca-app-pub-7863580056712493~5233178966';
       if (platform.is('android')) {
         // for android
-        adMobId = "ca-app-pub-7863580056712493~5233178966";
+        adMobId = 'ca-app-pub-7863580056712493~5233178966';
       } else if (platform.is('ios')) {
         // for ios
-        adMobId = "ca-app-pub-7863580056712493~8186645366";
+        adMobId = 'ca-app-pub-7863580056712493~8186645366';
       }
       //Show admob banner
       const bannerConfig: AdMobFreeBannerConfig = {

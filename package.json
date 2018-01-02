@@ -44,7 +44,7 @@
     "cordova-promise-polyfill": "0.0.2",
     "cordova-sqlite-storage": "^2.1.4",
     "ct-angular2-color-picker": "^1.0.5",
-    "firebase": "^4.8.1",
+    "firebase": "4.8.0",
     "ionic-angular": "3.9.2",
     "ionic2-auto-complete": "^1.6.2-alpha",
     "ionicons": "3.0.0",
@@ -94,7 +94,8 @@
     "plugins": {
       "cordova-sqlite-storage": {},
       "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.354280052179-amrn5f7si36l9lsdinjf8u7q5a5thpri"
+        "REVERSED_CLIENT_ID":
+          "com.googleusercontent.apps.354280052179-amrn5f7si36l9lsdinjf8u7q5a5thpri"
       },
       "cordova-plugin-device": {},
       "cordova-plugin-whitelist": {},

@@ -56,7 +56,7 @@ export class AboutPage {
         .post(
           //'https://us-central1-alacena-58699.cloudfunctions.net/mail',
           'http://localhost:5000/alacena-58699/us-central1/mail',
-          this.contactForm.value
+          JSON.stringify(this.contactForm.value)
         )
         .subscribe(data => {
           if (data.status === 200) {
