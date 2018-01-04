@@ -15,6 +15,7 @@ import { ItemsPage } from '../pages/items-page/items-page';
 import { ListPage } from '../pages/list-page/list-page';
 import { ListsPage } from '../pages/lists-page/lists-page';
 import { GlobalVars } from '../providers/global-vars/global-vars';
+import { Log } from '../providers/log/log';
 
 declare var cordova: any;
 
@@ -37,8 +38,17 @@ export class Alacena {
     public statusBar: StatusBar,
     private storage: Storage,
     private admobFree: AdMobFree,
-    public globalVars: GlobalVars
+    public globalVars: GlobalVars,
+    public log: Log
   ) {
+    this.log.setLogger(this.constructor.name);
+
+    this.log.logs[this.constructor.name].info('test');
+    this.log.logs[this.constructor.name].warn('test');
+    this.log.logs[this.constructor.name].error('test');
+
+    console.log(JSON.stringify(this.log.getLogMessages()));
+
     this.globalVars.getConfigData().then(data => {
       let version: boolean = (<any>data).version;
       if (!version) {
@@ -59,9 +69,7 @@ export class Alacena {
     platform.ready().then(() => {
       //Initial platform configuration
       this.splashScreen.hide();
-      this.statusBar.styleDefault();
-      this.statusBar.backgroundColorByHexString('#222');
-      this.statusBar.overlaysWebView(false);
+      this.statusBar.hide();
       //Admob Configuration
       let adMobId = 'ca-app-pub-7863580056712493~5233178966';
       if (platform.is('android')) {

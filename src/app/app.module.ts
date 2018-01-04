@@ -1,6 +1,11 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  NgModule,
+  APP_INITIALIZER
+} from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AdMobFree } from '@ionic-native/admob-free';
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -13,6 +18,9 @@ import { AutoCompleteModule } from 'ionic2-auto-complete';
 import { AppVersion } from '@ionic-native/app-version';
 import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
+
+import { ConfigurationService } from 'ionic-configuration-service';
+import { LoggingService } from 'ionic-logging-service';
 
 import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
 import { LocalNotifications } from '@ionic-native/local-notifications';
@@ -45,7 +53,14 @@ import { RemindersProvider } from '../providers/reminders-provider';
 import { LocalStorage } from '../providers/data/localStorage';
 import { DefaultIcons } from '../providers/default-icons/default-icons';
 import { GlobalVars } from '../providers/global-vars/global-vars';
+import { Log } from '../providers/log/log';
 import { Alacena } from './app.component';
+
+export function loadConfiguration(
+  configurationService: ConfigurationService
+): () => Promise<void> {
+  return () => configurationService.load('assets/settings.json');
+}
 
 @NgModule({
   declarations: [
@@ -71,6 +86,7 @@ import { Alacena } from './app.component';
     AutoCompleteModule,
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     IonicModule.forRoot(Alacena, {
       backButtonText: '',
       modalEnter: 'modal-slide-in',
@@ -104,8 +120,17 @@ import { Alacena } from './app.component';
   ],
   providers: [
     //{provide: ErrorHandler, useClass: SentryErrorHandler},
-//test and maybe change
-//{provide: ErrorHandler, useClass: IonicErrorHandler}
+    //test and maybe change
+    //{provide: ErrorHandler, useClass: IonicErrorHandler}
+    ConfigurationService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: loadConfiguration,
+      deps: [ConfigurationService],
+      multi: true
+    },
+    LoggingService,
+    Log,
     AdMobFree,
     AppVersion,
     Camera,

@@ -1,0 +1,142 @@
+{
+  "logging": {
+    "logLevels": [
+      {
+        "loggerName": "root",
+        "logLevel": "DEBUG"
+      },
+      {
+        "loggerName": "Alacena",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "GlobalVars",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "AuthService",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      },
+      {
+        "loggerName": "",
+        "logLevel": "INFO"
+      }
+    ]
+  }
+}
