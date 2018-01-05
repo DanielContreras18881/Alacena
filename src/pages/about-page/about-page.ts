@@ -4,6 +4,8 @@ import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { AppVersion } from '@ionic-native/app-version';
 import { Platform } from 'ionic-angular';
 import { Http } from '@angular/http';
+
+import { Log } from '../../providers/log/log';
 /**
  * Page to show data about the author, the app, tutorials and a contact form
  *
@@ -27,8 +29,11 @@ export class AboutPage {
     public plt: Platform,
     public formBuilder: FormBuilder,
     public http: Http,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    public log: Log
   ) {
+    this.log.setLogger(this.constructor.name);
+
     this.contactForm = formBuilder.group({
       name: [
         '',
@@ -46,20 +51,25 @@ export class AboutPage {
           )
         ])
       ],
-      message: ['', Validators.compose([Validators.required])]
+      message: ['', Validators.compose([Validators.required])],
+      logs: ['']
     });
   }
 
   save() {
+    this.contactForm
+      .get('logs')
+      .setValue(JSON.stringify(this.log.getLogMessages()));
     if (this.contactForm.valid) {
       this.http
         .post(
-          //'https://us-central1-alacena-58699.cloudfunctions.net/mail',
-          'http://localhost:5000/alacena-58699/us-central1/mail',
+          'https://us-central1-alacena-58699.cloudfunctions.net/mail',
+          //'http://localhost:5000/alacena-58699/us-central1/mail',
           JSON.stringify(this.contactForm.value)
         )
         .subscribe(data => {
           if (data.status === 200) {
+            this.log.logs[this.constructor.name].info('Message sent');
             const toast = this.toastCtrl.create({
               message: data['_body'],
               duration: 1000,
@@ -67,6 +77,7 @@ export class AboutPage {
             });
             toast.present();
           } else {
+            this.log.logs[this.constructor.name].error('Message not sent');
             const toast = this.toastCtrl.create({
               message: `${data['_body']}, try again later`,
               duration: 1000,
@@ -76,12 +87,16 @@ export class AboutPage {
           }
         });
     } else {
+      this.log.logs[this.constructor.name].warn('Form not valid');
       this.submitAttempt = true;
     }
   }
 
   ionViewDidLoad() {
     if (this.plt.is('android') || this.plt.is('ios')) {
+      this.log.logs[this.constructor.name].info(
+        'On Device:' + this.plt.platforms()
+      );
       this.appVersion.getVersionNumber().then(version => {
         this.version = version;
         this.appVersion.getVersionCode().then(code => {
@@ -89,9 +104,12 @@ export class AboutPage {
         });
       });
     } else {
+      this.log.logs[this.constructor.name].info(
+        'On Browser:' + this.plt.userAgent()
+      );
       this.version = 'browser';
     }
   }
 
-  // TODO: manage tutorials, contact form with error logs
+  // TODO: manage tutorials
 }

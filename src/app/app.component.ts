@@ -47,11 +47,12 @@ export class Alacena {
     this.log.logs[this.constructor.name].warn('test');
     this.log.logs[this.constructor.name].error('test');
 
-    console.log(JSON.stringify(this.log.getLogMessages()));
-
     this.globalVars.getConfigData().then(data => {
       let version: boolean = (<any>data).version;
       if (!version) {
+        this.log.logs[this.constructor.name].info(
+          'Getting Data from previous version'
+        );
         this.globalVars.getOldData();
       }
     });
@@ -90,9 +91,10 @@ export class Alacena {
       this.admobFree.banner
         .prepare()
         .then(() => {
+          this.log.logs[this.constructor.name].info('Showing AddMob banner');
           this.admobFree.banner.show();
         })
-        .catch(e => console.log(e));
+        .catch(e => this.log.logs[this.constructor.name].error(e));
     });
     //List of pages for side menu
     this.pages = [
@@ -113,6 +115,7 @@ export class Alacena {
    * @memberof Alacena
    */
   openPage(page) {
+    this.log.logs[this.constructor.name].info('Moving to:' + page.title);
     this.menu.close();
     this.nav.setRoot(page.component, {
       list: page.title
