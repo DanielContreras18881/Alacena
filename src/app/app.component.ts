@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
+//import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
@@ -37,7 +37,7 @@ export class Alacena {
     public splashScreen: SplashScreen,
     public statusBar: StatusBar,
     private storage: Storage,
-    private admobFree: AdMobFree,
+    //private admobFree: AdMobFree,
     public globalVars: GlobalVars,
     public log: Log
   ) {
@@ -70,7 +70,8 @@ export class Alacena {
     platform.ready().then(() => {
       //Initial platform configuration
       this.splashScreen.hide();
-      this.statusBar.hide();
+		this.statusBar.hide();
+		/*
       //Admob Configuration
       let adMobId = 'ca-app-pub-7863580056712493~5233178966';
       if (platform.is('android')) {
@@ -94,7 +95,8 @@ export class Alacena {
           this.log.logs[this.constructor.name].info('Showing AddMob banner');
           this.admobFree.banner.show();
         })
-        .catch(e => this.log.logs[this.constructor.name].error(e));
+		  .catch(e => this.log.logs[this.constructor.name].error(e));
+		  */
     });
     //List of pages for side menu
     this.pages = [

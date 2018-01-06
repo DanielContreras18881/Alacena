@@ -59,7 +59,10 @@ export class AboutPage {
   save() {
     this.contactForm
       .get('logs')
-      .setValue(JSON.stringify(this.log.getLogMessages()));
+		.setValue(JSON.stringify(this.log.getLogMessages()));
+
+	this.log.logs[this.constructor.name].info(JSON.stringify(this.contactForm.value));
+
     if (this.contactForm.valid) {
       this.http
         .post(

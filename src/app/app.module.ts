@@ -7,7 +7,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { AdMobFree } from '@ionic-native/admob-free';
+//import { AdMobFree } from '@ionic-native/admob-free';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Network } from '@ionic-native/network';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -131,7 +131,7 @@ export function loadConfiguration(
     },
     LoggingService,
     Log,
-    AdMobFree,
+    //AdMobFree,
     AppVersion,
     Camera,
     ImagePicker,
