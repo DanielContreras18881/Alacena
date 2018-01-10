@@ -8,6 +8,7 @@ import { ItemsProvider } from '../items-provider';
 import { ListProvider } from '../list-provider';
 import { ListsProvider } from '../lists-provider';
 import { DefaultIcons } from '../default-icons/default-icons';
+import { Log } from '../log/log';
 /**
  * Provider to manage, centralised, the app data
  *
@@ -29,8 +30,11 @@ export class GlobalVars {
     private itemsDataProvider: ItemsProvider,
     private iconsDataService: DefaultIcons,
     private categoriesDataProvider: CategorysProvider,
-    private configProvider: ConfigProvider
-  ) {}
+    private configProvider: ConfigProvider,
+    public log: Log
+  ) {
+    this.log.setLogger(this.constructor.name);
+  }
   /**
    * Save user profile on login and load local data to cloud service
    *
@@ -39,6 +43,9 @@ export class GlobalVars {
    * @memberof GlobalVars
    */
   setUserProfile(userProfile: any): any {
+    this.log.logs[this.constructor.name].info(
+      'UserProfile:' + JSON.stringify(userProfile)
+    );
     return new Promise(resolve => {
       this.userProfile = userProfile;
       if (userProfile !== null) {
@@ -116,6 +123,9 @@ export class GlobalVars {
   getConfigData() {
     return new Promise(resolve => {
       this.configProvider.getConfigData(this.userProfile).then(data => {
+        this.log.logs[this.constructor.name].info(
+          'getConfigData:' + JSON.stringify(data)
+        );
         resolve(data);
       });
     });
@@ -129,6 +139,9 @@ export class GlobalVars {
   getColorsData() {
     return new Promise(resolve => {
       this.listsDataProvider.getColorsData(this.userProfile).then(data => {
+        this.log.logs[this.constructor.name].info(
+          'getColorsData:' + JSON.stringify(data)
+        );
         resolve(data);
       });
     });
@@ -153,6 +166,9 @@ export class GlobalVars {
       this.listsDataProvider
         .getFavoritesListsData(this.userProfile)
         .then(data => {
+          this.log.logs[this.constructor.name].info(
+            'getFavoritesListsData:' + JSON.stringify(data)
+          );
           resolve(data);
         });
     });
@@ -175,6 +191,9 @@ export class GlobalVars {
   getListsData() {
     return new Promise(resolve => {
       this.listsDataProvider.getListsData(this.userProfile).then(data => {
+        this.log.logs[this.constructor.name].info(
+          'getListsData:' + JSON.stringify(data)
+        );
         resolve(data);
       });
     });
@@ -191,6 +210,9 @@ export class GlobalVars {
       this.listDataProvider
         .getListItemsData(name, this.userProfile)
         .then(data => {
+          this.log.logs[this.constructor.name].info(
+            'getListData:' + JSON.stringify(data)
+          );
           resolve(data);
         });
     });
@@ -249,6 +271,9 @@ export class GlobalVars {
   getItemsData() {
     return new Promise(resolve => {
       this.itemsDataProvider.getItemsData(this.userProfile).then(data => {
+        this.log.logs[this.constructor.name].info(
+          'getItemsData:' + JSON.stringify(data)
+        );
         resolve(data);
       });
     });
@@ -273,6 +298,9 @@ export class GlobalVars {
       this.categoriesDataProvider
         .getCategoriesData(this.userProfile)
         .then(data => {
+          this.log.logs[this.constructor.name].info(
+            'getCategoriesData:' + JSON.stringify(data)
+          );
           resolve(data);
         });
     });
@@ -285,11 +313,17 @@ export class GlobalVars {
    */
   getDefaulIconsData() {
     if (this.iconsData) {
+      this.log.logs[this.constructor.name].info(
+        'getDefaulIconsData:' + JSON.stringify(this.iconsData)
+      );
       return Promise.resolve(this.iconsData);
     } else {
       return new Promise(resolve => {
         this.iconsDataService.getIcons().then(data => {
           this.iconsData = data;
+          this.log.logs[this.constructor.name].info(
+            'getDefaulIconsData:' + JSON.stringify(data)
+          );
           resolve(data);
         });
       });

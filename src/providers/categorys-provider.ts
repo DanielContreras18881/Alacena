@@ -9,7 +9,7 @@ import { LocalStorage } from './data/localStorage';
 declare var cordova: any;
 /**
  * Provider to manage categories data
- * 
+ *
  * @export
  * @class CategorysProvider
  */
@@ -24,11 +24,11 @@ export class CategorysProvider {
     private plt: Platform
   ) {}
   /**
-	* Save categories data
-	* 
-	* @param {Category[]} data 
-	* @param {*} userProfile 
-	* @memberof CategorysProvider
+   * Save categories data
+   *
+   * @param {Category[]} data
+   * @param {*} userProfile
+   * @memberof CategorysProvider
    */
   setCategoriesData(data: Category[], userProfile: any) {
     if (userProfile) {
@@ -46,12 +46,12 @@ export class CategorysProvider {
     }
   }
   /**
-	 * Recover caegories data
-	 * 
-	 * @param {*} userProfile 
-	 * @returns {*} 
-	 * @memberof CategorysProvider
-	 */
+   * Recover caegories data
+   *
+   * @param {*} userProfile
+   * @returns {*}
+   * @memberof CategorysProvider
+   */
   getCategoriesData(userProfile: any): any {
     return new Promise(resolve => {
       if (userProfile) {

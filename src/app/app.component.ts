@@ -43,10 +43,6 @@ export class Alacena {
   ) {
     this.log.setLogger(this.constructor.name);
 
-    this.log.logs[this.constructor.name].info('test');
-    this.log.logs[this.constructor.name].warn('test');
-    this.log.logs[this.constructor.name].error('test');
-
     this.globalVars.getConfigData().then(data => {
       let version: boolean = (<any>data).version;
       if (!version) {

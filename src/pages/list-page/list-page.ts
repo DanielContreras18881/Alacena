@@ -21,6 +21,8 @@ import { RemindersComponent } from '../../components/reminders-component/reminde
 import { OrderBy } from '../../pipes/orderBy';
 import { GlobalVars } from '../../providers/global-vars/global-vars';
 import { ItemInfoPage } from '../../components/item-info/item-info';
+
+import { Log } from '../../providers/log/log';
 /**
  * Page to manage the items of a list
  *
@@ -57,10 +59,14 @@ export class ListPage {
     private order: OrderBy,
     private localNotification: PhonegapLocalNotification,
     private localNotifications: LocalNotifications,
-    private reminders: RemindersProvider
-  ) {}
+    private reminders: RemindersProvider,
+    public log: Log
+  ) {
+    this.log.setLogger(this.constructor.name);
+  }
 
   ionViewDidLoad() {
+    this.log.logs[this.constructor.name].info('ionViewDidLoad');
     this.searchBar = false;
     this.selectedItem = this.navParams.get('list')
       ? this.navParams.get('list')
@@ -87,6 +93,7 @@ export class ListPage {
    * @memberof ListPage
    */
   initializeItems(filter: string) {
+    this.log.logs[this.constructor.name].info('initializeItems:' + filter);
     this.globalVars.getListData(this.selectedItem).then(listData => {
       this.list = <ListItem[]>listData;
       this.sortItems(this.orderSelected);
@@ -130,6 +137,7 @@ export class ListPage {
    * @memberof ListPage
    */
   sortItems(orderBy: number) {
+    this.log.logs[this.constructor.name].info('sortItems:' + orderBy);
     this.orderSelected = orderBy;
     switch (orderBy) {
       case 1:
@@ -194,6 +202,7 @@ export class ListPage {
    * @memberof ListPage
    */
   removeItem(item: ListItem) {
+    this.log.logs[this.constructor.name].info('removeItem:' + item);
     let confirm = this.alertCtrl.create({
       title: 'Removing ' + item.nombreElemento,
       message:
@@ -225,7 +234,7 @@ export class ListPage {
    * @memberof ListPage
    */
   saveItem(item: ListItem) {
-    //TODO: Check on device
+    this.log.logs[this.constructor.name].info('saveItem:' + item);
     if (this.expireReminders) {
       if (item.caduca) {
         this.localNotifications.schedule({
@@ -274,6 +283,7 @@ export class ListPage {
    * @memberof ListPage
    */
   editItem(item: ListItem) {
+    this.log.logs[this.constructor.name].info('editItem:' + item);
     let infoListModal = this.mod.create(ItemInfoPage, {
       newItem: JSON.parse(JSON.stringify(item)),
       editing: true,
@@ -296,6 +306,7 @@ export class ListPage {
    * @memberof ListPage
    */
   moveItem(event) {
+    this.log.logs[this.constructor.name].info('moveItem');
     let item = event.item;
     if (event.toShopingList) {
       this.globalVars.getListData('LISTA_COMPRA').then(result => {
@@ -365,6 +376,7 @@ export class ListPage {
    * @memberof ListPage
    */
   addNotification() {
+    this.log.logs[this.constructor.name].info('addNotification');
     let reminderModal = this.mod.create(RemindersComponent, {
       time: moment()
         .toDate()
@@ -399,6 +411,7 @@ export class ListPage {
    * @memberof ListPage
    */
   removeElements(removed: string[]) {
+    this.log.logs[this.constructor.name].info('removeElements:' + removed);
     removed.forEach(itemRemoved => {
       this.list = this.list.filter(item => item.nombreElemento !== itemRemoved);
       this.globalVars.setListData(this.selectedItem, this.list);
@@ -411,6 +424,7 @@ export class ListPage {
    * @memberof ListPage
    */
   addItem(event) {
+    this.log.logs[this.constructor.name].info('addItem');
     let newItem = {
       category: this.defaultCategory,
       nombreElemento: '',

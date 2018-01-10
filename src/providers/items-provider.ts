@@ -7,6 +7,8 @@ import { CloudStorage } from './data/cloudStorage';
 import { LocalStorage } from './data/localStorage';
 import { Network } from '@ionic-native/network';
 
+import { Log } from './log/log';
+
 declare var cordova: any;
 /**
  * Provider to manage items data
@@ -23,8 +25,11 @@ export class ItemsProvider {
     private cloudStorage: CloudStorage,
     private localStorage: LocalStorage,
     private network: Network,
-    private plt: Platform
-  ) {}
+    private plt: Platform,
+    public log: Log
+  ) {
+    this.log.setLogger(this.constructor.name);
+  }
   /**
    * Save items data
    *
@@ -116,6 +121,9 @@ export class ItemsProvider {
    */
   getOldItems() {
     this.localStorage.getFromLocal('elementos', null).then(data => {
+      this.log.logs[this.constructor.name].info(
+        'OldData:' + JSON.stringify(data)
+      );
       if (data !== undefined && data !== null) {
         this.localStorage.getFromLocal('items', this.path).then(result => {
           if ((<Item[]>data).length === 0) {
@@ -123,7 +131,7 @@ export class ItemsProvider {
           } else {
             (<Item[]>data).forEach(item => {
               item.category = <Category>{
-                icon: 'images/icons/default.png' ,
+                icon: 'images/icons/default.png',
                 measurement: 'UNIDADES',
                 categoryName: 'No Category',
                 unitStep: 1

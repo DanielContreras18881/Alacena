@@ -6,6 +6,8 @@ import 'rxjs/add/operator/map';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
+
+import { Log } from '../log/log';
 /**
  * Provider to manage cloud storage of logged user
  *
@@ -14,7 +16,9 @@ import firebase from 'firebase';
  */
 @Injectable()
 export class CloudStorage {
-  constructor(private http: Http) {}
+  constructor(private http: Http, public log: Log) {
+    this.log.setLogger(this.constructor.name);
+  }
   /**
    * Get config data
    *
@@ -23,6 +27,7 @@ export class CloudStorage {
    * @memberof CloudStorage
    */
   loadConfigData(uid: string) {
+    this.log.logs[this.constructor.name].info('loadConfigData:' + uid);
     return new Promise(resolve => {
       let ref = firebase.database().ref('/config/');
       ref.once('value').then(function(snapshot) {
@@ -60,6 +65,7 @@ export class CloudStorage {
    * @memberof CloudStorage
    */
   loadElementData(uid: string) {
+    this.log.logs[this.constructor.name].info('loadElementData:' + uid);
     return new Promise(resolve => {
       let ref = firebase.database().ref('/lists/');
       ref.once('value').then(function(snapshot) {
@@ -89,6 +95,7 @@ export class CloudStorage {
    * @memberof CloudStorage
    */
   loadListData(name: string, uid: string) {
+    this.log.logs[this.constructor.name].info('loadListData:' + uid);
     return new Promise(resolve => {
       let ref = firebase
         .database()
@@ -128,6 +135,9 @@ export class CloudStorage {
    * @memberof CloudStorage
    */
   uploadListData(name: string, data: ListItem[], uid: string) {
+    this.log.logs[this.constructor.name].info(
+      'uploadListData:' + uid + ':' + name
+    );
     const storage = firebase.storage();
     let fileName = uid + '_' + name + '.json';
     let fileRef = storage.ref('lists/' + fileName);
@@ -159,6 +169,9 @@ export class CloudStorage {
    * @memberof CloudStorage
    */
   removeFavoritesListData(name: string, uid: string) {
+    this.log.logs[this.constructor.name].info(
+      'removeFavoritesListData:' + uid + ':' + name
+    );
     const storage = firebase.storage();
     let fileName = uid + '_' + name + '.json';
     let fileRef = storage.ref('favorites/' + fileName);
@@ -176,6 +189,9 @@ export class CloudStorage {
    * @memberof CloudStorage
    */
   removeListData(name: string, uid: string) {
+    this.log.logs[this.constructor.name].info(
+      'removeListData:' + uid + ':' + name
+    );
     const storage = firebase.storage();
     let fileName = uid + '_' + name + '.json';
     let fileRef = storage.ref('lists/' + fileName);
@@ -193,6 +209,9 @@ export class CloudStorage {
    * @memberof CloudStorage
    */
   uploadFavoritesListsData(lists: List[], uid: string) {
+    this.log.logs[this.constructor.name].info(
+      'uploadFavoritesListsData:' + uid
+    );
     firebase
       .database()
       .ref('favorites/' + uid)
@@ -206,6 +225,7 @@ export class CloudStorage {
    * @memberof CloudStorage
    */
   uploadListsData(lists: List[], uid: string) {
+    this.log.logs[this.constructor.name].info('uploadListsData:' + uid);
     firebase
       .database()
       .ref('lists/' + uid)
@@ -219,6 +239,7 @@ export class CloudStorage {
    * @memberof CloudStorage
    */
   uploadConfigData(configs: any, uid: string) {
+    this.log.logs[this.constructor.name].info('uploadConfigData:' + uid);
     firebase
       .database()
       .ref('config/' + uid)
@@ -232,6 +253,7 @@ export class CloudStorage {
    * @memberof CloudStorage
    */
   uploadItemsData(items: Item[], uid: string) {
+    this.log.logs[this.constructor.name].info('uploadItemsData:' + uid);
     firebase
       .database()
       .ref('elements/' + uid)
@@ -245,6 +267,7 @@ export class CloudStorage {
    * @memberof CloudStorage
    */
   uploadCategoriesData(categories: Category[], uid: string) {
+    this.log.logs[this.constructor.name].info('uploadCategoriesData:' + uid);
     firebase
       .database()
       .ref('categories/' + uid)
@@ -258,6 +281,7 @@ export class CloudStorage {
    * @memberof CloudStorage
    */
   loadFavoritesListsData(uid: string) {
+    this.log.logs[this.constructor.name].info('loadFavoritesListsData:' + uid);
     return new Promise(resolve => {
       let ref = firebase.database().ref('/favorites/');
       ref.once('value').then(function(snapshot) {
@@ -286,6 +310,7 @@ export class CloudStorage {
    * @memberof CloudStorage
    */
   loadListsData(uid: string) {
+    this.log.logs[this.constructor.name].info('loadListsData:' + uid);
     return new Promise(resolve => {
       let ref = firebase.database().ref('/lists/');
       ref.once('value').then(function(snapshot) {
@@ -314,6 +339,7 @@ export class CloudStorage {
    * @memberof CloudStorage
    */
   loadItemsData(uid: string) {
+    this.log.logs[this.constructor.name].info('loadItemsData:' + uid);
     return new Promise(resolve => {
       let ref = firebase.database().ref('/elements/');
       ref.once('value').then(function(snapshot) {
@@ -342,6 +368,7 @@ export class CloudStorage {
    * @memberof CloudStorage
    */
   loadCategoriesData(uid: string) {
+    this.log.logs[this.constructor.name].info('loadCategoriesData:' + uid);
     return new Promise(resolve => {
       let ref = firebase.database().ref('/categories/');
       ref.once('value').then(function(snapshot) {

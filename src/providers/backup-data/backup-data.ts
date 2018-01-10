@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Log } from '../log/log';
 /**
  * Service to manage backup local data for the user
- * 
+ *
  * @export
  * @class BackupData
  */
@@ -11,7 +12,9 @@ import 'rxjs/add/operator/map';
 export class BackupData {
   data: any = null;
 
-  constructor(public http: Http) {}
+  constructor(public http: Http, public log: Log) {
+    this.log.setLogger(this.constructor.name);
+  }
   // TODO: add backup functionality to local files
   load() {
     if (this.data) {

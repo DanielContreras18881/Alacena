@@ -6,6 +6,8 @@ import { ListIconsPage } from '../../components/icons/list-icons';
 import { DefaultIcons } from '../../providers/default-icons/default-icons';
 import { GlobalVars } from '../../providers/global-vars/global-vars';
 
+import { Log } from '../log/log';
+
 //import { Camera } from 'ionic-native';
 //import { ImagePicker } from 'ionic-native';
 /**
@@ -22,8 +24,10 @@ export class CategoriesService {
     public mod: ModalController,
     public alertCtrl: AlertController,
     private globalVars: GlobalVars,
-    private iconsData: DefaultIcons
+    private iconsData: DefaultIcons,
+    public log: Log
   ) {
+    this.log.setLogger(this.constructor.name);
     this.iconsData.getIcons().then(data => {
       this.icons = <string[]>data;
     });
@@ -37,6 +41,9 @@ export class CategoriesService {
    * @memberof CategoriesService
    */
   changeCategory(currentCategory: Category, item) {
+    this.log.logs[this.constructor.name].info(
+      'changeCategory:' + currentCategory + ':' + item
+    );
     return new Promise(resolve => {
       let change = this.alertCtrl.create();
       let currentCategoryName =
@@ -76,6 +83,7 @@ export class CategoriesService {
    * @memberof CategoriesService
    */
   changeCategoryIcon(category: Category, icons: string[]) {
+    this.log.logs[this.constructor.name].info('changeCategoryIcon:' + category);
     let paramIcons = icons !== null ? icons : this.icons;
     let changeIconModal = this.mod.create(ListIconsPage, { icons: paramIcons });
     changeIconModal.onDidDismiss(icon => {
@@ -94,16 +102,16 @@ export class CategoriesService {
                 /*
                   Camera.getPicture({}).then(
                     imageData => {
-                      console.log(imageData);
+                      this.log.logs[this.constructor.name].info(imageData);
                       category.icon = imageData;
                       // imageData is either a base64 encoded string or a file URI
                       // If it's base64:
                       // let base64Image = 'data:image/jpeg;base64,' + imageData;
-                      // console.log(base64Image);
+                      // this.log.logs[this.constructor.name].info(base64Image);
                       // Save data to storage
                     },
                     err => {
-                      // Handle error
+                      this.log.logs[this.constructor.name].error('cameraError:' + err);
                     }
 						);
 						*/
@@ -115,15 +123,17 @@ export class CategoriesService {
                 /*
                   ImagePicker.getPictures({}).then(
                     results => {
-                      console.log(results[0]);
+                      this.log.logs[this.constructor.name].info(results[0]);
                       category.icon = results[0];
 
                       for (var i = 0; i < results.length; i++) {
-                        console.log('Image URI: ' + results[i]);
+                        this.log.logs[this.constructor.name].info('Image URI: ' + results[i]);
                         // Save data to storage
                       }
                     },
-                    err => {}
+                    err => {
+                      this.log.logs[this.constructor.name].error('galleryError:' + err);
+                    }
 						);
 						*/
               }

@@ -17,6 +17,8 @@ import { PipeFilterElements } from '../../pipes/pipefilterElements';
 import { CategoriesService } from '../../providers/categories/categoriesService';
 import { GlobalVars } from '../../providers/global-vars/global-vars';
 import { ItemInfoPage } from '../../components/item-info/item-info';
+
+import { Log } from '../../providers/log/log';
 /**
  * Page to manage items on the app
  *
@@ -47,10 +49,14 @@ export class ItemsPage {
     private catService: CategoriesService,
     private globalVars: GlobalVars,
     private filterElements: PipeFilterElements,
-    private toastCtrl: ToastController
-  ) {}
+    private toastCtrl: ToastController,
+    public log: Log
+  ) {
+    this.log.setLogger(this.constructor.name);
+  }
 
   ionViewDidLoad() {
+    this.log.logs[this.constructor.name].info('ionViewDidLoad');
     this.searchBar = false;
     this.globalVars.getDefaulIconsData().then(data => {
       this.icons = <string[]>data;
@@ -70,6 +76,7 @@ export class ItemsPage {
    * @memberof ItemsPage
    */
   initializeItems(filter: string) {
+    this.log.logs[this.constructor.name].info('initializeItems:' + filter);
     this.globalVars.getItemsData().then(data => {
       this.items = <Item[]>data;
       this.globalVars.getListsData().then(data => {
@@ -90,7 +97,7 @@ export class ItemsPage {
               itemsFilled.push(auxItem);
             });
             this.items = itemsFilled;
-            /*				
+            /*
 				this.sortItems(this.orderSelected);
             if (filter) {
               this.items = this.items.filter(item => {
@@ -149,6 +156,7 @@ export class ItemsPage {
    * @memberof ItemsPage
    */
   removeItem(event, item: Item) {
+    this.log.logs[this.constructor.name].info('removeItem:' + item);
     let confirm = this.alertCtrl.create({
       title: 'Removing ' + item.nombreElemento,
       message: 'Do you like to remove ' + item.nombreElemento + '?',
@@ -175,6 +183,7 @@ export class ItemsPage {
    * @memberof ItemsPage
    */
   selectToSendShoppingList(event) {
+    this.log.logs[this.constructor.name].info('selectToSendShoppingList');
     let move = this.alertCtrl.create();
     move.setTitle('Move to LISTA_COMPRA');
 
@@ -226,6 +235,7 @@ export class ItemsPage {
    * @memberof ItemsPage
    */
   discardOrShop(event, item: Item) {
+    this.log.logs[this.constructor.name].info('discardOrShop:' + item);
     let discardRemove = this.alertCtrl.create();
     discardRemove.setTitle(
       'Discard ' + item.nombreElemento + ' or move to SHOPPING_LIST?'
@@ -252,6 +262,7 @@ export class ItemsPage {
    * @memberof ItemsPage
    */
   removeElements(removed: string[]) {
+    this.log.logs[this.constructor.name].info('removeElements:' + removed);
     removed.forEach(itemRemoved => {
       this.items = this.items.filter(
         item => item.nombreElemento !== itemRemoved
@@ -267,6 +278,7 @@ export class ItemsPage {
    * @memberof ItemsPage
    */
   editItem(event, item: Item) {
+    this.log.logs[this.constructor.name].info('editItem:' + item);
     let oldItem = item.nombreElemento;
     let edit = this.alertCtrl.create({
       title: 'Edit Item',
@@ -306,6 +318,7 @@ export class ItemsPage {
    * @memberof ItemsPage
    */
   addItem(newItem: string) {
+    this.log.logs[this.constructor.name].info('addItem:' + newItem);
     if (
       this.items.filter(
         item => item.nombreElemento.toLowerCase() === newItem.toLowerCase()
@@ -332,6 +345,7 @@ export class ItemsPage {
    * @memberof ItemsPage
    */
   sortItems(orderBy: number) {
+    this.log.logs[this.constructor.name].info('sortItems:' + orderBy);
     this.orderSelected = orderBy;
     switch (orderBy) {
       case 1:
@@ -402,6 +416,7 @@ export class ItemsPage {
    * @memberof ItemsPage
    */
   sendToShoppingList(event, item: ListItem) {
+    this.log.logs[this.constructor.name].info('sendToShoppingList:' + item);
     let itemSelected = this.items[this.items.indexOf(item)];
     let newShoppingListItem: ListItem = {
       category: itemSelected.category,

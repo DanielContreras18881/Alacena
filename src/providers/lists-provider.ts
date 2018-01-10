@@ -7,6 +7,8 @@ import { Network } from '@ionic-native/network';
 
 import { List } from '../classes/list';
 
+import { Log } from './log/log';
+
 declare var cordova: any;
 /**
  * Provider to manage lists data
@@ -23,8 +25,11 @@ export class ListsProvider {
     private cloudStorage: CloudStorage,
     private localStorage: LocalStorage,
     private network: Network,
-    private plt: Platform
-  ) {}
+    private plt: Platform,
+    public log: Log
+  ) {
+    this.log.setLogger(this.constructor.name);
+  }
   /**
    * Get colors data from local file
    *
@@ -230,6 +235,9 @@ export class ListsProvider {
   getOldLists(): any {
     return new Promise(resolve => {
       this.localStorage.getFromLocal('listas', null).then(data => {
+        this.log.logs[this.constructor.name].info(
+          'OldData:' + JSON.stringify(data)
+        );
         if (data !== undefined && data !== null) {
           this.localStorage.getFromLocal('lists', this.path).then(result => {
             if ((<List[]>data).length === 0) {

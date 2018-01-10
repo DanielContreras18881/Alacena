@@ -6,9 +6,11 @@ import moment from 'moment';
 import { Component } from '@angular/core';
 import { ViewController } from 'ionic-angular';
 
+import { Log } from '../../providers/log/log';
+
 /**
  * Component to show and manage items near to expire for the dashboard
- * 
+ *
  * @export
  * @class ItemsBestBeforeComponent
  */
@@ -23,12 +25,16 @@ export class ItemsBestBeforeComponent {
   constructor(
     private globalVars: GlobalVars,
     private order: OrderBy,
-    private view: ViewController
-  ) {}
+    private view: ViewController,
+    public log: Log
+  ) {
+    this.log.setLogger(this.constructor.name);
+  }
   ionViewDidLoad() {
     this.initializeItems();
   }
   initializeItems() {
+    this.log.logs[this.constructor.name].info('initializeItems');
     this.globalVars.getListsData().then(data => {
       let lists = <List[]>data;
       let itemsOnLists = [];
@@ -55,12 +61,12 @@ export class ItemsBestBeforeComponent {
     });
   }
   /**
-	* Check expiry date of the item
-	* 
-	* @param {any} expiryDate 
-	* @returns 
-	* @memberof Item
-	*/
+   * Check expiry date of the item
+   *
+   * @param {any} expiryDate
+   * @returns
+   * @memberof Item
+   */
   checkExpiryDate(expiryDate) {
     if (moment().isAfter(moment(expiryDate, 'YYYY-MM-DDTHH:mm:ss.SSSZ'))) {
       return 'expired';
@@ -76,10 +82,10 @@ export class ItemsBestBeforeComponent {
   }
 
   /**
-	 * Close modal discarding data
-	 * 
-	 * @memberof ItemsBestBeforeComponent
-	 */
+   * Close modal discarding data
+   *
+   * @memberof ItemsBestBeforeComponent
+   */
   close() {
     this.view.dismiss();
   }

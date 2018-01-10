@@ -7,9 +7,11 @@ import { ViewController } from 'ionic-angular';
 
 import { PipeFilterElements } from '../../pipes/pipefilterElements';
 
+import { Log } from '../../providers/log/log';
+
 /**
  * Component to show and manage items needed to shop on the dashboard
- * 
+ *
  * @export
  * @class ItemsNeededComponent
  */
@@ -25,8 +27,11 @@ export class ItemsNeededComponent {
   constructor(
     private globalVars: GlobalVars,
     private view: ViewController,
-    private filterElements: PipeFilterElements
-  ) {}
+    private filterElements: PipeFilterElements,
+    public log: Log
+  ) {
+    this.log.setLogger(this.constructor.name);
+  }
 
   ionViewDidLoad() {
     this.initializeItems();
@@ -35,6 +40,7 @@ export class ItemsNeededComponent {
     });
   }
   initializeItems() {
+    this.log.logs[this.constructor.name].info('initializeItems');
     this.globalVars.getItemsData().then(data => {
       let items = <Item[]>data;
       this.globalVars.getListsData().then(data => {
@@ -69,19 +75,20 @@ export class ItemsNeededComponent {
     });
   }
   /**
-	 * Close modal discarding data
-	 * 
-	 * @memberof ItemsBestBeforeComponent
-	 */
+   * Close modal discarding data
+   *
+   * @memberof ItemsBestBeforeComponent
+   */
   close() {
     this.view.dismiss();
   }
   /**
-	 * Add items to shopping list, from needed to shop
-	 * 
-	 * @memberof DashboardPage
-	 */
+   * Add items to shopping list, from needed to shop
+   *
+   * @memberof DashboardPage
+   */
   addItemsToShoppingList() {
+    this.log.logs[this.constructor.name].info('addItemsToShoppingList');
     this.list.forEach((item, index) => {
       let newItem: ListItem = {
         category: item.category,

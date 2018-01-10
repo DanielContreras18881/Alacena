@@ -7,6 +7,8 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import firebase from 'firebase';
 import { Platform } from 'ionic-angular';
 
+import { Log } from '../log/log';
+
 declare var gapi: any;
 declare var self: any;
 /**
@@ -25,14 +27,15 @@ export class AuthService {
   constructor(
     public plt: Platform,
     private googlePlus: GooglePlus,
-    private globalVars: GlobalVars
-  ) //private twitter: TwitterConnect,
-  //public fb: Facebook
-  {
+    private globalVars: GlobalVars,
+    public log: Log //private twitter: TwitterConnect, //public fb: Facebook
+  ) {
+    this.log.setLogger(this.constructor.name);
     //this.fb.browserInit(this.FB_APP_ID, 'v2.8');
     this.zone = new NgZone({});
     self = this;
     firebase.auth().onAuthStateChanged(user => {
+      this.log.logs[this.constructor.name].info('user:' + user);
       this.zone.run(() => {
         if (user) {
           this.userProfile = user;
@@ -51,6 +54,7 @@ export class AuthService {
    * @memberof AuthService
    */
   logout() {
+    this.log.logs[this.constructor.name].info('logout');
     this.globalVars.disconnectUser();
     return new Promise(resolve => {
       self = this;
@@ -252,10 +256,13 @@ IOS10 o posterior
         .then(confirmationResult => {
           // SMS sent. Prompt user to type the code from the message, then sign the
           // user in with confirmationResult.confirm(code).
+          this.log.logs[this.constructor.name].info('SMS sent');
           resolve(confirmationResult);
         })
         .catch(function(error) {
-          console.error('SMS not sent', error);
+          this.log.logs[this.constructor.name].error(
+            'SMS not sent:' + JSON.stringify(error)
+          );
           appVerifier = null;
         });
     });
@@ -288,13 +295,24 @@ IOS10 o posterior
               .then(success => {
                 this.userProfile = success.user;
                 self.globalVars.setUserProfile(this.userProfile);
+                this.log.logs[this.constructor.name].info(
+                  'Google Login Success'
+                );
                 resolve('google');
               })
-              .catch(error =>
-                resolve('Firebase failure: ' + JSON.stringify(error))
-              );
+              .catch(error => {
+                this.log.logs[this.constructor.name].error(
+                  'Firebase failure: ' + JSON.stringify(error)
+                );
+                resolve('Firebase failure: ' + JSON.stringify(error));
+              });
           })
-          .catch(err => resolve('Error: ' + JSON.stringify(err)));
+          .catch(err => {
+            this.log.logs[this.constructor.name].error(
+              'Error: ' + JSON.stringify(err)
+            );
+            resolve('Error: ' + JSON.stringify(err));
+          });
       } else {
         firebase
           .auth()
@@ -303,9 +321,13 @@ IOS10 o posterior
             result => {
               this.userProfile = result.user;
               self.globalVars.setUserProfile(this.userProfile);
+              this.log.logs[this.constructor.name].info('Google Login Success');
               resolve('google');
             },
             error => {
+              this.log.logs[this.constructor.name].error(
+                'Firebase failure: ' + JSON.stringify(error)
+              );
               resolve('Firebase failure: ' + JSON.stringify(error));
             }
           );

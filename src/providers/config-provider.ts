@@ -5,6 +5,8 @@ import { CloudStorage } from './data/cloudStorage';
 import { LocalStorage } from './data/localStorage';
 import { Network } from '@ionic-native/network';
 
+import { Log } from './log/log';
+
 declare var cordova: any;
 /**
  * Provider to manage config data
@@ -21,8 +23,11 @@ export class ConfigProvider {
     private cloudStorage: CloudStorage,
     private localStorage: LocalStorage,
     private network: Network,
-    private plt: Platform
-  ) {}
+    private plt: Platform,
+    public log: Log
+  ) {
+    this.log.setLogger(this.constructor.name);
+  }
   /**
    * Save config data
    *
@@ -118,6 +123,9 @@ export class ConfigProvider {
   getOldConfigData(): any {
     return new Promise(resolve => {
       this.localStorage.getFromLocal('configData', null).then(data => {
+        this.log.logs[this.constructor.name].info(
+          'OldData:' + JSON.stringify(data)
+        );
         if (data !== undefined && data !== null) {
           if (!(<any>data).version) {
             this.localStorage.getFromLocal('config', this.path).then(result => {
@@ -129,6 +137,7 @@ export class ConfigProvider {
                 (<any>data).unitDefault = (<any>result).unitDefault;
                 (<any>data).stepDefault = (<any>result).stepDefault;
               }
+              this.localStorage.setToLocal('config', data);
               resolve(data);
             });
           } else {

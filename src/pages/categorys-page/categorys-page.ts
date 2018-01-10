@@ -13,6 +13,8 @@ import { GlobalVars } from '../../providers/global-vars/global-vars';
 import { Category } from '../../classes/category';
 import { CategoryInfoPage } from '../../components/category-info/category-info';
 
+import { Log } from '../../providers/log/log';
+
 /**
  * Page to manage custom categories by the user
  *
@@ -43,10 +45,14 @@ export class CategorysPage {
     private catService: CategoriesService,
     private globalVars: GlobalVars,
     private order: OrderBy,
-    private toastCtrl: ToastController
-  ) {}
+    private toastCtrl: ToastController,
+    public log: Log
+  ) {
+    this.log.setLogger(this.constructor.name);
+  }
 
   ionViewDidLoad() {
+    this.log.logs[this.constructor.name].info('ionViewDidLoad');
     this.searchBar = false;
     this.globalVars.getDefaulIconsData().then(data => {
       this.icons = <string[]>data;
@@ -64,6 +70,7 @@ export class CategorysPage {
    * @memberof CategorysPage
    */
   initializeCategories(filter: string) {
+    this.log.logs[this.constructor.name].info('initializeCategories:' + filter);
     this.globalVars.getCategoriesData().then(data => {
       this.categories = <Category[]>data;
       this.sortItems(this.orderSelected);
@@ -85,6 +92,7 @@ export class CategorysPage {
    * @memberof CategorysPage
    */
   searchMatches(event) {
+    this.log.logs[this.constructor.name].info('searchMatches:' + event);
     if (this.searchCategory && this.searchCategory.trim() !== '') {
       this.initializeCategories(this.searchCategory);
     } else {
@@ -117,6 +125,7 @@ export class CategorysPage {
    * @memberof CategorysPage
    */
   sortItems(orderBy: number) {
+    this.log.logs[this.constructor.name].info('sortItems:' + orderBy);
     this.orderSelected = orderBy;
     switch (orderBy) {
       case 1:
@@ -180,6 +189,7 @@ export class CategorysPage {
    * @memberof CategorysPage
    */
   deleteCategory(event, category: Category) {
+    this.log.logs[this.constructor.name].info('deleteCategory:' + category);
     let confirm = this.alertCtrl.create({
       title: 'Removing ' + category.categoryName,
       message: 'Do you like to remove ' + category.categoryName + '?',
@@ -206,6 +216,7 @@ export class CategorysPage {
    * @memberof CategorysPage
    */
   removeElements(removed: string[]) {
+    this.log.logs[this.constructor.name].info('removeElements:' + removed);
     removed.forEach(categoryRemoved => {
       this.categories = this.categories.filter(
         category => category.categoryName !== categoryRemoved
@@ -220,6 +231,7 @@ export class CategorysPage {
    * @memberof CategorysPage
    */
   addCategory(event) {
+    this.log.logs[this.constructor.name].info('addCategory:' + event);
     let newCategory = {
       categoryName: 'NEW_CATEGORY',
       icon: 'images/icons/default.png',
@@ -260,6 +272,7 @@ export class CategorysPage {
    * @memberof CategorysPage
    */
   editCategory(event, category: Category) {
+    this.log.logs[this.constructor.name].info('editCategory:' + category);
     let oldCategory = category.categoryName;
     let edit = this.alertCtrl.create({
       title: 'Edit Category',
@@ -295,6 +308,9 @@ export class CategorysPage {
    * @memberof CategorysPage
    */
   onMeasurementChange(event, category: Category) {
+    this.log.logs[this.constructor.name].info(
+      'onMeasurementChange:' + category
+    );
     if (category.measurement === 'UNIDADES') {
       category.unitStep = 0.1;
     } else if (category.measurement === 'GRAMOS') {

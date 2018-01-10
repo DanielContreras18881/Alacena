@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { Log } from '../../providers/log/log';
 /**
  * Page to manage, create and remove local data backup
- * 
+ *
  * @export
  * @class BackupPage
  */
@@ -13,7 +14,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'backup-page.html'
 })
 export class BackupPage {
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public log: Log
+  ) {
+    this.log.setLogger(this.constructor.name);
+  }
 
-  ionViewDidLoad() {}
+  ionViewDidLoad() {
+    this.log.logs[this.constructor.name].info('ionViewDidLoad');
+  }
 }

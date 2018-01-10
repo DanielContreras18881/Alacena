@@ -7,6 +7,8 @@ import { CloudStorage } from './data/cloudStorage';
 import { LocalStorage } from './data/localStorage';
 import moment from 'moment';
 
+import { Log } from './log/log';
+
 declare var cordova: any;
 /**
  * Provider to manage list data
@@ -23,8 +25,11 @@ export class ListProvider {
     private cloudStorage: CloudStorage,
     private localStorage: LocalStorage,
     private network: Network,
-    private plt: Platform
-  ) {}
+    private plt: Platform,
+    public log: Log
+  ) {
+    this.log.setLogger(this.constructor.name);
+  }
   /**
    * Save list data
    *
@@ -153,6 +158,9 @@ export class ListProvider {
     this.localStorage
       .getFromLocal('cantidadElementosLista', null)
       .then(data => {
+        this.log.logs[this.constructor.name].info(
+          'OldData:' + JSON.stringify(data)
+        );
         if (data !== undefined && data !== null) {
           lists.forEach(list => {
             let listData = (<any[]>data).filter(

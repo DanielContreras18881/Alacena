@@ -29,6 +29,8 @@ import { ListPage } from '../list-page/list-page';
 import { OrderBy } from '../../pipes/orderBy';
 import { GlobalVars } from '../../providers/global-vars/global-vars';
 
+import { Log } from '../../providers/log/log';
+
 declare var gapi: any;
 declare var self: any;
 declare var cordova: any;
@@ -71,11 +73,15 @@ export class DashboardPage {
     private remindersData: RemindersProvider,
     private localNotification: PhonegapLocalNotification,
     private localNotifications: LocalNotifications,
-    public mod: ModalController
-  ) {}
+    public mod: ModalController,
+    public log: Log
+  ) {
+    this.log.setLogger(this.constructor.name);
+  }
   public recaptchaVerifier: firebase.auth.RecaptchaVerifier;
 
   ionViewDidLoad() {
+    this.log.logs[this.constructor.name].info('ionViewDidLoad');
     this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
       'recaptcha-container'
     );
@@ -103,6 +109,7 @@ export class DashboardPage {
    * @memberof DashboardPage
    */
   getDashboardData() {
+    this.log.logs[this.constructor.name].info('getDashboardData');
     this.remindersData.getReminders().then(data => {
       this.remindersList = <Reminder[]>data;
       if (this.remindersList.length > 0) {
@@ -145,6 +152,7 @@ export class DashboardPage {
    * @memberof DashboardPage
    */
   editReminder(data: Reminder) {
+    this.log.logs[this.constructor.name].info('editReminder');
     let oldReminder = JSON.parse(JSON.stringify(data));
     let reminderModal = this.mod.create(RemindersComponent, data);
     reminderModal.onDidDismiss(data => {
@@ -180,6 +188,7 @@ export class DashboardPage {
    * @memberof DashboardPage
    */
   phoneLogin() {
+    this.log.logs[this.constructor.name].info('phoneLogin');
     this.alertCtrl
       .create({
         title: 'Insert Phone Number',
@@ -222,7 +231,9 @@ export class DashboardPage {
                       {
                         text: 'Cancel',
                         handler: data => {
-                          console.log('Cancel clicked');
+                          this.log.logs[this.constructor.name].error(
+                            'Cancel clicked'
+                          );
                         }
                       },
                       {
@@ -232,10 +243,15 @@ export class DashboardPage {
                             .confirm(data.confirmationCode)
                             .then(function(result) {
                               // User signed in successfully.
-                              console.log(result.user);
+                              this.log.logs[this.constructor.name].info(
+                                'Send:' + result.user
+                              );
                               // ...
                             })
                             .catch(function(error) {
+                              this.log.logs[this.constructor.name].error(
+                                'SendError:' + error
+                              );
                               // User couldn't sign in (bad verification code?)
                               // ...
                             });
@@ -258,7 +274,7 @@ export class DashboardPage {
    */
   facebookLogin() {
     this.authService.facebookLogin().then(data => {
-      console.log(data);
+      this.log.logs[this.constructor.name].info('facebook:' + data);
     });
   }
   /**
@@ -268,7 +284,7 @@ export class DashboardPage {
    */
   googleLogin() {
     this.authService.googleAuth().then(data => {
-      console.log(data);
+      this.log.logs[this.constructor.name].info('google:' + data);
     });
   }
   /**
@@ -278,7 +294,7 @@ export class DashboardPage {
    */
   twitterLogin() {
     this.authService.twitterLogin().then(data => {
-      console.log(data);
+      this.log.logs[this.constructor.name].info('twitter:' + data);
     });
   }
   /**
@@ -287,6 +303,7 @@ export class DashboardPage {
    * @memberof DashboardPage
    */
   logout() {
+    this.log.logs[this.constructor.name].info('logout');
     this.authService.logout().then(data => {
       this.userProfile = null;
       this.ionViewDidLoad();

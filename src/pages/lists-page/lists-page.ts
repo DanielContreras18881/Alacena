@@ -18,6 +18,8 @@ import { ListPage } from '../list-page/list-page';
 
 import { Color } from '../../classes/color';
 
+import { Log } from '../../providers/log/log';
+
 /**
  * Page to manage the list of lists
  *
@@ -41,10 +43,14 @@ export class ListsPage {
     private mod: ModalController,
     private alertCtrl: AlertController,
     private globalVars: GlobalVars,
-    private toastCtrl: ToastController
-  ) {}
+    private toastCtrl: ToastController,
+    public log: Log
+  ) {
+    this.log.setLogger(this.constructor.name);
+  }
 
   ionViewDidLoad() {
+    this.log.logs[this.constructor.name].info('ionViewDidLoad');
     this.globalVars.getListsData().then(data => {
       this.lists = <List[]>data;
       this.reorderAllowed = false;
@@ -78,6 +84,7 @@ export class ListsPage {
    * @memberof ListsPage
    */
   removeList(event, name: string) {
+    this.log.logs[this.constructor.name].info('removeList:' + name);
     let confirm = this.alertCtrl.create({
       title: 'Removing ' + name,
       message: 'Do you like to remove ' + name + ' list?',
@@ -106,6 +113,7 @@ export class ListsPage {
    * @memberof ListsPage
    */
   editColor(event, list: List) {
+    this.log.logs[this.constructor.name].info('editColor:' + list);
     this.globalVars.getColorsData().then(data => {
       let buttons: any = [];
       let colorsList: Color[] = JSON.parse(JSON.stringify(data));
@@ -137,6 +145,7 @@ export class ListsPage {
    * @memberof ListsPage
    */
   editList(event, list: List) {
+    this.log.logs[this.constructor.name].info('editList:' + list);
     let oldName = list.nombreLista;
     let edit = this.alertCtrl.create({
       title: 'Edit List',
@@ -179,6 +188,7 @@ export class ListsPage {
    * @memberof ListsPage
    */
   addList(newList: string) {
+    this.log.logs[this.constructor.name].info('addList:' + newList);
     if (
       this.lists.filter(
         list => list.nombreLista.toLowerCase() === newList.toLowerCase()
@@ -208,6 +218,7 @@ export class ListsPage {
    * @memberof ListsPage
    */
   removeLists(removed: string[]) {
+    this.log.logs[this.constructor.name].info('removeLists:' + removed);
     this.lists = this.lists.filter(
       list => removed.indexOf(list.nombreLista) < 0
     );
