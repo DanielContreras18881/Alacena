@@ -54,6 +54,8 @@ export class Alacena {
     });
     //Firebase configuration
     firebase.initializeApp({
+      // TEST: "REVERSED_CLIENT_ID": "com.googleusercontent.apps.354280052179-amrn5f7si36l9lsdinjf8u7q5a5thpri"
+      //apiKey: 'AIzaSyD_NlhDQlkGPnjyDhVrphHkRLnDH30WvqM', //Firebase production?
       apiKey: 'AIzaSyCq_XZBezFcC_iAWa-i12swT0YL9sqvjfM', //Firebase
       //apiKey: "AIzaSyCYbNChWjDtLYXkm_ayPQeb4t4TjWDXWd0",//GoogleDevConsole
       authDomain: 'alacena-58699.firebaseapp.com',
