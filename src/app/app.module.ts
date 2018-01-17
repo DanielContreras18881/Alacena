@@ -18,6 +18,7 @@ import { AutoCompleteModule } from 'ionic2-auto-complete';
 import { AppVersion } from '@ionic-native/app-version';
 import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
+import { File } from '@ionic-native/file';
 
 import { ConfigurationService } from 'ionic-configuration-service';
 import { LoggingService } from 'ionic-logging-service';
@@ -50,6 +51,7 @@ import { ItemsProvider } from '../providers/items-provider';
 import { ListProvider } from '../providers/list-provider';
 import { ListsProvider } from '../providers/lists-provider';
 import { RemindersProvider } from '../providers/reminders-provider';
+import { BackupData } from '../providers/backup-data/backup-data';
 import { LocalStorage } from '../providers/data/localStorage';
 import { DefaultIcons } from '../providers/default-icons/default-icons';
 import { GlobalVars } from '../providers/global-vars/global-vars';
@@ -135,6 +137,7 @@ export function loadConfiguration(
     AppVersion,
     Camera,
     ImagePicker,
+    File,
     GooglePlus,
     Network,
     CloudStorage,
@@ -146,6 +149,7 @@ export function loadConfiguration(
     ListProvider,
     ItemsProvider,
     RemindersProvider,
+    BackupData,
     ItemInfoPage,
     ConfigProvider,
     PhonegapLocalNotification,
