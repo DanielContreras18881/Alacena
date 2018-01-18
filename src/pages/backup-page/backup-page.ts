@@ -16,6 +16,8 @@ import { Log } from '../../providers/log/log';
   templateUrl: 'backup-page.html'
 })
 export class BackupPage {
+  backupList: string[] = [];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -28,7 +30,30 @@ export class BackupPage {
   ionViewDidLoad() {
     this.log.logs[this.constructor.name].info('ionViewDidLoad');
     this.backup.getBackupList().then(data => {
-      this.log.logs[this.constructor.name].warn(data);
+      (<any[]>data).forEach(element => {
+        this.backupList.push(element.name);
+      });
+    });
+  }
+
+  makeBackup() {
+    this.log.logs[this.constructor.name].info('makeBackup');
+    this.backup.makeBackup().then(data => {
+      console.log(data);
+    });
+  }
+
+  retrieveBackup(backup: string) {
+    this.log.logs[this.constructor.name].info('retrieveBackup');
+    this.backup.getBackup(backup).then(data => {
+      console.log(data);
+    });
+  }
+
+  removeBackup(backup: string) {
+    this.log.logs[this.constructor.name].info('removeBackup');
+    this.backup.removeBackup(backup).then(data => {
+      console.log(data);
     });
   }
 }

@@ -1,11 +1,30 @@
 <ion-header>
-	<ion-navbar color="dark">
-		<button ion-button menuToggle>
-			<ion-icon ios="ios-menu" md="md-menu"></ion-icon>
-		</button>
-		<ion-title>Backup</ion-title>
-	</ion-navbar>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle>
+      <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
+    </button>
+    <ion-title>Backup</ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding class="backup">
+  <ion-item>
+    <button ion-button block round outline color="dark" (click)="makeBackup()">Create New Backup</button>
+
+  </ion-item>
+
+
+  <ion-list inset>
+    <ion-item ion-item *ngFor="let backup of backupList; let i = index">
+      <p>
+        <button class="buttonOperation" item-center primary large clear (click)="retrieveBackup(backup)">
+          <ion-icon ios="ios-disc" md="md-disc"></ion-icon>
+        </button>
+        {{backup}}
+        <button class="buttonOperation" item-center primary large clear (click)="removeBackup(backup)">
+          <ion-icon ios="ios-basket" md="md-basket"></ion-icon>
+        </button>
+      </p>
+    </ion-item>
+  </ion-list>
 </ion-content>

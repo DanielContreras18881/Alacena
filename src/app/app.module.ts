@@ -19,6 +19,7 @@ import { AppVersion } from '@ionic-native/app-version';
 import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { File } from '@ionic-native/file';
+import { FileMock } from '@ionic-native-mocks/file';
 
 import { ConfigurationService } from 'ionic-configuration-service';
 import { LoggingService } from 'ionic-logging-service';
@@ -137,7 +138,8 @@ export function loadConfiguration(
     AppVersion,
     Camera,
     ImagePicker,
-    File,
+    //File,
+    { provide: File, useClass: FileMock },
     GooglePlus,
     Network,
     CloudStorage,

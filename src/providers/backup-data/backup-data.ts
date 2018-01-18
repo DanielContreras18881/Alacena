@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import { Log } from '../log/log';
 import { File } from '@ionic-native/file';
 import * as moment from 'moment';
+import { Platform } from 'ionic-angular';
 
 declare var cordova: any;
 /**
@@ -21,7 +22,8 @@ export class BackupData {
     public log: Log,
     private file: File,
     public global: GlobalVars,
-    public reminders: RemindersProvider
+    public reminders: RemindersProvider,
+    private plt: Platform
   ) {
     this.log.setLogger(this.constructor.name);
   }
@@ -29,11 +31,13 @@ export class BackupData {
   getBackupList() {
     this.log.logs[this.constructor.name].info('getBackupList');
     return new Promise(resolve => {
-      this.file
-        .listDir(this.file.dataDirectory + '/', 'backups')
-        .then(files => {
-          resolve(files);
-        });
+      this.plt.ready().then(() => {
+        this.file
+          .listDir(this.file.dataDirectory + '/', 'backups')
+          .then(files => {
+            resolve([{ name: 'uno' }]);
+          });
+      });
     });
   }
 
