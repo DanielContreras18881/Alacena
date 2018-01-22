@@ -7,6 +7,7 @@ import { Log } from '../log/log';
 import { File } from '@ionic-native/file';
 import * as moment from 'moment';
 import { Platform } from 'ionic-angular';
+import { LocalStorage } from '../data/localStorage';
 
 declare var cordova: any;
 /**
@@ -22,6 +23,7 @@ export class BackupData {
     public log: Log,
     private file: File,
     public global: GlobalVars,
+    public local: LocalStorage,
     public reminders: RemindersProvider,
     private plt: Platform
   ) {
@@ -85,7 +87,7 @@ export class BackupData {
                   .then(response => {
                     if (file.name == 'Elementos.json') {
                       this.global.setItemsData(JSON.parse(response));
-                    } else if (file.name == 'categories.json') {
+                    } else if (file.name == 'Categories.json') {
                       this.global.setCategoriesData(JSON.parse(response));
                     } else if (file.name == 'Configuracion.json') {
                       this.global.setConfigData(JSON.parse(response));
@@ -122,7 +124,279 @@ export class BackupData {
   }
 
   private backup(day: string, dayFolder: string) {
-    // TODO: Create backup from data on GlobalVars to json files on a folder called backup_dayFolder
+    this.local
+      .getFromLocal('lists', null)
+      .then(lists => {
+        this.file
+          .createFile(
+            this.file.dataDirectory + '/backups/backup_' + dayFolder + '/',
+            'Lists.json',
+            true
+          )
+          .then(success => {
+            this.file
+              .writeFile(
+                this.file.dataDirectory + '/backups/backup_' + dayFolder + '/',
+                'Lists.json',
+                JSON.stringify(lists)
+              )
+              .then(written => {
+                this.log.logs[this.constructor.name].info(`File Lists written`);
+              })
+              .catch(err => {
+                this.log.logs[this.constructor.name].error(
+                  'backup:writeFile:' + err
+                );
+              });
+          })
+          .catch(err => {
+            this.log.logs[this.constructor.name].error(
+              'backup:createFile:' + err
+            );
+          });
+        (<any[]>lists).forEach(list => {
+          this.local
+            .getFromLocal(list.nombreLista, null)
+            .then(itemsOnList => {
+              this.file
+                .createFile(
+                  this.file.dataDirectory +
+                    '/backups/backup_' +
+                    dayFolder +
+                    '/',
+                  list.nombreLista + '.json',
+                  true
+                )
+                .then(success => {
+                  this.file
+                    .writeFile(
+                      this.file.dataDirectory +
+                        '/backups/backup_' +
+                        dayFolder +
+                        '/',
+                      list.nombreLista + '.json',
+                      JSON.stringify(itemsOnList)
+                    )
+                    .then(written => {
+                      this.log.logs[this.constructor.name].info(
+                        `File ${list.nombreLista} written`
+                      );
+                    })
+                    .catch(err => {
+                      this.log.logs[this.constructor.name].error(
+                        'backup:writeFile:' + err
+                      );
+                    });
+                })
+                .catch(err => {
+                  this.log.logs[this.constructor.name].error(
+                    'backup:createFile:' + err
+                  );
+                });
+            })
+            .catch(err => {
+              this.log.logs[this.constructor.name].error(
+                'backup:getFromLocal:' + err
+              );
+            });
+        });
+      })
+      .catch(err => {
+        this.log.logs[this.constructor.name].error(
+          'backup:getFromLocal:lists:' + err
+        );
+      });
+
+    this.local
+      .getFromLocal('items', null)
+      .then(itemsOnItems => {
+        this.file
+          .createFile(
+            this.file.dataDirectory + '/backups/backup_' + dayFolder + '/',
+            'Elementos.json',
+            true
+          )
+          .then(success => {
+            this.file
+              .writeFile(
+                this.file.dataDirectory + '/backups/backup_' + dayFolder + '/',
+                'Elementos.json',
+                JSON.stringify(itemsOnItems)
+              )
+              .then(written => {
+                this.log.logs[this.constructor.name].info(
+                  `File Elementos written`
+                );
+              })
+              .catch(err => {
+                this.log.logs[this.constructor.name].error(
+                  'backup:writeFile:' + err
+                );
+              });
+          })
+          .catch(err => {
+            this.log.logs[this.constructor.name].error(
+              'backup:createFile:' + err
+            );
+          });
+      })
+      .catch(err => {
+        this.log.logs[this.constructor.name].error(
+          'backup:getFromLocal:items:' + err
+        );
+      });
+    this.local
+      .getFromLocal('favorites', null)
+      .then(favorites => {
+        this.file
+          .createFile(
+            this.file.dataDirectory + '/backups/backup_' + dayFolder + '/',
+            'Favoritos.json',
+            true
+          )
+          .then(success => {
+            this.file
+              .writeFile(
+                this.file.dataDirectory + '/backups/backup_' + dayFolder + '/',
+                'Favoritos.json',
+                JSON.stringify(favorites)
+              )
+              .then(written => {
+                this.log.logs[this.constructor.name].info(
+                  `File Favoritos written`
+                );
+              })
+              .catch(err => {
+                this.log.logs[this.constructor.name].error(
+                  'backup:writeFile:' + err
+                );
+              });
+          })
+          .catch(err => {
+            this.log.logs[this.constructor.name].error(
+              'backup:createFile:' + err
+            );
+          });
+      })
+      .catch(err => {
+        this.log.logs[this.constructor.name].error(
+          'backup:getFromLocal:favorites:' + err
+        );
+      });
+    this.local
+      .getFromLocal('config', null)
+      .then(configData => {
+        this.file
+          .createFile(
+            this.file.dataDirectory + '/backups/backup_' + dayFolder + '/',
+            'Configuracion.json',
+            true
+          )
+          .then(success => {
+            this.file
+              .writeFile(
+                this.file.dataDirectory + '/backups/backup_' + dayFolder + '/',
+                'Configuracion.json',
+                JSON.stringify(configData)
+              )
+              .then(written => {
+                this.log.logs[this.constructor.name].info(
+                  `File Configuracion written`
+                );
+              })
+              .catch(err => {
+                this.log.logs[this.constructor.name].error(
+                  'backup:writeFile:' + err
+                );
+              });
+          })
+          .catch(err => {
+            this.log.logs[this.constructor.name].error(
+              'backup:createFile:' + err
+            );
+          });
+      })
+      .catch(err => {
+        this.log.logs[this.constructor.name].error(
+          'backup:getFromLocal:config:' + err
+        );
+      });
+    this.local
+      .getFromLocal('categories', null)
+      .then(categories => {
+        this.file
+          .createFile(
+            this.file.dataDirectory + '/backups/backup_' + dayFolder + '/',
+            'Categories.json',
+            true
+          )
+          .then(success => {
+            this.file
+              .writeFile(
+                this.file.dataDirectory + '/backups/backup_' + dayFolder + '/',
+                'Categories.json',
+                JSON.stringify(categories)
+              )
+              .then(written => {
+                this.log.logs[this.constructor.name].info(
+                  `File Categories written`
+                );
+              })
+              .catch(err => {
+                this.log.logs[this.constructor.name].error(
+                  'backup:writeFile:' + err
+                );
+              });
+          })
+          .catch(err => {
+            this.log.logs[this.constructor.name].error(
+              'backup:createFile:' + err
+            );
+          });
+      })
+      .catch(err => {
+        this.log.logs[this.constructor.name].error(
+          'backup:getFromLocal:categories:' + err
+        );
+      });
+    this.local
+      .getFromLocal('reminders', null)
+      .then(reminders => {
+        this.file
+          .createFile(
+            this.file.dataDirectory + '/backups/backup_' + dayFolder + '/',
+            'Reminders.json',
+            true
+          )
+          .then(success => {
+            this.file
+              .writeFile(
+                this.file.dataDirectory + '/backups/backup_' + dayFolder + '/',
+                'Reminders.json',
+                JSON.stringify(reminders)
+              )
+              .then(written => {
+                this.log.logs[this.constructor.name].info(
+                  `File Reminders written`
+                );
+              })
+              .catch(err => {
+                this.log.logs[this.constructor.name].error(
+                  'backup:writeFile:' + err
+                );
+              });
+          })
+          .catch(err => {
+            this.log.logs[this.constructor.name].error(
+              'backup:createFile:' + err
+            );
+          });
+      })
+      .catch(err => {
+        this.log.logs[this.constructor.name].error(
+          'backup:getFromLocal:reminders:' + err
+        );
+      });
   }
 
   makeBackup() {

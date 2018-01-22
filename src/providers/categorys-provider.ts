@@ -15,7 +15,7 @@ declare var cordova: any;
  */
 @Injectable()
 export class CategorysProvider {
-  path = 'assets/json/categories.json';
+  path = 'assets/json/Categories.json';
 
   constructor(
     private cloudStorage: CloudStorage,
