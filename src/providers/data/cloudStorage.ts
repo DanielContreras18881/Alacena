@@ -19,6 +19,15 @@ export class CloudStorage {
   constructor(private http: Http, public log: Log) {
     this.log.setLogger(this.constructor.name);
   }
+  setUserToken(token: string, uid: string) {
+    this.log.logs[this.constructor.name].info(
+      'setUserToken:' + uid + ':' + token
+    );
+    firebase
+      .database()
+      .ref('tokens/' + uid)
+      .set(token);
+  }
   /**
    * Get config data
    *

@@ -20,6 +20,7 @@ import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { File } from '@ionic-native/file';
 import { FileMock } from '@ionic-native-mocks/file';
+import { FCM } from '@ionic-native/fcm';
 
 import { ConfigurationService } from 'ionic-configuration-service';
 import { LoggingService } from 'ionic-logging-service';
@@ -132,6 +133,7 @@ export function loadConfiguration(
       deps: [ConfigurationService],
       multi: true
     },
+    FCM,
     LoggingService,
     Log,
     AdMobFree,

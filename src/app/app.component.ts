@@ -4,6 +4,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
 import firebase from 'firebase';
+import { FCM } from '@ionic-native/fcm';
 import { App, MenuController, Nav, Platform } from 'ionic-angular';
 
 import { AboutPage } from '../pages/about-page/about-page';
@@ -37,6 +38,7 @@ export class Alacena {
     public splashScreen: SplashScreen,
     public statusBar: StatusBar,
     private storage: Storage,
+    public fcm: FCM,
     private admobFree: AdMobFree,
     public globalVars: GlobalVars,
     public log: Log
@@ -93,6 +95,20 @@ export class Alacena {
           this.admobFree.banner.show();
         })
         .catch(e => this.log.logs[this.constructor.name].error(e));
+
+      fcm.onNotification().subscribe(data => {
+        if (data.wasTapped) {
+          this.log.logs[this.constructor.name].info('Tapped Notification');
+          //TODO: send to the List relative to the notification
+          //Notification was received on device tray and tapped by the user.
+          //this.navCtrl.setRoot('DetailPage', { profileId: data.profileId });
+        } else {
+          this.log.logs[this.constructor.name].info('Foreground Notification');
+          //TODO: send to the List relative to the notification
+          //Notification was received in foreground. Maybe the user needs to be notified.
+          //this.navCtrl.push('DetailPage', { profileId: data.profileId });
+        }
+      });
     });
     //List of pages for side menu
     this.pages = [

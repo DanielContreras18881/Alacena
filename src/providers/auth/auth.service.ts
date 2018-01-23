@@ -39,7 +39,7 @@ export class AuthService {
       this.zone.run(() => {
         if (user) {
           this.userProfile = user;
-          self.globalVars.setUserProfile(user);
+          self.globalVars.setUserProfile(user, null);
         } else {
           this.userProfile = null;
         }
@@ -65,7 +65,7 @@ export class AuthService {
         case 'google':
           firebase.auth().signOut();
           this.userProfile = null;
-          self.globalVars.setUserProfile(null);
+          self.globalVars.setUserProfile(null, null);
           resolve('OK');
           break;
         case 'facebook':
@@ -74,7 +74,7 @@ export class AuthService {
         case 'phone':
           firebase.auth().signOut();
           this.userProfile = null;
-          self.globalVars.setUserProfile(null);
+          self.globalVars.setUserProfile(null, null);
           resolve('OK');
           break;
       }
@@ -294,7 +294,7 @@ IOS10 o posterior
               )
               .then(success => {
                 this.userProfile = success.user;
-                self.globalVars.setUserProfile(this.userProfile);
+                self.globalVars.setUserProfile(this.userProfile, null);
                 this.log.logs[this.constructor.name].info(
                   'Google Login Success'
                 );
@@ -320,7 +320,7 @@ IOS10 o posterior
           .then(
             result => {
               this.userProfile = result.user;
-              self.globalVars.setUserProfile(this.userProfile);
+              self.globalVars.setUserProfile(this.userProfile, null);
               this.log.logs[this.constructor.name].info('Google Login Success');
               resolve('google');
             },

@@ -1,3 +1,4 @@
+import { FCM } from '@ionic-native/fcm';
 import { ItemsNeededComponent } from '../../components/items-needed-component/items-needed-component';
 import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
 import { LocalNotifications } from '@ionic-native/local-notifications';
@@ -66,6 +67,7 @@ export class DashboardPage {
     public alertCtrl: AlertController,
     private toastCtrl: ToastController,
     public plt: Platform,
+    public fcm: FCM,
     private order: OrderBy,
     private googlePlus: GooglePlus,
     private globalVars: GlobalVars,
@@ -93,9 +95,18 @@ export class DashboardPage {
       this.zone.run(() => {
         if (user) {
           this.userProfile = user;
-          self.globalVars.setUserProfile(user).then(() => {
-            this.getDashboardData();
-          });
+          this.fcm
+            .getToken()
+            .then(token => {
+              this.log.logs[this.constructor.name].info('Getting FCM token');
+              // Your best bet is to here store the token on the user's profile on the
+              // Firebase database, so that when you want to send notifications to this
+              // specific user you can do it from Cloud Functions.
+              self.globalVars.setUserProfile(user, token).then(() => {
+                this.getDashboardData();
+              });
+            })
+            .catch(e => this.log.logs[this.constructor.name].error(e));
         } else {
           this.userProfile = null;
           this.getDashboardData();
@@ -103,6 +114,8 @@ export class DashboardPage {
       });
     });
   }
+
+  getNotificationToken() {}
   /**
    * Get data to show on dashboard
    *

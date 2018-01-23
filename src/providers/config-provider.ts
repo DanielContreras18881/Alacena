@@ -28,6 +28,9 @@ export class ConfigProvider {
   ) {
     this.log.setLogger(this.constructor.name);
   }
+  setUserToken(token: string, userProfile: any) {
+    this.cloudStorage.setUserToken(token, userProfile.uid);
+  }
   /**
    * Save config data
    *

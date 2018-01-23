@@ -42,7 +42,7 @@ export class GlobalVars {
    * @returns {*}
    * @memberof GlobalVars
    */
-  setUserProfile(userProfile: any): any {
+  setUserProfile(userProfile: any, token: any): any {
     this.log.logs[this.constructor.name].info(
       'UserProfile:' + JSON.stringify(userProfile)
     );
@@ -50,6 +50,9 @@ export class GlobalVars {
       this.userProfile = userProfile;
       if (userProfile !== null) {
         this.userConnected = true;
+        if (token !== null) {
+          this.configProvider.setUserToken(token, userProfile);
+        }
         this.categoriesDataProvider
           .getCategoriesData(this.userProfile)
           .then(data => {
