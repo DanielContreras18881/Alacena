@@ -71,6 +71,14 @@ export class Alacena {
       //Initial platform configuration
       this.splashScreen.hide();
       this.statusBar.hide();
+      /*
+        platforms: {
+          ios: {
+            statusbarPadding: true
+          }
+        }
+      */
+      //this.statusBar.overlaysWebView(false);
       //Admob Configuration
       let adMobId = 'ca-app-pub-7863580056712493~5233178966';
       if (platform.is('android')) {
@@ -85,7 +93,9 @@ export class Alacena {
         id: adMobId,
         isTesting: true, //remove for production
         autoShow: true,
-        overlap: false
+        overlap: false,
+        size: 'LARGE_BANNER',
+        bannerAtTop: false
       };
       this.admobFree.banner.config(bannerConfig);
       this.admobFree.banner

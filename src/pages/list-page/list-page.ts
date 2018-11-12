@@ -404,7 +404,7 @@ export class ListPage {
                 text: data.message,
                 at: moment(data.notificationDate).toISOString()
               });
-            } else {
+            } else { 
               const timeOutHandler = setTimeout(
                 ()=>{
                   alert(data.message);
