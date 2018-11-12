@@ -57,7 +57,7 @@ export class ListsProvider {
    */
   setFavoriteListsData(lists: any, userProfile: any): void {
     if (userProfile) {
-      if (!this.plt.is('ios') && !this.plt.is('android')) {
+      if ((this.plt.is('android') || this.plt.is('ios')) && !this.plt.is('mobileweb')) {
         this.cloudStorage.uploadFavoritesListsData(lists, userProfile.uid);
         this.localStorage.setToLocal('favorites', lists);
       } else {
@@ -81,7 +81,7 @@ export class ListsProvider {
    */
   setListsData(lists: any, userProfile: any): void {
     if (userProfile) {
-      if (!this.plt.is('ios') && !this.plt.is('android')) {
+      if ((this.plt.is('android') || this.plt.is('ios')) && !this.plt.is('mobileweb')) {
         this.cloudStorage.uploadListsData(lists, userProfile.uid);
         this.localStorage.setToLocal('lists', lists);
       } else {
@@ -106,7 +106,7 @@ export class ListsProvider {
   getFavoritesListsData(userProfile: any): any {
     return new Promise(resolve => {
       if (userProfile) {
-        if (!this.plt.is('ios') && !this.plt.is('android')) {
+        if ((this.plt.is('android') || this.plt.is('ios')) && !this.plt.is('mobileweb')) {
           this.cloudStorage
             .loadFavoritesListsData(userProfile.uid)
             .then(data => {
@@ -174,7 +174,7 @@ export class ListsProvider {
   getListsData(userProfile: any): any {
     return new Promise(resolve => {
       if (userProfile) {
-        if (!this.plt.is('ios') && !this.plt.is('android')) {
+        if ((this.plt.is('android') || this.plt.is('ios')) && !this.plt.is('mobileweb')) {
           this.cloudStorage.loadListsData(userProfile.uid).then(data => {
             if (data !== undefined && data !== null) {
               this.localStorage.setToLocal('lists', data);

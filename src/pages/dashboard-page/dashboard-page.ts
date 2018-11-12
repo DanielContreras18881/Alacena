@@ -1,7 +1,7 @@
 import { FCM } from '@ionic-native/fcm';
 import { ItemsNeededComponent } from '../../components/items-needed-component/items-needed-component';
 import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
-import { LocalNotifications } from '@ionic-native/local-notifications';
+import { LocalNotifications, ILocalNotification } from '@ionic-native/local-notifications';
 
 import { Reminder } from '../../classes/reminder';
 import { RemindersProvider } from '../../providers/reminders-provider';
@@ -62,6 +62,8 @@ export class DashboardPage {
   userProfile: any = null;
   zone: NgZone;
 
+  native:boolean = false;
+
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController,
@@ -84,6 +86,10 @@ export class DashboardPage {
 
   ionViewDidLoad() {
     this.log.logs[this.constructor.name].info('ionViewDidLoad');
+    if ((this.plt.is('android') || this.plt.is('ios')) && !this.plt.is('mobileweb')) {
+      this.native = true;
+    }
+
     this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
       'recaptcha-container'
     );
@@ -174,7 +180,7 @@ export class DashboardPage {
           if (permission === 'granted') {
             let reminder: Reminder = {
               message: data.message,
-              time: data.notificationDate
+              time: moment(data.notificationDate).toISOString()
             };
             this.remindersData.setReminder(reminder);
             this.remindersList.push(reminder);
@@ -183,11 +189,21 @@ export class DashboardPage {
                 item.message !== oldReminder.message ||
                 item.time !== oldReminder.time
             );
-            this.localNotifications.schedule({
-              id: moment(data.notificationDate).unix(),
-              text: data.message,
-              at: data.notificationDate
-            });
+            if(this.native){
+              this.localNotifications.schedule(<ILocalNotification>{
+                id: moment(data.notificationDate).unix(),
+                text: data.message,
+                at: moment(data.notificationDate).toDate()
+              });
+            } else {
+              const timeOutHandler = setTimeout(
+                ()=>{
+                  alert(data.message);
+                  this.remindersData.removeReminder(data);
+                },
+                moment(data.notificationDate).subtract(moment(new Date().toISOString()).add(1,'hour').valueOf(),'milliseconds').valueOf()
+              );
+            }
           }
         });
       }

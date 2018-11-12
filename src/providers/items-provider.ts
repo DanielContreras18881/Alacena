@@ -39,7 +39,7 @@ export class ItemsProvider {
    */
   setItemsData(items: Item[], userProfile: any): void {
     if (userProfile) {
-      if (!this.plt.is('ios') && !this.plt.is('android')) {
+      if ((this.plt.is('android') || this.plt.is('ios')) && !this.plt.is('mobileweb')) {
         this.cloudStorage.uploadItemsData(items, userProfile.uid);
       } else {
         if (this.network.type === 'NONE') {
@@ -62,7 +62,7 @@ export class ItemsProvider {
   getItemsData(userProfile): any {
     return new Promise(resolve => {
       if (userProfile) {
-        if (!this.plt.is('ios') && !this.plt.is('android')) {
+        if ((this.plt.is('android') || this.plt.is('ios')) && !this.plt.is('mobileweb')) {
           this.cloudStorage.loadItemsData(userProfile.uid).then(data => {
             if (data !== undefined && data !== null) {
               this.localStorage.setToLocal('items', data);

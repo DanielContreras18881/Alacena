@@ -6,7 +6,8 @@ import {
   AlertController,
   ModalController,
   NavParams,
-  ViewController
+  ViewController,
+  Platform
 } from 'ionic-angular';
 
 import { List } from '../../classes/list';
@@ -15,7 +16,7 @@ import { ListItem } from '../../classes/listItem';
 import moment from 'moment';
 
 import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
-import { LocalNotifications } from '@ionic-native/local-notifications';
+import { LocalNotifications, ILocalNotification } from '@ionic-native/local-notifications';
 
 import { RemindersComponent } from '../../components/reminders-component/reminders-component';
 import { OrderBy } from '../../pipes/orderBy';
@@ -50,6 +51,8 @@ export class ListPage {
 
   dataConfig: any = {};
 
+  native:boolean = false;
+
   constructor(
     private navParams: NavParams,
     private view: ViewController,
@@ -57,6 +60,7 @@ export class ListPage {
     public alertCtrl: AlertController,
     private globalVars: GlobalVars,
     private order: OrderBy,
+    public plt: Platform,
     private localNotification: PhonegapLocalNotification,
     private localNotifications: LocalNotifications,
     private reminders: RemindersProvider,
@@ -67,6 +71,9 @@ export class ListPage {
 
   ionViewDidLoad() {
     this.log.logs[this.constructor.name].info('ionViewDidLoad');
+    if ((this.plt.is('android') || this.plt.is('ios')) && !this.plt.is('mobileweb')) {
+      this.native = true;
+    }
     this.searchBar = false;
     this.selectedItem = this.navParams.get('list')
       ? this.navParams.get('list')
@@ -237,10 +244,10 @@ export class ListPage {
     this.log.logs[this.constructor.name].info('saveItem:' + item);
     if (this.expireReminders) {
       if (item.caduca) {
-        this.localNotifications.schedule({
+        this.localNotifications.schedule(<ILocalNotification>{
           id: moment(item.fechaCaducidad)
             .add(-1, 'days')
-            .subtract(1, 'hour')
+            .add(1, 'hour')
             .unix(),
           title: 'CADUCA_MANIANA',
           text:
@@ -251,10 +258,10 @@ export class ListPage {
             'CADUCA_MANIANA',
           at: moment(item.fechaCaducidad)
             .add(-1, 'days')
-            .subtract(1, 'hour')
+            .add(1, 'hour')
             .toDate()
         });
-        this.localNotifications.schedule({
+        this.localNotifications.schedule(<ILocalNotification>{
           id: moment(item.fechaCaducidad)
             .add(-7, 'days')
             .subtract(1, 'hour')
@@ -268,7 +275,7 @@ export class ListPage {
             'CADUCA_7_DIAS',
           at: moment(item.fechaCaducidad)
             .add(-7, 'days')
-            .subtract(1, 'hour')
+            .add(1, 'hour')
             .toDate()
         });
       }
@@ -378,26 +385,34 @@ export class ListPage {
   addNotification() {
     this.log.logs[this.constructor.name].info('addNotification');
     let reminderModal = this.mod.create(RemindersComponent, {
-      time: moment()
-        .toDate()
-        .toISOString()
+      time: moment(new Date()).add(1,'hour').toISOString()
     });
     reminderModal.onDidDismiss(data => {
+      this.log.logs[this.constructor.name].info(moment(data.notificationDate).subtract(moment(new Date().toISOString()).add(1,'hour').valueOf(),'milliseconds').valueOf());
       if (data) {
         this.localNotification.requestPermission().then(permission => {
           if (permission === 'granted') {
             let reminder: Reminder = {
               message: data.message,
-              time: data.notificationDate
+              time: moment(data.notificationDate).toISOString()
             };
             this.reminders.setReminder(reminder);
-
-            this.localNotifications.schedule({
-              id: moment(data.notificationDate).unix(),
-              title: 'REMEMBER',
-              text: data.message,
-              at: data.notificationDate
-            });
+            if(this.native){
+              this.localNotifications.schedule(<ILocalNotification>{
+                id: moment(data.notificationDate).unix(),
+                title: 'REMEMBER',
+                text: data.message,
+                at: moment(data.notificationDate).toISOString()
+              });
+            } else {
+              const timeOutHandler = setTimeout(
+                ()=>{
+                  alert(data.message);
+                  this.reminders.removeReminder(data);
+                },
+                moment(data.notificationDate).subtract(moment(new Date().toISOString()).add(1,'hour').valueOf(),'milliseconds').valueOf()
+              );
+            }
           }
         });
       }

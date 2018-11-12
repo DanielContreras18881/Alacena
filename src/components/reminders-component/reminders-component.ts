@@ -27,7 +27,7 @@ export class RemindersComponent {
   ) {
     this.log.setLogger(this.constructor.name);
     this.log.logs[this.constructor.name].info('constructor');
-    this.data.notificationDate = params.data.time;
+    this.data.notificationDate = moment(params.data.time).toISOString();
     this.data.message = params.data.message;
   }
   /**

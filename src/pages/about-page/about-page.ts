@@ -6,6 +6,7 @@ import { Platform } from 'ionic-angular';
 import { Http } from '@angular/http';
 
 import { Log } from '../../providers/log/log';
+
 /**
  * Page to show data about the author, the app, tutorials and a contact form
  *
@@ -93,7 +94,7 @@ export class AboutPage {
   }
 
   ionViewDidLoad() {
-    if (this.plt.is('android') || this.plt.is('ios')) {
+    if ((this.plt.is('android') || this.plt.is('ios')) && !this.plt.is('mobileweb')) {
       this.log.logs[this.constructor.name].info(
         'On Device:' + this.plt.platforms()
       );

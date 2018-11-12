@@ -40,7 +40,7 @@ export class ListProvider {
    */
   setListData(name: string, data: any[], userProfile: any): void {
     if (userProfile) {
-      if (!this.plt.is('ios') && !this.plt.is('android')) {
+      if ((this.plt.is('android') || this.plt.is('ios')) && !this.plt.is('mobileweb')) {
         this.cloudStorage.uploadListData(name, data, userProfile.uid);
       } else {
         if (this.network.type === 'NONE') {
@@ -62,7 +62,7 @@ export class ListProvider {
    */
   removeListData(name: string, userProfile: any): void {
     if (userProfile) {
-      if (!this.plt.is('ios') && !this.plt.is('android')) {
+      if ((this.plt.is('android') || this.plt.is('ios')) && !this.plt.is('mobileweb')) {
         this.cloudStorage.removeListData(name, userProfile.uid);
         this.localStorage.removeFromLocal(name);
       } else {
@@ -88,7 +88,7 @@ export class ListProvider {
   getListItemsData(name: string, userProfile: any) {
     return new Promise(resolve => {
       if (userProfile) {
-        if (!this.plt.is('ios') && !this.plt.is('android')) {
+        if ((this.plt.is('android') || this.plt.is('ios')) && !this.plt.is('mobileweb')) {
           this.cloudStorage.loadListData(name, userProfile.uid).then(data => {
             if (data !== undefined && data !== null) {
               this.localStorage.setToLocal(name, data);

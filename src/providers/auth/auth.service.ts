@@ -279,7 +279,7 @@ IOS10 o posterior
       self = this;
       var provider = new firebase.auth.GoogleAuthProvider();
       var res = null;
-      if (this.plt.is('ios') || this.plt.is('android')) {
+      if ((this.plt.is('android') || this.plt.is('ios')) && !this.plt.is('mobileweb')) {
         this.googlePlus
           .login({
             webClientId:

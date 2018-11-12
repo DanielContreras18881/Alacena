@@ -42,7 +42,7 @@ export class ConfigProvider {
     let arrData = [];
     arrData.push(data);
     if (userProfile) {
-      if (!this.plt.is('ios') && !this.plt.is('android')) {
+      if ((this.plt.is('android') || this.plt.is('ios')) && !this.plt.is('mobileweb')) {
         this.cloudStorage.uploadConfigData(arrData, userProfile.uid);
       } else {
         if (this.network.type === 'NONE') {
@@ -65,7 +65,7 @@ export class ConfigProvider {
   getConfigData(userProfile: any): any {
     return new Promise(resolve => {
       if (userProfile) {
-        if (!this.plt.is('ios') && !this.plt.is('android')) {
+        if ((this.plt.is('android') || this.plt.is('ios')) && !this.plt.is('mobileweb')) {
           this.cloudStorage.loadConfigData(userProfile.uid).then(data => {
             if (data !== undefined && data !== null) {
               this.localStorage.setToLocal('config', data);

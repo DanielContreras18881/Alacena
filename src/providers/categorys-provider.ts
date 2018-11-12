@@ -32,7 +32,7 @@ export class CategorysProvider {
    */
   setCategoriesData(data: Category[], userProfile: any) {
     if (userProfile) {
-      if (!this.plt.is('ios') && !this.plt.is('android')) {
+      if ((this.plt.is('android') || this.plt.is('ios')) && !this.plt.is('mobileweb')) {
         this.cloudStorage.uploadCategoriesData(data, userProfile.uid);
       } else {
         if (this.network.type === 'NONE') {
@@ -55,7 +55,7 @@ export class CategorysProvider {
   getCategoriesData(userProfile: any): any {
     return new Promise(resolve => {
       if (userProfile) {
-        if (!this.plt.is('ios') && !this.plt.is('android')) {
+        if ((this.plt.is('android') || this.plt.is('ios')) && !this.plt.is('mobileweb')) {
           this.cloudStorage.loadCategoriesData(userProfile.uid).then(data => {
             if (data !== undefined && data !== null) {
               this.localStorage.setToLocal('categories', data);
