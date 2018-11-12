@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AdMobFree } from '@ionic-native/admob-free';
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -21,6 +21,8 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { File } from '@ionic-native/file';
 import { FileMock } from '@ionic-native-mocks/file';
 import { FCM } from '@ionic-native/fcm';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { ConfigurationService } from 'ionic-configuration-service';
 import { LoggingService } from 'ionic-logging-service';
@@ -67,6 +69,10 @@ export function loadConfiguration(
   return () => configurationService.load('assets/settings.json');
 }
 
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
 @NgModule({
   declarations: [
     Alacena,
@@ -101,7 +107,14 @@ export function loadConfiguration(
       loadingLEave: 'slide-out',
       pageTransition: 'slide'
     }),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

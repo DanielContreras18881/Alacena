@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
+import { TranslateModule } from '@ngx-translate/core';
 import { BackupPage } from './backup-page';
 
 @NgModule({
@@ -8,6 +9,7 @@ import { BackupPage } from './backup-page';
   ],
   imports: [
     IonicPageModule.forChild(BackupPage),
+    TranslateModule.forChild()
   ],
   exports: [
     BackupPage

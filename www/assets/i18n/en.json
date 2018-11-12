@@ -1,0 +1,20 @@
+{
+  "Inicio": "Dashboard",
+  "ConectarCon":"Login with...",
+  "Recordatorios":"Reminders",
+  "CosasComprar":"You need to buy...",
+  "VerListaCompra":"Show the shopping list",
+  "VerElementosComprar":"Show the element list to buy",
+  "ElementosCaducables":"Elements near to expire",
+  "VerElementosCaducables":"Show the element list near to expire",
+  "Desconectar":"Logout",
+  "LISTA_COMPRA":"Shopping list",
+  "InsertarTelefono":"Insert phone number",
+  "IncluirCodigoRegion":"Add '+' and the country code before",
+  "Cancelar":"Cancel",
+  "ValidValue":"Please, insert a valid value!",
+  "Login":"Login",
+  "CodigoConfirmacion":"Confirmation Code",
+  "IntroducirCodigoConfirmacion":"Insert confirmation code",
+  "Enviar":"Send"
+}

@@ -17,6 +17,7 @@ import { ListPage } from '../pages/list-page/list-page';
 import { ListsPage } from '../pages/lists-page/lists-page';
 import { GlobalVars } from '../providers/global-vars/global-vars';
 import { Log } from '../providers/log/log';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var cordova: any;
 
@@ -41,9 +42,13 @@ export class Alacena {
     public fcm: FCM,
     private admobFree: AdMobFree,
     public globalVars: GlobalVars,
-    public log: Log
+    public log: Log,
+    private translateService: TranslateService
   ) {
     this.log.setLogger(this.constructor.name);
+
+    this.translateService.setDefaultLang('es');
+    this.translateService.use('es');
 
     this.globalVars.getConfigData().then(data => {
       let version: boolean = (<any>data).version;

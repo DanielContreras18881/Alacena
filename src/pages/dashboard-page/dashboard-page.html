@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
     </button>
-    <ion-title>Inicio</ion-title>
+    <ion-title>{{ 'Inicio' | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -18,7 +18,7 @@
         <ion-grid>
           <ion-row>
             <ion-col col-4>
-              <h4 class="userAccountLabel">Login with</h4>
+              <h4 class="userAccountLabel">{{ 'ConectarCon' | translate }}</h4>
             </ion-col>
             <ion-col col-8>
               <ion-row>
@@ -58,7 +58,7 @@
               <ion-icon class="reminderIcon" ios="ios-notifications" md="md-notifications"></ion-icon>
             </button>
           </ion-avatar>
-          <h5 class="reminderLabel">RECORDATORIOS</h5>
+          <h5 class="reminderLabel">{{ 'Recordatorios' | translate }}</h5>
         </ion-item>
         <ion-list inset>
           <ion-item ion-item (click)="editReminder(reminder)" *ngFor="let reminder of remindersList; let i = index">
@@ -79,19 +79,19 @@
               <ion-icon class="neededsIcon" large item-right ios="ios-cart" md="md-cart"></ion-icon>
             </button>
           </ion-avatar>
-          <h5 class="neededsLabel">ELEMENTOS NECESARIOS DE COMPRAR</h5>
+          <h5 class="neededsLabel">{{ 'CosasComprar' | translate }}</h5>
         </ion-item>
         <ion-list inset>
           <ion-item ion-item (click)="openInternalPage(shoppingListPage)">
             <p class="item-info">
               <ion-icon class="item-icon" ios="ios-cart" md="md-cart"></ion-icon>
-              Ver la lista de la compra
+              {{ 'VerListaCompora' | translate }}
             </p>
           </ion-item>
           <ion-item ion-item (click)="showItemsToShop()">
             <p class="item-info">
               <ion-icon class="item-icon" ios="ios-basket" md="md-basket"></ion-icon>
-              Ver lista de elementos necesarios de comprar
+              {{ 'VerElementosComprar' | translate }}
             </p>
           </ion-item>
 
@@ -106,13 +106,13 @@
               <ion-icon class="expiresIcon" large item-right ios="ios-warning" md="md-warning"></ion-icon>
             </button>
           </ion-avatar>
-          <h5 class="expiresLabel">ELEMENTOS CERCANOS A CADUCAR</h5>
+          <h5 class="expiresLabel">{{ 'ElementosCaducables' | translate }}</h5>
         </ion-item>
         <ion-list inset>
           <ion-item ion-item (click)="showExpireItems()">
             <p class="item-info">
               <ion-icon class="item-icon" ios="ios-eye" md="md-eye"></ion-icon>
-              Ver lista de elementos a punto de caducar
+              {{ 'VerElementosCaducables' | translate }}
             </p>
           </ion-item>
         </ion-list>
@@ -127,7 +127,7 @@
             </button>
           </ion-avatar>
           <ion-item>
-            <h3 class="userAccountLabel">DESCONECTAR DE LA NUBE</h3>
+            <h3 class="userAccountLabel">{{ 'Desconectar' | translate}}</h3>
           </ion-item>
         </ion-item>
       </ion-card-header>

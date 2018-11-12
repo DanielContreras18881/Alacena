@@ -2,6 +2,7 @@ import { FCM } from '@ionic-native/fcm';
 import { ItemsNeededComponent } from '../../components/items-needed-component/items-needed-component';
 import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
 import { LocalNotifications, ILocalNotification } from '@ionic-native/local-notifications';
+import { TranslateService } from '@ngx-translate/core';
 
 import { Reminder } from '../../classes/reminder';
 import { RemindersProvider } from '../../providers/reminders-provider';
@@ -78,7 +79,8 @@ export class DashboardPage {
     private localNotification: PhonegapLocalNotification,
     private localNotifications: LocalNotifications,
     public mod: ModalController,
-    public log: Log
+    public log: Log,
+    public translate: TranslateService
   ) {
     this.log.setLogger(this.constructor.name);
   }
@@ -218,83 +220,98 @@ export class DashboardPage {
    */
   phoneLogin() {
     this.log.logs[this.constructor.name].info('phoneLogin');
-    this.alertCtrl
-      .create({
-        title: 'Insert Phone Number',
-        subTitle: "Include '+' and country code before it",
-        inputs: [
-          {
-            name: 'phoneNumber',
-            placeholder: '+ xx xxx xxx xxx'
-          }
-        ],
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel'
-          },
-          {
-            text: 'Login',
-            handler: data => {
-              if (data.phoneNumber.trim() == '' || data.phoneNumber == null) {
-                const toast = this.toastCtrl.create({
-                  message: 'Please enter a valid value!',
-                  duration: 1500,
-                  position: 'bottom'
-                });
-                toast.present();
-                return;
-              }
-              this.authService
-                .phoneLogin(data.phoneNumber.trim())
-                .then(result => {
-                  let prompt = this.alertCtrl.create({
-                    title: 'Enter the Confirmation code',
-                    inputs: [
-                      {
-                        name: 'confirmationCode',
-                        placeholder: 'Confirmation Code'
+    this.translate.get(
+      [
+        'InsertarTelefono',
+        'IncluirCodigoRegion',
+        'Cancelar',
+        'ValidValue',
+        'Login',
+        'CodigoConfirmacion',
+        'IntroducirCodigoConfirmacion',
+        'Enviar'
+      ])
+        .subscribe(
+          values => {
+            this.alertCtrl
+              .create({
+                title: values['InsertaTelefono'],
+                subTitle: values['IncluirCodigoRegion'],
+                inputs: [
+                  {
+                    name: 'phoneNumber',
+                    placeholder: '+ xx xxx xxx xxx'
+                  }
+                ],
+                buttons: [
+                  {
+                    text: values['Cancelar'],
+                    role: 'cancel'
+                  },
+                  {
+                    text: values['Login'],
+                    handler: data => {
+                      if (data.phoneNumber.trim() == '' || data.phoneNumber == null) {
+                        const toast = this.toastCtrl.create({
+                          message: values['ValidValue'],
+                          duration: 1500,
+                          position: 'bottom'
+                        });
+                        toast.present();
+                        return;
                       }
-                    ],
-                    buttons: [
-                      {
-                        text: 'Cancel',
-                        handler: data => {
-                          this.log.logs[this.constructor.name].error(
-                            'Cancel clicked'
-                          );
-                        }
-                      },
-                      {
-                        text: 'Send',
-                        handler: data => {
-                          (<any>result)
-                            .confirm(data.confirmationCode)
-                            .then(function(result) {
-                              // User signed in successfully.
-                              this.log.logs[this.constructor.name].info(
-                                'Send:' + result.user
-                              );
-                              // ...
-                            })
-                            .catch(function(error) {
-                              this.log.logs[this.constructor.name].error(
-                                'SendError:' + error
-                              );
-                              // User couldn't sign in (bad verification code?)
-                              // ...
-                            });
-                        }
-                      }
-                    ]
-                  });
-                  prompt.present();
-                });
-            }
+                      this.authService
+                        .phoneLogin(data.phoneNumber.trim())
+                        .then(result => {
+                          let prompt = this.alertCtrl.create({
+                            title: values['IntroducirCodigoConfirmacion'],
+                            inputs: [
+                              {
+                                name: 'confirmationCode',
+                                placeholder: values['CodigoConfirmacion']
+                              }
+                            ],
+                            buttons: [
+                              {
+                                text: values['Cancelar'],
+                                handler: data => {
+                                  this.log.logs[this.constructor.name].error(
+                                    'Cancel clicked'
+                                  );
+                                }
+                              },
+                              {
+                                text: values['Enviar'],
+                                handler: data => {
+                                  (<any>result)
+                                    .confirm(data.confirmationCode)
+                                    .then(function(result) {
+                                      // User signed in successfully.
+                                      this.log.logs[this.constructor.name].info(
+                                        'Send:' + result.user
+                                      );
+                                      // ...
+                                    })
+                                    .catch(function(error) {
+                                      this.log.logs[this.constructor.name].error(
+                                        'SendError:' + error
+                                      );
+                                      // User couldn't sign in (bad verification code?)
+                                      // ...
+                                    });
+                                }
+                              }
+                            ]
+                          });
+                          prompt.present();
+                        });
+                    }
+                  }
+                ]
+              })
+              .present();
           }
-        ]
-      })
-      .present();
+      );
   }
   /**
    * Login by facebook

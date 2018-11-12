@@ -1,0 +1,20 @@
+{
+  "Inicio": "Inicio",
+  "ConectarCon":"Conectar con...",
+  "Recordatorios":"Recordatorios",
+  "CosasComprar":"Tienes que comprar...",
+  "VerListaCompra":"Ver la lista de la compra",
+  "VerElementosComprar":"Ver lista de elementos necesarios de comprar",
+  "ElementosCaducables":"Elementos cercanos a caducar",
+  "VerElementosCaducables":"Ver lista de elementos a punto de caducar",
+  "Desconectar":"Desconectar",
+  "LISTA_COMPRA":"Lista de la compra",
+  "InsertarTelefono":"Insertar Número de teléfono",
+  "IncluirCodigoRegion":"Incluir '+' y el código de pais primero",
+  "Cancelar":"Cancelar",
+  "ValidValue":"Por favor, introduce un valor válido!",
+  "Login":"Conectar",
+  "CodigoConfirmacion":"Código de confirmación",
+  "IntroducirCodigoConfirmacion":"Introduce el código de confirmación",
+  "Enviar":"Enviar"
+}

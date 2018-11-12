@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { AppRate } from "ionic-native";
+import { AppRate } from "@ionic-native/app-rate";
 import { Platform } from "ionic-angular";
 
 @Injectable()
