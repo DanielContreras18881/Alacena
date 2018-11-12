@@ -59,6 +59,7 @@ import { DefaultIcons } from '../providers/default-icons/default-icons';
 import { GlobalVars } from '../providers/global-vars/global-vars';
 import { Log } from '../providers/log/log';
 import { Alacena } from './app.component';
+import { RateServiceProvider } from '../providers/rate-service/rate-service';
 
 export function loadConfiguration(
   configurationService: ConfigurationService
@@ -161,7 +162,8 @@ export function loadConfiguration(
     SplashScreen,
     StatusBar,
     GlobalVars,
-    AuthService
+    AuthService,
+    RateServiceProvider
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
