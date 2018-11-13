@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { TranslateService } from '@ngx-translate/core';
+
 import { ViewController, NavController, NavParams } from 'ionic-angular';
 
 /**
@@ -17,7 +19,8 @@ export class ListIconsPage {
   constructor(
     public nav: NavController,
     private view: ViewController,
-    public params: NavParams
+    public params: NavParams,
+    public translate: TranslateService
   ) {}
 
   ngOnInit() {

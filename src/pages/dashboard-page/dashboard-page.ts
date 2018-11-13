@@ -172,9 +172,10 @@ export class DashboardPage {
    *
    * @memberof DashboardPage
    */
-  editReminder(data: Reminder) {
+  editReminder(data: any) {
     this.log.logs[this.constructor.name].info('editReminder');
     let oldReminder = JSON.parse(JSON.stringify(data));
+    data.editing = true;
     let reminderModal = this.mod.create(RemindersComponent, data);
     reminderModal.onDidDismiss(data => {
       if (data) {
@@ -220,98 +221,84 @@ export class DashboardPage {
    */
   phoneLogin() {
     this.log.logs[this.constructor.name].info('phoneLogin');
-    this.translate.get(
-      [
-        'InsertarTelefono',
-        'IncluirCodigoRegion',
-        'Cancelar',
-        'ValidValue',
-        'Login',
-        'CodigoConfirmacion',
-        'IntroducirCodigoConfirmacion',
-        'Enviar'
-      ])
-        .subscribe(
-          values => {
-            this.alertCtrl
-              .create({
-                title: values['InsertaTelefono'],
-                subTitle: values['IncluirCodigoRegion'],
-                inputs: [
-                  {
-                    name: 'phoneNumber',
-                    placeholder: '+ xx xxx xxx xxx'
-                  }
-                ],
-                buttons: [
-                  {
-                    text: values['Cancelar'],
-                    role: 'cancel'
-                  },
-                  {
-                    text: values['Login'],
-                    handler: data => {
-                      if (data.phoneNumber.trim() == '' || data.phoneNumber == null) {
-                        const toast = this.toastCtrl.create({
-                          message: values['ValidValue'],
-                          duration: 1500,
-                          position: 'bottom'
-                        });
-                        toast.present();
-                        return;
-                      }
-                      this.authService
-                        .phoneLogin(data.phoneNumber.trim())
-                        .then(result => {
-                          let prompt = this.alertCtrl.create({
-                            title: values['IntroducirCodigoConfirmacion'],
-                            inputs: [
-                              {
-                                name: 'confirmationCode',
-                                placeholder: values['CodigoConfirmacion']
-                              }
-                            ],
-                            buttons: [
-                              {
-                                text: values['Cancelar'],
-                                handler: data => {
-                                  this.log.logs[this.constructor.name].error(
-                                    'Cancel clicked'
-                                  );
-                                }
-                              },
-                              {
-                                text: values['Enviar'],
-                                handler: data => {
-                                  (<any>result)
-                                    .confirm(data.confirmationCode)
-                                    .then(function(result) {
-                                      // User signed in successfully.
-                                      this.log.logs[this.constructor.name].info(
-                                        'Send:' + result.user
-                                      );
-                                      // ...
-                                    })
-                                    .catch(function(error) {
-                                      this.log.logs[this.constructor.name].error(
-                                        'SendError:' + error
-                                      );
-                                      // User couldn't sign in (bad verification code?)
-                                      // ...
-                                    });
-                                }
-                              }
-                            ]
-                          });
-                          prompt.present();
-                        });
-                    }
-                  }
-                ]
-              })
-              .present();
+
+    this.alertCtrl
+      .create({
+        title: this.translate.instant('InsertaTelefono'),
+        subTitle: this.translate.instant('IncluirCodigoRegion'),
+        inputs: [
+          {
+            name: 'phoneNumber',
+            placeholder: '+ xx xxx xxx xxx'
           }
-      );
+        ],
+        buttons: [
+          {
+            text: this.translate.instant('Cancelar'),
+            role: 'cancel'
+          },
+          {
+            text: this.translate.instant('Login'),
+            handler: data => {
+              if (data.phoneNumber.trim() == '' || data.phoneNumber == null) {
+                const toast = this.toastCtrl.create({
+                  message: this.translate.instant('ValorValido'),
+                  duration: 1500,
+                  position: 'bottom'
+                });
+                toast.present();
+                return;
+              }
+              this.authService
+                .phoneLogin(data.phoneNumber.trim())
+                .then(result => {
+                  let prompt = this.alertCtrl.create({
+                    title: this.translate.instant('IntroducirCodigoConfirmacion'),
+                    inputs: [
+                      {
+                        name: 'confirmationCode',
+                        placeholder: this.translate.instant('CodigoConfirmacion')
+                      }
+                    ],
+                    buttons: [
+                      {
+                        text: this.translate.instant('Cancelar'),
+                        handler: data => {
+                          this.log.logs[this.constructor.name].error(
+                            'Cancel clicked'
+                          );
+                        }
+                      },
+                      {
+                        text: this.translate.instant('Enviar'),
+                        handler: data => {
+                          (<any>result)
+                            .confirm(data.confirmationCode)
+                            .then(function(result) {
+                              // User signed in successfully.
+                              this.log.logs[this.constructor.name].info(
+                                'Send:' + result.user
+                              );
+                              // ...
+                            })
+                            .catch(function(error) {
+                              this.log.logs[this.constructor.name].error(
+                                'SendError:' + error
+                              );
+                              // User couldn't sign in (bad verification code?)
+                              // ...
+                            });
+                        }
+                      }
+                    ]
+                  });
+                  prompt.present();
+                });
+            }
+          }
+        ]
+      })
+      .present();
   }
   /**
    * Login by facebook

@@ -6,6 +6,8 @@ import {
   ToastController
 } from 'ionic-angular';
 
+import { TranslateService } from '@ngx-translate/core';
+
 import { OrderBy } from '../../pipes/orderBy';
 import { CategoriesService } from '../../providers/categories/categoriesService';
 import { GlobalVars } from '../../providers/global-vars/global-vars';
@@ -46,7 +48,8 @@ export class CategorysPage {
     private globalVars: GlobalVars,
     private order: OrderBy,
     private toastCtrl: ToastController,
-    public log: Log
+    public log: Log,
+    public translate: TranslateService
   ) {
     this.log.setLogger(this.constructor.name);
   }
@@ -151,30 +154,30 @@ export class CategorysPage {
    */
   reorder(event) {
     let reorder = this.alertCtrl.create();
-    reorder.setTitle('Sort by');
+    reorder.setTitle(this.translate.instant('Ordenar'));
 
     reorder.addInput({
       type: 'radio',
-      label: 'NOMBRE',
+      label: this.translate.instant('Nombre'),
       value: '1',
       checked: this.orderSelected === 1
     });
     reorder.addInput({
       type: 'radio',
-      label: 'MEASUREMENT',
+      label: this.translate.instant('Medida'),
       value: '2',
       checked: this.orderSelected === 2
     });
     reorder.addInput({
       type: 'radio',
-      label: 'PASO_MEDIDA',
+      label: this.translate.instant('PasoMedida'),
       value: '3',
       checked: this.orderSelected === 3
     });
 
-    reorder.addButton('Cancel');
+    reorder.addButton(this.translate.instant('Cancelar'));
     reorder.addButton({
-      text: 'OK',
+      text: this.translate.instant('OK'),
       handler: data => {
         this.sortItems(Number.parseInt(data));
       }
@@ -191,15 +194,15 @@ export class CategorysPage {
   deleteCategory(event, category: Category) {
     this.log.logs[this.constructor.name].info('deleteCategory:' + category);
     let confirm = this.alertCtrl.create({
-      title: 'Removing ' + category.categoryName,
-      message: 'Do you like to remove ' + category.categoryName + '?',
+      title: this.translate.instant('Borrando',{value:category.categoryName}),
+      message: this.translate.instant('PreguntaBorrarElemento',{value:category.categoryName}),
       buttons: [
         {
-          text: 'No',
+          text: this.translate.instant('No'),
           handler: () => {}
         },
         {
-          text: 'Yes',
+          text: this.translate.instant('Si'),
           handler: () => {
             this.categories.splice(this.categories.indexOf(category), 1);
             this.globalVars.setCategoriesData(this.categories);
@@ -233,13 +236,14 @@ export class CategorysPage {
   addCategory(event) {
     this.log.logs[this.constructor.name].info('addCategory:' + event);
     let newCategory = {
-      categoryName: 'NEW_CATEGORY',
+      categoryName: this.translate.instant('NuevaCategoria'),
       icon: 'images/icons/default.png',
       measurement: this.measurement,
       unitStep: this.unitStep
     };
     let categoryModal = this.mod.create(CategoryInfoPage, {
       newCategory: newCategory,
+      editing:false,
       icons: this.icons
     });
     categoryModal.onDidDismiss(item => {
@@ -254,7 +258,7 @@ export class CategorysPage {
           this.globalVars.setCategoriesData(this.categories);
         } else {
           const toast = this.toastCtrl.create({
-            message: 'This category already exists!',
+            message: this.translate.instant('CategoriaExiste'),
             duration: 1000,
             position: 'bottom'
           });
@@ -275,22 +279,22 @@ export class CategorysPage {
     this.log.logs[this.constructor.name].info('editCategory:' + category);
     let oldCategory = category.categoryName;
     let edit = this.alertCtrl.create({
-      title: 'Edit Category',
+      title: this.translate.instant('Edit Category'),
       inputs: [
         {
           name: 'nombreCategory',
           value: oldCategory,
           type: 'text',
-          placeholder: 'Name'
+          placeholder: this.translate.instant('Nombre')
         }
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: this.translate.instant('Cancelar'),
           role: 'cancel'
         },
         {
-          text: 'Confirm',
+          text: this.translate.instant('Confirmar'),
           handler: data => {
             category.categoryName = data.nombreCategory;
             this.globalVars.setCategoriesData(this.categories);

@@ -15,6 +15,7 @@ import { Log } from '../../providers/log/log';
   templateUrl: 'reminders-component.html'
 })
 export class RemindersComponent {
+  editing: boolean;
   minDate: string = moment()
     .toDate()
     .toISOString();

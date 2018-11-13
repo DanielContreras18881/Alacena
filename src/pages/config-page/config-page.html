@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
     </button>
-    <ion-title>Configuration</ion-title>
+    <ion-title>{{ 'Configuracion' | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -12,46 +12,46 @@
   <ion-list *ngIf="configData">
     <ion-card>
       <ion-card-header>
-        CONFIGURACION_LISTAS
+        {{ 'ConfiguracionListas' | translate }}
       </ion-card-header>
       <ion-card-content>
         <ion-item>
-          <ion-label stacked>CANTIDAD_MINIMA_DEFECTO</ion-label>
+          <ion-label stacked>{{ 'CantidadMinimaDefecto' | translate }}</ion-label>
           <ion-input text-right [(ngModel)]="configData.cantidadMinimaDefecto" min="1" type="number" (ngModelChange)='onChange()'></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label stacked>BORRAR_AL_LLEGAR_0</ion-label>
+          <ion-label stacked>{{ 'BorrarAlLlegarA0' | translate }}</ion-label>
           <ion-toggle [(ngModel)]="configData.deleteAt0" checked="{{configData.deleteAt0}}" color="dark" (ngModelChange)='onChange()'></ion-toggle>
         </ion-item>
         <ion-item>
-          <ion-label stacked>PREGUNTA_INCLUIR_LISTA_COMPRA</ion-label>
+          <ion-label stacked>{{ 'PreguntaIncluirListaCompra' | translate }}</ion-label>
           <ion-toggle [(ngModel)]="configData.askAddListaCompra" checked="{{configData.askAddListaCompra}}" color="dark" (ngModelChange)='onChange()'></ion-toggle>
         </ion-item>
         <ion-item>
-          <ion-label stacked>AVISOS_FECHA_CADUCIDAD</ion-label>
+          <ion-label stacked>{{ 'AvisosFechaCaducidad' | translate }}</ion-label>
           <ion-toggle [(ngModel)]="configData.expireReminders" checked="{{configData.expireReminders}}" color="dark" (ngModelChange)='onChange()'></ion-toggle>
         </ion-item>
         <ion-item>
-          <ion-label stacked>DIESTRO</ion-label>
+          <ion-label stacked>{{ 'Diestro' | translate }}</ion-label>
           <ion-toggle [(ngModel)]="configData.rightHand" checked="{{configData.rightHand}}" color="dark" (ngModelChange)='onChange()'></ion-toggle>
         </ion-item>
       </ion-card-content>
     </ion-card>
     <ion-card>
       <ion-card-header>
-        CONFIGURACION_CATEGORIAS
+        {{ 'ConfiguracionCategorias' | translate }}
       </ion-card-header>
       <ion-card-content>
         <ion-item>
-          <ion-label stacked>CATEGORIA_DEFECTO</ion-label>
+          <ion-label stacked>{{ 'CategoriaDefecto' | translate }}</ion-label>
           <ion-select text-right [(ngModel)]="categorySelected" (ngModelChange)='onChange()'>
             <ion-option *ngFor="let category of categories" value="{{category.categoryName}}">
-              {{category.categoryName}}
+              {{category.categoryName | translate}}
             </ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label stacked>PASO_MEDIDA_DEFECTO</ion-label>
+          <ion-label stacked>{{ 'PasoMedidaDefecto' | translate }}</ion-label>
           <ion-select text-right [(ngModel)]="configData.stepDefault" (ngModelChange)='onChange()'>
             <ion-option *ngFor="let paso of pasos" value="{{paso}}">
               {{paso}}
@@ -59,10 +59,10 @@
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label stacked>UNIDAD_DEFECTO</ion-label>
+          <ion-label stacked>{{ 'UnidadDefecto' | translate }}</ion-label>
           <ion-select text-right [(ngModel)]="configData.unitDefault" (ngModelChange)='onChange()'>
             <ion-option *ngFor="let unit of units" value="{{unit}}">
-              {{unit}}
+              {{unit | titlecase | translate}}
             </ion-option>
           </ion-select>
         </ion-item>
@@ -70,11 +70,11 @@
     </ion-card>
     <ion-card>
       <ion-card-header>
-        CONFIGURACION_APP
+        {{ 'ConfiguracionApp' | translate }}
       </ion-card-header>
       <ion-card-content>
         <ion-item>
-          <ion-label stacked>IDIOMA</ion-label>
+          <ion-label stacked>{{ 'Idioma' | translate }}</ion-label>
           <ion-select text-right [(ngModel)]="configData.idiomaDefault" (ngModelChange)='onChange()'>
             <ion-option *ngFor="let idioma of idiomas" value="{{idioma.id_iso}}">{{idioma.idiomaSeleccionado}}</ion-option>
           </ion-select>

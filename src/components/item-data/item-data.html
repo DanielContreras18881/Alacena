@@ -135,10 +135,10 @@
         <ion-item>
           <!--<ion-label stacked>MEASUREMENT</ion-label>-->
           <ion-select class="measurement" id="measurement" [(ngModel)]="item.category.measurement" (ngModelChange)="onChange($event)">
-            <ion-option>UNIDADES</ion-option>
-            <ion-option>LITROS</ion-option>
-            <ion-option>GRAMOS</ion-option>
-            <ion-option>KG</ion-option>
+							<ion-option value="UNIDADES">{{ 'Unidades' | translate }}</ion-option>
+							<ion-option value="GRAMOS">{{ 'Gramos' | translate }}</ion-option>
+							<ion-option value="KILOS">{{ 'Kilos' | translate }}</ion-option>
+							<ion-option value="LITROS">{{ 'Litros' | translate }}</ion-option>
           </ion-select>
         </ion-item>
       </ion-col>
@@ -146,7 +146,7 @@
   </ion-card-header>
   <ion-card-content *ngIf="creating">
     <ion-row>
-      <ion-label class="labelExpire">CADUCA</ion-label>
+      <ion-label class="labelExpire">{{ 'Caduca' | translate }}</ion-label>
       <ion-toggle id="expire" checked="item.caduca" [(ngModel)]="item.caduca" (ngModelChange)="newExpire($event)"></ion-toggle>
     </ion-row>
     <ion-row [hidden]="!item.caduca">
@@ -160,7 +160,7 @@
     <ion-row>
       <ion-col col-5>
         <p class="labelMinAmout">
-          CANTIDAD MINIMA:
+          {{ 'CantidadMinima' | translate }}
         </p>
       </ion-col>
       <ion-col col-7>
@@ -180,7 +180,7 @@
     <ion-row>
       <ion-col col-5>
         <p class="labelAmount">
-          CANTIDAD:
+          {{ 'Cantidad' | translate }}
         </p>
       </ion-col>
       <ion-col col-7>

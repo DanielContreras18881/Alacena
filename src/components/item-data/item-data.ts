@@ -12,6 +12,8 @@ import {
 import { OnInit } from '@angular/core/public_api';
 import { AutoCompleteComponent } from 'ionic2-auto-complete';
 
+import { TranslateService } from '@ngx-translate/core';
+
 import { CategoriesService } from '../../providers/categories/categoriesService';
 import { ItemsOnList } from './items-on-list';
 
@@ -44,13 +46,14 @@ export class Item implements OnInit {
   right: boolean = true;
 
   defaultIcon: string = 'images/icons/default.png';
-  nombreantiguo: string = 'NEW ELEMENT';
+  nombreantiguo: string = this.translate.instant('NuevoElemento');
 
   constructor(
     private catService: CategoriesService,
     public alertCtrl: AlertController,
     public itemsOnList: ItemsOnList,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    public translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -141,18 +144,16 @@ export class Item implements OnInit {
             this.item.cantidadElemento = removed;
             this.save.emit(this.item);
             let confirm = this.alertCtrl.create({
-              title: 'Not enough ' + this.item.nombreElemento + '',
+              title: this.translate.instant('NoSuficiente',{value:this.item.nombreElemento}),
               message:
-                'Do you like to move ' +
-                this.item.nombreElemento +
-                ' to SHOPPING_LIST?',
+                this.translate.instant('PreguntaMoverListaCompra',{value:this.item.nombreElemento}),
               buttons: [
                 {
-                  text: 'No',
+                  text: this.translate.instant('No'),
                   handler: () => {}
                 },
                 {
-                  text: 'Yes',
+                  text: this.translate.instant('Si'),
                   handler: () => {
                     let newItem: List = JSON.parse(JSON.stringify(this.item));
                     newItem.nombreLista = 'LISTA_COMPRA';

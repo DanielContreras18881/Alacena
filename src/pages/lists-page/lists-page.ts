@@ -9,6 +9,8 @@ import {
   ToastController
 } from 'ionic-angular';
 
+import { TranslateService } from '@ngx-translate/core';
+
 import { ListItem } from '../../classes/listItem';
 import { List } from '../../classes/list';
 
@@ -44,7 +46,8 @@ export class ListsPage {
     private alertCtrl: AlertController,
     private globalVars: GlobalVars,
     private toastCtrl: ToastController,
-    public log: Log
+    public log: Log,
+    public translate: TranslateService
   ) {
     this.log.setLogger(this.constructor.name);
   }
@@ -85,16 +88,17 @@ export class ListsPage {
    */
   removeList(event, name: string) {
     this.log.logs[this.constructor.name].info('removeList:' + name);
+
     let confirm = this.alertCtrl.create({
-      title: 'Removing ' + name,
-      message: 'Do you like to remove ' + name + ' list?',
+      title: this.translate.instant('Borrando',{value:name}),
+      message: this.translate.instant('PreguntaBorrarLista',{value:name}),
       buttons: [
         {
-          text: 'No',
+          text: this.translate.instant('No'),
           handler: () => {}
         },
         {
-          text: 'Yes',
+          text: this.translate.instant('Si'),
           handler: () => {
             this.lists = this.lists.filter(list => list.nombreLista !== name);
             this.globalVars.setListsData(this.lists);
@@ -131,7 +135,7 @@ export class ListsPage {
         }
       });
       let actionSheet = this.actionSheetCtrl.create({
-        title: 'Change list color',
+        title: this.translate.instant('CambiarColorLista'),
         buttons: buttons
       });
       actionSheet.present();
@@ -148,22 +152,22 @@ export class ListsPage {
     this.log.logs[this.constructor.name].info('editList:' + list);
     let oldName = list.nombreLista;
     let edit = this.alertCtrl.create({
-      title: 'Edit List',
+      title: this.translate.instant('EditarLista'),
       inputs: [
         {
           name: 'nombreLista',
           value: oldName,
           type: 'text',
-          placeholder: 'Name'
+          placeholder: this.translate.instant('Nombre')
         }
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: this.translate.instant('Cancelar'),
           role: 'cancel'
         },
         {
-          text: 'Confirm',
+          text: this.translate.instant('Confirmar'),
           handler: data => {
             this.globalVars.getListData(oldName).then(listData => {
               list.nombreLista = data.nombreLista;
@@ -204,7 +208,7 @@ export class ListsPage {
       this.globalVars.setListData(newList, []);
     } else {
       const toast = this.toastCtrl.create({
-        message: 'This list already exists!',
+        message: this.translate.instant('Esta lista ya existe!'),
         duration: 1000,
         position: 'bottom'
       });

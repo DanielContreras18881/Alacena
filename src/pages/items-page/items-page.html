@@ -3,7 +3,7 @@
 		<button ion-button menuToggle>
 			<ion-icon ios="ios-menu" md="md-menu"></ion-icon>
 		</button>
-		<ion-title>Item management</ion-title>
+		<ion-title>{{ 'Elementos' | translate }}</ion-title>
 		<ion-buttons end>
 			<button ion-button secondary (click)="selectToSendShoppingList($event)">
 				<ion-icon class="icon-toolbar" ios="ios-basket" md="md-basket"></ion-icon>
@@ -17,7 +17,7 @@
 		</ion-buttons>
 	</ion-navbar>
 	<ion-searchbar [hidden]="!searchBar" [(ngModel)]="searchItem" [showCancelButton]="true" [debounce]=500 [autocomplete]="true"
-	 [placeholder]="Search" (ionInput)="searchMatches($event)" (ionCancel)="toggleSearchBar($event)">
+	              (ionInput)="searchMatches($event)" (ionCancel)="toggleSearchBar($event)">
 	</ion-searchbar>
 </ion-header>
 
@@ -64,16 +64,16 @@
 				</ion-row>
 				<ion-row width-100 *ngIf="item.lists">
 					<ion-item (click)="discardOrShop($event,item)" *ngIf="item.lists.length==0">
-						<p class="item-advice">NO TIENES ESTE ELEMENTO EN TUS LISTAS</p>
+						<p class="item-advice">{{ 'NoTienes' | translate }}</p>
 					</ion-item>
 					<ion-list inset *ngIf="item.lists.length>0">
 						<ion-item ion-item *ngFor="let list of item.lists">
 							<p class="item-info">
 								<ion-icon class="item-icon" ios="ios-eye" md="md-eye"></ion-icon>
-								TIENES en {{list.nombreLista}}
+								{{ 'TienesEn' | translate }} {{list.nombreLista}}
 							</p>
 							<ion-badge large item-right>{{list.cantidadElemento}}</ion-badge>
-							<p *ngIf="list.cantidadElemento==0" class="item-advice" (click)="discardOrShop($event,item)">HAY_QUE_COMPRAR</p>
+							<p *ngIf="list.cantidadElemento==0" class="item-advice" (click)="discardOrShop($event,item)">{{ 'HayQueComprar' | translate }}</p>
 						</ion-item>
 					</ion-list>
 				</ion-row>

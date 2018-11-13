@@ -4,8 +4,12 @@ import {
   AlertController,
   ToastController
 } from 'ionic-angular';
+
+import { TranslateService } from '@ngx-translate/core';
+
 import { GlobalVars } from '../../providers/global-vars/global-vars';
 import { ListItem } from '../../classes/listItem';
+import { database } from 'firebase';
 /**
  * Bottom button component to use on App pages
  *
@@ -37,7 +41,8 @@ export class BottomButtonsComponent {
     private actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
-    private globalVars: GlobalVars
+    private globalVars: GlobalVars,
+    public translate: TranslateService
   ) {
     globalVars.getConfigData().then(config => {
       this.right =
@@ -62,11 +67,11 @@ export class BottomButtonsComponent {
     this.globalVars.getFavoritesListsData().then(listFavorites => {
       let askButtons: any = [];
       askButtons.push({
-        text: 'Save',
+        text: this.translate.instant('Guardar'),
         handler: () => {
           this.alertCtrl
             .create({
-              title: 'Save as...',
+              title: this.translate.instant('GuardarComo'),
               inputs: [
                 {
                   name: 'name'
@@ -74,15 +79,15 @@ export class BottomButtonsComponent {
               ],
               buttons: [
                 {
-                  text: 'Cancel',
+                  text: this.translate.instant('Cancelar'),
                   role: 'cancel'
                 },
                 {
-                  text: 'Save',
+                  text: this.translate.instant('Guardar'),
                   handler: data => {
                     if (data.name.trim() == '' || data.name == null) {
                       const toast = this.toastCtrl.create({
-                        message: 'Please enter a valid value!',
+                        message: this.translate.instant('ValorValido'),
                         duration: 1500,
                         position: 'bottom'
                       });
@@ -101,7 +106,7 @@ export class BottomButtonsComponent {
       });
       if ((<any[]>listFavorites).length > 0) {
         askButtons.push({
-          text: 'Load',
+          text: this.translate.instant('Cargar'),
           handler: () => {
             let buttons: any = [];
             (<any[]>listFavorites).forEach(favorite => {
@@ -119,14 +124,14 @@ export class BottomButtonsComponent {
               });
             });
             let actionSheet = this.actionSheetCtrl.create({
-              title: 'Select list to Load',
+              title: this.translate.instant('ListaCargar'),
               buttons: buttons
             });
             actionSheet.present();
           }
         });
         askButtons.push({
-          text: 'Remove',
+          text: this.translate.instant('Borrar'),
           handler: () => {
             let buttons: any = [];
             (<any[]>listFavorites).forEach(favorite => {
@@ -142,16 +147,16 @@ export class BottomButtonsComponent {
               });
             });
             let actionSheet = this.actionSheetCtrl.create({
-              title: 'Select list to Remove',
+              title: this.translate.instant('ListaBorrar'),
               buttons: buttons
             });
             actionSheet.present();
           }
         });
       }
-      askButtons.push({ text: 'Cancel', role: 'cancel' });
+      askButtons.push({ text: this.translate.instant('Cancelar'), role: 'cancel' });
       let askFavorite = this.alertCtrl.create({
-        title: 'Save or Load ShoppingList',
+        title: this.translate.instant('GuardarListaCompra'),
         buttons: askButtons
       });
 
@@ -166,7 +171,7 @@ export class BottomButtonsComponent {
    */
   removeItems(event: Event) {
     let remove = this.alertCtrl.create();
-    remove.setTitle('Remove');
+    remove.setTitle(this.translate.instant('Borrar'));
     let existElements = false;
     this.object.forEach((item: any) => {
       let nombre =
@@ -185,13 +190,13 @@ export class BottomButtonsComponent {
         });
       }
     });
-    remove.addButton('Cancel');
+    remove.addButton(this.translate.instant('Cancelar'));
     remove.addButton({
-      text: 'OK',
+      text: this.translate.instant('OK'),
       handler: data => {
         if (data.length === 0) {
           const toast = this.toastCtrl.create({
-            message: 'Please select at least one ' + this.type + ' to remove!',
+            message: this.translate.instant('SeleccionaParaBorrar',{value:this.type}),
             duration: 1500,
             position: 'bottom'
           });
@@ -200,7 +205,7 @@ export class BottomButtonsComponent {
         }
         this.finishedRemoved.emit(data);
         const toast = this.toastCtrl.create({
-          message: data.length + ' ' + this.type + ' removed!',
+          message: this.translate.instant('Borrados',{cuantos:database.length,tipo:this.type}),
           duration: 1500,
           position: 'bottom'
         });
@@ -236,7 +241,7 @@ export class BottomButtonsComponent {
               handler: data => {
                 if (data.name.trim() == '' || data.name == null) {
                   const toast = this.toastCtrl.create({
-                    message: 'Please enter a valid value!',
+                    message: this.translate.instant('ValorValido'),
                     duration: 1500,
                     position: 'bottom'
                   });

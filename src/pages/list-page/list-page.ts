@@ -10,6 +10,8 @@ import {
   Platform
 } from 'ionic-angular';
 
+import { TranslateService } from '@ngx-translate/core';
+
 import { List } from '../../classes/list';
 import { Category } from '../../classes/category';
 import { ListItem } from '../../classes/listItem';
@@ -64,7 +66,8 @@ export class ListPage {
     private localNotification: PhonegapLocalNotification,
     private localNotifications: LocalNotifications,
     private reminders: RemindersProvider,
-    public log: Log
+    public log: Log,
+    public translate: TranslateService
   ) {
     this.log.setLogger(this.constructor.name);
   }
@@ -170,32 +173,32 @@ export class ListPage {
    */
   reorder(event) {
     let reorder = this.alertCtrl.create();
-    reorder.setTitle('Sort by');
+    reorder.setTitle(this.translate.instant('Ordenar'));
 
     if (this.selectedItem !== 'LISTA_COMPRA') {
       reorder.addInput({
         type: 'radio',
-        label: 'FECHA_CADUCIDAD',
+        label: this.translate.instant('FechaCaducidad'),
         value: '3',
         checked: this.orderSelected === 3
       });
     }
     reorder.addInput({
       type: 'radio',
-      label: 'NOMBRE',
+      label: this.translate.instant('Nombre'),
       value: '1',
       checked: this.orderSelected === 1
     });
     reorder.addInput({
       type: 'radio',
-      label: 'CATEGORIA',
+      label: this.translate.instant('Categoria'),
       value: '2',
       checked: this.orderSelected === 2
     });
 
-    reorder.addButton('Cancel');
+    reorder.addButton(this.translate.instant('Cancelar'));
     reorder.addButton({
-      text: 'OK',
+      text: this.translate.instant('OK'),
       handler: data => {
         this.sortItems(Number.parseInt(data));
       }
@@ -211,20 +214,15 @@ export class ListPage {
   removeItem(item: ListItem) {
     this.log.logs[this.constructor.name].info('removeItem:' + item);
     let confirm = this.alertCtrl.create({
-      title: 'Removing ' + item.nombreElemento,
-      message:
-        'Do you like to remove ' +
-        item.nombreElemento +
-        ' from ' +
-        item.nombreLista +
-        ' ?',
+      title: this.translate.instant('Borrando',{value:item.nombreElemento}),
+      message: this.translate.instant('PreguntaBorrarElementoLista',{value:item.nombreElemento,lista:item.nombreLista}),
       buttons: [
         {
-          text: 'No',
+          text: this.translate.instant('No'),
           handler: () => {}
         },
         {
-          text: 'Yes',
+          text: this.translate.instant('Si'),
           handler: () => {
             this.list.splice(this.list.indexOf(item), 1);
             this.globalVars.setListData(this.selectedItem, this.list);
@@ -249,13 +247,13 @@ export class ListPage {
             .add(-1, 'days')
             .add(1, 'hour')
             .unix(),
-          title: 'CADUCA_MANIANA',
+          title: this.translate.instant('CaducaManiana'),
           text:
             item.nombreLista +
             '\n' +
             item.nombreElemento +
             '\n' +
-            'CADUCA_MANIANA',
+            this.translate.instant('CaducaManiana'),
           at: moment(item.fechaCaducidad)
             .add(-1, 'days')
             .add(1, 'hour')
@@ -266,13 +264,13 @@ export class ListPage {
             .add(-7, 'days')
             .subtract(1, 'hour')
             .unix(),
-          title: 'CADUCA_7_DIAS',
+          title: this.translate.instant('Caduca7Dias'),
           text:
             item.nombreLista +
             '\n' +
             item.nombreElemento +
             '\n' +
-            'CADUCA_7_DIAS',
+            this.translate.instant('Caduca7Dias'),
           at: moment(item.fechaCaducidad)
             .add(-7, 'days')
             .add(1, 'hour')
@@ -385,7 +383,8 @@ export class ListPage {
   addNotification() {
     this.log.logs[this.constructor.name].info('addNotification');
     let reminderModal = this.mod.create(RemindersComponent, {
-      time: moment(new Date()).add(1,'hour').toISOString()
+      time: moment(new Date()).add(1,'hour').toISOString(),
+      editing:false
     });
     reminderModal.onDidDismiss(data => {
       this.log.logs[this.constructor.name].info(moment(data.notificationDate).subtract(moment(new Date().toISOString()).add(1,'hour').valueOf(),'milliseconds').valueOf());
@@ -400,11 +399,11 @@ export class ListPage {
             if(this.native){
               this.localNotifications.schedule(<ILocalNotification>{
                 id: moment(data.notificationDate).unix(),
-                title: 'REMEMBER',
+                title: this.translate.instant('Recuerda'),
                 text: data.message,
                 at: moment(data.notificationDate).toISOString()
               });
-            } else { 
+            } else {
               const timeOutHandler = setTimeout(
                 ()=>{
                   alert(data.message);
@@ -473,11 +472,11 @@ export class ListPage {
         } else {
           let addAmount = this.alertCtrl.create();
           addAmount.setTitle(
-            item.nombreElemento + ' already exists, choose an option'
+            this.translate.instant('YaExisteSelecciona',{value:item.nombreElemento})
           );
           addAmount.addButton('Discard');
           addAmount.addButton({
-            text: 'Add amount',
+            text: this.translate.instant('AniadirCantidad'),
             handler: data => {
               this.list.filter(
                 element =>

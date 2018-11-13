@@ -14,7 +14,7 @@
     </ion-buttons>
   </ion-navbar>
   <ion-searchbar [hidden]="!searchBar" [(ngModel)]="searchItem" [debounce]=500 [showCancelButton]="true" [autocomplete]="true"
-    [placeholder]="Search" (ionInput)="searchMatches($event)" (ionCancel)="toggleSearchBar($event)">
+                (ionInput)="searchMatches($event)" (ionCancel)="toggleSearchBar($event)">
   </ion-searchbar>
 </ion-header>
 

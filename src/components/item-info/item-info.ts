@@ -17,7 +17,10 @@ export class ItemInfoPage {
   item: Item;
   editing: boolean;
   icons: string[];
-  constructor(private view: ViewController, params: NavParams) {
+  constructor(
+    private view: ViewController,
+    params: NavParams
+    ) {
     this.item = params.get('newItem');
     this.editing = params.get('editing');
     this.icons = params.get('icons');

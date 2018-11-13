@@ -7,6 +7,8 @@ import {
   ToastController
 } from 'ionic-angular';
 
+import { TranslateService } from '@ngx-translate/core';
+
 import { Category } from '../../classes/category';
 import { ListItem } from '../../classes/listItem';
 import { Item } from '../../classes/item';
@@ -50,7 +52,8 @@ export class ItemsPage {
     private globalVars: GlobalVars,
     private filterElements: PipeFilterElements,
     private toastCtrl: ToastController,
-    public log: Log
+    public log: Log,
+    public translate: TranslateService
   ) {
     this.log.setLogger(this.constructor.name);
   }
@@ -158,15 +161,15 @@ export class ItemsPage {
   removeItem(event, item: Item) {
     this.log.logs[this.constructor.name].info('removeItem:' + item);
     let confirm = this.alertCtrl.create({
-      title: 'Removing ' + item.nombreElemento,
-      message: 'Do you like to remove ' + item.nombreElemento + '?',
+      title: this.translate.instant('Borrando',{value:item.nombreElemento}),
+      message: this.translate.instant('PreguntaBorrarElemento',{value:item.nombreElemento}),
       buttons: [
         {
-          text: 'No',
+          text: this.translate.instant('No'),
           handler: () => {}
         },
         {
-          text: 'Yes',
+          text: this.translate.instant('Si'),
           handler: () => {
             this.items.splice(this.items.indexOf(item), 1);
             this.globalVars.setItemsData(this.items);
@@ -185,7 +188,7 @@ export class ItemsPage {
   selectToSendShoppingList(event) {
     this.log.logs[this.constructor.name].info('selectToSendShoppingList');
     let move = this.alertCtrl.create();
-    move.setTitle('Move to LISTA_COMPRA');
+    move.setTitle(this.translate.instant('MoverListaCompra'));
 
     this.items.forEach((item: Item) => {
       if (item.lists.length === 0) {
@@ -198,9 +201,9 @@ export class ItemsPage {
       }
     });
 
-    move.addButton('Cancel');
+    move.addButton(this.translate.instant('Cancelar'));
     move.addButton({
-      text: 'OK',
+      text: this.translate.instant('OK'),
       handler: data => {
         data.forEach((item, index) => {
           let auxItem = this.filterElements.transform(this.items, item)[0];
@@ -238,17 +241,17 @@ export class ItemsPage {
     this.log.logs[this.constructor.name].info('discardOrShop:' + item);
     let discardRemove = this.alertCtrl.create();
     discardRemove.setTitle(
-      'Discard ' + item.nombreElemento + ' or move to SHOPPING_LIST?'
+      this.translate.instant('DescartarOMover',{value:item.nombreElemento})
     );
 
     discardRemove.addButton({
-      text: 'To SHOPPING_LIST',
+      text: this.translate.instant('AListaCompra'),
       handler: data => {
         this.sendToShoppingList(event, <ListItem>item);
       }
     });
     discardRemove.addButton({
-      text: 'Discard',
+      text: this.translate.instant('Descartar'),
       handler: data => {
         this.removeElements([item.nombreElemento]);
       }
@@ -281,22 +284,22 @@ export class ItemsPage {
     this.log.logs[this.constructor.name].info('editItem:' + item);
     let oldItem = item.nombreElemento;
     let edit = this.alertCtrl.create({
-      title: 'Edit Item',
+      title: this.translate.instant('EditaElemento'),
       inputs: [
         {
           name: 'nombreElemento',
           value: oldItem,
           type: 'text',
-          placeholder: 'Name'
+          placeholder: this.translate.instant('Name')
         }
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: this.translate.instant('Cancel'),
           role: 'cancel'
         },
         {
-          text: 'Confirm',
+          text: this.translate.instant('Confirmar'),
           handler: data => {
             if (item.lists.length > 0) {
               this.items.push(JSON.parse(JSON.stringify(item)));
@@ -375,32 +378,32 @@ export class ItemsPage {
    */
   reorder(event) {
     let reorder = this.alertCtrl.create();
-    reorder.setTitle('Sort by');
+    reorder.setTitle(this.translate.instant('Ordenar'));
 
     reorder.addInput({
       type: 'radio',
-      label: 'NOMBRE',
+      label: this.translate.instant('Nombre'),
       value: '1',
       checked: this.orderSelected === 1
     });
 
     reorder.addInput({
       type: 'radio',
-      label: 'CATEGORIA',
+      label: this.translate.instant('Categoria'),
       value: '2',
       checked: this.orderSelected === 2
     });
 
     reorder.addInput({
       type: 'radio',
-      label: 'PASO_MEDIDA',
+      label: this.translate.instant('PasoMedida'),
       value: '3',
       checked: this.orderSelected === 3
     });
 
-    reorder.addButton('Cancel');
+    reorder.addButton(this.translate.instant('Cancelar'));
     reorder.addButton({
-      text: 'OK',
+      text: this.translate.instant('OK'),
       handler: data => {
         this.sortItems(Number.parseInt(data));
       }

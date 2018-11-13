@@ -1,7 +1,7 @@
 <ion-header>
 	<ion-toolbar dark>
 		<ion-title>
-			Items Needed to add to Shopping List
+      {{ 'ElementosNecesariosComprar' | translate }}
 		</ion-title>
 		<ion-buttons end>
 			<button (click)="addItemsToShoppingList()" *ngIf="list.length>0">
@@ -18,7 +18,7 @@
 	<ion-list inset>
 		<div>
 			<ion-card>
-				NO HAY ELEMENTOS QUE COMPRAR
+        {{ 'ElementosNecesariosComprar' | translate }}
 			</ion-card>
 		</div>
 	</ion-list>

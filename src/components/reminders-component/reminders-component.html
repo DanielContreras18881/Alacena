@@ -1,7 +1,10 @@
 <ion-header>
 	<ion-toolbar dark>
-		<ion-title>
-			ADD_REMINDER or EDIT_REMINDER
+		<ion-title [hidden]="!editing">
+			{{ 'EditaRecordatorio' | translate }}
+		</ion-title>
+		<ion-title [hidden]="editing">
+			{{ 'NuevoRecordatorio' | translate }}
 		</ion-title>
 		<ion-buttons end>
 			<button primary (click)="save()">
@@ -16,7 +19,7 @@
 
 <ion-content>
 	<ion-item>
-		<ion-label>MESSAGE</ion-label>
+		<ion-label>{{ 'Mensaje' | translate }}</ion-label>
 		<ion-input id="message" type="text" [(ngModel)]="data.message" placeholder="NEW MESSAGE"></ion-input>
 	</ion-item>
 	<ion-item>

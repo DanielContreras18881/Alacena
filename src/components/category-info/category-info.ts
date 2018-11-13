@@ -1,6 +1,8 @@
 import { Category } from '../../classes/category';
 import { Component } from '@angular/core';
 
+import { TranslateService } from '@ngx-translate/core';
+
 import { ViewController, NavParams } from 'ionic-angular';
 
 import { CategoriesService } from '../../providers/categories/categoriesService';
@@ -15,13 +17,15 @@ import { CategoriesService } from '../../providers/categories/categoriesService'
   providers: [CategoriesService]
 })
 export class CategoryInfoPage {
+  editing: boolean;
   category: Category;
   icons: string[];
 
   constructor(
     private view: ViewController,
     private catService: CategoriesService,
-    public params: NavParams
+    public params: NavParams,
+    public translate: TranslateService
   ) {}
 
   ngOnInit() {

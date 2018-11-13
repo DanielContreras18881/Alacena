@@ -3,13 +3,13 @@
     <button ion-button menuToggle>
       <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
     </button>
-    <ion-title>Backup</ion-title>
+    <ion-title>{{ 'Backup' | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding class="backup">
   <ion-item>
-    <button ion-button block round outline color="dark" (click)="makeBackup()">Create New Backup</button>
+    <button ion-button block round outline color="dark" (click)="makeBackup()">{{ 'CrearNuevoBackup' | translate }}</button>
 
   </ion-item>
 

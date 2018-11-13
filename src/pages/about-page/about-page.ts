@@ -5,6 +5,8 @@ import { AppVersion } from '@ionic-native/app-version';
 import { Platform } from 'ionic-angular';
 import { Http } from '@angular/http';
 
+import { TranslateService } from '@ngx-translate/core';
+
 import { Log } from '../../providers/log/log';
 
 /**
@@ -31,7 +33,8 @@ export class AboutPage {
     public formBuilder: FormBuilder,
     public http: Http,
     private toastCtrl: ToastController,
-    public log: Log
+    public log: Log,
+    public translate: TranslateService
   ) {
     this.log.setLogger(this.constructor.name);
 

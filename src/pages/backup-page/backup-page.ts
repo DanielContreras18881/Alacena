@@ -7,6 +7,8 @@ import {
   AlertController
 } from 'ionic-angular';
 
+import { TranslateService } from '@ngx-translate/core';
+
 import { Log } from '../../providers/log/log';
 
 /**
@@ -28,7 +30,8 @@ export class BackupPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public log: Log,
-    public backup: BackupData
+    public backup: BackupData,
+    public translate: TranslateService
   ) {
     this.log.setLogger(this.constructor.name);
   }
@@ -52,14 +55,14 @@ export class BackupPage {
   retrieveBackup(backup: string) {
     this.log.logs[this.constructor.name].info('retrieveBackup');
     let retrieve = this.alertCtrl.create();
-    retrieve.setTitle('Retrieing ' + backup);
-    retrieve.addButton('Discard');
+    retrieve.setTitle(this.translate.instant('Recuperando',{value:backup}));
+    retrieve.addButton(this.translate.instant('Descartar'));
     retrieve.addButton({
-      text: 'Retrieve',
+      text: this.translate.instant('Recuperar'),
       handler: result => {
         this.backup.getBackup(backup).then(data => {
           this.log.logs[this.constructor.name].info(
-            `Backup ${backup} retrieved`
+            this.translate.instant('Recuperado',{value:backup})
           );
         });
       }
@@ -70,10 +73,10 @@ export class BackupPage {
   removeBackup(backup: string) {
     this.log.logs[this.constructor.name].info('removeBackup');
     let remove = this.alertCtrl.create();
-    remove.setTitle('Removing ' + backup);
-    remove.addButton('Discard');
+    remove.setTitle(this.translate.instant('Borrando',{value:backup}));
+    remove.addButton(this.translate.instant('Descartar'));
     remove.addButton({
-      text: 'Remove',
+      text: this.translate.instant('Borrar'),
       handler: result => {
         this.backup.removeBackup(backup).then(data => {
           this.log.logs[this.constructor.name].info(`Backup ${backup} removed`);

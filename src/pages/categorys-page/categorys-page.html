@@ -3,7 +3,7 @@
 		<button ion-button menuToggle>
 			<ion-icon ios="ios-menu" md="md-menu"></ion-icon>
 		</button>
-		<ion-title>Categories management</ion-title>
+		<ion-title>{{ 'Categorias' | translate }}</ion-title>
 		<ion-buttons end>
 			<button (click)="reorder($event)">
 				<ion-icon ion-button secondary class="reorderAllowed icon-toolbar" *ngIf="reorderAllowed" ios="ios-repeat" md="md-repeat"></ion-icon>
@@ -14,8 +14,9 @@
 			</button>
 		</ion-buttons>
 	</ion-navbar>
-	<ion-searchbar [hidden]="!searchBar" [(ngModel)]="searchCategory" [showCancelButton]="true" [debounce]=500 [autocomplete]="true"
-	 [placeholder]="Search" (ionInput)="searchMatches($event)" (ionCancel)="toggleSearchBar($event)">
+	<ion-searchbar [hidden]="!searchBar" [(ngModel)]="searchCategory" [showCancelButton]="true"
+                  [debounce]=500 [autocomplete]="true"
+                  (ionInput)="searchMatches($event)" (ionCancel)="toggleSearchBar($event)">
 	</ion-searchbar>
 </ion-header>
 
@@ -48,16 +49,16 @@
 					<ion-col width-33>
 						<ion-item>
 							<ion-select readonly="true" class="categoryMeasurement" id="measurement" [(ngModel)]="category.measurement" (ngModelChange)="onMeasurementChange($event,category)">
-								<ion-option>UNIDADES</ion-option>
-								<ion-option>LITROS</ion-option>
-								<ion-option>GRAMOS</ion-option>
-								<ion-option>KG</ion-option>
+                <ion-option value="UNIDADES">{{ 'Unidades' | translate }}</ion-option>
+                <ion-option value="GRAMOS">{{ 'Gramos' | translate }}</ion-option>
+                <ion-option value="KILOS">{{ 'Kilos' | translate }}</ion-option>
+                <ion-option value="LITROS">{{ 'Litros' | translate }}</ion-option>
 							</ion-select>
 						</ion-item>
 					</ion-col>
 					<ion-col width-25>
 						<ion-item readonly="true" class="measurementUnitStep">
-							<ion-label stacked>PASO_MEDIDA</ion-label>
+							<ion-label stacked>{{ 'PasoMedida' | translate }}</ion-label>
 							<ion-input text-right [(ngModel)]="category.unitStep" min="1" type="number"></ion-input>
 						</ion-item>
 					</ion-col>
