@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>354280052179-rd9dnh6ttkvm0nhns8219vmjfeiagrpe.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.354280052179-rd9dnh6ttkvm0nhns8219vmjfeiagrpe</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCu3OAeD3LguqTNtwH6Jz2z0ZW34QOWeOg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>354280052179</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>developapps.chony.alacena</string>
+	<key>PROJECT_ID</key>
+	<string>alacena-58699</string>
+	<key>STORAGE_BUCKET</key>
+	<string>alacena-58699.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:354280052179:ios:50c79845e9693a6d</string>
+	<key>DATABASE_URL</key>
+	<string>https://alacena-58699.firebaseio.com</string>
+</dict>
+</plist>

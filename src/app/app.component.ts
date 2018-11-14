@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import firebase from 'firebase';
 import { FCM } from '@ionic-native/fcm';
 import { App, MenuController, Nav, Platform } from 'ionic-angular';
+import { Insomnia } from '@ionic-native/insomnia';
 
 import { AboutPage } from '../pages/about-page/about-page';
 import { BackupPage } from '../pages/backup-page/backup-page';
@@ -43,9 +44,16 @@ export class Alacena {
     private admobFree: AdMobFree,
     public globalVars: GlobalVars,
     public log: Log,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private insomnia: Insomnia
   ) {
     this.log.setLogger(this.constructor.name);
+
+    this.insomnia.keepAwake()
+      .then(
+        () => this.log.logs[this.constructor.name].info('Awake activated'),
+        () => this.log.logs[this.constructor.name].info('Awake error')
+      );
 
     this.translateService.setDefaultLang('es');
     this.translateService.use('es');

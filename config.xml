@@ -113,27 +113,28 @@
     </feature>
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
+    <plugin name="cordova-sqlite-storage" spec="^2.5.1" />
+    <plugin name="cordova-plugin-googleplus" spec="^5.3.2">
+        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.354280052179-v7ajl6gdl22u17761d2eqo3mtt22k0gb" />
+    </plugin>
     <plugin name="cordova-plugin-device" spec="^1.1.7" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
-    <plugin name="cordova-plugin-googleplus" spec="^5.2.0">
-        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.354280052179-amrn5f7si36l9lsdinjf8u7q5a5thpri" />
-    </plugin>
-    <plugin name="cordova-sqlite-storage" spec="^2.1.4" />
-    <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
-    <plugin name="cordova-plugin-camera" spec="~2.2.0" />
-    <plugin name="cordova-plugin-console" spec="~1.0.5" />
-    <plugin name="cordova-plugin-native-spinner" spec="^1.1.3" />
-    <plugin name="cordova-plugin-network-information" spec="^1.3.3" />
-    <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
-    <plugin name="cordova-plugin-statusbar" spec="~2.2.1" />
-    <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
-    <plugin name="phonegap-plugin-local-notification" spec="^1.0.1" />
-    <plugin name="de.appplant.cordova.plugin.local-notification" spec="~0.8.5" />
     <plugin name="cordova-plugin-admob-free" spec="^0.13.0" />
     <plugin name="cordova-plugin-file" spec="^4.3.3" />
+    <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
+    <plugin name="cordova-plugin-camera" spec="^2.2.0" />
+    <plugin name="cordova-plugin-console" spec="^1.1.0" />
+    <plugin name="cordova-plugin-native-spinner" spec="^1.1.3" />
+    <plugin name="cordova-plugin-network-information" spec="^1.3.4" />
+    <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
+    <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-compat" spec="^1.2.0" />
-    <engine name="browser" spec="^4.1.0" />
-    <engine name="android" spec="^6.3.0" />
     <plugin name="cordova-plugin-fcm" spec="^2.1.2" />
     <plugin name="cordova-plugin-local-notification" spec="0.9.0-beta.2" />
+    <engine name="browser" spec="4.1.0" />
+    <engine name="android" spec="6.4.0" />
+    <engine name="ios" spec="4.5.5" />
+    <plugin name="cordova-plugin-insomnia" spec="4.3.0" />
+    <plugin name="cordova-plugin-contacts" spec="3.0.1" />
 </widget>

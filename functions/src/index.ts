@@ -111,3 +111,24 @@ exports.notification = functions.https.onRequest((req, res) => {
 			res.send('Error getting token:' + JSON.stringify(error));
 		});
 });
+
+exports.contacts = functions.https.onRequest((req, res) => {
+  	console.log('Getting App users');
+    admin.auth().listUsers()
+      .then(
+        (listUsersResult) => {
+          if(listUsersResult.users){
+            res.status(200);
+            res.send(listUsersResult.users);
+          }else{
+            res.status(400);
+            res.send('No users found');
+          }
+        }
+      )
+      .catch(error => {
+					res.status(400);
+					res.send('Error sending notifications:' + JSON.stringify(error));
+				}
+      );
+});

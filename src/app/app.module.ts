@@ -21,6 +21,8 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { File } from '@ionic-native/file';
 import { FileMock } from '@ionic-native-mocks/file';
 import { FCM } from '@ionic-native/fcm';
+import { Insomnia } from '@ionic-native/insomnia';
+import { Contacts } from '@ionic-native/contacts';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -148,6 +150,8 @@ export function createTranslateLoader(http: HttpClient) {
       multi: true
     },
     FCM,
+    Insomnia,
+    Contacts,
     LoggingService,
     Log,
     AdMobFree,

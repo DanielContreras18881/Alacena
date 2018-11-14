@@ -18,6 +18,8 @@ import { OrderBy } from '../../pipes/orderBy';
 import { GlobalVars } from '../../providers/global-vars/global-vars';
 import { ListPage } from '../list-page/list-page';
 
+import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
+
 import { Color } from '../../classes/color';
 
 import { Log } from '../../providers/log/log';
@@ -47,7 +49,8 @@ export class ListsPage {
     private globalVars: GlobalVars,
     private toastCtrl: ToastController,
     public log: Log,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private contacts:Contacts
   ) {
     this.log.setLogger(this.constructor.name);
   }
@@ -242,5 +245,21 @@ export class ListsPage {
     this.nav.push(ListPage, {
       list: list
     });
+  }
+  shareList(event, list: List) {
+    this.contacts.find(["*"])
+    .then(res => {
+      let datosMostar:any[]=[];
+      res.map((item) =>{
+// TODO:
+//  Filtrar por los usuarios de la app en firebase, por email y/o teléfono
+//  Mostrar selector de usuarios, diferenciando entre contactos y contactos con la app
+//  Enviar notificación al usuario a través de la función de firebase
+
+        console.log({funcion:'CargarListaContactos',item:item})
+      })
+    },error => {
+      console.log({error:error})
+    })
   }
 }

@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "project_number": "354280052179",
+    "firebase_url": "https://alacena-58699.firebaseio.com",
+    "project_id": "alacena-58699",
+    "storage_bucket": "alacena-58699.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354280052179:android:50c79845e9693a6d",
+        "android_client_info": {
+          "package_name": "developapps.chony.alacena"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354280052179-fkmk7g20grbpkctmdgtt53oiel3be7a1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_NlhDQlkGPnjyDhVrphHkRLnDH30WvqM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354280052179:android:83cd856405072f23",
+        "android_client_info": {
+          "package_name": "developapps.chony.alacena.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354280052179-fpirn1f0n4o1uiu13kh8pvjktk0ksauj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "developapps.chony.alacena.test",
+            "certificate_hash": "50a0bcaf3f0ceffe723b3036d92e331f5d3594b9"
+          }
+        },
+        {
+          "client_id": "354280052179-fkmk7g20grbpkctmdgtt53oiel3be7a1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_NlhDQlkGPnjyDhVrphHkRLnDH30WvqM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "354280052179-fkmk7g20grbpkctmdgtt53oiel3be7a1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "354280052179-rd9dnh6ttkvm0nhns8219vmjfeiagrpe.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "developapps.chony.alacena"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
