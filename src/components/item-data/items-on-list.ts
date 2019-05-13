@@ -30,9 +30,15 @@ export class ItemsOnList implements AutoCompleteService {
 	* @memberof ItemsOnList
    */
   getResults(keyword: string) {
+    if(!keyword){
+      return [];
+    }
     return this.items.filter(
-      item =>
-        item.nombreElemento.toLowerCase().indexOf(keyword.toLowerCase()) > -1
+      (item) => {
+        if(item.nombreElemento){
+          return item.nombreElemento.toLowerCase().indexOf(keyword.toLowerCase()) > -1
+        }
+      }
     );
   }
 }

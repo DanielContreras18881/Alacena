@@ -88,9 +88,9 @@ export class ItemsProvider {
             });
           } else {
             this.cloudStorage.loadItemsData(userProfile.uid).then(data => {
-              if (data !== undefined && data !== null) {
-                this.localStorage.setToLocal('items', data);
-                resolve(data);
+              if (data !== undefined) {
+                this.localStorage.setToLocal('items', data || []);
+                resolve(data || []);
               } else {
                 this.localStorage.getFromLocal('items', null).then(data => {
                   if (data !== undefined && data !== null) {
@@ -131,7 +131,7 @@ export class ItemsProvider {
           } else {
             (<Item[]>data).forEach(item => {
               item.category = <Category>{
-                icon: 'images/icons/default.png',
+                icon:{src: 'assets/images/icons/default.png'},
                 measurement: 'UNIDADES',
                 categoryName: 'No Category',
                 unitStep: 1

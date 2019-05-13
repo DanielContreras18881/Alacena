@@ -17,8 +17,7 @@
       <ion-col col-2 offset-1>
         <div>
           <ion-avatar item-left class="category-icon" (click)="editCategory($event)">
-            <img class="icon" src="item.category.icon" *ngIf="item.category" />
-            <img class="icon" src="defaultIcon" *ngIf="!item.category" />
+            <img class="icon" src="item.category.icon.src" />
             <h2 *ngIf="creating" class="labelCategory">{{item.category.categoryName}}</h2>
           </ion-avatar>
         </div>
@@ -33,13 +32,8 @@
       <ion-col col-2>
         <div *ngIf="item.category">
           <ion-avatar item-left class="category-icon">
-            <img class="icon" src="{{item.category.icon}}" (click)="editCategory($event)" />
+            <img class="icon" src="{{item.category.icon.src}}" (click)="editCategory($event)" />
             <h2 *ngIf="creating" class="labelCategory">{{item.category.categoryName}}</h2>
-          </ion-avatar>
-        </div>
-        <div *ngIf="!item.category">
-          <ion-avatar item-left class="category-icon">
-            <img class="icon" src="images/icons/default.png" (click)="editCategory($event)" />
           </ion-avatar>
         </div>
       </ion-col>

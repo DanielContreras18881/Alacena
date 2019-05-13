@@ -147,7 +147,10 @@ export class ItemsPage {
    * @memberof ItemsPage
    */
   changeItemCategory(event, item: Item) {
-    this.catService.changeCategory(item.category, item).then(data => {
+    this.catService.changeCategory(item.category, item).then((data:Item) => {
+      if(!data.category){
+        data.category = this.defaultCategory;
+      }
       item = <Item>data;
     });
   }

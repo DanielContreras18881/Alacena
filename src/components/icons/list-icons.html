@@ -15,7 +15,7 @@
 
   <ion-row class="icon-row">
     <ion-col *ngFor="let icon of icons" class="icon-col">
-      <img class="icon-img" src="{{icon}}" (click)="selected($event,icon)"/>
+      <img class="icon-img" src="{{icon.src}}" (click)="selected($event,icon)"/>
     </ion-col>
   </ion-row>
 </ion-content>

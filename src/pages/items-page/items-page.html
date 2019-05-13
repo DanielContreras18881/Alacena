@@ -29,13 +29,13 @@
 					<ion-col width-50>
 						<div *ngIf="item.category">
 							<ion-avatar item-left class="category-icon">
-								<img class="icon" src="{{item.category.icon}}" (click)="changeItemCategory($event,item)" />
+								<img class="icon" src="{{item.category.icon.src}}" (click)="changeItemCategory($event,item)" />
 								<h2 *ngIf="creating" class="labelCategory">{{item.category.categoryName}}</h2>
 							</ion-avatar>
 						</div>
 						<div *ngIf="!item.category">
 							<ion-avatar item-left class="category-icon">
-								<img class="icon" src="images/icons/default.png" (click)="changeItemCategory($event,item)" />
+								<img class="icon" src="assets/images/icons/default.png" (click)="changeItemCategory($event,item)" />
 							</ion-avatar>
 						</div>
 					</ion-col>

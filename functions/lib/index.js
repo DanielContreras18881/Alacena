@@ -1,9 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const firebase = require("firebase-app");
 const functions = require("firebase-functions");
 const nodemailer = require("nodemailer");
 const admin = require("firebase-admin");
 admin.initializeApp(functions.config().firebase);
+const messaging = firebase.messaging();
+messaging.usePublicVapidKey('BOGbFzr0df6Ny5TKXxe0Q9FZqFiImd9mki3Uv6GMFOnT9ZcNrWhUdL_LSgYdkralD3EmsMQ1MADYfAhoheM_QJk');
 const gmailEmail = 'daniel.chony@gmail.com';
 const gmailPassword = 'Chony0666';
 const mailTransport = nodemailer.createTransport({
@@ -93,6 +96,24 @@ exports.notification = functions.https.onRequest((req, res) => {
         .catch(error => {
         res.status(400);
         res.send('Error getting token:' + JSON.stringify(error));
+    });
+});
+exports.contacts = functions.https.onRequest((req, res) => {
+    console.log('Getting App users');
+    admin.auth().listUsers()
+        .then((listUsersResult) => {
+        if (listUsersResult.users) {
+            res.status(200);
+            res.send(listUsersResult.users);
+        }
+        else {
+            res.status(400);
+            res.send('No users found');
+        }
+    })
+        .catch(error => {
+        res.status(400);
+        res.send('Error sending notifications:' + JSON.stringify(error));
     });
 });
 //# sourceMappingURL=index.js.map

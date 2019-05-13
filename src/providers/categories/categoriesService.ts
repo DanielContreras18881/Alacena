@@ -63,7 +63,13 @@ export class CategoriesService {
           }
         });
 
-        change.addButton('Cancel');
+        change.addButton({
+          text: 'Cancel',
+          handler: data => {
+            item.category = data;
+            resolve(item);
+          }
+        });
         change.addButton({
           text: 'OK',
           handler: data => {

@@ -45,7 +45,7 @@ export class Item implements OnInit {
   oldMeasurement: string = '';
   right: boolean = true;
 
-  defaultIcon: string = 'images/icons/default.png';
+  defaultIcon: string = 'assets/images/icons/default.png';
   nombreantiguo: string = this.translate.instant('NuevoElemento');
 
   constructor(
@@ -287,10 +287,11 @@ export class Item implements OnInit {
    * @memberof Item
    */
   seleccionado(event) {
-    if (event) {
-      this.item.nombreElemento = event.nombreElemento;
+    if (this.searchbar.suggestions.length === 0) {
+      this.item.nombreElemento = this.searchbar.keyword;
     } else {
-      this.item.nombreElemento = this.searchbar.getValue();
+      this.item.nombreElemento = this.searchbar.suggestions[0].nombreElemento;
+      this.searchbar.keyword = this.searchbar.suggestions[0].nombreElemento;
     }
   }
 }

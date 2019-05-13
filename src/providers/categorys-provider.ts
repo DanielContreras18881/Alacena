@@ -85,9 +85,9 @@ export class CategorysProvider {
               });
           } else {
             this.cloudStorage.loadCategoriesData(userProfile.uid).then(data => {
-              if (data !== undefined && data !== null) {
-                this.localStorage.setToLocal('categories', data);
-                resolve(data);
+              if (data !== undefined) {
+                this.localStorage.setToLocal('categories', data || []);
+                resolve(data || []);
               } else {
                 this.localStorage
                   .getFromLocal('categories', this.path)

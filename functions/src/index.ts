@@ -1,3 +1,4 @@
+import * as firebase from 'firebase-app';
 import * as functions from 'firebase-functions';
 import * as messaging from 'firebase-messaging';
 import * as nodemailer from 'nodemailer';

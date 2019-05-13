@@ -1,7 +1,8 @@
 [ {
   "category": {
     "categoryName": "",
-    "icon": "images/icons/default.png",
+    "icon": {
+    "src": "assets/images/icons/default.png"},
     "measurement": "KG",
     "unitStep": 0.5
   },
@@ -19,7 +20,8 @@
 }, {
   "category": {
     "categoryName": "",
-    "icon": "images/icons/default.png",
+    "icon": {
+    "src": "assets/images/icons/default.png"},
     "measurement": "KG",
     "unitStep": 0.5
   },
@@ -37,7 +39,8 @@
 }, {
   "category": {
     "categoryName": "",
-    "icon": "images/icons/default.png",
+    "icon": {
+    "src": "assets/images/icons/default.png"},
     "measurement": "KG",
     "unitStep": 0.5
   },
@@ -56,7 +59,8 @@
 }, {
   "category": {
     "categoryName": "",
-    "icon": "images/icons/default.png",
+    "icon": {
+    "src": "assets/images/icons/default.png"},
     "measurement": "KG",
     "unitStep": 0.5
   },
@@ -75,7 +79,8 @@
 }, {
   "category": {
     "categoryName": "",
-    "icon": "images/icons/default.png",
+    "icon": {
+    "src": "assets/images/icons/default.png"},
     "measurement": "KG",
     "unitStep": 0.5
   },
@@ -94,7 +99,8 @@
 }, {
   "category": {
     "categoryName": "",
-    "icon": "images/icons/default.png",
+    "icon": {
+    "src": "assets/images/icons/default.png"},
     "measurement": "KG",
     "unitStep": 0.5
   },

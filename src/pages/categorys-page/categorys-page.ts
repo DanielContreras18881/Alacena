@@ -237,7 +237,9 @@ export class CategorysPage {
     this.log.logs[this.constructor.name].info('addCategory:' + event);
     let newCategory = {
       categoryName: this.translate.instant('NuevaCategoria'),
-      icon: 'images/icons/default.png',
+      icon: {
+        src: 'assets/images/icons/default.png'
+      },
       measurement: this.measurement,
       unitStep: this.unitStep
     };

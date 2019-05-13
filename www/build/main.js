@@ -1,14 +1,14 @@
 webpackJsonp([8],{
 
-/***/ 1011:
+/***/ 1017:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BottomButtonsComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_global_vars_global_vars__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_global_vars_global_vars__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -31,7 +31,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class BottomButtonsComponent
  */
-var BottomButtonsComponent = (function () {
+var BottomButtonsComponent = /** @class */ (function () {
     function BottomButtonsComponent(actionSheetCtrl, alertCtrl, toastCtrl, globalVars, translate) {
         var _this = this;
         this.actionSheetCtrl = actionSheetCtrl;
@@ -318,20 +318,20 @@ var BottomButtonsComponent = (function () {
 
 /***/ }),
 
-/***/ 1012:
+/***/ 1018:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Item; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_listItem__ = __webpack_require__(1013);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_listItem__ = __webpack_require__(1019);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic2_auto_complete__ = __webpack_require__(508);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ngx_translate_core__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic2_auto_complete__ = __webpack_require__(513);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ngx_translate_core__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_categories_categoriesService__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__items_on_list__ = __webpack_require__(1014);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__items_on_list__ = __webpack_require__(1020);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -356,7 +356,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @class Item
  * @implements {OnInit}
  */
-var Item = (function () {
+var Item = /** @class */ (function () {
     function Item(catService, alertCtrl, itemsOnList, toastCtrl, translate) {
         this.catService = catService;
         this.alertCtrl = alertCtrl;
@@ -369,7 +369,7 @@ var Item = (function () {
         this.save = new __WEBPACK_IMPORTED_MODULE_3__angular_core__["w" /* EventEmitter */]();
         this.oldMeasurement = '';
         this.right = true;
-        this.defaultIcon = 'images/icons/default.png';
+        this.defaultIcon = 'assets/images/icons/default.png';
         this.nombreantiguo = this.translate.instant('NuevoElemento');
     }
     Item.prototype.ngOnInit = function () {
@@ -609,11 +609,12 @@ var Item = (function () {
      * @memberof Item
      */
     Item.prototype.seleccionado = function (event) {
-        if (event) {
-            this.item.nombreElemento = event.nombreElemento;
+        if (this.searchbar.suggestions.length === 0) {
+            this.item.nombreElemento = this.searchbar.keyword;
         }
         else {
-            this.item.nombreElemento = this.searchbar.getValue();
+            this.item.nombreElemento = this.searchbar.suggestions[0].nombreElemento;
+            this.searchbar.keyword = this.searchbar.suggestions[0].nombreElemento;
         }
     };
     __decorate([
@@ -654,7 +655,7 @@ var Item = (function () {
     ], Item.prototype, "searchbar", void 0);
     Item = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["n" /* Component */])({
-            selector: 'item',template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/components/item-data/item-data.html"*/'<ion-card>\n  <ion-card-header>\n    <ion-row class="fila" *ngIf="!right">\n      <ion-col col-1 *ngIf="!creating && item.nombreLista===\'LISTA_COMPRA\'">\n        <button [hidden]="!item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">\n          <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon>\n        </button>\n        <button [hidden]="item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">\n          <ion-icon ios="ios-radio-button-off" md="md-radio-button-off"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col col-7 offset-1>\n        <ion-label *ngIf="!creating" class="nameElement">{{item.nombreElemento}}</ion-label>\n        <ion-auto-complete *ngIf="creating" #searchbar [dataProvider]="itemsOnList" (itemSelected)="seleccionado($event)" (autoBlur)="seleccionado($event)"\n          [options]="{ placeholder : nombreantiguo }"></ion-auto-complete>\n      </ion-col>\n      <ion-col col-2 offset-1>\n        <div>\n          <ion-avatar item-left class="category-icon" (click)="editCategory($event)">\n            <img class="icon" src="item.category.icon" *ngIf="item.category" />\n            <img class="icon" src="defaultIcon" *ngIf="!item.category" />\n            <h2 *ngIf="creating" class="labelCategory">{{item.category.categoryName}}</h2>\n          </ion-avatar>\n        </div>\n      </ion-col>\n      <ion-col col-1>\n        <div *ngIf="item.caduca && item.fechaCaducidad">\n          <ion-icon ios="ios-alert" md="md-alert" (click)="showExpiryDate(item)" [ngClass]="checkExpiryDate(item.fechaCaducidad)"></ion-icon>\n        </div>\n      </ion-col>\n    </ion-row>\n    <ion-row class="fila" *ngIf="right">\n      <ion-col col-2>\n        <div *ngIf="item.category">\n          <ion-avatar item-left class="category-icon">\n            <img class="icon" src="{{item.category.icon}}" (click)="editCategory($event)" />\n            <h2 *ngIf="creating" class="labelCategory">{{item.category.categoryName}}</h2>\n          </ion-avatar>\n        </div>\n        <div *ngIf="!item.category">\n          <ion-avatar item-left class="category-icon">\n            <img class="icon" src="images/icons/default.png" (click)="editCategory($event)" />\n          </ion-avatar>\n        </div>\n      </ion-col>\n      <ion-col col-7>\n        <ion-label *ngIf="!creating" class="nameElement">{{item.nombreElemento}}</ion-label>\n        <ion-auto-complete *ngIf="creating" #searchbar [dataProvider]="itemsOnList" (itemSelected)="seleccionado($event)" (autoBlur)="seleccionado($event)"\n          [options]="{ placeholder : nombreantiguo }"></ion-auto-complete>\n      </ion-col>\n      <ion-col col-1>\n        <div *ngIf="item.caduca && item.fechaCaducidad">\n          <ion-icon ios="ios-alert" md="md-alert" (click)="showExpiryDate(item)" [ngClass]="checkExpiryDate(item.fechaCaducidad)"></ion-icon>\n        </div>\n      </ion-col>\n      <ion-col col-1 *ngIf="!creating && item.nombreLista===\'LISTA_COMPRA\'">\n        <button [hidden]="!item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">\n          <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon>\n        </button>\n        <button [hidden]="item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">\n          <ion-icon ios="ios-radio-button-off" md="md-radio-button-off"></ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n    <ion-row class="fila" *ngIf="!creating && !right">\n      <ion-col col-4>\n        <ion-item class="amountItem">\n          <button item-center default large clear (click)="minusElement($event, item, true)" class="amountButton">\n            <ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>\n          </button>\n          <button clear class="amountButton">\n            <ion-badge class="amount amountIcon" large>{{item.cantidadElemento}}</ion-badge>\n          </button>\n          <button item-center default large clear (click)="plusElement($event, item, true)" class="amountButton">\n            <ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>\n          </button>\n        </ion-item>\n      </ion-col>\n      <ion-col col-4>\n        <ion-row>\n          <ion-col col-4>\n            <button item-center secondary clear (click)="moveItem($event)" class="buttonOperation">\n              <ion-icon ios="ios-return-right" md="md-return-right"></ion-icon>\n            </button>\n          </ion-col>\n          <ion-col col-4>\n            <button item-center secondary clear (click)="editItem($event)" class="buttonOperation">\n              <ion-icon ios="ios-create" md="md-create"></ion-icon>\n            </button>\n          </ion-col>\n          <ion-col col-4>\n            <button item-center danger clear (click)="removeItem($event)" class="buttonOperation">\n              <ion-icon ios="ios-trash" md="md-trash"></ion-icon>\n            </button>\n          </ion-col>\n        </ion-row>\n      </ion-col>\n    </ion-row>\n    <ion-row class="fila" *ngIf="!creating && right">\n      <ion-col col-4 offset-4>\n        <ion-row>\n          <ion-col col-4>\n            <button item-center secondary clear (click)="moveItem($event)" class="buttonOperation">\n              <ion-icon ios="ios-return-right" md="md-return-right"></ion-icon>\n            </button>\n          </ion-col>\n          <ion-col col-4>\n            <button item-center secondary clear (click)="editItem($event)" class="buttonOperation">\n              <ion-icon ios="ios-create" md="md-create"></ion-icon>\n            </button>\n          </ion-col>\n          <ion-col col-4>\n            <button item-center danger clear (click)="removeItem($event)" class="buttonOperation">\n              <ion-icon ios="ios-trash" md="md-trash"></ion-icon>\n            </button>\n          </ion-col>\n        </ion-row>\n      </ion-col>\n      <ion-col col-4>\n        <ion-item class="amountItem">\n          <button item-center default large clear (click)="minusElement($event, item, true)" class="amountButton">\n            <ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>\n          </button>\n          <button clear class="amountButton">\n            <ion-badge class="amount amountIcon" large>{{item.cantidadElemento}}</ion-badge>\n          </button>\n          <button item-center default large clear (click)="plusElement($event, item, true)" class="amountButton">\n            <ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>\n          </button>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n    <ion-row *ngIf="creating">\n      <ion-col>\n        <ion-item>\n          <!--<ion-label stacked>MEASUREMENT</ion-label>-->\n          <ion-select class="measurement" id="measurement" [(ngModel)]="item.category.measurement" (ngModelChange)="onChange($event)">\n							<ion-option value="UNIDADES">{{ \'Unidades\' | translate }}</ion-option>\n							<ion-option value="GRAMOS">{{ \'Gramos\' | translate }}</ion-option>\n							<ion-option value="KILOS">{{ \'Kilos\' | translate }}</ion-option>\n							<ion-option value="LITROS">{{ \'Litros\' | translate }}</ion-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n  </ion-card-header>\n  <ion-card-content *ngIf="creating">\n    <ion-row>\n      <ion-label class="labelExpire">{{ \'Caduca\' | translate }}</ion-label>\n      <ion-toggle id="expire" checked="item.caduca" [(ngModel)]="item.caduca" (ngModelChange)="newExpire($event)"></ion-toggle>\n    </ion-row>\n    <ion-row [hidden]="!item.caduca">\n      <ion-item>\n        {{item.fechaCaducidad}}\n        <ion-datetime class="expireDate" id="fechaCaducidad" displayFormat="DD MMMM YYYY" pickerFormat="DD MMMM YYYY" [(ngModel)]="item.fechaCaducidad"\n          [disabled]="!creating" max="3000">\n        </ion-datetime>\n      </ion-item>\n    </ion-row>\n    <ion-row>\n      <ion-col col-5>\n        <p class="labelMinAmout">\n          {{ \'CantidadMinima\' | translate }}\n        </p>\n      </ion-col>\n      <ion-col col-7>\n        <ion-item>\n          <button item-center default large clear (click)="minusElement($event, false)" class="amountButton">\n            <ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>\n          </button>\n          <button clear class="amountButton">\n            <ion-badge class="minimum amountIcon" large>{{item.cantidadMinima}}</ion-badge>\n          </button>\n          <button item-center default large clear (click)="plusElement($event, false)" class="amountButton">\n            <ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>\n          </button>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-5>\n        <p class="labelAmount">\n          {{ \'Cantidad\' | translate }}\n        </p>\n      </ion-col>\n      <ion-col col-7>\n        <ion-item>\n          <button item-center default large clear (click)="minusElement($event, true)" class="amountButton">\n            <ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>\n          </button>\n          <button clear class="amountButton">\n            <ion-badge class="amount amountIcon" large>{{item.cantidadElemento}}</ion-badge>\n          </button>\n          <button item-center default large clear (click)="plusElement($event, true)" class="amountButton">\n            <ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>\n          </button>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n  </ion-card-content>\n</ion-card>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/components/item-data/item-data.html"*/,
+            selector: 'item',template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/components/item-data/item-data.html"*/'<ion-card>\n  <ion-card-header>\n    <ion-row class="fila" *ngIf="!right">\n      <ion-col col-1 *ngIf="!creating && item.nombreLista===\'LISTA_COMPRA\'">\n        <button [hidden]="!item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">\n          <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon>\n        </button>\n        <button [hidden]="item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">\n          <ion-icon ios="ios-radio-button-off" md="md-radio-button-off"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col col-7 offset-1>\n        <ion-label *ngIf="!creating" class="nameElement">{{item.nombreElemento}}</ion-label>\n        <ion-auto-complete *ngIf="creating" #searchbar [dataProvider]="itemsOnList" (itemSelected)="seleccionado($event)" (autoBlur)="seleccionado($event)"\n          [options]="{ placeholder : nombreantiguo }"></ion-auto-complete>\n      </ion-col>\n      <ion-col col-2 offset-1>\n        <div>\n          <ion-avatar item-left class="category-icon" (click)="editCategory($event)">\n            <img class="icon" src="item.category.icon.src" />\n            <h2 *ngIf="creating" class="labelCategory">{{item.category.categoryName}}</h2>\n          </ion-avatar>\n        </div>\n      </ion-col>\n      <ion-col col-1>\n        <div *ngIf="item.caduca && item.fechaCaducidad">\n          <ion-icon ios="ios-alert" md="md-alert" (click)="showExpiryDate(item)" [ngClass]="checkExpiryDate(item.fechaCaducidad)"></ion-icon>\n        </div>\n      </ion-col>\n    </ion-row>\n    <ion-row class="fila" *ngIf="right">\n      <ion-col col-2>\n        <div *ngIf="item.category">\n          <ion-avatar item-left class="category-icon">\n            <img class="icon" src="{{item.category.icon.src}}" (click)="editCategory($event)" />\n            <h2 *ngIf="creating" class="labelCategory">{{item.category.categoryName}}</h2>\n          </ion-avatar>\n        </div>\n      </ion-col>\n      <ion-col col-7>\n        <ion-label *ngIf="!creating" class="nameElement">{{item.nombreElemento}}</ion-label>\n        <ion-auto-complete *ngIf="creating" #searchbar [dataProvider]="itemsOnList" (itemSelected)="seleccionado($event)" (autoBlur)="seleccionado($event)"\n          [options]="{ placeholder : nombreantiguo }"></ion-auto-complete>\n      </ion-col>\n      <ion-col col-1>\n        <div *ngIf="item.caduca && item.fechaCaducidad">\n          <ion-icon ios="ios-alert" md="md-alert" (click)="showExpiryDate(item)" [ngClass]="checkExpiryDate(item.fechaCaducidad)"></ion-icon>\n        </div>\n      </ion-col>\n      <ion-col col-1 *ngIf="!creating && item.nombreLista===\'LISTA_COMPRA\'">\n        <button [hidden]="!item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">\n          <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon>\n        </button>\n        <button [hidden]="item.marked" item-center dark clear (click)="markItem($event)" class="buttonOperation">\n          <ion-icon ios="ios-radio-button-off" md="md-radio-button-off"></ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n    <ion-row class="fila" *ngIf="!creating && !right">\n      <ion-col col-4>\n        <ion-item class="amountItem">\n          <button item-center default large clear (click)="minusElement($event, item, true)" class="amountButton">\n            <ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>\n          </button>\n          <button clear class="amountButton">\n            <ion-badge class="amount amountIcon" large>{{item.cantidadElemento}}</ion-badge>\n          </button>\n          <button item-center default large clear (click)="plusElement($event, item, true)" class="amountButton">\n            <ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>\n          </button>\n        </ion-item>\n      </ion-col>\n      <ion-col col-4>\n        <ion-row>\n          <ion-col col-4>\n            <button item-center secondary clear (click)="moveItem($event)" class="buttonOperation">\n              <ion-icon ios="ios-return-right" md="md-return-right"></ion-icon>\n            </button>\n          </ion-col>\n          <ion-col col-4>\n            <button item-center secondary clear (click)="editItem($event)" class="buttonOperation">\n              <ion-icon ios="ios-create" md="md-create"></ion-icon>\n            </button>\n          </ion-col>\n          <ion-col col-4>\n            <button item-center danger clear (click)="removeItem($event)" class="buttonOperation">\n              <ion-icon ios="ios-trash" md="md-trash"></ion-icon>\n            </button>\n          </ion-col>\n        </ion-row>\n      </ion-col>\n    </ion-row>\n    <ion-row class="fila" *ngIf="!creating && right">\n      <ion-col col-4 offset-4>\n        <ion-row>\n          <ion-col col-4>\n            <button item-center secondary clear (click)="moveItem($event)" class="buttonOperation">\n              <ion-icon ios="ios-return-right" md="md-return-right"></ion-icon>\n            </button>\n          </ion-col>\n          <ion-col col-4>\n            <button item-center secondary clear (click)="editItem($event)" class="buttonOperation">\n              <ion-icon ios="ios-create" md="md-create"></ion-icon>\n            </button>\n          </ion-col>\n          <ion-col col-4>\n            <button item-center danger clear (click)="removeItem($event)" class="buttonOperation">\n              <ion-icon ios="ios-trash" md="md-trash"></ion-icon>\n            </button>\n          </ion-col>\n        </ion-row>\n      </ion-col>\n      <ion-col col-4>\n        <ion-item class="amountItem">\n          <button item-center default large clear (click)="minusElement($event, item, true)" class="amountButton">\n            <ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>\n          </button>\n          <button clear class="amountButton">\n            <ion-badge class="amount amountIcon" large>{{item.cantidadElemento}}</ion-badge>\n          </button>\n          <button item-center default large clear (click)="plusElement($event, item, true)" class="amountButton">\n            <ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>\n          </button>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n    <ion-row *ngIf="creating">\n      <ion-col>\n        <ion-item>\n          <!--<ion-label stacked>MEASUREMENT</ion-label>-->\n          <ion-select class="measurement" id="measurement" [(ngModel)]="item.category.measurement" (ngModelChange)="onChange($event)">\n							<ion-option value="UNIDADES">{{ \'Unidades\' | translate }}</ion-option>\n							<ion-option value="GRAMOS">{{ \'Gramos\' | translate }}</ion-option>\n							<ion-option value="KILOS">{{ \'Kilos\' | translate }}</ion-option>\n							<ion-option value="LITROS">{{ \'Litros\' | translate }}</ion-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n  </ion-card-header>\n  <ion-card-content *ngIf="creating">\n    <ion-row>\n      <ion-label class="labelExpire">{{ \'Caduca\' | translate }}</ion-label>\n      <ion-toggle id="expire" checked="item.caduca" [(ngModel)]="item.caduca" (ngModelChange)="newExpire($event)"></ion-toggle>\n    </ion-row>\n    <ion-row [hidden]="!item.caduca">\n      <ion-item>\n        {{item.fechaCaducidad}}\n        <ion-datetime class="expireDate" id="fechaCaducidad" displayFormat="DD MMMM YYYY" pickerFormat="DD MMMM YYYY" [(ngModel)]="item.fechaCaducidad"\n          [disabled]="!creating" max="3000">\n        </ion-datetime>\n      </ion-item>\n    </ion-row>\n    <ion-row>\n      <ion-col col-5>\n        <p class="labelMinAmout">\n          {{ \'CantidadMinima\' | translate }}\n        </p>\n      </ion-col>\n      <ion-col col-7>\n        <ion-item>\n          <button item-center default large clear (click)="minusElement($event, false)" class="amountButton">\n            <ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>\n          </button>\n          <button clear class="amountButton">\n            <ion-badge class="minimum amountIcon" large>{{item.cantidadMinima}}</ion-badge>\n          </button>\n          <button item-center default large clear (click)="plusElement($event, false)" class="amountButton">\n            <ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>\n          </button>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-5>\n        <p class="labelAmount">\n          {{ \'Cantidad\' | translate }}\n        </p>\n      </ion-col>\n      <ion-col col-7>\n        <ion-item>\n          <button item-center default large clear (click)="minusElement($event, true)" class="amountButton">\n            <ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>\n          </button>\n          <button clear class="amountButton">\n            <ion-badge class="amount amountIcon" large>{{item.cantidadElemento}}</ion-badge>\n          </button>\n          <button item-center default large clear (click)="plusElement($event, true)" class="amountButton">\n            <ion-icon class="amountIcon" default large ios="ios-add-circle" md="md-add-circle"></ion-icon>\n          </button>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n  </ion-card-content>\n</ion-card>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/components/item-data/item-data.html"*/,
             inputs: ['item', 'creating'],
             providers: [__WEBPACK_IMPORTED_MODULE_6__providers_categories_categoriesService__["a" /* CategoriesService */], __WEBPACK_IMPORTED_MODULE_7__items_on_list__["a" /* ItemsOnList */]]
         }),
@@ -671,7 +672,7 @@ var Item = (function () {
 
 /***/ }),
 
-/***/ 1013:
+/***/ 1019:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -682,7 +683,7 @@ var Item = (function () {
  * @export
  * @class ListItem Class with the listItem properties
  */
-var ListItem = (function () {
+var ListItem = /** @class */ (function () {
     function ListItem() {
     }
     return ListItem;
@@ -692,13 +693,13 @@ var ListItem = (function () {
 
 /***/ }),
 
-/***/ 1014:
+/***/ 1020:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ItemsOnList; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_global_vars_global_vars__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_global_vars_global_vars__ = __webpack_require__(27);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -717,7 +718,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @class ItemsOnList
  * @implements {AutoCompleteService}
  */
-var ItemsOnList = (function () {
+var ItemsOnList = /** @class */ (function () {
     function ItemsOnList(globalVars) {
         var _this = this;
         this.globalVars = globalVars;
@@ -735,8 +736,13 @@ var ItemsOnList = (function () {
       * @memberof ItemsOnList
      */
     ItemsOnList.prototype.getResults = function (keyword) {
+        if (!keyword) {
+            return [];
+        }
         return this.items.filter(function (item) {
-            return item.nombreElemento.toLowerCase().indexOf(keyword.toLowerCase()) > -1;
+            if (item.nombreElemento) {
+                return item.nombreElemento.toLowerCase().indexOf(keyword.toLowerCase()) > -1;
+            }
         });
     };
     ItemsOnList = __decorate([
@@ -750,7 +756,7 @@ var ItemsOnList = (function () {
 
 /***/ }),
 
-/***/ 1015:
+/***/ 1021:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -762,19 +768,20 @@ var ItemsOnList = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(144);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_fcm__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_fcm__ = __webpack_require__(191);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_about_page_about_page__ = __webpack_require__(220);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_backup_page_backup_page__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_categorys_page_categorys_page__ = __webpack_require__(222);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_config_page_config_page__ = __webpack_require__(223);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_dashboard_page_dashboard_page__ = __webpack_require__(224);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_items_page_items_page__ = __webpack_require__(225);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_list_page_list_page__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_lists_page_lists_page__ = __webpack_require__(226);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_global_vars_global_vars__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__providers_log_log__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ngx_translate_core__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_insomnia__ = __webpack_require__(600);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_about_page_about_page__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_backup_page_backup_page__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_categorys_page_categorys_page__ = __webpack_require__(224);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_config_page_config_page__ = __webpack_require__(222);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_dashboard_page_dashboard_page__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_items_page_items_page__ = __webpack_require__(226);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_list_page_list_page__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_lists_page_lists_page__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__providers_global_vars_global_vars__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_log_log__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ngx_translate_core__ = __webpack_require__(30);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -803,8 +810,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var Alacena = (function () {
-    function Alacena(platform, menu, app, splashScreen, statusBar, storage, fcm, admobFree, globalVars, log, translateService) {
+
+var Alacena = /** @class */ (function () {
+    function Alacena(platform, menu, app, splashScreen, statusBar, storage, fcm, admobFree, globalVars, log, translateService, insomnia) {
         var _this = this;
         this.menu = menu;
         this.app = app;
@@ -816,8 +824,11 @@ var Alacena = (function () {
         this.globalVars = globalVars;
         this.log = log;
         this.translateService = translateService;
-        this.rootPage = __WEBPACK_IMPORTED_MODULE_12__pages_dashboard_page_dashboard_page__["a" /* DashboardPage */];
+        this.insomnia = insomnia;
+        this.rootPage = __WEBPACK_IMPORTED_MODULE_13__pages_dashboard_page_dashboard_page__["a" /* DashboardPage */];
         this.log.setLogger(this.constructor.name);
+        this.insomnia.keepAwake()
+            .then(function () { return _this.log.logs[_this.constructor.name].info('Awake activated'); }, function () { return _this.log.logs[_this.constructor.name].info('Awake error'); });
         this.translateService.setDefaultLang('es');
         this.translateService.use('es');
         this.globalVars.getConfigData().then(function (data) {
@@ -895,14 +906,14 @@ var Alacena = (function () {
         });
         //List of pages for side menu
         this.pages = [
-            { title: 'Inicio', component: __WEBPACK_IMPORTED_MODULE_12__pages_dashboard_page_dashboard_page__["a" /* DashboardPage */], icon: 'contact' },
-            { title: 'LISTA_COMPRA', component: __WEBPACK_IMPORTED_MODULE_14__pages_list_page_list_page__["a" /* ListPage */], icon: 'basket' },
-            { title: 'Lists', component: __WEBPACK_IMPORTED_MODULE_15__pages_lists_page_lists_page__["a" /* ListsPage */], icon: 'list-box' },
-            { title: 'Items', component: __WEBPACK_IMPORTED_MODULE_13__pages_items_page_items_page__["a" /* ItemsPage */], icon: 'list' },
-            { title: 'Categories', component: __WEBPACK_IMPORTED_MODULE_10__pages_categorys_page_categorys_page__["a" /* CategorysPage */], icon: 'paper' },
-            { title: 'Config', component: __WEBPACK_IMPORTED_MODULE_11__pages_config_page_config_page__["a" /* ConfigPage */], icon: 'cog' },
-            { title: 'Backup', component: __WEBPACK_IMPORTED_MODULE_9__pages_backup_page_backup_page__["a" /* BackupPage */], icon: 'disc' },
-            { title: 'About', component: __WEBPACK_IMPORTED_MODULE_8__pages_about_page_about_page__["a" /* AboutPage */], icon: 'information-circle' }
+            { title: 'Inicio', component: __WEBPACK_IMPORTED_MODULE_13__pages_dashboard_page_dashboard_page__["a" /* DashboardPage */], icon: 'contact' },
+            { title: 'LISTA_COMPRA', component: __WEBPACK_IMPORTED_MODULE_15__pages_list_page_list_page__["a" /* ListPage */], icon: 'basket' },
+            { title: 'Lists', component: __WEBPACK_IMPORTED_MODULE_16__pages_lists_page_lists_page__["a" /* ListsPage */], icon: 'list-box' },
+            { title: 'Items', component: __WEBPACK_IMPORTED_MODULE_14__pages_items_page_items_page__["a" /* ItemsPage */], icon: 'list' },
+            { title: 'Categories', component: __WEBPACK_IMPORTED_MODULE_11__pages_categorys_page_categorys_page__["a" /* CategorysPage */], icon: 'paper' },
+            { title: 'Config', component: __WEBPACK_IMPORTED_MODULE_12__pages_config_page_config_page__["a" /* ConfigPage */], icon: 'cog' },
+            { title: 'Backup', component: __WEBPACK_IMPORTED_MODULE_10__pages_backup_page_backup_page__["a" /* BackupPage */], icon: 'disc' },
+            { title: 'About', component: __WEBPACK_IMPORTED_MODULE_9__pages_about_page_about_page__["a" /* AboutPage */], icon: 'information-circle' }
         ];
     }
     /**
@@ -934,9 +945,10 @@ var Alacena = (function () {
             __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */],
             __WEBPACK_IMPORTED_MODULE_6__ionic_native_fcm__["a" /* FCM */],
             __WEBPACK_IMPORTED_MODULE_1__ionic_native_admob_free__["a" /* AdMobFree */],
-            __WEBPACK_IMPORTED_MODULE_16__providers_global_vars_global_vars__["a" /* GlobalVars */],
-            __WEBPACK_IMPORTED_MODULE_17__providers_log_log__["a" /* Log */],
-            __WEBPACK_IMPORTED_MODULE_18__ngx_translate_core__["c" /* TranslateService */]])
+            __WEBPACK_IMPORTED_MODULE_17__providers_global_vars_global_vars__["a" /* GlobalVars */],
+            __WEBPACK_IMPORTED_MODULE_18__providers_log_log__["a" /* Log */],
+            __WEBPACK_IMPORTED_MODULE_19__ngx_translate_core__["c" /* TranslateService */],
+            __WEBPACK_IMPORTED_MODULE_8__ionic_native_insomnia__["a" /* Insomnia */]])
     ], Alacena);
     return Alacena;
 }());
@@ -945,13 +957,13 @@ var Alacena = (function () {
 
 /***/ }),
 
-/***/ 1016:
+/***/ 1022:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RateServiceProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_app_rate__ = __webpack_require__(1017);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_app_rate__ = __webpack_require__(1023);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -965,7 +977,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var RateServiceProvider = (function () {
+var RateServiceProvider = /** @class */ (function () {
     function RateServiceProvider(platform) {
         var _this = this;
         this.platform = platform;
@@ -1030,7 +1042,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class RemindersProvider
  */
-var RemindersProvider = (function () {
+var RemindersProvider = /** @class */ (function () {
     function RemindersProvider(http, localStorage, log) {
         this.http = http;
         this.localStorage = localStorage;
@@ -1108,7 +1120,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class Log
  */
-var Log = (function () {
+var Log = /** @class */ (function () {
     function Log(loggingService) {
         this.loggingService = loggingService;
         this.data = null;
@@ -1166,7 +1178,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class DefaultIcons
  */
-var DefaultIcons = (function () {
+var DefaultIcons = /** @class */ (function () {
     function DefaultIcons(http, log) {
         this.http = http;
         this.log = log;
@@ -1208,7 +1220,7 @@ var DefaultIcons = (function () {
 
 /***/ }),
 
-/***/ 191:
+/***/ 190:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1237,7 +1249,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class RemindersComponent
  */
-var RemindersComponent = (function () {
+var RemindersComponent = /** @class */ (function () {
     function RemindersComponent(view, params, log) {
         this.view = view;
         this.log = log;
@@ -1292,7 +1304,7 @@ var RemindersComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_app_version__ = __webpack_require__(290);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ngx_translate_core__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ngx_translate_core__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_log_log__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1317,7 +1329,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class AboutPage
  */
-var AboutPage = (function () {
+var AboutPage = /** @class */ (function () {
     function AboutPage(navCtrl, appVersion, plt, formBuilder, http, toastCtrl, log, translate) {
         this.navCtrl = navCtrl;
         this.appVersion = appVersion;
@@ -1430,7 +1442,7 @@ var AboutPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__providers_backup_data_backup_data__ = __webpack_require__(294);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ngx_translate_core__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ngx_translate_core__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_log_log__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1452,7 +1464,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class BackupPage
  */
-var BackupPage = (function () {
+var BackupPage = /** @class */ (function () {
     function BackupPage(alertCtrl, navCtrl, navParams, log, backup, translate) {
         this.alertCtrl = alertCtrl;
         this.navCtrl = navCtrl;
@@ -1533,14 +1545,380 @@ var BackupPage = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ConfigPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_global_vars_global_vars__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_log_log__ = __webpack_require__(14);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+/**
+ * Page to manage config data for the app
+ *
+ * @export
+ * @class ConfigPage
+ */
+var ConfigPage = /** @class */ (function () {
+    function ConfigPage(navCtrl, globalVars, log) {
+        this.navCtrl = navCtrl;
+        this.globalVars = globalVars;
+        this.log = log;
+        this.units = ['UNIDADES', 'LITROS', 'GRAMOS', 'KG'];
+        this.pasos = ['0.25', '0.5', '1', '100'];
+        this.categorySelected = '';
+        this.log.setLogger(this.constructor.name);
+    }
+    ConfigPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        this.log.logs[this.constructor.name].info('ionViewDidLoad');
+        this.globalVars.getConfigData().then(function (result) {
+            _this.configData = result;
+            _this.idiomas = _this.configData.idiomas;
+            _this.idiomaSelecciondo = _this.configData.idiomaDefault;
+            _this.configData.stepDefault = _this.configData.categoryDefault
+                ? _this.configData.categoryDefault.unitStep
+                : 1;
+            _this.configData.unitDefault = _this.configData.categoryDefault
+                ? _this.configData.categoryDefault.measurement
+                : 'UNIDADES';
+            _this.categorySelected = _this.configData.categoryDefault
+                ? _this.configData.categoryDefault.categoryName
+                : 'No Category';
+            _this.globalVars.getCategoriesData().then(function (data) {
+                _this.categories = data;
+                if (_this.categories.filter(function (cat) { return cat.categoryName === 'No Category'; })
+                    .length <= 0) {
+                    _this.categories.push({
+                        icon: { src: 'assets/images/icons/default.png' },
+                        measurement: 'UNIDADES',
+                        categoryName: 'No Category',
+                        unitStep: 1
+                    });
+                }
+            });
+        });
+    };
+    /**
+     * On change it should save the data
+     *
+     * @memberof ConfigPage
+     */
+    ConfigPage.prototype.onChange = function () {
+        var _this = this;
+        this.log.logs[this.constructor.name].info('onChange');
+        this.configData.categoryDefault = this.categories.filter(function (cat) { return cat.categoryName === _this.categorySelected; })[0];
+        this.globalVars.setConfigData(this.configData);
+    };
+    ConfigPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'page-config-page',template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/config-page/config-page.html"*/'<ion-header>\n  <ion-navbar color="dark">\n    <button ion-button menuToggle>\n      <ion-icon ios="ios-menu" md="md-menu"></ion-icon>\n    </button>\n    <ion-title>{{ \'Configuracion\' | translate }}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class="list config">\n\n  <ion-list *ngIf="configData">\n    <ion-card>\n      <ion-card-header>\n        {{ \'ConfiguracionListas\' | translate }}\n      </ion-card-header>\n      <ion-card-content>\n        <ion-item>\n          <ion-label stacked>{{ \'CantidadMinimaDefecto\' | translate }}</ion-label>\n          <ion-input text-right [(ngModel)]="configData.cantidadMinimaDefecto" min="1" type="number" (ngModelChange)=\'onChange()\'></ion-input>\n        </ion-item>\n        <ion-item>\n          <ion-label stacked>{{ \'BorrarAlLlegarA0\' | translate }}</ion-label>\n          <ion-toggle [(ngModel)]="configData.deleteAt0" checked="{{configData.deleteAt0}}" color="dark" (ngModelChange)=\'onChange()\'></ion-toggle>\n        </ion-item>\n        <ion-item>\n          <ion-label stacked>{{ \'PreguntaIncluirListaCompra\' | translate }}</ion-label>\n          <ion-toggle [(ngModel)]="configData.askAddListaCompra" checked="{{configData.askAddListaCompra}}" color="dark" (ngModelChange)=\'onChange()\'></ion-toggle>\n        </ion-item>\n        <ion-item>\n          <ion-label stacked>{{ \'AvisosFechaCaducidad\' | translate }}</ion-label>\n          <ion-toggle [(ngModel)]="configData.expireReminders" checked="{{configData.expireReminders}}" color="dark" (ngModelChange)=\'onChange()\'></ion-toggle>\n        </ion-item>\n        <ion-item>\n          <ion-label stacked>{{ \'Diestro\' | translate }}</ion-label>\n          <ion-toggle [(ngModel)]="configData.rightHand" checked="{{configData.rightHand}}" color="dark" (ngModelChange)=\'onChange()\'></ion-toggle>\n        </ion-item>\n      </ion-card-content>\n    </ion-card>\n    <ion-card>\n      <ion-card-header>\n        {{ \'ConfiguracionCategorias\' | translate }}\n      </ion-card-header>\n      <ion-card-content>\n        <ion-item>\n          <ion-label stacked>{{ \'CategoriaDefecto\' | translate }}</ion-label>\n          <ion-select text-right [(ngModel)]="categorySelected" (ngModelChange)=\'onChange()\'>\n            <ion-option *ngFor="let category of categories" value="{{category.categoryName}}">\n              {{category.categoryName | translate}}\n            </ion-option>\n          </ion-select>\n        </ion-item>\n        <ion-item>\n          <ion-label stacked>{{ \'PasoMedidaDefecto\' | translate }}</ion-label>\n          <ion-select text-right [(ngModel)]="configData.stepDefault" (ngModelChange)=\'onChange()\'>\n            <ion-option *ngFor="let paso of pasos" value="{{paso}}">\n              {{paso}}\n            </ion-option>\n          </ion-select>\n        </ion-item>\n        <ion-item>\n          <ion-label stacked>{{ \'UnidadDefecto\' | translate }}</ion-label>\n          <ion-select text-right [(ngModel)]="configData.unitDefault" (ngModelChange)=\'onChange()\'>\n            <ion-option *ngFor="let unit of units" value="{{unit}}">\n              {{unit | titlecase | translate}}\n            </ion-option>\n          </ion-select>\n        </ion-item>\n      </ion-card-content>\n    </ion-card>\n    <ion-card>\n      <ion-card-header>\n        {{ \'ConfiguracionApp\' | translate }}\n      </ion-card-header>\n      <ion-card-content>\n        <ion-item>\n          <ion-label stacked>{{ \'Idioma\' | translate }}</ion-label>\n          <ion-select text-right [(ngModel)]="configData.idiomaDefault" (ngModelChange)=\'onChange()\'>\n            <ion-option *ngFor="let idioma of idiomas" value="{{idioma.id_iso}}">{{idioma.idiomaSeleccionado}}</ion-option>\n          </ion-select>\n        </ion-item>\n      </ion-card-content>\n    </ion-card>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/config-page/config-page.html"*/
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_global_vars_global_vars__["a" /* GlobalVars */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_global_vars_global_vars__["a" /* GlobalVars */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__providers_log_log__["a" /* Log */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_log_log__["a" /* Log */]) === "function" && _c || Object])
+    ], ConfigPage);
+    return ConfigPage;
+    var _a, _b, _c;
+}());
+
+//# sourceMappingURL=config-page.js.map
+
+/***/ }),
+
+/***/ 223:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_global_vars_global_vars__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__list_page_list_page__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_contacts__ = __webpack_require__(467);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_log_log__ = __webpack_require__(14);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+/**
+ * Page to manage the list of lists
+ *
+ * @export
+ * @class ListsPage
+ */
+var ListsPage = /** @class */ (function () {
+    function ListsPage(actionSheetCtrl, nav, navParams, mod, alertCtrl, globalVars, toastCtrl, log, translate, contacts) {
+        this.actionSheetCtrl = actionSheetCtrl;
+        this.nav = nav;
+        this.navParams = navParams;
+        this.mod = mod;
+        this.alertCtrl = alertCtrl;
+        this.globalVars = globalVars;
+        this.toastCtrl = toastCtrl;
+        this.log = log;
+        this.translate = translate;
+        this.contacts = contacts;
+        this.type = 'List';
+        this.lists = [];
+        this.log.setLogger(this.constructor.name);
+    }
+    ListsPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        this.log.logs[this.constructor.name].info('ionViewDidLoad');
+        this.globalVars.getListsData().then(function (data) {
+            _this.lists = data;
+            _this.reorderAllowed = false;
+        });
+    };
+    /**
+     * Event to allow reorder the lists or not
+     *
+     * @param {any} event
+     * @memberof ListsPage
+     */
+    ListsPage.prototype.reorder = function (event) {
+        this.reorderAllowed = !this.reorderAllowed;
+    };
+    /**
+     * Event to reorder lists as user select
+     *
+     * @param {any} indexes
+     * @memberof ListsPage
+     */
+    ListsPage.prototype.reorderItems = function (indexes) {
+        var element = this.lists[indexes.from];
+        this.lists.splice(indexes.from, 1);
+        this.lists.splice(indexes.to, 0, element);
+    };
+    /**
+     * Event to remove a list
+     *
+     * @param {any} event
+     * @param {string} name
+     * @memberof ListsPage
+     */
+    ListsPage.prototype.removeList = function (event, name) {
+        var _this = this;
+        this.log.logs[this.constructor.name].info('removeList:' + name);
+        var confirm = this.alertCtrl.create({
+            title: this.translate.instant('Borrando', { value: name }),
+            message: this.translate.instant('PreguntaBorrarLista', { value: name }),
+            buttons: [
+                {
+                    text: this.translate.instant('No'),
+                    handler: function () { }
+                },
+                {
+                    text: this.translate.instant('Si'),
+                    handler: function () {
+                        _this.lists = _this.lists.filter(function (list) { return list.nombreLista !== name; });
+                        _this.globalVars.setListsData(_this.lists);
+                        _this.globalVars.removetItemListData(name);
+                    }
+                }
+            ]
+        });
+        confirm.present();
+    };
+    /**
+     * Event to edit the color of a list
+     *
+     * @param {any} event
+     * @param {List} list
+     * @memberof ListsPage
+     */
+    ListsPage.prototype.editColor = function (event, list) {
+        var _this = this;
+        this.log.logs[this.constructor.name].info('editColor:' + list);
+        this.globalVars.getColorsData().then(function (data) {
+            var buttons = [];
+            var colorsList = JSON.parse(JSON.stringify(data));
+            colorsList.forEach(function (colorData) {
+                if (colorData.cssClass !== list.colorLista) {
+                    buttons.push({
+                        text: colorData.color,
+                        cssClass: colorData.cssClass,
+                        handler: function () {
+                            list.colorLista = colorData.cssClass;
+                            list.colorBotones = colorData.buttons;
+                            _this.globalVars.setListsData(_this.lists);
+                        }
+                    });
+                }
+            });
+            var actionSheet = _this.actionSheetCtrl.create({
+                title: _this.translate.instant('CambiarColorLista'),
+                buttons: buttons
+            });
+            actionSheet.present();
+        });
+    };
+    /**
+     * Event to edit the name of a list
+     *
+     * @param {any} event
+     * @param {List} list
+     * @memberof ListsPage
+     */
+    ListsPage.prototype.editList = function (event, list) {
+        var _this = this;
+        this.log.logs[this.constructor.name].info('editList:' + list);
+        var oldName = list.nombreLista;
+        var edit = this.alertCtrl.create({
+            title: this.translate.instant('EditarLista'),
+            inputs: [
+                {
+                    name: 'nombreLista',
+                    value: oldName,
+                    type: 'text',
+                    placeholder: this.translate.instant('Nombre')
+                }
+            ],
+            buttons: [
+                {
+                    text: this.translate.instant('Cancelar'),
+                    role: 'cancel'
+                },
+                {
+                    text: this.translate.instant('Confirmar'),
+                    handler: function (data) {
+                        _this.globalVars.getListData(oldName).then(function (listData) {
+                            list.nombreLista = data.nombreLista;
+                            _this.globalVars.setListsData(_this.lists);
+                            _this.globalVars.setListData(data.nombreLista, listData);
+                            _this.globalVars.removetItemListData(oldName);
+                        });
+                    }
+                }
+            ]
+        });
+        edit.present();
+    };
+    /**
+     * Event to add a new list
+     *
+     * @param {string} newList
+     * @memberof ListsPage
+     */
+    ListsPage.prototype.addList = function (newList) {
+        this.log.logs[this.constructor.name].info('addList:' + newList);
+        if (this.lists.filter(function (list) { return list.nombreLista.toLowerCase() === newList.toLowerCase(); }).length === 0) {
+            this.lists.push({
+                nombreLista: newList,
+                colorLista: 'white-list',
+                colorBotones: 'black-buttons',
+                listaEditable: true
+            });
+            this.globalVars.setListsData(this.lists);
+            this.globalVars.setListData(newList, []);
+        }
+        else {
+            var toast = this.toastCtrl.create({
+                message: this.translate.instant('Esta lista ya existe!'),
+                duration: 1000,
+                position: 'bottom'
+            });
+            toast.present();
+        }
+    };
+    /**
+     * Event to remove a list of lists selected
+     *
+     * @param {string[]} removed
+     * @memberof ListsPage
+     */
+    ListsPage.prototype.removeLists = function (removed) {
+        var _this = this;
+        this.log.logs[this.constructor.name].info('removeLists:' + removed);
+        this.lists = this.lists.filter(function (list) { return removed.indexOf(list.nombreLista) < 0; });
+        this.globalVars.setListsData(this.lists);
+        removed.forEach(function (listToRemove) {
+            _this.globalVars.removetItemListData(listToRemove);
+        });
+    };
+    /**
+     * Event to navigate to selected list
+     *
+     * @param {any} event
+     * @param {List} list
+     * @memberof ListsPage
+     */
+    ListsPage.prototype.listSelected = function (event, list) {
+        this.nav.push(__WEBPACK_IMPORTED_MODULE_4__list_page_list_page__["a" /* ListPage */], {
+            list: list
+        });
+    };
+    ListsPage.prototype.shareList = function (event, list) {
+        this.contacts.find(["*"])
+            .then(function (res) {
+            var datosMostar = [];
+            res.map(function (item) {
+                // TODO:
+                //  Filtrar por los usuarios de la app en firebase, por email y/o teléfono
+                //  Mostrar selector de usuarios, diferenciando entre contactos y contactos con la app
+                //  Enviar notificación al usuario a través de la función de firebase
+                console.log({ funcion: 'CargarListaContactos', item: item });
+            });
+        }, function (error) {
+            console.log({ error: error });
+        });
+    };
+    ListsPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'page-lists-page',template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/lists-page/lists-page.html"*/'<ion-header>\n	<ion-navbar color="dark">\n		<button ion-button menuToggle>\n			<ion-icon ios="ios-menu" md="md-menu"></ion-icon>\n		</button>\n		<ion-title>{{ \'Listas\' | translate }}</ion-title>\n		<ion-buttons end>\n			<button (click)="reorder($event)">\n				<ion-icon secondary class="reorderAllowed icon-toolbar" *ngIf="reorderAllowed" ios="ios-repeat" md="md-repeat"></ion-icon>\n				<ion-icon secondary class="reorderNotAllowed icon-toolbar" *ngIf="!reorderAllowed" ios="ios-repeat" md="md-repeat"></ion-icon>\n			</button>\n		</ion-buttons>\n	</ion-navbar>\n</ion-header>\n\n<ion-content padding class="lists">\n	<ion-list inset reorder="{{reorderAllowed}}" (ionItemReorder)="reorderItems($event)">\n		<div *ngFor="let list of lists">\n			<ion-card ion-item *ngIf="list.nombreLista!==\'LISTA_COMPRA\'" class="listCard" [ngClass]="list.colorLista">\n				<ion-card-header>\n					<ion-grid>\n						<ion-row>\n							<ion-col (click)="listSelected($event, list.nombreLista)">\n								<ion-icon class="listName" dark large ios="ios-clipboard-outline" md="md-clipboard" [ngClass]="list.colorBotones">\n									{{list.nombreLista}}\n								</ion-icon>\n							</ion-col>\n						</ion-row>\n						<ion-row>\n							<ion-col col-2 offset-6>\n								<button item-center secondary clear (click)="editList($event,list)" class="buttonOperation" *ngIf="list.listaEditable" [ngClass]="list.colorBotones">\n									<ion-icon ios="ios-create" md="md-create"></ion-icon>\n								</button>\n							</ion-col>\n							<ion-col col-2>\n								<button item-center secondary clear (click)="editColor($event,list)" class="buttonOperation" *ngIf="list.listaEditable" [ngClass]="list.colorBotones">\n									<ion-icon ios="ios-color-palette" md="md-color-palette"></ion-icon>\n								</button>\n							</ion-col>\n							<ion-col col-2>\n								<button item-center danger clear (click)="removeList($event, list.nombreLista)" class="buttonOperation" *ngIf="list.listaEditable"\n								 [ngClass]="list.colorBotones">\n									<ion-icon ios="ios-trash" md="md-trash"></ion-icon>\n								</button>\n							</ion-col>\n						</ion-row>\n					</ion-grid>\n				</ion-card-header>\n				<ion-card-content>\n					<p class="info-list-items">\n						<ion-icon large primary ios="ios-cart" md="md-cart" class="iconListAdvice" [ngClass]="list.colorBotones">\n							Tienes\n							<ion-badge large item-right class="badge-info-list-items">4</ion-badge>elementos que deberías comprar\n						</ion-icon>\n					</p>\n					<p class="info-list-items">\n						<ion-icon large danger ios="ios-warning" md="md-warning" class="iconListAdvice" [ngClass]="list.colorBotones">\n							Tienes\n							<ion-badge large item-right class="badge-info-list-items">3</ion-badge>elementos cercanos a caducar\n						</ion-icon>\n					</p>\n				</ion-card-content>\n			</ion-card>\n		</div>\n	</ion-list>\n</ion-content>\n<ion-footer>\n	<bottom-buttons-component [type]="type" [object]="lists" [add]=true [remove]=true [notifications]=false [favorites]=false\n	 (finishedAdd)="addList($event)" (finishedRemoved)="removeLists($event,lists)">\n	</bottom-buttons-component>\n</ion-footer>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/lists-page/lists-page.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_global_vars_global_vars__["a" /* GlobalVars */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_6__providers_log_log__["a" /* Log */],
+            __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__["c" /* TranslateService */],
+            __WEBPACK_IMPORTED_MODULE_5__ionic_native_contacts__["a" /* Contacts */]])
+    ], ListsPage);
+    return ListsPage;
+}());
+
+//# sourceMappingURL=lists-page.js.map
+
+/***/ }),
+
+/***/ 224:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CategorysPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pipes_orderBy__ = __webpack_require__(89);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_categories_categoriesService__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_global_vars_global_vars__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_category_info_category_info__ = __webpack_require__(463);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_global_vars_global_vars__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_category_info_category_info__ = __webpack_require__(469);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_log_log__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1566,7 +1944,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class CategorysPage
  */
-var CategorysPage = (function () {
+var CategorysPage = /** @class */ (function () {
     function CategorysPage(navCtrl, mod, alertCtrl, catService, globalVars, order, toastCtrl, log, translate) {
         this.navCtrl = navCtrl;
         this.mod = mod;
@@ -1766,7 +2144,9 @@ var CategorysPage = (function () {
         this.log.logs[this.constructor.name].info('addCategory:' + event);
         var newCategory = {
             categoryName: this.translate.instant('NuevaCategoria'),
-            icon: 'images/icons/default.png',
+            icon: {
+                src: 'assets/images/icons/default.png'
+            },
             measurement: this.measurement,
             unitStep: this.unitStep
         };
@@ -1856,7 +2236,7 @@ var CategorysPage = (function () {
     };
     CategorysPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-categorys-page',template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/categorys-page/categorys-page.html"*/'<ion-header>\n	<ion-navbar color="dark" [hidden]="searchBar">\n		<button ion-button menuToggle>\n			<ion-icon ios="ios-menu" md="md-menu"></ion-icon>\n		</button>\n		<ion-title>{{ \'Categorias\' | translate }}</ion-title>\n		<ion-buttons end>\n			<button (click)="reorder($event)">\n				<ion-icon ion-button secondary class="reorderAllowed icon-toolbar" *ngIf="reorderAllowed" ios="ios-repeat" md="md-repeat"></ion-icon>\n				<ion-icon ion-button secondary class="reorderNotAllowed icon-toolbar" *ngIf="!reorderAllowed" ios="ios-repeat" md="md-repeat"></ion-icon>\n			</button>\n			<button ion-button secondary (click)="toggleSearchBar($event)">\n				<ion-icon class="icon-toolbar" ios="ios-search" md="md-search"></ion-icon>\n			</button>\n		</ion-buttons>\n	</ion-navbar>\n	<ion-searchbar [hidden]="!searchBar" [(ngModel)]="searchCategory" [showCancelButton]="true"\n                  [debounce]=500 [autocomplete]="true"\n                  (ionInput)="searchMatches($event)" (ionCancel)="toggleSearchBar($event)">\n	</ion-searchbar>\n</ion-header>\n\n<ion-content padding class="categories">\n	<ion-list>\n		<ion-card *ngFor="let category of categories; let i = index">\n			<ion-card-header>\n				<ion-row>\n					<ion-col width-66>\n						<ion-avatar item-left class="category-icon">\n							<img class="icon" src="{{category.icon}}" (click)="changeCategoryIcon($event, category)" />\n						</ion-avatar>\n					</ion-col>\n					<ion-col width-15>\n						<button item-center secondary clear (click)="editCategory($event,category)" class="buttonOperation">\n							<ion-icon ios="ios-create" md="md-create"></ion-icon>\n						</button>\n					</ion-col>\n					<ion-col width-15>\n						<button class="removeCategoryButton" item-center danger large clear (click)="deleteCategory($event, category)">\n							<ion-icon ios="ios-trash" md="md-trash"></ion-icon>\n						</button>\n					</ion-col>\n				</ion-row>\n				<ion-row>\n					<ion-col width-33>\n						<ion-input readonly="true" class="categoryName" type="text" [(ngModel)]="category.categoryName">\n						</ion-input>\n					</ion-col>\n					<ion-col width-33>\n						<ion-item>\n							<ion-select readonly="true" class="categoryMeasurement" id="measurement" [(ngModel)]="category.measurement" (ngModelChange)="onMeasurementChange($event,category)">\n                <ion-option value="UNIDADES">{{ \'Unidades\' | translate }}</ion-option>\n                <ion-option value="GRAMOS">{{ \'Gramos\' | translate }}</ion-option>\n                <ion-option value="KILOS">{{ \'Kilos\' | translate }}</ion-option>\n                <ion-option value="LITROS">{{ \'Litros\' | translate }}</ion-option>\n							</ion-select>\n						</ion-item>\n					</ion-col>\n					<ion-col width-25>\n						<ion-item readonly="true" class="measurementUnitStep">\n							<ion-label stacked>{{ \'PasoMedida\' | translate }}</ion-label>\n							<ion-input text-right [(ngModel)]="category.unitStep" min="1" type="number"></ion-input>\n						</ion-item>\n					</ion-col>\n				</ion-row>\n			</ion-card-header>\n		</ion-card>\n	</ion-list>\n</ion-content>\n<ion-footer>\n	<bottom-buttons-component [type]="type" [object]="categories" [add]=true [remove]=true [notifications]=false [favorites]=false\n	 (finishedAdd)="addCategory($event)" (finishedRemoved)="removeElements($event,category)">\n	</bottom-buttons-component>\n</ion-footer>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/categorys-page/categorys-page.html"*/,
+            selector: 'page-categorys-page',template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/categorys-page/categorys-page.html"*/'<ion-header>\n	<ion-navbar color="dark" [hidden]="searchBar">\n		<button ion-button menuToggle>\n			<ion-icon ios="ios-menu" md="md-menu"></ion-icon>\n		</button>\n		<ion-title>{{ \'Categorias\' | translate }}</ion-title>\n		<ion-buttons end>\n			<button (click)="reorder($event)">\n				<ion-icon ion-button secondary class="reorderAllowed icon-toolbar" *ngIf="reorderAllowed" ios="ios-repeat" md="md-repeat"></ion-icon>\n				<ion-icon ion-button secondary class="reorderNotAllowed icon-toolbar" *ngIf="!reorderAllowed" ios="ios-repeat" md="md-repeat"></ion-icon>\n			</button>\n			<button ion-button secondary (click)="toggleSearchBar($event)">\n				<ion-icon class="icon-toolbar" ios="ios-search" md="md-search"></ion-icon>\n			</button>\n		</ion-buttons>\n	</ion-navbar>\n	<ion-searchbar [hidden]="!searchBar" [(ngModel)]="searchCategory" [showCancelButton]="true"\n                  [debounce]=500 [autocomplete]="true"\n                  (ionInput)="searchMatches($event)" (ionCancel)="toggleSearchBar($event)">\n	</ion-searchbar>\n</ion-header>\n\n<ion-content padding class="categories">\n	<ion-list>\n		<ion-card *ngFor="let category of categories; let i = index">\n			<ion-card-header>\n				<ion-row>\n					<ion-col width-66>\n						<ion-avatar item-left class="category-icon">\n							<img class="icon" src="{{category.icon.src}}" (click)="changeCategoryIcon($event, category)" />\n						</ion-avatar>\n					</ion-col>\n					<ion-col width-15>\n						<button item-center secondary clear (click)="editCategory($event,category)" class="buttonOperation">\n							<ion-icon ios="ios-create" md="md-create"></ion-icon>\n						</button>\n					</ion-col>\n					<ion-col width-15>\n						<button class="removeCategoryButton" item-center danger large clear (click)="deleteCategory($event, category)">\n							<ion-icon ios="ios-trash" md="md-trash"></ion-icon>\n						</button>\n					</ion-col>\n				</ion-row>\n				<ion-row>\n					<ion-col width-33>\n						<ion-input readonly="true" class="categoryName" type="text" [(ngModel)]="category.categoryName">\n						</ion-input>\n					</ion-col>\n					<ion-col width-33>\n						<ion-item>\n							<ion-select readonly="true" class="categoryMeasurement" id="measurement" [(ngModel)]="category.measurement" (ngModelChange)="onMeasurementChange($event,category)">\n                <ion-option value="UNIDADES">{{ \'Unidades\' | translate }}</ion-option>\n                <ion-option value="GRAMOS">{{ \'Gramos\' | translate }}</ion-option>\n                <ion-option value="KILOS">{{ \'Kilos\' | translate }}</ion-option>\n                <ion-option value="LITROS">{{ \'Litros\' | translate }}</ion-option>\n							</ion-select>\n						</ion-item>\n					</ion-col>\n					<ion-col width-25>\n						<ion-item readonly="true" class="measurementUnitStep">\n							<ion-label stacked>{{ \'PasoMedida\' | translate }}</ion-label>\n							<ion-input text-right [(ngModel)]="category.unitStep" min="1" type="number"></ion-input>\n						</ion-item>\n					</ion-col>\n				</ion-row>\n			</ion-card-header>\n		</ion-card>\n	</ion-list>\n</ion-content>\n<ion-footer>\n	<bottom-buttons-component [type]="type" [object]="categories" [add]=true [remove]=true [notifications]=false [favorites]=false\n	 (finishedAdd)="addCategory($event)" (finishedRemoved)="removeElements($event,category)">\n	</bottom-buttons-component>\n</ion-footer>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/categorys-page/categorys-page.html"*/,
             providers: [__WEBPACK_IMPORTED_MODULE_3__pipes_orderBy__["a" /* OrderBy */], __WEBPACK_IMPORTED_MODULE_4__providers_categories_categoriesService__["a" /* CategoriesService */]]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
@@ -1876,124 +2256,30 @@ var CategorysPage = (function () {
 
 /***/ }),
 
-/***/ 223:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ConfigPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_global_vars_global_vars__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_log_log__ = __webpack_require__(14);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-/**
- * Page to manage config data for the app
- *
- * @export
- * @class ConfigPage
- */
-var ConfigPage = (function () {
-    function ConfigPage(navCtrl, globalVars, log) {
-        this.navCtrl = navCtrl;
-        this.globalVars = globalVars;
-        this.log = log;
-        this.units = ['UNIDADES', 'LITROS', 'GRAMOS', 'KG'];
-        this.pasos = ['0.25', '0.5', '1', '100'];
-        this.categorySelected = '';
-        this.log.setLogger(this.constructor.name);
-    }
-    ConfigPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        this.log.logs[this.constructor.name].info('ionViewDidLoad');
-        this.globalVars.getConfigData().then(function (result) {
-            _this.configData = result;
-            _this.idiomas = _this.configData.idiomas;
-            _this.idiomaSelecciondo = _this.configData.idiomaDefault;
-            _this.configData.stepDefault = _this.configData.categoryDefault
-                ? _this.configData.categoryDefault.unitStep
-                : 1;
-            _this.configData.unitDefault = _this.configData.categoryDefault
-                ? _this.configData.categoryDefault.measurement
-                : 'UNIDADES';
-            _this.categorySelected = _this.configData.categoryDefault
-                ? _this.configData.categoryDefault.categoryName
-                : 'No Category';
-            _this.globalVars.getCategoriesData().then(function (data) {
-                _this.categories = data;
-                if (_this.categories.filter(function (cat) { return cat.categoryName === 'No Category'; })
-                    .length <= 0) {
-                    _this.categories.push({
-                        icon: 'images/icons/default.png',
-                        measurement: 'UNIDADES',
-                        categoryName: 'No Category',
-                        unitStep: 1
-                    });
-                }
-            });
-        });
-    };
-    /**
-     * On change it should save the data
-     *
-     * @memberof ConfigPage
-     */
-    ConfigPage.prototype.onChange = function () {
-        var _this = this;
-        this.log.logs[this.constructor.name].info('onChange');
-        this.configData.categoryDefault = this.categories.filter(function (cat) { return cat.categoryName === _this.categorySelected; })[0];
-        this.globalVars.setConfigData(this.configData);
-    };
-    ConfigPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-config-page',template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/config-page/config-page.html"*/'<ion-header>\n  <ion-navbar color="dark">\n    <button ion-button menuToggle>\n      <ion-icon ios="ios-menu" md="md-menu"></ion-icon>\n    </button>\n    <ion-title>{{ \'Configuracion\' | translate }}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class="list config">\n\n  <ion-list *ngIf="configData">\n    <ion-card>\n      <ion-card-header>\n        {{ \'ConfiguracionListas\' | translate }}\n      </ion-card-header>\n      <ion-card-content>\n        <ion-item>\n          <ion-label stacked>{{ \'CantidadMinimaDefecto\' | translate }}</ion-label>\n          <ion-input text-right [(ngModel)]="configData.cantidadMinimaDefecto" min="1" type="number" (ngModelChange)=\'onChange()\'></ion-input>\n        </ion-item>\n        <ion-item>\n          <ion-label stacked>{{ \'BorrarAlLlegarA0\' | translate }}</ion-label>\n          <ion-toggle [(ngModel)]="configData.deleteAt0" checked="{{configData.deleteAt0}}" color="dark" (ngModelChange)=\'onChange()\'></ion-toggle>\n        </ion-item>\n        <ion-item>\n          <ion-label stacked>{{ \'PreguntaIncluirListaCompra\' | translate }}</ion-label>\n          <ion-toggle [(ngModel)]="configData.askAddListaCompra" checked="{{configData.askAddListaCompra}}" color="dark" (ngModelChange)=\'onChange()\'></ion-toggle>\n        </ion-item>\n        <ion-item>\n          <ion-label stacked>{{ \'AvisosFechaCaducidad\' | translate }}</ion-label>\n          <ion-toggle [(ngModel)]="configData.expireReminders" checked="{{configData.expireReminders}}" color="dark" (ngModelChange)=\'onChange()\'></ion-toggle>\n        </ion-item>\n        <ion-item>\n          <ion-label stacked>{{ \'Diestro\' | translate }}</ion-label>\n          <ion-toggle [(ngModel)]="configData.rightHand" checked="{{configData.rightHand}}" color="dark" (ngModelChange)=\'onChange()\'></ion-toggle>\n        </ion-item>\n      </ion-card-content>\n    </ion-card>\n    <ion-card>\n      <ion-card-header>\n        {{ \'ConfiguracionCategorias\' | translate }}\n      </ion-card-header>\n      <ion-card-content>\n        <ion-item>\n          <ion-label stacked>{{ \'CategoriaDefecto\' | translate }}</ion-label>\n          <ion-select text-right [(ngModel)]="categorySelected" (ngModelChange)=\'onChange()\'>\n            <ion-option *ngFor="let category of categories" value="{{category.categoryName}}">\n              {{category.categoryName | translate}}\n            </ion-option>\n          </ion-select>\n        </ion-item>\n        <ion-item>\n          <ion-label stacked>{{ \'PasoMedidaDefecto\' | translate }}</ion-label>\n          <ion-select text-right [(ngModel)]="configData.stepDefault" (ngModelChange)=\'onChange()\'>\n            <ion-option *ngFor="let paso of pasos" value="{{paso}}">\n              {{paso}}\n            </ion-option>\n          </ion-select>\n        </ion-item>\n        <ion-item>\n          <ion-label stacked>{{ \'UnidadDefecto\' | translate }}</ion-label>\n          <ion-select text-right [(ngModel)]="configData.unitDefault" (ngModelChange)=\'onChange()\'>\n            <ion-option *ngFor="let unit of units" value="{{unit}}">\n              {{unit | titlecase | translate}}\n            </ion-option>\n          </ion-select>\n        </ion-item>\n      </ion-card-content>\n    </ion-card>\n    <ion-card>\n      <ion-card-header>\n        {{ \'ConfiguracionApp\' | translate }}\n      </ion-card-header>\n      <ion-card-content>\n        <ion-item>\n          <ion-label stacked>{{ \'Idioma\' | translate }}</ion-label>\n          <ion-select text-right [(ngModel)]="configData.idiomaDefault" (ngModelChange)=\'onChange()\'>\n            <ion-option *ngFor="let idioma of idiomas" value="{{idioma.id_iso}}">{{idioma.idiomaSeleccionado}}</ion-option>\n          </ion-select>\n        </ion-item>\n      </ion-card-content>\n    </ion-card>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/config-page/config-page.html"*/
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_global_vars_global_vars__["a" /* GlobalVars */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_log_log__["a" /* Log */]])
-    ], ConfigPage);
-    return ConfigPage;
-}());
-
-//# sourceMappingURL=config-page.js.map
-
-/***/ }),
-
-/***/ 224:
+/***/ 225:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DashboardPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_fcm__ = __webpack_require__(188);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_items_needed_component_items_needed_component__ = __webpack_require__(464);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_phonegap_local_notification__ = __webpack_require__(189);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_local_notifications__ = __webpack_require__(190);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ngx_translate_core__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_fcm__ = __webpack_require__(191);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_items_needed_component_items_needed_component__ = __webpack_require__(470);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_phonegap_local_notification__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_local_notifications__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ngx_translate_core__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_reminders_provider__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_auth_auth_service__ = __webpack_require__(466);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_auth_auth_service__ = __webpack_require__(472);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_google_plus__ = __webpack_require__(143);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_firebase__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_moment__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_reminders_component_reminders_component__ = __webpack_require__(191);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_items_best_before_component_items_best_before_component__ = __webpack_require__(467);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_reminders_component_reminders_component__ = __webpack_require__(190);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_items_best_before_component_items_best_before_component__ = __webpack_require__(473);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__list_page_list_page__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pipes_orderBy__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_global_vars_global_vars__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_global_vars_global_vars__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__providers_log_log__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2028,7 +2314,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class DashboardPage
  */
-var DashboardPage = (function () {
+var DashboardPage = /** @class */ (function () {
     function DashboardPage(navCtrl, alertCtrl, toastCtrl, plt, fcm, order, googlePlus, globalVars, authService, remindersData, localNotification, localNotifications, mod, log, translate) {
         this.navCtrl = navCtrl;
         this.alertCtrl = alertCtrl;
@@ -2310,7 +2596,7 @@ var DashboardPage = (function () {
     };
     DashboardPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_8__angular_core__["n" /* Component */])({
-            selector: 'page-dashboard-page',template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/dashboard-page/dashboard-page.html"*/'<ion-header>\n  <ion-navbar color="dark">\n    <button ion-button menuToggle>\n      <ion-icon ios="ios-menu" md="md-menu"></ion-icon>\n    </button>\n    <ion-title>{{ \'Inicio\' | translate }}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding class="dashboard">\n\n  <div id="recaptcha-container"></div>\n\n  <ion-list>\n    <ion-card *ngIf="!userProfile">\n      <ion-card-header>\n        <ion-grid>\n          <ion-row>\n            <ion-col col-4>\n              <h4 class="userAccountLabel">{{ \'ConectarCon\' | translate }}</h4>\n            </ion-col>\n            <ion-col col-8>\n              <ion-row>\n                <ion-col col-6>\n                  <button type="button" class="mailLogo" ion-button icon-only (click)="phoneLogin()">\n                    <ion-icon ios="ios-call" md="md-call"></ion-icon>\n                  </button>\n                </ion-col>\n                <!--<ion-col col-6>\n                  <button type="button" class="twLogo" ion-button icon-only (click)="twitterLogin()">\n                    <ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon>\n                  </button>\n                </ion-col>\n              </ion-row>\n              <ion-row>\n                <ion-col col-6>\n                  <button type="button" class="fbLogo" ion-button icon-only (click)="facebookLogin()">\n                    <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>\n                  </button>\n                </ion-col>-->\n                <ion-col col-6>\n                  <button type="button" class="googleLogo" ion-button icon-only (click)="googleLogin()">\n                    <ion-icon name="logo-google"></ion-icon>\n                  </button>\n                </ion-col>\n              </ion-row>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n      </ion-card-header>\n    </ion-card>\n    <ion-card *ngIf="reminders">\n      <ion-card-header>\n        <ion-item>\n          <ion-avatar item-right>\n            <button clear dark>\n              <ion-icon class="reminderIcon" ios="ios-notifications" md="md-notifications"></ion-icon>\n            </button>\n          </ion-avatar>\n          <h5 class="reminderLabel">{{ \'Recordatorios\' | translate }}</h5>\n        </ion-item>\n        <ion-list inset>\n          <ion-item ion-item (click)="editReminder(reminder)" *ngFor="let reminder of remindersList; let i = index">\n            <p class="item-info">\n              <ion-icon class="item-icon" ios="ios-eye" md="md-eye"></ion-icon>\n              {{reminder.time | date:\'yyyy-MM-dd HH:mm\':\'UTC\'}}\n              <ion-icon class="item-icon" ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>{{reminder.message}}\n            </p>\n          </ion-item>\n        </ion-list>\n      </ion-card-header>\n    </ion-card>\n    <ion-card>\n      <ion-card-header>\n        <ion-item>\n          <ion-avatar item-right>\n            <button clear dark>\n              <ion-icon class="neededsIcon" large item-right ios="ios-cart" md="md-cart"></ion-icon>\n            </button>\n          </ion-avatar>\n          <h5 class="neededsLabel">{{ \'CosasComprar\' | translate }}</h5>\n        </ion-item>\n        <ion-list inset>\n          <ion-item ion-item (click)="openInternalPage(shoppingListPage)">\n            <p class="item-info">\n              <ion-icon class="item-icon" ios="ios-cart" md="md-cart"></ion-icon>\n              {{ \'VerListaCompora\' | translate }}\n            </p>\n          </ion-item>\n          <ion-item ion-item (click)="showItemsToShop()">\n            <p class="item-info">\n              <ion-icon class="item-icon" ios="ios-basket" md="md-basket"></ion-icon>\n              {{ \'VerElementosComprar\' | translate }}\n            </p>\n          </ion-item>\n\n        </ion-list>\n      </ion-card-header>\n    </ion-card>\n    <ion-card *ngIf="expires">\n      <ion-card-header>\n        <ion-item>\n          <ion-avatar item-right>\n            <button clear dark>\n              <ion-icon class="expiresIcon" large item-right ios="ios-warning" md="md-warning"></ion-icon>\n            </button>\n          </ion-avatar>\n          <h5 class="expiresLabel">{{ \'ElementosCaducables\' | translate }}</h5>\n        </ion-item>\n        <ion-list inset>\n          <ion-item ion-item (click)="showExpireItems()">\n            <p class="item-info">\n              <ion-icon class="item-icon" ios="ios-eye" md="md-eye"></ion-icon>\n              {{ \'VerElementosCaducables\' | translate }}\n            </p>\n          </ion-item>\n        </ion-list>\n      </ion-card-header>\n    </ion-card>\n    <ion-card *ngIf="userProfile">\n      <ion-card-header>\n        <ion-item (click)="logout()">\n          <ion-avatar item-right>\n            <button clear danger>\n              <ion-icon class="userAccountIcon" ios="ios-log-out" md="md-log-out"></ion-icon>\n            </button>\n          </ion-avatar>\n          <ion-item>\n            <h3 class="userAccountLabel">{{ \'Desconectar\' | translate}}</h3>\n          </ion-item>\n        </ion-item>\n      </ion-card-header>\n    </ion-card>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/dashboard-page/dashboard-page.html"*/,
+            selector: 'page-dashboard-page',template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/dashboard-page/dashboard-page.html"*/'<ion-header>\n  <ion-navbar color="dark">\n    <button ion-button menuToggle>\n      <ion-icon ios="ios-menu" md="md-menu"></ion-icon>\n    </button>\n    <ion-title>{{ \'Inicio\' | translate }} 3</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding class="dashboard">\n\n  <div id="recaptcha-container"></div>\n\n  <ion-list>\n    <ion-card *ngIf="!userProfile">\n      <ion-card-header>\n        <ion-grid>\n          <ion-row>\n            <ion-col col-4>\n              <h4 class="userAccountLabel">{{ \'ConectarCon\' | translate }}</h4>\n            </ion-col>\n            <ion-col col-8>\n              <ion-row>\n                <ion-col col-6>\n                  <button type="button" class="mailLogo" ion-button icon-only (click)="phoneLogin()">\n                    <ion-icon ios="ios-call" md="md-call"></ion-icon>\n                  </button>\n                </ion-col>\n                <!--<ion-col col-6>\n                  <button type="button" class="twLogo" ion-button icon-only (click)="twitterLogin()">\n                    <ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon>\n                  </button>\n                </ion-col>\n              </ion-row>\n              <ion-row>\n                <ion-col col-6>\n                  <button type="button" class="fbLogo" ion-button icon-only (click)="facebookLogin()">\n                    <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>\n                  </button>\n                </ion-col>-->\n                <ion-col col-6>\n                  <button type="button" class="googleLogo" ion-button icon-only (click)="googleLogin()">\n                    <ion-icon name="logo-google"></ion-icon>\n                  </button>\n                </ion-col>\n              </ion-row>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n      </ion-card-header>\n    </ion-card>\n    <ion-card *ngIf="reminders">\n      <ion-card-header>\n        <ion-item>\n          <ion-avatar item-right>\n            <button clear dark>\n              <ion-icon class="reminderIcon" ios="ios-notifications" md="md-notifications"></ion-icon>\n            </button>\n          </ion-avatar>\n          <h5 class="reminderLabel">{{ \'Recordatorios\' | translate }}</h5>\n        </ion-item>\n        <ion-list inset>\n          <ion-item ion-item (click)="editReminder(reminder)" *ngFor="let reminder of remindersList; let i = index">\n            <p class="item-info">\n              <ion-icon class="item-icon" ios="ios-eye" md="md-eye"></ion-icon>\n              {{reminder.time | date:\'yyyy-MM-dd HH:mm\':\'UTC\'}}\n              <ion-icon class="item-icon" ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>{{reminder.message}}\n            </p>\n          </ion-item>\n        </ion-list>\n      </ion-card-header>\n    </ion-card>\n    <ion-card>\n      <ion-card-header>\n        <ion-item>\n          <ion-avatar item-right>\n            <button clear dark>\n              <ion-icon class="neededsIcon" large item-right ios="ios-cart" md="md-cart"></ion-icon>\n            </button>\n          </ion-avatar>\n          <h5 class="neededsLabel">{{ \'CosasComprar\' | translate }}</h5>\n        </ion-item>\n        <ion-list inset>\n          <ion-item ion-item (click)="openInternalPage(shoppingListPage)">\n            <p class="item-info">\n              <ion-icon class="item-icon" ios="ios-cart" md="md-cart"></ion-icon>\n              {{ \'VerListaCompora\' | translate }}\n            </p>\n          </ion-item>\n          <ion-item ion-item (click)="showItemsToShop()">\n            <p class="item-info">\n              <ion-icon class="item-icon" ios="ios-basket" md="md-basket"></ion-icon>\n              {{ \'VerElementosComprar\' | translate }}\n            </p>\n          </ion-item>\n\n        </ion-list>\n      </ion-card-header>\n    </ion-card>\n    <ion-card *ngIf="expires">\n      <ion-card-header>\n        <ion-item>\n          <ion-avatar item-right>\n            <button clear dark>\n              <ion-icon class="expiresIcon" large item-right ios="ios-warning" md="md-warning"></ion-icon>\n            </button>\n          </ion-avatar>\n          <h5 class="expiresLabel">{{ \'ElementosCaducables\' | translate }}</h5>\n        </ion-item>\n        <ion-list inset>\n          <ion-item ion-item (click)="showExpireItems()">\n            <p class="item-info">\n              <ion-icon class="item-icon" ios="ios-eye" md="md-eye"></ion-icon>\n              {{ \'VerElementosCaducables\' | translate }}\n            </p>\n          </ion-item>\n        </ion-list>\n      </ion-card-header>\n    </ion-card>\n    <ion-card *ngIf="userProfile">\n      <ion-card-header>\n        <ion-item (click)="logout()">\n          <ion-avatar item-right>\n            <button clear danger>\n              <ion-icon class="userAccountIcon" ios="ios-log-out" md="md-log-out"></ion-icon>\n            </button>\n          </ion-avatar>\n          <ion-item>\n            <h3 class="userAccountLabel">{{ \'Desconectar\' | translate}}</h3>\n          </ion-item>\n        </ion-item>\n      </ion-card-header>\n    </ion-card>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/dashboard-page/dashboard-page.html"*/,
             providers: [__WEBPACK_IMPORTED_MODULE_15__pipes_orderBy__["a" /* OrderBy */]]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6_ionic_angular__["j" /* NavController */],
@@ -2336,18 +2622,18 @@ var DashboardPage = (function () {
 
 /***/ }),
 
-/***/ 225:
+/***/ 226:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ItemsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pipes_orderBy__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pipes_pipefilterElements__ = __webpack_require__(465);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pipes_pipefilterElements__ = __webpack_require__(471);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_categories_categoriesService__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_global_vars_global_vars__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_global_vars_global_vars__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_log_log__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2372,7 +2658,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class ItemsPage
  */
-var ItemsPage = (function () {
+var ItemsPage = /** @class */ (function () {
     function ItemsPage(mod, nav, alertCtrl, order, catService, globalVars, filterElements, toastCtrl, log, translate) {
         this.mod = mod;
         this.nav = nav;
@@ -2478,7 +2764,11 @@ var ItemsPage = (function () {
      * @memberof ItemsPage
      */
     ItemsPage.prototype.changeItemCategory = function (event, item) {
+        var _this = this;
         this.catService.changeCategory(item.category, item).then(function (data) {
+            if (!data.category) {
+                data.category = _this.defaultCategory;
+            }
             item = data;
         });
     };
@@ -2786,7 +3076,7 @@ var ItemsPage = (function () {
     };
     ItemsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-items-page',template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/items-page/items-page.html"*/'<ion-header>\n	<ion-navbar color="dark" [hidden]="searchBar">\n		<button ion-button menuToggle>\n			<ion-icon ios="ios-menu" md="md-menu"></ion-icon>\n		</button>\n		<ion-title>{{ \'Elementos\' | translate }}</ion-title>\n		<ion-buttons end>\n			<button ion-button secondary (click)="selectToSendShoppingList($event)">\n				<ion-icon class="icon-toolbar" ios="ios-basket" md="md-basket"></ion-icon>\n			</button>\n			<button ion-button secondary (click)="reorder($event)">\n				<ion-icon class="icon-toolbar" ios="ios-repeat" md="md-repeat"></ion-icon>\n			</button>\n			<button ion-button secondary (click)="toggleSearchBar($event)">\n				<ion-icon class="icon-toolbar" ios="ios-search" md="md-search"></ion-icon>\n			</button>\n		</ion-buttons>\n	</ion-navbar>\n	<ion-searchbar [hidden]="!searchBar" [(ngModel)]="searchItem" [showCancelButton]="true" [debounce]=500 [autocomplete]="true"\n	              (ionInput)="searchMatches($event)" (ionCancel)="toggleSearchBar($event)">\n	</ion-searchbar>\n</ion-header>\n\n<ion-content padding class="items">\n	<ion-list>\n		<ion-card *ngFor="let item of items; let i = index">\n			<ion-card-header>\n				<ion-row>\n					<ion-col width-50>\n						<div *ngIf="item.category">\n							<ion-avatar item-left class="category-icon">\n								<img class="icon" src="{{item.category.icon}}" (click)="changeItemCategory($event,item)" />\n								<h2 *ngIf="creating" class="labelCategory">{{item.category.categoryName}}</h2>\n							</ion-avatar>\n						</div>\n						<div *ngIf="!item.category">\n							<ion-avatar item-left class="category-icon">\n								<img class="icon" src="images/icons/default.png" (click)="changeItemCategory($event,item)" />\n							</ion-avatar>\n						</div>\n					</ion-col>\n					<ion-col width-15>\n						<button class="buttonOperation" item-center primary large clear (click)="sendToShoppingList($event, item)">\n							<ion-icon ios="ios-basket" md="md-basket"></ion-icon>\n						</button>\n					</ion-col>\n					<ion-col width-15>\n						<button item-center secondary clear (click)="editItem($event,item)" class="buttonOperation">\n							<ion-icon ios="ios-create" md="md-create"></ion-icon>\n						</button>\n					</ion-col>\n					<ion-col width-15>\n						<button class="buttonOperation" item-center danger large clear (click)="removeItem($event, item)">\n							<ion-icon ios="ios-trash" md="md-trash"></ion-icon>\n						</button>\n					</ion-col>\n				</ion-row>\n				<ion-row>\n					<ion-col width-75>\n						<ion-item ion-item class="itemName">\n							<h2>{{item.nombreElemento}}</h2>\n						</ion-item>\n					</ion-col>\n				</ion-row>\n				<ion-row width-100 *ngIf="item.lists">\n					<ion-item (click)="discardOrShop($event,item)" *ngIf="item.lists.length==0">\n						<p class="item-advice">{{ \'NoTienes\' | translate }}</p>\n					</ion-item>\n					<ion-list inset *ngIf="item.lists.length>0">\n						<ion-item ion-item *ngFor="let list of item.lists">\n							<p class="item-info">\n								<ion-icon class="item-icon" ios="ios-eye" md="md-eye"></ion-icon>\n								{{ \'TienesEn\' | translate }} {{list.nombreLista}}\n							</p>\n							<ion-badge large item-right>{{list.cantidadElemento}}</ion-badge>\n							<p *ngIf="list.cantidadElemento==0" class="item-advice" (click)="discardOrShop($event,item)">{{ \'HayQueComprar\' | translate }}</p>\n						</ion-item>\n					</ion-list>\n				</ion-row>\n			</ion-card-header>\n		</ion-card>\n	</ion-list>\n</ion-content>\n<ion-footer>\n	<bottom-buttons-component [type]="type" [object]="items" [add]=true [remove]=true [notifications]=false [favorites]=false\n	 (finishedAdd)="addItem($event)" (finishedRemoved)="removeElements($event,category)">\n	</bottom-buttons-component>\n</ion-footer>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/items-page/items-page.html"*/,
+            selector: 'page-items-page',template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/items-page/items-page.html"*/'<ion-header>\n	<ion-navbar color="dark" [hidden]="searchBar">\n		<button ion-button menuToggle>\n			<ion-icon ios="ios-menu" md="md-menu"></ion-icon>\n		</button>\n		<ion-title>{{ \'Elementos\' | translate }}</ion-title>\n		<ion-buttons end>\n			<button ion-button secondary (click)="selectToSendShoppingList($event)">\n				<ion-icon class="icon-toolbar" ios="ios-basket" md="md-basket"></ion-icon>\n			</button>\n			<button ion-button secondary (click)="reorder($event)">\n				<ion-icon class="icon-toolbar" ios="ios-repeat" md="md-repeat"></ion-icon>\n			</button>\n			<button ion-button secondary (click)="toggleSearchBar($event)">\n				<ion-icon class="icon-toolbar" ios="ios-search" md="md-search"></ion-icon>\n			</button>\n		</ion-buttons>\n	</ion-navbar>\n	<ion-searchbar [hidden]="!searchBar" [(ngModel)]="searchItem" [showCancelButton]="true" [debounce]=500 [autocomplete]="true"\n	              (ionInput)="searchMatches($event)" (ionCancel)="toggleSearchBar($event)">\n	</ion-searchbar>\n</ion-header>\n\n<ion-content padding class="items">\n	<ion-list>\n		<ion-card *ngFor="let item of items; let i = index">\n			<ion-card-header>\n				<ion-row>\n					<ion-col width-50>\n						<div *ngIf="item.category">\n							<ion-avatar item-left class="category-icon">\n								<img class="icon" src="{{item.category.icon.src}}" (click)="changeItemCategory($event,item)" />\n								<h2 *ngIf="creating" class="labelCategory">{{item.category.categoryName}}</h2>\n							</ion-avatar>\n						</div>\n						<div *ngIf="!item.category">\n							<ion-avatar item-left class="category-icon">\n								<img class="icon" src="assets/images/icons/default.png" (click)="changeItemCategory($event,item)" />\n							</ion-avatar>\n						</div>\n					</ion-col>\n					<ion-col width-15>\n						<button class="buttonOperation" item-center primary large clear (click)="sendToShoppingList($event, item)">\n							<ion-icon ios="ios-basket" md="md-basket"></ion-icon>\n						</button>\n					</ion-col>\n					<ion-col width-15>\n						<button item-center secondary clear (click)="editItem($event,item)" class="buttonOperation">\n							<ion-icon ios="ios-create" md="md-create"></ion-icon>\n						</button>\n					</ion-col>\n					<ion-col width-15>\n						<button class="buttonOperation" item-center danger large clear (click)="removeItem($event, item)">\n							<ion-icon ios="ios-trash" md="md-trash"></ion-icon>\n						</button>\n					</ion-col>\n				</ion-row>\n				<ion-row>\n					<ion-col width-75>\n						<ion-item ion-item class="itemName">\n							<h2>{{item.nombreElemento}}</h2>\n						</ion-item>\n					</ion-col>\n				</ion-row>\n				<ion-row width-100 *ngIf="item.lists">\n					<ion-item (click)="discardOrShop($event,item)" *ngIf="item.lists.length==0">\n						<p class="item-advice">{{ \'NoTienes\' | translate }}</p>\n					</ion-item>\n					<ion-list inset *ngIf="item.lists.length>0">\n						<ion-item ion-item *ngFor="let list of item.lists">\n							<p class="item-info">\n								<ion-icon class="item-icon" ios="ios-eye" md="md-eye"></ion-icon>\n								{{ \'TienesEn\' | translate }} {{list.nombreLista}}\n							</p>\n							<ion-badge large item-right>{{list.cantidadElemento}}</ion-badge>\n							<p *ngIf="list.cantidadElemento==0" class="item-advice" (click)="discardOrShop($event,item)">{{ \'HayQueComprar\' | translate }}</p>\n						</ion-item>\n					</ion-list>\n				</ion-row>\n			</ion-card-header>\n		</ion-card>\n	</ion-list>\n</ion-content>\n<ion-footer>\n	<bottom-buttons-component [type]="type" [object]="items" [add]=true [remove]=true [notifications]=false [favorites]=false\n	 (finishedAdd)="addItem($event)" (finishedRemoved)="removeElements($event,category)">\n	</bottom-buttons-component>\n</ion-footer>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/items-page/items-page.html"*/,
             providers: [__WEBPACK_IMPORTED_MODULE_4__pipes_pipefilterElements__["a" /* PipeFilterElements */], __WEBPACK_IMPORTED_MODULE_3__pipes_orderBy__["a" /* OrderBy */], __WEBPACK_IMPORTED_MODULE_5__providers_categories_categoriesService__["a" /* CategoriesService */]]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
@@ -2807,260 +3097,6 @@ var ItemsPage = (function () {
 
 /***/ }),
 
-/***/ 226:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListsPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_global_vars_global_vars__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__list_page_list_page__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_log_log__ = __webpack_require__(14);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-/**
- * Page to manage the list of lists
- *
- * @export
- * @class ListsPage
- */
-var ListsPage = (function () {
-    function ListsPage(actionSheetCtrl, nav, navParams, mod, alertCtrl, globalVars, toastCtrl, log, translate) {
-        this.actionSheetCtrl = actionSheetCtrl;
-        this.nav = nav;
-        this.navParams = navParams;
-        this.mod = mod;
-        this.alertCtrl = alertCtrl;
-        this.globalVars = globalVars;
-        this.toastCtrl = toastCtrl;
-        this.log = log;
-        this.translate = translate;
-        this.type = 'List';
-        this.lists = [];
-        this.log.setLogger(this.constructor.name);
-    }
-    ListsPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        this.log.logs[this.constructor.name].info('ionViewDidLoad');
-        this.globalVars.getListsData().then(function (data) {
-            _this.lists = data;
-            _this.reorderAllowed = false;
-        });
-    };
-    /**
-     * Event to allow reorder the lists or not
-     *
-     * @param {any} event
-     * @memberof ListsPage
-     */
-    ListsPage.prototype.reorder = function (event) {
-        this.reorderAllowed = !this.reorderAllowed;
-    };
-    /**
-     * Event to reorder lists as user select
-     *
-     * @param {any} indexes
-     * @memberof ListsPage
-     */
-    ListsPage.prototype.reorderItems = function (indexes) {
-        var element = this.lists[indexes.from];
-        this.lists.splice(indexes.from, 1);
-        this.lists.splice(indexes.to, 0, element);
-    };
-    /**
-     * Event to remove a list
-     *
-     * @param {any} event
-     * @param {string} name
-     * @memberof ListsPage
-     */
-    ListsPage.prototype.removeList = function (event, name) {
-        var _this = this;
-        this.log.logs[this.constructor.name].info('removeList:' + name);
-        var confirm = this.alertCtrl.create({
-            title: this.translate.instant('Borrando', { value: name }),
-            message: this.translate.instant('PreguntaBorrarLista', { value: name }),
-            buttons: [
-                {
-                    text: this.translate.instant('No'),
-                    handler: function () { }
-                },
-                {
-                    text: this.translate.instant('Si'),
-                    handler: function () {
-                        _this.lists = _this.lists.filter(function (list) { return list.nombreLista !== name; });
-                        _this.globalVars.setListsData(_this.lists);
-                        _this.globalVars.removetItemListData(name);
-                    }
-                }
-            ]
-        });
-        confirm.present();
-    };
-    /**
-     * Event to edit the color of a list
-     *
-     * @param {any} event
-     * @param {List} list
-     * @memberof ListsPage
-     */
-    ListsPage.prototype.editColor = function (event, list) {
-        var _this = this;
-        this.log.logs[this.constructor.name].info('editColor:' + list);
-        this.globalVars.getColorsData().then(function (data) {
-            var buttons = [];
-            var colorsList = JSON.parse(JSON.stringify(data));
-            colorsList.forEach(function (colorData) {
-                if (colorData.cssClass !== list.colorLista) {
-                    buttons.push({
-                        text: colorData.color,
-                        cssClass: colorData.cssClass,
-                        handler: function () {
-                            list.colorLista = colorData.cssClass;
-                            list.colorBotones = colorData.buttons;
-                            _this.globalVars.setListsData(_this.lists);
-                        }
-                    });
-                }
-            });
-            var actionSheet = _this.actionSheetCtrl.create({
-                title: _this.translate.instant('CambiarColorLista'),
-                buttons: buttons
-            });
-            actionSheet.present();
-        });
-    };
-    /**
-     * Event to edit the name of a list
-     *
-     * @param {any} event
-     * @param {List} list
-     * @memberof ListsPage
-     */
-    ListsPage.prototype.editList = function (event, list) {
-        var _this = this;
-        this.log.logs[this.constructor.name].info('editList:' + list);
-        var oldName = list.nombreLista;
-        var edit = this.alertCtrl.create({
-            title: this.translate.instant('EditarLista'),
-            inputs: [
-                {
-                    name: 'nombreLista',
-                    value: oldName,
-                    type: 'text',
-                    placeholder: this.translate.instant('Nombre')
-                }
-            ],
-            buttons: [
-                {
-                    text: this.translate.instant('Cancelar'),
-                    role: 'cancel'
-                },
-                {
-                    text: this.translate.instant('Confirmar'),
-                    handler: function (data) {
-                        _this.globalVars.getListData(oldName).then(function (listData) {
-                            list.nombreLista = data.nombreLista;
-                            _this.globalVars.setListsData(_this.lists);
-                            _this.globalVars.setListData(data.nombreLista, listData);
-                            _this.globalVars.removetItemListData(oldName);
-                        });
-                    }
-                }
-            ]
-        });
-        edit.present();
-    };
-    /**
-     * Event to add a new list
-     *
-     * @param {string} newList
-     * @memberof ListsPage
-     */
-    ListsPage.prototype.addList = function (newList) {
-        this.log.logs[this.constructor.name].info('addList:' + newList);
-        if (this.lists.filter(function (list) { return list.nombreLista.toLowerCase() === newList.toLowerCase(); }).length === 0) {
-            this.lists.push({
-                nombreLista: newList,
-                colorLista: 'white-list',
-                colorBotones: 'black-buttons',
-                listaEditable: true
-            });
-            this.globalVars.setListsData(this.lists);
-            this.globalVars.setListData(newList, []);
-        }
-        else {
-            var toast = this.toastCtrl.create({
-                message: this.translate.instant('Esta lista ya existe!'),
-                duration: 1000,
-                position: 'bottom'
-            });
-            toast.present();
-        }
-    };
-    /**
-     * Event to remove a list of lists selected
-     *
-     * @param {string[]} removed
-     * @memberof ListsPage
-     */
-    ListsPage.prototype.removeLists = function (removed) {
-        var _this = this;
-        this.log.logs[this.constructor.name].info('removeLists:' + removed);
-        this.lists = this.lists.filter(function (list) { return removed.indexOf(list.nombreLista) < 0; });
-        this.globalVars.setListsData(this.lists);
-        removed.forEach(function (listToRemove) {
-            _this.globalVars.removetItemListData(listToRemove);
-        });
-    };
-    /**
-     * Event to navigate to selected list
-     *
-     * @param {any} event
-     * @param {List} list
-     * @memberof ListsPage
-     */
-    ListsPage.prototype.listSelected = function (event, list) {
-        this.nav.push(__WEBPACK_IMPORTED_MODULE_4__list_page_list_page__["a" /* ListPage */], {
-            list: list
-        });
-    };
-    ListsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-lists-page',template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/lists-page/lists-page.html"*/'<ion-header>\n	<ion-navbar color="dark">\n		<button ion-button menuToggle>\n			<ion-icon ios="ios-menu" md="md-menu"></ion-icon>\n		</button>\n		<ion-title>{{ \'Listas\' | translate }}</ion-title>\n		<ion-buttons end>\n			<button (click)="reorder($event)">\n				<ion-icon secondary class="reorderAllowed icon-toolbar" *ngIf="reorderAllowed" ios="ios-repeat" md="md-repeat"></ion-icon>\n				<ion-icon secondary class="reorderNotAllowed icon-toolbar" *ngIf="!reorderAllowed" ios="ios-repeat" md="md-repeat"></ion-icon>\n			</button>\n		</ion-buttons>\n	</ion-navbar>\n</ion-header>\n\n<ion-content padding class="lists">\n	<ion-list inset reorder="{{reorderAllowed}}" (ionItemReorder)="reorderItems($event)">\n		<div *ngFor="let list of lists">\n			<ion-card ion-item *ngIf="list.nombreLista!==\'LISTA_COMPRA\'" class="listCard" [ngClass]="list.colorLista">\n				<ion-card-header>\n					<ion-grid>\n						<ion-row>\n							<ion-col (click)="listSelected($event, list.nombreLista)">\n								<ion-icon class="listName" dark large ios="ios-clipboard-outline" md="md-clipboard" [ngClass]="list.colorBotones">\n									{{list.nombreLista}}\n								</ion-icon>\n							</ion-col>\n						</ion-row>\n						<ion-row>\n							<ion-col col-2 offset-6>\n								<button item-center secondary clear (click)="editList($event,list)" class="buttonOperation" *ngIf="list.listaEditable" [ngClass]="list.colorBotones">\n									<ion-icon ios="ios-create" md="md-create"></ion-icon>\n								</button>\n							</ion-col>\n							<ion-col col-2>\n								<button item-center secondary clear (click)="editColor($event,list)" class="buttonOperation" *ngIf="list.listaEditable" [ngClass]="list.colorBotones">\n									<ion-icon ios="ios-color-palette" md="md-color-palette"></ion-icon>\n								</button>\n							</ion-col>\n							<ion-col col-2>\n								<button item-center danger clear (click)="removeList($event, list.nombreLista)" class="buttonOperation" *ngIf="list.listaEditable"\n								 [ngClass]="list.colorBotones">\n									<ion-icon ios="ios-trash" md="md-trash"></ion-icon>\n								</button>\n							</ion-col>\n						</ion-row>\n					</ion-grid>\n				</ion-card-header>\n				<ion-card-content>\n					<p class="info-list-items">\n						<ion-icon large primary ios="ios-cart" md="md-cart" class="iconListAdvice" [ngClass]="list.colorBotones">\n							Tienes\n							<ion-badge large item-right class="badge-info-list-items">4</ion-badge>elementos que deberías comprar\n						</ion-icon>\n					</p>\n					<p class="info-list-items">\n						<ion-icon large danger ios="ios-warning" md="md-warning" class="iconListAdvice" [ngClass]="list.colorBotones">\n							Tienes\n							<ion-badge large item-right class="badge-info-list-items">3</ion-badge>elementos cercanos a caducar\n						</ion-icon>\n					</p>\n				</ion-card-content>\n			</ion-card>\n		</div>\n	</ion-list>\n</ion-content>\n<ion-footer>\n	<bottom-buttons-component [type]="type" [object]="lists" [add]=true [remove]=true [notifications]=false [favorites]=false\n	 (finishedAdd)="addList($event)" (finishedRemoved)="removeLists($event,lists)">\n	</bottom-buttons-component>\n</ion-footer>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/lists-page/lists-page.html"*/
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_global_vars_global_vars__["a" /* GlobalVars */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_5__providers_log_log__["a" /* Log */],
-            __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__["c" /* TranslateService */]])
-    ], ListsPage);
-    return ListsPage;
-}());
-
-//# sourceMappingURL=lists-page.js.map
-
-/***/ }),
-
 /***/ 236:
 /***/ (function(module, exports) {
 
@@ -3078,7 +3114,7 @@ webpackEmptyAsyncContext.id = 236;
 
 /***/ }),
 
-/***/ 26:
+/***/ 27:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3088,7 +3124,7 @@ webpackEmptyAsyncContext.id = 236;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_provider__ = __webpack_require__(335);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__items_provider__ = __webpack_require__(336);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__list_provider__ = __webpack_require__(337);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__lists_provider__ = __webpack_require__(461);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__lists_provider__ = __webpack_require__(465);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__default_icons_default_icons__ = __webpack_require__(186);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__log_log__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -3114,7 +3150,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class GlobalVars
  */
-var GlobalVars = (function () {
+var GlobalVars = /** @class */ (function () {
     function GlobalVars(listsDataProvider, listDataProvider, itemsDataProvider, iconsDataService, categoriesDataProvider, configProvider, log) {
         this.listsDataProvider = listsDataProvider;
         this.listDataProvider = listDataProvider;
@@ -3455,35 +3491,35 @@ var GlobalVars = (function () {
 
 var map = {
 	"../pages/about-page/about-page.module": [
-		1018,
+		1024,
 		7
 	],
 	"../pages/backup-page/backup-page.module": [
-		1019,
+		1025,
 		6
 	],
 	"../pages/categorys-page/categorys-page.module": [
-		1020,
+		1028,
 		5
 	],
 	"../pages/config-page/config-page.module": [
-		1021,
+		1026,
 		4
 	],
 	"../pages/dashboard-page/dashboard-page.module": [
-		1022,
+		1029,
 		3
 	],
 	"../pages/items-page/items-page.module": [
-		1023,
+		1030,
 		2
 	],
 	"../pages/list-page/list-page.module": [
-		1024,
+		1031,
 		1
 	],
 	"../pages/lists-page/lists-page.module": [
-		1025,
+		1027,
 		0
 	]
 };
@@ -3509,7 +3545,7 @@ module.exports = webpackAsyncContext;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BackupData; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__reminders_provider__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__global_vars_global_vars__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__global_vars_global_vars__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__(68);
@@ -3545,7 +3581,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class BackupData
  */
-var BackupData = (function () {
+var BackupData = /** @class */ (function () {
     function BackupData(http, log, file, global, local, reminders, plt) {
         this.http = http;
         this.log = log;
@@ -3887,7 +3923,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class CategorysProvider
  */
-var CategorysProvider = (function () {
+var CategorysProvider = /** @class */ (function () {
     function CategorysProvider(cloudStorage, localStorage, network, plt) {
         this.cloudStorage = cloudStorage;
         this.localStorage = localStorage;
@@ -3966,9 +4002,9 @@ var CategorysProvider = (function () {
                     }
                     else {
                         _this.cloudStorage.loadCategoriesData(userProfile.uid).then(function (data) {
-                            if (data !== undefined && data !== null) {
-                                _this.localStorage.setToLocal('categories', data);
-                                resolve(data);
+                            if (data !== undefined) {
+                                _this.localStorage.setToLocal('categories', data || []);
+                                resolve(data || []);
                             }
                             else {
                                 _this.localStorage
@@ -4044,7 +4080,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class ConfigProvider
  */
-var ConfigProvider = (function () {
+var ConfigProvider = /** @class */ (function () {
     function ConfigProvider(cloudStorage, localStorage, network, plt, log) {
         this.cloudStorage = cloudStorage;
         this.localStorage = localStorage;
@@ -4128,8 +4164,8 @@ var ConfigProvider = (function () {
                     else {
                         _this.cloudStorage.loadConfigData(userProfile.uid).then(function (data) {
                             if (data !== undefined && data !== null) {
-                                _this.localStorage.setToLocal('config', data[0]);
-                                resolve(data[0]);
+                                _this.localStorage.setToLocal('config', data);
+                                resolve(data);
                             }
                             else {
                                 _this.localStorage.getFromLocal('config', null).then(function (data) {
@@ -4243,7 +4279,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class ItemsProvider
  */
-var ItemsProvider = (function () {
+var ItemsProvider = /** @class */ (function () {
     function ItemsProvider(cloudStorage, localStorage, network, plt, log) {
         this.cloudStorage = cloudStorage;
         this.localStorage = localStorage;
@@ -4321,9 +4357,9 @@ var ItemsProvider = (function () {
                     }
                     else {
                         _this.cloudStorage.loadItemsData(userProfile.uid).then(function (data) {
-                            if (data !== undefined && data !== null) {
-                                _this.localStorage.setToLocal('items', data);
-                                resolve(data);
+                            if (data !== undefined) {
+                                _this.localStorage.setToLocal('items', data || []);
+                                resolve(data || []);
                             }
                             else {
                                 _this.localStorage.getFromLocal('items', null).then(function (data) {
@@ -4368,7 +4404,7 @@ var ItemsProvider = (function () {
                     else {
                         data.forEach(function (item) {
                             item.category = {
-                                icon: 'images/icons/default.png',
+                                icon: { src: 'assets/images/icons/default.png' },
                                 measurement: 'UNIDADES',
                                 categoryName: 'No Category',
                                 unitStep: 1
@@ -4387,13 +4423,10 @@ var ItemsProvider = (function () {
     };
     ItemsProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__data_cloudStorage__["a" /* CloudStorage */],
-            __WEBPACK_IMPORTED_MODULE_3__data_localStorage__["a" /* LocalStorage */],
-            __WEBPACK_IMPORTED_MODULE_4__ionic_native_network__["a" /* Network */],
-            __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["l" /* Platform */],
-            __WEBPACK_IMPORTED_MODULE_5__log_log__["a" /* Log */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__data_cloudStorage__["a" /* CloudStorage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__data_cloudStorage__["a" /* CloudStorage */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__data_localStorage__["a" /* LocalStorage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__data_localStorage__["a" /* LocalStorage */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_network__["a" /* Network */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_network__["a" /* Network */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["l" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["l" /* Platform */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__log_log__["a" /* Log */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__log_log__["a" /* Log */]) === "function" && _e || Object])
     ], ItemsProvider);
     return ItemsProvider;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=items-provider.js.map
@@ -4435,7 +4468,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class ListProvider
  */
-var ListProvider = (function () {
+var ListProvider = /** @class */ (function () {
     function ListProvider(cloudStorage, localStorage, network, plt, log) {
         this.cloudStorage = cloudStorage;
         this.localStorage = localStorage;
@@ -4601,7 +4634,7 @@ var ListProvider = (function () {
                     });
                     listData.forEach(function (item) {
                         item.category = {
-                            icon: 'images/icons/default.png',
+                            icon: { src: 'assets/images/icons/default.png' },
                             measurement: 'UNIDADES',
                             categoryName: 'No Category',
                             unitStep: 1
@@ -4625,20 +4658,17 @@ var ListProvider = (function () {
     };
     ListProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__data_cloudStorage__["a" /* CloudStorage */],
-            __WEBPACK_IMPORTED_MODULE_4__data_localStorage__["a" /* LocalStorage */],
-            __WEBPACK_IMPORTED_MODULE_1__ionic_native_network__["a" /* Network */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* Platform */],
-            __WEBPACK_IMPORTED_MODULE_6__log_log__["a" /* Log */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__data_cloudStorage__["a" /* CloudStorage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__data_cloudStorage__["a" /* CloudStorage */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__data_localStorage__["a" /* LocalStorage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__data_localStorage__["a" /* LocalStorage */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_native_network__["a" /* Network */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_native_network__["a" /* Network */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* Platform */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_6__log_log__["a" /* Log */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__log_log__["a" /* Log */]) === "function" && _e || Object])
     ], ListProvider);
     return ListProvider;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=list-provider.js.map
 
 /***/ }),
 
-/***/ 461:
+/***/ 465:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4670,7 +4700,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class ListsProvider
  */
-var ListsProvider = (function () {
+var ListsProvider = /** @class */ (function () {
     function ListsProvider(cloudStorage, localStorage, network, plt, log) {
         this.cloudStorage = cloudStorage;
         this.localStorage = localStorage;
@@ -4979,13 +5009,73 @@ var ListsProvider = (function () {
 
 /***/ }),
 
-/***/ 462:
+/***/ 466:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ItemInfoPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Modal continer to show item data to edit or create
+ *
+ * @export
+ * @class ItemInfoPage
+ */
+var ItemInfoPage = /** @class */ (function () {
+    function ItemInfoPage(view, params) {
+        this.view = view;
+        this.item = params.get('newItem');
+        this.editing = params.get('editing');
+        this.icons = params.get('icons');
+    }
+    /**
+     * Close modal saving data
+     *
+     * @memberof ItemInfoPage
+     */
+    ItemInfoPage.prototype.save = function () {
+        this.view.dismiss(this.item);
+    };
+    /**
+     * Close modal without saving data
+     *
+     * @memberof ItemInfoPage
+     */
+    ItemInfoPage.prototype.close = function () {
+        this.view.dismiss();
+    };
+    ItemInfoPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/components/item-info/item-info.html"*/'<ion-header>\n  <ion-toolbar dark>\n    <ion-title [hidden]="!editing">\n      {{ \'EditaElemento\' | translate }}\n    </ion-title>\n    <ion-title [hidden]="editing">\n      {{ \'AniadirElemento\' | translate }}\n    </ion-title>\n    <ion-buttons end>\n      <button primary (click)="save()">\n        <ion-icon ios="ios-archive" md="md-archive"></ion-icon>\n      </button>\n      <button (click)="close()">\n        <ion-icon ios="ios-close" md="md-close"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class="item-info">\n  <item [(item)]="item" [creating]="editing" [icons]="icons"></item>\n</ion-content>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/components/item-info/item-info.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
+    ], ItemInfoPage);
+    return ItemInfoPage;
+}());
+
+//# sourceMappingURL=item-info.js.map
+
+/***/ }),
+
+/***/ 468:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListIconsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngx_translate_core__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngx_translate_core__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5005,7 +5095,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class ListIconsPage
  */
-var ListIconsPage = (function () {
+var ListIconsPage = /** @class */ (function () {
     function ListIconsPage(nav, view, params, translate) {
         this.nav = nav;
         this.view = view;
@@ -5036,7 +5126,7 @@ var ListIconsPage = (function () {
         this.view.dismiss();
     };
     ListIconsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/components/icons/list-icons.html"*/'<ion-header>\n  <ion-toolbar dark>\n      <ion-title>\n          {{ \'SeleccionaIcono\' | translate }}\n      </ion-title>\n      <ion-buttons end>\n          <button (click)="close()"><ion-icon class="icon-toolbar" ios="ios-close" md="md-close"></ion-icon></button>\n      </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <button full small ion-button class="button-icon-search" (click)="selected($event,\'\')"><ion-icon ios="ios-search" md="md-search"></ion-icon></button>\n\n  <ion-row class="icon-row">\n    <ion-col *ngFor="let icon of icons" class="icon-col">\n      <img class="icon-img" src="{{icon}}" (click)="selected($event,icon)"/>\n    </ion-col>\n  </ion-row>\n</ion-content>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/components/icons/list-icons.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/components/icons/list-icons.html"*/'<ion-header>\n  <ion-toolbar dark>\n      <ion-title>\n          {{ \'SeleccionaIcono\' | translate }}\n      </ion-title>\n      <ion-buttons end>\n          <button (click)="close()"><ion-icon class="icon-toolbar" ios="ios-close" md="md-close"></ion-icon></button>\n      </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <button full small ion-button class="button-icon-search" (click)="selected($event,\'\')"><ion-icon ios="ios-search" md="md-search"></ion-icon></button>\n\n  <ion-row class="icon-row">\n    <ion-col *ngFor="let icon of icons" class="icon-col">\n      <img class="icon-img" src="{{icon.src}}" (click)="selected($event,icon)"/>\n    </ion-col>\n  </ion-row>\n</ion-content>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/components/icons/list-icons.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["n" /* ViewController */],
@@ -5050,13 +5140,13 @@ var ListIconsPage = (function () {
 
 /***/ }),
 
-/***/ 463:
+/***/ 469:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CategoryInfoPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngx_translate_core__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngx_translate_core__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_categories_categoriesService__ = __webpack_require__(90);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -5078,7 +5168,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class CategoryInfoPage
  */
-var CategoryInfoPage = (function () {
+var CategoryInfoPage = /** @class */ (function () {
     function CategoryInfoPage(view, catService, params, translate) {
         this.view = view;
         this.catService = catService;
@@ -5136,7 +5226,7 @@ var CategoryInfoPage = (function () {
         this.view.dismiss();
     };
     CategoryInfoPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/components/category-info/category-info.html"*/'<ion-header>\n	<ion-toolbar dark>\n		<ion-title [hidden]="!editing">\n			{{ \'EditaCategoria\' | translate }}\n		</ion-title>\n		<ion-title [hidden]="editing">\n			{{ \'NuevaCategoria\' | translate }}\n		</ion-title>\n		<ion-buttons end>\n			<button primary (click)="save()"><ion-icon ios="ios-archive" md="md-archive"></ion-icon></button>\n			<button (click)="close()"><ion-icon ios="ios-close" md="md-close"></ion-icon></button>\n		</ion-buttons>\n	</ion-toolbar>\n</ion-header>\n\n<ion-content class="item-info">\n	<ion-card>\n		<ion-card-header>\n			<ion-row>\n				<ion-col width-66>\n					<ion-avatar item-left class="category-icon">\n						<img class="icon" src="{{category.icon}}" (click)="changeCategoryIcon($event, category)" />\n					</ion-avatar>\n				</ion-col>\n			</ion-row>\n			<ion-row>\n				<ion-col width-50>\n					<ion-input class="categoryName" type="text" [(ngModel)]="category.categoryName">\n					</ion-input>\n				</ion-col>\n				<ion-col width-33>\n					<ion-item>\n						<ion-select class="measurement" id="measurement" [(ngModel)]="category.measurement" (ngModelChange)="measurementChange($event)">\n							<ion-option value="UNIDADES">{{ \'Unidades\' | translate }}</ion-option>\n							<ion-option value="GRAMOS">{{ \'Gramos\' | translate }}</ion-option>\n							<ion-option value="KILOS">{{ \'Kilos\' | translate }}</ion-option>\n							<ion-option value="LITROS">{{ \'Litros\' | translate }}</ion-option>\n						</ion-select>\n					</ion-item>\n				</ion-col>\n				<ion-col width-25>\n					<ion-item class="measurementUnitStep">\n						<ion-label stacked>{{ \'PasoMedida\' | translate }}</ion-label>\n						<ion-input text-right [(ngModel)]="category.unitStep" min="1" type="number"></ion-input>\n					</ion-item>\n				</ion-col>\n			</ion-row>\n		</ion-card-header>\n	</ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/components/category-info/category-info.html"*/,
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/components/category-info/category-info.html"*/'<ion-header>\n	<ion-toolbar dark>\n		<ion-title [hidden]="!editing">\n			{{ \'EditaCategoria\' | translate }}\n		</ion-title>\n		<ion-title [hidden]="editing">\n			{{ \'NuevaCategoria\' | translate }}\n		</ion-title>\n		<ion-buttons end>\n			<button primary (click)="save()"><ion-icon ios="ios-archive" md="md-archive"></ion-icon></button>\n			<button (click)="close()"><ion-icon ios="ios-close" md="md-close"></ion-icon></button>\n		</ion-buttons>\n	</ion-toolbar>\n</ion-header>\n\n<ion-content class="item-info">\n	<ion-card>\n		<ion-card-header>\n			<ion-row>\n				<ion-col width-66>\n					<ion-avatar item-left class="category-icon">\n						<img class="icon" src="{{category.icon.src}}" (click)="changeCategoryIcon($event, category)" />\n					</ion-avatar>\n				</ion-col>\n			</ion-row>\n			<ion-row>\n				<ion-col width-50>\n					<ion-input class="categoryName" type="text" [(ngModel)]="category.categoryName">\n					</ion-input>\n				</ion-col>\n				<ion-col width-33>\n					<ion-item>\n						<ion-select class="measurement" id="measurement" [(ngModel)]="category.measurement" (ngModelChange)="measurementChange($event)">\n							<ion-option value="UNIDADES">{{ \'Unidades\' | translate }}</ion-option>\n							<ion-option value="GRAMOS">{{ \'Gramos\' | translate }}</ion-option>\n							<ion-option value="KILOS">{{ \'Kilos\' | translate }}</ion-option>\n							<ion-option value="LITROS">{{ \'Litros\' | translate }}</ion-option>\n						</ion-select>\n					</ion-item>\n				</ion-col>\n				<ion-col width-25>\n					<ion-item class="measurementUnitStep">\n						<ion-label stacked>{{ \'PasoMedida\' | translate }}</ion-label>\n						<ion-input text-right [(ngModel)]="category.unitStep" min="1" type="number"></ion-input>\n					</ion-item>\n				</ion-col>\n			</ion-row>\n		</ion-card-header>\n	</ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/components/category-info/category-info.html"*/,
             providers: [__WEBPACK_IMPORTED_MODULE_3__providers_categories_categoriesService__["a" /* CategoriesService */]]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["n" /* ViewController */],
@@ -5151,15 +5241,15 @@ var CategoryInfoPage = (function () {
 
 /***/ }),
 
-/***/ 464:
+/***/ 470:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ItemsNeededComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__providers_global_vars_global_vars__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__providers_global_vars_global_vars__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pipes_pipefilterElements__ = __webpack_require__(465);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pipes_pipefilterElements__ = __webpack_require__(471);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_log_log__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5181,7 +5271,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class ItemsNeededComponent
  */
-var ItemsNeededComponent = (function () {
+var ItemsNeededComponent = /** @class */ (function () {
     function ItemsNeededComponent(globalVars, view, filterElements, log) {
         this.globalVars = globalVars;
         this.view = view;
@@ -5280,7 +5370,7 @@ var ItemsNeededComponent = (function () {
 
 /***/ }),
 
-/***/ 465:
+/***/ 471:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5300,7 +5390,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
  * @class PipeFilterElements
  * @implements {PipeTransform}
  */
-var PipeFilterElements = (function () {
+var PipeFilterElements = /** @class */ (function () {
     function PipeFilterElements() {
     }
     PipeFilterElements.prototype.transform = function (value, args) {
@@ -5329,12 +5419,12 @@ var PipeFilterElements = (function () {
 
 /***/ }),
 
-/***/ 466:
+/***/ 472:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__global_vars_global_vars__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__global_vars_global_vars__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_google_plus__ = __webpack_require__(143);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_firebase__ = __webpack_require__(84);
@@ -5365,7 +5455,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class AuthService
  */
-var AuthService = (function () {
+var AuthService = /** @class */ (function () {
     function AuthService(plt, googlePlus, globalVars, log //private twitter: TwitterConnect, //public fb: Facebook
     ) {
         var _this = this;
@@ -5683,12 +5773,12 @@ var AuthService = (function () {
 
 /***/ }),
 
-/***/ 467:
+/***/ 473:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ItemsBestBeforeComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__providers_global_vars_global_vars__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__providers_global_vars_global_vars__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pipes_orderBy__ = __webpack_require__(89);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
@@ -5716,7 +5806,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class ItemsBestBeforeComponent
  */
-var ItemsBestBeforeComponent = (function () {
+var ItemsBestBeforeComponent = /** @class */ (function () {
     function ItemsBestBeforeComponent(globalVars, order, view, log) {
         this.globalVars = globalVars;
         this.order = order;
@@ -5794,66 +5884,6 @@ var ItemsBestBeforeComponent = (function () {
 
 /***/ }),
 
-/***/ 468:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ItemInfoPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-/**
- * Modal continer to show item data to edit or create
- *
- * @export
- * @class ItemInfoPage
- */
-var ItemInfoPage = (function () {
-    function ItemInfoPage(view, params) {
-        this.view = view;
-        this.item = params.get('newItem');
-        this.editing = params.get('editing');
-        this.icons = params.get('icons');
-    }
-    /**
-     * Close modal saving data
-     *
-     * @memberof ItemInfoPage
-     */
-    ItemInfoPage.prototype.save = function () {
-        this.view.dismiss(this.item);
-    };
-    /**
-     * Close modal without saving data
-     *
-     * @memberof ItemInfoPage
-     */
-    ItemInfoPage.prototype.close = function () {
-        this.view.dismiss();
-    };
-    ItemInfoPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/components/item-info/item-info.html"*/'<ion-header>\n  <ion-toolbar dark>\n    <ion-title [hidden]="!editing">\n      {{ \'EditaElemento\' | translate }}\n    </ion-title>\n    <ion-title [hidden]="editing">\n      {{ \'AniadirElemento\' | translate }}\n    </ion-title>\n    <ion-buttons end>\n      <button primary (click)="save()">\n        <ion-icon ios="ios-archive" md="md-archive"></ion-icon>\n      </button>\n      <button (click)="close()">\n        <ion-icon ios="ios-close" md="md-close"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class="item-info">\n  <item [(item)]="item" [creating]="editing" [icons]="icons"></item>\n</ion-content>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/components/item-info/item-info.html"*/
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
-    ], ItemInfoPage);
-    return ItemInfoPage;
-}());
-
-//# sourceMappingURL=item-info.js.map
-
-/***/ }),
-
 /***/ 53:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5885,7 +5915,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class LocalStorage
  */
-var LocalStorage = (function () {
+var LocalStorage = /** @class */ (function () {
     function LocalStorage(http, storage, log) {
         this.http = http;
         this.storage = storage;
@@ -5966,13 +5996,13 @@ var LocalStorage = (function () {
 
 /***/ }),
 
-/***/ 595:
+/***/ 601:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(596);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(600);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(602);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(606);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -5980,7 +6010,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 600:
+/***/ 606:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5998,57 +6028,61 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(244);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_storage__ = __webpack_require__(144);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic2_auto_complete__ = __webpack_require__(508);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic2_auto_complete__ = __webpack_require__(513);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_app_version__ = __webpack_require__(290);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_camera__ = __webpack_require__(1007);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_image_picker__ = __webpack_require__(1008);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_camera__ = __webpack_require__(1013);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_image_picker__ = __webpack_require__(1014);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_file__ = __webpack_require__(187);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_mocks_file__ = __webpack_require__(1009);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_fcm__ = __webpack_require__(188);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ngx_translate_core__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ngx_translate_http_loader__ = __webpack_require__(1010);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_ionic_configuration_service__ = __webpack_require__(293);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21_ionic_logging_service__ = __webpack_require__(291);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ionic_native_phonegap_local_notification__ = __webpack_require__(189);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__ionic_native_local_notifications__ = __webpack_require__(190);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_reminders_component_reminders_component__ = __webpack_require__(191);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_items_best_before_component_items_best_before_component__ = __webpack_require__(467);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_items_needed_component_items_needed_component__ = __webpack_require__(464);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_bottom_buttons_component_bottom_buttons_component__ = __webpack_require__(1011);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_item_data_item_data__ = __webpack_require__(1012);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_about_page_about_page__ = __webpack_require__(220);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_backup_page_backup_page__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__pages_categorys_page_categorys_page__ = __webpack_require__(222);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__components_icons_list_icons__ = __webpack_require__(462);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__components_category_info_category_info__ = __webpack_require__(463);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__pages_config_page_config_page__ = __webpack_require__(223);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__pages_dashboard_page_dashboard_page__ = __webpack_require__(224);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__components_item_info_item_info__ = __webpack_require__(468);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__pages_items_page_items_page__ = __webpack_require__(225);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__pages_list_page_list_page__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__pages_lists_page_lists_page__ = __webpack_require__(226);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__providers_auth_auth_service__ = __webpack_require__(466);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__providers_categories_categoriesService__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__providers_categorys_provider__ = __webpack_require__(295);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__providers_data_cloudStorage__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__providers_config_provider__ = __webpack_require__(335);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__providers_items_provider__ = __webpack_require__(336);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__providers_list_provider__ = __webpack_require__(337);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__providers_lists_provider__ = __webpack_require__(461);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__providers_reminders_provider__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__providers_backup_data_backup_data__ = __webpack_require__(294);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__providers_data_localStorage__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__providers_default_icons_default_icons__ = __webpack_require__(186);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__providers_global_vars_global_vars__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__providers_log_log__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__app_component__ = __webpack_require__(1015);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__providers_rate_service_rate_service__ = __webpack_require__(1016);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_mocks_file__ = __webpack_require__(1015);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_fcm__ = __webpack_require__(191);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_insomnia__ = __webpack_require__(600);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_contacts__ = __webpack_require__(467);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ngx_translate_core__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ngx_translate_http_loader__ = __webpack_require__(1016);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22_ionic_configuration_service__ = __webpack_require__(293);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23_ionic_logging_service__ = __webpack_require__(291);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_phonegap_local_notification__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_local_notifications__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_reminders_component_reminders_component__ = __webpack_require__(190);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_items_best_before_component_items_best_before_component__ = __webpack_require__(473);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_items_needed_component_items_needed_component__ = __webpack_require__(470);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_bottom_buttons_component_bottom_buttons_component__ = __webpack_require__(1017);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_item_data_item_data__ = __webpack_require__(1018);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__pages_about_page_about_page__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__pages_backup_page_backup_page__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__pages_categorys_page_categorys_page__ = __webpack_require__(224);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__components_icons_list_icons__ = __webpack_require__(468);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__components_category_info_category_info__ = __webpack_require__(469);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__pages_config_page_config_page__ = __webpack_require__(222);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__pages_dashboard_page_dashboard_page__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__components_item_info_item_info__ = __webpack_require__(466);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__pages_items_page_items_page__ = __webpack_require__(226);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__pages_list_page_list_page__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__pages_lists_page_lists_page__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__providers_auth_auth_service__ = __webpack_require__(472);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__providers_categories_categoriesService__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__providers_categorys_provider__ = __webpack_require__(295);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__providers_data_cloudStorage__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__providers_config_provider__ = __webpack_require__(335);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__providers_items_provider__ = __webpack_require__(336);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__providers_list_provider__ = __webpack_require__(337);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__providers_lists_provider__ = __webpack_require__(465);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__providers_reminders_provider__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__providers_backup_data_backup_data__ = __webpack_require__(294);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__providers_data_localStorage__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__providers_default_icons_default_icons__ = __webpack_require__(186);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__providers_global_vars_global_vars__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__providers_log_log__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__app_component__ = __webpack_require__(1021);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_57__providers_rate_service_rate_service__ = __webpack_require__(1022);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -6109,38 +6143,38 @@ function loadConfiguration(configurationService) {
     return function () { return configurationService.load('assets/settings.json'); };
 }
 function createTranslateLoader(http) {
-    return new __WEBPACK_IMPORTED_MODULE_19__ngx_translate_http_loader__["a" /* TranslateHttpLoader */](http, './assets/i18n/', '.json');
+    return new __WEBPACK_IMPORTED_MODULE_21__ngx_translate_http_loader__["a" /* TranslateHttpLoader */](http, './assets/i18n/', '.json');
 }
-var AppModule = (function () {
+var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_54__app_component__["a" /* Alacena */],
-                __WEBPACK_IMPORTED_MODULE_35__pages_dashboard_page_dashboard_page__["a" /* DashboardPage */],
-                __WEBPACK_IMPORTED_MODULE_38__pages_list_page_list_page__["a" /* ListPage */],
-                __WEBPACK_IMPORTED_MODULE_39__pages_lists_page_lists_page__["a" /* ListsPage */],
-                __WEBPACK_IMPORTED_MODULE_37__pages_items_page_items_page__["a" /* ItemsPage */],
-                __WEBPACK_IMPORTED_MODULE_36__components_item_info_item_info__["a" /* ItemInfoPage */],
-                __WEBPACK_IMPORTED_MODULE_34__pages_config_page_config_page__["a" /* ConfigPage */],
-                __WEBPACK_IMPORTED_MODULE_29__pages_about_page_about_page__["a" /* AboutPage */],
-                __WEBPACK_IMPORTED_MODULE_30__pages_backup_page_backup_page__["a" /* BackupPage */],
-                __WEBPACK_IMPORTED_MODULE_31__pages_categorys_page_categorys_page__["a" /* CategorysPage */],
-                __WEBPACK_IMPORTED_MODULE_28__components_item_data_item_data__["a" /* Item */],
-                __WEBPACK_IMPORTED_MODULE_27__components_bottom_buttons_component_bottom_buttons_component__["a" /* BottomButtonsComponent */],
-                __WEBPACK_IMPORTED_MODULE_32__components_icons_list_icons__["a" /* ListIconsPage */],
-                __WEBPACK_IMPORTED_MODULE_33__components_category_info_category_info__["a" /* CategoryInfoPage */],
-                __WEBPACK_IMPORTED_MODULE_24__components_reminders_component_reminders_component__["a" /* RemindersComponent */],
-                __WEBPACK_IMPORTED_MODULE_25__components_items_best_before_component_items_best_before_component__["a" /* ItemsBestBeforeComponent */],
-                __WEBPACK_IMPORTED_MODULE_26__components_items_needed_component_items_needed_component__["a" /* ItemsNeededComponent */]
+                __WEBPACK_IMPORTED_MODULE_56__app_component__["a" /* Alacena */],
+                __WEBPACK_IMPORTED_MODULE_37__pages_dashboard_page_dashboard_page__["a" /* DashboardPage */],
+                __WEBPACK_IMPORTED_MODULE_40__pages_list_page_list_page__["a" /* ListPage */],
+                __WEBPACK_IMPORTED_MODULE_41__pages_lists_page_lists_page__["a" /* ListsPage */],
+                __WEBPACK_IMPORTED_MODULE_39__pages_items_page_items_page__["a" /* ItemsPage */],
+                __WEBPACK_IMPORTED_MODULE_38__components_item_info_item_info__["a" /* ItemInfoPage */],
+                __WEBPACK_IMPORTED_MODULE_36__pages_config_page_config_page__["a" /* ConfigPage */],
+                __WEBPACK_IMPORTED_MODULE_31__pages_about_page_about_page__["a" /* AboutPage */],
+                __WEBPACK_IMPORTED_MODULE_32__pages_backup_page_backup_page__["a" /* BackupPage */],
+                __WEBPACK_IMPORTED_MODULE_33__pages_categorys_page_categorys_page__["a" /* CategorysPage */],
+                __WEBPACK_IMPORTED_MODULE_30__components_item_data_item_data__["a" /* Item */],
+                __WEBPACK_IMPORTED_MODULE_29__components_bottom_buttons_component_bottom_buttons_component__["a" /* BottomButtonsComponent */],
+                __WEBPACK_IMPORTED_MODULE_34__components_icons_list_icons__["a" /* ListIconsPage */],
+                __WEBPACK_IMPORTED_MODULE_35__components_category_info_category_info__["a" /* CategoryInfoPage */],
+                __WEBPACK_IMPORTED_MODULE_26__components_reminders_component_reminders_component__["a" /* RemindersComponent */],
+                __WEBPACK_IMPORTED_MODULE_27__components_items_best_before_component_items_best_before_component__["a" /* ItemsBestBeforeComponent */],
+                __WEBPACK_IMPORTED_MODULE_28__components_items_needed_component_items_needed_component__["a" /* ItemsNeededComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_11_ionic2_auto_complete__["b" /* AutoCompleteModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* HttpModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["b" /* HttpClientModule */],
-                __WEBPACK_IMPORTED_MODULE_10_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_54__app_component__["a" /* Alacena */], {
+                __WEBPACK_IMPORTED_MODULE_10_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_56__app_component__["a" /* Alacena */], {
                     backButtonText: '',
                     modalEnter: 'modal-slide-in',
                     modalLeave: 'modal-slide-out',
@@ -6152,18 +6186,18 @@ var AppModule = (function () {
                     links: [
                         { loadChildren: '../pages/about-page/about-page.module#AboutPageModule', name: 'AboutPage', segment: 'about-page', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/backup-page/backup-page.module#BackupPageModule', name: 'BackupPage', segment: 'backup-page', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/categorys-page/categorys-page.module#CategorysPageModule', name: 'CategorysPage', segment: 'categorys-page', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/config-page/config-page.module#ConfigPageModule', name: 'ConfigPage', segment: 'config-page', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/lists-page/lists-page.module#ListsPageModule', name: 'ListsPage', segment: 'lists-page', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/categorys-page/categorys-page.module#CategorysPageModule', name: 'CategorysPage', segment: 'categorys-page', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/dashboard-page/dashboard-page.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard-page', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/items-page/items-page.module#ItemsPageModule', name: 'ItemsPage', segment: 'items-page', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/list-page/list-page.module#ListPageModule', name: 'ListPage', segment: 'list-page', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/lists-page/lists-page.module#ListsPageModule', name: 'ListsPage', segment: 'lists-page', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/list-page/list-page.module#ListPageModule', name: 'ListPage', segment: 'list-page', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_9__ionic_storage__["a" /* IonicStorageModule */].forRoot(),
-                __WEBPACK_IMPORTED_MODULE_18__ngx_translate_core__["b" /* TranslateModule */].forRoot({
+                __WEBPACK_IMPORTED_MODULE_20__ngx_translate_core__["b" /* TranslateModule */].forRoot({
                     loader: {
-                        provide: __WEBPACK_IMPORTED_MODULE_18__ngx_translate_core__["a" /* TranslateLoader */],
+                        provide: __WEBPACK_IMPORTED_MODULE_20__ngx_translate_core__["a" /* TranslateLoader */],
                         useFactory: (createTranslateLoader),
                         deps: [__WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */]]
                     }
@@ -6171,38 +6205,40 @@ var AppModule = (function () {
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_10_ionic_angular__["d" /* IonicApp */]],
             entryComponents: [
-                __WEBPACK_IMPORTED_MODULE_54__app_component__["a" /* Alacena */],
-                __WEBPACK_IMPORTED_MODULE_35__pages_dashboard_page_dashboard_page__["a" /* DashboardPage */],
-                __WEBPACK_IMPORTED_MODULE_38__pages_list_page_list_page__["a" /* ListPage */],
-                __WEBPACK_IMPORTED_MODULE_39__pages_lists_page_lists_page__["a" /* ListsPage */],
-                __WEBPACK_IMPORTED_MODULE_37__pages_items_page_items_page__["a" /* ItemsPage */],
-                __WEBPACK_IMPORTED_MODULE_36__components_item_info_item_info__["a" /* ItemInfoPage */],
-                __WEBPACK_IMPORTED_MODULE_34__pages_config_page_config_page__["a" /* ConfigPage */],
-                __WEBPACK_IMPORTED_MODULE_29__pages_about_page_about_page__["a" /* AboutPage */],
-                __WEBPACK_IMPORTED_MODULE_30__pages_backup_page_backup_page__["a" /* BackupPage */],
-                __WEBPACK_IMPORTED_MODULE_31__pages_categorys_page_categorys_page__["a" /* CategorysPage */],
-                __WEBPACK_IMPORTED_MODULE_28__components_item_data_item_data__["a" /* Item */],
-                __WEBPACK_IMPORTED_MODULE_27__components_bottom_buttons_component_bottom_buttons_component__["a" /* BottomButtonsComponent */],
-                __WEBPACK_IMPORTED_MODULE_32__components_icons_list_icons__["a" /* ListIconsPage */],
-                __WEBPACK_IMPORTED_MODULE_33__components_category_info_category_info__["a" /* CategoryInfoPage */],
-                __WEBPACK_IMPORTED_MODULE_24__components_reminders_component_reminders_component__["a" /* RemindersComponent */],
-                __WEBPACK_IMPORTED_MODULE_25__components_items_best_before_component_items_best_before_component__["a" /* ItemsBestBeforeComponent */],
-                __WEBPACK_IMPORTED_MODULE_26__components_items_needed_component_items_needed_component__["a" /* ItemsNeededComponent */]
+                __WEBPACK_IMPORTED_MODULE_56__app_component__["a" /* Alacena */],
+                __WEBPACK_IMPORTED_MODULE_37__pages_dashboard_page_dashboard_page__["a" /* DashboardPage */],
+                __WEBPACK_IMPORTED_MODULE_40__pages_list_page_list_page__["a" /* ListPage */],
+                __WEBPACK_IMPORTED_MODULE_41__pages_lists_page_lists_page__["a" /* ListsPage */],
+                __WEBPACK_IMPORTED_MODULE_39__pages_items_page_items_page__["a" /* ItemsPage */],
+                __WEBPACK_IMPORTED_MODULE_38__components_item_info_item_info__["a" /* ItemInfoPage */],
+                __WEBPACK_IMPORTED_MODULE_36__pages_config_page_config_page__["a" /* ConfigPage */],
+                __WEBPACK_IMPORTED_MODULE_31__pages_about_page_about_page__["a" /* AboutPage */],
+                __WEBPACK_IMPORTED_MODULE_32__pages_backup_page_backup_page__["a" /* BackupPage */],
+                __WEBPACK_IMPORTED_MODULE_33__pages_categorys_page_categorys_page__["a" /* CategorysPage */],
+                __WEBPACK_IMPORTED_MODULE_30__components_item_data_item_data__["a" /* Item */],
+                __WEBPACK_IMPORTED_MODULE_29__components_bottom_buttons_component_bottom_buttons_component__["a" /* BottomButtonsComponent */],
+                __WEBPACK_IMPORTED_MODULE_34__components_icons_list_icons__["a" /* ListIconsPage */],
+                __WEBPACK_IMPORTED_MODULE_35__components_category_info_category_info__["a" /* CategoryInfoPage */],
+                __WEBPACK_IMPORTED_MODULE_26__components_reminders_component_reminders_component__["a" /* RemindersComponent */],
+                __WEBPACK_IMPORTED_MODULE_27__components_items_best_before_component_items_best_before_component__["a" /* ItemsBestBeforeComponent */],
+                __WEBPACK_IMPORTED_MODULE_28__components_items_needed_component_items_needed_component__["a" /* ItemsNeededComponent */]
             ],
             providers: [
                 //{provide: ErrorHandler, useClass: SentryErrorHandler},
                 //test and maybe change
                 //{provide: ErrorHandler, useClass: IonicErrorHandler}
-                __WEBPACK_IMPORTED_MODULE_20_ionic_configuration_service__["a" /* ConfigurationService */],
+                __WEBPACK_IMPORTED_MODULE_22_ionic_configuration_service__["a" /* ConfigurationService */],
                 {
                     provide: __WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* APP_INITIALIZER */],
                     useFactory: loadConfiguration,
-                    deps: [__WEBPACK_IMPORTED_MODULE_20_ionic_configuration_service__["a" /* ConfigurationService */]],
+                    deps: [__WEBPACK_IMPORTED_MODULE_22_ionic_configuration_service__["a" /* ConfigurationService */]],
                     multi: true
                 },
                 __WEBPACK_IMPORTED_MODULE_17__ionic_native_fcm__["a" /* FCM */],
-                __WEBPACK_IMPORTED_MODULE_21_ionic_logging_service__["a" /* LoggingService */],
-                __WEBPACK_IMPORTED_MODULE_53__providers_log_log__["a" /* Log */],
+                __WEBPACK_IMPORTED_MODULE_18__ionic_native_insomnia__["a" /* Insomnia */],
+                __WEBPACK_IMPORTED_MODULE_19__ionic_native_contacts__["a" /* Contacts */],
+                __WEBPACK_IMPORTED_MODULE_23_ionic_logging_service__["a" /* LoggingService */],
+                __WEBPACK_IMPORTED_MODULE_55__providers_log_log__["a" /* Log */],
                 __WEBPACK_IMPORTED_MODULE_4__ionic_native_admob_free__["a" /* AdMobFree */],
                 __WEBPACK_IMPORTED_MODULE_12__ionic_native_app_version__["a" /* AppVersion */],
                 __WEBPACK_IMPORTED_MODULE_13__ionic_native_camera__["a" /* Camera */],
@@ -6211,25 +6247,25 @@ var AppModule = (function () {
                 { provide: __WEBPACK_IMPORTED_MODULE_15__ionic_native_file__["a" /* File */], useClass: __WEBPACK_IMPORTED_MODULE_16__ionic_native_mocks_file__["a" /* FileMock */] },
                 __WEBPACK_IMPORTED_MODULE_5__ionic_native_google_plus__["a" /* GooglePlus */],
                 __WEBPACK_IMPORTED_MODULE_6__ionic_native_network__["a" /* Network */],
-                __WEBPACK_IMPORTED_MODULE_43__providers_data_cloudStorage__["a" /* CloudStorage */],
-                __WEBPACK_IMPORTED_MODULE_50__providers_data_localStorage__["a" /* LocalStorage */],
-                __WEBPACK_IMPORTED_MODULE_41__providers_categories_categoriesService__["a" /* CategoriesService */],
-                __WEBPACK_IMPORTED_MODULE_51__providers_default_icons_default_icons__["a" /* DefaultIcons */],
-                __WEBPACK_IMPORTED_MODULE_42__providers_categorys_provider__["a" /* CategorysProvider */],
-                __WEBPACK_IMPORTED_MODULE_47__providers_lists_provider__["a" /* ListsProvider */],
-                __WEBPACK_IMPORTED_MODULE_46__providers_list_provider__["a" /* ListProvider */],
-                __WEBPACK_IMPORTED_MODULE_45__providers_items_provider__["a" /* ItemsProvider */],
-                __WEBPACK_IMPORTED_MODULE_48__providers_reminders_provider__["a" /* RemindersProvider */],
-                __WEBPACK_IMPORTED_MODULE_49__providers_backup_data_backup_data__["a" /* BackupData */],
-                __WEBPACK_IMPORTED_MODULE_36__components_item_info_item_info__["a" /* ItemInfoPage */],
-                __WEBPACK_IMPORTED_MODULE_44__providers_config_provider__["a" /* ConfigProvider */],
-                __WEBPACK_IMPORTED_MODULE_22__ionic_native_phonegap_local_notification__["a" /* PhonegapLocalNotification */],
-                __WEBPACK_IMPORTED_MODULE_23__ionic_native_local_notifications__["a" /* LocalNotifications */],
+                __WEBPACK_IMPORTED_MODULE_45__providers_data_cloudStorage__["a" /* CloudStorage */],
+                __WEBPACK_IMPORTED_MODULE_52__providers_data_localStorage__["a" /* LocalStorage */],
+                __WEBPACK_IMPORTED_MODULE_43__providers_categories_categoriesService__["a" /* CategoriesService */],
+                __WEBPACK_IMPORTED_MODULE_53__providers_default_icons_default_icons__["a" /* DefaultIcons */],
+                __WEBPACK_IMPORTED_MODULE_44__providers_categorys_provider__["a" /* CategorysProvider */],
+                __WEBPACK_IMPORTED_MODULE_49__providers_lists_provider__["a" /* ListsProvider */],
+                __WEBPACK_IMPORTED_MODULE_48__providers_list_provider__["a" /* ListProvider */],
+                __WEBPACK_IMPORTED_MODULE_47__providers_items_provider__["a" /* ItemsProvider */],
+                __WEBPACK_IMPORTED_MODULE_50__providers_reminders_provider__["a" /* RemindersProvider */],
+                __WEBPACK_IMPORTED_MODULE_51__providers_backup_data_backup_data__["a" /* BackupData */],
+                __WEBPACK_IMPORTED_MODULE_38__components_item_info_item_info__["a" /* ItemInfoPage */],
+                __WEBPACK_IMPORTED_MODULE_46__providers_config_provider__["a" /* ConfigProvider */],
+                __WEBPACK_IMPORTED_MODULE_24__ionic_native_phonegap_local_notification__["a" /* PhonegapLocalNotification */],
+                __WEBPACK_IMPORTED_MODULE_25__ionic_native_local_notifications__["a" /* LocalNotifications */],
                 __WEBPACK_IMPORTED_MODULE_7__ionic_native_splash_screen__["a" /* SplashScreen */],
                 __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__["a" /* StatusBar */],
-                __WEBPACK_IMPORTED_MODULE_52__providers_global_vars_global_vars__["a" /* GlobalVars */],
-                __WEBPACK_IMPORTED_MODULE_40__providers_auth_auth_service__["a" /* AuthService */],
-                __WEBPACK_IMPORTED_MODULE_55__providers_rate_service_rate_service__["a" /* RateServiceProvider */]
+                __WEBPACK_IMPORTED_MODULE_54__providers_global_vars_global_vars__["a" /* GlobalVars */],
+                __WEBPACK_IMPORTED_MODULE_42__providers_auth_auth_service__["a" /* AuthService */],
+                __WEBPACK_IMPORTED_MODULE_57__providers_rate_service_rate_service__["a" /* RateServiceProvider */]
             ],
             schemas: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["i" /* CUSTOM_ELEMENTS_SCHEMA */]]
         })
@@ -6273,7 +6309,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class CloudStorage
  */
-var CloudStorage = (function () {
+var CloudStorage = /** @class */ (function () {
     function CloudStorage(http, log) {
         this.http = http;
         this.log = log;
@@ -6654,7 +6690,7 @@ var CloudStorage = (function () {
 
 /***/ }),
 
-/***/ 711:
+/***/ 717:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -6710,200 +6746,208 @@ var map = {
 	"./dv.js": 362,
 	"./el": 363,
 	"./el.js": 363,
-	"./en-au": 364,
-	"./en-au.js": 364,
-	"./en-ca": 365,
-	"./en-ca.js": 365,
-	"./en-gb": 366,
-	"./en-gb.js": 366,
-	"./en-ie": 367,
-	"./en-ie.js": 367,
-	"./en-il": 368,
-	"./en-il.js": 368,
-	"./en-nz": 369,
-	"./en-nz.js": 369,
-	"./eo": 370,
-	"./eo.js": 370,
-	"./es": 371,
-	"./es-do": 372,
-	"./es-do.js": 372,
-	"./es-us": 373,
-	"./es-us.js": 373,
-	"./es.js": 371,
-	"./et": 374,
-	"./et.js": 374,
-	"./eu": 375,
-	"./eu.js": 375,
-	"./fa": 376,
-	"./fa.js": 376,
-	"./fi": 377,
-	"./fi.js": 377,
-	"./fo": 378,
-	"./fo.js": 378,
-	"./fr": 379,
-	"./fr-ca": 380,
-	"./fr-ca.js": 380,
-	"./fr-ch": 381,
-	"./fr-ch.js": 381,
-	"./fr.js": 379,
-	"./fy": 382,
-	"./fy.js": 382,
-	"./gd": 383,
-	"./gd.js": 383,
-	"./gl": 384,
-	"./gl.js": 384,
-	"./gom-latn": 385,
-	"./gom-latn.js": 385,
-	"./gu": 386,
-	"./gu.js": 386,
-	"./he": 387,
-	"./he.js": 387,
-	"./hi": 388,
-	"./hi.js": 388,
-	"./hr": 389,
-	"./hr.js": 389,
-	"./hu": 390,
-	"./hu.js": 390,
-	"./hy-am": 391,
-	"./hy-am.js": 391,
-	"./id": 392,
-	"./id.js": 392,
-	"./is": 393,
-	"./is.js": 393,
-	"./it": 394,
-	"./it.js": 394,
-	"./ja": 395,
-	"./ja.js": 395,
-	"./jv": 396,
-	"./jv.js": 396,
-	"./ka": 397,
-	"./ka.js": 397,
-	"./kk": 398,
-	"./kk.js": 398,
-	"./km": 399,
-	"./km.js": 399,
-	"./kn": 400,
-	"./kn.js": 400,
-	"./ko": 401,
-	"./ko.js": 401,
-	"./ky": 402,
-	"./ky.js": 402,
-	"./lb": 403,
-	"./lb.js": 403,
-	"./lo": 404,
-	"./lo.js": 404,
-	"./lt": 405,
-	"./lt.js": 405,
-	"./lv": 406,
-	"./lv.js": 406,
-	"./me": 407,
-	"./me.js": 407,
-	"./mi": 408,
-	"./mi.js": 408,
-	"./mk": 409,
-	"./mk.js": 409,
-	"./ml": 410,
-	"./ml.js": 410,
-	"./mn": 411,
-	"./mn.js": 411,
-	"./mr": 412,
-	"./mr.js": 412,
-	"./ms": 413,
-	"./ms-my": 414,
-	"./ms-my.js": 414,
-	"./ms.js": 413,
-	"./mt": 415,
-	"./mt.js": 415,
-	"./my": 416,
-	"./my.js": 416,
-	"./nb": 417,
-	"./nb.js": 417,
-	"./ne": 418,
-	"./ne.js": 418,
-	"./nl": 419,
-	"./nl-be": 420,
-	"./nl-be.js": 420,
-	"./nl.js": 419,
-	"./nn": 421,
-	"./nn.js": 421,
-	"./pa-in": 422,
-	"./pa-in.js": 422,
-	"./pl": 423,
-	"./pl.js": 423,
-	"./pt": 424,
-	"./pt-br": 425,
-	"./pt-br.js": 425,
-	"./pt.js": 424,
-	"./ro": 426,
-	"./ro.js": 426,
-	"./ru": 427,
-	"./ru.js": 427,
-	"./sd": 428,
-	"./sd.js": 428,
-	"./se": 429,
-	"./se.js": 429,
-	"./si": 430,
-	"./si.js": 430,
-	"./sk": 431,
-	"./sk.js": 431,
-	"./sl": 432,
-	"./sl.js": 432,
-	"./sq": 433,
-	"./sq.js": 433,
-	"./sr": 434,
-	"./sr-cyrl": 435,
-	"./sr-cyrl.js": 435,
-	"./sr.js": 434,
-	"./ss": 436,
-	"./ss.js": 436,
-	"./sv": 437,
-	"./sv.js": 437,
-	"./sw": 438,
-	"./sw.js": 438,
-	"./ta": 439,
-	"./ta.js": 439,
-	"./te": 440,
-	"./te.js": 440,
-	"./tet": 441,
-	"./tet.js": 441,
-	"./tg": 442,
-	"./tg.js": 442,
-	"./th": 443,
-	"./th.js": 443,
-	"./tl-ph": 444,
-	"./tl-ph.js": 444,
-	"./tlh": 445,
-	"./tlh.js": 445,
-	"./tr": 446,
-	"./tr.js": 446,
-	"./tzl": 447,
-	"./tzl.js": 447,
-	"./tzm": 448,
-	"./tzm-latn": 449,
-	"./tzm-latn.js": 449,
-	"./tzm.js": 448,
-	"./ug-cn": 450,
-	"./ug-cn.js": 450,
-	"./uk": 451,
-	"./uk.js": 451,
-	"./ur": 452,
-	"./ur.js": 452,
-	"./uz": 453,
-	"./uz-latn": 454,
-	"./uz-latn.js": 454,
-	"./uz.js": 453,
-	"./vi": 455,
-	"./vi.js": 455,
-	"./x-pseudo": 456,
-	"./x-pseudo.js": 456,
-	"./yo": 457,
-	"./yo.js": 457,
-	"./zh-cn": 458,
-	"./zh-cn.js": 458,
-	"./zh-hk": 459,
-	"./zh-hk.js": 459,
-	"./zh-tw": 460,
-	"./zh-tw.js": 460
+	"./en-SG": 364,
+	"./en-SG.js": 364,
+	"./en-au": 365,
+	"./en-au.js": 365,
+	"./en-ca": 366,
+	"./en-ca.js": 366,
+	"./en-gb": 367,
+	"./en-gb.js": 367,
+	"./en-ie": 368,
+	"./en-ie.js": 368,
+	"./en-il": 369,
+	"./en-il.js": 369,
+	"./en-nz": 370,
+	"./en-nz.js": 370,
+	"./eo": 371,
+	"./eo.js": 371,
+	"./es": 372,
+	"./es-do": 373,
+	"./es-do.js": 373,
+	"./es-us": 374,
+	"./es-us.js": 374,
+	"./es.js": 372,
+	"./et": 375,
+	"./et.js": 375,
+	"./eu": 376,
+	"./eu.js": 376,
+	"./fa": 377,
+	"./fa.js": 377,
+	"./fi": 378,
+	"./fi.js": 378,
+	"./fo": 379,
+	"./fo.js": 379,
+	"./fr": 380,
+	"./fr-ca": 381,
+	"./fr-ca.js": 381,
+	"./fr-ch": 382,
+	"./fr-ch.js": 382,
+	"./fr.js": 380,
+	"./fy": 383,
+	"./fy.js": 383,
+	"./ga": 384,
+	"./ga.js": 384,
+	"./gd": 385,
+	"./gd.js": 385,
+	"./gl": 386,
+	"./gl.js": 386,
+	"./gom-latn": 387,
+	"./gom-latn.js": 387,
+	"./gu": 388,
+	"./gu.js": 388,
+	"./he": 389,
+	"./he.js": 389,
+	"./hi": 390,
+	"./hi.js": 390,
+	"./hr": 391,
+	"./hr.js": 391,
+	"./hu": 392,
+	"./hu.js": 392,
+	"./hy-am": 393,
+	"./hy-am.js": 393,
+	"./id": 394,
+	"./id.js": 394,
+	"./is": 395,
+	"./is.js": 395,
+	"./it": 396,
+	"./it-ch": 397,
+	"./it-ch.js": 397,
+	"./it.js": 396,
+	"./ja": 398,
+	"./ja.js": 398,
+	"./jv": 399,
+	"./jv.js": 399,
+	"./ka": 400,
+	"./ka.js": 400,
+	"./kk": 401,
+	"./kk.js": 401,
+	"./km": 402,
+	"./km.js": 402,
+	"./kn": 403,
+	"./kn.js": 403,
+	"./ko": 404,
+	"./ko.js": 404,
+	"./ku": 405,
+	"./ku.js": 405,
+	"./ky": 406,
+	"./ky.js": 406,
+	"./lb": 407,
+	"./lb.js": 407,
+	"./lo": 408,
+	"./lo.js": 408,
+	"./lt": 409,
+	"./lt.js": 409,
+	"./lv": 410,
+	"./lv.js": 410,
+	"./me": 411,
+	"./me.js": 411,
+	"./mi": 412,
+	"./mi.js": 412,
+	"./mk": 413,
+	"./mk.js": 413,
+	"./ml": 414,
+	"./ml.js": 414,
+	"./mn": 415,
+	"./mn.js": 415,
+	"./mr": 416,
+	"./mr.js": 416,
+	"./ms": 417,
+	"./ms-my": 418,
+	"./ms-my.js": 418,
+	"./ms.js": 417,
+	"./mt": 419,
+	"./mt.js": 419,
+	"./my": 420,
+	"./my.js": 420,
+	"./nb": 421,
+	"./nb.js": 421,
+	"./ne": 422,
+	"./ne.js": 422,
+	"./nl": 423,
+	"./nl-be": 424,
+	"./nl-be.js": 424,
+	"./nl.js": 423,
+	"./nn": 425,
+	"./nn.js": 425,
+	"./pa-in": 426,
+	"./pa-in.js": 426,
+	"./pl": 427,
+	"./pl.js": 427,
+	"./pt": 428,
+	"./pt-br": 429,
+	"./pt-br.js": 429,
+	"./pt.js": 428,
+	"./ro": 430,
+	"./ro.js": 430,
+	"./ru": 431,
+	"./ru.js": 431,
+	"./sd": 432,
+	"./sd.js": 432,
+	"./se": 433,
+	"./se.js": 433,
+	"./si": 434,
+	"./si.js": 434,
+	"./sk": 435,
+	"./sk.js": 435,
+	"./sl": 436,
+	"./sl.js": 436,
+	"./sq": 437,
+	"./sq.js": 437,
+	"./sr": 438,
+	"./sr-cyrl": 439,
+	"./sr-cyrl.js": 439,
+	"./sr.js": 438,
+	"./ss": 440,
+	"./ss.js": 440,
+	"./sv": 441,
+	"./sv.js": 441,
+	"./sw": 442,
+	"./sw.js": 442,
+	"./ta": 443,
+	"./ta.js": 443,
+	"./te": 444,
+	"./te.js": 444,
+	"./tet": 445,
+	"./tet.js": 445,
+	"./tg": 446,
+	"./tg.js": 446,
+	"./th": 447,
+	"./th.js": 447,
+	"./tl-ph": 448,
+	"./tl-ph.js": 448,
+	"./tlh": 449,
+	"./tlh.js": 449,
+	"./tr": 450,
+	"./tr.js": 450,
+	"./tzl": 451,
+	"./tzl.js": 451,
+	"./tzm": 452,
+	"./tzm-latn": 453,
+	"./tzm-latn.js": 453,
+	"./tzm.js": 452,
+	"./ug-cn": 454,
+	"./ug-cn.js": 454,
+	"./uk": 455,
+	"./uk.js": 455,
+	"./ur": 456,
+	"./ur.js": 456,
+	"./uz": 457,
+	"./uz-latn": 458,
+	"./uz-latn.js": 458,
+	"./uz.js": 457,
+	"./vi": 459,
+	"./vi.js": 459,
+	"./x-pseudo": 460,
+	"./x-pseudo.js": 460,
+	"./yo": 461,
+	"./yo.js": 461,
+	"./zh-cn": 462,
+	"./zh-cn.js": 462,
+	"./zh-hk": 463,
+	"./zh-hk.js": 463,
+	"./zh-tw": 464,
+	"./zh-tw.js": 464
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -6919,7 +6963,7 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 711;
+webpackContext.id = 717;
 
 /***/ }),
 
@@ -6943,7 +6987,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
  * @class OrderBy
  * @implements {PipeTransform}
  */
-var OrderBy = (function () {
+var OrderBy = /** @class */ (function () {
     function OrderBy() {
     }
     OrderBy_1 = OrderBy;
@@ -7037,9 +7081,9 @@ var OrderBy = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CategoriesService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_icons_list_icons__ = __webpack_require__(462);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_icons_list_icons__ = __webpack_require__(468);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_default_icons_default_icons__ = __webpack_require__(186);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_global_vars_global_vars__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_global_vars_global_vars__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__log_log__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7064,7 +7108,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class CategoriesService
  */
-var CategoriesService = (function () {
+var CategoriesService = /** @class */ (function () {
     function CategoriesService(mod, alertCtrl, globalVars, iconsData, log) {
         var _this = this;
         this.mod = mod;
@@ -7104,7 +7148,13 @@ var CategoriesService = (function () {
                         });
                     }
                 });
-                change.addButton('Cancel');
+                change.addButton({
+                    text: 'Cancel',
+                    handler: function (data) {
+                        item.category = data;
+                        resolve(item);
+                    }
+                });
                 change.addButton({
                     text: 'OK',
                     handler: function (data) {
@@ -7211,15 +7261,15 @@ var CategoriesService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__providers_reminders_provider__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ngx_translate_core__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ngx_translate_core__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_phonegap_local_notification__ = __webpack_require__(189);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_local_notifications__ = __webpack_require__(190);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_reminders_component_reminders_component__ = __webpack_require__(191);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_phonegap_local_notification__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_local_notifications__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_reminders_component_reminders_component__ = __webpack_require__(190);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pipes_orderBy__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_global_vars_global_vars__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_item_info_item_info__ = __webpack_require__(468);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_global_vars_global_vars__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_item_info_item_info__ = __webpack_require__(466);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_log_log__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7248,7 +7298,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * @export
  * @class ListPage
  */
-var ListPage = (function () {
+var ListPage = /** @class */ (function () {
     function ListPage(navParams, view, mod, alertCtrl, globalVars, order, plt, localNotification, localNotifications, reminders, log, translate) {
         this.navParams = navParams;
         this.view = view;
@@ -7653,6 +7703,7 @@ var ListPage = (function () {
             cantidadMinima: this.minimumAmount,
             marked: false
         };
+        this.log.logs[this.constructor.name].info(newItem);
         var infoListModal = this.mod.create(__WEBPACK_IMPORTED_MODULE_10__components_item_info_item_info__["a" /* ItemInfoPage */], {
             newItem: newItem,
             editing: true,
@@ -7661,7 +7712,7 @@ var ListPage = (function () {
         infoListModal.onDidDismiss(function (item) {
             if (item !== undefined) {
                 if (_this.list.filter(function (element) {
-                    return element.nombreElemento.toLowerCase() === item.nombreElemento;
+                    return element.nombreElemento.toLowerCase() === item.nombreElemento.toLowerCase();
                 }).length === 0) {
                     _this.list.push(item);
                     _this.saveItem(item);
@@ -7696,25 +7747,15 @@ var ListPage = (function () {
             selector: 'page-list-page',template:/*ion-inline-start:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/list-page/list-page.html"*/'<ion-header>\n  <ion-navbar color="dark" [hidden]="searchBar">\n    <button ion-button menuToggle>\n      <ion-icon ios="ios-menu" md="md-menu"></ion-icon>\n    </button>\n    <ion-title>{{selectedItem}}</ion-title>\n    <ion-buttons end>\n      <button ion-button secondary (click)="reorder($event)">\n        <ion-icon class="icon-toolbar" ios="ios-repeat" md="md-repeat"></ion-icon>\n      </button>\n      <button ion-button secondary (click)="toggleSearchBar($event)">\n        <ion-icon class="icon-toolbar" ios="ios-search" md="md-search"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n  <ion-searchbar [hidden]="!searchBar" [(ngModel)]="searchItem" [debounce]=500 [showCancelButton]="true" [autocomplete]="true"\n                (ionInput)="searchMatches($event)" (ionCancel)="toggleSearchBar($event)">\n  </ion-searchbar>\n</ion-header>\n\n<ion-content class="list">\n  <ion-list inset>\n\n    <div *ngIf="selectedItem!==\'LISTA_COMPRA\'">\n      <div *ngFor="let itemData of list; let i = index">\n        <item [(item)]="list[i]" [creating]="false" [icons]="icons" (edit)="editItem(list[i])" (remove)="removeItem(list[i])" (move)="moveItem($event)"\n          (save)="saveItem(list[i])" [config]="dataConfig"></item>\n      </div>\n    </div>\n\n    <div *ngIf="selectedItem===\'LISTA_COMPRA\'">\n      <div *ngFor="let itemData of list; let i = index">\n        <item *ngIf="!list[i].marked" [(item)]="list[i]" [creating]="false" [icons]="icons" (edit)="editItem(list[i])" (remove)="removeItem(list[i])"\n          (move)="moveItem($event)" (save)="saveItem(list[i])" [config]="dataConfig"></item>\n      </div>\n      <div *ngFor="let itemData of list; let i = index">\n        <item *ngIf="list[i].marked" [(item)]="list[i]" [creating]="false" [icons]="icons" (edit)="editItem(list[i])" (remove)="removeItem(list[i])"\n          (move)="moveItem($event)" (save)="saveItem(list[i])" [config]="dataConfig"></item>\n      </div>\n    </div>\n\n  </ion-list>\n</ion-content>\n<ion-footer>\n  <bottom-buttons-component [type]="type" [object]="list" [add]=true [remove]=true [notifications]=true [favorites]="selectedItem===\'LISTA_COMPRA\'"\n    (finishedAdd)="addItem($event)" (finishedRemoved)="removeElements($event,list)" (finishNotification)="addNotification()"\n    (finishFavorite)="loadFavorite($event)">\n  </bottom-buttons-component>\n</ion-footer>\n'/*ion-inline-end:"/Users/danielcontrerasaladro/Documents/Projects/Alacena/src/pages/list-page/list-page.html"*/,
             providers: [__WEBPACK_IMPORTED_MODULE_8__pipes_orderBy__["a" /* OrderBy */]]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["n" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_9__providers_global_vars_global_vars__["a" /* GlobalVars */],
-            __WEBPACK_IMPORTED_MODULE_8__pipes_orderBy__["a" /* OrderBy */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* Platform */],
-            __WEBPACK_IMPORTED_MODULE_5__ionic_native_phonegap_local_notification__["a" /* PhonegapLocalNotification */],
-            __WEBPACK_IMPORTED_MODULE_6__ionic_native_local_notifications__["a" /* LocalNotifications */],
-            __WEBPACK_IMPORTED_MODULE_0__providers_reminders_provider__["a" /* RemindersProvider */],
-            __WEBPACK_IMPORTED_MODULE_11__providers_log_log__["a" /* Log */],
-            __WEBPACK_IMPORTED_MODULE_3__ngx_translate_core__["c" /* TranslateService */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* NavParams */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["n" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["n" /* ViewController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* ModalController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_9__providers_global_vars_global_vars__["a" /* GlobalVars */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__providers_global_vars_global_vars__["a" /* GlobalVars */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_8__pipes_orderBy__["a" /* OrderBy */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__pipes_orderBy__["a" /* OrderBy */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* Platform */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_native_phonegap_local_notification__["a" /* PhonegapLocalNotification */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_native_phonegap_local_notification__["a" /* PhonegapLocalNotification */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_local_notifications__["a" /* LocalNotifications */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_local_notifications__["a" /* LocalNotifications */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_0__providers_reminders_provider__["a" /* RemindersProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__providers_reminders_provider__["a" /* RemindersProvider */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_11__providers_log_log__["a" /* Log */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_11__providers_log_log__["a" /* Log */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_3__ngx_translate_core__["c" /* TranslateService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ngx_translate_core__["c" /* TranslateService */]) === "function" && _m || Object])
     ], ListPage);
     return ListPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
 }());
 
 //# sourceMappingURL=list-page.js.map
 
 /***/ })
 
-},[595]);
+},[601]);
 //# sourceMappingURL=main.js.map

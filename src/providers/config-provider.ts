@@ -92,8 +92,8 @@ export class ConfigProvider {
           } else {
             this.cloudStorage.loadConfigData(userProfile.uid).then(data => {
               if (data !== undefined && data !== null) {
-                this.localStorage.setToLocal('config', data[0]);
-                resolve(data[0]);
+                this.localStorage.setToLocal('config', data);
+                resolve(data);
               } else {
                 this.localStorage.getFromLocal('config', null).then(data => {
                   if (data !== undefined && data !== null) {

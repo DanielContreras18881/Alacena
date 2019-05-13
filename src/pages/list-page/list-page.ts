@@ -453,6 +453,7 @@ export class ListPage {
       cantidadMinima: this.minimumAmount,
       marked: false
     };
+    this.log.logs[this.constructor.name].info(newItem);
     let infoListModal = this.mod.create(ItemInfoPage, {
       newItem: newItem,
       editing: true,
@@ -463,7 +464,7 @@ export class ListPage {
         if (
           this.list.filter(
             element =>
-              element.nombreElemento.toLowerCase() === item.nombreElemento
+              element.nombreElemento.toLowerCase() === item.nombreElemento.toLowerCase()
           ).length === 0
         ) {
           this.list.push(item);

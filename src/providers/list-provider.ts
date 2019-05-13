@@ -171,7 +171,7 @@ export class ListProvider {
             );
             listData.forEach(item => {
               item.category = {
-                icon: 'images/icons/default.png',
+                icon: {src: 'assets/images/icons/default.png'},
                 measurement: 'UNIDADES',
                 categoryName: 'No Category',
                 unitStep: 1

@@ -2,7 +2,7 @@
   {
     "category": {
       "categoryName": "",
-      "icon": "images/icons/default.png",
+      "icon": { "src": "assets/images/icons/default.png",
 		"measurement": "UNIDADES",
 		"unitStep": 1
     },
@@ -21,7 +21,7 @@
   {
     "category": {
       "categoryName": "",
-      "icon": "images/icons/default.png",
+      "icon": { "src": "assets/images/icons/default.png",
 		"measurement": "UNIDADES",
 		"unitStep": 1
     },
@@ -40,7 +40,7 @@
   {
     "category": {
       "categoryName": "",
-      "icon": "images/icons/default.png",
+      "icon": { "src": "assets/images/icons/default.png",
 		"measurement": "UNIDADES",
 		"unitStep": 1
     },
@@ -59,7 +59,7 @@
   {
     "category": {
       "categoryName": "",
-      "icon": "images/icons/default.png",
+      "icon": { "src": "assets/images/icons/default.png",
 		"measurement": "UNIDADES",
 		"unitStep": 1
     },
@@ -78,7 +78,7 @@
   {
     "category": {
       "categoryName": "",
-      "icon": "images/icons/default.png",
+      "icon": { "src": "assets/images/icons/default.png",
 		"measurement": "UNIDADES",
 		"unitStep": 1
     },
@@ -97,7 +97,7 @@
   {
     "category": {
       "categoryName": "",
-      "icon": "images/icons/default.png",
+      "icon": { "src": "assets/images/icons/default.png",
       "measurement": "UNIDADES",
       "unitStep": 1
     },

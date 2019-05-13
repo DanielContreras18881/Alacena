@@ -25741,6 +25741,10 @@ bottom-buttons-component .segment-button.segment-activated {
   font-size: 3rem !important;
 }
 
+ion-avatar.category-icon {
+  max-width: 3.5%;
+}
+
 .button-icon-search {
   margin: 1rem 0 2rem 0;
 }
@@ -25883,6 +25887,10 @@ ion-auto-complete ul li {
 
 .onTime {
   visibility: hidden;
+}
+
+ion-avatar.category-icon {
+  max-width: 3rem;
 }
 
 .item-info {
@@ -26095,6 +26103,10 @@ page-items-page .item p.item-advice {
   white-space: normal;
   font-style: italic;
   color: red;
+}
+
+page-list-page .category-icon {
+  max-width: 3.25rem;
 }
 
 page-list-page .icon {
