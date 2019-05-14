@@ -6,7 +6,11 @@
  */
 export class Category {
   categoryName: string;
-  icon: string;
+  icon: Icon;
   measurement: string;
   unitStep: number;
+}
+
+class Icon {
+  src: string
 }

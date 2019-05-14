@@ -91,7 +91,7 @@
       </ion-col>
     </ion-row>
     <ion-row class="fila" *ngIf="!creating && right">
-      <ion-col col-4 offset-4>
+      <ion-col col-4 offset-2>
         <ion-row>
           <ion-col col-4>
             <button item-center secondary clear (click)="moveItem($event)" class="buttonOperation">
@@ -110,7 +110,7 @@
           </ion-col>
         </ion-row>
       </ion-col>
-      <ion-col col-4>
+      <ion-col col-6>
         <ion-item class="amountItem">
           <button item-center default large clear (click)="minusElement($event, item, true)" class="amountButton">
             <ion-icon class="amountIcon" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
