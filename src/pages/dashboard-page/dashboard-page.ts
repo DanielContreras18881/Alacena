@@ -98,6 +98,7 @@ export class DashboardPage {
 
     this.zone = new NgZone({});
     self = this;
+    this.getDashboardData();
     firebase.auth().onAuthStateChanged(user => {
       // if login state changed
       this.zone.run(() => {
@@ -111,13 +112,12 @@ export class DashboardPage {
               // Firebase database, so that when you want to send notifications to this
               // specific user you can do it from Cloud Functions.
               self.globalVars.setUserProfile(user, token).then(() => {
-                this.getDashboardData();
+                this.log.logs[this.constructor.name].info('UserProfileUpdated');
               });
             })
             .catch(e => this.log.logs[this.constructor.name].error(e));
         } else {
           this.userProfile = null;
-          this.getDashboardData();
         }
       });
     });
@@ -132,6 +132,7 @@ export class DashboardPage {
   getDashboardData() {
     this.log.logs[this.constructor.name].info('getDashboardData');
     this.remindersData.getReminders().then(data => {
+      this.log.logs[this.constructor.name].info(JSON.stringify(data));
       this.remindersList = <Reminder[]>data;
       if (this.remindersList.length > 0) {
         this.reminders = true;
@@ -166,6 +167,17 @@ export class DashboardPage {
   showExpireItems() {
     let expiresModal = this.mod.create(ItemsBestBeforeComponent);
     expiresModal.present();
+  }
+  /**
+   * Remove a reminder
+   *
+   * @memberof DashboardPage
+   */
+  removeReminder(data: any,index: number){
+    this.log.logs[this.constructor.name].info('removeReminder');
+    this.remindersData.removeReminder(data);
+    this.remindersList.splice(index, 1);
+    if(this.remindersList.length <= 0) this.reminders = false;
   }
   /**
    * Edit a reminder

@@ -21,6 +21,7 @@ export class GlobalVars {
 
   userProfile: any = null;
   userConnected: boolean = false;
+  appLocale: string = 'es';
 
   iconsData: string[];
 

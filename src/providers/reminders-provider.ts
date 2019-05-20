@@ -21,7 +21,7 @@ export class RemindersProvider {
     this.log.setLogger(this.constructor.name);
   }
   setReminder(reminder: Reminder): void {
-    this.log.logs[this.constructor.name].info('setReminder:' + reminder);
+    this.log.logs[this.constructor.name].info('setReminder:' + JSON.stringify(reminder));
     this.localStorage.getFromLocal('reminders', null).then(data => {
       if (data === undefined || data === null) {
         data = [];

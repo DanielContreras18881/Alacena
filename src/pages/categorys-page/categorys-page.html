@@ -25,7 +25,7 @@
 		<ion-card *ngFor="let category of categories; let i = index">
 			<ion-card-header>
 				<ion-row>
-					<ion-col width-66>
+					<ion-col width-50>
 						<ion-avatar item-left class="category-icon">
 							<img class="icon" src="{{category.icon.src}}" (click)="changeCategoryIcon($event, category)" />
 						</ion-avatar>
@@ -41,12 +41,8 @@
 						</button>
 					</ion-col>
 				</ion-row>
-				<ion-row>
-					<ion-col width-33>
-						<ion-input readonly="true" class="categoryName" type="text" [(ngModel)]="category.categoryName">
-						</ion-input>
-					</ion-col>
-					<ion-col width-33>
+        <ion-row>
+					<ion-col width-50>
 						<ion-item>
 							<ion-select readonly="true" class="categoryMeasurement" id="measurement" [(ngModel)]="category.measurement" (ngModelChange)="onMeasurementChange($event,category)">
                 <ion-option value="UNIDADES">{{ 'Unidades' | translate }}</ion-option>
@@ -62,7 +58,11 @@
 							<ion-input text-right [(ngModel)]="category.unitStep" min="1" type="number"></ion-input>
 						</ion-item>
 					</ion-col>
-				</ion-row>
+        </ion-row>
+        <ion-row>
+            <ion-input readonly="true" class="categoryName" type="text" [(ngModel)]="category.categoryName">
+            </ion-input>
+        </ion-row>
 			</ion-card-header>
 		</ion-card>
 	</ion-list>

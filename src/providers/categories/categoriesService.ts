@@ -94,8 +94,8 @@ export class CategoriesService {
     let changeIconModal = this.mod.create(ListIconsPage, { icons: paramIcons });
     changeIconModal.onDidDismiss(icon => {
       // Save data to storage
-      if (icon !== undefined) {
-        category.icon = icon;
+      if (icon !== undefined || category.icon !== undefined) {
+        category.icon = icon || category.icon;
       } else {
         // TODO: check config for camera and gallery
         let confirm = this.alertCtrl.create({

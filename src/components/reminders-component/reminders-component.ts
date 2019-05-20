@@ -16,7 +16,7 @@ import { Log } from '../../providers/log/log';
 })
 export class RemindersComponent {
   editing: boolean;
-  minDate: string = moment()
+  minDate: string = moment().seconds(0).milliseconds(0)
     .toDate()
     .toISOString();
   data: any = {};
@@ -28,7 +28,7 @@ export class RemindersComponent {
   ) {
     this.log.setLogger(this.constructor.name);
     this.log.logs[this.constructor.name].info('constructor');
-    this.data.notificationDate = moment(params.data.time).toISOString();
+    this.data.notificationDate = params.data.time;
     this.data.message = params.data.message;
   }
   /**

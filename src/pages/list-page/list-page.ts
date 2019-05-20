@@ -381,27 +381,29 @@ export class ListPage {
    * @memberof ListPage
    */
   addNotification() {
+    const currentTime = moment().seconds(0).milliseconds(0)
+    .add(2,'hour');
     this.log.logs[this.constructor.name].info('addNotification');
     let reminderModal = this.mod.create(RemindersComponent, {
-      time: moment(new Date()).add(1,'hour').toISOString(),
+      time:currentTime.toDate().toISOString(),
       editing:false
     });
     reminderModal.onDidDismiss(data => {
-      this.log.logs[this.constructor.name].info(moment(data.notificationDate).subtract(moment(new Date().toISOString()).add(1,'hour').valueOf(),'milliseconds').valueOf());
+      this.log.logs[this.constructor.name].info(moment(data.notificationDate).subtract(currentTime.valueOf(),'milliseconds').valueOf());
       if (data) {
         this.localNotification.requestPermission().then(permission => {
           if (permission === 'granted') {
             let reminder: Reminder = {
               message: data.message,
-              time: moment(data.notificationDate).toISOString()
+              time: moment(data.notificationDate).seconds(0).milliseconds(0).toISOString()
             };
             this.reminders.setReminder(reminder);
             if(this.native){
               this.localNotifications.schedule(<ILocalNotification>{
-                id: moment(data.notificationDate).unix(),
+                id: moment(data.notificationDate).seconds(0).milliseconds(0).unix(),
                 title: this.translate.instant('Recuerda'),
                 text: data.message,
-                at: moment(data.notificationDate).toISOString()
+                at: moment(data.notificationDate).seconds(0).milliseconds(0).toISOString()
               });
             } else {
               const timeOutHandler = setTimeout(
@@ -409,7 +411,7 @@ export class ListPage {
                   alert(data.message);
                   this.reminders.removeReminder(data);
                 },
-                moment(data.notificationDate).subtract(moment(new Date().toISOString()).add(1,'hour').valueOf(),'milliseconds').valueOf()
+                moment(data.notificationDate).seconds(0).milliseconds(0).subtract(currentTime.valueOf(),'milliseconds').valueOf()
               );
             }
           }
