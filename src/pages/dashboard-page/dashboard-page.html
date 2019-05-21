@@ -64,7 +64,7 @@
           <ion-item ion-item *ngFor="let reminder of remindersList; let i = index">
             <p class="item-info">
               <ion-icon class="item-icon" ios="ios-eye" md="md-eye" (click)="editReminder(reminder)"></ion-icon>
-              {{reminder.time | date:'yyyy-MM-dd HH:mm':'UTC'}}
+              {{reminder.time | date:'yyyy-MM-dd HH:mm'}}
               <ion-icon class="item-icon" ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>{{reminder.message}}
               <ion-icon class="item-icon" ios="ios-trash" md="md-trash" (click)="removeReminder(reminder,i)"></ion-icon>
             </p>

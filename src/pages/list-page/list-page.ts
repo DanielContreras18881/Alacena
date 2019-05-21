@@ -15,7 +15,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { List } from '../../classes/list';
 import { Category } from '../../classes/category';
 import { ListItem } from '../../classes/listItem';
-import moment from 'moment';
+//import moment from 'moment';
+import moment from 'moment-timezone';
 
 import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
 import { LocalNotifications, ILocalNotification } from '@ionic-native/local-notifications';
@@ -239,7 +240,7 @@ export class ListPage {
    * @memberof ListPage
    */
   saveItem(item: ListItem) {
-    this.log.logs[this.constructor.name].info('saveItem:' + item);
+    this.log.logs[this.constructor.name].info('saveItem:' + JSON.stringify(item));
     if (this.expireReminders) {
       if (item.caduca) {
         this.localNotifications.schedule(<ILocalNotification>{
@@ -378,32 +379,29 @@ export class ListPage {
   /**
    * Event to add a notification on that list
    *
-   * @memberof ListPage
    */
   addNotification() {
-    const currentTime = moment().seconds(0).milliseconds(0)
-    .add(2,'hour');
+    const currentTime = moment.tz(moment.tz.guess()).format();
     this.log.logs[this.constructor.name].info('addNotification');
     let reminderModal = this.mod.create(RemindersComponent, {
-      time:currentTime.toDate().toISOString(),
+      time:currentTime,
       editing:false
     });
     reminderModal.onDidDismiss(data => {
-      this.log.logs[this.constructor.name].info(moment(data.notificationDate).subtract(currentTime.valueOf(),'milliseconds').valueOf());
       if (data) {
         this.localNotification.requestPermission().then(permission => {
           if (permission === 'granted') {
             let reminder: Reminder = {
               message: data.message,
-              time: moment(data.notificationDate).seconds(0).milliseconds(0).toISOString()
+              time: moment(data.notificationDate).seconds(0).milliseconds(0).tz(moment.tz.guess()).format()
             };
             this.reminders.setReminder(reminder);
             if(this.native){
               this.localNotifications.schedule(<ILocalNotification>{
-                id: moment(data.notificationDate).seconds(0).milliseconds(0).unix(),
+                id: moment(data.notificationDate).seconds(0).milliseconds(0).tz(moment.tz.guess()).unix(),
                 title: this.translate.instant('Recuerda'),
                 text: data.message,
-                at: moment(data.notificationDate).seconds(0).milliseconds(0).toISOString()
+                at: moment(data.notificationDate).seconds(0).milliseconds(0).tz(moment.tz.guess()).toISOString()
               });
             } else {
               const timeOutHandler = setTimeout(
@@ -411,7 +409,7 @@ export class ListPage {
                   alert(data.message);
                   this.reminders.removeReminder(data);
                 },
-                moment(data.notificationDate).seconds(0).milliseconds(0).subtract(currentTime.valueOf(),'milliseconds').valueOf()
+                moment(data.notificationDate).seconds(0).milliseconds(0).tz(moment.tz.guess()).subtract(moment(currentTime).tz(moment.tz.guess()).seconds(0).milliseconds(0).valueOf(),'milliseconds').valueOf()
               );
             }
           }
@@ -451,7 +449,7 @@ export class ListPage {
       nombreLista: this.selectedItem,
       cantidadElemento: this.minimumAmount,
       caduca: false,
-      fechaCaducidad: new Date().toISOString(),
+      fechaCaducidad: moment.tz(moment.tz.guess()).format(),
       cantidadMinima: this.minimumAmount,
       marked: false
     };

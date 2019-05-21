@@ -7,6 +7,8 @@ import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
 
+import moment from 'moment-timezone';
+
 import { Log } from '../log/log';
 /**
  * Provider to manage cloud storage of logged user
@@ -161,7 +163,7 @@ export class CloudStorage {
           URL: uploadTask.snapshot.downloadURL,
           name: uploadTask.snapshot.metadata.name,
           owners: [uid],
-          lastUpdated: new Date().getTime()
+          lastUpdated: moment.tz(moment.tz.guess()).format()
         };
         firebase
           .database()

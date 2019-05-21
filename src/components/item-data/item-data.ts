@@ -1,6 +1,6 @@
 import { ListItem } from '../../classes/listItem';
 import { List } from '../../classes/list';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { ToastController, AlertController } from 'ionic-angular';
 import {
   Component,
@@ -207,7 +207,7 @@ export class Item implements OnInit {
     toast.present();
   }
   newExpire() {
-    if (this.item.caduca) this.item.fechaCaducidad = new Date().toISOString();
+    if (this.item.caduca) this.item.fechaCaducidad = moment.tz(moment.tz.guess()).format();
   }
   /**
    * Check expiry date of the item

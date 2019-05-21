@@ -85,6 +85,7 @@
     "karma-chrome-launcher": "^2.2.0",
     "lycwed-cordova-plugin-admob-free": "git+https://github.com/RenaudROHLINGER/lycwed-cordova-plugin-admob-free.git",
     "moment": "^2.20.0",
+    "moment-timezone": "^0.5.25",
     "node-sass": "^4.11.0",
     "raven-js": "^3.21.0",
     "rxjs": "^5.5.5",

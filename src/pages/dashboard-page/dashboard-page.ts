@@ -22,7 +22,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { GooglePlus } from '@ionic-native/google-plus';
 import firebase from 'firebase';
 
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 import { RemindersComponent } from '../../components/reminders-component/reminders-component';
 import { ItemsBestBeforeComponent } from '../../components/items-best-before-component/items-best-before-component';
@@ -195,7 +195,7 @@ export class DashboardPage {
           if (permission === 'granted') {
             let reminder: Reminder = {
               message: data.message,
-              time: moment(data.notificationDate).toISOString()
+              time: moment(data.notificationDate).seconds(0).milliseconds(0).tz(moment.tz.guess()).format()
             };
             this.remindersData.setReminder(reminder);
             this.remindersList.push(reminder);
@@ -206,9 +206,9 @@ export class DashboardPage {
             );
             if(this.native){
               this.localNotifications.schedule(<ILocalNotification>{
-                id: moment(data.notificationDate).unix(),
+                id: moment(data.notificationDate).seconds(0).milliseconds(0).tz(moment.tz.guess()).unix(),
                 text: data.message,
-                at: moment(data.notificationDate).toDate()
+                at: moment(data.notificationDate).seconds(0).milliseconds(0).tz(moment.tz.guess()).toISOString()
               });
             } else {
               const timeOutHandler = setTimeout(
@@ -216,7 +216,7 @@ export class DashboardPage {
                   alert(data.message);
                   this.remindersData.removeReminder(data);
                 },
-                moment(data.notificationDate).subtract(moment(new Date().toISOString()).add(1,'hour').valueOf(),'milliseconds').valueOf()
+                moment(data.notificationDate).seconds(0).milliseconds(0).tz(moment.tz.guess()).subtract(moment.tz(moment.tz.guess()).seconds(0).milliseconds(0).valueOf(),'milliseconds').valueOf()
               );
             }
           }
