@@ -15,7 +15,7 @@ import { Log } from '../../providers/log/log';
  * @export
  * @class AboutPage
  */
-@IonicPage()
+
 @Component({
   selector: 'page-about-page',
   templateUrl: 'about-page.html'

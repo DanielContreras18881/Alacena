@@ -1,16 +1,15 @@
-import * as firebase from 'firebase-app';
 import * as functions from 'firebase-functions';
-import * as messaging from 'firebase-messaging';
 import * as nodemailer from 'nodemailer';
 
 import * as admin from 'firebase-admin';
 admin.initializeApp(functions.config().firebase);
 
-const messaging = firebase.messaging();
+const messaging = admin.messaging();
+/*
 messaging.usePublicVapidKey(
 	'BOGbFzr0df6Ny5TKXxe0Q9FZqFiImd9mki3Uv6GMFOnT9ZcNrWhUdL_LSgYdkralD3EmsMQ1MADYfAhoheM_QJk'
 );
-
+*/
 const gmailEmail = 'daniel.chony@gmail.com';
 const gmailPassword = 'Chony0666';
 const mailTransport = nodemailer.createTransport({
@@ -55,6 +54,39 @@ exports.mail = functions.https.onRequest((req, res) => {
 	}
 });
 
+exports.registration = functions.https.onRequest((req, res) => {
+  console.log('Registration starts');
+  console.log(req.body);
+  admin
+      .auth()
+      .createCustomToken(req.body.UUID)
+      .then(function (customToken) {
+      console.log('Token created.');
+      admin
+          .database()
+          .ref('/tokens/' + req.body.UUID)
+          .set(customToken);
+      res.status(200);
+      res.send(customToken);
+  })
+      .catch(function (err) {
+      console.log('Unable to retrieve token ', err);
+      res.status(400);
+      res.send('Registration error');
+  });
+});
+
+exports.deregistration = functions.https.onRequest((req, res) => {
+  console.log('DeRegistration starts');
+  console.log(req.body);
+  admin
+      .database()
+      .ref('/tokens/' + req.body.UUID)
+      .set(null);
+  res.status(200);
+  res.send('DeRegistration success');
+});
+
 exports.notification = functions.https.onRequest((req, res) => {
 	console.log('Sending notification');
 	//const body = JSON.parse(req.body);
@@ -72,12 +104,11 @@ exports.notification = functions.https.onRequest((req, res) => {
 				}
 			};
 			const tokens = Object.keys(snapshot.val());
-			admin
-				.messaging()
+			messaging
 				.sendToDevice(tokens, payload)
 				.then(response => {
 					// For each message check if there was an error.
-					const tokensToRemove = [];
+					const tokensToRemove: any[] = [];
 					response.results.forEach((result, index) => {
 						const error = result.error;
 						if (error) {

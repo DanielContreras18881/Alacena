@@ -1,12 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const firebase = require("firebase-app");
 const functions = require("firebase-functions");
 const nodemailer = require("nodemailer");
 const admin = require("firebase-admin");
 admin.initializeApp(functions.config().firebase);
-const messaging = firebase.messaging();
-messaging.usePublicVapidKey('BOGbFzr0df6Ny5TKXxe0Q9FZqFiImd9mki3Uv6GMFOnT9ZcNrWhUdL_LSgYdkralD3EmsMQ1MADYfAhoheM_QJk');
+const messaging = admin.messaging();
+/*
+messaging.usePublicVapidKey(
+    'BOGbFzr0df6Ny5TKXxe0Q9FZqFiImd9mki3Uv6GMFOnT9ZcNrWhUdL_LSgYdkralD3EmsMQ1MADYfAhoheM_QJk'
+);
+*/
 const gmailEmail = 'daniel.chony@gmail.com';
 const gmailPassword = 'Chony0666';
 const mailTransport = nodemailer.createTransport({
@@ -48,6 +51,37 @@ exports.mail = functions.https.onRequest((req, res) => {
         console.error('no data');
     }
 });
+exports.registration = functions.https.onRequest((req, res) => {
+    console.log('Registration starts');
+    console.log(req.body);
+    admin
+        .auth()
+        .createCustomToken(req.body.UUID)
+        .then(function (customToken) {
+        console.log('Token created.');
+        admin
+            .database()
+            .ref('/tokens/' + req.body.UUID)
+            .set(customToken);
+        res.status(200);
+        res.send(customToken);
+    })
+        .catch(function (err) {
+        console.log('Unable to retrieve token ', err);
+        res.status(400);
+        res.send('Registration error');
+    });
+});
+exports.deregistration = functions.https.onRequest((req, res) => {
+    console.log('DeRegistration starts');
+    console.log(req.body);
+    admin
+        .database()
+        .ref('/tokens/' + req.body.UUID)
+        .set(null);
+    res.status(200);
+    res.send('DeRegistration success');
+});
 exports.notification = functions.https.onRequest((req, res) => {
     console.log('Sending notification');
     //const body = JSON.parse(req.body);
@@ -65,8 +99,7 @@ exports.notification = functions.https.onRequest((req, res) => {
             }
         };
         const tokens = Object.keys(snapshot.val());
-        admin
-            .messaging()
+        messaging
             .sendToDevice(tokens, payload)
             .then(response => {
             // For each message check if there was an error.

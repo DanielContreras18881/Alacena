@@ -4,6 +4,11 @@
     <description>
         Organiza tu alacena facilmente
   </description>
+  <chcp>
+    <config-file url="https://alacena-58699.firebaseapp.com/chcp.json" />
+    <auto-download enabled="true" />
+    <auto-install enabled="true" />
+  </chcp>
     <author email="develop.apps.chony@gmail.com" href="mailto:develop.apps.chony@gmail.com">
       Chony Apps Develop
     </author>
@@ -137,4 +142,5 @@
     <engine name="ios" spec="4.5.5" />
     <plugin name="cordova-plugin-insomnia" spec="4.3.0" />
     <plugin name="cordova-plugin-contacts" spec="3.0.1" />
+    <plugin name="cordova-hot-code-push-plugin" spec="^1.5.3" />
 </widget>

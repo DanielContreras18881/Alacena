@@ -119,7 +119,17 @@ export class Alacena {
         })
         .catch(e => this.log.logs[this.constructor.name].error(e));
 
-      fcm.onNotification().subscribe(data => {
+        this.fcm.subscribeToTopic('notifications');
+
+        this.fcm.getToken().then(token => {
+          this.log.logs[this.constructor.name].info(token);
+        });
+
+        this.fcm.onTokenRefresh().subscribe(token => {
+          this.log.logs[this.constructor.name].info(token);
+        });
+
+        this.fcm.onNotification().subscribe(data => {
         if (data.wasTapped) {
           this.log.logs[this.constructor.name].info('Tapped Notification');
           //TODO: send to the List relative to the notification

@@ -17,7 +17,7 @@ import { Log } from '../../providers/log/log';
  * @export
  * @class BackupPage
  */
-@IonicPage()
+
 @Component({
   selector: 'page-backup-page',
   templateUrl: 'backup-page.html'

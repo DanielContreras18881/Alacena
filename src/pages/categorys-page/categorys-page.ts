@@ -23,7 +23,7 @@ import { Log } from '../../providers/log/log';
  * @export
  * @class CategorysPage
  */
-@IonicPage()
+
 @Component({
   selector: 'page-categorys-page',
   templateUrl: 'categorys-page.html',

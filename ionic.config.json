@@ -4,5 +4,7 @@
     "cordova": {}
   },
   "type": "ionic-angular",
-  "pro_id": "fdb00fb5"
+  "v2": true,
+  "typescript": true,
+  "id": "20e68ee9"
 }

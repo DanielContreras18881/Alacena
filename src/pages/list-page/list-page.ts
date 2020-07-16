@@ -33,7 +33,7 @@ import { Log } from '../../providers/log/log';
  * @export
  * @class ListPage
  */
-@IonicPage()
+
 @Component({
   selector: 'page-list-page',
   templateUrl: 'list-page.html',

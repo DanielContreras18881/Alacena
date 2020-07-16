@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "alacena-58699"
+    "default": "alacena-58699",
+    "alacena": "alacena-58699"
   }
 }

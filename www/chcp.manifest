@@ -1,0 +1,630 @@
+[
+  {
+    "file": "assets/fonts/ionicons.eot",
+    "hash": "bdf1d30681cf87986c385eea78e8de9a"
+  },
+  {
+    "file": "assets/fonts/ionicons.scss",
+    "hash": "c1fdfabf9cbd412b444f064d27641f10"
+  },
+  {
+    "file": "assets/fonts/ionicons.svg",
+    "hash": "d9496a234c81179afbca6bf5959cc30a"
+  },
+  {
+    "file": "assets/fonts/ionicons.ttf",
+    "hash": "74c652671225d6ded874a648502e5f0a"
+  },
+  {
+    "file": "assets/fonts/ionicons.woff",
+    "hash": "81414686e99c00d2921e03dd53c0ab04"
+  },
+  {
+    "file": "assets/fonts/ionicons.woff2",
+    "hash": "311d81961c5880647fec7eaca1221b2a"
+  },
+  {
+    "file": "assets/fonts/noto-sans-bold.ttf",
+    "hash": "a165a42685795361b25593effb32fdb1"
+  },
+  {
+    "file": "assets/fonts/noto-sans-bold.woff",
+    "hash": "ce3d777f2c41cca1494021cfa3fcd72c"
+  },
+  {
+    "file": "assets/fonts/noto-sans-regular.ttf",
+    "hash": "2fd9c16b805724d590c0cff96da070a4"
+  },
+  {
+    "file": "assets/fonts/noto-sans-regular.woff",
+    "hash": "ce8ba1a4ff970db896192c41fc3c96b1"
+  },
+  {
+    "file": "assets/fonts/noto-sans.scss",
+    "hash": "47d5f7264952ccee8cead7b6dcb6d1bd"
+  },
+  {
+    "file": "assets/fonts/roboto-bold.ttf",
+    "hash": "1f4fd7e4df65487f07ba9148f7ca095d"
+  },
+  {
+    "file": "assets/fonts/roboto-bold.woff",
+    "hash": "43183beef21370d8a4b0d64152287eba"
+  },
+  {
+    "file": "assets/fonts/roboto-bold.woff2",
+    "hash": "28d80f43ae4cc35f19e1f1a6ab670f25"
+  },
+  {
+    "file": "assets/fonts/roboto-light.ttf",
+    "hash": "9ff15bd34ea83e4dd3f23c20c7f5090e"
+  },
+  {
+    "file": "assets/fonts/roboto-light.woff",
+    "hash": "7e2d32e7141050d758a38b4ec96390c0"
+  },
+  {
+    "file": "assets/fonts/roboto-light.woff2",
+    "hash": "a826ff848e9f52b1732fed7d154afa97"
+  },
+  {
+    "file": "assets/fonts/roboto-medium.ttf",
+    "hash": "a937e2cae14e68262a45aa91204c2fdf"
+  },
+  {
+    "file": "assets/fonts/roboto-medium.woff",
+    "hash": "0f3b7101a8adc1afe1fbe89775553c32"
+  },
+  {
+    "file": "assets/fonts/roboto-medium.woff2",
+    "hash": "b2c9c262e089411e20689ed393c00796"
+  },
+  {
+    "file": "assets/fonts/roboto-regular.ttf",
+    "hash": "07f8fb6acbabeb10d3fad9ab02d65e0b"
+  },
+  {
+    "file": "assets/fonts/roboto-regular.woff",
+    "hash": "f94d5e5102359961c44a1da1b58d37c9"
+  },
+  {
+    "file": "assets/fonts/roboto-regular.woff2",
+    "hash": "e6b9d54811307f98da62eae992ae05ba"
+  },
+  {
+    "file": "assets/fonts/roboto.scss",
+    "hash": "e7c30075bc0f0b11422bfbdb2236f9e7"
+  },
+  {
+    "file": "assets/i18n/en.json",
+    "hash": "16dd3216730b70f9875592325ad8ac8c"
+  },
+  {
+    "file": "assets/i18n/es.json",
+    "hash": "181b5716cf3961a42b74e0e46fa99e29"
+  },
+  {
+    "file": "assets/icon/favicon.ico",
+    "hash": "6d94e4eff7ae926d9eb4a5c7fc4710f3"
+  },
+  {
+    "file": "assets/images/icons/1.png",
+    "hash": "38bc92f23ac8a99b100b94ac1909228b"
+  },
+  {
+    "file": "assets/images/icons/10.png",
+    "hash": "54030790c41f408b2d5df687ac85f9de"
+  },
+  {
+    "file": "assets/images/icons/100.png",
+    "hash": "2b70266fe67930b7aedc7f1d405b237d"
+  },
+  {
+    "file": "assets/images/icons/101.png",
+    "hash": "51e837476c5b8de91c319fb85c6e5588"
+  },
+  {
+    "file": "assets/images/icons/102.png",
+    "hash": "7632c2e1904a202ffb3754e336c18669"
+  },
+  {
+    "file": "assets/images/icons/103.png",
+    "hash": "0e4c5f1321d44c0772b9b0f2fff269bb"
+  },
+  {
+    "file": "assets/images/icons/104.png",
+    "hash": "fa6676c801c45a047b619f01df5e238c"
+  },
+  {
+    "file": "assets/images/icons/11.png",
+    "hash": "53681fa74d9ce510aea2240178b21496"
+  },
+  {
+    "file": "assets/images/icons/12.png",
+    "hash": "739fc7e7cf018703d7f8e385e346f83d"
+  },
+  {
+    "file": "assets/images/icons/13.png",
+    "hash": "e55764d73fc87a8e3304e2c5302d1ae7"
+  },
+  {
+    "file": "assets/images/icons/14.png",
+    "hash": "d564daa5631c855a53212ebdc658e62f"
+  },
+  {
+    "file": "assets/images/icons/15.png",
+    "hash": "76b5288aead2ba412c409abd6436e295"
+  },
+  {
+    "file": "assets/images/icons/16.png",
+    "hash": "330fee307af1b6fbae69567527d53e52"
+  },
+  {
+    "file": "assets/images/icons/17.png",
+    "hash": "20886446c08a97ce23e3606ca2b87797"
+  },
+  {
+    "file": "assets/images/icons/18.png",
+    "hash": "c1366711ce0021ca537dc6e8b2737544"
+  },
+  {
+    "file": "assets/images/icons/19.png",
+    "hash": "a99f80f079df5a6ca622f86c8840c605"
+  },
+  {
+    "file": "assets/images/icons/2.png",
+    "hash": "d3a57667a9f9fcab203624feea794533"
+  },
+  {
+    "file": "assets/images/icons/20.png",
+    "hash": "a44f61d28f471a8a30f9f0e91985377d"
+  },
+  {
+    "file": "assets/images/icons/21.png",
+    "hash": "522b49c9c1ff298df07718fab14732e6"
+  },
+  {
+    "file": "assets/images/icons/22.png",
+    "hash": "2b14fcaa03fe79e52723619b6f1ec1d9"
+  },
+  {
+    "file": "assets/images/icons/23.png",
+    "hash": "237ff02aa0a71224502878be126f6cf3"
+  },
+  {
+    "file": "assets/images/icons/24.png",
+    "hash": "34f4534673579c61f9cf619852f22c2c"
+  },
+  {
+    "file": "assets/images/icons/25.png",
+    "hash": "24fbe8b5fbd789e06015f9200b90beb4"
+  },
+  {
+    "file": "assets/images/icons/26.png",
+    "hash": "e7ab19848bc861848d593f8bbcf2e32b"
+  },
+  {
+    "file": "assets/images/icons/27.png",
+    "hash": "3bc270ac68e73f2d74d4d2e4a7a9ecd0"
+  },
+  {
+    "file": "assets/images/icons/28.png",
+    "hash": "90e8b0121e41ffa119bbcefaeda98c7e"
+  },
+  {
+    "file": "assets/images/icons/29.png",
+    "hash": "1675c4505265d511f5b6e41fc157f614"
+  },
+  {
+    "file": "assets/images/icons/3.png",
+    "hash": "a16b737fa937fce5f02003adf43cfecc"
+  },
+  {
+    "file": "assets/images/icons/30.png",
+    "hash": "ba3b1665cb8138a7d8b19a278f89ae2f"
+  },
+  {
+    "file": "assets/images/icons/31.png",
+    "hash": "0216cc9a614ea24f59881179a8e00894"
+  },
+  {
+    "file": "assets/images/icons/32.png",
+    "hash": "6121d4abc16411f9e3a5dcaef20d7831"
+  },
+  {
+    "file": "assets/images/icons/33.png",
+    "hash": "756ef77c7a1436d2c49da96119a6ba2b"
+  },
+  {
+    "file": "assets/images/icons/34.png",
+    "hash": "1c1c127e3f56f5938083fa11ded45bf7"
+  },
+  {
+    "file": "assets/images/icons/35.png",
+    "hash": "1c5780b783592b6f15bdd29db0bc7f27"
+  },
+  {
+    "file": "assets/images/icons/36.png",
+    "hash": "4737f873f5be720b87b40dfa7524acbc"
+  },
+  {
+    "file": "assets/images/icons/37.png",
+    "hash": "bd8e46c34492d8c0e6cc2a669fd89af4"
+  },
+  {
+    "file": "assets/images/icons/38.png",
+    "hash": "c9c33c5d973fdc13d155a370e40f1518"
+  },
+  {
+    "file": "assets/images/icons/39.png",
+    "hash": "42f7baea9332a4019d2e07894742aa6e"
+  },
+  {
+    "file": "assets/images/icons/4.png",
+    "hash": "29b376b353e36fdbbef5cf2f2184de20"
+  },
+  {
+    "file": "assets/images/icons/40.png",
+    "hash": "db01cab34ad05d27fee42995a65fee33"
+  },
+  {
+    "file": "assets/images/icons/41.png",
+    "hash": "7e8c4ad41e8555d2914599463a8277d6"
+  },
+  {
+    "file": "assets/images/icons/42.png",
+    "hash": "d257b5aefefd414ae95d00b8e0e52e0f"
+  },
+  {
+    "file": "assets/images/icons/43.png",
+    "hash": "4ddb11757116055c49d2e7b11c2e0d3a"
+  },
+  {
+    "file": "assets/images/icons/44.png",
+    "hash": "d0727eafe9cd08cd09ebbfa76c48c5d2"
+  },
+  {
+    "file": "assets/images/icons/45.png",
+    "hash": "22fb56c0dc3497d7fa80dd0122d6f94e"
+  },
+  {
+    "file": "assets/images/icons/46.png",
+    "hash": "bc4f2114a4de4c1a41cabea0885fb2fe"
+  },
+  {
+    "file": "assets/images/icons/47.png",
+    "hash": "3e7cd4eaadd09705c713020951bf479a"
+  },
+  {
+    "file": "assets/images/icons/48.png",
+    "hash": "037d82dc3ae13d74b44bcb25889d1ed1"
+  },
+  {
+    "file": "assets/images/icons/49.png",
+    "hash": "b4e7dc54b03225a51e1e5b8a8e318bdc"
+  },
+  {
+    "file": "assets/images/icons/5.png",
+    "hash": "d03ee2b9c2a59fe1014cb2ca1042df7c"
+  },
+  {
+    "file": "assets/images/icons/50.png",
+    "hash": "aad50db90b7ab925063d42bbb468c66e"
+  },
+  {
+    "file": "assets/images/icons/51.png",
+    "hash": "70b6427f7d3590c3c791830d0709ac61"
+  },
+  {
+    "file": "assets/images/icons/52.png",
+    "hash": "5d3b082a6704e2653183e4601556faac"
+  },
+  {
+    "file": "assets/images/icons/53.png",
+    "hash": "49449600d1ead6bce805bc538ddb2e9a"
+  },
+  {
+    "file": "assets/images/icons/54.png",
+    "hash": "e66595212fade79f678a2d473841087a"
+  },
+  {
+    "file": "assets/images/icons/55.png",
+    "hash": "8e0109836fa1b9fe00a9c367a308636b"
+  },
+  {
+    "file": "assets/images/icons/56.png",
+    "hash": "2ace54e0f9565683ea721d20ded73b2b"
+  },
+  {
+    "file": "assets/images/icons/57.png",
+    "hash": "ba1d103775b17927d668cd45f2249c5d"
+  },
+  {
+    "file": "assets/images/icons/58.png",
+    "hash": "8228381e114df2e8787b636f74303363"
+  },
+  {
+    "file": "assets/images/icons/59.png",
+    "hash": "0e4c5f1321d44c0772b9b0f2fff269bb"
+  },
+  {
+    "file": "assets/images/icons/6.png",
+    "hash": "7013a00a1dba31d44fb531da9d3a8725"
+  },
+  {
+    "file": "assets/images/icons/60.png",
+    "hash": "1be797f84675cae62de0d801e5db79b8"
+  },
+  {
+    "file": "assets/images/icons/61.png",
+    "hash": "e98257e2a589b6491673fc2814558a68"
+  },
+  {
+    "file": "assets/images/icons/62.png",
+    "hash": "a7cb6a330b30cea983785c5237546b76"
+  },
+  {
+    "file": "assets/images/icons/63.png",
+    "hash": "6a54781587a246c70a5baf7e2a903b0c"
+  },
+  {
+    "file": "assets/images/icons/64.png",
+    "hash": "a4873f377e352667280040acd1afc6a9"
+  },
+  {
+    "file": "assets/images/icons/65.png",
+    "hash": "faf8e1f3e180b6770720cafbeaef8071"
+  },
+  {
+    "file": "assets/images/icons/66.png",
+    "hash": "1e1d3efbf31dca953909b8777596cef2"
+  },
+  {
+    "file": "assets/images/icons/67.png",
+    "hash": "b8befda7da30862338017601ccede61c"
+  },
+  {
+    "file": "assets/images/icons/68.png",
+    "hash": "72944aa118f71e5acc93c0aa16581777"
+  },
+  {
+    "file": "assets/images/icons/69.png",
+    "hash": "87560423c9db16087c2f1c034234a7ea"
+  },
+  {
+    "file": "assets/images/icons/7.png",
+    "hash": "72ef50b01646c6e9b2ff9dbdcca1cf9b"
+  },
+  {
+    "file": "assets/images/icons/70.png",
+    "hash": "682a71a3f0eb088a23821de1e0fec867"
+  },
+  {
+    "file": "assets/images/icons/71.png",
+    "hash": "3e8aa04d3077d51b5070d6bc946bed5d"
+  },
+  {
+    "file": "assets/images/icons/72.png",
+    "hash": "97339a9f0495874fab28a6232a8d332a"
+  },
+  {
+    "file": "assets/images/icons/73.png",
+    "hash": "b707808e1042a4136e99045aeeb0d37b"
+  },
+  {
+    "file": "assets/images/icons/74.png",
+    "hash": "a271e1798179c82e32257906d1ba6be1"
+  },
+  {
+    "file": "assets/images/icons/75.png",
+    "hash": "556244324a02783b3899766476a39c09"
+  },
+  {
+    "file": "assets/images/icons/76.png",
+    "hash": "1dbdae245f2ab6b44dbd1318b5539209"
+  },
+  {
+    "file": "assets/images/icons/77.png",
+    "hash": "2f4e40efcd1b8c25331552d76ae0fb39"
+  },
+  {
+    "file": "assets/images/icons/78.png",
+    "hash": "8cceb4e0fb9a91ac9d3123085dc719ee"
+  },
+  {
+    "file": "assets/images/icons/79.png",
+    "hash": "c3c56aaa6580021e24021e43ad2567b0"
+  },
+  {
+    "file": "assets/images/icons/8.png",
+    "hash": "9719cb8b8fc51e94a3457b2bf157d5c8"
+  },
+  {
+    "file": "assets/images/icons/80.png",
+    "hash": "6debd2223762c7fe03e68e5b11904d0a"
+  },
+  {
+    "file": "assets/images/icons/81.png",
+    "hash": "66be406d032b673b2e9254167b308a9c"
+  },
+  {
+    "file": "assets/images/icons/82.png",
+    "hash": "0fdf3c05d828e8394ad4f6b7c8914a4a"
+  },
+  {
+    "file": "assets/images/icons/83.png",
+    "hash": "7da735505dfa31e1d73176d1c0e5e7f4"
+  },
+  {
+    "file": "assets/images/icons/84.png",
+    "hash": "373d51a73ca07d6a07dce97ef1e41dca"
+  },
+  {
+    "file": "assets/images/icons/85.png",
+    "hash": "b64f596efcc19444c18a221fb94c0b12"
+  },
+  {
+    "file": "assets/images/icons/86.png",
+    "hash": "1b4b9f93d232c4c38ce73a415d2fab7c"
+  },
+  {
+    "file": "assets/images/icons/87.png",
+    "hash": "f6bba518a7ac1ff477716a3ef7691882"
+  },
+  {
+    "file": "assets/images/icons/88.png",
+    "hash": "74bfdb2792b184b7e7de09e59a436ad5"
+  },
+  {
+    "file": "assets/images/icons/89.png",
+    "hash": "7e0f8b333af12800a39ce943ab687667"
+  },
+  {
+    "file": "assets/images/icons/9.png",
+    "hash": "dec0a764ea1568508bb377591422e8e9"
+  },
+  {
+    "file": "assets/images/icons/90.png",
+    "hash": "569d145faf2f1cb6d49b57da3f074b88"
+  },
+  {
+    "file": "assets/images/icons/91.png",
+    "hash": "604dcda55331db0952db9eee24a622a3"
+  },
+  {
+    "file": "assets/images/icons/92.png",
+    "hash": "b74a287adc66432d4529ef853c6c6c8d"
+  },
+  {
+    "file": "assets/images/icons/93.png",
+    "hash": "1c81b3f7b500bb863cb8cdddc2167147"
+  },
+  {
+    "file": "assets/images/icons/94.png",
+    "hash": "74b239ddce3aa5c56d388d818911b07d"
+  },
+  {
+    "file": "assets/images/icons/95.png",
+    "hash": "796f6df3a78155c4f659089c4ff07065"
+  },
+  {
+    "file": "assets/images/icons/96.png",
+    "hash": "f4bab6964d1297c1083d159ce3db9efc"
+  },
+  {
+    "file": "assets/images/icons/97.png",
+    "hash": "549fd71e96d329be8aa2ed555e896f41"
+  },
+  {
+    "file": "assets/images/icons/98.png",
+    "hash": "e591ea3702cca6c7b439566fa91c50de"
+  },
+  {
+    "file": "assets/images/icons/99.png",
+    "hash": "237df5eb4ff2e0fcfcdf71a4b54e3e63"
+  },
+  {
+    "file": "assets/images/icons/default.png",
+    "hash": "32e06050302988495ad713e203b165ff"
+  },
+  {
+    "file": "assets/imgs/logo.png",
+    "hash": "bf8973745dc456974ac01ad8bba9972e"
+  },
+  {
+    "file": "assets/json/CantidadElementoLista.json",
+    "hash": "77a8eb90209085b61f4993f6f26bc982"
+  },
+  {
+    "file": "assets/json/Categories.json",
+    "hash": "da149758fefafe29b88e3ad0b449edab"
+  },
+  {
+    "file": "assets/json/Colors.json",
+    "hash": "7960e36668d146a51003cb7695ea1c63"
+  },
+  {
+    "file": "assets/json/Configuracion.json",
+    "hash": "78ca2f67d6eea1d905b2e4ee1329900c"
+  },
+  {
+    "file": "assets/json/defaultIcons.json",
+    "hash": "4880004deb7170b4c50ca9d8fbb63a0c"
+  },
+  {
+    "file": "assets/json/Elementos.json",
+    "hash": "0ae5e575c577a4cd4d29138299786185"
+  },
+  {
+    "file": "assets/json/Listas.json",
+    "hash": "81b0e052072131c8b6593a4c2eb2115b"
+  },
+  {
+    "file": "assets/json/lists/LISTA_COMPRA.json",
+    "hash": "493a518bc702020f864f04b8d2e38688"
+  },
+  {
+    "file": "assets/json/lists/Prueba1.json",
+    "hash": "cb05b6296ffb6c65f8284b5050648e1c"
+  },
+  {
+    "file": "assets/json/lists/Prueba2.json",
+    "hash": "cfcdc29205af8552f95e81f5a8367ee8"
+  },
+  {
+    "file": "assets/json/Shopping List.json",
+    "hash": "367e2f4e225fe5263c0f54390715ef5e"
+  },
+  {
+    "file": "assets/manifest.json",
+    "hash": "21c97f0804b7f4f888c9046540059081"
+  },
+  {
+    "file": "assets/settings.json",
+    "hash": "c1763785f3800948df2fe64342b74aba"
+  },
+  {
+    "file": "build/main.css",
+    "hash": "4d59ed87a35850861a177207856fe717"
+  },
+  {
+    "file": "build/main.css.map",
+    "hash": "c4d7554482a9084d687954068dea1dde"
+  },
+  {
+    "file": "build/main.js",
+    "hash": "1c6c188fca2f1fedd7223f68adc3901a"
+  },
+  {
+    "file": "build/main.js.map",
+    "hash": "1ee900a5a39f3c8bcc2946eb9b9a69e4"
+  },
+  {
+    "file": "build/polyfills.js",
+    "hash": "443c697fc904cd88a651d09cf5c2fe2b"
+  },
+  {
+    "file": "build/sw-toolbox.js",
+    "hash": "2770efb889cc10c4de88d0b746c2a13c"
+  },
+  {
+    "file": "build/vendor.js",
+    "hash": "4a96524a68a0f1018988c7529cb308ce"
+  },
+  {
+    "file": "build/vendor.js.map",
+    "hash": "6a7acfa607057f5bb30454bfae507090"
+  },
+  {
+    "file": "index.html",
+    "hash": "7f5f4c8630814a224ce2fa8d5471f8d8"
+  },
+  {
+    "file": "manifest.json",
+    "hash": "49e77a08a886b0287a0db5ad8ca00421"
+  },
+  {
+    "file": "service-worker.js",
+    "hash": "8f0fcb6b5c9bcdf4f9ac9e0a0a9cfb89"
+  }
+]

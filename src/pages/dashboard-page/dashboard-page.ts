@@ -42,7 +42,7 @@ declare var cordova: any;
  * @export
  * @class DashboardPage
  */
-@IonicPage()
+
 @Component({
   selector: 'page-dashboard-page',
   templateUrl: 'dashboard-page.html',

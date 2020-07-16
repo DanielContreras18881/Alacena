@@ -1,0 +1,8 @@
+{
+  "name": "Alacena",
+  "ios_identifier": "developapps.chony.alacena",
+  "android_identifier": "developapps.chony.alacena",
+  "update": "now",
+  "content_url": "https://alacena-58699.firebaseapp.com/",
+  "release": "2020.02.10-12.43.36"
+}

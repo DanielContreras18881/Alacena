@@ -1,11 +1,17 @@
 {
   "compilerOptions": {
-    "lib": ["es6"],
     "module": "commonjs",
     "noImplicitReturns": true,
+    "noUnusedLocals": true,
     "outDir": "lib",
     "sourceMap": true,
-    "target": "es6"
+    "strict": true,
+    "noImplicitAny": false,
+    "target": "es2017",
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "types": [ "firebase" ]
   },
   "compileOnSave": true,
   "include": [

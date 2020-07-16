@@ -13,7 +13,7 @@ import { Log } from '../../providers/log/log';
  * @export
  * @class ConfigPage
  */
-@IonicPage()
+
 @Component({
   selector: 'page-config-page',
   templateUrl: 'config-page.html'

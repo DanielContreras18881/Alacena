@@ -1,0 +1,11 @@
+{
+  "dev": {
+    "config-file": "https://alacena-58699.firebaseapp.com/chcp.json"
+  },
+  "prod": {
+    "config-file": "https://alacena-58699.firebaseapp.com/chcp.json"
+  },
+  "qa": {
+    "config-file": "https://alacena-58699.firebaseapp.com/chcp.json"
+  }
+}
